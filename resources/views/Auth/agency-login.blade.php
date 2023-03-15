@@ -72,34 +72,40 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                             <form class="form-horizontal" action="/save-agency-login" method="POST">
-                                                @if(Session::get('fail'))
+                                                @if (Session::get('fail'))
                                                     <div class="alert alert-danger">
                                                         {{ Session::get('fail') }}
                                                     </div>
                                                 @endif
-                                                @if(Session::get('success'))
+                                                @if (Session::get('success'))
                                                     <div class="alert alert-success">
                                                         {{ Session::get('success') }}
                                                     </div>
                                                 @endif
                                                 @csrf
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="text" name="email" class="form-control" id="user-name"
-                                                        placeholder="Your Email">
+                                                    <input type="text" name="email" class="form-control"
+                                                        id="user-name" placeholder="Your Email">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>
                                                     </div>
                                                 </fieldset>
                                                 <fieldset
                                                     class="form-group position-relative has-icon-right has-icon-left">
-                                                    <input type="password" name="password" class="form-control" id="user-password" placeholder="Enter Password"/>
+                                                    <input type="password" name="password" class="form-control"
+                                                        id="user-password" placeholder="Enter Password" />
                                                     <div class="form-control-position">
                                                         <i class="fa fa-key"></i>
                                                     </div>
-                                                    <div class="form-control-position" style="right: 0 !important; cursor: pointer;">
-                                                        <i class="fa fa-eye" id="togglePassword" ></i>
+                                                    <div class="form-control-position"
+                                                        style="right: 0 !important; cursor: pointer;">
+                                                        <i class="fa fa-eye" id="togglePassword"></i>
                                                     </div>
-                                                    <span class="danger text-danger">@error('password'){{$message}}@enderror</span>
+                                                    <span class="danger text-danger">
+                                                        @error('password')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </fieldset>
                                                 <button type="submit"
                                                     class="btn btn-outline-primary btn-block registerbtn"><i
@@ -107,11 +113,8 @@
                                             </form>
                                         </div>
                                         <div class="card-body my-2 ">
-                                            <a
-                                                href="/agency_password_forget_form"
-                                                class="loginbtn primary"
-                                                >Forgot Password?</a
-                                            >
+                                            <a href="/agency_password_forget_form" class="loginbtn primary">Forgot
+                                                Password?</a>
                                         </div>
                                     </div>
                                 </div>
@@ -122,18 +125,18 @@
             </div>
         </div>
     </div>
-    
+
     <script>
-          const togglePassword = document.querySelector('#togglePassword');
-          const password = document.querySelector('#user-password');
-         
-            togglePassword.addEventListener('click', function (e) {
-                // toggle the type attribute
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                // toggle the eye slash icon
-                this.classList.toggle('fa-eye-slash');
-            });
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#user-password');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
     </script>
     <!-- END: Content-->
 

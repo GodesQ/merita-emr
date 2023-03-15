@@ -68,22 +68,26 @@
                                         <div class="card-body">
                                             <h2>Reset Password</h2>
                                             <form class="form-horizontal" action="/submit_reset_form" method="POST">
-                                                @if(Session::get('fail'))
-                                                <div class="alert alert-danger">
-                                                    {{Session::get('fail')}}
-                                                </div>
+                                                @if (Session::get('fail'))
+                                                    <div class="alert alert-danger">
+                                                        {{ Session::get('fail') }}
+                                                    </div>
                                                 @endif
                                                 @csrf
-                                                <input type="hidden" name="verify_token" value="{{$token}}">
-                                                <input type="hidden" name="classification" value="{{$classification}}">
+                                                <input type="hidden" name="verify_token" value="{{ $token }}">
+                                                <input type="hidden" name="classification"
+                                                    value="{{ $classification }}">
                                                 <fieldset class="form-group position-relative has-icon-left">
                                                     <input type="email" name="email" class="form-control"
                                                         id="user-email" placeholder="Your Email Address">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-mail"></i>
                                                     </div>
-                                                    <span
-                                                        class="danger text-danger">@error('email'){{$message}}@enderror</span>
+                                                    <span class="danger text-danger">
+                                                        @error('email')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </fieldset>
                                                 <fieldset class="form-group position-relative has-icon-left">
                                                     <input type="password" name="password" class="form-control"
@@ -91,8 +95,11 @@
                                                     <div class="form-control-position">
                                                         <i class="fa fa-key"></i>
                                                     </div>
-                                                    <span
-                                                        class="danger text-danger">@error('password'){{$message}}@enderror</span>
+                                                    <span class="danger text-danger">
+                                                        @error('password')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </fieldset>
                                                 <fieldset class="form-group position-relative has-icon-left">
                                                     <input type="password" name="password_confirmation"
@@ -101,10 +108,14 @@
                                                     <div class="form-control-position">
                                                         <i class="fa fa-key"></i>
                                                     </div>
-                                                    <span
-                                                        class="danger text-danger">@error('password_confirmation'){{$message}}@enderror</span>
+                                                    <span class="danger text-danger">
+                                                        @error('password_confirmation')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </fieldset>
-                                                <button type="submit" class="btn btn-primary btn-block registerbtn"><i
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-block registerbtn"><i
                                                         class="feather icon-user"></i> Reset Password</button>
                                             </form>
                                             <div class="card-body">

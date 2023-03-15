@@ -72,34 +72,40 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                             <form class="form-horizontal" action="/save-employee-login" method="POST">
-                                                @if(Session::get('fail'))
-                                                <div class="alert alert-danger">
-                                                    {{Session::get('fail')}}
-                                                </div>
+                                                @if (Session::get('fail'))
+                                                    <div class="alert alert-danger">
+                                                        {{ Session::get('fail') }}
+                                                    </div>
                                                 @endif
-                                                @if(Session::get('success'))
-                                                <div class="alert alert-success">
-                                                    {{Session::get('success')}}
-                                                </div>
+                                                @if (Session::get('success'))
+                                                    <div class="alert alert-success">
+                                                        {{ Session::get('success') }}
+                                                    </div>
                                                 @endif
                                                 @csrf
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="text" name="name" class="form-control" id="user-name"
-                                                        placeholder="Your username">
+                                                    <input type="text" name="name" class="form-control"
+                                                        id="user-name" placeholder="Your username">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>
                                                     </div>
                                                 </fieldset>
                                                 <fieldset
                                                     class="form-group position-relative has-icon-right has-icon-left">
-                                                    <input type="password" name="password" class="form-control" id="user-password" placeholder="Enter Password"/>
+                                                    <input type="password" name="password" class="form-control"
+                                                        id="user-password" placeholder="Enter Password" />
                                                     <div class="form-control-position">
                                                         <i class="fa fa-key"></i>
                                                     </div>
-                                                    <div class="form-control-position" style="right: 0 !important; cursor: pointer;">
-                                                        <i class="fa fa-eye" id="togglePassword" ></i>
+                                                    <div class="form-control-position"
+                                                        style="right: 0 !important; cursor: pointer;">
+                                                        <i class="fa fa-eye" id="togglePassword"></i>
                                                     </div>
-                                                    <span class="danger text-danger">@error('password'){{$message}}@enderror</span>
+                                                    <span class="danger text-danger">
+                                                        @error('password')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </fieldset>
                                                 <button type="submit"
                                                     class="btn btn-outline-primary btn-block registerbtn"><i
@@ -115,18 +121,18 @@
             </div>
         </div>
     </div>
-    
+
     <script>
-          const togglePassword = document.querySelector('#togglePassword');
-          const password = document.querySelector('#user-password');
-         
-            togglePassword.addEventListener('click', function (e) {
-                // toggle the type attribute
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                // toggle the eye slash icon
-                this.classList.toggle('fa-eye-slash');
-            });
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#user-password');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
     </script>
     <!-- END: Content-->
 
@@ -148,8 +154,9 @@
     <!-- BEGIN: Page JS-->
     <script src="../../../app-assets/js/scripts/forms/form-login-register.js"></script>
     <script>
-        
-        document.oncontextmenu = document.body.oncontextmenu = function() {return false;}
+        document.oncontextmenu = document.body.oncontextmenu = function() {
+            return false;
+        }
     </script>
     <!-- END: Page JS-->
 
