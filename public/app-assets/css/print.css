@@ -1,0 +1,223 @@
+/*--------------------------------------------------------------------*/
+
+
+/* EUREKA: CUSTOMIZED CSS FOR PRINTOUT                                */
+
+
+/*--------------------------------------------------------------------*/
+
+.text-underline {
+    display: inline-block;
+    border-bottom: solid 1px black;
+}
+
+.clrWhite {
+    color: white;
+}
+
+.underline {
+    font-weight: bold;
+    border-top: 1px black solid;
+    text-align: center;
+}
+
+.lblheader {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.lblCompName {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.lblCompDtl {
+    font-size: 10px;
+    padding-top: 40px;
+}
+
+.lblReport {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.brdTable tr td {
+    border: solid 1px black;
+}
+
+.brdTableWyt tr td {
+    border: solid 1px white;
+}
+
+.brdBtmWyt {
+    border-bottom: solid 1px white;
+}
+
+.brdLTR {
+    border-left: solid 1px black;
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+}
+
+.brdAll {
+    border: solid 1px black;
+}
+
+.brdTop {
+    border-top: solid 1px black;
+}
+
+.brdBtm {
+    border-bottom: solid 1px black;
+}
+
+.brdLeftTopBtm {
+    border-left: solid 1px black;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.brdLeft {
+    border-left: solid 1px black;
+}
+
+.brdLeftBtm {
+    border-left: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.brdLeftBtmRight {
+    border-left: solid 1px black;
+    border-bottom: solid 1px black;
+    border-right: solid 1px black;
+}
+
+.brdLeftTop {
+    border-left: solid 1px black;
+    border-top: solid 1px black;
+}
+
+.brdRightTop {
+    border-right: solid 1px black;
+    border-top: solid 1px black;
+}
+
+.brdRightBtm {
+    border-right: solid 1px black;
+    border-bottom: solid 1px black;
+}
+
+.brdRight {
+    border-right: solid 1px black;
+}
+
+.brdForm {
+    border-top: solid 1px black;
+    border-left: solid 1px white;
+    border-right: solid 1px white;
+    border-bottom: solid 1px white;
+}
+
+.lblHeader {
+    font-size: 11px;
+}
+
+.lblForm {
+    font-size: 9px;
+}
+
+.padLeft {
+    padding-left: 30px;
+}
+
+.smallfont {
+    font-size: 9px
+}
+
+.size10 {
+    font-size: 9px
+}
+
+.brdMedCert {
+    border-collapse: collapse;
+}
+
+.brdMedCert td,
+th {
+    border: 1px solid black;
+    font-size: 12px;
+}
+
+#brdNone td,
+th {
+    border: 0px;
+    font-size: 10px;
+}
+
+#brdTblNone td,
+th {
+    border: 0px;
+}
+
+.mlc {
+    border-collapse: inherit;
+}
+
+.mlc td,
+th {
+    border: inherit;
+    font-size: inherit;
+}
+
+.brdTable {
+    border-collapse: collapse;
+}
+
+.brdTable td,
+th {
+    border: 1px solid black;
+}
+
+#none td,
+th {
+    border: 1px solid white;
+}
+
+#tblTeeth td,
+th {
+    font-size: 9px;
+}
+
+#tblNoneRight td,
+th {
+    border: 0px;
+    font-size: 10px;
+}
+
+.brdNone {
+    border: 1px solid white;
+}
+
+#tblNoneRightNew td,
+th {
+    border: 0px;
+}
+
+.brdMLC {
+    border-collapse: collapse;
+}
+
+.brdMLC td,
+th {
+    border: 1px solid black;
+    font-size: 8px;
+}
+
+.lblName {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+@page {
+    size: A4;
+}
