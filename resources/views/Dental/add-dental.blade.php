@@ -5,7 +5,7 @@
     input[type=checkbox] {
         width: 25px;
         height: 25px;
-        
+
     }
     .active {
         background: black !important;
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3>Add Dental</h3>
+                            <h3>Add Dentals</h3>
                             <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
@@ -143,7 +143,7 @@
                                         <button type="button" onclick="changeLegend('P', this)" class="dental-btn col-md-5 btn btn-sm p-75 font-bold btn-outline-blue btn-darken-1  m-lg-50 m-sm-25">P - Pontic</button>
                                         <button type="button" onclick="changeLegend('Co', this)" class="dental-btn col-md-5 btn btn-sm p-75 font-bold btn-outline-blue btn-darken-1  m-lg-50 m-sm-25">Co	- Composite</button>
                                         <button type="button" onclick="changeLegend('M', this)" class="dental-btn col-md-5 btn btn-sm p-75 font-bold btn-outline-blue btn-darken-1  m-lg-50 m-sm-25">M	 - Missing</button>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-md-6 align-self-end" style="color: rgb(255, 0, 0);">
@@ -599,16 +599,16 @@
 
     function handleInputFocusTransfer(e){
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();
@@ -650,7 +650,7 @@ function unCheckUpper() {
     let upperInput = document.querySelectorAll('.upper-input');
     for (let index = 0; index < upperCheckBoxes.length; index++) {
         const element = upperCheckBoxes[index];
-        element.checked = false; 
+        element.checked = false;
         upperInput[index].value = "CD";
     }
 }
@@ -660,7 +660,7 @@ function unCheckLower() {
     let lowerInput = document.querySelectorAll('.lower-input');
     for (let index = 0; index < lowerCheckBoxes.length; index++) {
         const element = lowerCheckBoxes[index];
-        element.checked = false; 
+        element.checked = false;
         lowerInput[index].value = "CD";
     }
 }
@@ -670,7 +670,7 @@ let legendInput = '';
 function changeLegend(legend, e) {
     legendInput = legend;
     $(".dental-btn").removeClass("active");
-    e.classList.add('active'); 
+    e.classList.add('active');
 }
 
 function makeInput(e, id) {
