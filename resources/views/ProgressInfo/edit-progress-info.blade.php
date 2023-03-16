@@ -123,7 +123,7 @@
                                                                 <span class="danger">*</span>
                                                             </label>
                                                             <input required type="text" class="form-control to_upper"
-                                                                name="homeAdress" value="{{$patientInfo->address}}">
+                                                                name="address" value="{{$patientInfo->address}}">
                                                         </div>
                                                     </div>
                                                     <div class=" col-md-4">
@@ -230,7 +230,7 @@
                                                                 <span class="danger">*</span>
                                                             </label>
                                                             <input required maxlength="11" type="tel" class="form-control"
-                                                                name="phoneNumber" id="phoneNumber"
+                                                                name="contactno" id="phoneNumber"
                                                                 value="{{$patientInfo->contactno}}">
                                                         </div>
                                                     </div>

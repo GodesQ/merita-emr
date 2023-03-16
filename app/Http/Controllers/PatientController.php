@@ -23,6 +23,7 @@ use App\Models\ReassessmentFindings;
 use App\Http\Controllers\AdmissionController;
 use App\Models\Audiometry;
 use App\Models\Refferal;
+use App\Models\PatientInfo;
 
 class PatientController extends Controller
 {
@@ -33,7 +34,8 @@ class PatientController extends Controller
         return view('Auth.login');
     }
 
-    public function documentation() {
+    public function documentation()
+    {
         $data = session()->all();
         return view('ProgressInfo.documentation', compact('data'));
     }
@@ -51,11 +53,12 @@ class PatientController extends Controller
 
         // IF THE USERNAME IS NOT ACCESS IN PATIENT TABLE
         if (!$patientInfo) {
-            return back()->with('fail', 'Invalid Email');
+            return back()->with('fail', 'Invalid Email/Username');
         } else {
             //check password
             if (Hash::check($request->password, $patientInfo->password)) {
                 if ($patientInfo->isVerify) {
+
                     $request->session()->put([
                         'classification' => 'patient',
                         'email' => $patientInfo->email,
@@ -67,13 +70,11 @@ class PatientController extends Controller
                         'firstname' => $patientInfo->firstname,
                         'lastname' => $patientInfo->lastname,
                     ]);
+
                     $data = session()->all();
                     return redirect('/progress-patient-info');
                 } else {
-                    return back()->with(
-                        'fail',
-                        'Please verify your email address to continue.'
-                    );
+                    return back()->with('fail', 'Please verify your email address to continue.');
                 }
             } else {
                 return back()->with('fail', 'Invalid Password');
@@ -102,28 +103,30 @@ class PatientController extends Controller
             'password' => 'required|min:8',
             'password_confirmation' => 'required_with:password|same:password',
         ]);
-        
+
         $referral = Refferal::where('email_employee', $request->email)->first();
-        
-        if($referral) {
-            if($referral->is_hold) return back()->with('fail', 'You are currently hold. Please contact your agency before register.');
+
+        if ($referral) {
+            if ($referral->is_hold) {
+                return back()->with('fail', 'You are currently hold. Please contact your agency before register.');
+            }
         }
 
-        if(!isset($request->terms_conditions)) {
+        if (!isset($request->terms_conditions)) {
             return back()->with('fail', 'Please confirm if you agree to the terms and conditions');
-        } else if(!isset($request->data_privacy)) {
+        } elseif (!isset($request->data_privacy)) {
             return back()->with('fail', 'Please confirm if you agree in Data Privacy');
         } else {
             $latestData = DB::table('mast_patient')
-            ->latest('patientcode')
-            ->first();
+                ->latest('patientcode')
+                ->first();
 
             $lastPatientCode = substr($latestData->patientcode, 4);
             // new patient code
             $addPatientCode = $lastPatientCode + 1;
-            if($addPatientCode > 9999) {
+            if ($addPatientCode > 9999) {
                 $patientCode = 'P' . date('y') . '-0' . $addPatientCode;
-            }else {
+            } else {
                 $patientCode = 'P' . date('y') . '-00' . $addPatientCode;
             }
 
@@ -134,13 +137,12 @@ class PatientController extends Controller
             $patient->password = Hash::make($request->password);
             $patient->isVerify = false;
             $patient->yndelete = false;
-            $patient->created_date = date("Y-m-d h:i:s");
+            $patient->created_date = date('Y-m-d h:i:s');
             $save = $patient->save();
 
             // IF THE DATA STORED IN DATABASE
             if ($save) {
-                $bodyMessage =
-                    '';
+                $bodyMessage = '';
 
                 $details = [
                     'title' => 'Verification email from merita',
@@ -149,14 +151,9 @@ class PatientController extends Controller
                 ];
                 Mail::to($request->email)->send(new VerificationMail($details));
                 return redirect('/verify-message');
-
             } else {
-                return redirect('/login')->with(
-                    'fail',
-                    'Something went wrong. Try Again later.'
-                );
+                return redirect('/login')->with('fail', 'Something went wrong. Try Again later.');
             }
-
         }
     }
 
@@ -166,10 +163,7 @@ class PatientController extends Controller
         $patient->isVerify = true;
         $save = $patient->save();
         if ($save) {
-            return redirect('/login')->with(
-                'success',
-                'Your Email Address was successfully verified.'
-            );
+            return redirect('/login')->with('success', 'Your Email Address was successfully verified.');
         }
     }
 
@@ -181,22 +175,12 @@ class PatientController extends Controller
             $patientInfo = DB::table('mast_patientinfo')
                 ->where('main_id', $data['patientId'])
                 ->first();
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'list_package.agency_id'
-            )
-            ->get();
-            
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
+                ->get();
+
             $patient_email = session()->has('email') ? session()->get('email') : null;
-                
+
             $referral = Refferal::where('email_employee', $patient_email)->first();
 
             if ($patientInfo) {
@@ -204,7 +188,6 @@ class PatientController extends Controller
             } else {
                 return view('ProgressInfo.progress-info', compact('agencies', 'data', 'packages', 'referral'));
             }
-            
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -214,76 +197,44 @@ class PatientController extends Controller
 
     public function patient_info(Request $request)
     {
-            $data = session()->all();
-            $patient = Patient::where('id', '=', $data['patientId'])
-                ->with('patientinfo')
-                ->latest('created_date')
-                ->first();
-            
-            if(!$patient->patientinfo) {
-                return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
-            }
+        $data = session()->all();
+        $patient = Patient::where('id', '=', $data['patientId'])
+            ->with('patientinfo')
+            ->latest('created_date')
+            ->first();
 
-            $patientRecords = Patient::where(
-                'patientcode',
-                '=',
-                $data['patientCode']
-            )->get();
+        if (!$patient->patientinfo) {
+            return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
+        }
 
-            $patientInfo = DB::table('mast_patientinfo')
-                ->select(
-                    'mast_patientinfo.*',
-                    'mast_agency.agencyname as agencyname',
-                    'list_package.packagename as packagename'
-                )
-                ->where('main_id', $data['patientId'])
-                ->leftJoin(
-                    'mast_agency',
-                    'mast_agency.id',
-                    'mast_patientinfo.agency_id'
-                )
-                ->leftJoin(
-                    'list_package',
-                    'list_package.id',
-                    'mast_patientinfo.medical_package'
-                )
-                ->latest('id')
-                ->first();
+        $patientRecords = Patient::where('patientcode', '=', $data['patientCode'])->get();
 
-            $medicalHistory = MedicalHistory::where(
-                'main_id',
-                '=',
-                $data['patientId']
-            )
-                ->latest('id')
-                ->first();
+        $patientInfo = DB::table('mast_patientinfo')
+            ->select('mast_patientinfo.*', 'mast_agency.agencyname as agencyname', 'list_package.packagename as packagename')
+            ->where('main_id', $data['patientId'])
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
+            ->latest('id')
+            ->first();
 
-            $declarationForm = DB::table('declaration_form')
-                ->where('main_id', $data['patientId'])
-                ->latest('id')
-                ->first();
+        $medicalHistory = MedicalHistory::where('main_id', '=', $data['patientId'])
+            ->latest('id')
+            ->first();
 
-            $patient_package = ListPackage::where(
-                'id',
-                $patientInfo->medical_package
-            )->first();
+        $declarationForm = DB::table('declaration_form')
+            ->where('main_id', $data['patientId'])
+            ->latest('id')
+            ->first();
 
-            $patientAdmission = Admission::where('id', $patient->admission_id)->first();
-            $latest_schedule = DB::table('sched_patients')->where('patientcode', $patient->patientcode)->latest('date')->first();
+        $patient_package = ListPackage::where('id', $patientInfo->medical_package)->first();
 
-            return view(
-                'ProgressInfo.patient-info',
-                compact(
-                    'patientInfo',
-                    'medicalHistory',
-                    'declarationForm',
-                    'patient',
-                    'patientRecords',
-                    'data',
-                    'latest_schedule',
-                    'patientAdmission'
-                )
-            );
+        $patientAdmission = Admission::where('id', $patient->admission_id)->first();
+        $latest_schedule = DB::table('sched_patients')
+            ->where('patientcode', $patient->patientcode)
+            ->latest('date')
+            ->first();
+
+        return view('ProgressInfo.patient-info', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'patientRecords', 'data', 'latest_schedule', 'patientAdmission'));
     }
 
     public function see_record(Request $request)
@@ -311,41 +262,16 @@ class PatientController extends Controller
             $patientInfo = DB::table('mast_patientinfo')
                 ->where('main_id', $data['patientId'])
                 ->first();
-            $medicalHistory = MedicalHistory::where(
-                'main_id',
-                '=',
-                $data['patientId']
-            )->first();
+            $medicalHistory = MedicalHistory::where('main_id', '=', $data['patientId'])->first();
 
             $declarationForm = DB::table('declaration_form')
                 ->where('main_id', $data['patientId'])
                 ->first();
 
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )
-                ->leftJoin(
-                    'mast_agency',
-                    'mast_agency.id',
-                    '=',
-                    'list_package.agency_id'
-                )
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
-            return view(
-                'ProgressInfo.remedical',
-                compact(
-                    'patientInfo',
-                    'medicalHistory',
-                    'declarationForm',
-                    'patient',
-                    'data',
-                    'agencies',
-                    'packages'
-                )
-            );
+            return view('ProgressInfo.remedical', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'data', 'agencies', 'packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -374,83 +300,53 @@ class PatientController extends Controller
             $mast_patient_save = $mast_patient->save();
 
             $save_patient_info = DB::table('mast_patientinfo')->insert([
-                "main_id" => $mast_patient->id,
-                "patientcode" => $request->patientcode,
-                "address" => $request->homeAdress,
-                "contactno" => $request->phoneNumber,
-                "occupation" => $request->occupation,
-                "religion" => strtoupper($request->religion),
-                "category" => $request->category,
-                "payment_type" => $request->payment_type,
-                "admission_type" => $request->admit_type,
-                "nationality" => strtoupper($request->nationality),
-                "maritalstatus" => $request->civilStatus,
-                "agency_id" => $request->agencyName,
-                "principal" => $request->principal,
-                "agency_address" => $request->address_of_agency,
-                "country_destination" => $request->countryDestination,
-                "medical_package" => $request->medicalPackage,
-                "vessel" => $request->vessel,
-                "passportno" => $request->passportNo,
-                "passport_expdate" => $request->passport_expdate,
-                "srbno" => $request->ssrb,
-                "srb_expdate" => $request->srb_expdate,
-                "birthdate" => $request->birthdate,
-                "birthplace" => $request->birthplace,
+                'main_id' => $mast_patient->id,
+                'patientcode' => $request->patientcode,
+                'address' => $request->homeAdress,
+                'contactno' => $request->phoneNumber,
+                'occupation' => $request->occupation,
+                'religion' => strtoupper($request->religion),
+                'category' => $request->category,
+                'payment_type' => $request->payment_type,
+                'admission_type' => $request->admit_type,
+                'nationality' => strtoupper($request->nationality),
+                'maritalstatus' => $request->civilStatus,
+                'agency_id' => $request->agencyName,
+                'principal' => $request->principal,
+                'agency_address' => $request->address_of_agency,
+                'country_destination' => $request->countryDestination,
+                'medical_package' => $request->medicalPackage,
+                'vessel' => $request->vessel,
+                'passportno' => $request->passportNo,
+                'passport_expdate' => $request->passport_expdate,
+                'srbno' => $request->ssrb,
+                'srb_expdate' => $request->srb_expdate,
+                'birthdate' => $request->birthdate,
+                'birthplace' => $request->birthplace,
             ]);
 
             // INSERT MEDICAL HISTORY
-           $save_medical_history = $this->action_med_history($request->all(), "store", "patient", $mast_patient->id);
+            $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $mast_patient->id);
 
             // dd($save_medical_history);
 
             // INSERT DATA TO DECLARATION FORM TABLE
-            $save_declaration_form = DB::insert(
-                'insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [
-                    $mast_patient->id,
-                    $request->travelled_abroad_recently,
-                    $request->area_visited,
-                    $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
-                    $request->travel_arrival_date,
-                    $request->travel_return_date,
-                    $request->relationship_last_contact_people,
-                    $request->last_contact_date,
-                    $request->fever,
-                    $request->cough,
-                    $request->shortness_of_breath,
-                    $request->persistent_pain_in_the_chest,
-                ]
-            );
+            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$mast_patient->id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
 
-            if(!$mast_patient_save &&
-                !$save_patient_info &&
-                !$save_medical_history &&
-                !$save_declaration_form) {
-                return back()->with('status', "Failed to Submit Data");
+            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
+                return back()->with('status', 'Failed to Submit Data');
             }
 
             $request->session()->put('patientId', $mast_patient->id);
 
-            if( $request->fever == 1 &&
-                $request->cough == 1 &&
-                $request->shortness_of_breath == 1 &&
-                $request->persistent_pain_in_the_chest == 1 &&
-                $request->travelled_abroad_recently == 1) {
-                    return redirect('/patient_info')->with(
-                        'status',
-                        'Test Message'
-                    );
+            if ($request->fever == 1 && $request->cough == 1 && $request->shortness_of_breath == 1 && $request->persistent_pain_in_the_chest == 1 && $request->travelled_abroad_recently == 1) {
+                return redirect('/patient_info')->with('status', 'Test Message');
             }
 
-            if($request->admit_type == "Normal") {
-
+            if ($request->admit_type == 'Normal') {
                 return redirect('/schedule_appointment');
             } else {
-                return redirect('/patient_info')->with(
-                    'success',
-                    'Register Successfully'
-                );
+                return redirect('/patient_info')->with('success', 'Register Successfully');
             }
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -474,39 +370,17 @@ class PatientController extends Controller
                 ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
                 ->first();
 
-            $medicalHistory = MedicalHistory::where('main_id','=',$data['patientId'])->first();
+            $medicalHistory = MedicalHistory::where('main_id', '=', $data['patientId'])->first();
 
             $declarationForm = DB::table('declaration_form')
                 ->where('main_id', $data['patientId'])
                 ->first();
 
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )
-                ->leftJoin(
-                    'mast_agency',
-                    'mast_agency.id',
-                    '=',
-                    'list_package.agency_id'
-                )
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
-
-            return view(
-                'ProgressInfo.edit-progress-info',
-                compact(
-                    'patientInfo',
-                    'medicalHistory',
-                    'declarationForm',
-                    'patient',
-                    'data',
-                    'agencies',
-                    'packages'
-                )
-            );
+            return view('ProgressInfo.edit-progress-info', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'data', 'agencies', 'packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -517,7 +391,7 @@ class PatientController extends Controller
     public function add_other_details(Request $request)
     {
         try {
-            date_default_timezone_set("Asia/Manila");
+            date_default_timezone_set('Asia/Manila');
             $date = date('Y-m-d h:i:s');
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
@@ -529,108 +403,76 @@ class PatientController extends Controller
             $mast_patient->position_applied = strtoupper($request->positionApplied);
             $mast_patient->created_date = $date;
             $mast_patient_save = $mast_patient->save();
-            $patient_vessel = $request->agencyName == 3 || $request->agencyName == 57 || $request->agencyName == 58 || $request->agencyName == 55  ? $request->bahia_vessel : $request->vessel;
+            $patient_vessel = $request->agencyName == 3 || $request->agencyName == 57 || $request->agencyName == 58 || $request->agencyName == 55 ? $request->bahia_vessel : $request->vessel;
 
             //INSERT OTHER DATA TO MAST_PATIENT INFO
-           $save_patient_info = DB::insert(
-                'insert into mast_patientinfo (main_id, patientcode, address, contactno, occupation, occupation_other, category, referral, payment_type, admission_type, nationality, religion, religion_other, maritalstatus, agency_id, principal, agency_address, country_destination, medical_package, vessel, passportno, passport_expdate, srbno, srb_expdate,  birthdate, birthplace) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )',
-                [
-                    $request->main_id,
-                    $request->patientcode,
-                    strtoupper($request->homeAddress),
-                    $request->phoneNumber,
-                    strtoupper($request->occupation),
-                    $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
-                    $request->category,
-                    strtoupper($request->referral),
-                    $request->payment_type,
-                    strtoupper($request->admit_type),
-                    strtoupper($request->nationality),
-                    $request->religion,
-                    $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
-                    strtoupper($request->civilStatus),
-                    $request->agencyName,
-                    strtoupper($request->principal),
-                    strtoupper($request->address_of_agency),
-                    strtoupper($request->countryDestination),
-                    $request->medicalPackage,
-                    strtoupper($patient_vessel),
-                    strtoupper($request->passportNo),
-                    $request->passport_expdate,
-                    strtoupper($request->ssrb),
-                    $request->srb_expdate,
-                    $request->birthdate,
-                    $request->birthplace,
-                ]
-            );
+            $save_patient_info = DB::insert('insert into mast_patientinfo (main_id, patientcode, address, contactno, occupation, occupation_other, category, referral, payment_type, admission_type, nationality, religion, religion_other, maritalstatus, agency_id, principal, agency_address, country_destination, medical_package, vessel, passportno, passport_expdate, srbno, srb_expdate,  birthdate, birthplace) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )', [
+                $request->main_id,
+                $request->patientcode,
+                strtoupper($request->homeAddress),
+                $request->phoneNumber,
+                strtoupper($request->occupation),
+                $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
+                $request->category,
+                strtoupper($request->referral),
+                $request->payment_type,
+                strtoupper($request->admit_type),
+                strtoupper($request->nationality),
+                $request->religion,
+                $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
+                strtoupper($request->civilStatus),
+                $request->agencyName,
+                strtoupper($request->principal),
+                strtoupper($request->address_of_agency),
+                strtoupper($request->countryDestination),
+                $request->medicalPackage,
+                strtoupper($patient_vessel),
+                strtoupper($request->passportNo),
+                $request->passport_expdate,
+                strtoupper($request->ssrb),
+                $request->srb_expdate,
+                $request->birthdate,
+                $request->birthplace,
+            ]);
 
             // INSERT MEDICAL HISTORY
-            $save_medical_history = $this->action_med_history($request->all(), "store", "patient", $request->main_id);
+            $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $request->main_id);
 
             // INSERT DATA TO DECLARATION FORM TABLE
-            $save_declaration_form = DB::insert(
-                'insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [
-                    $request->main_id,
-                    $request->travelled_abroad_recently,
-                    $request->area_visited,
-                    $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
-                    $request->travel_arrival_date,
-                    $request->travel_return_date,
-                    $request->relationship_last_contact_people,
-                    $request->last_contact_date,
-                    $request->fever,
-                    $request->cough,
-                    $request->shortness_of_breath,
-                    $request->persistent_pain_in_the_chest,
-                ]
-            );
+            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->main_id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
 
-            if(!$mast_patient_save &&
-                !$save_patient_info &&
-                !$save_medical_history &&
-                !$save_declaration_form) {
-                return back()->with('status', "Failed to Submit Data");
+            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
+                return back()->with('status', 'Failed to Submit Data');
             }
 
-            if( $request->fever == 1 &&
-                $request->cough == 1 &&
-                $request->shortness_of_breath == 1 &&
-                $request->persistent_pain_in_the_chest == 1 &&
-                $request->travelled_abroad_recently == 1) {
-                    $request->session()->put([
-                        'classification' => 'patient',
-                        'patientCode' => $mast_patient->patientcode,
-                        'patientId' => $mast_patient->id,
-                        'admissionId' => $mast_patient->admission_id,
-                        'patient_image' => $mast_patient->patient_image,
-                        'created_date' => $mast_patient->created_date,
-                        'firstname' => $mast_patient->firstname,
-                        'lastname' => $mast_patient->lastname,
-                    ]);
-                    return redirect('/patient_info')->with(
-                        'status',
-                        'Test Message'
-                    );
-            }
-
-            if($request->admit_type == "Normal") {
+            if ($request->fever == 1 && $request->cough == 1 && $request->shortness_of_breath == 1 && $request->persistent_pain_in_the_chest == 1 && $request->travelled_abroad_recently == 1) {
                 $request->session()->put([
-                        'classification' => 'patient',
-                        'patientCode' => $mast_patient->patientcode,
-                        'patientId' => $mast_patient->id,
-                        'admissionId' => $mast_patient->admission_id,
-                        'patient_image' => $mast_patient->patient_image,
-                        'created_date' => $mast_patient->created_date,
-                        'firstname' => $mast_patient->firstname,
-                        'lastname' => $mast_patient->lastname,
+                    'classification' => 'patient',
+                    'patientCode' => $mast_patient->patientcode,
+                    'patientId' => $mast_patient->id,
+                    'admissionId' => $mast_patient->admission_id,
+                    'patient_image' => $mast_patient->patient_image,
+                    'created_date' => $mast_patient->created_date,
+                    'firstname' => $mast_patient->firstname,
+                    'lastname' => $mast_patient->lastname,
+                ]);
+                return redirect('/patient_info')->with('status', 'Test Message');
+            }
+
+            if ($request->admit_type == 'Normal') {
+                $request->session()->put([
+                    'classification' => 'patient',
+                    'patientCode' => $mast_patient->patientcode,
+                    'patientId' => $mast_patient->id,
+                    'admissionId' => $mast_patient->admission_id,
+                    'patient_image' => $mast_patient->patient_image,
+                    'created_date' => $mast_patient->created_date,
+                    'firstname' => $mast_patient->firstname,
+                    'lastname' => $mast_patient->lastname,
                 ]);
                 return redirect('/schedule_appointment');
             } else {
-                return redirect('/patient_info')->with(
-                    'success',
-                    'Register Successfully'
-                );
+                return redirect('/patient_info')->with('success', 'Register Successfully');
             }
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -643,20 +485,28 @@ class PatientController extends Controller
     {
         try {
             $data = session()->all();
-            $today_date = date("Y-m-d");
-            $schedules = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->get();
-            
-            $scheduled_patients = DB::table('sched_patients')->where('date', $today_date)->get();
-            $latest_schedule = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->latest('date')->first();
-            
-            $patient = Patient::where('id', session()->get('patientId'))->with('patientinfo')->first();
-            
-            if(!$patient->patientinfo) {
+            $today_date = date('Y-m-d');
+            $schedules = DB::table('sched_patients')
+                ->where('patientcode', $data['patientCode'])
+                ->get();
+
+            $scheduled_patients = DB::table('sched_patients')
+                ->where('date', $today_date)
+                ->get();
+            $latest_schedule = DB::table('sched_patients')
+                ->where('patientcode', $data['patientCode'])
+                ->latest('date')
+                ->first();
+
+            $patient = Patient::where('id', session()->get('patientId'))
+                ->with('patientinfo')
+                ->first();
+
+            if (!$patient->patientinfo) {
                 return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
             }
-            
+
             return view('ProgressInfo.schedule', compact('data', 'schedules', 'latest_schedule', 'scheduled_patients'));
-            
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -670,26 +520,18 @@ class PatientController extends Controller
             $action = isset($request->action) ? $request->action : null;
             $data = session()->all();
 
-                $path =
-                'patient_edit?id=' .
-                $request->patient_id .
-                '&patientcode=' .
-                $request->patientcode;
+            $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
 
-            if($action) {
+            if ($action) {
                 $schedule = DB::table('sched_patients')->insert(['patient_id' => $request->patient_id, 'patientcode' => $request->patientcode, 'date' => $request->schedule_date]);
                 return redirect($path)->with('status', 'Add schedule of patient.');
             }
 
-            $save = DB::insert(
-                'insert into sched_patients(patient_id, patientcode, date) values(?, ?, ?)',
-                [$data['patientId'], $data['patientCode'], $request->schedule_date]
-            );
+            $save = DB::insert('insert into sched_patients(patient_id, patientcode, date) values(?, ?, ?)', [$data['patientId'], $data['patientCode'], $request->schedule_date]);
 
             if ($save) {
                 return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
             }
-
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -697,12 +539,20 @@ class PatientController extends Controller
         }
     }
 
-    public function edit_schedule() {
+    public function edit_schedule()
+    {
         try {
             $data = session()->all();
-            $schedules = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->get();
-            $latest_schedule = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->latest('date')->first();
-            if(!$latest_schedule) return redirect('/patient_info')->with('fail', "Don't have any schedule");
+            $schedules = DB::table('sched_patients')
+                ->where('patientcode', $data['patientCode'])
+                ->get();
+            $latest_schedule = DB::table('sched_patients')
+                ->where('patientcode', $data['patientCode'])
+                ->latest('date')
+                ->first();
+            if (!$latest_schedule) {
+                return redirect('/patient_info')->with('fail', "Don't have any schedule");
+            }
             return view('ProgressInfo.edit-schedule', compact('data', 'schedules', 'latest_schedule'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -711,18 +561,17 @@ class PatientController extends Controller
         }
     }
 
-    public function update_schedule(Request $request) {
+    public function update_schedule(Request $request)
+    {
         try {
             $action = $request->action ? $request->action : null;
-            $schedule = DB::table('sched_patients')->where('id', $request->id)->update(['date' => $request->schedule_date]);
-            $path =
-                'patient_edit?id=' .
-                $request->patient_id .
-                '&patientcode=' .
-                $request->patientcode;
+            $schedule = DB::table('sched_patients')
+                ->where('id', $request->id)
+                ->update(['date' => $request->schedule_date]);
+            $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
 
             // if admin is updating re-schedule
-            if($action) {
+            if ($action) {
                 return redirect($path)->with('status', 'Update schedule of patient.');
             }
             // if patient is updating re-schedule
@@ -749,70 +598,41 @@ class PatientController extends Controller
             $mast_patient_save = $mast_patient->save();
 
             // UPDATE MAST PATIENT INFO
-            $save_patient_info = DB::update(
-                'update mast_patientinfo set address = ?, contactno = ?, occupation = ?, principal = ?, referral = ?, category = ?, payment_type = ?, admission_type = ?, nationality = ?, religion = ?,  maritalstatus = ?, agency_id = ?, agency_address = ?, country_destination = ?, medical_package = ?, vessel = ?, passportno = ?, passport_expdate = ?, srbno = ?, srb_expdate = ?, birthdate = ?, birthplace = ? where main_id = ?',
-                [
-                    strtoupper($request->homeAdress),
-                    $request->phoneNumber,
-                    $request->occupation,
-                    strtoupper($request->principal),
-                    strtoupper($request->referral),
-                    $request->category,
-                    $request->payment_type,
-                    $request->admit_type,
-                    strtoupper($request->nationality),
-                    strtoupper($request->religion),
-                    $request->civilStatus,
-                    $request->agencyName,
-                    $request->address_of_agency,
-                    $request->countryDestination,
-                    $request->medicalPackage,
-                    strtoupper($request->vessel),
-                    $request->passportNo,
-                    $request->passport_expdate,
-                    $request->ssrb,
-                    $request->srb_expdate,
-                    $request->birthdate,
-                    $request->birthplace,
-                    $request->main_id,
-                ]
-            );
+            $save_patient_info = PatientInfo::where('main_id', $request->main_id)->update([
+                'address' => strtoupper($request->address),
+                'contactno' => $request->contactno,
+                'occupation' => $request->occupation,
+                'principal' => strtoupper($request->principal),
+                'referral' => strtoupper($request->referral),
+                'category' => $request->category,
+                'payment_type' => $request->payment_type,
+                'admission_type' => $request->admit_type,
+                'nationality' => strtoupper($request->nationality),
+                'religion' => strtoupper($request->religion),
+                'maritalstatus' => $request->civilStatus,
+                'agency_id' => $request->agencyName,
+                'agency_address' => $request->address_of_agency,
+                'country_destination' => $request->countryDestination,
+                'medical_package' => $request->medicalPackage,
+                'vessel' => strtoupper($request->vessel),
+                'passportno' => $request->passportNo,
+                'passport_expdate' => $request->passport_expdate,
+                'srbno' => $request->ssrb,
+                'srb_expdate' => $request->srb_expdate,
+                'birthdate' => $request->birthdate,
+                'birthplace' => $request->birthplace,
+            ]);
 
             //UPDATE MEDICAL HISTORY
-            $save_medical_history = $this->action_med_history($request->all(), "update", "patient", $request->main_id);
+            $save_medical_history = $this->action_med_history($request->all(), 'update', 'patient', $request->main_id);
 
             // UPDATE DECLARATION FORM
-            $save_declaration_form = DB::update(
-                'update declaration_form set travelled_abroad_recently = ?, area_visited = ?, contact_with_people_being_infected__suspected_diagnose_with_cov = ?, travel_arrival = ?, travel_return = ?, relationship_with_last_people = ?, last_contact_date = ?, fever = ?, cough = ?, shortness_of_breath = ?, persistent_pain_in_chest = ? where main_id = ?',
-                [
-                    $request->travelled_abroad_recently,
-                    $request->area_visited,
-                    $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
-                    $request->travel_arrival_date,
-                    $request->travel_return_date,
-                    $request->relationship_last_contact_people,
-                    $request->last_contact_date,
-                    $request->fever,
-                    $request->cough,
-                    $request->shortness_of_breath,
-                    $request->persistent_pain_in_the_chest,
-                    $request->main_id,
-                ]
-            );
+            $save_declaration_form = DB::update('update declaration_form set travelled_abroad_recently = ?, area_visited = ?, contact_with_people_being_infected__suspected_diagnose_with_cov = ?, travel_arrival = ?, travel_return = ?, relationship_with_last_people = ?, last_contact_date = ?, fever = ?, cough = ?, shortness_of_breath = ?, persistent_pain_in_chest = ? where main_id = ?', [$request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest, $request->main_id]);
 
-            if (
-                $request->fever == 0 &&
-                $request->cough == 0 &&
-                $request->shortness_of_breath == 0 &&
-                $request->persistent_pain_in_the_chest == 0 &&
-                $request->travelled_abroad_recently == 0
-            ) {
-                return redirect('/edit_schedule');
+            if ($request->fever == 0 && $request->cough == 0 && $request->shortness_of_breath == 0 && $request->persistent_pain_in_the_chest == 0 && $request->travelled_abroad_recently == 0) {
+                return redirect('/edit_schedule')->with('success', 'Patient Information Update Successfully');
             } else {
-                return redirect('/patient_info')->with(
-                    'status',
-                    'Warning: Test Message'
-                );
+                return redirect('/patient_info')->with('status', 'Warning: Test Message');
             }
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -832,9 +652,7 @@ class PatientController extends Controller
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
-
     }
-
 
     public function view_patients(Request $request)
     {
@@ -851,15 +669,7 @@ class PatientController extends Controller
     public function get_patients(Request $request)
     {
         try {
-            $data = Patient::select(
-                'patientcode',
-                DB::raw('MAX(created_date) as created_date'),
-                DB::raw('MAX(id) as id'),
-                DB::raw('MAX(email) as email'),
-                DB::raw('MAX(lastname) as lastname'),
-                DB::raw('MAX(firstname) as firstname'),
-                DB::raw('MAX(gender) as gender')
-                )
+            $data = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(gender) as gender'))
                 ->whereNotNull('firstname')
                 ->where('yndelete', '0')
                 ->with('patientinfo', 'admission')
@@ -871,38 +681,40 @@ class PatientController extends Controller
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
                         $patientInfo = $row->patientinfo;
-                        if($patientInfo) {
+                        if ($patientInfo) {
                             if (!$patientInfo->agency_id) {
-                                return "NO AGENCY";
+                                return 'NO AGENCY';
                             } else {
                                 $agency = $patientInfo->agency;
-                                return $agency ? $agency->agencyname : "NO AGENCY";
+                                return $agency ? $agency->agencyname : 'NO AGENCY';
                             }
                         }
                     })
                     ->addColumn('medical_package', function ($row) {
                         $patientInfo = $row->patientinfo;
-                        if($patientInfo) {
+                        if ($patientInfo) {
                             if (!$patientInfo->medical_package) {
-                                return "NO PACKAGE";
+                                return 'NO PACKAGE';
                             } else {
                                 $package = $patientInfo->package;
-                                return $package ? $package->packagename : "NO PACKAGE";
+                                return $package ? $package->packagename : 'NO PACKAGE';
                             }
                         }
                     })
                     ->addColumn('action', function ($row) {
                         $patient = Patient::where('id', $row['id'])->first();
-                            $actionBtn = '<a href="/patient_edit?id=' . $row['id'] . '&patientcode=' . $row['patientcode'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-                                <a href="#" id="' . $row['id'] . '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                        $actionBtn =
+                            '<a href="/patient_edit?id=' .
+                            $row['id'] .
+                            '&patientcode=' .
+                            $row['patientcode'] .
+                            '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                                <a href="#" id="' .
+                            $row['id'] .
+                            '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
                     })
-                    ->rawColumns([
-                        'action',
-                        'contactno',
-                        'agency',
-                        'medical_package',
-                    ])
+                    ->rawColumns(['action', 'contactno', 'agency', 'medical_package'])
                     ->toJson();
             }
         } catch (\Exception $exception) {
@@ -912,7 +724,8 @@ class PatientController extends Controller
         }
     }
 
-    public function add_patient() {
+    public function add_patient()
+    {
         try {
             $agencies = Agency::all();
             $data = session()->all();
@@ -924,39 +737,37 @@ class PatientController extends Controller
         }
     }
 
-    public function store_patient(Request $request) {
+    public function store_patient(Request $request)
+    {
         try {
-
             $request->validate([
                 'patient_image.*' => 'mimes:jpg,png,jpeg',
-                "agency" => 'required'
+                'agency' => 'required',
             ]);
 
             // dd($request->all());
 
             $latest_patientcode = DB::table('mast_patient')
-            ->latest('patientcode')
-            ->first();
-
-
+                ->latest('patientcode')
+                ->first();
 
             $lastPatientCode = substr($latest_patientcode->patientcode, 4);
             // dd($lastPatientCode);
             // new patient code
             $addPatientCode = $lastPatientCode + 1;
-            if($addPatientCode > 9999) {
+            if ($addPatientCode > 9999) {
                 $patientCode = 'P' . date('y') . '-0' . $addPatientCode;
-            }else {
+            } else {
                 $patientCode = 'P' . date('y') . '-00' . $addPatientCode;
             }
 
-            if($request->hasFile('patient_image')) {
+            if ($request->hasFile('patient_image')) {
                 $oldFileName = $request->file('patient_image')->getClientOriginalName();
                 $extension = pathinfo($oldFileName, PATHINFO_EXTENSION);
-                $newFileName = $patientCode . "." . $extension;
+                $newFileName = $patientCode . '.' . $extension;
                 $userExistPhoto = public_path('app-assets/images/profiles/') . $newFileName;
                 $remove = @unlink($userExistPhoto);
-                $save_file = $request->file('patient_image')->move(public_path().'/app-assets/images/profiles/', $newFileName);
+                $save_file = $request->file('patient_image')->move(public_path() . '/app-assets/images/profiles/', $newFileName);
             }
 
             $patient = new Patient();
@@ -973,32 +784,30 @@ class PatientController extends Controller
             $save = $patient->save();
 
             $insert_other_patient_info = DB::table('mast_patientinfo')->insert([
-                "main_id" => $patient->id,
-                "patientcode" => $patientCode,
-                "address" => $request->address,
-                "contactno" => $request->contactno,
-                "occupation" => $request->occupation,
-                "nationality" => $request->nationality,
-                "religion" => $request->religion,
-                "maritalstatus" => $request->maritalstatus,
-                "agency_id" => $request->agency,
-                "country_destination" => $request->country_destination,
-                "passportno" => $request->passportno,
-                "passport_expdate" => $request->passport_expdate,
-                "srbno" => $request->srbno,
-                "srb_expdate" => $request->srb_expdate,
-                "medical_package" => $request->medical_package,
-                "birthdate" => $request->birthdate,
-                "birthplace" => $request->birthplace
+                'main_id' => $patient->id,
+                'patientcode' => $patientCode,
+                'address' => $request->address,
+                'contactno' => $request->contactno,
+                'occupation' => $request->occupation,
+                'nationality' => $request->nationality,
+                'religion' => $request->religion,
+                'maritalstatus' => $request->maritalstatus,
+                'agency_id' => $request->agency,
+                'country_destination' => $request->country_destination,
+                'passportno' => $request->passportno,
+                'passport_expdate' => $request->passport_expdate,
+                'srbno' => $request->srbno,
+                'srb_expdate' => $request->srb_expdate,
+                'medical_package' => $request->medical_package,
+                'birthdate' => $request->birthdate,
+                'birthplace' => $request->birthplace,
             ]);
 
-            return redirect('/patients')->with('status', "Patient Added Successfully");
-
+            return redirect('/patients')->with('status', 'Patient Added Successfully');
         } catch (\Exception $exception) {
-
             $request->validate([
                 'patient_image.*' => 'mimes:jpg,png,jpeg',
-                "agency" => 'required'
+                'agency' => 'required',
             ]);
 
             $message = $exception->getMessage();
@@ -1031,8 +840,7 @@ class PatientController extends Controller
     public function edit_patient()
     {
         try {
-
-            if(isset($_GET['payment_type'])) {
+            if (isset($_GET['payment_type'])) {
                 session()->put('payment_type', $_GET['payment_type']);
             }
 
@@ -1041,7 +849,9 @@ class PatientController extends Controller
             // dd($employeeInfo);
             $id = $_GET['id'];
             $patientcode = $_GET['patientcode'];
-            $patient = Patient::where('id', '=', $id)->with('patientinfo')->first();
+            $patient = Patient::where('id', '=', $id)
+                ->with('patientinfo')
+                ->first();
             $agencies = Agency::all();
             $patientInfo = DB::table('mast_patientinfo')
                 ->where('mast_patientinfo.main_id', $id)
@@ -1060,53 +870,31 @@ class PatientController extends Controller
                 ->latest('id')
                 ->first();
 
-            $patientRecords = Patient::where(
-                'patientcode',
-                '=',
-                $patientcode
-            )->latest('id')->get();
+            $patientRecords = Patient::where('patientcode', '=', $patientcode)
+                ->latest('id')
+                ->get();
 
-            $latestRecord = Patient::where(
-                'patientcode',
-                '=',
-                $patientcode
-            )->latest('id')->first();
+            $latestRecord = Patient::where('patientcode', '=', $patientcode)
+                ->latest('id')
+                ->first();
 
-            $patient_agency = Agency::where(
-                'id',
-                '=',
-                $patientInfo->agency_id
-            )->first();
+            $patient_agency = Agency::where('id', '=', $patientInfo->agency_id)->first();
 
-            $patient_package = ListPackage::where(
-                'id',
-                $patientInfo->medical_package
-            )->first();
+            $patient_package = ListPackage::where('id', $patientInfo->medical_package)->first();
 
             $list_exams = ListExam::all();
 
-            $yellow_card_records = DB::table('yellow_card')->where('patient_id', $id)->orderBy('count')->get();
+            $yellow_card_records = DB::table('yellow_card')
+                ->where('patient_id', $id)
+                ->orderBy('count')
+                ->get();
 
             if ($patient_package) {
                 $patient_exams = DB::table('list_packagedtl')
-                    ->select(
-                        'list_packagedtl.*',
-                        'list_exam.examname as examname',
-                        'list_exam.category as category',
-                        'list_exam.section_id',
-                        'list_section.sectionname'
-                    )
+                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
                     ->where('main_id', $patient_package->id)
-                    ->leftJoin(
-                        'list_exam',
-                        'list_exam.id',
-                        'list_packagedtl.exam_id'
-                    )
-                    ->leftJoin(
-                        'list_section',
-                        'list_section.id',
-                        'list_exam.section_id'
-                    )
+                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                     ->get();
             } else {
                 $patient_exams = null;
@@ -1116,65 +904,29 @@ class PatientController extends Controller
 
             if ($patientCode) {
                 if (!$patient_agency) {
-                    $patient_agency = Agency::where(
-                        'id',
-                        '=',
-                        $patientCode->agency_id
-                    )->first();
+                    $patient_agency = Agency::where('id', '=', $patientCode->agency_id)->first();
                 }
 
                 if (!$patient_package) {
-                    $patient_package = ListPackage::where(
-                        'id',
-                        '=',
-                        $patientInfo->medical_package
-                    )->first();
+                    $patient_package = ListPackage::where('id', '=', $patientInfo->medical_package)->first();
                 }
 
                 if ($patient_package) {
                     $patient_exams = DB::table('list_packagedtl')
-                        ->select(
-                            'list_packagedtl.*',
-                            'list_exam.examname as examname',
-                            'list_exam.category as category',
-                            'list_exam.section_id',
-                            'list_section.sectionname'
-                        )
+                        ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
                         ->where('main_id', $patient_package->id)
-                        ->leftJoin(
-                            'list_exam',
-                            'list_exam.id',
-                            'list_packagedtl.exam_id'
-                        )
-                        ->leftJoin(
-                            'list_section',
-                            'list_section.id',
-                            'list_exam.section_id'
-                        )
+                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                        ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                         ->get();
                 } else {
                     $patient_exams = null;
                 }
             }
 
-            $patientRecords = Patient::where(
-                'patientcode',
-                '=',
-                $patientcode
-            )->get();
+            $patientRecords = Patient::where('patientcode', '=', $patientcode)->get();
 
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )
-                ->leftJoin(
-                    'mast_agency',
-                    'mast_agency.id',
-                    '=',
-                    'list_package.agency_id'
-                )
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
             $patient_status = $patientCode ? $this->patientStatus($patientCode->id, $patient_exams) : $this->patientStatus(null, $patient_exams);
@@ -1205,11 +957,11 @@ class PatientController extends Controller
             $examlab_urin = $patient_status['examlab_urin'];
             $examlab_misc = $patient_status['examlab_misc'];
 
-            if($patientCode) {
+            if ($patientCode) {
                 $exam_ppd = DB::table('exam_ppd')
-                ->where('admission_id', '=', $patientCode->id)
-                ->latest('id')
-                ->first();
+                    ->where('admission_id', '=', $patientCode->id)
+                    ->latest('id')
+                    ->first();
             } else {
                 $exam_ppd = null;
             }
@@ -1230,14 +982,14 @@ class PatientController extends Controller
             }
 
             $complete_patient = false;
-            if($patient_exams) {
-                if(count($completed_exams) == count($patient_exams)) {
-                    $complete_patient =  true;
+            if ($patient_exams) {
+                if (count($completed_exams) == count($patient_exams)) {
+                    $complete_patient = true;
                     $patient = Patient::where('id', $id)->first();
 
-                    if(!$patient->medical_done_date) {
+                    if (!$patient->medical_done_date) {
                         $medical_done_update = Patient::where('id', $id)->update([
-                            "medical_done_date" => date("Y-m-d h:i:s")
+                            'medical_done_date' => date('Y-m-d h:i:s'),
                         ]);
                     }
                 }
@@ -1245,14 +997,18 @@ class PatientController extends Controller
 
             $patient_or = null;
 
-            if($patientCode) {
+            if ($patientCode) {
                 $patient_or = CashierOR::where('admission_id', $patientCode->id)->first();
             }
 
+            $latest_schedule = DB::table('sched_patients')
+                ->where('patientcode', $patient->patientcode)
+                ->latest('date')
+                ->first();
 
-            $latest_schedule = DB::table('sched_patients')->where('patientcode', $patient->patientcode)->latest('date')->first();
-
-            $patient_upload_files = DB::table('mast_patient_files')->where('main_id', $patient->id)->get();
+            $patient_upload_files = DB::table('mast_patient_files')
+                ->where('main_id', $patient->id)
+                ->get();
 
             $doctors = DB::table('mast_employee')
                 ->where('position', 'like', '%Medical Director%')
@@ -1272,76 +1028,19 @@ class PatientController extends Controller
                     'examname' => $exam->examname,
                     'charge' => $exam->charge,
                     'date' => $exam->updated_date,
-                    'price' => $exam->price
+                    'price' => $exam->price,
                 ];
                 array_push($additional_exams, $exam_data);
             }
 
-            if($patientCode) {
+            if ($patientCode) {
                 $followup_records = ReassessmentFindings::where('admission_id', $patientCode->id)->get();
             } else {
                 $followup_records = [];
             }
 
-            $exam_groups =  $patientCode ? (new AdmissionController)->group_by('date', $additional_exams,  $patientCode->trans_date) : (new AdmissionController)->group_by('date', $additional_exams,  null);
-            return view(
-                'Patient.edit-patient',
-                compact(
-                    'patient',
-                    'patientInfo',
-                    'agencies',
-                    'medicalHistory',
-                    'declarationForm',
-                    'patientCode',
-                    'patient_agency',
-                    'patient_package',
-                    'packages',
-                    'exam_audio',
-                    'exam_crf',
-                    'exam_cardio',
-                    'exam_dental',
-                    'exam_ecg',
-                    'exam_echodoppler',
-                    'exam_echoplain',
-                    'exam_ishihara',
-                    'exam_physical',
-                    'exam_psycho',
-                    'exam_psychobpi',
-                    'exam_stressecho',
-                    'exam_stresstest',
-                    'patient_or',
-                    'exam_ultrasound',
-                    'exam_visacuity',
-                    'exam_xray',
-                    'exam_ppd',
-                    'exam_blood_serology',
-                    'examlab_hiv',
-                    'examlab_drug',
-                    'examlab_feca',
-                    'examlab_hema',
-                    'examlab_hepa',
-                    'examlab_pregnancy',
-                    'examlab_urin',
-                    'examlab_misc',
-                    'employeeInfo',
-                    'patientRecords',
-                    'patient_exams',
-                    'completed_exams',
-                    'on_going_exams',
-                    'data',
-                    'latest_schedule',
-                    'patientRecords',
-                    'latestRecord',
-                    'list_exams',
-                    'additional_exams',
-                    'complete_patient',
-                    'doctors',
-                    'patient_upload_files',
-                    'yellow_card_records',
-                    'exam_groups',
-                    'followup_records'
-                )
-            );
+            $exam_groups = $patientCode ? (new AdmissionController())->group_by('date', $additional_exams, $patientCode->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
+            return view('Patient.edit-patient', compact('patient', 'patientInfo', 'agencies', 'medicalHistory', 'declarationForm', 'patientCode', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
         } catch (\Exception $exception) {
             dd($exception);
             $message = $exception->getMessage();
@@ -1350,34 +1049,37 @@ class PatientController extends Controller
         }
     }
 
-    public function crop_signature(Request $request) {
+    public function crop_signature(Request $request)
+    {
         $data = session()->all();
         $patient = Patient::where('id', $request->patient_id)->firstOrFail();
         return view('Patient.crop-image', compact('data', 'patient'));
     }
 
-    public function save_crop_signature(Request $request) {
+    public function save_crop_signature(Request $request)
+    {
         $patient = Patient::where('id', $request->id)->first();
-        if(!$patient->default_signature) {
+        if (!$patient->default_signature) {
             $patient->default_signature = $patient->patient_signature;
         }
         $patient->patient_signature = base64_encode($request->image);
         $save = $patient->save();
 
-        $redirect_url = '/patient_edit?id='.$patient->id.'&patientcode='.$patient->patientcode.'';
+        $redirect_url = '/patient_edit?id=' . $patient->id . '&patientcode=' . $patient->patientcode . '';
 
-        if($save) {
+        if ($save) {
             return response()->json([
                 'status' => '201',
                 'message' => 'Crop Signature Successfully',
-                'redirect_url' => $redirect_url
+                'redirect_url' => $redirect_url,
             ]);
         }
     }
-    
-    public function return_default_signature(Request $request) {
+
+    public function return_default_signature(Request $request)
+    {
         $patient = Patient::where('id', $request->id)->first();
-        if($patient->default_signature) {
+        if ($patient->default_signature) {
             $patient->patient_signature = $patient->default_signature;
             $patient->save();
             return response()->json([
@@ -1398,30 +1100,13 @@ class PatientController extends Controller
             if ($request->patient_image == $request->old_image) {
                 $name = $request->old_image;
             } else {
-                $userOldPhoto =
-                    public_path('app-assets/images/profiles/') .
-                    $request->old_image;
+                $userOldPhoto = public_path('app-assets/images/profiles/') . $request->old_image;
                 $remove = @unlink($userOldPhoto);
-                    $name =
-                    $request->patientcode .
-                    '.' .
-                    explode(
-                        '/',
-                        explode(
-                            ':',
-                            substr(
-                                $request->patient_image,
-                                0,
-                                strpos($request->patient_image, ';')
-                            )
-                        )[1]
-                    )[1];
-                Image::make($request->patient_image)->save(
-                    public_path('app-assets/images/profiles/') . $name
-                );
+                $name = $request->patientcode . '.' . explode('/', explode(':', substr($request->patient_image, 0, strpos($request->patient_image, ';')))[1])[1];
+                Image::make($request->patient_image)->save(public_path('app-assets/images/profiles/') . $name);
             }
 
-            if($request->old_signature == $request->signature) {
+            if ($request->old_signature == $request->signature) {
                 $signature = $request->old_signature;
             } else {
                 $signature = base64_encode($request->signature);
@@ -1441,26 +1126,26 @@ class PatientController extends Controller
             $mast_patient->updated_date = date('Y-m-d h:i:s');
             $mast_patient_save = $mast_patient->save();
 
-
             // UPDATE MAST PATIENT INFO
-            $save_patient_info = DB::table('mast_patientinfo')->where('main_id', $request->main_id)->update([
-                "address" => strtoupper($request->homeAddress),
-                "contactno" => $request->phoneNumber,
-                "occupation" => strtoupper($request->occupation),
-                "occupation_other" => $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
-                "nationality" => strtoupper($request->nationality),
-                "religion" => strtoupper($request->religion),
-                "religion_other" => $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
-                "maritalstatus" => strtoupper($request->civilStatus),
-                "birthdate" => $request->birthdate,
-                "birthplace" => $request->birthplace,
-            ]);
+            $save_patient_info = DB::table('mast_patientinfo')
+                ->where('main_id', $request->main_id)
+                ->update([
+                    'address' => strtoupper($request->homeAddress),
+                    'contactno' => $request->phoneNumber,
+                    'occupation' => strtoupper($request->occupation),
+                    'occupation_other' => $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
+                    'nationality' => strtoupper($request->nationality),
+                    'religion' => strtoupper($request->religion),
+                    'religion_other' => $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
+                    'maritalstatus' => strtoupper($request->civilStatus),
+                    'birthdate' => $request->birthdate,
+                    'birthplace' => $request->birthplace,
+                ]);
 
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description =
-                'Edit General Info of Patient ' . $mast_patient->patientcode;
+            $log->description = 'Edit General Info of Patient ' . $mast_patient->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 
@@ -1482,18 +1167,18 @@ class PatientController extends Controller
 
     public function update_patient_agency(Request $request)
     {
-       try {
-            $patient_vessel = $request->agency_id == 3 || $request->agency_id == 57 || $request->agency_id == 58 || $request->agency_id == 55  ? $request->bahia_vessel : $request->vessel;
+        try {
+            $patient_vessel = $request->agency_id == 3 || $request->agency_id == 57 || $request->agency_id == 58 || $request->agency_id == 55 ? $request->bahia_vessel : $request->vessel;
             $patient_principal = $request->agency_id == 9 ? $request->hartmann_principal : $request->principal;
             $patient = Patient::where('id', $request->main_id)->first();
-               Patient::where('id', $request->main_id)->update([
-                   "position_applied" => $request->positionApplied
-                ]);
-                $save_patient_info = DB::table('mast_patientinfo')
+            Patient::where('id', $request->main_id)->update([
+                'position_applied' => $request->positionApplied,
+            ]);
+            $save_patient_info = DB::table('mast_patientinfo')
                 ->where('main_id', $request->main_id)
                 ->update([
-                    'agency_id' =>  $request->agency_id,
-                    'agency_address' =>  strtoupper($request->address_of_agency),
+                    'agency_id' => $request->agency_id,
+                    'agency_address' => strtoupper($request->address_of_agency),
                     'category' => $request->category,
                     'payment_type' => $request->payment_type,
                     'admission_type' => strtoupper($request->admit_type),
@@ -1508,11 +1193,11 @@ class PatientController extends Controller
                     'referral' => strtoupper($request->referral),
                 ]);
 
-            if($patient->admission_id) {
+            if ($patient->admission_id) {
                 Admission::where('id', $patient->admission_id)->update([
-                    "agency_id" => $request->agency_id,
-                    "position" => $request->positionApplied,
-                    "package_id" => $request->medicalPackage,
+                    'agency_id' => $request->agency_id,
+                    'position' => $request->positionApplied,
+                    'package_id' => $request->medicalPackage,
                     'vesselname' => strtoupper($request->vessel),
                 ]);
             }
@@ -1520,15 +1205,14 @@ class PatientController extends Controller
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description =
-                'Edit agency info of patient ' . $patient->patientcode;
+            $log->description = 'Edit agency info of patient ' . $patient->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 
             return response()->json([
                 'status' => 200,
             ]);
-       } catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1538,9 +1222,9 @@ class PatientController extends Controller
     public function update_patient_medical_history(Request $request)
     {
         try {
-           // INSERT MEDICAL HISTORY
-            $save = $this->action_med_history($request->all(), "update", "admin", $request->main_id);
-            
+            // INSERT MEDICAL HISTORY
+            $save = $this->action_med_history($request->all(), 'update', 'admin', $request->main_id);
+
             $employeeInfo = session()->all();
             $patient = Patient::where('id', $request->main_id)->first();
             $log = new EmployeeLog();
@@ -1563,65 +1247,33 @@ class PatientController extends Controller
 
     public function update_patient_declaration_form(Request $request)
     {
-       try {
-            $save_declaration_form =  DB::table('declaration_form')->where('main_id',  $request->main_id)
-            ->update([
-                'travelled_abroad_recently' => $request->travelled_abroad_recently,
-                'area_visited' => $request->area_visited,
-                'contact_with_people_being_infected__suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
-                'travel_arrival' => $request->travelled_abroad_recently,
-                'travel_return' => $request->travel_arrival_date,
-                'relationship_with_last_people' => $request->relationship_with_last_people,
-                'last_contact_date' => $request->last_contact_date,
-                'fever' => $request->fever,
-                'cough' => $request->cough,
-                'shortness_of_breath' => $request->shortness_of_breath,
-                'persistent_pain_in_chest' => $request->persistent_pain_in_the_chest,
-            ]);
+        try {
+            $save_declaration_form = DB::table('declaration_form')
+                ->where('main_id', $request->main_id)
+                ->update([
+                    'travelled_abroad_recently' => $request->travelled_abroad_recently,
+                    'area_visited' => $request->area_visited,
+                    'contact_with_people_being_infected__suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
+                    'travel_arrival' => $request->travelled_abroad_recently,
+                    'travel_return' => $request->travel_arrival_date,
+                    'relationship_with_last_people' => $request->relationship_with_last_people,
+                    'last_contact_date' => $request->last_contact_date,
+                    'fever' => $request->fever,
+                    'cough' => $request->cough,
+                    'shortness_of_breath' => $request->shortness_of_breath,
+                    'persistent_pain_in_chest' => $request->persistent_pain_in_the_chest,
+                ]);
 
             $employeeInfo = session()->all();
             $patient = Patient::where('id', $request->main_id)->first();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description =
-                'Edit declaration form of patient ' . $patient->patientcode;
+            $log->description = 'Edit declaration form of patient ' . $patient->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
             return response()->json([
                 'status' => 200,
             ]);
-       } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
-        }
-    }
-
-    public function search(Request $request) {
-
-        try {
-            $query = $_GET['query'];
-            $patients = Patient::select(
-            'patientcode',
-            DB::raw('MAX(created_date) as created_date'),
-            DB::raw('MAX(id) as id'),
-            DB::raw('MAX(email) as email'),
-            DB::raw('MAX(lastname) as lastname'),
-            DB::raw('MAX(firstname) as firstname'),
-            DB::raw('MAX(gender) as gender')
-            )
-            ->where('firstname', 'LIKE', '%' . $query . '%')
-            ->orWhere('lastname', 'LIKE', '%' . $query . '%')
-            ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
-            ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', "%".$query."%")
-            ->groupBy('patientcode')
-            ->latest('id')
-            ->get();
-
-            return response()->json([
-                $patients
-            ]);
-
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -1629,29 +1281,48 @@ class PatientController extends Controller
         }
     }
 
+    public function search(Request $request)
+    {
+        try {
+            $query = $_GET['query'];
+            $patients = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(gender) as gender'))
+                ->where('firstname', 'LIKE', '%' . $query . '%')
+                ->orWhere('lastname', 'LIKE', '%' . $query . '%')
+                ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
+                ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
+                ->groupBy('patientcode')
+                ->latest('id')
+                ->get();
 
-    public function store_patient_files(Request $request) {
+            return response()->json([$patients]);
+        } catch (\Exception $exception) {
+            $message = $exception->getMessage();
+            $file = $exception->getFile();
+            return view('errors.error', compact('message', 'file'));
+        }
+    }
 
+    public function store_patient_files(Request $request)
+    {
         try {
             $this->validate($request, [
                 'upload_files' => 'required',
-                'upload_files.*' => 'mimes:pdf,jpg,png,jpeg'
+                'upload_files.*' => 'mimes:pdf,jpg,png,jpeg',
             ]);
 
-            if($request->hasFile('upload_files')) {
-                foreach($request->file('upload_files') as $file)
-                {
-                    $name= $file->getClientOriginalName();
-                    $file->move(public_path().'/app-assets/files/', $name);
+            if ($request->hasFile('upload_files')) {
+                foreach ($request->file('upload_files') as $file) {
+                    $name = $file->getClientOriginalName();
+                    $file->move(public_path() . '/app-assets/files/', $name);
 
                     $save_file = DB::table('mast_patient_files')->insert([
-                        "main_id" => $request->patient_id,
-                        "file_name" => $name,
-                        "created_date" => date("Y-m-d")
+                        'main_id' => $request->patient_id,
+                        'file_name' => $name,
+                        'created_date' => date('Y-m-d'),
                     ]);
                 }
 
-                if($save_file) {
+                if ($save_file) {
                     return back()->with('status', 'Upload Successfully');
                 }
             }
@@ -1662,11 +1333,11 @@ class PatientController extends Controller
         }
     }
 
-    public function action_med_history($request, $action, $user, $id) {
+    public function action_med_history($request, $action, $user, $id)
+    {
         try {
-            $request_user = $user == "admin" ? $request['main_id'] : $id;
-            
-            $medical_history = $action == "store" ? new MedicalHistory : MedicalHistory::where('main_id', $request_user)->first();
+            $request_user = $user == 'admin' ? $request['main_id'] : $id;
+            $medical_history = $action == 'store' ? new MedicalHistory() : MedicalHistory::where('main_id', $request_user)->first();
             $medical_history->main_id = $request_user;
             $medical_history->head_and_neck_injury = $request['head_and_neck_injury'];
             $medical_history->frequent_headache = $request['frequent_head_ache'];
@@ -1682,7 +1353,7 @@ class PatientController extends Controller
             $medical_history->tuberculosis = $request['tuberculosis'];
             $medical_history->signed_off_as_sick = $request['signed_off_as_sick'];
             $medical_history->repatriation_form_ship = $request['repatriation_form_ship'];
-            $medical_history->declared_unfit_for_sea_duty =  $request['declared_unfit_for_sea_duty'];
+            $medical_history->declared_unfit_for_sea_duty = $request['declared_unfit_for_sea_duty'];
             $medical_history->previous_hospitalization = $request['previous_hospitalization'];
             $medical_history->feel_healthy = $request['feel_healthy'];
             $medical_history->other_lung_disorder = $request['other_lung_disorder'];
@@ -1722,7 +1393,7 @@ class PatientController extends Controller
             $medical_history->taking_medication_for_diabetes = $request['taking_medication_for_diabetes'];
             $medical_history->vaccination = $request['vaccination'];
             $save = $medical_history->save();
-            
+
             return $save;
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -1732,7 +1403,8 @@ class PatientController extends Controller
         }
     }
 
-    public function patientStatus($admission_id, $patient_exams) {
+    public function patientStatus($admission_id, $patient_exams)
+    {
         if ($admission_id) {
             $exam_audio = DB::table('exam_audio')
                 ->where('admission_id', '=', $admission_id)
@@ -1775,7 +1447,7 @@ class PatientController extends Controller
                 ->first();
 
             $exam_physical = DB::table('exam_physical')
-            ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice')
+                ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice')
                 ->where('exam_physical.admission_id', '=', $admission_id)
                 ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
                 ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
@@ -1864,10 +1536,7 @@ class PatientController extends Controller
                 ->first();
         } else {
             // set all exam value to null if the patient doesn't have a admission id
-            $exam_audio = $exam_cardio = $exam_crf = $exam_ecg = $exam_dental = $exam_echodoppler = $exam_echoplain = $exam_ishihara =
-            $exam_physical = $exam_psycho = $exam_psychobpi = $exam_stressecho = $exam_stresstest =$exam_ultrasound = $exam_visacuity =
-            $exam_xray = $exam_blood_serology = $examlab_hiv = $examlab_drug =$examlab_feca = $examlab_hema = $examlab_pregnancy = $examlab_hepa =
-            $examlab_urin = $examlab_misc = null;
+            $exam_audio = $exam_cardio = $exam_crf = $exam_ecg = $exam_dental = $exam_echodoppler = $exam_echoplain = $exam_ishihara = $exam_physical = $exam_psycho = $exam_psychobpi = $exam_stressecho = $exam_stresstest = $exam_ultrasound = $exam_visacuity = $exam_xray = $exam_blood_serology = $examlab_hiv = $examlab_drug = $examlab_feca = $examlab_hema = $examlab_pregnancy = $examlab_hepa = $examlab_urin = $examlab_misc = null;
         }
 
         $exams = [];
@@ -1954,12 +1623,7 @@ class PatientController extends Controller
                     }
                 }
 
-                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) ||  preg_match('/SGPT/i', $exam->examname)
-                    || preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) || preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname)
-                    || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname)
-                    ||  preg_match('/Electrolytes/i', $exam->category) ||  preg_match('/Sodium/i', $exam->examname) ||  preg_match('/Potassium/i', $exam->examname) ||  preg_match('/Calcium/i', $exam->examname)
-                    ||  preg_match('/Albumin/i', $exam->examname) ||  preg_match('/Creatinine/i', $exam->examname) ||  preg_match('/Uric Acid/i', $exam->examname) ||  preg_match('/Anti HBs/i', $exam->examname)) {
-
+                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) || preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) || preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) || preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) || preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) || preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) || preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
                     if (!$exam_blood_serology) {
                         $exams[$exam->examname] = '';
                     }
@@ -2037,7 +1701,7 @@ class PatientController extends Controller
             'examlab_pregnancy' => $examlab_pregnancy,
             'examlab_urin' => $examlab_urin,
             'examlab_misc' => $examlab_misc,
-            'exams' => $exams
+            'exams' => $exams,
         ];
 
         return $data;

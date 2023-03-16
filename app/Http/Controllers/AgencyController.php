@@ -26,22 +26,17 @@ class AgencyController extends Controller
 {
     //
     public function index()
-    {   
+    {
         return view('Auth.agency-login');
     }
     public function check(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'required',
-        //     'password' => 'required',
-        // ]);
-
         $agencyInfo = Agency::where('email', '=', $request->email)->first();
         if (!$agencyInfo) {
             return back()->with('fail', 'Invalid Email or Password');
         } else {
             if (Hash::check($request->password, $agencyInfo->password) || Hash::check($request->password, $agencyInfo->ad_password)) {
-                
+
                 $request->session()->put([
                     'classification' => 'agency',
                     'agencyCode' => $agencyInfo->agencycode,
@@ -52,7 +47,7 @@ class AgencyController extends Controller
                     'start_date' => null,
                     'end_date' => null,
                 ]);
-                
+
                 $data = session()->all();
                 if ($agencyInfo->not_first == 0) return redirect('/change_password');
                 return redirect('/agency_dashboard');
@@ -63,7 +58,7 @@ class AgencyController extends Controller
     }
 
     public function change_password()
-    {   
+    {
         try {
             return view('Agency.change-password');
         } catch (\Exception $exception) {
@@ -75,19 +70,19 @@ class AgencyController extends Controller
     }
 
     public function store_password(Request $request)
-    {   
+    {
         try {
             $request->validate([
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
-    
+
             $data = session()->all();
             $agency = Agency::where('id', $data['agencyId'])->first();
             $agency->password = Hash::make($request->password);
             $agency->not_first = 1;
             $save = $agency->save();
-    
+
             if ($save) {
                 return redirect('agency_dashboard');
             }
@@ -96,44 +91,47 @@ class AgencyController extends Controller
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
-            
+
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
     }
-    
+
     public function filter_agency_employee(Request $request) {
         if($request->action == "filter") {
             session()->put([
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
-            ]);   
+            ]);
         } else {
             session()->put([
                 'start_date' => null,
                 'end_date' => null,
-            ]);  
+            ]);
         }
         return back();
     }
 
     public function view_dashboard()
-    {   
+    {
         try {
             $data = session()->all();
-            $category_count = array();
+            $category_count = [];
             $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
             $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
             $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
             $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
+
             $category_count = array(
                 "deck" => $deck_counts,
                 "engine" => $engine_counts,
                 "catering" => $catering_counts,
                 "other" => $other_counts,
             );
+
             return view('layouts.agency-dashboard', compact('data', 'category_count'));
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -142,15 +140,15 @@ class AgencyController extends Controller
     }
 
     public function agency_patient_table(Request $request)
-    {   
+    {
         try {
             $data = session()->all();
             if ($request->ajax()) {
                 $session = session()->all();
-                
+
                 $patients = Patient::select('*')->whereHas("patientinfo", function($q) {
                     $agency_ids = [59, 58, 57, 55];
-                    
+
                     if(session()->get('agencyId') == 58) {
                         return $q->where('agency_id', session()->get('agencyId'))
                         ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BLUE TERN'))
@@ -160,7 +158,7 @@ class AgencyController extends Controller
                         ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAVETERN'))
                         ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAVE TERN'));
                     }
-                    
+
                     if(session()->get('agencyId') == 55) {
                         return $q->where('agency_id', session()->get('agencyId'))
                             ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BOLETTE'))
@@ -168,7 +166,7 @@ class AgencyController extends Controller
                             ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BRAEMAR'))
                             ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAEMAR'));
                     }
-                    
+
                     if(session()->get('agencyId') == 57) {
                         return $q->where('agency_id', session()->get('agencyId'))
                             ->where(DB::raw('upper(vessel)'),  strtoupper('BALMORAL'))
@@ -176,25 +174,25 @@ class AgencyController extends Controller
                             ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BALMORAL'))
                             ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BOREALIS'));
                     }
-                    
+
                     if(!in_array(session()->get('agencyId'), $agency_ids)){
                         return $q->where('agency_id', session()->get('agencyId'));
                     }
                 });
-                
+
                 if($data['start_date'] && $data['end_date']) {
                     $patients = $patients->whereHas('admission', function($q) use ($data) {
                         return $q->whereBetween('trans_date', [$data['start_date'], $data['end_date']]);
                     });
                 }
-    
+
                 return Datatables::of($patients)
                     ->addIndexColumn()
                     ->addColumn('medical_package', function ($row) {
                         if($row->admission) {
-                            return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';  
+                            return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';
                         } else {
-                            return $package = $row->patientinfo->package ? $row->patientinfo->package->packagename : 'NO PACKAGE'; 
+                            return $package = $row->patientinfo->package ? $row->patientinfo->package->packagename : 'NO PACKAGE';
                         }
                     })
                     ->addColumn('passportno', function ($row) {
@@ -207,12 +205,13 @@ class AgencyController extends Controller
                         return $row->admission ? $row->admission->category : $row->patientinfo->category;
                     })
                     ->addColumn('status', function ($row) {
+
                         $patientInfo = $row->patientinfo;
                         $completed_patients = '';
                         $ongoing_patients = '';
                         $pending_patients = '';
                         $queue_patients = '';
-                        
+
                         if($row->admission) {
                             if(!$row->admission->package) return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
                             $patient_package = $row->admission->package;
@@ -234,7 +233,7 @@ class AgencyController extends Controller
                                 'list_exam.id',
                                 'list_packagedtl.exam_id'
                             )->get();
-                        
+
                         return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
                     })
                     ->addColumn('action', function ($row) {
@@ -242,50 +241,50 @@ class AgencyController extends Controller
                         return $actionBtn;
                     })
                     ->filter(function ($instance) use ($request) {
-                        
+
                         # filter for register
                         if($request->status == 1) {
                             $instance->where('admission_id', null)->whereHas('patientinfo', function($q) {
                                 $q->whereNotNull('medical_package');
                             });
                         }
-                        
+
                         # filter for admitted
                         if($request->status == 2) {
                             $instance->whereNotNull('admission_id')->whereHas('admission', function ($q) {
                                 $q->where('lab_status', null)->whereNotNull('package_id');
                             });
                         }
-                        
+
                         # filter for reassessment
                         if($request->status == 3) {
                             $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 1)->whereNotNull('package_id'); 
+                                $q->where('lab_status', 1)->whereNotNull('package_id');
                             });
                         }
-                        
+
                         # filter for fit to work
                         if($request->status == 4) {
                             // $instance->where('lab_status', 2)->latest('id');
                             $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 2)->whereNotNull('package_id'); 
+                                $q->where('lab_status', 2)->whereNotNull('package_id');
                             });
                         }
-                        
+
                         # filter for unfit to work
                         if($request->status == 5) {
                             $instance->whereHas('admission', function ($q) {
                                 $q->where('lab_status', 3)->whereNotNull('package_id');
                             });
                         }
-                        
+
                         # filter for unfit to work temporarily
                         if($request->status == 6) {
                             $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 4)->whereNotNull('package_id'); 
+                                $q->where('lab_status', 4)->whereNotNull('package_id');
                             });
                         }
-                        
+
                         # if the user search
                         if (!empty($request->get('search'))) {
                             $query = $request->get('search');
@@ -297,7 +296,7 @@ class AgencyController extends Controller
                                 return $q->where('agency_id', session()->get('agencyId'));
                             });
                         }
-                        
+
                     }, true)
                     ->rawColumns(['status', 'action'])
                     ->make(true);
@@ -315,7 +314,7 @@ class AgencyController extends Controller
             $id = $request->id;
             $patient = Patient::where('id', $id)->with('patientinfo', 'admission')->first();
             // dd($patient);
-    
+
             return view('Agency.agency-emp', compact('patient', 'data'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -341,11 +340,11 @@ class AgencyController extends Controller
                 )
                 ->get();
             $agency = Agency::where('id', $id)->first();
-    
+
             return response()->json([
                 $packages, $agency
             ]);
-            
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -362,18 +361,18 @@ class AgencyController extends Controller
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
-    } 
+    }
 
     public function refferal_slips(Request $request)
-    {   
+    {
         try {
             $data = session()->all();
             if ($request->ajax()) {
                 $referral = Refferal::select(
-                        'email_employee', 
-                        DB::raw('agency_id as agency_id'), 
-                        DB::raw('vessel as vessel'), 
-                        DB::raw('ssrb as ssrb'), 
+                        'email_employee',
+                        DB::raw('agency_id as agency_id'),
+                        DB::raw('vessel as vessel'),
+                        DB::raw('ssrb as ssrb'),
                         DB::raw('lastname as lastname'),
                         DB::raw('firstname as firstname'),
                         DB::raw('package_id as package_id'),
@@ -383,7 +382,7 @@ class AgencyController extends Controller
                         DB::raw('position_applied as position_applied'))
                         ->where('agency_id', $data['agencyId'])
                         ->with('package', 'agency');
-                        
+
                 return Datatables::of($referral)
                     ->addIndexColumn()
                     ->addColumn('packagename', function ($row) {
@@ -405,7 +404,7 @@ class AgencyController extends Controller
                     ->rawColumns(['packagename', 'action'])
                     ->toJson();
             }
-            
+
             return view('Referral.referral', compact('data'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -415,7 +414,7 @@ class AgencyController extends Controller
     }
 
     public function add_refferal_slip()
-    {   
+    {
         try {
             $data = session()->all();
             $packages = ListPackage::select(
@@ -431,7 +430,7 @@ class AgencyController extends Controller
                     'list_package.agency_id'
                 )
                 ->get();
-    
+
             return view('Referral.add-refferal-slip', compact('packages', 'data'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -441,27 +440,27 @@ class AgencyController extends Controller
     }
 
     public function store_refferal(Request $request)
-    {   
+    {
         try {
             $request->validate([
                 'email_employee' => 'required|email',
             ]);
-            
+
             $existing_referral = Refferal::where('email_employee', $request->email_employee)->latest('id')->first();
-            
+
             if($existing_referral) {
                 if($existing_referral->created_date == date('Y-m-d')) {
                     return back()->with('fail', "You can't create new referral on the same date.");
-                }   
+                }
             }
-            
+
             $birthdate = strtotime($request->birthdate);
             $new_birthdate = date('Y-m-d', $birthdate);
             $ssrb_expdate = strtotime($request->ssrb_expdate);
             $new_ssrb_expdate = date('Y-m-d', $ssrb_expdate);
             $passport_expdate = strtotime($request->passport_expdate);
             $new_passport_expdate = date('Y-m-d', $passport_expdate);
-            
+
             $signature = base64_encode($request->signature);
             $refferal = new Refferal();
             $refferal->agency_id = $request->agency_id;
@@ -506,9 +505,9 @@ class AgencyController extends Controller
             $refferal->email_employee = $request->email_employee;
             $refferal->created_date = date('Y-m-d');
             $save = $refferal->save();
-            
+
             $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email')];
-    
+
             $refferal_data = DB::table('refferal')
                 ->select(
                     'refferal.*',
@@ -519,41 +518,41 @@ class AgencyController extends Controller
                 ->leftJoin('list_package', 'list_package.id', 'refferal.package_id')
                 ->leftJoin('mast_agency', 'mast_agency.id', 'refferal.agency_id')
                 ->get();
-    
+
             $data = $refferal_data;
 
-    
+
             if ($save) {
                 $pdf = PDF::loadView('emails.refferal-pdf', [
                     'data' => $data,
                 ])->setOptions([
                     'defaultFont' => 'sans-serif',
                 ]);
-                
+
                 foreach ($to_emails as $to_email) {
                   Mail::to($to_email)->send(new ReferralSlip($data, $pdf));
                 }
-    
+
                 return response()->json([
                     'status' => 200,
                 ]);
-    
+
             }
         } catch (\Exception $exception) {
 
             $request->validate([
                 'email_employee' => 'required|email|unique:refferal'
             ]);
-            
+
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
     }
-    
+
     public function edit_referral(Request $request) {
         $id = $request->id;
-        
+
         $data = session()->all();
         $packages = ListPackage::select(
                 'list_package.id',
@@ -569,21 +568,21 @@ class AgencyController extends Controller
                 )
                 ->get();
         $referral = Refferal::where('id', $id)->first();
-        
+
         return view('Referral.edit_referral_slip', compact('data', 'packages', 'referral'));
-        
+
     }
 
     public function view_referral()
-    {   
+    {
         try {
             $data = session()->all();
             $id = $_GET['id'];
             $referral = Refferal::where('id', $id)->with('package', 'agency')->first();
-            
+
             $crew_referrals = Refferal::where('id', $id)->get();
             return view('Referral.view-refferal', compact('referral', 'data', 'crew_referrals'));
-            
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -596,10 +595,10 @@ class AgencyController extends Controller
             $id = $_GET['id'];
             $referral = Refferal::where('id', $id)->first();
             $to_emails = [$referral->email_employee, env('APP_EMAIL')];
-    
+
             $referral->is_hold = 1;
             $save = $referral->save();
-            
+
             if($save) {
                 foreach ($to_emails as $to_email) {
                     Mail::to($to_email)->send(new Hold($referral));
@@ -646,7 +645,7 @@ class AgencyController extends Controller
     }
 
     public function view_agencies(Request $request)
-    {   
+    {
         try {
             $data = session()->all();
             return view('Agency.agencies', compact('data'));
@@ -658,7 +657,7 @@ class AgencyController extends Controller
     }
 
     public function get_agencies(Request $request)
-    {   
+    {
         try {
             $sessions = session()->all();
             if ($request->ajax()) {
@@ -686,7 +685,7 @@ class AgencyController extends Controller
     }
 
     public function add_agency()
-    {   
+    {
         try {
             return view('Agency.add-agency');
         } catch (\Exception $exception) {
@@ -697,7 +696,7 @@ class AgencyController extends Controller
     }
 
     public function store_agency(Request $request)
-    {   
+    {
         try {
             $request->validate([
                 'email' => 'required|email|unique:mast_agency'
@@ -711,7 +710,7 @@ class AgencyController extends Controller
             // new row code
             $addAgencyCode = $lastAgencyCode + 1;
             $agencyCode = 'A' . date('y') . '-0000' . $addAgencyCode;
-            
+
             $password = bin2hex(random_bytes(10));
             $agency = new Agency();
             $agency->agencycode = $agencyCode;
@@ -728,17 +727,17 @@ class AgencyController extends Controller
             $agency->commission = $request->commission;
             $agency->created_date = $request->registered_at;
             $save = $agency->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description = 'Add Agency ' . $request->agency_code;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             if ($save) {
                 $bodyMessage = '';
-    
+
                 $details = [
                     'title' => 'Verification Email From Merita',
                     'body' => $bodyMessage,
@@ -757,12 +756,12 @@ class AgencyController extends Controller
                 );
             }
         } catch (\Exception $exception) {
-            
+
             $request->validate([
                 'commission' => 'numeric|required',
                 'email' => 'required|email|unique:mast_agency'
             ]);
-            
+
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -770,7 +769,7 @@ class AgencyController extends Controller
     }
 
     public function edit_agency()
-    {   
+    {
         try {
             $id = $_GET['id'];
             $agency = Agency::where('id', '=', $id)->first();
@@ -783,7 +782,7 @@ class AgencyController extends Controller
     }
 
     public function update_agency(Request $request)
-    {   
+    {
         try {
             $agency = Agency::where('id', '=', $request->id)->first();
             $agency->agencyname = $request->agencyname;
@@ -797,14 +796,14 @@ class AgencyController extends Controller
             $agency->arrangement_type = $request->arrangement_type;
             $agency->commission = $request->commission;
             $save = $agency->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description = 'Update Agency ' . $agency->agencycode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             if ($save) {
                 return response()->json([
                     'status' => 200,
@@ -819,7 +818,7 @@ class AgencyController extends Controller
     }
 
     public function delete_agency(Request $request)
-    {   
+    {
         try {
             $employeeInfo = session()->all();
             $id = $request->id;
@@ -836,7 +835,7 @@ class AgencyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
-    
+
     public function submit_agency_password_form(Request $request) {
         try {
              Mail::to($request->email)->send(new AgencyResetPassword($request->email, $request->id));
@@ -849,44 +848,44 @@ class AgencyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
-    
+
     public function change_agency_password() {
         $email = $_GET['email'];
         $id = $_GET['agency_id'];
         return view('Agency.agency-reset-form', compact('email', 'id'));
     }
-    
+
     public function update_agency_password(Request $request) {
         try {
             $request->validate([
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
-    
+
             $data = session()->all();
             $agency = Agency::where('id', $request->agency_id)->first();
             $agency->password = Hash::make($request->password);
             $agency->not_first = 1;
             $save = $agency->save();
-    
+
             if ($save) {
                 return redirect('/agency-login')->with('success', 'Success! You can now login with your new password');
             }
-            
+
         } catch (\Exception $exception) {
 
             $request->validate([
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
-            
+
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
 
-        
+
         return back();
     }
-    
+
 }

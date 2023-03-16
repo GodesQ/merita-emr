@@ -20,6 +20,14 @@
 @endsection
 
 @section('content')
+
+@if(Session::get('success'))
+    @push('scripts')
+        <script>
+            toastr.success('{{ Session::get("success") }}', 'Success');
+        </script>
+    @endpush
+@endif
 <div class="app-content content">
     <div class="content-body my-2">
         <section id="basic-form-layouts d-flex">
