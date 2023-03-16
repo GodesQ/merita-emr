@@ -277,8 +277,7 @@
                                                                                 <span class="danger">*</span>
                                                                             </label>
                                                                             <input type="number"
-                                                                                class="form-control" min="18" max="100" readonly id="age" name="age"
-                                                                                value="{{$patient->age}}">
+                                                                                class="form-control" min="18" max="100" id="age" name="age" value="{{ $patient->age }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
@@ -3120,7 +3119,7 @@
                                     <div class="modal-content modal-lg">
                                         <div class="modal-header">
                                             <div class="modal-title font-weight-bold">
-                                                FIT 
+                                                FIT
                                             </div>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Close">
