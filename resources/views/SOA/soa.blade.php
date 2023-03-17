@@ -74,7 +74,7 @@
                                                             <label class="custom-control-label" for="include_additional_exams">Include Additional Exams </label>
                                                         </div>
                                                     </fieldset>
-                                                    
+
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -113,7 +113,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Invoice Number</label>
-                                                <input type="text" name="invoice_number" class="form-control">
+                                                <input type="text" name="invoice_number" class="form-control" readonly value="{{ date('Ym') }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="">SOA Date</label>
@@ -246,9 +246,9 @@
     let vessel_six = ['BOLETTE'];
     let vessel_seven = ['BRAEMAR'];
     let all_vessel = [...['ALL VESSELS'], ...vessel_one, ...vessel_two, ...vessel_three, ...vessel_four, ...vessel_five, ...vessel_six, ...vessel_seven];
-    
+
     let agency_ids = [55, 57, 58, 59, 3];
-    
+
     function getPackages(e) {
         getBahiaVessels(e);
         let csrf = '{{ csrf_token() }}';
@@ -266,20 +266,20 @@
                         id: 'all',
                         packagename: 'All'
                     }].concat(response[0]);
-                    
+
                 allOptions.forEach(element => {
                     $(`<option value=${element.id}>${element.packagename}</option>`).appendTo('#packages');
                 });
             }
         });
-        
+
         // if(e.value == 15) {
         //      $(".tax-group").css("display", "block");
         // } else {
         //      $(".tax-group").css("display", "none");
         // }
     }
-    
+
     function getBahiaVessels(e) {
         $('#bahia-select-vessels option').remove();
 
