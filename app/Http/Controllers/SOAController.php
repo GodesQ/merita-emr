@@ -37,58 +37,46 @@ class SOAController extends Controller
         $patients = Admission::whereDate('trans_date', '>=', $request->date_from)
             ->whereDate('trans_date', '<=', $request->date_to)
             ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                if ($bahia_vessel == 'ALL VESSELS') {
-                    $bahia_ids = ['55', '57', '58', '59', '3'];
-                    return $q->whereIn('agency_id', $bahia_ids);
-                } else {
-                    return $q->where('agency_id', $agency_id);
-                }
-            })
-            ->where(function ($q) use ($bahia_vessel, $agency_id) {
                 if ($agency_id == 3) {
-                    if ($bahia_vessel == 'ALL VESSELS') {
-                        return;
-                    }
-
                     if ($bahia_vessel == 'BLUETERN') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'));
+                        return $q->whereIn('agency_id', [3, 58])->where(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'));
                     }
 
                     if ($bahia_vessel == 'BOLDTERN') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'));
+                        return $q->whereIn('agency_id', [3, 58])->where(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'));
                     }
 
                     if ($bahia_vessel == 'BRAVETERN') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                        return $q->whereIn('agency_id', [3, 58])->where(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'));
                     }
 
                     if ($bahia_vessel == 'BALMORAL') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'));
+                        return $q->whereIn('agency_id', [3, 57])->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'));
                     }
 
                     if ($bahia_vessel == 'BOREALIS') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'));
+                        return $q-->whereIn('agency_id', [3, 57])->where(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
                     }
 
                     if ($bahia_vessel == 'BOLETTE') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'));
+                        return $q->whereIn('agency_id', [3, 55])->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'));
                     }
 
                     if ($bahia_vessel == 'BRAEMAR') {
-                        return $q->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'));
+                        return $q->whereIn('agency_id', [3, 55])->where(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
                     }
                 }
+                return $q->where('agency_id', $agency_id);
             })
             ->where(function ($q) use ($package_id) {
                 if ($package_id != 'all') {
                     return $q->where('package_id', $package_id);
                 }
             })
-
             ->where('payment_type', 'Billed')
             ->with('patient', 'admission_exams', 'package')
             ->join('mast_patient', 'tran_admission.id', '=', 'mast_patient.admission_id')
-            ->select('tran_admission.*', 'mast_patient.admission_id', 'mast_patient.lastname', 'mast_patient.firstname', 'mast_patient.middlename');
+            ->select('tran_admission.*', 'mast_patient.admission_id', 'mast_patient.lastname');
 
         if ($request->arrange_by == 'name') {
             $patients = $patients->orderBy('mast_patient.lastname')->get();

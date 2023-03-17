@@ -12,4 +12,5 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     protected $table = 'mast_employee';
     public $timestamps = false;
+    protected $guarded = [];
 }

@@ -485,55 +485,35 @@ class AdminController extends Controller
             Image::make($request->employee_image)->save(public_path('app-assets/images/employees/') . $name);
         }
 
-        // $employee_save = User::create([
-        //     'employeecode' => $request->employeecode,
-        //     'employee_image' => $name,
-        //     'signature' => $request->signature,
-        //     'lastname' => $request->lastname,
-        //     'firstname' => $request->firstname,
-        //     'middlename' => $request->middlename,
-        //     'email' => $request->email,
-        //     'username' => $request->middlename,
-        //     'password' => Hash::make($request->password),
-        //     'title' => $request->title,
-        //     'position' => $request->position,
-        //     'dept_id' => $request->dept,
-        //     'license_no' => $request->license_no,
-        //     ''
-        // ]);
+        $employee = User::create([
+            'employeecode' => $request->employeecode,
+            'employee_image' => $name,
+            'signature' => $request->signature,
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'email' => $request->email,
+            'username' => $request->middlename,
+            'password' => Hash::make($request->password),
+            'title' => $request->title,
+            'position' => $request->position,
+            'dept_id' => $request->dept,
+            'license_no' => $request->license_no,
+            'license_expdate' => $request->license_expdate,
+            'created_date' => date('Y-m-d')
+        ]);
 
-        $employee = new User();
-        $employee->employeecode = $request->employeecode;
-        $employee->employee_image = $name;
-        $employee->signature = $request->signature;
-        $employee->lastname = $request->lastname;
-        $employee->firstname = $request->firstname;
-        $employee->middlename = $request->middlename;
-        $employee->email = $request->email;
-        $employee->username = $request->username;
-        $employee->password = Hash::make($request->password);
-        $employee->title = $request->title;
-        $employee->position = $request->position;
-        $employee->dept_id = $request->dept;
-        $employee->license_no = $request->license_no;
-        $employee->license_expdate = $request->license_expdate;
-        $employee->created_date = date('Y-m-d');
-        $save = $employee->save();
-
-        $employee_info = DB::insert(
-            'insert into mast_employeeinfo (main_id, address, contactno, gender, maritalstatus, otherposition, religion, birthdate, birthplace) values(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [
-                $employee->id,
-                $request->address,
-                $request->contactno,
-                $request->gender,
-                $request->maritalstatus,
-                $request->otherposition,
-                $request->religion,
-                $request->birthdate,
-                $request->birthplace,
-            ]
-        );
+        $employee_info = DB::table('mast_employeeinfo')->insert([
+            'main_id' => $employee->id,
+            'address' => $request->address,
+            'contactno' => $request->contactno,
+            'gender' => $request->gender,
+            'maritalstatus' => $request->maritalstatus,
+            'otherposition' => $request->otherposition,
+            'religion' => $request->religion,
+            'birthdate' => $request->birthdate,
+            'birthplace' => $request->birthplace
+        ]);
 
         $employeeInfo = session()->all();
         $log = new EmployeeLog();
@@ -542,11 +522,8 @@ class AdminController extends Controller
         $log->date = date('Y-m-d');
         $log->save();
 
-        if ($save) {
-            return redirect('/employees')->with(
-                'status',
-                'Employee added successfully.'
-            );
+        if ($employee && employee_info) {
+            return redirect('/employees')->with('status','Employee added successfully.' );
         }
     }
 
