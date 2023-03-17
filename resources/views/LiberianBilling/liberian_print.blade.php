@@ -174,7 +174,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                         <td width="20%" style="font-size: 10px; text-decoration: underline;text-transform: uppercase;">
                                             {{ date_format(new DateTime($date_to), 'F Y') }}
                                         </td>
-                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}</span></td>
+                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}-{{ $page }}</span></td>
                                     </tr>
                                     <tr>
                                         <td>{{ $bahia_vessel ? '( ' . $bahia_vessel . ' )' : null }}</td>

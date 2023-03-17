@@ -62,7 +62,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Invoice Number</label>
-                                                <input type="text" name="invoice_number" class="form-control">
+                                                <input type="text" name="invoice_number" class="form-control" readonly value="{{ date('Ym') }}">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -81,7 +81,7 @@
                                                             <input type="radio" class="custom-control-input" id="currency2" name="currency" value="Pesos">
                                                             <label class="custom-control-label" for="currency2">Pesos</label>
                                                         </div>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group ">
@@ -144,9 +144,9 @@
     let vessel_six = ['BOLETTE'];
     let vessel_seven = ['BRAEMAR'];
     let all_vessel = [...['ALL VESSELS'], ...vessel_one, ...vessel_two, ...vessel_three, ...vessel_four, ...vessel_five, ...vessel_six, ...vessel_seven];
-    
+
     let agency_ids = [55, 57, 58, 59, 3];
-    
+
     function getPackages(e) {
         getBahiaVessels(e);
         // let csrf = '{{ csrf_token() }}';
@@ -160,14 +160,14 @@
         //     success: function(response) {
         //     }
         // });
-        
+
         if(e.value == 15) {
              $(".tax-group").css("display", "block");
         } else {
              $(".tax-group").css("display", "none");
         }
     }
-    
+
     function getBahiaVessels(e) {
         $('#bahia-select-vessels option').remove();
 
