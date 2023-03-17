@@ -37,7 +37,8 @@
     </div>
     @push('scripts')
     <script>
-    document.querySelector("#open-instruction").click();
+        document.querySelector("#open-instruction").click();
+        toastr.success('{{ Session::get('success') }}', 'Failed');
     </script>
     @endpush
     @endif
@@ -55,13 +56,13 @@
     {{$latest_schedule->date}}
     @endif
     @endsection
-    
+
     @if(Session::get('fail'))
         <div class="danger alert-danger p-2 my-2 rounded">
             {{Session::get('fail')}}
         </div>
     @endif
-    
+
     @section('remedical')
         <div class="mx-1 my-25">
             <a href="/remedical?patientcode={{session()->get('patientCode')}}" class="text-white btn btn-primary"><i class="fa fa-pencil"></i>
@@ -372,11 +373,11 @@
                                                                     <td colspan="2">
                                                                         <div class="row">
                                                                             <div class="col-lg-6 col-sm-12">
-                                                                                <h6><b>Remarks for Passport Expiration Date ({{$patientInfo->passport_expdate ? $patientInfo->passport_expdate : "No Record"}})</b></h6>  
+                                                                                <h6><b>Remarks for Passport Expiration Date ({{$patientInfo->passport_expdate ? $patientInfo->passport_expdate : "No Record"}})</b></h6>
                                                                                 <p id="remarks-passport"></p>
                                                                             </div>
                                                                             <div class="col-lg-6 col-sm-12">
-                                                                                <h6><b>Remarks for SSRB Expiration Date ({{$patientInfo->srb_expdate ? $patientInfo->srb_expdate : "No Record"}})</b></h6>  
+                                                                                <h6><b>Remarks for SSRB Expiration Date ({{$patientInfo->srb_expdate ? $patientInfo->srb_expdate : "No Record"}})</b></h6>
                                                                                 <p id="remarks-srb"></p>
                                                                             </div>
                                                                         </div>

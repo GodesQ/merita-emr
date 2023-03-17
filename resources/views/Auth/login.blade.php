@@ -78,11 +78,14 @@
                                                     </div>
                                                 @endif @csrf
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="text" name="username" class="form-control"
+                                                    <input type="text" name="email" class="form-control"
                                                         id="user-name" placeholder="Your Email or Username" />
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>
                                                     </div>
+                                                    <span class="danger text-danger">
+                                                        @error('email'){{ $message }}@enderror
+                                                    </span>
                                                 </fieldset>
                                                 <fieldset
                                                     class="form-group position-relative has-icon-right has-icon-left">
@@ -96,9 +99,7 @@
                                                         <i class="fa fa-eye" id="togglePassword"></i>
                                                     </div>
                                                     <span class="danger text-danger">
-                                                        @error('password')
-                                                            {{ $message }}
-                                                        @enderror
+                                                        @error('password'){{ $message }}@enderror
                                                     </span>
                                                 </fieldset>
                                                 <button type="submit"

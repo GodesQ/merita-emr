@@ -40,6 +40,14 @@
                 </script>
             @endpush
         @endif
+
+        @if (Session::get('success'))
+        @push('scripts')
+            <script>
+                toastr.success('{{ Session::get('success') }}', 'Failed');
+            </script>
+        @endpush
+    @endif
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper">

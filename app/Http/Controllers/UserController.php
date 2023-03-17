@@ -13,12 +13,12 @@ use App\Models\EmployeeLog;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
-{   
+{
 
 
     public function user_profile() {
         $id = $_GET['id'];
-        
+
         if($id == session()->get('employeeId')) {
             $data = session()->all();
             $id = $_GET['id'];
@@ -57,7 +57,7 @@ class UserController extends Controller
     }
 
     public function update_profile(Request $request) {
-        
+
         // dd($request->all());
         if ($request->old_image === $request->employee_image) {
             $name = $request->old_image;
@@ -79,7 +79,7 @@ class UserController extends Controller
             Image::make($request->employee_image)->save(
                 public_path('app-assets/images/employees/') . $name
             );
-            
+
             $userOldPhoto =
                 public_path('app-assets/images/employees/') .
                 $request->old_image;
@@ -95,7 +95,7 @@ class UserController extends Controller
         $employee->firstname = $request->firstname;
         $employee->middlename = $request->middlename;
         $employee->email = $request->email;
-        $employee->username = $request->username; 
+        $employee->username = $request->username;
         $employee->title = $request->title;
         $employee->position = $request->position;
         $employee->license_no = $request->license_no;
@@ -123,36 +123,24 @@ class UserController extends Controller
         $log->description = 'Update Profile of ' . $request->employeecode;
         $log->date = date('Y-m-d');
         $log->save();
-        
+
         // return back()->with('success', 'Update Successfully');
 
         return response()->json([
             "status" => 200
         ]);
     }
-    
+
     public function employee_change_password(Request $request) {
         $request->validate([
             'password' => 'required|min:8',
             'password_confirmation' => 'required_with:password|same:password',
         ]);
-        
+
         $user = User::where('id', $request->id)->first();
         $user->password = Hash::make($request->password);
         $save = $user->save();
         return back()->with('success', 'Change Password Successfully');
-    }
-
-    // LOGOUTS
-    public function logout()
-    {
-        if (session()->has(['classification'])) {
-            session()->flush();
-            return redirect('/login')->with(
-                'success_logout',
-                'You are successfully logout.'
-            );
-        }
     }
 
     public function employee_logout() {

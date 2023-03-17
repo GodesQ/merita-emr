@@ -29,8 +29,6 @@ class VerificationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome to Merita EMR! Please verify your Email Address!')->view(
-            '/emails.verification'
-        );
+        return $this->subject('Welcome to Merita EMR! Please verify your Email Address!')->view('emails.verification');
     }
 }

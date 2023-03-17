@@ -397,16 +397,16 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             @if ($agency->id == 15)
                                                 <?php
                                                 // $tax_amount = $tax/100;
-                                                $sub_amount = $total;
-                                                $total_tax_amount = $sub_amount * 0.05;
-                                                $total = $total - $total_tax_amount;
+                                                    $sub_amount = $total;
+                                                    $total_tax_amount = $sub_amount * 0.05;
+                                                    $total = $total - $total_tax_amount;
                                                 ?>
                                             @endif
                                             @if ($total_ecg > 0)
                                                 <?php
-                                                $sub_amount_ecg = $total_ecg;
-                                                $total_tax_amount_ecg = $sub_amount_ecg * 0.02;
-                                                $total_amount_ecg = $sub_amount_ecg - $total_tax_amount_ecg;
+                                                    $sub_amount_ecg = $total_ecg;
+                                                    $total_tax_amount_ecg = $sub_amount_ecg * 0.02;
+                                                    $total_amount_ecg = $sub_amount_ecg - $total_tax_amount_ecg;
                                                 ?>
                                             @endif
                                             <td class="brdTop brdLeft"
