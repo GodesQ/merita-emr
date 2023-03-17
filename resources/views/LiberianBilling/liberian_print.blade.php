@@ -1,15 +1,15 @@
 <?php
 function convertNumber($num = false, $currency = 'Pesos')
-{   
+{
     list($whole, $fraction) = explode('.', number_format($num, 2));
-    
+
     $num = str_replace(array(',', ''), '' , trim($num));
     if(!$num) {
         return 0;
     }
-    
+
     $num = (int) $num;
-    
+
     $words = array();
     $list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
         'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
@@ -19,13 +19,13 @@ function convertNumber($num = false, $currency = 'Pesos')
         'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion',
         'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'
     );
-    
+
     $num_length = strlen($num);
     $levels = (int) (($num_length + 2) / 3);
     $max_length = $levels * 3;
     $num = substr('00' . $num, -$max_length);
     $num_levels = str_split($num, 3);
-    
+
     for ($i = 0; $i < count($num_levels); $i++) {
         $levels--;
         $hundreds = (int) ($num_levels[$i] / 100);
@@ -42,15 +42,15 @@ function convertNumber($num = false, $currency = 'Pesos')
         }
         $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
     } //end for loop
-    
+
     $centavos_num_length = strlen($fraction);
     $centavos_levels = (int) (($centavos_num_length + 2) / 3);
     $centavos_max_length = $centavos_levels * 3;
     $fraction = substr('00' . $fraction, -$centavos_max_length);
     $centavos_num_levels = str_split($fraction, 3);
-    
-   
-    
+
+
+
     for ($i = 0; $i < count($centavos_num_levels); $i++) {
         $centavos_levels--;
         $hundreds = (int) ($centavos_num_levels[$i] / 100);
@@ -67,9 +67,9 @@ function convertNumber($num = false, $currency = 'Pesos')
         }
         $centavos_words[] = $hundreds . $tens . $singles . ( ( $centavos_levels && ( int ) ( $centavos_num_levels[$i] ) ) ? ' ' . $list3[$centavos_levels] . ' ' : '' );
     } //end for loop
-    
-    
-    
+
+
+
     $commas = count($words);
     if ($commas > 1) {
         $commas = $commas - 1;
@@ -81,20 +81,20 @@ function convertNumber($num = false, $currency = 'Pesos')
        $language_sign = 'Pesos ';
        $language_sign2 = 'Centavos ';
    }
-   
+
     $words = implode(' ',  $words);
     $words = preg_replace('/^\s\b(and)/', '', $words );
     $words = trim($words);
     $words = ucfirst($words);
     $words = $words . ' ' . $language_sign;
-    
+
     $centavos_words = implode(' ',  $centavos_words);
     $centavos_words = preg_replace('/^\s\b(and)/', '', $centavos_words );
     $centavos_words = trim($centavos_words);
     $centavos_words = ucfirst($centavos_words);
     $centavos_words = $fraction > 0 ? $centavos_words . ' ' . $language_sign2 : null;
-    
-    $total_words = (int) $fraction > 0 ? $words . ' And ' . $centavos_words : $words; 
+
+    $total_words = (int) $fraction > 0 ? $words . ' And ' . $centavos_words : $words;
     return $total_words;
 }
 ?>
@@ -200,15 +200,15 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             <td width="30%" align="left" class="brdAll">CERTIFICATE NOS.</td>
                                             <td align="left" class="brdAll" width="10%">AMOUNT</td>
                                         </tr>
-                                        <?php 
-                                            $total = 0; 
+                                        <?php
+                                            $total = 0;
                                             $patient_count = 1;
                                         ?>
                                         @forelse($collected_patient as $patient)
                                             <tr>
                                                 <td valign="top" align="left" class="brdLeft brdRight">{{date_format(new DateTime($patient->trans_date), "d-M-Y")}}</td>
                                                 <td valign="top" align="left" class="brdRight">
-                                                    @php 
+                                                    @php
                                                         echo $patient_count;
                                                         $patient_count++;
                                                     @endphp
@@ -216,16 +216,16 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 <td valign="top" align="left">{{$patient->patient ? $patient->patient->lastname : null}}</td>
                                                 <td valign="top" align="left">{{$patient->patient ? $patient->patient->firstname : null}}</td>
                                                 <td valign="top" align="left" class="brdRight">{{$patient->patient ? $patient->patient->middlename : null}}</td>
-                                                <td valign="top" align="left" class="brdRight"><input value="" style="width: 100%;" class="brdNone"></td>
+                                                <td valign="top" align="left" class="brdRight">{{ optional($patient->exam_physical)->liberian_code ? optional($patient->exam_physical)->liberian_code : $patient->liberian_certno }}</td>
                                                 <td valign="top" align="left" class="brdRight">
-                                                    <?php 
+                                                    <?php
                                                         if($agency) {
                                                             if($agency->id == 9 || $agency->id == 22 || $agency->id == 25 || $agency->id == 4) {
                                                                 $price = 300;
                                                                 echo  '₱ ' . number_format($price, 2);
                                                                 $total += $price;
                                                             } else {
-                                                                
+
                                                                 if($currency == 'Peso') {
                                                                     $price = $exchange_rate * 5;
                                                                     echo '₱ ' . number_format($price, 2);
@@ -240,25 +240,25 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                     ?>
                                                 </td>
                                             </tr>
-                                        @empty 
+                                        @empty
                                             <h2 class="text-align">No Record Found</h2>
                                         @endforelse
                                         <tr>
                                             <td class="brdTop brdLeft brdRight" colspan="7">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
                                             @if($tax)
-                                                <?php 
+                                                <?php
                                                     $tax_amount = $tax/100;
                                                     $sub_amount = $total;
                                                     $total_tax_amount = $sub_amount * $tax_amount;
                                                     $total = $total - $total_tax_amount;
                                                 ?>
                                             @endif
-                                            
-                                            
+
+
                                             <td class="brdTop brdLeft" colspan="5">
                                                 Amount in Words : <b style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency); echo $get_amount; ?></b>
                                             </td>
@@ -360,32 +360,32 @@ function convertNumber($num = false, $currency = 'Pesos')
         if(action == "PRINT") {
             window.print();
         }
-        
+
         if(action == 'Download Excel') {
             exportTableToExcel('soa-table');
             window.close();
         }
-        
+
         if(action == 'Download CSV') {
             var data = [];
         	var rows = document.querySelectorAll(".soa-table tr");
-        			
+
         	for (var i = 0; i < rows.length; i++) {
         		var row = [], cols = rows[i].querySelectorAll("td, th");
         		for (var j = 0; j < cols.length; j++) {
         		        let col = cols[j].innerText.replace(/,|\n/g, " ")
         		        row.push(col);
                 }
-        		data.push(row.join(",")); 	
+        		data.push(row.join(","));
         	}
-            
+
         	downloadCSVFile(data.join("\n"), 'soa_report');
         	window.close();
         }
-        
+
         let tableHeight= document.querySelectorAll('.soa-table');
         let maxHeightTable = 453;
-    
+
         for (let index = 0; index < tableHeight.length; index++) {
             const element = tableHeight[index];
             let tableRow = element.children[0].children;
@@ -396,25 +396,25 @@ function convertNumber($num = false, $currency = 'Pesos')
             }
         }
     });
-    
+
     function exportTableToExcel(tableID, filename = 'soa_report'){
         var downloadLink;
         var dataType = 'application/vnd.ms-excel';
         var tableSelect = document.querySelectorAll('.soa-table');
         var tableHTML;
-        
+
         tableSelect.forEach(table => {
             tableHTML += table.outerHTML.replace(/ /g, '%20');
         });
-        
+
         // Specify file name
         filename = filename ? filename +'.xls':'excel_data.xls';
-        
+
         // Create download link element
         downloadLink = document.createElement("a");
-        
+
         document.body.appendChild(downloadLink);
-        
+
         if(navigator.msSaveOrOpenBlob){
             var blob = new Blob(['\ufeff', tableHTML], {
                 type: dataType
@@ -423,30 +423,30 @@ function convertNumber($num = false, $currency = 'Pesos')
         }else{
             // Create a link to the file
             downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        
+
             // Setting the file name
             downloadLink.download = filename;
-            
+
             //triggering the function
             downloadLink.click();
         }
     }
-    
+
     function downloadCSVFile(csv, filename) {
         var csv_file, download_link;
-        
+
         csv_file = new Blob([csv], {type: "text/csv"});
-        
+
         download_link = document.createElement("a");
-        
+
         download_link.download = filename;
-        
+
         download_link.href = window.URL.createObjectURL(csv_file);
-        
+
         download_link.style.display = "none";
-        
+
         document.body.appendChild(download_link);
-        
+
         download_link.click();
     }
 </script>

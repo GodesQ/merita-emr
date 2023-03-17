@@ -255,7 +255,7 @@ class SOAController extends Controller
                 }
             })
             ->where('have_liberian', 1)
-            ->with('patient')
+            ->with('patient', 'exam_physical')
             ->get();
 
         $agency = Agency::where('id', $request->agency_id)->first();
