@@ -28,10 +28,10 @@ function convertNumber($num = false, $currency = 'Pesos')
         $tens = (int) ($num_levels[$i] % 100);
         $singles = '';
         if ($tens < 20) {
-            $tens = $tens ? ' and ' . $list1[$tens] . ' ' : '';
+            $tens = $tens ? $list1[$tens] . ' ' : '';
         } elseif ($tens >= 20) {
             $tens = (int) ($tens / 10);
-            $tens = ' and ' . $list2[$tens] . ' ';
+            $tens = $list2[$tens] . ' ';
             $singles = (int) ($num_levels[$i] % 10);
             $singles = ' ' . $list1[$singles] . ' ';
         }
@@ -66,7 +66,7 @@ function convertNumber($num = false, $currency = 'Pesos')
         $commas = $commas - 1;
     }
     if ($currency == 'Dollar') {
-        $language_sign = 'Dollar ';
+        $language_sign = 'U$ Dollars';
         $language_sign2 = 'Cents ';
     } else {
         $language_sign = 'Pesos ';
