@@ -197,7 +197,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             <td align="left" class="brdTop brdLeft brdBtm" width="12%">LASTNAME</td>
                                             <td align="left" class="brdTop brdBtm" width="12%">FIRSTNAME</td>
                                             <td align="left" class="brdTop brdBtm" width="12%">MIDDLENAME</td>
-                                            <td align="left" class="brdTop brdBtm" width="15%">PARTICULAR</td>
+                                            <td align="left" class="brdTop brdLeft brdBtm" width="15%">PARTICULAR</td>
                                             <td width="15%" align="left" class="brdAll">CERTIFICATE NOS.</td>
                                             <td align="left" class="brdAll" width="10%">AMOUNT</td>
                                         </tr>
@@ -246,9 +246,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             <h2 class="text-align">No Record Found</h2>
                                         @endforelse
                                         <tr>
-                                            <td class="brdTop brdLeft brdRight" colspan="7">
-
-                                            </td>
+                                            <td class="brdTop brdLeft brdRight" colspan="8"></td>
                                         </tr>
                                         <tr>
                                             @if($tax)
@@ -261,7 +259,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             @endif
 
 
-                                            <td class="brdTop brdLeft" colspan="5">
+                                            <td class="brdTop brdLeft" colspan="6">
                                                 Amount in Words : <b style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency); echo $get_amount; ?></b>
                                             </td>
                                             <td class="brdTop brdRight" style="text-align: right;"><b>Total Amount:</b></td>
