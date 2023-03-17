@@ -137,7 +137,7 @@ function convertNumber($num = false, $currency = 'Pesos')
         <div style="height: 100vh; margin: 0; position: relative;">
             <table width="100%" cellpadding="0" cellspacing="0" class="pageTable" >
                 <tbody>
-                    <tr>
+                    {{-- <tr>
                         <td >
                             <table width="100%" cellpadding="2" cellspacing="0">
                                 <tbody>
@@ -159,7 +159,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                 </tbody>
                             </table>
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td >
                             <table width="100%" cellspacing="0" cellpadding="2" style="margin: 2rem 0 0 0;">
@@ -197,7 +197,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             <td align="left" class="brdTop brdLeft brdBtm" width="12%">LASTNAME</td>
                                             <td align="left" class="brdTop brdBtm" width="12%">FIRSTNAME</td>
                                             <td align="left" class="brdTop brdBtm" width="12%">MIDDLENAME</td>
-                                            <td width="30%" align="left" class="brdAll">CERTIFICATE NOS.</td>
+                                            <td align="left" class="brdTop brdBtm" width="15%">PARTICULAR</td>
+                                            <td width="15%" align="left" class="brdAll">CERTIFICATE NOS.</td>
                                             <td align="left" class="brdAll" width="10%">AMOUNT</td>
                                         </tr>
                                         <?php
@@ -216,6 +217,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 <td valign="top" align="left">{{$patient->patient ? $patient->patient->lastname : null}}</td>
                                                 <td valign="top" align="left">{{$patient->patient ? $patient->patient->firstname : null}}</td>
                                                 <td valign="top" align="left" class="brdRight">{{$patient->patient ? $patient->patient->middlename : null}}</td>
+                                                <td valign="top" align="left" class="brdRight">Liberian Medical Cert.</td>
                                                 <td valign="top" align="left" class="brdRight">{{ optional($patient->exam_physical)->liberian_code ? optional($patient->exam_physical)->liberian_code : $patient->liberian_certno }}</td>
                                                 <td valign="top" align="left" class="brdRight">
                                                     <?php
@@ -322,7 +324,7 @@ function convertNumber($num = false, $currency = 'Pesos')
         @empty
         <table width="100%" cellpadding="0" cellspacing="0" class="pageTable" >
             <tbody>
-                <tr>
+                {{-- <tr>
                     <td >
                         <table width="100%" cellpadding="2" cellspacing="0" style="margin-bottom: 4rem;">
                             <tbody>
@@ -344,7 +346,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                             </tbody>
                         </table>
                     </td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td style="font-size: 20px; font-weight: bold; text-align: center;">NO RECORD FOUND</td>
                 </tr>
