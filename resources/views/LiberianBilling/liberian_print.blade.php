@@ -166,7 +166,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                 <tbody>
                                     <tr>
                                         <td width="80%" style="font-size: 10px; text-decoration: underline;">
-                                            {{$agency ? $agency->agencyname : 'All Agency'}} (LIBERIAN)
+                                            {{$agency ? $agency->agencyname : 'All Agency'}}
                                         </td>
                                         <td width="80%">Date: <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span></td>
                                     </tr>
