@@ -37,7 +37,8 @@ class SOAController extends Controller
         $patients = Admission::whereDate('trans_date', '>=', $request->date_from)
             ->whereDate('trans_date', '<=', $request->date_to)
             ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                if ($agency_id == 3) {
+                $agency_ids = [3, 58, 57, 55];
+                if (in_array($agency_id, $agency_ids)) {
                     if ($bahia_vessel == 'BLUETERN') {
                         return $q->whereIn('agency_id', [3, 58])->where(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'));
                     }
@@ -84,7 +85,6 @@ class SOAController extends Controller
             $patients = $patients->orderBy('tran_admission.trans_date')->get();
         }
 
-        // dd($patients);
         $agency = Agency::where('id', $request->agency_id)->first();
 
         if ($agency->id == 22) {
