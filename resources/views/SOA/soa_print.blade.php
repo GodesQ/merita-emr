@@ -435,7 +435,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                     </div>
                                                     <div
                                                         style="width: {{ $total_ecg > 0 ? '50%' : '100%' }} !important;">
-                                                        @if ($agency->id)
+                                                        @if ($agency->id == 15)
                                                             <div>{{ $currency == 'Pesos' ? '₱' : '' }}
                                                                 <?php echo number_format((float) $sub_amount, 2); ?></div>
                                                             <div style="margin: 5px 0;">
