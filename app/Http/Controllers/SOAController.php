@@ -88,9 +88,9 @@ class SOAController extends Controller
         $agency = Agency::where('id', $request->agency_id)->first();
 
         if ($agency->id == 22) {
-            $collected_patients = collect($patients)->chunk(6);
+            $collected_patients = collect($patients)->chunk(15);
         } elseif ($agency->id == 9 && $request->package_id == 1) {
-            $collected_patients = collect($patients)->chunk(10);
+            $collected_patients = collect($patients)->chunk(15);
         } elseif ($agency->id == 3 && $request->package_id == 3) {
             $collected_patients = collect($patients)->chunk(25);
         } else {
@@ -98,7 +98,7 @@ class SOAController extends Controller
                 if ($agency->id == 64) {
                     $collected_patients = collect($patients)->chunk(20);
                 } else {
-                    $collected_patients = collect($patients)->chunk(10);
+                    $collected_patients = collect($patients)->chunk(15);
                 }
             } else {
                 $collected_patients = collect($patients)->chunk(25);

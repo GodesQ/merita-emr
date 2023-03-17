@@ -394,7 +394,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             </td>
                                         </tr>
                                         <tr>
-                                            @if ($tax)
+                                            @if ($agency->id == 15)
                                                 <?php
                                                 // $tax_amount = $tax/100;
                                                 $sub_amount = $total;
@@ -435,7 +435,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                     </div>
                                                     <div
                                                         style="width: {{ $total_ecg > 0 ? '50%' : '100%' }} !important;">
-                                                        @if ($tax)
+                                                        @if ($agency->id)
                                                             <div>{{ $currency == 'Pesos' ? '₱' : '' }}
                                                                 <?php echo number_format((float) $sub_amount, 2); ?></div>
                                                             <div style="margin: 5px 0;">
