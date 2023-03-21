@@ -27,7 +27,7 @@ class AdmissionController extends Controller
     public function select_admission(Request $request)
     {
         if ($request->ajax()) {
-            $data = Admission::select('tran_admission.*');
+            $data = Admission::select('*');
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -39,8 +39,7 @@ class AdmissionController extends Controller
                     )->first();
                     $patient_name = null;
                     if ($patient) {
-                        $patient_name =
-                            $patient->lastname . ', ' . $patient->firstname;
+                        $patient_name = $patient->lastname . ', ' . $patient->firstname;
                     }
                     return $patient_name;
                 })
@@ -87,9 +86,7 @@ class AdmissionController extends Controller
                         '<button id=' .
                         $row['id'] .
                         ' class="btn btn-secondary btn-sm route-print" title="Routing Slip"><i class="fa fa-print"></i></button>
-                        <a href="#" id="' .
-                        $row['id'] .
-                        '" class="delete-admission btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                        <a href="#" id="' . $row['id'] . '" class="delete-admission btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patientname'])
@@ -101,7 +98,7 @@ class AdmissionController extends Controller
     {
         $data = session()->all();
         $id = $_GET['id'];
-        $patient = $patient = Patient::where('id', '=', $id)->first();
+        $patient = Patient::where('id', '=', $id)->first();
 
         $patientInfo = DB::table('mast_patientinfo')
             ->where('main_id', $id)
@@ -126,7 +123,7 @@ class AdmissionController extends Controller
     }
 
     public function store_admission(Request $request)
-    {   
+    {
         // dd($request->all());
         $admission = new Admission();
         $admission->patientcode = $request->patientcode;
@@ -165,7 +162,7 @@ class AdmissionController extends Controller
                         'charge' =>  isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
-                }    
+                }
             } else {
                 foreach ($request->exam as $key => $exam) {
                     $save_exams = DB::table('tran_admissiondtl')->insert([
@@ -174,7 +171,7 @@ class AdmissionController extends Controller
                         'charge' =>  'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
-                }    
+                }
             }
         }
 
@@ -222,7 +219,7 @@ class AdmissionController extends Controller
             ->where('main_id', $patient->admission_id)
             ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
             ->get();
-        
+
         $additional_exams = [];
 
         foreach ($admission_exams as $key => $exam) {
@@ -235,7 +232,7 @@ class AdmissionController extends Controller
 
             array_push($additional_exams, $exam_data);
         }
-        
+
         $exam_groups = $this->group_by('date', $additional_exams,  $admission->trans_date);
 
         return view(
@@ -251,23 +248,23 @@ class AdmissionController extends Controller
             )
         );
     }
-    
+
     public function group_by($key, $data, $date) {
         $result = array();
-    
+
         foreach($data as $val) {
-            if(array_key_exists($key, $val)){  
+            if(array_key_exists($key, $val)){
                 $result[$val[$key] ? $val[$key] : $date][] = $val;
             }else{
                 $result[$date][] = $date;
             }
         }
-    
+
         return $result;
     }
 
     public function update_admission(Request $request)
-    {   
+    {
         $admission = Admission::where('id', $request->main_id)->first();
         $admission->agency_id = $request->agency_id;
         $admission->package_id = $request->package_id;
@@ -286,7 +283,7 @@ class AdmissionController extends Controller
         $admission->panama_certno = $request->panama_certno;
         $admission->liberian_certno = $request->liberian_certno;
         $save = $admission->save();
-        
+
         if(isset($request->exam)) {
             if(isset($request->charge)) {
                 foreach ($request->exam as $key => $exam) {
@@ -296,7 +293,7 @@ class AdmissionController extends Controller
                         'charge' =>  isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
-                }    
+                }
             } else {
                 foreach ($request->exam as $key => $exam) {
                     $save_exams = DB::table('tran_admissiondtl')->insert([
@@ -305,7 +302,7 @@ class AdmissionController extends Controller
                         'charge' =>  'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
-                }    
+                }
             }
         }
 
@@ -358,15 +355,15 @@ class AdmissionController extends Controller
         $agency = Agency::where('id', $request->agency_id)->first();
 
         $recipients = [$agency->email, $patient->email, env('APP_EMAIL')];
-        
+
         $doctor = User::where('id', $request->doctor_prescription)->first();
-        
-        
+
+
         if($request->lab_status == 2) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => "Fit"
             ]);
-            
+
             if($request->prescription != null || $request->prescription != "") {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
                 'data' => $admission,
@@ -378,8 +375,8 @@ class AdmissionController extends Controller
             } else {
                 $pdf = null;
             }
-            
-            
+
+
             Patient::where('admission_id', $admission->id)->update([
                 'fit_to_work_date' => date('Y-m-d')
             ]);
@@ -387,29 +384,29 @@ class AdmissionController extends Controller
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
             }
-        } 
-        
+        }
+
         if($request->lab_status == 3) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => "Unfit"
             ]);
-            
+
             Patient::where('admission_id', $admission->id)->update([
                 'unfit_to_work_date' => $request->unfit_date
             ]);
-            
-            
+
+
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission));
             }
-        } 
-        
+        }
+
         if($request->lab_status == 4) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => "Unfit_temp"
             ]);
-            
+
             if($request->prescription != null || $request->prescription != "") {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
                 'data' => $admission,
@@ -422,16 +419,16 @@ class AdmissionController extends Controller
             } else {
                 $pdf = null;
             }
-            
+
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
             }
-        } 
-        
+        }
+
         if($request->lab_status == 1) {
             // $findings = implode(";", $request->findings);
-            
+
             // ReassessmentFindings::insert([
             //     "admission_id" => $request->id,
             //     "patient_id" => $patient->id,
@@ -440,11 +437,11 @@ class AdmissionController extends Controller
             //     "impression" => $request->impression,
             //     "date" => date("Y-m-d")
             // ]);
-            
+
             PhysicalExam::where('admission_id', $request->id)->update([
-                'fit' => "Pending" 
+                'fit' => "Pending"
             ]);
-            
+
             if($request->prescription != null || $request->prescription != "") {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
                 'data' => $admission,
@@ -457,17 +454,17 @@ class AdmissionController extends Controller
             } else {
                 $pdf = null;
             }
-            
+
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
-            } 
+            }
         }
-        
+
         return response()->json([
             "status" => 200
         ]);
     }
-    
+
     public function create_followup(Request $request) {
         if(!$request->findings) return back()->with('fail', 'No Significant Findings Found. Failed to Submit');
         $findings = implode(";", $request->findings);

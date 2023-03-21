@@ -1158,7 +1158,7 @@
                                                                     suspected or diagnosed with COVID-19?</h4>
                                                             </div>
                                                             <div class="col-md-4 mt-1">
-                                                                @if($declarationForm->contact_with_people_being_infected__suspected_diagnose_with_cov
+                                                                @if($declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov
                                                                 == 0)
                                                                 <span
                                                                     class="btn btn-solid btn-warning contact-with-cov">No</span>

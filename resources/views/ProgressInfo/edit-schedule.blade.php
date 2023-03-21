@@ -81,12 +81,9 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">Schedule Date</label>
-                                                            <input type="hidden" name="patient_id"
-                                                                value="{{$latest_schedule->patient_id}}">
-                                                            <input type="hidden" name="id"
-                                                                value="{{$latest_schedule->id}}">
-                                                            <input type="text" id="date-picker" class="form-control"
-                                                                value="{{$latest_schedule->date}}" name="schedule_date">
+                                                            <input type="hidden" name="patient_id" value="{{$latest_schedule->patient_id}}">
+                                                            <input type="hidden" name="id" value="{{$latest_schedule->id}}">
+                                                            <input type="text" id="date-picker" class="form-control" value="{{$latest_schedule->date}}" name="schedule_date">
                                                         </div>
                                                     </div>
                                                 </div>

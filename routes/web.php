@@ -80,7 +80,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/progress-patient-info', [PatientController::class, 'progress_info']);
 
-    Route::post('/save-info', [PatientController::class, 'add_other_details']);
+    Route::post('/save-info', [PatientController::class, 'save_progress_info']);
 
     Route::get('/edit-patient-info', [PatientController::class, 'edit_patient_info']);
 

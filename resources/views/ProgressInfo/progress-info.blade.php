@@ -42,12 +42,12 @@
         @endif
 
         @if (Session::get('success'))
-        @push('scripts')
-            <script>
-                toastr.success('{{ Session::get('success') }}', 'Failed');
-            </script>
-        @endpush
-    @endif
+            @push('scripts')
+                <script>
+                    toastr.success('{{ Session::get('success') }}', 'Failed');
+                </script>
+            @endpush
+        @endif
         <div class="app-content content">
             <div class="content-overlay"></div>
             <div class="content-wrapper">
@@ -92,7 +92,7 @@
                                                     <input type="hidden" name="patientcode"
                                                         value="{{ $data['patientCode'] }}">
                                                     <div class=" row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="firstName3">
                                                                     First Name :
@@ -103,7 +103,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-4">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="lastName3">
                                                                     Last Name :
@@ -114,7 +114,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-4">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="lastName3">
                                                                     Middle Name :
@@ -125,7 +125,7 @@
                                                                     name="middleName">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
+                                                        <div class="col-lg-3">
                                                             <div class="form-group">
                                                                 <label for="lastName3">
                                                                     Suffix :
@@ -143,9 +143,7 @@
                                                                     Permanent Home Address :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required type="text" class="form-control to_upper"
-                                                                    name="homeAddress"
-                                                                    value="{{ optional($referral)->address }}">
+                                                                <input required type="text" class="form-control to_upper" name="address" value="{{ optional($referral)->address }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -306,7 +304,7 @@
                                                                     <span class="danger">*</span>
                                                                 </label>
                                                                 <select required class="form-control select2"
-                                                                    onchange="getPackages(this)" name="agencyName">
+                                                                    onchange="getPackages(this)" name="agency_id">
                                                                     <option value=" ">Select Agency</option>
                                                                     @foreach ($agencies as $row)
                                                                         <option

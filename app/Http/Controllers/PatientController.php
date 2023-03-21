@@ -36,24 +36,23 @@ class PatientController extends Controller
     public function progress_info(Request $request)
     {
         try {
-            $agencies = DB::select('select * from mast_agency');
+            $agencies = Agency::get();
             $data = session()->all();
-            $patientInfo = DB::table('mast_patientinfo')
-                ->where('main_id', $data['patientId'])
-                ->first();
+
+            $patientInfo = PatientInfo::where('main_id', $data['patientId'])->first();
+
             $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
             $patient_email = session()->has('email') ? session()->get('email') : null;
-
             $referral = Refferal::where('email_employee', $patient_email)->first();
 
             if ($patientInfo) {
                 return redirect('/patient_info');
-            } else {
-                return view('ProgressInfo.progress-info', compact('agencies', 'data', 'packages', 'referral'));
             }
+
+            return view('ProgressInfo.progress-info', compact('agencies', 'data', 'packages', 'referral'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -197,7 +196,7 @@ class PatientController extends Controller
             // dd($save_medical_history);
 
             // INSERT DATA TO DECLARATION FORM TABLE
-            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$mast_patient->id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
+            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected_suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$mast_patient->id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
 
             if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
                 return back()->with('status', 'Failed to Submit Data');
@@ -254,11 +253,9 @@ class PatientController extends Controller
         }
     }
 
-    public function add_other_details(Request $request)
+    public function save_progress_info(Request $request)
     {
         try {
-            date_default_timezone_set('Asia/Manila');
-            $date = date('Y-m-d h:i:s');
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);
@@ -267,48 +264,58 @@ class PatientController extends Controller
             $mast_patient->gender = $request->gender;
             $mast_patient->age = $request->age;
             $mast_patient->position_applied = strtoupper($request->positionApplied);
-            $mast_patient->created_date = $date;
+            $mast_patient->created_date = date('Y-m-d h:i:s');
             $mast_patient_save = $mast_patient->save();
             $patient_vessel = $request->agencyName == 3 || $request->agencyName == 57 || $request->agencyName == 58 || $request->agencyName == 55 ? $request->bahia_vessel : $request->vessel;
 
-            //INSERT OTHER DATA TO MAST_PATIENT INFO
-            $save_patient_info = DB::insert('insert into mast_patientinfo (main_id, patientcode, address, contactno, occupation, occupation_other, category, referral, payment_type, admission_type, nationality, religion, religion_other, maritalstatus, agency_id, principal, agency_address, country_destination, medical_package, vessel, passportno, passport_expdate, srbno, srb_expdate,  birthdate, birthplace) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )', [
-                $request->main_id,
-                $request->patientcode,
-                strtoupper($request->homeAddress),
-                $request->phoneNumber,
-                strtoupper($request->occupation),
-                $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
-                $request->category,
-                strtoupper($request->referral),
-                $request->payment_type,
-                strtoupper($request->admit_type),
-                strtoupper($request->nationality),
-                $request->religion,
-                $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
-                strtoupper($request->civilStatus),
-                $request->agencyName,
-                strtoupper($request->principal),
-                strtoupper($request->address_of_agency),
-                strtoupper($request->countryDestination),
-                $request->medicalPackage,
-                strtoupper($patient_vessel),
-                strtoupper($request->passportNo),
-                $request->passport_expdate,
-                strtoupper($request->ssrb),
-                $request->srb_expdate,
-                $request->birthdate,
-                $request->birthplace,
+            $save_patient_info = PatientInfo::create([
+                'main_id' => $request->main_id,
+                'patientcode' => $request->patientcode,
+                'address' => strtoupper($request->address),
+                'contactno' => $request->phoneNumber,
+                'occupation' => strtoupper($request->occupation),
+                'occupation_other' => $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
+                'category' => $request->category,
+                'referral' => strtoupper($request->referral),
+                'payment_type' => $request->payment_type,
+                'admission_type' => strtoupper($request->admit_type),
+                'nationality' => strtoupper($request->nationality),
+                'religion' => $request->religion,
+                'religion_other' => $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
+                'maritalstatus' => strtoupper($request->civilStatus),
+                'agency_id' => $request->agency_id,
+                'principal' => strtoupper($request->principal),
+                'agency_address' => strtoupper($request->address_of_agency),
+                'country_destination' => strtoupper($request->countryDestination),
+                'medical_package' => $request->medicalPackage,
+                'vessel' => strtoupper($patient_vessel),
+                'passportno' => strtoupper($request->passportNo),
+                'passport_expdate' => $request->passport_expdate,
+                'srbno' => strtoupper($request->ssrb),
+                'srb_expdate' => $request->srb_expdate,
+                'birthdate' => $request->birthdate,
+                'birthplace' => $request->birthplace,
             ]);
 
-            // INSERT MEDICAL HISTORY
             $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $request->main_id);
 
-            // INSERT DATA TO DECLARATION FORM TABLE
-            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected__suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->main_id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
+            $save_declaration_form = DB::table('declaration_form')->insert([
+                'main_id' => $request->main_id,
+                'travelled_abroad_recently' => $request->travelled_abroad_recently,
+                'area_visited' => $request->area_visited,
+                'contact_with_people_being_infected_suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
+                'travel_arrival' => $request->travel_arrival_date,
+                'travel_return' => $request->travel_return_date,
+                'relationship_with_last_people' => $request->relationship_last_contact_people,
+                'last_contact_date' => $request->last_contact_date,
+                'fever' => $request->fever,
+                'cough' => $request->cough,
+                'shortness_of_breath' => $request->shortness_of_breath,
+                'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
+            ]);
 
             if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
-                return back()->with('status', 'Failed to Submit Data');
+                return back()->with('status', 'Failed to Submit Data. Please check all of your information and try again.');
             }
 
             if ($request->fever == 1 && $request->cough == 1 && $request->shortness_of_breath == 1 && $request->persistent_pain_in_the_chest == 1 && $request->travelled_abroad_recently == 1) {
@@ -322,7 +329,7 @@ class PatientController extends Controller
                     'firstname' => $mast_patient->firstname,
                     'lastname' => $mast_patient->lastname,
                 ]);
-                return redirect('/patient_info')->with('status', 'Test Message');
+                return redirect('/patient_info')->with('status', "Oops! Looks like you're not ready to go in clinic. Please Stay atleast 7 days to continue in medical clinic.");
             }
 
             if ($request->admit_type == 'Normal') {
@@ -336,7 +343,7 @@ class PatientController extends Controller
                     'firstname' => $mast_patient->firstname,
                     'lastname' => $mast_patient->lastname,
                 ]);
-                return redirect('/schedule_appointment');
+                return redirect('/schedule_appointment')->with('success', 'Register Successfully');
             } else {
                 return redirect('/patient_info')->with('success', 'Register Successfully');
             }
@@ -493,7 +500,7 @@ class PatientController extends Controller
             $save_medical_history = $this->action_med_history($request->all(), 'update', 'patient', $request->main_id);
 
             // UPDATE DECLARATION FORM
-            $save_declaration_form = DB::update('update declaration_form set travelled_abroad_recently = ?, area_visited = ?, contact_with_people_being_infected__suspected_diagnose_with_cov = ?, travel_arrival = ?, travel_return = ?, relationship_with_last_people = ?, last_contact_date = ?, fever = ?, cough = ?, shortness_of_breath = ?, persistent_pain_in_chest = ? where main_id = ?', [$request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest, $request->main_id]);
+            $save_declaration_form = DB::update('update declaration_form set travelled_abroad_recently = ?, area_visited = ?, contact_with_people_being_infected_suspected_diagnose_with_cov = ?, travel_arrival = ?, travel_return = ?, relationship_with_last_people = ?, last_contact_date = ?, fever = ?, cough = ?, shortness_of_breath = ?, persistent_pain_in_chest = ? where main_id = ?', [$request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest, $request->main_id]);
 
             if ($request->fever == 0 && $request->cough == 0 && $request->shortness_of_breath == 0 && $request->persistent_pain_in_the_chest == 0 && $request->travelled_abroad_recently == 0) {
                 return redirect('/edit_schedule')->with('success', 'Patient Information Update Successfully');
@@ -1119,7 +1126,7 @@ class PatientController extends Controller
                 ->update([
                     'travelled_abroad_recently' => $request->travelled_abroad_recently,
                     'area_visited' => $request->area_visited,
-                    'contact_with_people_being_infected__suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
+                    'contact_with_people_being_infected_suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
                     'travel_arrival' => $request->travelled_abroad_recently,
                     'travel_return' => $request->travel_arrival_date,
                     'relationship_with_last_people' => $request->relationship_with_last_people,

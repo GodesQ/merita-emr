@@ -1,4 +1,156 @@
-@extends('layouts.admin-layout')
+<div class="row container">
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/skuld.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/skuld_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Skuld</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/woe.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/west_england_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print WOE</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/noe.jpg" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/north_england_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print NOE</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/cayman.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/cayman_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Cayman</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/liberian.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/liberian_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Liberian</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/croatian.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/croatian_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Croatian</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/danish.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/danish_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Danish</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/diamlemos.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/diamlemos_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Diamlemos</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/marshall.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/marshall_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Marshall</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/malta.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/malta_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Malta</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/dominican.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/dominican_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Dominican</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/bahamas.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/bahamas_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Bahamas</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/bermuda.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/bermuda_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Bermuda</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/singapore_flag.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/singapore_flag_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Singapore</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/land_based.jpg" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/land_based_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Land Based</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- @extends('layouts.admin-layout')
 
 @section('name')
 {{$data['employeeFirstname'] . " " . $data['employeeLastname']}}
@@ -487,4 +639,5 @@ $("#browse").click(function() {
     location.href = `print_panel?&id=${id}`;
 })
 </script>
-@endpush
+@endpush --}}
+

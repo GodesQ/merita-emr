@@ -28,7 +28,6 @@
                     {{Session::get('fail')}}
                 </div>
             @endif
-
             @if(Session::get('success'))
                 @push('scripts')
                     <script>

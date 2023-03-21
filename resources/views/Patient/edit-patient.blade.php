@@ -109,9 +109,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn grey btn-outline-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-outline-primary"
-                                                    onclick="snapShot()">Save
-                                                    changes</button>
+                                                <button type="button" class="btn btn-outline-primary" onclick="snapShot()">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +144,7 @@
                                                                 class="fa fa-bars"></i>Declaration Form</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link main-tab @php echo session()->get('dept_id') != " 1" ? "active" : "" @endphp" id="baseIcon-tab35"
+                                                        <a class="nav-link main-tab {{ session()->get('dept_id') != " 1" ? "active" : "" }}" id="baseIcon-tab35"
                                                             data-toggle="tab" aria-controls="tabIcon35"
                                                             href="#tabIcon35" role="tab"><i class="fa fa-file"></i>Basic & Special Exams</a>
                                                     </li>
@@ -817,7 +815,7 @@
                                                                                         class="custom-control-input required"
                                                                                         name="contact_with_people_being_infected_suspected_or_diagnosed_with_covid"
                                                                                         id="contact_with_people_being_infected_suspected_or_diagnosed_with_covid1"
-                                                                                        {{$declarationForm->contact_with_people_being_infected__suspected_diagnose_with_cov == "1" ? "checked" : null}}
+                                                                                        {{$declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov == "1" ? "checked" : null}}
                                                                                         onchange="hasContactWithPeopleInfected(this)">
                                                                                     <label class="custom-control-label"
                                                                                         for="contact_with_people_being_infected_suspected_or_diagnosed_with_covid1">YES</label>
@@ -830,7 +828,7 @@
                                                                                         value="0"
                                                                                         class="custom-control-input required"
                                                                                         name="contact_with_people_being_infected_suspected_or_diagnosed_with_covid"
-                                                                                        {{$declarationForm->contact_with_people_being_infected__suspected_diagnose_with_cov == "0" ? "checked" : null}}
+                                                                                        {{$declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov == "0" ? "checked" : null}}
                                                                                         id="contact_with_people_being_infected_suspected_or_diagnosed_with_covid2"
                                                                                         onchange="hasContactWithPeopleInfected(this)">
                                                                                     <label class=" custom-control-label"
@@ -2320,158 +2318,7 @@
                                         </div>
                                     </div>
                                     <h4><b>MEDICAL CERTIFICATE</b></h4>
-                                    <div class="row container">
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/skuld.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/skuld_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Skuld</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/woe.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/west_england_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print WOE</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/noe.jpg" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/north_england_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print NOE</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/cayman.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/cayman_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Cayman</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/liberian.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/liberian_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Liberian</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/croatian.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/croatian_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Croatian</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/danish.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/danish_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Danish</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/diamlemos.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/diamlemos_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Diamlemos</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/marshall.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/marshall_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Marshall</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/malta.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/malta_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Malta</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/dominican.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/dominican_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Dominican</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/bahamas.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/bahamas_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Bahamas</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/bermuda.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/bermuda_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Bermuda</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/singapore_flag.png" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/singapore_flag_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Singapore</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                            <div class="print-con">
-                                                <img src="../../../app-assets/images/gallery/land_based.jpg" alt="">
-                                                <div class="print-btn-div">
-                                                    <button type="button"
-                                                        onclick="window.open('/land_based_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
-                                                        class="btn-print">Print Land Based</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('PrintPanel.print-panel')
                                 </div>
                             </div>
                         </div>
@@ -2480,395 +2327,7 @@
                         <div class="tab-pane fade" id="account-vertical-info" role="tabpanel"
                             aria-labelledby="account-pill-info" aria-expanded="false">
                             @if ($patientCode)
-                            <div class="card">
-                                <div class="card-header">
-                                    <h2 class="text-bold-500">Edit Admission</h2>
-                                    <a class="heading-elements-toggle"><i
-                                            class="fa fa-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="feather icon-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="feather icon-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="feather icon-maximize"></i></a></li>
-                                            <li><a data-action="close"><i class="feather icon-x"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="card-title">
-                                        <h6>
-                                            PEME Date: {{$patientCode->trans_date}}
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-                                        @if(Session::get('status'))
-                                        <div class="success alert-success p-2 my-2">
-                                            {{Session::get('status')}}
-                                        </div>
-                                        @endif
-                                        <form class="form" method="POST" action="/update_admission">
-                                            @csrf
-                                            <input type="hidden" value="{{$patientCode->id}}" name="main_id">
-                                            <div class="d-none">
-                                                <input type="date" max="2050-12-31" name="trans_date" id="" hidden value="<?php echo date(
-                                            'Y-m-d'
-                                        ); ?>">
-                                                <input type="hidden" name="package_id"
-                                                    value="{{$patientInfo->medical_package}}">
-                                                <input type="hidden" name="agency_id"
-                                                    value="{{$patientInfo->agency_id}}">
-                                                <input type="hidden" name="vessel" value="{{$patientInfo->vessel}}">
-                                                <input type="hidden" name="country_destination"
-                                                    value="{{$patientInfo->country_destination}}">
-                                            </div>
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput1">Patient
-                                                                Name</label>
-                                                            <input type="text" id="projectinput1" class="form-control"
-                                                                value="{{$patient->lastname}}, {{$patient->firstname}}"
-                                                                name="fullname" readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput1">Patient
-                                                                Code</label>
-                                                            <input type="text" id="projectinput1" class="form-control"
-                                                                value="{{$patient->patientcode}}" name="patientcode"
-                                                                readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600"
-                                                                for="admission_category">Category</label>
-                                                            <select id="admission_category" onchange="isOtherServices(this)"  name="category"
-                                                                class="form-control">
-                                                                <option value="none" selected="" disabled="">Select
-                                                                    Category
-                                                                </option>
-                                                                <option value="DECK SERVICES" @php echo $patientCode->
-                                                                    category ==
-                                                                    "DECK SERVICES" ? "selected=''" : "" @endphp>DECK
-                                                                    SERVICES
-                                                                </option>
-                                                                <option value="ENGINE SERVICES" @php echo $patientCode->
-                                                                    category
-                                                                    == "ENGINE SERVICES" ? "selected=''" : ""
-                                                                    @endphp>ENGINE
-                                                                    SERVICES</option>
-                                                                <option value="CATERING SERVICES" @php echo
-                                                                    $patientCode->
-                                                                    category
-                                                                    == "CATERING SERVICES" ? "selected=''" : ""
-                                                                    @endphp>CATERING
-                                                                    SERVICES</option>
-                                                                <option value="OTHER SERVICES" @php echo $patientCode->
-                                                                    category ==
-                                                                    "OTHER SERVICES" ? "selected=''" : "" @endphp>OTHER
-                                                                    SERVICES
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group other-specify-con">
-                                                            <label class="text-bold-600">Other Specify :</label>
-                                                            <input type="text" name="other_specify" id="other_specify" value="{{$patientCode->other_specify}}" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="form-group">
-                                                                <label class="text-bold-600"
-                                                                    for="companyName">Position</label>
-                                                                <input type="text" id="companyName" class="form-control"
-                                                                    placeholder="Position" name="position"
-                                                                    value="{{$patientCode->position}}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Employment
-                                                                Type</label>
-                                                            <div class="container-fluid ">
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="employment1" value="Sea-Based"
-                                                                        name="employment" @php echo
-                                                                        $patientCode->employment == "Sea-Based" ?
-                                                                    "checked" : "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="employment1">Sea
-                                                                        Based</label>
-                                                                </div>
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="employment2" name="employment"
-                                                                        value="Land-Based" @php echo
-                                                                        $patientCode->employment == "Land-Based" ?
-                                                                    "checked" : "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="employment2">Land
-                                                                        Based
-                                                                    </label>
-                                                                </div>
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="employment3" name="employment"
-                                                                        value="Local-Based" @php echo
-                                                                        $patientCode->employment == "Local-Based" ?
-                                                                    "checked" : "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="employment3">Local
-                                                                        Based
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 my-1">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Employment
-                                                                Status</label>
-                                                            <div class="container-fluid ">
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="emp_status1" name="emp_status"
-                                                                        value="New Crew" @php echo
-                                                                        $patientCode->emp_status == "New Crew" ?
-                                                                    "checked"
-                                                                    :
-                                                                    "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="emp_status1">New
-                                                                        Crew</label>
-                                                                </div>
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="emp_status2" name="emp_status"
-                                                                        value="Ex-Crew" @php echo
-                                                                        $patientCode->emp_status
-                                                                    == "Ex-Crew" ? "checked" :
-                                                                    "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="emp_status2">Ex
-                                                                        Crew</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Admission
-                                                                Type</label>
-                                                            <div class="container-fluid ">
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="admit_type1" name="admit_type"
-                                                                        value="Normal" @php echo
-                                                                        $patientCode->admit_type
-                                                                    == "Normal" ? "checked" : ""
-                                                                    @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="admit_type1">Regular
-                                                                        Patient</label>
-                                                                </div>
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="admit_type2" name="admit_type" value="Rush"
-                                                                        @php echo $patientCode->admit_type == "Rush" ? "checked" : ""
-                                                                    @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="admit_type2">Rush
-                                                                        Patient</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Payment
-                                                                Type</label>
-                                                            <div class="container-fluid ">
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        name="payment_type" id="payment_type3"
-                                                                        value="Applicant Paid" @php echo
-                                                                        $patientCode->payment_type == "Applicant Paid" ?
-                                                                    "checked" : "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="payment_type3">Applicant Paid</label>
-                                                                </div>
-                                                                <div
-                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input"
-                                                                        id="payment_type4" name="payment_type"
-                                                                        value="Billed" @php echo
-                                                                        $patientCode->payment_type
-                                                                    == "Billed" ?
-                                                                    "checked" : "" @endphp>
-                                                                    <label class="custom-control-label"
-                                                                        for="payment_type4">Billed to Agency</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput1">Last Medical in Merita</label>
-                                                            <input type="text" id="projectinput1" class="form-control"
-                                                                value="{{$patientCode->last_medical}}" name="last_medical">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput1">Principal</label>
-                                                            <input type="text" id="projectinput1" class="form-control"
-                                                                value="{{$patientCode->principal}}" name="principal">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="">
-                                                                Referral :
-                                                            </label>
-                                                            <input type="text" class="form-control"
-                                                                name="referral" value="{{$patientCode->referral}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Have a Panama?</label>
-                                                            <div class="container-fluid">
-                                                                <div class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input" name="have_panama" id="have_panama3" value="1" {{ $patientCode->have_panama ? 'checked' : null }}>
-                                                                    <label class="custom-control-label" for="have_panama3">Yes</label>
-                                                                </div>
-                                                                <div class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input" id="have_panama4" name="have_panama" value="0" {{ !$patientCode->have_panama ? 'checked' : null }}>
-                                                                    <label class="custom-control-label" for="have_panama4">No</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Have a Liberian?</label>
-                                                            <div class="container-fluid">
-                                                                <div class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input" name="have_liberian" id="have_liberian3" value="1" {{ $patientCode->have_liberian ? 'checked' : null }}>
-                                                                    <label class="custom-control-label" for="have_liberian3">Yes</label>
-                                                                </div>
-                                                                <div class="d-inline-block custom-control custom-radio mr-1">
-                                                                    <input type="radio" class="custom-control-input" id="have_liberian4" name="have_liberian" value="0" {{ !$patientCode->have_liberian ? 'checked' : null }}>
-                                                                    <label class="custom-control-label" for="have_liberian4">No</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput2">Panama Certificate Number</label>
-                                                            <input class="form-control" name="panama_certno" id="panama_certno" value="{{ $patientCode->panama_certno }}" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-bold-600" for="projectinput3">Liberian Certificate Number</label>
-                                                            <input class="form-control" name="liberian_certno" id="liberian_certno" value="{{ $patientCode->liberian_certno }}" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="card border my-3">
-                                                    <div class="card-header border bg-success text-white">
-                                                        <h4>Exam List
-                                                        </h4>
-                                                        <h5>Note: All exams in the package cannot be deleted.</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        @if (count($additional_exams) > 0)
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <div class="row border p-1">
-                                                                            <button type="button" class="btn btn-primary add-item col-md-2">Add Exam</button>
-                                                                        </div>
-                                                                        <div class="items-form">
-                                                                            <div class="row border p-1">
-                                                                                <div class="col-md-3 font-weight-bold text-center">Exams</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Charge</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Date</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Action</div>
-                                                                            </div>
-                                                                            @foreach($exam_groups as $key => $exam_group)
-                                                                                <div class="row border p-75">
-                                                                                    <h4 class="font-weight-bold">{{date_format(new DateTime($key), "F d, Y")}}</h4>
-                                                                                    @foreach($exam_group as $key => $exam)
-                                                                                        <div class="col-md-12 border p-1">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-3 text-center">{{$exam['examname']}}</div>
-                                                                                                <div class="col-md-3 text-center">{{$exam['charge'] == 'package' ? "Billed To Agency" : "Applicant Paid"}}</div>
-                                                                                                <div class="col-md-3 text-center">{{$exam['date']}}</div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @else
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <div class="row border p-1">
-                                                                            <button type="button" class="btn btn-primary add-item col-md-2">Add Exam</button>
-                                                                        </div>
-                                                                        <div class="items-form">
-                                                                            <div class="row border p-1">
-                                                                                <div class="col-md-3 font-weight-bold text-center">Exams</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Charge</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Date</div>
-                                                                                <div class="col-md-3 font-weight-bold text-center">Action</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <div class="form-actions">
-                                                <button type="reset" class="btn btn-warning mr-1">
-                                                    <i class="feather icon-x"></i> Cancel
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fa fa-check-square-o"></i> Save
-                                                </button>
-                                            </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
+                                @include('Admission.edit-admission')
                             @else
                                 @include('Admission.add-admission', [$patient, $patientInfo, $list_exams])
                             @endif
@@ -3038,17 +2497,6 @@
                                     </a>
                                 </li>
                                 @endif
-                                <!--@if($patientCode)-->
-                                <!--    <li class="nav-item">-->
-                                <!--        <a class="nav-link d-flex text-white" id="account-pill-connections"-->
-                                <!--            data-toggle="pill"-->
-                                <!--            onclick="window.open('/follow_up_print?id={{$patient->id}}&admission_id={{$patientCode->id}}').print()"-->
-                                <!--            aria-expanded="false">-->
-                                <!--            <i class="fa fa-print"></i>-->
-                                <!--            Print Follow Up Form-->
-                                <!--        </a>-->
-                                <!--    </li>-->
-                                <!--@endif-->
                                 @if($patientCode && session()->get('dept_id') == '1' || session()->get('dept_id') == '3' || session()->get('dept_id') == '8')
                                 <li class="nav-item">
                                     <a class="nav-link d-flex text-white" id="account-pill-connections"
@@ -3089,21 +2537,17 @@
                             <h5 class="text-white">MEDICAL STATUS:
                                 <span><b>
                                         @if ($patientCode->lab_status == 2)
-                                        <b><u>FIT TO WORK</u></b>
+                                            <b><u>FIT TO WORK</u></b>
                                         @elseif ($patientCode->lab_status == 1)
-                                        <b><u>FINDINGS / RE ASSESSMENT</u></b>
+                                            <b><u>FINDINGS / RE ASSESSMENT</u></b>
                                         @elseif ($patientCode->lab_status == 3)
-                                        <b><u>UNFIT TO WORK</u></b>
+                                            <b><u>UNFIT TO WORK</u></b>
                                         @elseif ($patientCode->lab_status == 4)
-                                        <b><u>UNFIT TEMPORARILY</u></b>
+                                            <b><u>UNFIT TEMPORARILY</u></b>
                                         @endif
                                     </b></span>
                             </h5>
                             <div class="my-1">
-                                <!--<button type="button" class="btn btn-outline-warning btn-sm m-25 p-75 text-white {{$patientCode->lab_status == 1 ? 'active' : null}}" data-toggle="modal"-->
-                                <!--    data-target="#inlineForm">-->
-                                <!--     RE ASSESSMENT-->
-                                <!--</button>-->
                                 <button type="button" class="btn btn-sm p-75 m-25 text-white btn-outline-primary {{$patientCode->lab_status == 1 ? 'active' : null}}" data-toggle="modal" data-target="#pendingModal">
                                     PENDING
                                 </button>
@@ -3351,10 +2795,8 @@
                                                 <input type="hidden" name="lab_status" value="1">
                                                 <input type="hidden" name="patientId" value="{{$patient->id}}">
                                                 <input type="hidden" name="agency_id" value="{{$patientInfo->agency_id}}">
-                                                <input type="hidden" name="id"
-                                                    value="@php echo $patientCode ? $patientCode->id : null @endphp">
-                                                <input type="hidden" name="schedule_id"
-                                                    value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
+                                                <input type="hidden" name="id" value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                <input type="hidden" name="schedule_id" value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
                                                 <div class="form-group">
                                                     <label for="">Remarks/Recommendations:</label>
                                                     <textarea name="remarks" id="" cols="30" rows="10"
@@ -3410,20 +2852,20 @@
                                     <div class="tab-pane active" id="home1" aria-labelledby="home-tab1" role="tabpanel">
                                         <div class="row">
                                             @if ($completed_exams)
-                                            @foreach ($completed_exams as $key => $patient_exam)
-                                            <div class="col-md-6 col-xl-12 my-50">
-                                                <fieldset>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            name="customCheck" id="customCheck1" checked disabled>
-                                                        <label class="custom-control-label text-white"
-                                                            for="customCheck1">{{$key}}</label>
+                                                @foreach ($completed_exams as $key => $patient_exam)
+                                                    <div class="col-md-6 col-xl-12 my-50">
+                                                        <fieldset>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="customCheck" id="customCheck1" checked disabled>
+                                                                <label class="custom-control-label text-white"
+                                                                    for="customCheck1">{{$key}}</label>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
-                                                </fieldset>
-                                            </div>
-                                            @endforeach
+                                                @endforeach
                                             @else
-                                            <div class="white">No Exams Found</div>
+                                                <div class="white">No Exams Found</div>
                                             @endif
                                         </div>
                                     </div>
@@ -3465,7 +2907,6 @@
 
 <script>
 document.querySelector('#admission-btn').addEventListener('click', () => {
-    console.log(true)
     document.querySelector('#account-pill-info').click();
 })
 </script>

@@ -84,7 +84,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav float-right">
-                        
+
                         <li class="dropdown dropdown-user nav-item">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <div class="avatar avatar-online">@yield('employee_image')<i></i></div><span
@@ -178,29 +178,14 @@
                     </ul>
                 </li>
                 @endif
-                <li class=" nav-item"><a href="#"><i class="feather icon-bar-chart-2"></i><span class="menu-title"
-                            data-i18n="Layouts">Report</span></a>
+                <li class=" nav-item"><a href="#"><i class="feather icon-bar-chart-2"></i><span class="menu-title" data-i18n="Layouts">Report</span></a>
                     <ul class="menu-content">
-                        @if (session()->get('dept_id') == '1')
-                        <li><a class="menu-item" href="/print_panel" data-i18n="Analytics">PRINT PANEL</a>
-                        </li>
-                        <!--<li><a class="menu-item" href="#" data-i18n="Fitness">DOH Stat Report</a>-->
-                        <!--</li>-->
-                        @endif
                         @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                            <li><a class="menu-item" href="/transmittal" data-i18n="CRM">Transmittal</a>
-                            </li>
+                            <li><a class="menu-item" href="/transmittal" data-i18n="CRM">Transmittal</a></li>
                         @endif
-                        
-
-                        <!--<li><a class="menu-item" href="#" data-i18n="CRM">Daily Sales Report</a>-->
-                        <!--</li>-->
-                        <li><a class="menu-item" href="/soa" data-i18n="SOA Report">SOA Report</a></li> 
-                        <li><a class="menu-item" href="/panama" data-i18n="Panama Billing">Panama Billing</a></li>     
-                        <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian Billing</a></li>     
-                        <!--<li><a class="menu-item" href="#" data-i18n="Fitness">Billing Statement</a>-->
-                        <!--</li>-->
-
+                        <li><a class="menu-item" href="/soa" data-i18n="SOA Report">SOA Report</a></li>
+                        <li><a class="menu-item" href="/panama" data-i18n="Panama Billing">Panama Billing</a></li>
+                        <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian Billing</a></li>
                         <li><a class="menu-item" href="daily_patient_form" data-i18n="Fitness">Daily Patients</a></li>
                     </ul>
                 </li>
@@ -310,7 +295,7 @@
 
 
     </script>
-    
+
 
     @stack('scripts')
 </body>

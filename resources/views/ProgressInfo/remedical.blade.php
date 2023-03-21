@@ -69,7 +69,7 @@
                                                 <input type="hidden" name="patientcode"
                                                     value="{{ $data['patientCode'] }}">
                                                 <div class=" row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="firstName3">
                                                                 First Name :
@@ -81,7 +81,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="lastName3">
                                                                 Last Name :
@@ -93,7 +93,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="lastName3">
                                                                 Middle Name :
@@ -102,7 +102,7 @@
                                                                 value="{{ $patient->middlename }}" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="lastName3">
                                                                 Suffix :
@@ -1303,7 +1303,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Aware of any disease / illness <br> 
+                                                                    <th>Aware of any disease / illness <br>
                                                                         <input type="text" placeholder="Specify..." value=""name="illness_other" class="form-control">
                                                                     </th>
                                                                     <td>
@@ -1794,7 +1794,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Vaccination
-                                                                        <input type="date" placeholder="Specify..." name="vaccination_date" style="display: none;" class="form-control vaccination_date">   
+                                                                        <input type="date" placeholder="Specify..." name="vaccination_date" style="display: none;" class="form-control vaccination_date">
                                                                     </div>
                                                                     </th>
                                                                     <td>
@@ -2130,7 +2130,7 @@ function getPackages(e) {
         const ageInput = document.querySelector("#age");
         ageInput.value = age;
     }
-    
+
     function isVaccinated(e) {
         if (e.value == 1) {
             let vaccination_date = document.querySelector('.vaccination_date');
@@ -2167,19 +2167,19 @@ function getPackages(e) {
             element.style.display = 'none';
         }
     }
-    
+
     const btn = document.querySelector('.add-vaccination');
-    
+
     btn.onclick = e => {
       console.log(true);
-      
+
       let repeatingField = document.querySelector('.vaccination-con');
-      
+
       let newRepeating = document.createElement('input');
       newRepeating.className = 'repeating';
-      
+
       let repeatingForm = `<input type="date" placeholder="Specify..." name="vaccination_date[]" class="form-control vaccination_date">`;
-      
+
       newRepeating.innerHTML = repeatingForm;
       repeatingField.appendChild(newRepeating);
     }
