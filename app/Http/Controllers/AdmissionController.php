@@ -32,11 +32,7 @@ class AdmissionController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('patientname', function ($row) {
-                    $patient = Patient::where(
-                        'patientcode',
-                        '=',
-                        $row['patientcode']
-                    )->first();
+                    $patient = Patient::where('patientcode', '=', $row['patientcode'])->first();
                     $patient_name = null;
                     if ($patient) {
                         $patient_name = $patient->lastname . ', ' . $patient->firstname;
@@ -44,8 +40,7 @@ class AdmissionController extends Controller
                     return $patient_name;
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn =
-                        '<button id=' . $row['id'] .' class="btn btn-secondary btn-sm select-admission" title="Routing Slip"><i class="fa fa-hand-o-left"></i></button>';
+                    $actionBtn = '<button id=' . $row['id'] . ' class="btn btn-secondary btn-sm select-admission" title="Routing Slip"><i class="fa fa-hand-o-left"></i></button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patientname'])
@@ -69,15 +64,10 @@ class AdmissionController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('patientname', function ($row) {
-                    $patient = Patient::where(
-                        'patientcode',
-                        '=',
-                        $row['patientcode']
-                    )->first();
+                    $patient = Patient::where('patientcode', '=', $row['patientcode'])->first();
                     $patient_name = null;
                     if ($patient) {
-                        $patient_name =
-                            $patient->lastname . ', ' . $patient->firstname;
+                        $patient_name = $patient->lastname . ', ' . $patient->firstname;
                     }
                     return $patient_name;
                 })
@@ -86,7 +76,9 @@ class AdmissionController extends Controller
                         '<button id=' .
                         $row['id'] .
                         ' class="btn btn-secondary btn-sm route-print" title="Routing Slip"><i class="fa fa-print"></i></button>
-                        <a href="#" id="' . $row['id'] . '" class="delete-admission btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                        <a href="#" id="' .
+                        $row['id'] .
+                        '" class="delete-admission btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patientname'])
@@ -110,16 +102,7 @@ class AdmissionController extends Controller
 
         $exams = ListExam::all();
 
-        return view(
-            'Admission.add-admission',
-            compact(
-                'patient',
-                'patientInfo',
-                'latestAdmission',
-                'exams',
-                'data'
-            )
-        );
+        return view('Admission.add-admission', compact('patient', 'patientInfo', 'latestAdmission', 'exams', 'data'));
     }
 
     public function store_admission(Request $request)
@@ -127,7 +110,7 @@ class AdmissionController extends Controller
         // dd($request->all());
         $admission = new Admission();
         $admission->patientcode = $request->patientcode;
-        $admission->trans_date = date("Y-m-d h:i:s");
+        $admission->trans_date = date('Y-m-d h:i:s');
         $admission->package_id = $request->package_id;
         $admission->agency_id = $request->agency_id;
         $admission->principal = $request->principal;
@@ -146,20 +129,20 @@ class AdmissionController extends Controller
         $admission->have_liberian = $request->have_liberian;
         $admission->panama_certno = $request->panama_certno;
         $admission->liberian_certno = $request->liberian_certno;
-        $admission->created_date = date("Y-m-d h:i:s");
+        $admission->created_date = date('Y-m-d h:i:s');
         $save_admission = $admission->save();
 
         $patient = Patient::where('id', $request->patient_id)->first();
         $patient->admission_id = $admission->id;
         $patient->save();
 
-        if(isset($request->exam)) {
-            if(isset($request->charge)) {
+        if (isset($request->exam)) {
+            if (isset($request->charge)) {
                 foreach ($request->exam as $key => $exam) {
                     $save_exams = DB::table('tran_admissiondtl')->insert([
                         'main_id' => $admission->id,
                         'exam_id' => $exam,
-                        'charge' =>  isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
+                        'charge' => isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
                 }
@@ -168,7 +151,7 @@ class AdmissionController extends Controller
                     $save_exams = DB::table('tran_admissiondtl')->insert([
                         'main_id' => $admission->id,
                         'exam_id' => $exam,
-                        'charge' =>  'applicant_paid',
+                        'charge' => 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
                 }
@@ -182,18 +165,10 @@ class AdmissionController extends Controller
         $log->date = date('Y-m-d');
         $log->save();
 
-        $path =
-            'patient_edit?id=' .
-            $request->patient_id .
-            '&patientcode=' .
-            $request->patientcode;
-
+        $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
 
         if ($save_admission) {
-            return redirect($path)->with(
-                'status',
-                'New Patient Added Successfully'
-            );
+            return redirect($path)->with('status', 'New Patient Added Successfully');
         }
     }
 
@@ -227,39 +202,28 @@ class AdmissionController extends Controller
                 'exam_id' => $exam->exam_id,
                 'examname' => $exam->examname,
                 'charge' => $exam->charge,
-                'date' => $exam->updated_date
+                'date' => $exam->updated_date,
             ];
 
             array_push($additional_exams, $exam_data);
         }
 
-        $exam_groups = $this->group_by('date', $additional_exams,  $admission->trans_date);
+        $exam_groups = $this->group_by('date', $additional_exams, $admission->trans_date);
 
-        return view(
-            'Admission.edit-admission',
-            compact(
-                'patient',
-                'patientInfo',
-                'admission',
-                'additional_exams',
-                'exams',
-                'data',
-                'exam_groups'
-            )
-        );
+        return view('Admission.edit-admission', compact('patient', 'patientInfo', 'admission', 'additional_exams', 'exams', 'data', 'exam_groups'));
     }
 
-    public function group_by($key, $data, $date) {
-        $result = array();
+    public function group_by($key, $data, $date)
+    {
+        $result = [];
 
-        foreach($data as $val) {
-            if(array_key_exists($key, $val)){
+        foreach ($data as $val) {
+            if (array_key_exists($key, $val)) {
                 $result[$val[$key] ? $val[$key] : $date][] = $val;
-            }else{
+            } else {
                 $result[$date][] = $date;
             }
         }
-
         return $result;
     }
 
@@ -284,13 +248,13 @@ class AdmissionController extends Controller
         $admission->liberian_certno = $request->liberian_certno;
         $save = $admission->save();
 
-        if(isset($request->exam)) {
-            if(isset($request->charge)) {
+        if (isset($request->exam)) {
+            if (isset($request->charge)) {
                 foreach ($request->exam as $key => $exam) {
                     $save_exams = DB::table('tran_admissiondtl')->insert([
                         'main_id' => $admission->id,
                         'exam_id' => $exam,
-                        'charge' =>  isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
+                        'charge' => isset($request->charge[$key]) ? $request->charge[$key] : 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
                 }
@@ -299,7 +263,7 @@ class AdmissionController extends Controller
                     $save_exams = DB::table('tran_admissiondtl')->insert([
                         'main_id' => $admission->id,
                         'exam_id' => $exam,
-                        'charge' =>  'applicant_paid',
+                        'charge' => 'applicant_paid',
                         'updated_date' => date('Y-m-d'),
                     ]);
                 }
@@ -331,26 +295,29 @@ class AdmissionController extends Controller
         $res = Admission::find($id)->delete();
     }
 
-    public function update_lab_result(Request $request) {
+    public function update_lab_result(Request $request)
+    {
         // dd($request->all());
-        $admission =  Admission::where('id', $request->id)->first();
-        $admission->lab_status = isset($request->lab_status)  ? $request->lab_status : null;
-        $admission->remarks = isset($request->remarks)  ? $request->remarks : null;
-        $admission->doctor_prescription = isset($request->doctor_prescription)  ? $request->doctor_prescription : null;
-        $admission->prescription = isset($request->prescription)  ? $request->prescription : null;
-        $admission->prescription_date = $request->lab_status == 1 ? date("Y-m-d") : null;
+        $admission = Admission::where('id', $request->id)->first();
+        $admission->lab_status = isset($request->lab_status) ? $request->lab_status : null;
+        $admission->remarks = isset($request->remarks) ? $request->remarks : null;
+        $admission->doctor_prescription = isset($request->doctor_prescription) ? $request->doctor_prescription : null;
+        $admission->prescription = isset($request->prescription) ? $request->prescription : null;
+        $admission->prescription_date = $request->lab_status == 1 ? date('Y-m-d') : null;
         $admission->cause_of_unfit = $request->cause_of_unfit ? $request->cause_of_unfit : null;
         $save = $admission->save();
 
-        if(isset($request->schedule)) {
-            $schedule = DB::table('sched_patients')->where('id', $request->schedule_id)->update(['date' => $request->schedule]);
+        if (isset($request->schedule)) {
+            $schedule = DB::table('sched_patients')
+                ->where('id', $request->schedule_id)
+                ->update(['date' => $request->schedule]);
         }
 
         $patient = Patient::select('mast_patient.*', 'mast_patientinfo.address', 'mast_agency.agencyname')
-                ->where('mast_patient.admission_id', $admission->id)
-                ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-                ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
-                ->first();
+            ->where('mast_patient.admission_id', $admission->id)
+            ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->first();
 
         $agency = Agency::where('id', $request->agency_id)->first();
 
@@ -358,27 +325,21 @@ class AdmissionController extends Controller
 
         $doctor = User::where('id', $request->doctor_prescription)->first();
 
+        if ($request->lab_status == 2) {
+            PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
 
-        if($request->lab_status == 2) {
-            PhysicalExam::where('admission_id', $request->id)->update([
-                'fit' => "Fit"
-            ]);
-
-            if($request->prescription != null || $request->prescription != "") {
+            if ($request->prescription != null || $request->prescription != '') {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
-                'data' => $admission,
-                'patient' => $patient,
-                'doctor' => $doctor
-                ])->setOptions([
-                    'defaultFont' => 'serif',
-                ]);
+                    'data' => $admission,
+                    'patient' => $patient,
+                    'doctor' => $doctor,
+                ])->setOptions(['defaultFont' => 'serif']);
             } else {
                 $pdf = null;
             }
 
-
             Patient::where('admission_id', $admission->id)->update([
-                'fit_to_work_date' => date('Y-m-d')
+                'fit_to_work_date' => date('Y-m-d'),
             ]);
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
@@ -386,15 +347,14 @@ class AdmissionController extends Controller
             }
         }
 
-        if($request->lab_status == 3) {
+        if ($request->lab_status == 3) {
             PhysicalExam::where('admission_id', $request->id)->update([
-                'fit' => "Unfit"
+                'fit' => 'Unfit',
             ]);
 
             Patient::where('admission_id', $admission->id)->update([
-                'unfit_to_work_date' => $request->unfit_date
+                'unfit_to_work_date' => $request->unfit_date,
             ]);
-
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
@@ -402,17 +362,16 @@ class AdmissionController extends Controller
             }
         }
 
-        if($request->lab_status == 4) {
+        if ($request->lab_status == 4) {
             PhysicalExam::where('admission_id', $request->id)->update([
-                'fit' => "Unfit_temp"
+                'fit' => 'Unfit_temp',
             ]);
 
-            if($request->prescription != null || $request->prescription != "") {
+            if ($request->prescription != null || $request->prescription != '') {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
-                'data' => $admission,
-                'patient' => $patient,
-                'doctor' => $doctor
-
+                    'data' => $admission,
+                    'patient' => $patient,
+                    'doctor' => $doctor,
                 ])->setOptions([
                     'defaultFont' => 'serif',
                 ]);
@@ -426,7 +385,7 @@ class AdmissionController extends Controller
             }
         }
 
-        if($request->lab_status == 1) {
+        if ($request->lab_status == 1) {
             // $findings = implode(";", $request->findings);
 
             // ReassessmentFindings::insert([
@@ -439,16 +398,11 @@ class AdmissionController extends Controller
             // ]);
 
             PhysicalExam::where('admission_id', $request->id)->update([
-                'fit' => "Pending"
+                'fit' => 'Pending',
             ]);
 
-            if($request->prescription != null || $request->prescription != "") {
-                $pdf = PDF::loadView('emails.prescription-pdf', [
-                'data' => $admission,
-                'patient' => $patient,
-                'doctor' => $doctor
-
-                ])->setOptions([
+            if ($request->prescription != null || $request->prescription != '') {
+                $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
                     'defaultFont' => 'serif',
                 ]);
             } else {
@@ -461,30 +415,38 @@ class AdmissionController extends Controller
         }
 
         return response()->json([
-            "status" => 200
+            'status' => 200,
         ]);
     }
 
-    public function create_followup(Request $request) {
-        if(!$request->findings) return back()->with('fail', 'No Significant Findings Found. Failed to Submit');
-        $findings = implode(";", $request->findings);
-        $recommendations = $request->recommendation ? implode(";", $request->recommendation) : null;
+    public function create_followup(Request $request)
+    {
+        if (!$request->findings) {
+            return back()->with('fail', 'No Significant Findings Found. Failed to Submit');
+        }
+        $findings = implode(';', $request->findings);
+        $recommendations = $request->recommendation ? implode(';', $request->recommendation) : null;
+
         ReassessmentFindings::insert([
-            "admission_id" => $request->admission_id,
-            "patient_id" => $request->patient_id,
-            "findings" => $findings,
-            "remarks" => $recommendations,
-            "date" => $request->date,
+            'admission_id' => $request->admission_id,
+            'patient_id' => $request->patient_id,
+            'findings' => $findings,
+            'remarks' => $recommendations,
+            'date' => $request->date,
         ]);
+
         return back()->with('status', 'Follow Up Created Successfully');
     }
 
-    public function destroy_followup(Request $request) {
+    public function destroy_followup(Request $request)
+    {
         $record = ReassessmentFindings::where('id', $request->id)->first();
         $delete = $record->delete();
-        if($delete) return response()->json([
-            'status' => 201,
-            'message' => 'Follow Up Record Deleted Successfully'
-        ]);
+        if ($delete) {
+            return response()->json([
+                'status' => 201,
+                'message' => 'Follow Up Record Deleted Successfully',
+            ]);
+        }
     }
 }

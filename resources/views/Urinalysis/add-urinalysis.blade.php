@@ -119,7 +119,7 @@
                                             <select name="spgravity" id="spgravity" class="form-control move">
                                                 <option value="">--SELECT--</option>
                                                 <option value="1.000">1.000</option>
-                                                <option value="1.005">1.005</option> 
+                                                <option value="1.005">1.005</option>
                                                 <option value="1.010">1.010</option>
                                                 <option value="1.015">1.015</option>
                                                 <option value="1.020">1.020</option>
@@ -282,7 +282,7 @@
                                             <input name="phosphates" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bacteria_3" value="Many">Many
                                             <input name="phosphates" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bacteria_4" value="">Reset
                                         </td>
-                                        
+
                                         <td>&nbsp;</td>
                                     </tr>
                                     <tr>
@@ -391,18 +391,18 @@
     document.addEventListener('keydown',handleInputFocusTransfer);
 
     function handleInputFocusTransfer(e){
-    
+
       const focusableInputElements= document.querySelectorAll(`.move`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();

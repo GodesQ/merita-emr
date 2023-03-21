@@ -19,7 +19,7 @@
                     <h5><b>Visual Acuity</b></h5>
                     <span style="font-size: 12px;">@php echo
                         nl2br($exam_visacuity->recommendation) @endphp</span>
-                    <input type="hidden" value="Visual Acuity: @php echo nl2br($exam_visacuity->recommendation) @endphp" name="recommendation[]" />    
+                    <input type="hidden" value="Visual Acuity: @php echo nl2br($exam_visacuity->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
             @endif
@@ -29,7 +29,7 @@
                     <h5><b>Dental</b></h5>
                     <span style="font-size: 12px;">@php echo
                         nl2br($exam_dental->recommendation) @endphp</span>
-                    <input type="hidden" value="Dental: @php echo nl2br($exam_dental->recommendation) @endphp" name="recommendation[]" />   
+                    <input type="hidden" value="Dental: @php echo nl2br($exam_dental->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
             @endif
@@ -39,17 +39,17 @@
                     <h5><b>Psychological</b></h5>
                     <span style="font-size: 12px;">@php echo
                         nl2br($exam_psycho->recommendation) @endphp</span>
-                    <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->recommendation) @endphp" name="recommendation[]" />   
+                    <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif                                                    
+            @endif
             @if ($exam_audio)
                 @if($exam_audio->remarks_status == 'findings' && $exam_audio->recommendation)
                 <div class="my-75">
                     <h5><b>Audiometry</b></h5>
                     <span style="font-size: 12px; ">@php echo
                         nl2br($exam_audio->recommendation) @endphp</span>
-                    <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->recommendation) @endphp" name="recommendation[]" />   
+                    <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
             @endif
@@ -59,19 +59,19 @@
                     <h5><b>Ishihara</b></h5>
                     <span style="font-size: 12px;">@php echo
                         nl2br($exam_ishihara->recommendation) @endphp</span>
-                    <input type="hidden" value="Ishihara: @php echo nl2br($exam_ishihara->recommendation) @endphp" name="recommendation[]" />   
+                    <input type="hidden" value="Ishihara: @php echo nl2br($exam_ishihara->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif 
+            @endif
             @if ($exam_xray)
                 @if($exam_xray->remarks_status == 'findings' && $exam_xray->recommendation)
                 <div class="my-75">
                     <h5><b>X Ray</b></h5>
                     <span style="font-size: 12px;">@php echo nl2br($exam_xray->recommendation) @endphp</span>
-                    <input type="hidden" value="X Ray: @php echo nl2br($exam_xray->recommendation) @endphp" name="recommendation[]" />   
+                    <input type="hidden" value="X Ray: @php echo nl2br($exam_xray->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif   
+            @endif
 
             @if ($exam_crf)
                 @if($exam_crf->remarks_status == 'findings' && $exam_crf->recommendation)
@@ -112,8 +112,8 @@
                     <input type="hidden" value="2D Echo Plain: @php echo nl2br($exam_echoplain->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif               
-            
+            @endif
+
             @if ($exam_ppd)
                 @if($exam_ppd->remarks_status == 'findings' && $exam_ppd->recommendation)
                 <div class="col-md-6 my-50">
@@ -199,7 +199,7 @@
                     <input type="hidden" value="Hematology: @php echo nl2br($examlab_hema->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif 
+            @endif
             @if ($examlab_urin)
                 @if($examlab_urin->remarks_status == 'findings' && $examlab_urin->recommendation)
                 <div class="my-75">
@@ -209,7 +209,7 @@
                     <input type="hidden" value="Urinalysis: @php echo nl2br($examlab_urin->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
-            @endif     
+            @endif
             @if ($examlab_feca)
                 @if($examlab_feca->remarks_status == 'findings' && $examlab_feca->recommendation)
                 <div class="my-75">
@@ -257,7 +257,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>FBS</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->fbs_recommendation)
                         @endphp
                     </span>
@@ -273,7 +273,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>BUN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->bun_recommendation)
                         @endphp
                     </span>
@@ -289,7 +289,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CREATININE</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->creatinine_recommendation)
                         @endphp
                     </span>
@@ -305,7 +305,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CHOLESTEROL</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->cholesterol_recommendation)
                         @endphp
                     </span>
@@ -321,7 +321,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TRIGLYCERIDES</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->triglycerides_recommendation)
                         @endphp
                     </span>
@@ -337,7 +337,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>HDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->hdl_recommendation)
                         @endphp
                     </span>
@@ -353,7 +353,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>LDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ldl_recommendation)
                         @endphp
                     </span>
@@ -369,7 +369,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>VLDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->vldl_recommendation)
                         @endphp
                     </span>
@@ -385,7 +385,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>URIC ACID</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->uricacid_recommendation)
                         @endphp
                     </span>
@@ -401,7 +401,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SGOT (AST)</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sgot_recommendation)
                         @endphp
                     </span>
@@ -417,7 +417,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SGPT (ALT)</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sgpt_recommendation)
                         @endphp
                     </span>
@@ -433,7 +433,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>GGT</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ggt_recommendation)
                         @endphp
                     </span>
@@ -449,7 +449,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ALK. PHOS.</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->alkphos_recommendation)
                         @endphp
                     </span>
@@ -465,7 +465,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TOTAL BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ttlbilirubin_recommendation)
                         @endphp
                     </span>
@@ -481,7 +481,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>DIRECT BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->dirbilirubin_recommendation)
                         @endphp
                     </span>
@@ -497,7 +497,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>INDIRECT BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->indbilirubin_recommendation)
                         @endphp
                     </span>
@@ -513,7 +513,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TOTAL PROTEIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ttlprotein_recommendation)
                         @endphp
                     </span>
@@ -529,7 +529,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ALBUMIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->albumin_recommendation)
                         @endphp
                     </span>
@@ -545,7 +545,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>GLOBULIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->globulin_recommendation)
                         @endphp
                     </span>
@@ -561,7 +561,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SODIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sodium_recommendation)
                         @endphp
                     </span>
@@ -577,7 +577,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>POTASSIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->potassium_recommendation)
                         @endphp
                     </span>
@@ -587,13 +587,13 @@
                 </div>
             @endif
         @endif
-        
+
         @if($exam_blood_serology)
             @if($exam_blood_serology->chloride_recommendation)
                 <div class="col-md-6 my-50">
                     <h5><b>CHLORIDE</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->chloride_recommendation)
                         @endphp
                     </span>
@@ -609,7 +609,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CALCIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->calcium_recommendation)
                         @endphp
                     </span>
@@ -625,7 +625,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>A/G RATIO</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ag_ratio_recommendation)
                         @endphp
                     </span>
@@ -641,7 +641,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Hemoglobin</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->hemoglobin_recommendation)
                         @endphp
                     </span>
@@ -657,7 +657,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Hematocrit</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->hematocrit_recommendation)
                         @endphp
                     </span>
@@ -673,7 +673,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>RBC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->rbc_recommendation)
                         @endphp
                     </span>
@@ -689,7 +689,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>WBC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->wbc_recommendation)
                         @endphp
                     </span>
@@ -705,7 +705,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Neutrophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->neuthrophils_recommendation)
                         @endphp
                     </span>
@@ -721,7 +721,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Lymphocyte</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->lymphocytes_recommendation)
                         @endphp
                     </span>
@@ -737,7 +737,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Eosinophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->eosinophils_recommendation)
                         @endphp
                     </span>
@@ -753,7 +753,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Monocyte</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->monophils_recommendation)
                         @endphp
                     </span>
@@ -769,7 +769,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Platelet</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->platelet_recommendation)
                         @endphp
                     </span>
@@ -785,7 +785,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Bleeding Time</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->bleeding_recommendation)
                         @endphp
                     </span>
@@ -801,7 +801,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Basophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->baspophils_recommendation)
                         @endphp
                     </span>
@@ -817,7 +817,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Clotting Time</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->clotting_recommendation)
                         @endphp
                     </span>
@@ -833,7 +833,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ESR</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->esr_recommendation)
                         @endphp
                     </span>
@@ -849,7 +849,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCV</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mcv_recommendation)
                         @endphp
                     </span>
@@ -865,7 +865,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCH</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mch_recommendation)
                         @endphp
                     </span>
@@ -881,7 +881,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCHC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mchc_recommendation)
                         @endphp
                     </span>
@@ -899,7 +899,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->vdrl_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="VDRL: @php 
+                    <input type="hidden" value="VDRL: @php
                         echo nl2br($examlab_hepa->vdrl_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -913,7 +913,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->tpha_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="TPHA: @php 
+                    <input type="hidden" value="TPHA: @php
                         echo nl2br($examlab_hepa->tpha_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -927,7 +927,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->hbsag_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="HBSAG: @php 
+                    <input type="hidden" value="HBSAG: @php
                         echo nl2br($examlab_hepa->hbsag_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -941,7 +941,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbs_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBs: @php 
+                    <input type="hidden" value="Anti-HBs: @php
                         echo nl2br($examlab_hepa->antihbs_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -955,7 +955,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->hbeag_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="HBeAg: @php 
+                    <input type="hidden" value="HBeAg: @php
                         echo nl2br($examlab_hepa->hbeag_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -969,7 +969,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbe_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBe: @php 
+                    <input type="hidden" value="Anti-HBe: @php
                         echo nl2br($examlab_hepa->antihbe_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -983,7 +983,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbclgm_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBc (lgM): @php 
+                    <input type="hidden" value="Anti-HBc (lgM): @php
                         echo nl2br($examlab_hepa->antihbclgm_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -997,7 +997,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbclgg_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBc (lgG): @php 
+                    <input type="hidden" value="Anti-HBc (lgG): @php
                         echo nl2br($examlab_hepa->antihbclgg_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -1011,13 +1011,13 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihavlgm_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HAV (lgM): @php 
+                    <input type="hidden" value="Anti-HAV (lgM): @php
                         echo nl2br($examlab_hepa->antihavlgm_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
             @endif
         @endif
-        
+
         @if($examlab_hepa)
             @if($examlab_hepa->antihavlgg_result == 'Reactive')
                 <div class="col-md-6 my-50">
@@ -1025,7 +1025,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihavlgg_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HAV (lgG): @php 
+                    <input type="hidden" value="Anti-HAV (lgG): @php
                         echo nl2br($examlab_hepa->antihavlgg_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>
@@ -1039,7 +1039,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihcv_recommendation) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HCV: @php 
+                    <input type="hidden" value="Anti-HCV: @php
                         echo nl2br($examlab_hepa->antihcv_recommendation);
                     @endphp" name="recommendation[]" />
                 </div>

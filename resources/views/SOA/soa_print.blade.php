@@ -173,7 +173,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ date_format(new DateTime($date_from), 'd') }} -
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
-                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}-{{ $page }} </span>
+                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -239,8 +239,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         {{ date_format(new DateTime($patient->trans_date), 'd-M-Y') }}
                                                     </td>
                                                     <td align="left" valign="top" class="brdRight">
-                                                        @php
-                                                            echo $patient_count;
+                                                        @php echo $patient_count;
                                                             $patient_count++;
                                                         @endphp
                                                     </td>
@@ -275,9 +274,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         <span>{{ $agency->id == 15 ? 'ECG' : null }}</span></td>
                                                     <td valign="top" align="left" class="brdRight">
                                                         @if ($patient->agency_id == 15)
-                                                            <span style="margin-right: 40px;">
-                                                                ₱ 300.00
-                                                            </span>
+                                                            <span style="margin-right: 40px;">₱ 300.00</span>
                                                             <?php $total_ecg += 300; ?>
                                                         @endif
                                                         <span>
@@ -388,15 +385,13 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 colspan="{{ 7 + count($additional_columns) }}">
                                                 @if ($exchange_rate)
                                                     Bangko Sentral ng Pilipinas (BSP) Reference Exchange Rate
-                                                    {{ $soa_date }} :
-                                                    1$ = PHP {{ $exchange_rate }}
+                                                    {{ $soa_date }} : 1$ = PHP {{ $exchange_rate }}
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             @if ($agency->id == 15)
                                                 <?php
-                                                // $tax_amount = $tax/100;
                                                     $sub_amount = $total;
                                                     $total_tax_amount = $sub_amount * 0.05;
                                                     $total = $total - $total_tax_amount;
@@ -411,14 +406,11 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             @endif
                                             <td class="brdTop brdLeft"
                                                 colspan="{{ 5 + count($additional_columns) }}">
-                                                Amount in Words : <b
-                                                    style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency);
+                                                Amount in Words : <b style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency);
                                                     echo $get_amount; ?></b>
                                             </td>
-                                            <td class="brdTop brdRight" style="text-align: right;"><b>Total
-                                                    Amount:</b></td>
+                                            <td class="brdTop brdRight" style="text-align: right;"><b>Total Amount:</b></td>
                                             <td class="brdTop brdRight" colspan="1">
-
                                                 <div
                                                     style="display: flex; justify-content: space-between; align-items: center;">
                                                     <div
@@ -477,17 +469,14 @@ function convertNumber($num = false, $currency = 'Pesos')
                                     <tr>
                                         <td>
                                             Prepared by / Checked by: <span
-                                                style="border-bottom: 1px solid black;"><input
-                                                    style="border: none; border-bottom: 1px solid black;"
+                                                style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
                                                     value="{{ $prepared_by }}" /> </span>
                                         </td>
                                         <td>
-                                            Approved by: <span style="border-bottom: 1px solid black;"><input
-                                                    style="border: none; border-bottom: 1px solid black;"
+                                            Approved by: <span style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
                                                     value="{{ $approved_by }}" /></span>
                                         </td>
-                                        <td>Received by: <span style="border-bottom: 1px solid black;"><input
-                                                    style="border: none; border-bottom: 1px solid black;"
+                                        <td>Received by: <span style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
                                                     value="" /></span>
                                         </td>
                                     </tr>

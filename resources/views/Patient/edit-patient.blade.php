@@ -155,18 +155,14 @@
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content px-1 pt-1">
-                                                    <div class="tab-pane main-content @php echo session()->get('dept_id') == " 1" ||
-                                                        session()->get('dept_id') == "17"
-                                                        ? "active" : "" @endphp" id="tabIcon31" role="tabpanel"
+                                                    <div class="tab-pane main-content @php echo session()->get('dept_id') == " 1" ? "active" : "" @endphp" id="tabIcon31" role="tabpanel"
                                                         aria-labelledby="baseIcon-tab31">
                                                         <fieldset class="my-2">
                                                             <form action="#" id="update_patient_basic" method="POST">
                                                                 @csrf
                                                                 <input type="hidden" name="old_signature"
-                                                                    id="old_signature"
-                                                                    value="{{$patient->patient_signature}}">
-                                                                <input type="hidden" name="signature"
-                                                                    id="signature_data">
+                                                                    id="old_signature" value="{{$patient->patient_signature}}">
+                                                                <input type="hidden" name="signature" id="signature_data">
                                                                 <input type="hidden" name="main_id"
                                                                     value="{{$patient->id}}">
                                                                 <input type="hidden" name="old_image"
@@ -178,8 +174,7 @@
                                                                     value="{{$patient->patient_image}}">
                                                                 <div
                                                                     class="col-md-8 d-flex justify-content align-items-center">
-                                                                    <img class=" image-taken"
-                                                                        src="../../../app-assets/images/profiles/profilepic.jpg" />
+                                                                    <img class=" image-taken" src="../../../app-assets/images/profiles/profilepic.jpg" />
                                                                     <div class="d-flex flex-column my-2 mx-4">
                                                                         <canvas class="signature" width="320" height="95"></canvas>
                                                                         <button type='button'
@@ -189,12 +184,10 @@
                                                                 <div class=" row">
                                                                     <div class="col-md-3">
                                                                         <div class="form-group">
-                                                                            <label for="firstName3">
-                                                                                First Name :
+                                                                            <label for="firstName3">First Name :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input type="text"
-                                                                                class="form-control to_upper" id="firstName3"
+                                                                            <input type="text" class="form-control to_upper" id="firstName3"
                                                                                 name="firstName"
                                                                                 value="{{$patient->firstname}}">
                                                                         </div>
@@ -206,9 +199,7 @@
                                                                                 Last Name :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input type="text"
-                                                                                class="form-control lastname to_upper"
-                                                                                id="lastName3" name="lastName"
+                                                                            <input type="text" class="form-control lastname to_upper" id="lastName3" name="lastName"
                                                                                 value="{{$patient->lastname}}">
                                                                         </div>
                                                                     </div>
@@ -280,25 +271,17 @@
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
-                                                                            <label for="">
-                                                                                Birthplace :
-                                                                                <span class="danger">*</span>
+                                                                            <label for="">Birthplace : <span class="danger">*</span>
                                                                             </label>
-                                                                            <input type="text"
-                                                                                class="form-control" name="birthplace"
-                                                                                value="{{$patientInfo->birthplace}}">
+                                                                            <input type="text" class="form-control" name="birthplace" value="{{$patientInfo->birthplace}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
-                                                                            <label for="">
-                                                                                Civil Status :
-                                                                                <span class="danger">*</span>
-                                                                            </label>
+                                                                            <label for="">Civil Status : <span class="danger">*</span></label>
                                                                             <select class="form-control"
                                                                                 name="civilStatus">
-                                                                                <option
-                                                                                    value="{{$patientInfo->maritalstatus}}">
+                                                                                <option value="{{$patientInfo->maritalstatus}}">
                                                                                     {{$patientInfo->maritalstatus}}
                                                                                 </option>
                                                                                 <option value="SINGLE">SINGLE</option>
@@ -334,11 +317,9 @@
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
                                                                             <label for="">
-                                                                                Gender :
-                                                                                <span class="danger">*</span>
+                                                                                Gender : <span class="danger">*</span>
                                                                             </label>
-                                                                            <select class="form-control"
-                                                                                name="gender">
+                                                                            <select class="form-control" name="gender">
                                                                                 <option value="Male" {{$patient->gender == 'Male' ? 'selected' : null}}>MALE</option>
                                                                                 <option value="Female" {{$patient->gender == 'Female' ? 'selected' : null}}>FEMALE</option>
                                                                             </select>
@@ -346,8 +327,7 @@
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
-                                                                            <label for="">
-                                                                                Nationality :
+                                                                            <label for=""> Nationality :
                                                                                 <span class="danger">*</span>
                                                                             </label>
                                                                             <input type="text"
@@ -394,9 +374,7 @@
                                                                                 Registered Date :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input type="datetime-local"
-                                                                                class="form-control" name="created_date"
-                                                                                value="{{$patient->created_date}}">
+                                                                            <input type="datetime-local" class="form-control" name="created_date" value="{{$patient->created_date}}">
                                                                         </div>
                                                                     </div>
                                                                     <input type="date" max="2050-12-31" name="date" id="" hidden value="<?php echo date('Y-m-d'); ?>">
@@ -424,13 +402,13 @@
                                                                             <select onchange="getPackages(this)" id="agency" class="form-control select2"
                                                                                 name="agency_id">
                                                                                 @if($patient_agency)
-                                                                                <option value="{{$patient_agency->id}}">
-                                                                                    {{$patient_agency->agencyname}}
-                                                                                </option>
+                                                                                    <option value="{{$patient_agency->id}}">
+                                                                                        {{$patient_agency->agencyname}}
+                                                                                    </option>
                                                                                 @endif
                                                                                 @foreach($agencies as $row)
-                                                                                <option value="{{$row->id}}">
-                                                                                    {{$row->agencyname}}</option>
+                                                                                    <option value="{{$row->id}}">
+                                                                                        {{$row->agencyname}}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -441,11 +419,7 @@
                                                                                 Address of Agency :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input
-                                                                                id="address_of_agency"
-                                                                                type="text"
-                                                                                class="form-control"
-                                                                                name="address_of_agency"
+                                                                            <input id="address_of_agency" type="text" class="form-control" name="address_of_agency"
                                                                                 value="{{$patientInfo->agency_address}}">
                                                                         </div>
                                                                     </div>
@@ -457,9 +431,7 @@
                                                                                 Country of Destination :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input required type="text"
-                                                                                class="form-control"
-                                                                                name="countryDestination"
+                                                                            <input required type="text" class="form-control" name="countryDestination"
                                                                                 value="{{$patientInfo->country_destination}}">
                                                                         </div>
                                                                     </div>
@@ -491,9 +463,7 @@
                                                                                 Passport :
                                                                                 <span class="danger">*</span>
                                                                             </label>
-                                                                            <input required type="text"
-                                                                                value="{{$patientInfo->passportno}}"
-                                                                                class="form-control" name="passportNo">
+                                                                            <input required type="text" value="{{$patientInfo->passportno}}" class="form-control" name="passportNo">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-4">
@@ -603,24 +573,17 @@
                                                                                 for="projectinput2">Admission
                                                                                 Type</label>
                                                                             <div class="container-fluid ">
-                                                                                <div
-                                                                                    class="d-inline-block custom-control custom-radio mr-1">
+                                                                                <div class="d-inline-block custom-control custom-radio mr-1">
                                                                                     <input type="radio"
                                                                                         class="custom-control-input"
                                                                                         id="admit_type3"
                                                                                         name="admit_type" value="Normal"
                                                                                         @php echo
-                                                                                        $patientInfo->admission_type ==
-                                                                                    "Normal" || $patientInfo->admission_type == 'NORMAL' ? "checked" : "" @endphp>
-                                                                                    <label class="custom-control-label"
-                                                                                        for="admit_type3">REGULAR
-                                                                                        PATIENT</label>
+                                                                                        $patientInfo->admission_type == "Normal" || $patientInfo->admission_type == 'NORMAL' ? "checked" : "" @endphp>
+                                                                                    <label class="custom-control-label" for="admit_type3">REGULAR PATIENT</label>
                                                                                 </div>
-                                                                                <div
-                                                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                                                    <input type="radio"
-                                                                                        class="custom-control-input"
-                                                                                        id="admit_type4"
+                                                                                <div class="d-inline-block custom-control custom-radio mr-1">
+                                                                                    <input type="radio" class="custom-control-input" id="admit_type4"
                                                                                         name="admit_type" value="Rush"
                                                                                         @php echo
                                                                                         $patientInfo->admission_type ==
@@ -681,8 +644,7 @@
                                                                         <div class="form-group hartmann-principal remove">
                                                                             <label for="">
                                                                                 Hartmann Principal :
-                                                                                <span class="primary h6">(If not applicable, please
-                                                                                    write N/A)</span>
+                                                                                <span class="primary h6">(If not applicable, please write N/A)</span>
                                                                                 <select name="hartmann_principal" id="" class="select2 form-control hartmann-select-principals">
                                                                                     <option value="{{$patientInfo->principal}}">{{$patientInfo->principal}}</option>
                                                                                 </select>
@@ -738,8 +700,7 @@
                                                                                         id="travelled_abroad_recently1"
                                                                                         value="1" {{$declarationForm->travelled_abroad_recently == "1" ? "checked" : null}}
                                                                                         onchange="isTravelAbroadRecently(this)">
-                                                                                    <label class="custom-control-label"
-                                                                                        for="travelled_abroad_recently1">YES</label>
+                                                                                    <label class="custom-control-label" for="travelled_abroad_recently1">YES</label>
                                                                                 </div>
                                                                             </fieldset>
                                                                             <fieldset>
@@ -751,8 +712,7 @@
                                                                                         name="travelled_abroad_recently"
                                                                                         id="travelled_abroad_recently2" {{$declarationForm->travelled_abroad_recently == "0" ? "checked" : null}}
                                                                                         onchange="isTravelAbroadRecently(this)">
-                                                                                    <label class="custom-control-label"
-                                                                                        for="travelled_abroad_recently2">No</label>
+                                                                                    <label class="custom-control-label" for="travelled_abroad_recently2">No</label>
                                                                                 </div>
                                                                             </fieldset>
                                                                         </div>
@@ -763,9 +723,7 @@
                                                                                 <span class="danger">*</span>
                                                                             </label>
                                                                             <fieldset>
-                                                                                <input name="area_visited" type="text"
-                                                                                    id=""
-                                                                                    placeholder="Country, State, City"
+                                                                                <input name="area_visited" type="text" id="" placeholder="Country, State, City"
                                                                                     class="form-control"
                                                                                     value="{{$declarationForm->area_visited}}" />
                                                                             </fieldset>
@@ -780,8 +738,7 @@
                                                                                 <div class="col-md-6">
                                                                                     <label class="font-weight-bold"
                                                                                         for="">Arrival</label>
-                                                                                    <input name="travel_arrival_date"
-                                                                                        id="" placeholder=""
+                                                                                    <input name="travel_arrival_date" id="" placeholder=""
                                                                                         class="form-control" type="date" max="2050-12-31"
                                                                                         value="{{$declarationForm->travel_arrival}}" />
                                                                                 </div>
@@ -839,10 +796,7 @@
                                                                     </div>
                                                                     <div class="col-md-12 mt-2 show-if-contact hide">
                                                                         <div class="form-group">
-                                                                            <label for="">Your relationship with the
-                                                                                people
-                                                                                and
-                                                                                your
+                                                                            <label for="">Your relationship with the people and your
                                                                                 last contact date with them
                                                                                 <span class="danger">*</span>
                                                                             </label>
@@ -865,7 +819,6 @@
                                                                                         id="" placeholder=""
                                                                                         class="form-control" type="date" max="2050-12-31"
                                                                                         value="{{$declarationForm->last_contact_date}}" />
-
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1076,20 +1029,18 @@
 
                                                     </div>
                                                     <div class="tab-pane main-content @php echo session()->get('dept_id') != " 1" &&
-                                                        session()->get('dept_id') != "17" && session()->get('dept_id')
-                                                        != "8"
-                                                        ? "active" : "" @endphp" id="tabIcon35" role="tabpanel"
+                                                        session()->get('dept_id') != "17" && session()->get('dept_id') != "8" ? "active" : "" @endphp" id="tabIcon35" role="tabpanel"
                                                         aria-labelledby="baseIcon-tab35">
                                                         <div class="col-12">
-                                                            @if($patientCode == null)
-                                                            <div
-                                                                class="container d-flex justify-content-center align-items-center flex-column">
-                                                                <h3 class="text-center font-weight-regular my-2">
-                                                                    Before entering this section, the patient needs to
-                                                                    admit.
-                                                                </h3>
-                                                                <button id="admission-btn" class="btn btn-solid btn-primary text-center">Admit Now</button>
-                                                            </div>
+                                                            @if(!$patientCode)
+                                                                <div
+                                                                    class="container d-flex justify-content-center align-items-center flex-column">
+                                                                    <h3 class="text-center font-weight-regular my-2">
+                                                                        Before entering this section, the patient needs to
+                                                                        admit.
+                                                                    </h3>
+                                                                    <button id="admission-btn" class="btn btn-solid btn-primary text-center">Admit Now</button>
+                                                                </div>
                                                             @else
                                                             <div class="nav-vertical">
                                                                 <ul class="nav nav-tabs nav-left nav-border-left" id="child-basic-tabs"

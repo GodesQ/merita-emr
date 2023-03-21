@@ -15,7 +15,7 @@ class DrugController extends Controller
 {
     //
     public function edit_drug(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $exam = DrugTest::select(
@@ -32,25 +32,27 @@ class DrugController extends Controller
                 ->first();
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
-            
-            $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
+
+            $medical_techs = User::where('position', 'Medical Technologist')->get();
+
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Drug.edit-drug', compact('exam', 'patient', 'admission', 'medical_techs', 'pathologists'));
+
         }  catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
-       
+
     }
 
     public function update_drug(Request $request)
-    {   
+    {
         try {
             // dd($request->all());
             $id = $request->id;
@@ -79,7 +81,7 @@ class DrugController extends Controller
             $exam->technician_id = $request->technician_id;
             $exam->technician2_id = $request->technician2_id;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
@@ -87,7 +89,7 @@ class DrugController extends Controller
                 'Update Drug Test from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             if ($save) {
                 return back()->with('status', 'Drugtest updated');
             }
@@ -99,7 +101,7 @@ class DrugController extends Controller
     }
 
     public function add_drug()
-    {   
+    {
         try {
             $id = $_GET['id'];
             $admission = Admission::select(
@@ -116,14 +118,14 @@ class DrugController extends Controller
                 )
                 ->latest('mast_patient.id')
                 ->first();
-                
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Drug.add-drug', compact('admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -133,7 +135,7 @@ class DrugController extends Controller
     }
 
     public function store_drug(Request $request)
-    {   
+    {
         try {
             $exam = new DrugTest();
             $exam->trans_date = $request->trans_date;

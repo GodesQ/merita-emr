@@ -17,17 +17,17 @@
                 <h5><b>Visual Acuity</b></h5>
                 <span style="font-size: 12px;">@php echo
                     nl2br($exam_visacuity->remarks) @endphp</span>
-                <input type="hidden" value="Visual Acuity: @php echo nl2br($exam_visacuity->remarks) @endphp" name="findings[]" />    
+                <input type="hidden" value="Visual Acuity: @php echo nl2br($exam_visacuity->remarks) @endphp" name="findings[]" />
             </div>
             @endif
         @endif
         @if ($exam_dental)
-            @if($exam_dental->remarks_status == 'findings')
+            @if($exam_dental->remarks_status == 'findings')zzzzzz
             <div class="col-md-6 my-50">
                 <h5><b>Dental</b></h5>
                 <span style="font-size: 12px;">@php echo
                     nl2br($exam_dental->remarks) @endphp</span>
-                <input type="hidden" value="Dental: @php echo nl2br($exam_dental->remarks) @endphp" name="findings[]" />   
+                <input type="hidden" value="Dental: @php echo nl2br($exam_dental->remarks) @endphp" name="findings[]" />
             </div>
             @endif
         @endif
@@ -37,18 +37,18 @@
                 <h5><b>Psychological</b></h5>
                 <span style="font-size: 12px;">@php echo
                     nl2br($exam_psycho->remarks) @endphp</span>
-                <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->remarks) @endphp" name="findings[]" />   
+                <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->remarks) @endphp" name="findings[]" />
             </div>
             @endif
-        @endif  
-    
+        @endif
+
         @if ($exam_audio)
             @if($exam_audio->remarks_status == 'findings')
             <div class="col-md-6 my-50">
                 <h5><b>Audiometry</b></h5>
                 <span style="font-size: 12px; ">@php echo
                     nl2br($exam_audio->remarks) @endphp</span>
-                <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->remarks) @endphp" name="findings[]" />   
+                <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->remarks) @endphp" name="findings[]" />
             </div>
             @endif
         @endif
@@ -58,10 +58,10 @@
                 <h5><b>Ishihara</b></h5>
                 <span style="font-size: 12px;">@php echo
                     nl2br($exam_ishihara->remarks) @endphp</span>
-                <input type="hidden" value="Ishihara: @php echo nl2br($exam_ishihara->remarks) @endphp" name="findings[]" />   
+                <input type="hidden" value="Ishihara: @php echo nl2br($exam_ishihara->remarks) @endphp" name="findings[]" />
             </div>
             @endif
-        @endif 
+        @endif
 
         @if ($exam_crf)
             @if($exam_crf->remarks_status == 'findings')
@@ -102,7 +102,7 @@
                 <input type="hidden" value="2D Echo Plain: @php echo nl2br($exam_echoplain->remarks) @endphp" name="findings[]" />
             </div>
             @endif
-        @endif                                                    
+        @endif
         @if ($exam_echodoppler)
             @if($exam_echodoppler->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -113,7 +113,7 @@
             </div>
             @endif
         @endif
-        
+
         @if ($exam_ppd)
             @if($exam_ppd->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -123,7 +123,7 @@
             </div>
             @endif
         @endif
-        
+
         @if ($exam_stressecho)
             @if($exam_stressecho->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -206,7 +206,7 @@
                 <input type="hidden" value="Hematology: @php echo nl2br($examlab_hema->remarks) @endphp" name="findings[]" />
             </div>
             @endif
-        @endif 
+        @endif
         @if ($examlab_urin)
             @if($examlab_urin->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -216,7 +216,7 @@
                 <input type="hidden" value="Urinalysis: @php echo nl2br($examlab_urin->remarks) @endphp" name="findings[]" />
             </div>
             @endif
-        @endif     
+        @endif
         @if ($examlab_pregnancy)
             @if($examlab_pregnancy->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -483,7 +483,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>HBA1C</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->hba1c) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->hba1c < 4 && is_numeric(optional($exam_blood_serology)->hba1c))
@@ -504,13 +504,13 @@
                 </div>
             @endif
         @endif
-        
+
         @if($exam_blood_serology)
             @if(optional($exam_blood_serology)->ppbg > 200)
                 <div class="col-md-6 my-50">
                     <h5><b>PPBG</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ppbg) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ppbg > 200 && is_numeric(optional($exam_blood_serology)->ppbg))
@@ -532,7 +532,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>FBS</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->fbs) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->fbs < 70 && is_numeric(optional($exam_blood_serology)->fbs))
@@ -559,7 +559,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>BUN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->bun) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->bun < 5 && is_numeric(optional($exam_blood_serology)->bun))
@@ -586,7 +586,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CREATININE</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->creatinine) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->creatinine < 0.8 && is_numeric(optional($exam_blood_serology)->creatinine))
@@ -613,7 +613,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CHOLESTEROL</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->cholesterol) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->cholesterol < 125 && is_numeric(optional($exam_blood_serology)->cholesterol))
@@ -640,7 +640,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TRIGLYCERIDES</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->triglycerides) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->triglycerides < 35 && is_numeric(optional($exam_blood_serology)->triglycerides))
@@ -667,7 +667,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>HDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->hdl) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->hdl < 40 && is_numeric(optional($exam_blood_serology)->hdl))
@@ -689,7 +689,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>LDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ldl) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ldl > 40 && is_numeric(optional($exam_blood_serology)->ldl))
@@ -711,7 +711,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>VLDL Chole</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->vldl) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->vldl < 7 && is_numeric(optional($exam_blood_serology)->vldl))
@@ -738,7 +738,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>URIC ACID</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->uricacid) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->uricacid < 140 && is_numeric(optional($exam_blood_serology)->uricacid))
@@ -765,7 +765,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SGOT (AST)</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sgot) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->sgot < 0 && is_numeric(optional($exam_blood_serology)->sgot))
@@ -792,7 +792,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SGPT (ALT)</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sgpt) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->sgpt < 0 && is_numeric(optional($exam_blood_serology)->sgpt))
@@ -819,7 +819,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>GGT</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ggt) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ggt < 0 && is_numeric(optional($exam_blood_serology)->ggt))
@@ -846,7 +846,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ALK. PHOS.</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->alkphos) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->alkphos < 35 && is_numeric(optional($exam_blood_serology)->alkphos))
@@ -873,7 +873,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TOTAL BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ttlbilirubin) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ttlbilirubin < 5 && is_numeric(optional($exam_blood_serology)->ttlbilirubin))
@@ -900,7 +900,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>DIRECT BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->dirbilirubin) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->dirbilirubin < 0 && is_numeric(optional($exam_blood_serology)->dirbilirubin))
@@ -927,7 +927,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>INDIRECT BILIRUBIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->indbilirubin) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->indbilirubin < 0 && is_numeric(optional($exam_blood_serology)->indbilirubin))
@@ -954,7 +954,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>TOTAL PROTEIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ttlprotein) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ttlprotein < 66 && is_numeric(optional($exam_blood_serology)->ttlprotein))
@@ -981,7 +981,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ALBUMIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->albumin) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->albumin < 35 && is_numeric(optional($exam_blood_serology)->albumin))
@@ -1008,7 +1008,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>GLOBULIN</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->globulin) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->globulin < 31 && is_numeric(optional($exam_blood_serology)->globulin))
@@ -1035,7 +1035,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>SODIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->sodium) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->sodium < 135.0 && is_numeric(optional($exam_blood_serology)->sodium))
@@ -1056,13 +1056,13 @@
                 </div>
             @endif
         @endif
-        
+
         @if($exam_blood_serology)
             @if(optional($exam_blood_serology)->potassium < 3.5 && is_numeric(optional($exam_blood_serology)->potassium) || optional($exam_blood_serology)->potassium > 5.3)
                 <div class="col-md-6 my-50">
                     <h5><b>POTASSIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->potassium) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->potassium < 3.5 && is_numeric(optional($exam_blood_serology)->potassium))
@@ -1089,7 +1089,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CHLORIDE</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->chloride) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->chloride < 96.0 && is_numeric(optional($exam_blood_serology)->chloride))
@@ -1116,7 +1116,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>CALCIUM</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->calcium) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->calcium < 2.10 && is_numeric(optional($exam_blood_serology)->calcium))
@@ -1143,7 +1143,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>A/G RATIO</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($exam_blood_serology->ag_ratio) . ' - '
                         @endphp
                         @if(optional($exam_blood_serology)->ag_ratio < 0.6 && is_numeric(optional($exam_blood_serology)->ag_ratio))
@@ -1170,7 +1170,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Hemoglobin</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->hemoglobin) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->hemoglobin < 120 && is_numeric(optional($examlab_hema)->hemoglobin))
@@ -1197,7 +1197,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Hematocrit</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->hematocrit) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->hematocrit < 0.40 && is_numeric(optional($examlab_hema)->hematocrit))
@@ -1224,7 +1224,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>RBC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->rbc) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->rbc < 3.5 && is_numeric(optional($examlab_hema)->rbc))
@@ -1245,13 +1245,13 @@
                 </div>
             @endif
         @endif
-        
+
         @if($examlab_hema)
             @if(optional($examlab_hema)->wbc < 5 && is_numeric(optional($examlab_hema)->wbc) || optional($examlab_hema)->wbc > 100)
                 <div class="col-md-6 my-50">
                     <h5><b>WBC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->wbc) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->wbc < 5 && is_numeric(optional($examlab_hema)->wbc))
@@ -1278,7 +1278,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Neutrophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->neuthrophils) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->neuthrophils < 0.50 && is_numeric(optional($examlab_hema)->neuthrophils))
@@ -1304,7 +1304,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Lymphocyte</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->lymphocytes) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->lymphocytes < 0.20 && is_numeric(optional($examlab_hema)->lymphocytes))
@@ -1331,7 +1331,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Eosinophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->eosinophils) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->eosinophils < 0.00 && is_numeric(optional($examlab_hema)->eosinophils))
@@ -1358,7 +1358,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Monocyte</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->monophils) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->monophils < 0.00 && is_numeric(optional($examlab_hema)->monophils))
@@ -1385,7 +1385,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Basophil</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->baspophils) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->baspophils < 0.00 && is_numeric(optional($examlab_hema)->baspophils))
@@ -1412,7 +1412,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Platelet</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->platelet) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->platelet < 150 && is_numeric(optional($examlab_hema)->platelet))
@@ -1439,7 +1439,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Bleeding Time</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->bleeding) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->bleeding < 1 && is_numeric(optional($examlab_hema)->bleeding))
@@ -1466,7 +1466,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>Clotting Time</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->clotting) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->clotting < 5 && is_numeric(optional($examlab_hema)->clotting))
@@ -1493,7 +1493,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>ESR</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->esr) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->esr < 0 && is_numeric(optional($examlab_hema)->esr))
@@ -1520,7 +1520,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCV</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mcv) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->mcv < 80 && is_numeric(optional($examlab_hema)->mcv))
@@ -1547,7 +1547,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCH</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mch) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->mch < 27 && is_numeric(optional($examlab_hema)->mch))
@@ -1574,7 +1574,7 @@
                 <div class="col-md-6 my-50">
                     <h5><b>MCHC</b></h5>
                     <span style="font-size: 12px;">
-                        @php 
+                        @php
                             echo nl2br($examlab_hema->mchc) . ' - '
                         @endphp
                         @if(optional($examlab_hema)->mchc < 320 && is_numeric(optional($examlab_hema)->mchc))
@@ -1603,7 +1603,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->vdrl_result) @endphp
                     </span>
-                    <input type="hidden" value="VDRL: @php 
+                    <input type="hidden" value="VDRL: @php
                         echo nl2br($examlab_hepa->vdrl_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1617,7 +1617,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->tpha_result) @endphp
                     </span>
-                    <input type="hidden" value="TPHA: @php 
+                    <input type="hidden" value="TPHA: @php
                         echo nl2br($examlab_hepa->tpha_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1631,7 +1631,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->hbsag_result) @endphp
                     </span>
-                    <input type="hidden" value="HBSAG: @php 
+                    <input type="hidden" value="HBSAG: @php
                         echo nl2br($examlab_hepa->hbsag_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1645,7 +1645,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbs_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBs: @php 
+                    <input type="hidden" value="Anti-HBs: @php
                         echo nl2br($examlab_hepa->antihbs_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1659,7 +1659,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->hbeag_result) @endphp
                     </span>
-                    <input type="hidden" value="HBeAg: @php 
+                    <input type="hidden" value="HBeAg: @php
                         echo nl2br($examlab_hepa->hbeag_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1673,7 +1673,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbe_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBe: @php 
+                    <input type="hidden" value="Anti-HBe: @php
                         echo nl2br($examlab_hepa->antihbe_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1687,7 +1687,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbclgm_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBc (lgM): @php 
+                    <input type="hidden" value="Anti-HBc (lgM): @php
                         echo nl2br($examlab_hepa->antihbclgm_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1701,7 +1701,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihbclgg_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HBc (lgG): @php 
+                    <input type="hidden" value="Anti-HBc (lgG): @php
                         echo nl2br($examlab_hepa->antihbclgg_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1715,7 +1715,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihavlgm_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HAV (lgM): @php 
+                    <input type="hidden" value="Anti-HAV (lgM): @php
                         echo nl2br($examlab_hepa->antihavlgm_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1728,7 +1728,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihavlgg_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HAV (lgG): @php 
+                    <input type="hidden" value="Anti-HAV (lgG): @php
                         echo nl2br($examlab_hepa->antihavlgg_result);
                     @endphp" name="findings[]" />
                 </div>
@@ -1741,7 +1741,7 @@
                     <span style="font-size: 12px;">
                         @php echo nl2br($examlab_hepa->antihcv_result) @endphp
                     </span>
-                    <input type="hidden" value="Anti-HCV: @php 
+                    <input type="hidden" value="Anti-HCV: @php
                         echo nl2br($examlab_hepa->antihcv_result);
                     @endphp" name="findings[]" />
                 </div>

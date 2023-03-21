@@ -700,6 +700,7 @@ class PatientController extends Controller
             $log->description = 'Delete Patient ' . $patient->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
+
             $res = Patient::where('id', $id)->first();
             $res->yndelete = true;
             $res->save();
@@ -932,9 +933,11 @@ class PatientController extends Controller
     public function save_crop_signature(Request $request)
     {
         $patient = Patient::where('id', $request->id)->first();
+
         if (!$patient->default_signature) {
             $patient->default_signature = $patient->patient_signature;
         }
+
         $patient->patient_signature = base64_encode($request->image);
         $save = $patient->save();
 
@@ -942,7 +945,7 @@ class PatientController extends Controller
 
         if ($save) {
             return response()->json([
-                'status' => '201',
+                'status' => 201,
                 'message' => 'Crop Signature Successfully',
                 'redirect_url' => $redirect_url,
             ]);
@@ -969,6 +972,7 @@ class PatientController extends Controller
     public function update_patient_basic(Request $request)
     {
         try {
+
             $name = $request->old_image;
             if ($request->patient_image == $request->old_image) {
                 $name = $request->old_image;
@@ -1031,6 +1035,7 @@ class PatientController extends Controller
                     'status' => 204,
                 ]);
             }
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
