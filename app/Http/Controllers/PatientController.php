@@ -33,16 +33,6 @@ class PatientController extends Controller
         return view('ProgressInfo.documentation', compact('data'));
     }
 
-    public function verify(Request $request)
-    {
-        $patient = Patient::where('email', '=', $_GET['verify_email'])->first();
-        $patient->isVerify = true;
-        $save = $patient->save();
-        if ($save) {
-            return redirect('/login')->with('success', 'Your Email Address was successfully verified.');
-        }
-    }
-
     public function progress_info(Request $request)
     {
         try {

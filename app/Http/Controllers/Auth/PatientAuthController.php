@@ -105,6 +105,14 @@ class PatientAuthController extends Controller
          return back()->with('fail', 'Something went wrong. Try Again later.');
     }
 
+    public function verify(Request $request)
+    {
+        $patient = Patient::where('email', '=', $request->verify_email)->first();
+        $patient->isVerify = true;
+        $save = $patient->save();
+        if ($save) return redirect('/login')->with('success', 'Your Email Address was successfully verified.');
+    }
+
     public function logout()
     {
         if (session()->has(['classification'])) {

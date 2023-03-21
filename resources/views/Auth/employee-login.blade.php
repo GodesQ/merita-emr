@@ -84,7 +84,7 @@
                                                 @endif
                                                 @csrf
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="text" name="name" class="form-control"
+                                                    <input type="text" name="username" class="form-control"
                                                         id="user-name" placeholder="Your username">
                                                     <div class="form-control-position">
                                                         <i class="feather icon-user"></i>

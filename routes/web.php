@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Auth\PatientAuthController;
+use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\ChartAccountController;
@@ -48,14 +49,14 @@ Route::get('/login', [PatientAuthController::class, 'login']);
 Route::post('/save-login', [PatientAuthController::class, 'save_login']);
 Route::get('/register', [PatientAuthController::class, 'register']);
 Route::post('/save-register', [PatientAuthController::class, 'save_register']);
+Route::view('/verify-message', 'verification-message');
+Route::get('/verify-email', [PatientAuthController::class, 'verify']);
 
+Route::get('/employee-login', [AdminAuthController::class, 'login']);
+Route::post('/save-employee-login', [AdminAuthController::class, 'save_login']);
 
-Route::get('/employee-login', [AdminController::class, 'employee_index']);
 Route::get('/agency-login', [AgencyController::class, 'index']);
 Route::post('/save-agency-login', [AgencyController::class, 'check']);
-Route::post('/save-employee-login', [AdminController::class, 'check_employee']);
-Route::view('/verify-message', 'verification-message');
-Route::get('/verify-email', [PatientController::class, 'verify']);
 
 Route::get('/password_forget_form', [ForgetPasswordController::class, 'view_password_forget_form']);
 Route::get('/agency_password_forget_form', [ForgetPasswordController::class, 'view_agency_password_forget_form']);
@@ -791,6 +792,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/employee_change_password', [UserController::class, 'employee_change_password']);
 
     Route::get('/logout', [PatientAuthController::class, 'logout']);
-    Route::get('/employee_logout', [UserController::class, 'employee_logout']);
+    Route::get('/employee_logout', [AdminAuthController::class, 'logout']);
     Route::get('/agency_logout', [UserController::class, 'agency_logout']);
 });

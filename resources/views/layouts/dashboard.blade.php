@@ -24,10 +24,19 @@
     <div class="content-wrapper">
         <div class="content-body">
             @if(Session::get('fail'))
-            <div class="danger alert-danger p-2 my-2 rounded">
-                {{Session::get('fail')}}
-            </div>
+                <div class="danger alert-danger p-2 my-2 rounded">
+                    {{Session::get('fail')}}
+                </div>
             @endif
+
+            @if(Session::get('success'))
+                @push('scripts')
+                    <script>
+                        toastr.success('{{ Session::get("success") }}', 'Success');
+                    </script>
+                @endpush
+            @endif
+
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
                     <div class="container mb-1 p-0">
