@@ -5,7 +5,7 @@
     .form-control {
         padding: 0.2rem;
     }
-    
+
     .table th,
     .table td {
         padding: 0.5rem;
@@ -97,8 +97,7 @@
                                                     @endphp>--SELECT--</option>
                                                 <option value="Not Required" @php echo $exam->purpose == "Not Required"
                                                     ? "selected=''" : "" @endphp>Not Required</option>
-                                                <option value="Pre-Employement" @php echo $exam->purpose ==
-                                                    "Pre-Employement" ? "selected=''" : "" @endphp>Pre-Employement
+                                                <option value="Pre-Employment" @php echo $exam->purpose == "Pre-Employment" || $exam->purpose == "Pre-Employement" ? "selected=''" : "" @endphp>Pre-Employment
                                                 </option>
                                                 <option value="Student" @php echo $exam->purpose == "Student" ?
                                                     "selected=''" : "" @endphp>Student</option>
@@ -189,7 +188,7 @@
                                                 value="Positive" onchange="addRemarks('Ecstacy', this)" @php echo $exam->ecstacy == "Positive" ? "checked" : ""
                                             @endphp>
                                             Positive
-                                            <input name="ecstacy" type="radio" style="width: 20px; height: 20px;" class="m-75" id="ecstacy_1" value="" 
+                                            <input name="ecstacy" type="radio" style="width: 20px; height: 20px;" class="m-75" id="ecstacy_1" value=""
                                                 onchange="addRemarks('Ecstacy', this)" @php echo $exam->ecstacy == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
@@ -323,7 +322,7 @@
                                         </td>
                                         <td align="right"><b></b></td>
                                         <td>
-                                           
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -418,24 +417,24 @@
               document.getElementById("remarks").innerHTML = resultString;
         }
     }
-    
+
 </script>
 <script>
     document.addEventListener('keydown',handleInputFocusTransfer);
 
     function handleInputFocusTransfer(e){
-    
+
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();

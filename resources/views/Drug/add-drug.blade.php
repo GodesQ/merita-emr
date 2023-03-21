@@ -5,7 +5,7 @@
     .form-control {
         padding: 0.2rem;
     }
-    
+
     .table th,
     .table td {
         padding: 0.5rem;
@@ -89,7 +89,7 @@
                                             <select type="menu" name="purpose" id="purpose" class="form-control">
                                                 <option value="">--SELECT--</option>
                                                 <option value="Not Required">Not Required</option>
-                                                <option value="Pre-Employement" selected>Pre-Employement</option>
+                                                <option value="Pre-Employment" selected>Pre-Employment</option>
                                                 <option value="Student">Student</option>
                                                 <option value="Licensing">Licensing</option>
                                                 <option value="Random Drug Testing">Random Drug Testing</option>
@@ -274,7 +274,7 @@
                                         </td>
                                         <td align="right"><b></b></td>
                                         <td>
-                                            
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -364,18 +364,18 @@
     document.addEventListener('keydown',handleInputFocusTransfer);
 
     function handleInputFocusTransfer(e){
-    
+
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();
@@ -404,6 +404,6 @@
               document.getElementById("remarks").innerHTML = resultString;
         }
     }
-    
+
 </script>
 @endsection
