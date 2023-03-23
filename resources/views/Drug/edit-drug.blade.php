@@ -10,6 +10,10 @@
     .table td {
         padding: 0.5rem;
     }
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
 </style>
 <div class="app-content content bg-white">
     <div class="container">
@@ -93,36 +97,25 @@
                                         <td width="19%" align="right"><b>Purpose</b></td>
                                         <td width="31%">
                                             <select type="menu" name="purpose" id="purpose" class="form-control">
-                                                <option value="" @php echo $exam->purpose == "" ? "selected=''" : ""
-                                                    @endphp>--SELECT--</option>
-                                                <option value="Not Required" @php echo $exam->purpose == "Not Required"
-                                                    ? "selected=''" : "" @endphp>Not Required</option>
-                                                <option value="Pre-Employment" @php echo $exam->purpose == "Pre-Employment" || $exam->purpose == "Pre-Employement" ? "selected=''" : "" @endphp>Pre-Employment
+                                                <option value="" {{ $exam->purpose == "" ? "selected" : "" }}>--SELECT--</option>
+                                                <option value="Not Required" {{ $exam->purpose == "Not Required" ? "selected" : "" }}>Not Required</option>
+                                                <option value="Pre-Employment" {{ $exam->purpose == "Pre-Employment" || $exam->purpose == "Pre-Employement" ? "selected" : "" }}>Pre-Employment
                                                 </option>
-                                                <option value="Student" @php echo $exam->purpose == "Student" ?
-                                                    "selected=''" : "" @endphp>Student</option>
-                                                <option value="Licensing" @php echo $exam->purpose == "Licensing" ?
-                                                    "selected=''" : "" @endphp>Licensing</option>
-                                                <option value="Random Drug Testing" @php echo $exam->purpose == "Random
-                                                    Drug Testing" ? "selected=''" : "" @endphp>Random Drug Testing
+                                                <option value="Student"{{ $exam->purpose == "Student" ? "selected" : "" }}>Student</option>
+                                                <option value="Licensing"{{ $exam->purpose == "Licensing" ? "selected" : "" }}>Licensing</option>
+                                                <option value="Random Drug Testing"{{ $exam->purpose == "Random Drug Testing" ? "selected" : "" }}>Random Drug Testing
                                                 </option>
-                                                <option value="Others" @php echo $exam->purpose == "Others" ?
-                                                    "selected=''" : "" @endphp>Others</option>
+                                                <option value="Others"{{ $exam->purpose == "Others" ? "selected" : "" }}>Others</option>
                                             </select>
                                         </td>
                                         <td width="18%" align="right"><b>Method</b></td>
                                         <td width="32%" align="right">
                                             <select type="menu" name="method" id="method" class="form-control">
-                                                <option value="" @php echo $exam->method == "" ? "selected=''" : ""
-                                                    @endphp>--SELECT--</option>
-                                                <option value="Not Required" @php echo $exam->method == "Not Required" ?
-                                                    "selected=''" : "" @endphp>Not Required</option>
-                                                <option value="Instrumented" @php echo $exam->method == "Instrumented" ?
-                                                    "selected=''" : "" @endphp>Instrumented</option>
-                                                <option value="Test Kit" @php echo $exam->method == "Test Kit" ?
-                                                    "selected=''" : "" @endphp>Test Kit</option>
-                                                <option value="Random Drug Test" @php echo $exam->method == "Random Drug
-                                                    Test" ? "selected=''" : "" @endphp>Random Drug Test</option>
+                                                <option value="" {{ $exam->method == "" ? "selected" : "" }}>--SELECT--</option>
+                                                <option value="Not Required" {{ $exam->method == "Not Required" ? "selected" : "" }}>Not Required</option>
+                                                <option value="Instrumented" {{ $exam->method == "Instrumented" ? "selected" : "" }}>Instrumented</option>
+                                                <option value="Test Kit" {{ $exam->method == "Test Kit" ? "selected" : "" }}>Test Kit</option>
+                                                <option value="Random Drug Test" {{ $exam->method == "Random Drug Test" ? "selected" : "" }}>Random Drug Test</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -135,60 +128,59 @@
                                     <tr>
                                         <td align="right"><b>Methamphetamine / Amphetamines</b></td>
                                         <td>
-                                            <input name="methamphetamine" type="radio" style="width: 20px; height: 20px;" class="m-75" @php echo
-                                                $exam->methamphetamine == "Negative" ? "checked" : "" @endphp
-                                            id="methamphetamine_0" value="Negative" onchange="addRemarks('Methamphetamine', this)">
-                                            Negative
-                                            <input name="methamphetamine" type="radio" style="width: 20px; height: 20px;" class="m-75" @php echo
-                                                $exam->methamphetamine == "Positive" ? "checked" : "" @endphp
-                                            id="methamphetamine_1" value="Positive" onchange="addRemarks('Methamphetamine', this)">
-                                            Positive
-                                            <input name="methamphetamine" type="radio" style="width: 20px; height: 20px;" class="m-75" @php echo
-                                                $exam->methamphetamine == "" ? "checked" : "" @endphp
-                                            id="methamphetamine_1" value="" onchange="addRemarks('Methamphetamine', this)">
-                                            Reset
+                                            <input name="methamphetamine" type="radio" class="m-75"
+                                            {{ $exam->methamphetamine == "Negative" ? "checked" : "" }} id="methamphetamine_0"
+                                            value="Negative" onchange="addRemarks('Methamphetamine', this)">Negative
+
+                                            <input name="methamphetamine" type="radio" class="m-75"
+                                            {{ $exam->methamphetamine == "Positive" ? "checked" : "" }} id="methamphetamine_1"
+                                             value="Positive" onchange="addRemarks('Methamphetamine', this)">Positive
+
+                                            <input name="methamphetamine" type="radio" class="m-75"
+                                            {{ $exam->methamphetamine == "" ? "checked" : "" }} id="methamphetamine_2"
+                                            value="" onchange="addRemarks('Methamphetamine', this)">Reset
                                         </td>
                                         <td align="right"><b>Barbiturates</b></td>
                                         <td>
-                                            <input name="barbiturates" type="radio" style="width: 20px; height: 20px;" class="m-75" id="barbiturates_0"
-                                                value="Negative" onchange="addRemarks('Barbiturates', this)" @php echo $exam->barbiturates == "Negative" ? "checked"
-                                            : "" @endphp>
-                                            Negative
-                                            <input name="barbiturates" type="radio" style="width: 20px; height: 20px;" class="m-75" id="barbiturates_1"
-                                                value="Positive" onchange="addRemarks('Barbiturates', this)" @php echo $exam->barbiturates == "Positive" ? "checked"
-                                            : "" @endphp>
-                                            Positive
-                                            <input name="barbiturates" type="radio" style="width: 20px; height: 20px;" class="m-75" id="barbiturates_1"
-                                                value="" onchange="addRemarks('Barbiturates', this)" @php echo $exam->barbiturates == "" ? "checked" : "" @endphp>
-                                            Reset
+                                            <input name="barbiturates" type="radio" class="m-75" id="barbiturates_0"
+                                            value="Negative" onchange="addRemarks('Barbiturates', this)"
+                                            {{ $exam->barbiturates == "Negative" ? "checked" : "" }}>Negative
+
+                                            <input name="barbiturates" type="radio" class="m-75" id="barbiturates_1"
+                                            value="Positive" onchange="addRemarks('Barbiturates', this)"
+                                            {{ $exam->barbiturates == "Positive" ? "checked" : "" }}>Positive
+
+                                            <input name="barbiturates" type="radio" class="m-75" id="barbiturates_2"
+                                            value="" onchange="addRemarks('Barbiturates', this)"
+                                            {{ $exam->barbiturates == "" ? "checked" : "" }}>Reset
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right"><b>Tetrahydrocannabinol</b></td>
-                                        <td><input name="tetrahydrocannabinol" type="radio" style="width: 20px; height: 20px;" class="m-75"
-                                                id="tetrahydrocannabinol_0" value="Negative" onchange="addRemarks('Tetrahydrocannabinol', this)" @php echo
-                                                $exam->tetrahydrocannabinol == "Negative" ? "checked" : "" @endphp>
-                                            Negative
-                                            <input name="tetrahydrocannabinol" type="radio" style="width: 20px; height: 20px;" class="m-75"
-                                                id="tetrahydrocannabinol_1" value="Positive" onchange="addRemarks('Tetrahydrocannabinol', this)" @php echo
-                                                $exam->tetrahydrocannabinol == "Positive" ? "checked" : "" @endphp>
-                                            Positive
-                                            <input name="tetrahydrocannabinol" type="radio" style="width: 20px; height: 20px;" class="m-75"
-                                                id="tetrahydrocannabinol_1" value="" onchange="addRemarks('Tetrahydrocannabinol', this)" @php echo
-                                                $exam->tetrahydrocannabinol == "" ? "checked" : "" @endphp>
-                                            Reset
+                                        <td>
+                                            <input name="tetrahydrocannabinol" type="radio" class="m-75"
+                                                id="tetrahydrocannabinol_0" value="Negative" onchange="addRemarks('Tetrahydrocannabinol', this)"
+                                                {{ $exam->tetrahydrocannabinol == "Negative" ? "checked" : "" }}>Negative
+
+                                            <input name="tetrahydrocannabinol" type="radio" class="m-75"
+                                                id="tetrahydrocannabinol_1" value="Positive" onchange="addRemarks('Tetrahydrocannabinol', this)"
+                                                {{ $exam->tetrahydrocannabinol == "Positive" ? "checked" : "" }}>Positive
+
+                                            <input name="tetrahydrocannabinol" type="radio" class="m-75"
+                                                id="tetrahydrocannabinol_1" value="" onchange="addRemarks('Tetrahydrocannabinol', this)" {{
+                                                $exam->tetrahydrocannabinol == "" ? "checked" : "" }}> Reset
                                         </td>
                                         <td align="right"><b>Ecstacy(MDMA)</b></td>
                                         <td>
-                                            <input name="ecstacy" type="radio" style="width: 20px; height: 20px;" class="m-75" id="ecstacy_0"
+                                            <input name="ecstacy" type="radio" class="m-75" id="ecstacy_0"
                                                 value="Negative" onchange="addRemarks('Ecstacy', this)" @php echo $exam->ecstacy == "Negative" ? "checked" : ""
                                             @endphp>
                                             Negative
-                                            <input name="ecstacy" type="radio" style="width: 20px; height: 20px;" class="m-75" id="ecstacy_1"
+                                            <input name="ecstacy" type="radio" class="m-75" id="ecstacy_1"
                                                 value="Positive" onchange="addRemarks('Ecstacy', this)" @php echo $exam->ecstacy == "Positive" ? "checked" : ""
                                             @endphp>
                                             Positive
-                                            <input name="ecstacy" type="radio" style="width: 20px; height: 20px;" class="m-75" id="ecstacy_1" value=""
+                                            <input name="ecstacy" type="radio" class="m-75" id="ecstacy_1" value=""
                                                 onchange="addRemarks('Ecstacy', this)" @php echo $exam->ecstacy == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
@@ -196,29 +188,29 @@
                                     <tr>
                                         <td align="right"><b>Morphine / Opiates</b></td>
                                         <td>
-                                            <input name="morphine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="morphine_0"
+                                            <input name="morphine" type="radio" class="m-75" id="morphine_0"
                                                 value="Negative" onchange="addRemarks('Morphine', this)" @php echo $exam->morphine == "Negative" ? "checked" :
                                             "" @endphp>
                                             Negative
-                                            <input name="morphine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="morphine_1"
+                                            <input name="morphine" type="radio" class="m-75" id="morphine_1"
                                                 value="Positive" onchange="addRemarks('Morphine', this)" @php echo $exam->morphine == "Positive" ? "checked" :
                                             "" @endphp>
                                             Positive
-                                            <input name="morphine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="morphine_1" value=""
+                                            <input name="morphine" type="radio" class="m-75" id="morphine_1" value=""
                                                onchange="addRemarks('Morphine', this)" @php echo $exam->morphine == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                         <td width="18%" colspan="-2" align="right"><b> Benzodiazepine </b></td>
                                         <td width="32%" colspan="-2">
-                                            <input name="benzodiazepine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="benzodiazepine_0"
+                                            <input name="benzodiazepine" type="radio" class="m-75" id="benzodiazepine_0"
                                                 value="Negative" onchange="addRemarks('Benzodiazepine', this)" @php echo $exam->benzodiazepine == "Negative" ?
-                                            "checked" : "" @endphp >
+                                            "checked" : "" @endphp>
                                             Negative
-                                            <input name="benzodiazepine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="benzodiazepine_1"
+                                            <input name="benzodiazepine" type="radio" class="m-75" id="benzodiazepine_1"
                                                 value="Positive" onchange="addRemarks('Benzodiazepine', this)" @php echo $exam->benzodiazepine == "Positive" ?
                                             "checked" : "" @endphp>
                                             Positive
-                                            <input name="benzodiazepine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="benzodiazepine_1"
+                                            <input name="benzodiazepine" type="radio" class="m-75" id="benzodiazepine_1"
                                                 value="" onchange="addRemarks('Benzodiazepine', this)" @php echo $exam->benzodiazepine == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
@@ -226,27 +218,27 @@
                                     <tr>
                                         <td align="right"><b>Cocaine</b></td>
                                         <td>
-                                            <input name="cocaine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="cocaine_0"
+                                            <input name="cocaine" type="radio" class="m-75" id="cocaine_0"
                                                 value="Negative" onchange="addRemarks('Cocaine', this)" @php echo $exam->cocaine == "Negative" ? "checked" : ""
                                             @endphp>
                                             Negative
-                                            <input name="cocaine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="cocaine_1"
+                                            <input name="cocaine" type="radio" class="m-75" id="cocaine_1"
                                                 value="Positive" onchange="addRemarks('Cocaine', this)" @php echo $exam->cocaine == "Positive" ? "checked" : ""
                                             @endphp>
                                             Positive
-                                            <input name="cocaine" type="radio" style="width: 20px; height: 20px;" onchange="addRemarks('Cocaine', this)" class="m-75" id="cocaine_1" value="" @php
+                                            <input name="cocaine" type="radio" onchange="addRemarks('Cocaine', this)" class="m-75" id="cocaine_1" value="" @php
                                                 echo $exam->cocaine == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                         <td align="right"><b>Propoxyphene</b></td>
                                         <td>
-                                            <input name="propoxyphene" type="radio" style="width: 20px; height: 20px;" class="m-1" id="propoxyphene_0"
+                                            <input name="propoxyphene" type="radio" class="m-1" id="propoxyphene_0"
                                                 value="Negative" @php echo $exam->propoxyphene == "Negative" ? "checked" : null @endphp onchange="addRemarks('Propoxyphene', this)">
                                             Negative
-                                            <input name="propoxyphene" type="radio" style="width: 20px; height: 20px;" class="m-1" id="propoxyphene_1" onchange="addRemarks('Propoxyphene', this)"
+                                            <input name="propoxyphene" type="radio" class="m-1" id="propoxyphene_1" onchange="addRemarks('Propoxyphene', this)"
                                                 value="Positive" @php echo $exam->propoxyphene == "Positive" ? "checked" : null @endphp>
                                             Positive
-                                            <input name="propoxyphene" type="radio" style="width: 20px; height: 20px;" class="m-1" id="propoxyphene_1"
+                                            <input name="propoxyphene" type="radio" class="m-1" id="propoxyphene_1"
                                                 value="" onchange="addRemarks('Propoxyphene', this)" @php echo $exam->propoxyphene == "" ? "checked" : null @endphp>
                                             Reset
                                         </td>
@@ -254,70 +246,70 @@
                                     <tr>
                                         <td colspan="-2" align="right"><b> Phencyclidine</b></td>
                                         <td colspan="-2">
-                                            <input name="phencyclidine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="phencyclidine_0"
+                                            <input name="phencyclidine" type="radio" class="m-75" id="phencyclidine_0"
                                                 value="Negative" onchange="addRemarks('Phencyclidine', this)" @php echo $exam->phencyclidine == "Negative" ?
                                             "checked" : "" @endphp>
                                             Negative
-                                            <input name="phencyclidine" type="radio" style="width: 20px; height: 20px;" class="m-75" id="phencyclidine_1"
+                                            <input name="phencyclidine" type="radio" class="m-75" id="phencyclidine_1"
                                                 value="Positive" onchange="addRemarks('Phencyclidine', this)" @php echo $exam->phencyclidine == "Positive" ?
                                             "checked" : "" @endphp>
                                             Positive
-                                            <input name="phencyclidine" type="radio" onchange="addRemarks('Phencyclidine', this)" style="width: 20px; height: 20px;" class="m-75" id="phencyclidine_1"
+                                            <input name="phencyclidine" type="radio" onchange="addRemarks('Phencyclidine', this)" class="m-75" id="phencyclidine_1"
                                                 value="" @php echo $exam->phencyclidine == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                         <td width="18%" colspan="-2" align="right"><b>Methadone</b></td>
                                         <td width="32%" colspan="-2">
-                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" style="width: 20px; height: 20px;" class="m-75" id="methadone_0"
+                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" class="m-75" id="methadone_0"
                                                 value="Negative" @php echo $exam->methadone == "Negative" ? "checked" :
                                             "" @endphp>
                                             Negative
-                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" style="width: 20px; height: 20px;" class="m-75" id="methadone_1"
+                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" class="m-75" id="methadone_1"
                                                 value="Positive" @php echo $exam->methadone == "Positive" ? "checked" :
                                             "" @endphp>
                                             Positive
-                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" style="width: 20px; height: 20px;" class="m-75" id="methadone_1" value=""@php echo $exam->methadone == "" ? "checked" : "" @endphp>
+                                            <input name="methadone" type="radio" onchange="addRemarks('Methadone', this)" class="m-75" id="methadone_1" value=""@php echo $exam->methadone == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right"><b>Alcohol</b></td>
-                                        <td><input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" style="width: 20px; height: 20px;" class="m-75" id="alcohol_0"
+                                        <td><input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" class="m-75" id="alcohol_0"
                                                 value="Negative" @php echo $exam->alcohol == "Negative" ? "checked" : ""
                                             @endphp>
                                             Negative
-                                            <input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" style="width: 20px; height: 20px;" class="m-75" id="alcohol_1"
+                                            <input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" class="m-75" id="alcohol_1"
                                                 value="Positive" @php echo $exam->alcohol == "Positive" ? "checked" : ""
                                             @endphp>
                                             Positive
-                                            <input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" style="width: 20px; height: 20px;" class="m-75" id="alcohol_1" value="" @php
+                                            <input name="alcohol" type="radio" onchange="addRemarks('Alcohol', this)" class="m-75" id="alcohol_1" value="" @php
                                                 echo $exam->alcohol == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                         <td width="18%" colspan="-2" align="right"><b> Metaqualone</b></td>
                                         <td width="32%" colspan="-2">
-                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" style="width: 20px; height: 20px;" class="m-75" id="metaqualone_0"
+                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" class="m-75" id="metaqualone_0"
                                                 value="Negative" @php echo $exam->metaqualone == "Negative" ? "checked"
                                             : "" @endphp>
                                             Negative
-                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" style="width: 20px; height: 20px;" class="m-75" id="metaqualone_1"
+                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" class="m-75" id="metaqualone_1"
                                                 value="Positive" @php echo $exam->metaqualone == "Positive" ? "checked"
                                             : "" @endphp>
                                             Positive
-                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" style="width: 20px; height: 20px;" class="m-75" id="metaqualone_1"
+                                            <input name="metaqualone" type="radio" onchange="addRemarks('Metaqualone', this)" class="m-75" id="metaqualone_1"
                                                 value="" @php echo $exam->metaqualone == "" ? "checked" : "" @endphp>
                                             Reset
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right"><b>Opium</b></td>
-                                        <td><input name="opium" type="radio" style="width: 20px; height: 20px;" class="m-1" id="opium_0"
+                                        <td><input name="opium" type="radio" class="m-1" id="opium_0"
                                                 value="Negative" @php echo $exam->opium == "Negative" ? "checked" : null @endphp onchange="addRemarks('Opium', this)">
                                             Negative
-                                            <input name="opium" type="radio" style="width: 20px; height: 20px;" class="m-1" id="opium_1"
+                                            <input name="opium" type="radio" class="m-1" id="opium_1"
                                                 value="Positive" @php echo $exam->opium == "Positive" ? "checked" : null @endphp onchange="addRemarks('Opium', this)">
                                             Positive
-                                            <input value="" name="opium" @php echo $exam->opium == "" ? "checked" : null @endphp type="radio" style="width: 20px; height: 20px;" class="m-1" id="opium_1" onchange="addRemarks('Opium', this)">
+                                            <input value="" name="opium" @php echo $exam->opium == "" ? "checked" : null @endphp type="radio" class="m-1" id="opium_1" onchange="addRemarks('Opium', this)">
                                             Reset
                                         </td>
                                         <td align="right"><b></b></td>
@@ -333,10 +325,10 @@
                                         <td colspan="4">
                                             <div class="form-group">
                                                 <label for=""><b>Remarks</b></label>
-                                                <input name="remarks_status" type="radio" style="width: 20px; height: 20px;" class="m-75"
+                                                <input name="remarks_status" type="radio" class="m-75"
                                                     id="remarks_status_0" value="normal" @php echo $exam->remarks_status
                                                 == "normal" ? "checked" : null @endphp>Normal
-                                                <input name="remarks_status" type="radio" style="width: 20px; height: 20px;" class="m-75"
+                                                <input name="remarks_status" type="radio" class="m-75"
                                                     id="remarks_status_1" value="findings" @php echo
                                                     $exam->remarks_status == "findings" ? "checked" : null @endphp>With
                                                 Findings

@@ -363,55 +363,56 @@ class AgencyController extends Controller
         }
     }
 
-    public function refferal_slips(Request $request)
-    {
-        try {
-            $data = session()->all();
-            if ($request->ajax()) {
-                $referral = Refferal::select(
-                        'email_employee',
-                        DB::raw('agency_id as agency_id'),
-                        DB::raw('vessel as vessel'),
-                        DB::raw('ssrb as ssrb'),
-                        DB::raw('lastname as lastname'),
-                        DB::raw('firstname as firstname'),
-                        DB::raw('package_id as package_id'),
-                        DB::raw('is_hold as is_hold'),
-                        DB::raw('firstname as firstname'),
-                        DB::raw('id as id'),
-                        DB::raw('position_applied as position_applied'))
-                        ->where('agency_id', $data['agencyId'])
-                        ->with('package', 'agency');
+    // public function refferal_slips(Request $request)
+    // {
+    //     try {
+    //         $data = session()->all();
+    //         if ($request->ajax()) {
+    //             $referral = Refferal::select(
+    //                     'email_employee',
+    //                     DB::raw('agency_id as agency_id'),
+    //                     DB::raw('vessel as vessel'),
+    //                     DB::raw('ssrb as ssrb'),
+    //                     DB::raw('lastname as lastname'),
+    //                     DB::raw('firstname as firstname'),
+    //                     DB::raw('package_id as package_id'),
+    //                     DB::raw('is_hold as is_hold'),
+    //                     DB::raw('firstname as firstname'),
+    //                     DB::raw('id as id'),
+    //                     DB::raw('position_applied as position_applied'))
+    //                     ->where('agency_id', $data['agencyId'])
+    //                     ->with('package', 'agency');
 
-                return Datatables::of($referral)
-                    ->addIndexColumn()
-                    ->addColumn('packagename', function ($row) {
-                        return $row->package->packagename;
-                    })
-                    ->addColumn('action', function ($row) {
-                       if($row->is_hold == 0) {
-                            $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                                        <button class="btn btn-danger btn-sm hold-btn" id="'. $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
-                                        <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                                return $actionBtn;
-                       } else {
-                            $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' .  $row->id . '"><i class="fa fa-eye"></i></a>
-                            <button class="btn btn-success btn-sm activate-btn" id="'. $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
-                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                                return $actionBtn;
-                       }
-                    })
-                    ->rawColumns(['packagename', 'action'])
-                    ->toJson();
-            }
+    //             return Datatables::of($referral)
+    //                 ->addIndexColumn()
+    //                 ->addColumn('packagename', function ($row) {
+    //                     return $row->package->packagename;
+    //                 })
+    //                 ->addColumn('action', function ($row) {
+    //                    if($row->is_hold == 0) {
+    //                         $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
+    //                                     <button class="btn btn-danger btn-sm hold-btn" id="'. $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
+    //                                     <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+    //                             return $actionBtn;
+    //                    } else {
+    //                         $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' .  $row->id . '"><i class="fa fa-eye"></i></a>
+    //                         <button class="btn btn-success btn-sm activate-btn" id="'. $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
+    //                         <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+    //                             return $actionBtn;
+    //                    }
+    //                 })
+    //                 ->rawColumns(['packagename', 'action'])
+    //                 ->toJson();
+    //         }
 
-            return view('Referral.referral', compact('data'));
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
-        }
-    }
+    //         return view('Referral.referral', compact('data'));
+
+    //     } catch (\Exception $exception) {
+    //         $message = $exception->getMessage();
+    //         $file = $exception->getFile();
+    //         return view('errors.error', compact('message', 'file'));
+    //     }
+    // }
 
     public function add_refferal_slip()
     {

@@ -63,6 +63,15 @@
                 </div>
                 @endif
             @endif
+            @if ($exam_ecg)
+                @if($exam_ecg->ecg == 'Significant Findings' && $exam_ecg->recommendation)
+                <div class="my-75">
+                    <h5><b>ECG</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_ecg->recommendation) @endphp</span>
+                </div>
+                @endif
+            @endif
+
             @if ($exam_xray)
                 @if($exam_xray->remarks_status == 'findings' && $exam_xray->recommendation)
                 <div class="my-75">

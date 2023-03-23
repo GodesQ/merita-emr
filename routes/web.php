@@ -42,6 +42,7 @@ use App\Http\Controllers\StressTestController;
 use App\Http\Controllers\PrintPanelController;
 use App\Http\Controllers\SOAController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\ReferralController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PatientAuthController::class, 'login']);
@@ -120,7 +121,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::post('/get_agencies', [AgencyController::class, 'select_agencies'])->name('agencies.select');
 
-    Route::get('/refferal_slips', [AgencyController::class, 'refferal_slips']);
+    Route::get('/refferal_slips', [ReferralController::class, 'referrals']);
+
+    Route::get('/referral_slips_list', [ReferralController::class, 'referral_list']);
 
     Route::get('/referral_pdf', [PrintController::class, 'referral_pdf']);
 

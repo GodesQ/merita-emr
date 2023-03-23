@@ -58,7 +58,7 @@ $(document).ready(function() {
         pageLength: 50,
         responsive: true,
         serverSide: true,
-        ajax: '/refferal_slips',
+        ajax: '/referral_slips_list',
         columns: [{
                 data: 'packagename',
                 name: 'packagename'

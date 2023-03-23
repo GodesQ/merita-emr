@@ -2063,7 +2063,7 @@
                                                                         data-toggle="tab"
                                                                         aria-controls="patient-recommendations"
                                                                         href="#patient-recommendations" role="tab"
-                                                                        aria-selected="false">Reccomendation</a>
+                                                                        aria-selected="false">Recommendation</a>
                                                                 </li>
                                                             </ul>
                                                             <div class="tab-content px-1">

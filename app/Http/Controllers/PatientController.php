@@ -53,6 +53,7 @@ class PatientController extends Controller
             }
 
             return view('ProgressInfo.progress-info', compact('agencies', 'data', 'packages', 'referral'));
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -120,8 +121,7 @@ class PatientController extends Controller
     {
         try {
             $patientcode = $_GET['patientcode'];
-            $data = session()->all();
-            $agencies = DB::select('select * from mast_agency');
+            $agencies = Agency::all();
             $data = session()->all();
             $patient = Patient::where('patientcode', $patientcode)->first();
             $patientInfo = DB::table('mast_patientinfo')
@@ -192,8 +192,6 @@ class PatientController extends Controller
 
             // INSERT MEDICAL HISTORY
             $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $mast_patient->id);
-
-            // dd($save_medical_history);
 
             // INSERT DATA TO DECLARATION FORM TABLE
             $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected_suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$mast_patient->id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
@@ -1052,6 +1050,7 @@ class PatientController extends Controller
             Patient::where('id', $request->main_id)->update([
                 'position_applied' => $request->positionApplied,
             ]);
+
             $save_patient_info = DB::table('mast_patientinfo')
                 ->where('main_id', $request->main_id)
                 ->update([
@@ -1116,6 +1115,7 @@ class PatientController extends Controller
                     'status' => 200,
                 ]);
             }
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -1168,6 +1168,7 @@ class PatientController extends Controller
                 ->orWhere('lastname', 'LIKE', '%' . $query . '%')
                 ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
                 ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
+                ->orWhere(DB::raw("concat(lastname, ' ', firstname)"), 'LIKE', '%' . $query . '%')
                 ->groupBy('patientcode')
                 ->latest('id')
                 ->get();
