@@ -216,14 +216,13 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             @if (in_array('vessel', $additional_columns))
                                                 <td align="left" class="brdAll">Vessel</td>
                                             @endif
-                                            <td width="{{ $agency->id == 15 ? '20%' : '28%' }}" align="left"
-                                                class="brdAll">EXAMINATIONS</td>
-                                            <td align="left" class="brdAll"
-                                                width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
+                                            <td width="{{ $agency->id == 15 ? '20%' : '28%' }}" align="left" class="brdAll">EXAMINATIONS</td>
+                                            <td align="left" class="brdAll" width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
                                         </tr>
                                         <?php
-                                        $total = 0;
-                                        $patient_count = 1; ?>
+                                            $total = 0;
+                                            $patient_count = 1;
+                                        ?>
                                         <?php
                                         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                                         $url_components = parse_url($url);
@@ -242,7 +241,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         {{ date_format(new DateTime($patient->trans_date), 'd-M-Y') }}
                                                     </td>
                                                     <td align="left" valign="top" class="brdRight">
-                                                        @phpecho $patient_count;
+                                                        @php echo $patient_count;
                                                             $patient_count++;
                                                         @endphp
                                                     </td>
