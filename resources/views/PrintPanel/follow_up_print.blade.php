@@ -36,6 +36,7 @@
         size: legal;
        margin: 0px 28px;
     }
+
     </style>
 </head>
 <body>
@@ -126,7 +127,7 @@
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">Principal :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->admission->principal}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{ $patient->admission->principal }}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -144,9 +145,9 @@
                         <table width="100%" cellspacing="0" border="1" style="border-collapse: collapse !important;" cellpadding="2" class="findings-table">
                             <tbody>
                                 <tr style="display: none;">
-                                    <td>Name: {{$patient->lastname}}, {{$patient->firstname}} {{$patient->middlename}} </td>
-                                    <td>Agency: {{$patient->agencyname}}</td>
-                                    <td>Package: {{$patient->admission->package->packagename}}</td>
+                                    <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
+                                    <td>Agency: {{ $patient->agencyname }}</td>
+                                    <td>Package: {{ $patient->admission->package->packagename }}</td>
                                 </tr>
                                 <tr>
                                     <td width="12%" style="font-weight: 800;">DATE</td>
@@ -296,13 +297,16 @@
                                                 @php echo nl2br($result['Findings']) @endphp
                                             </td>
                                             <td valign="top">
-                                                @if(isset($result['Recommendation'])) @php echo nl2br($result['Recommendation']) @endphp @endif
+                                                @if(isset($result['Recommendation']))
+                                                    @php echo nl2br($result['Recommendation']) @endphp
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
+
                                 @empty
                                     <tr>
-                                        <td>{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
+                                        <td>{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>
                                         <td>
                                             <b>Past Med History:</b>
                                         </td>
@@ -448,19 +452,19 @@
                                     <td width="60%" colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start;  width: 100%;">
                                             <div style="width: 15%;">Name :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}} </div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 85%;">{{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}} </div>
                                         </div>
                                     </td>
                                     <td width="20%">
                                         <div style="display: flex; align-items: flex-stendart; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">Age :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%; text-align: center;">{{$patient->age}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 75%; text-align: center;">{{$patient->age}}</div>
                                         </div>
                                     </td>
                                     <td width="20%">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">Sex :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->gender}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 75%;">{{$patient->gender}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -468,19 +472,19 @@
                                     <td>
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 35%;">Patient ID :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 65%;">{{$patient->patientcode}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 65%;">{{$patient->patientcode}}</div>
                                         </div>
                                     </td>
                                     <td>
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">PEME :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{date_format(new DateTime($patient->admission->trans_date), "d F Y")}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 75%;">{{date_format(new DateTime($patient->admission->trans_date), "d F Y")}}</div>
                                         </div>
                                     </td>
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 30%;">Position :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 70%;">{{$patient->position_applied}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 70%;">{{$patient->position_applied}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -488,13 +492,13 @@
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 15%;">Agency :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->agencyname}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 85%;">{{$patient->agencyname}}</div>
                                         </div>
                                     </td>
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">Vessel :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->admission->vesselname}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 75%;">{{$patient->admission->vesselname}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -502,13 +506,13 @@
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 15%;">Package :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->admission->package->packagename}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 85%;">{{$patient->admission->package->packagename}}</div>
                                         </div>
                                     </td>
                                     <td colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
                                             <div style="width: 25%;">Principal :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->admission->principal}}</div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 75%;">{{$patient->admission->principal}}</div>
                                         </div>
                                     </td>
                                 </tr>

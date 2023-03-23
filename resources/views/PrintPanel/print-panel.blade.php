@@ -29,6 +29,16 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/standard_club.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/standard_club_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Standard Club</button>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-4 col-xl-3 col-sm-6 ">
         <div class="print-con">
             <img src="../../../app-assets/images/gallery/cayman.png" alt="">
