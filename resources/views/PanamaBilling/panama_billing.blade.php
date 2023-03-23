@@ -1,13 +1,13 @@
 @extends('layouts.admin-layout')
 
 @section('content')
-<style>
-    .selected {
-        background: white;
-        color: black;
-        border: 1.2px solid black;
-    }
-</style>
+    <style>
+        .selected {
+            background: white;
+            color: black;
+            border: 1.2px solid black;
+        }
+    </style>
     <div class="app-content content">
         <div class="content-body my-2">
             <div class="container">
@@ -23,28 +23,33 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="date_from">Date From :</label>
-                                                <input required type="date" max="2050-12-31" name="date_from" class="form-control">
+                                                <input required type="date" max="2050-12-31" name="date_from"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="date_to">Date To :</label>
-                                                <input required type="date" max="2050-12-31" name="date_to" class="form-control">
+                                                <input required type="date" max="2050-12-31" name="date_to"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Agency</label>
-                                                <select onchange="getPackages(this)" required class="form-control select2" name="agency_id">
+                                                <select onchange="getPackages(this)" required class="form-control select2"
+                                                    name="agency_id">
                                                     <option value="">Select Agency</option>
-                                                        <option value="All">All</option>
-                                                    @foreach($agencies as $row)
-                                                        <option value="{{$row->id}}"> {{ $row->agencyname }}</option>
+                                                    <option value="All">All</option>
+                                                    @foreach ($agencies as $row)
+                                                        <option value="{{ $row->id }}"> {{ $row->agencyname }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group bahia-group" style="display: none;">
-                                                <label for="">Bahia Vessels <span class="primary" style="font-size: 12px; font-style:italic;">(This is for Bahia Agency Only)</span></label>
+                                                <label for="">Bahia Vessels <span class="primary"
+                                                        style="font-size: 12px; font-style:italic;">(This is for Bahia
+                                                        Agency Only)</span></label>
                                                 <select name="bahia_vessel" id="bahia-select-vessels" class="select2">
                                                     <option value="">Select Vessel</option>
                                                 </select>
@@ -52,7 +57,8 @@
                                             <fieldset class="my-1 tax-group" style="display: none;">
                                                 <label for="">Tax Percentage</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Tax" name="tax" id="tax" aria-describedby="sizing-addon2">
+                                                    <input type="text" class="form-control" placeholder="Tax"
+                                                        name="tax" id="tax" aria-describedby="sizing-addon2">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text" id="sizing-addon2">%</span>
                                                     </div>
@@ -62,7 +68,8 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Invoice Number</label>
-                                                <input type="text" name="invoice_number" class="form-control">
+                                                <input type="text" name="invoice_number" class="form-control"
+                                                    value="{{ date('Ym') }}">
                                             </div>
                                         </div>
                                         <!--<div class="col-12">-->
@@ -111,10 +118,12 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="action" value="Download CSV" class="btn btn-primary">
-                                        <input type="submit" name="action" value="Download Excel" class="btn btn-primary">
+                                        <input type="submit" name="action" value="Download CSV"
+                                            class="btn btn-primary">
+                                        <input type="submit" name="action" value="Download Excel"
+                                            class="btn btn-primary">
                                         <input type="submit" name="action" value="PRINT" class="btn btn-primary">
-                                </div>
+                                    </div>
                                 </form>
                             </section>
                         </div>
@@ -134,81 +143,82 @@
 @endsection
 
 @push('scripts')
-<script>
+    <script>
+        let vessel_one = ['BLUETERN'];
+        let vessel_two = ['BOLDTERN'];
+        let vessel_three = ['BRAVETERN'];
+        let vessel_four = ['BALMORAL'];
+        let vessel_five = ['BOREALIS'];
+        let vessel_six = ['BOLETTE'];
+        let vessel_seven = ['BRAEMAR'];
+        let all_vessel = [...['ALL VESSELS'], ...vessel_one, ...vessel_two, ...vessel_three, ...vessel_four, ...vessel_five,
+            ...vessel_six, ...vessel_seven
+        ];
 
-    let vessel_one = ['BLUETERN'];
-    let vessel_two = ['BOLDTERN'];
-    let vessel_three = ['BRAVETERN'];
-    let vessel_four = ['BALMORAL'];
-    let vessel_five = ['BOREALIS'];
-    let vessel_six = ['BOLETTE'];
-    let vessel_seven = ['BRAEMAR'];
-    let all_vessel = [...['ALL VESSELS'], ...vessel_one, ...vessel_two, ...vessel_three, ...vessel_four, ...vessel_five, ...vessel_six, ...vessel_seven];
-    
-    let agency_ids = [55, 57, 58, 59, 3];
-    
-    function getPackages(e) {
-        getBahiaVessels(e);
-        // let csrf = '{{ csrf_token() }}';
-        // $.ajax({
-        //     url: '{{route("agencies.select")}}',
-        //     method: 'post',
-        //     data: {
-        //         id: e.value,
-        //         _token: csrf
-        //     },
-        //     success: function(response) {
-        //     }
-        // });
-        
-        if(e.value == 15) {
-             $(".tax-group").css("display", "block");
-        } else {
-             $(".tax-group").css("display", "none");
+        let agency_ids = [55, 57, 58, 59, 3];
+
+        function getPackages(e) {
+            getBahiaVessels(e);
+            // let csrf = '{{ csrf_token() }}';
+            // $.ajax({
+            //     url: '{{ route('agencies.select') }}',
+            //     method: 'post',
+            //     data: {
+            //         id: e.value,
+            //         _token: csrf
+            //     },
+            //     success: function(response) {
+            //     }
+            // });
+
+            if (e.value == 15) {
+                $(".tax-group").css("display", "block");
+            } else {
+                $(".tax-group").css("display", "none");
+            }
         }
-    }
-    
-    function getBahiaVessels(e) {
-        $('#bahia-select-vessels option').remove();
 
-        if(e.value == 55) {
-            vessel_three.forEach(vessel => {
-                $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
+        function getBahiaVessels(e) {
+            $('#bahia-select-vessels option').remove();
+
+            if (e.value == 55) {
+                vessel_three.forEach(vessel => {
+                    $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
                         '#bahia-select-vessels');
-            });
+                });
 
-        }
+            }
 
-        if(e.value == 57) {
-            vessel_two.forEach(vessel => {
-                $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
+            if (e.value == 57) {
+                vessel_two.forEach(vessel => {
+                    $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
                         '#bahia-select-vessels');
-            });
+                });
 
-        }
+            }
 
-        if(e.value == 58) {
-            vessel_one.forEach(vessel => {
-                $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
+            if (e.value == 58) {
+                vessel_one.forEach(vessel => {
+                    $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
                         '#bahia-select-vessels');
-            });
+                });
 
-        }
+            }
 
-        if(e.value == 3) {
-            all_vessel.forEach(vessel => {
-                $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
+            if (e.value == 3) {
+                all_vessel.forEach(vessel => {
+                    $(`<option value='${vessel}'>${vessel}</option>`).appendTo(
                         '#bahia-select-vessels');
-            });
+                });
+
+            }
+
+            if (agency_ids.includes(Number(e.value))) {
+                $(".bahia-group").css("display", "block");
+            } else {
+                $(".bahia-group").css("display", "none");
+            }
 
         }
-
-        if(agency_ids.includes(Number(e.value))) {
-            $(".bahia-group").css("display", "block");
-        } else {
-            $(".bahia-group").css("display", "none");
-        }
-
-    }
-</script>
+    </script>
 @endpush

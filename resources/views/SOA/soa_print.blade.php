@@ -165,7 +165,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ $agency->agencyname }}
                                         </td>
                                         <td width="80%">Date:
-                                            <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span></td>
+                                            <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td width="20%"
@@ -173,7 +174,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ date_format(new DateTime($date_from), 'd') }} -
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
-                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}</span>
+                                        <td width="20%">INVOICE: <span
+                                                style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -191,7 +193,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                     <tbody>
                                         <tr>
                                             <td colspan="10" align="center"
-                                                style="font-size: 15px; font-weight: 500; border: none !important;">STATEMENT OF ACCOUNT</td>
+                                                style="font-size: 15px; font-weight: 500; border: none !important;">
+                                                STATEMENT OF ACCOUNT</td>
                                         </tr>
                                         <tr>
                                             <td align="left" class="brdAll" width="10%">DATE</td>
@@ -219,17 +222,17 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
                                         </tr>
                                         <?php
-                                            $total = 0;
-                                            $patient_count = 1; ?>
+                                        $total = 0;
+                                        $patient_count = 1; ?>
                                         <?php
-                                            $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                                            $url_components = parse_url($url);
-                                            parse_str($url_components['query'], $params);
-                                            if ($params['action'] == 'PRINT') {
-                                                $symbol = $currency == 'Dollar' ? '$ ' : '₱ ';
-                                            } else {
-                                                $symbol = $currency == 'Dollar' ? '$ ' : ' ';
-                                            }
+                                        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                        $url_components = parse_url($url);
+                                        parse_str($url_components['query'], $params);
+                                        if ($params['action'] == 'PRINT') {
+                                            $symbol = $currency == 'Dollar' ? '$ ' : '₱ ';
+                                        } else {
+                                            $symbol = $currency == 'Dollar' ? '$ ' : ' ';
+                                        }
                                         ?>
                                         <?php $total_ecg = 0; ?>
                                         @forelse($collected_patient as $patient)
@@ -239,7 +242,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         {{ date_format(new DateTime($patient->trans_date), 'd-M-Y') }}
                                                     </td>
                                                     <td align="left" valign="top" class="brdRight">
-                                                        @php echo $patient_count;
+                                                        @phpecho $patient_count;
                                                             $patient_count++;
                                                         @endphp
                                                     </td>
@@ -271,7 +274,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                     @endif
                                                     <td valign="top" align="left" class="brdRight"><span
                                                             style="margin-right: 15px;">{{ $patient->package->packagename }}</span>
-                                                        <span>{{ $agency->id == 15 ? 'ECG' : null }}</span></td>
+                                                        <span>{{ $agency->id == 15 ? 'ECG' : null }}</span>
+                                                    </td>
                                                     <td valign="top" align="left" class="brdRight">
                                                         @if ($patient->agency_id == 15)
                                                             <span style="margin-right: 40px;">₱ 300.00</span>
@@ -392,24 +396,26 @@ function convertNumber($num = false, $currency = 'Pesos')
                                         <tr>
                                             @if ($agency->id == 15)
                                                 <?php
-                                                    $sub_amount = $total;
-                                                    $total_tax_amount = $sub_amount * 0.05;
-                                                    $total = $total - $total_tax_amount;
+                                                $sub_amount = $total;
+                                                $total_tax_amount = $sub_amount * 0.05;
+                                                $total = $total - $total_tax_amount;
                                                 ?>
                                             @endif
                                             @if ($total_ecg > 0)
                                                 <?php
-                                                    $sub_amount_ecg = $total_ecg;
-                                                    $total_tax_amount_ecg = $sub_amount_ecg * 0.02;
-                                                    $total_amount_ecg = $sub_amount_ecg - $total_tax_amount_ecg;
+                                                $sub_amount_ecg = $total_ecg;
+                                                $total_tax_amount_ecg = $sub_amount_ecg * 0.02;
+                                                $total_amount_ecg = $sub_amount_ecg - $total_tax_amount_ecg;
                                                 ?>
                                             @endif
                                             <td class="brdTop brdLeft"
                                                 colspan="{{ 5 + count($additional_columns) }}">
-                                                Amount in Words : <b style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency);
+                                                Amount in Words : <b
+                                                    style="text-transform: uppercase; font-size: 9px;"><?php $get_amount = convertNumber($total, $currency);
                                                     echo $get_amount; ?></b>
                                             </td>
-                                            <td class="brdTop brdRight" style="text-align: right;"><b>Total Amount:</b></td>
+                                            <td class="brdTop brdRight" style="text-align: right;"><b>Total
+                                                    Amount:</b></td>
                                             <td class="brdTop brdRight" colspan="1">
                                                 <div
                                                     style="display: flex; justify-content: space-between; align-items: center;">
@@ -420,7 +426,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                                 <?php echo number_format((float) $sub_amount_ecg, 2); ?></div>
                                                             <div style="margin: 5px 0;">
                                                                 ({{ $currency == 'Pesos' ? '₱' : '' }}
-                                                                <?php echo number_format((float) $total_tax_amount_ecg, 2); ?>)</div>
+                                                                <?php echo number_format((float) $total_tax_amount_ecg, 2); ?>)
+                                                            </div>
                                                             <hr>
                                                             {{ $currency == 'Pesos' ? '₱' : '$' }} <?php echo number_format((float) $total_amount_ecg, 2); ?>
                                                         @endif
@@ -469,14 +476,17 @@ function convertNumber($num = false, $currency = 'Pesos')
                                     <tr>
                                         <td>
                                             Prepared by / Checked by: <span
-                                                style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
+                                                style="border-bottom: 1px solid black;"><input
+0                                                    style="border: none; border-bottom: 1px solid black;"
                                                     value="{{ $prepared_by }}" /> </span>
                                         </td>
                                         <td>
-                                            Approved by: <span style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
+                                            Approved by: <span style="border-bottom: 1px solid black;"><input
+                                                    style="border: none; border-bottom: 1px solid black;"
                                                     value="{{ $approved_by }}" /></span>
                                         </td>
-                                        <td>Received by: <span style="border-bottom: 1px solid black;"><input style="border: none; border-bottom: 1px solid black;"
+                                        <td>Received by: <span style="border-bottom: 1px solid black;"><input
+                                                    style="border: none; border-bottom: 1px solid black;"
                                                     value="" /></span>
                                         </td>
                                     </tr>
@@ -485,8 +495,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                         <td style="position: absolute; bottom: 20px; left: 45%;">Page
                                             <?php echo $page;
                                             $page++; ?> of <?php echo count($collected_patients); ?></td>
-                                        <td>Date & Time: <input style="border: none; border-bottom: 1px solid black;"
-                                                value="" /></td>
+                                        <td>Date & Time: <input style="border: none; border-bottom: 1px solid black;" value="" /></td>
                                     </tr>
                                 </tbody>
                             </table>
