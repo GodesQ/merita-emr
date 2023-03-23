@@ -56,7 +56,7 @@ class SOAController extends Controller
                     }
 
                     if ($bahia_vessel == 'BOREALIS') {
-                        return $q->whereIn('agency_id', [3, 57])->where(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                        return $q-->whereIn('agency_id', [3, 57])->where(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
                     }
 
                     if ($bahia_vessel == 'BOLETTE') {
@@ -66,8 +66,6 @@ class SOAController extends Controller
                     if ($bahia_vessel == 'BRAEMAR') {
                         return $q->whereIn('agency_id', [3, 55])->where(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
                     }
-
-
                 }
                 return $q->where('agency_id', $agency_id);
             })
