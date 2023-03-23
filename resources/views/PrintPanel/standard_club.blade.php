@@ -547,7 +547,7 @@
                                                                     TERESITA F. GONZALES, MD<br>
                                                                     MEDICAL DIRECTOR
                                                                 </td>
-                                                                <td><img width="130" src="../../../app-assets/images/logo/standard_club_logo.png"></td>
+                                                                <td><img width="170" src="../../../app-assets/images/logo/standard_club_logo.png"></td>
                                                             </tr>
                                                         </table>
                                                     </td>
