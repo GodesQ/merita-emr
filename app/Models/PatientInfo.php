@@ -11,6 +11,7 @@ class PatientInfo extends Model
 
     protected $table = 'mast_patientinfo';
     public $timestamps = false;
+    protected $guarded = [];
 
     public function patient()
     {
