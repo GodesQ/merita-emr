@@ -113,7 +113,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Invoice Number</label>
-                                                <input type="text" name="invoice_number" class="form-control" readonly value="{{ date('Ym') }}">
+                                                <input type="text" name="invoice_number" class="form-control" value="{{ date('Ym') }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="">SOA Date</label>

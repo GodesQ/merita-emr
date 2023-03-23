@@ -68,8 +68,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Invoice Number</label>
-                                                <input type="text" name="invoice_number" class="form-control"
-                                                    value="{{ date('Ym') }}">
+                                                <input type="text" name="invoice_number" class="form-control" value="{{ date('Ym') }}">
                                             </div>
                                         </div>
                                         <!--<div class="col-12">-->
@@ -118,10 +117,8 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <input type="submit" name="action" value="Download CSV"
-                                            class="btn btn-primary">
-                                        <input type="submit" name="action" value="Download Excel"
-                                            class="btn btn-primary">
+                                        <input type="submit" name="action" value="Download CSV" class="btn btn-primary">
+                                        <input type="submit" name="action" value="Download Excel" class="btn btn-primary">
                                         <input type="submit" name="action" value="PRINT" class="btn btn-primary">
                                     </div>
                                 </form>

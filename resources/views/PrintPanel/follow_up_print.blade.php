@@ -1,4 +1,4 @@
-@php 
+@php
     $count = 0;
 @endphp
 <html>
@@ -27,7 +27,7 @@
         font-size: 12px;
         font-weight: 400;
     }
-    
+
     .findings-table tr {
         height: 30px !important;
     }
@@ -154,7 +154,7 @@
                                     <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
                                 </tr>
                                 @forelse($records as $key_record => $record)
-                                    @php 
+                                    @php
                                         $findings = explode(";", $record->findings);
                                         $results = array_map(function ($finding) {
                                             return ['Findings' => $finding];
@@ -166,7 +166,7 @@
                                             }
                                         }
                                     @endphp
-                                    
+
                                     @if($loop->first)
                                         <tr>
                                             <td valign="top">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
@@ -194,7 +194,7 @@
                                         <tr>
                                             <td valign="top"></td>
                                             <td valign="top">
-                                                
+
                                                 <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
                                             </td>
                                             <td valign="top"></td>
@@ -234,7 +234,7 @@
                                             </td>
                                             <td valign="top"></td>
                                         </tr>
-                                        
+
                                         @if($admission->exam_xray)
                                             @if($admission->exam_xray->exam == 'Chest')
                                                 <tr>
@@ -242,11 +242,13 @@
                                                     <td valign="top">
                                                         <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
-                                                    <td valign="top"></td>
+                                                    <td valign="top">
+
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endif
-                                        
+
                                         @if($admission->exam_xray)
                                             @if($admission->exam_xray->exam_type == 'Lumbosacral')
                                                 <tr>
@@ -258,7 +260,7 @@
                                                 </tr>
                                             @endif
                                         @endif
-                                        
+
                                         @if($admission->exam_xray)
                                             @if($admission->exam_xray->exam_type == 'Knees')
                                                 <tr>
@@ -270,7 +272,7 @@
                                                 </tr>
                                             @endif
                                         @endif
-                                        
+
                                         @if($admission->exam_ecg)
                                             <tr>
                                                 <td valign="top"></td>
@@ -279,14 +281,14 @@
                                                 </td>
                                                 <td valign="top">
                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
-                                                        <b>ECG:</b> 
+                                                        <b>ECG:</b>
                                                    @endif
                                                    {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
                                                 </td>
                                             </tr>
                                         @endif
                                     @endif
-                                    
+
                                     @foreach($results as $result)
                                         <tr style="height:40px">
                                             <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null}}</td>
@@ -366,7 +368,7 @@
                                             </tr>
                                         @endif
                                     @endif
-                                    
+
                                     @if($admission->exam_xray)
                                         @if($admission->exam_xray->exam_type == 'Lumbosacral')
                                             <tr>
@@ -378,7 +380,7 @@
                                             </tr>
                                         @endif
                                     @endif
-                                    
+
                                     @if($admission->exam_xray)
                                         @if($admission->exam_xray->exam_type == 'Knees')
                                             <tr>
@@ -416,7 +418,7 @@
                         REV. 01/18-10-2022
                     </td>
                 </tr>
-            </tbody> 
+            </tbody>
         </table>
     </div>
     <div style="height: 100vh; margin: 0;">
@@ -530,13 +532,13 @@
                                     <td style="display: none; text-align: left;">Name :</td>
                                     <td style="display: none; text-align: left;">{{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}}</td>
                                     <td style="display: none; text-align: left;">Agency : {{$patient->agencyname}}</td>
-                                    
+
                                 </tr>
                                 <tr>
                                     <td style="display: none; text-align: left;">Patient ID : </td>
                                     <td style="display: none; text-align: left;">{{$patient->patientcode}}</td>
                                     <td style="display: none; text-align: left;">Package : {{$patient->admission->package->packagename}}</td>
-                                    
+
                                 </tr>
                                 <tr>
                                     <td style="display: none; text-align: left;">Position :</td>
@@ -566,7 +568,7 @@
                         REV. 01/18-10-2022
                     </td>
                 </tr>
-            </tbody> 
+            </tbody>
         </table>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -596,7 +598,7 @@
             		        let col = cols[j].innerText.replace(/,|\n/g, " ")
             		        row.push(col);
                     }
-            		data.push(row.join(",")); 	
+            		data.push(row.join(","));
                 }
             //     for (var i = 0; i < secondRows.length; i++) {
             // 		var row = [], cols = secondRows[i].querySelectorAll("td, th");
@@ -604,29 +606,29 @@
             // 		        let col = cols[j].innerText.replace(/,|\n/g, " ")
             // 		        row.push(col);
             //         }
-            // 		data.push(row.join(",")); 	
+            // 		data.push(row.join(","));
             // 	}
                 let title = "FOLLOW UP FORM ({{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}})"
             	downloadCSVFile(data.join("\n"), title);
             	window.close();
-            } 
+            }
         });
-        
+
         function downloadCSVFile(csv, filename) {
             var csv_file, download_link;
-            
+
             csv_file = new Blob([csv], {type: "text/csv"});
-            
+
             download_link = document.createElement("a");
-            
+
             download_link.download = filename;
-            
+
             download_link.href = window.URL.createObjectURL(csv_file);
-            
+
             download_link.style.display = "none";
-            
+
             document.body.appendChild(download_link);
-            
+
             download_link.click();
         }
 
@@ -636,7 +638,7 @@
             let secondMaxSize = 1230;
             let mainTable = document.querySelector('.main-table');
             let tableTbody = document.querySelector('.findings-table').children[0];
-            
+
             while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 850 ? 1 : 0]) {
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
