@@ -66,6 +66,8 @@ class SOAController extends Controller
                     if ($bahia_vessel == 'BRAEMAR') {
                         return $q->whereIn('agency_id', [3, 55])->where(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
                     }
+
+
                 }
                 return $q->where('agency_id', $agency_id);
             })
