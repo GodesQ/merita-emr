@@ -40,7 +40,7 @@ return mysqli_fetch_array($result);
     .form-control {
         padding: 0.4rem;
     }
-    
+
     .table th,
     .table td {
         padding: 1rem;
@@ -543,7 +543,7 @@ return mysqli_fetch_array($result);
                                                     : ""
                                                     @endphp>
                                                 </td>
-                                                <td width="132" align="center">Vaccination 
+                                                <td width="132" align="center">Vaccination
                                                     <br><input name="vaccination" type="input" id="vaccination" value="">
                                                 </td>
                                                 <td width="146" align="center">
@@ -788,7 +788,7 @@ return mysqli_fetch_array($result);
                                                 </td>
                                                 <td width="132" align="center">Tropical Diseases <br>
                                                     (e.g.Malaria,Filariaris <br>
-                                                    Schistosomiasis - Specific Date) 
+                                                    Schistosomiasis - Specific Date)
                                                     </td>
                                                 <td width="146" align="center"><label for="checkbox">YES</label>
                                                     <input name="sick26" type="radio" style="width: 20px; height: 20px;" id="sick26" value="Yes">
@@ -1433,7 +1433,7 @@ return mysqli_fetch_array($result);
                                                 <td width="16%" height="21">A.CHEST XRAY</td>
                                                 <td width="13%" height="21">
                                                     <input name="chest" type="radio" style="width: 20px; height: 20px;"
-                                                        id="radio88" value="normal" 
+                                                        id="radio88" value="normal"
                                                         @if($exam_xray)
                                                             {{$exam_xray->remarks_status == "normal" ? "checked" : null}}
                                                         @endif
@@ -1441,7 +1441,7 @@ return mysqli_fetch_array($result);
                                                     Normal</td>
                                                 <td height="21" colspan="2">
                                                     <input name="chest" type="radio" style="width: 20px; height: 20px;"
-                                                        id="radio89" value="findings" 
+                                                        id="radio89" value="findings"
                                                         @if($exam_xray)
                                                             {{$exam_xray->remarks_status == "findings" ? "checked" : null}}
                                                         @endif>
@@ -1485,7 +1485,7 @@ return mysqli_fetch_array($result);
                                                             {{$exam_hema->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1507,7 +1507,7 @@ return mysqli_fetch_array($result);
                                                             {{$exam_urin->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1527,7 +1527,7 @@ return mysqli_fetch_array($result);
                                                             {{$exam_feca->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1567,7 +1567,7 @@ return mysqli_fetch_array($result);
                                                         @endif
                                                         >
                                                     Reactive </td>
-                                                
+
                                             </tr>
 
 
@@ -1586,7 +1586,7 @@ return mysqli_fetch_array($result);
                                                             {{$exam_bloodsero->vdrl_result == "Reactive" ? "checked" : null}}
                                                         @endif>
                                                     Reactive </td>
-                                                
+
                                             </tr>
 
 
@@ -2042,6 +2042,23 @@ return mysqli_fetch_array($result);
                                                                                                 cellpadding="2">
                                                                                                 <tbody>
                                                                                                     <tr>
+                                                                                                        <td width="23%" colspan="3"><b>NORMAL</b>
+                                                                                                            <input
+                                                                                                                name="remarks_status"
+                                                                                                                type="radio" style="width: 20px; height: 20px;"
+                                                                                                                id="remarks_status"
+                                                                                                                value="normal"
+
+                                                                                                            <br>
+                                                                                                            &nbsp;&nbsp;&nbsp;<b>WITH FINDINGS</b>
+                                                                                                            <input
+                                                                                                                name="remarks_status"
+                                                                                                                type="radio" style="width: 20px; height: 20px;"
+                                                                                                                id="remarks_status"
+                                                                                                                value="findings"
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
                                                                                                         <td width="45%"
                                                                                                             align="left"
                                                                                                             bgcolor="#FFFFFF">
@@ -2070,7 +2087,7 @@ return mysqli_fetch_array($result);
                                                                                                             </span>
                                                                                                         </td>
                                                                                                         <td
-                                                                                                            valign="middle">
+                                                                                                            valign="middle" colspan="2">
                                                                                                             <span
                                                                                                                 class="col-md-8">
                                                                                                                 <textarea
@@ -2079,9 +2096,6 @@ return mysqli_fetch_array($result);
                                                                                                                     class="form-control"
                                                                                                                     id="recommendations"></textarea>
                                                                                                             </span>
-                                                                                                        </td>
-                                                                                                        <td align="left"
-                                                                                                            valign="middle">
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     <tr>

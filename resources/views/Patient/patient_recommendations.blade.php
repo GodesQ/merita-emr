@@ -8,8 +8,8 @@
                 <div class="my-75">
                     <h5><b>Physical</b></h5>
                     <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->recommendation)@endphp</span>
-                    <input type="hidden" value="Physical: @php echo nl2br($exam_physical->recommendation) @endphp" name="recommendation[]" />
+                        nl2br($exam_physical->recommendations)@endphp</span>
+                    <input type="hidden" value="Physical: @php echo nl2br($exam_physical->recommendations) @endphp" name="recommendation[]" />
                 </div>
                 @endif
             @endif

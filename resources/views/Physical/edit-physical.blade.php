@@ -41,7 +41,7 @@
         padding: 0.4rem;
     }
 
-    
+
     .table th,
     .table td {
         padding: 1rem;
@@ -535,18 +535,18 @@
                                             <tr>
                                                 <td width="154" align="center">Back Problems</td>
                                                 <td width="96" align="center"><label for="checkbox">YES</label>
-                                                    <input name="sick34" type="radio" style="width: 20px; height: 20px;" id="sick34" value="1" 
+                                                    <input name="sick34" type="radio" style="width: 20px; height: 20px;" id="sick34" value="1"
                                                         @php echo $exam->sick34 == "Yes" || $exam->sick34 == "1" ? "checked" : "" @endphp>
                                                     <label for="checkbox">NO</label>
-                                                    <input name="sick34" type="radio" style="width: 20px; height: 20px;" id="sick34" value="0" 
+                                                    <input name="sick34" type="radio" style="width: 20px; height: 20px;" id="sick34" value="0"
                                                         @php echo $exam->sick34 == "No" || $exam->sick34 == "0" ? "checked" : "" @endphp>
                                                 </td>
                                                 <td width="154" align="center">Thyroid Problems</td>
                                                 <td width="96" align="center"><label for="checkbox">YES</label>
-                                                    <input name="sick35" type="radio" style="width: 20px; height: 20px;" id="sick35" value="1" 
+                                                    <input name="sick35" type="radio" style="width: 20px; height: 20px;" id="sick35" value="1"
                                                          @php echo $exam->sick35 == "Yes" || $exam->sick35 == "1" ? "checked" : "" @endphp>
                                                     <label for="checkbox">NO</label>
-                                                    <input name="sick35" type="radio" style="width: 20px; height: 20px;" id="sick35" value="0" 
+                                                    <input name="sick35" type="radio" style="width: 20px; height: 20px;" id="sick35" value="0"
                                                     @php echo $exam->sick35 == "No" || $exam->sick35 == "0" ? "checked" : "" @endphp>
                                                 </td>
                                                 <td width="154" align="center">Amputation</td>
@@ -1164,7 +1164,7 @@
                                                 <td width="16%" height="21">A.CHEST XRAY</td>
                                                 <td width="13%" height="21">
                                                     <input name="chest" type="radio" style="width: 20px; height: 20px;"
-                                                        id="radio88" value="normal" 
+                                                        id="radio88" value="normal"
                                                         @if($exam_xray)
                                                             {{$exam_xray->remarks_status == "normal" ? "checked" : null}}
                                                         @endif
@@ -1172,11 +1172,11 @@
                                                     Normal</td>
                                                 <td height="21" colspan="2">
                                                     <input name="chest" type="radio" style="width: 20px; height: 20px;"
-                                                        id="radio89" value="findings" 
+                                                        id="radio89" value="findings"
                                                         @if($exam_xray)
                                                             {{$exam_xray->remarks_status == "findings" ? "checked" : null}}
                                                         @endif>
-                                                    With Findings 
+                                                    With Findings
                                                     <textarea class="form-control" name="xray_findings">@if($exam_xray){{$exam_xray->remarks_status == "findings" ? $exam_xray->remarks : null}}@endif</textarea>
                                                 </td>
                                             </tr>
@@ -1208,7 +1208,7 @@
                                                             {{$exam_hema->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1230,7 +1230,7 @@
                                                             {{$exam_urin->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1250,7 +1250,7 @@
                                                             {{$exam_feca->remarks_status == "findings" ? "checked" : null}}
                                                         @endif
                                                         >
-                                                        With Findings 
+                                                        With Findings
                                                     </td>
                                             </tr>
 
@@ -1290,7 +1290,7 @@
                                                         @endif
                                                         >
                                                     Reactive </td>
-                                                
+
                                             </tr>
 
 
@@ -1309,7 +1309,7 @@
                                                             {{$exam_bloodsero->vdrl_result == "Reactive" ? "checked" : null}}
                                                         @endif>
                                                     Reactive </td>
-                                                
+
                                             </tr>
 
 
@@ -1875,6 +1875,24 @@
                                                                                                 cellpadding="2">
                                                                                                 <tbody>
                                                                                                     <tr>
+                                                                                                        <td width="23%" colspan="3"><b>NORMAL</b>
+                                                                                                            <input
+                                                                                                                name="remarks_status"
+                                                                                                                type="radio" style="width: 20px; height: 20px;"
+                                                                                                                id="remarks_status"
+                                                                                                                value="normal"
+                                                                                                                {{ $exam->remarks_status == "normal" ? "checked" : "" }}
+                                                                                                            <br>
+                                                                                                            &nbsp;&nbsp;&nbsp;<b>WITH FINDINGS</b>
+                                                                                                            <input
+                                                                                                                name="remarks_status"
+                                                                                                                type="radio" style="width: 20px; height: 20px;"
+                                                                                                                id="remarks_status"
+                                                                                                                value="findings"
+                                                                                                                {{ $exam->remarks_status == "findings" ? "checked" : "" }}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
                                                                                                         <td width="45%"
                                                                                                             align="left"
                                                                                                             bgcolor="#FFFFFF">
@@ -1903,7 +1921,7 @@
                                                                                                             </span>
                                                                                                         </td>
                                                                                                         <td
-                                                                                                            valign="middle">
+                                                                                                            valign="middle" colspan="2">
                                                                                                             <span
                                                                                                                 class="col-md-8">
                                                                                                                 <textarea
@@ -1913,7 +1931,6 @@
                                                                                                                     id="recommendations">{{ $exam->recommendations }}</textarea>
                                                                                                             </span>
                                                                                                         </td>
-                                                                                                        <td></td>
                                                                                                     </tr>
                                                                                                 </tbody>
                                                                                             </table>
@@ -2075,7 +2092,7 @@ function computeExpiration(e) {
     let resultDate = new Date(date);
     var day = ("0" + resultDate.getDate()).slice(-2);
     var month = ("0" + (resultDate.getMonth() + 1)).slice(-2);
-    
+
     $('#date_expiration').val(resultDate.getFullYear()+"-"+(month)+"-"+(day));
 }
 </script>

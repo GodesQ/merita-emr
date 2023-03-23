@@ -490,9 +490,7 @@
                                                             <tr>
                                                                 <td colspan="2">THIS IS TO CERTIFY THAT A MEDICAL AND
                                                                     PHYSICAL EXAMINATION WAS GIVEN TO: <br>
-                                                                    <span class="fontBoldLrg"><u>{{$admission->lastname}},
-                                                                            {{$admission->firstname}}
-                                                                            {{$admission->middlename}}</u></span><br>
+                                                                    <span class="fontBoldLrg"><u>{{$admission->lastname}}, {{$admission->firstname}} {{$admission->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span style="margin-right: 150px;">RESULT:</span>
