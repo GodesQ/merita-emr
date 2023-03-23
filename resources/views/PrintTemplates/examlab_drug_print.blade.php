@@ -83,19 +83,19 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3"><b>Purpose:</b>
-                                        {{$exam->purpose}}</td>
+                                        {{ $exam->purpose == 'Pre-Employement' ? 'Pre-Employment' : $exam->purpose }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><b>Date &amp; Time of Received:</b> <span style="text-transform: uppercase;">{{date_format(new DateTime($exam->trans_date), "F d, Y")}}</span></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><b>Requesting Party:</b> 
-                                        @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                    <td colspan="3"><b>Requesting Party:</b>
+                                        @if (preg_match("/Bahia/i", $admission->agencyname))
                                             {{'Bahia Shipping Services, Inc.'}}
                                         @else
                                             {{$admission->agencyname}}
                                         @endif
-                                        
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,7 +216,7 @@
                                                                     <td align="left">{{$exam->metaqualone}}</td>
                                                                 </tr>
                                                                 @endif
-                                                                
+
                                                                 @if($exam->propoxyphene)
                                                                 <tr>
                                                                     <td width="6%" align="left">&nbsp;</td>
@@ -224,7 +224,7 @@
                                                                     <td align="left">{{$exam->propoxyphene}}</td>
                                                                 </tr>
                                                                 @endif
-                                                                
+
                                                                 @if($exam->opium)
                                                                 <tr>
                                                                     <td width="6%" align="left">&nbsp;</td>
@@ -264,8 +264,8 @@
                                         @if ($technician1)
                                             {{$technician1->firstname . " " . $technician1->middlename[0]. "." . " " . $technician1->lastname . ", " . $technician1->title}}<br>
                                             Medical Technologist<br>
-                                            {{$technician1->id == 70 ? $technician1->otherposition : 'License No.: ' . $technician1->license_no}}       
-                                        @endif    
+                                            {{$technician1->id == 70 ? $technician1->otherposition : 'License No.: ' . $technician1->license_no}}
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>
@@ -286,7 +286,7 @@
                                         @if ($technician2)
                                         {{$technician2->firstname . " " . $technician2->middlename[0] . "." . " " . $technician2->lastname . ", " . $technician2->title}}<br>
                                         Pathologist<br>
-                                        Lic. No.: {{$technician2->license_no}}                                       
+                                        Lic. No.: {{$technician2->license_no}}
                                         @endif
                                     </td>
                                 </tr>
