@@ -1995,6 +1995,7 @@
                                                 <a class="nav-link" id="{{ $key }}" data-toggle="tab" aria-controls="fl{{ $key }}" href="#fl{{ $key }}" role="tab" aria-selected="true">{{date_format(new DateTime($followup_record->date), "F d, Y")}}</a>
                                             </li>
                                         @empty
+
                                         @endforelse
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="new_followup" data-toggle="tab" aria-controls="new_followup1" href="#new_followup1" role="tab" aria-selected="true">New Follow Up</a>

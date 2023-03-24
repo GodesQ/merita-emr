@@ -7,7 +7,7 @@
                 <h5><b>PE</b></h5>
                 <span style="font-size: 12px;">@php echo
                     nl2br($exam_physical->finding)@endphp</span>
-                <input type="hidden" value="Physical: @php echo nl2br($exam_physical->finding) @endphp" name="findings[]" />
+                <input type="hidden" value="PE: @php echo nl2br($exam_physical->finding) @endphp" name="findings[]" />
             </div>
             @endif
         @endif
@@ -22,7 +22,7 @@
             @endif
         @endif
         @if ($exam_dental)
-            @if($exam_dental->remarks_status == 'findings')zzzzzz
+            @if($exam_dental->remarks_status == 'findings')
             <div class="col-md-6 my-50">
                 <h5><b>Dental</b></h5>
                 <span style="font-size: 12px;">@php echo

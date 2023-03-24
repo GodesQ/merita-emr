@@ -6,10 +6,10 @@
             @if ($exam_physical)
                 @if($exam_physical->remarks_status == 'findings' && $exam_physical->recommendation)
                 <div class="my-75">
-                    <h5><b>Physical</b></h5>
+                    <h5><b>PE</b></h5>
                     <span style="font-size: 12px;">@php echo
                         nl2br($exam_physical->recommendations)@endphp</span>
-                    <input type="hidden" value="Physical: @php echo nl2br($exam_physical->recommendations) @endphp" name="recommendation[]" />
+                    <input type="hidden" value="PE: @php echo nl2br($exam_physical->recommendations) @endphp" name="recommendation[]" />
                 </div>
                 @endif
             @endif

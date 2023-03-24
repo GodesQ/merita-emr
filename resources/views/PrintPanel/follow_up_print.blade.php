@@ -244,7 +244,7 @@
                                                         <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
                                                     <td valign="top">
-
+                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -257,7 +257,9 @@
                                                     <td valign="top">
                                                         <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
-                                                    <td valign="top"></td>
+                                                    <td valign="top">
+                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endif
@@ -269,7 +271,9 @@
                                                     <td valign="top">
                                                         <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
-                                                    <td valign="top"></td>
+                                                    <td valign="top">
+                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endif
@@ -298,7 +302,9 @@
                                             </td>
                                             <td valign="top">
                                                 @if(isset($result['Recommendation']))
-                                                    @php echo nl2br($result['Recommendation']) @endphp
+                                                    @if(!preg_match('/X Ray:/i', $result['Recommendation']))
+                                                        @php echo nl2br($result['Recommendation']) @endphp
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
@@ -368,7 +374,9 @@
                                                 <td valign="top">
                                                     <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                 </td>
-                                                <td valign="top"></td>
+                                                <td valign="top">
+                                                    <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
+                                                </td>
                                             </tr>
                                         @endif
                                     @endif
@@ -378,9 +386,11 @@
                                             <tr>
                                                 <td valign="top"></td>
                                                 <td valign="top">
-                                                    <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->findings  }}</span>
+                                                    <b>Lumbosacral XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->findings  }}</span>
                                                 </td>
-                                                <td valign="top"></td>
+                                                <td valign="top">
+                                                    <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
+                                                </td>
                                             </tr>
                                         @endif
                                     @endif
@@ -392,7 +402,9 @@
                                                 <td valign="top">
                                                     <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->findings  }}</span>
                                                 </td>
-                                                <td valign="top"></td>
+                                                <td valign="top">
+                                                    <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->recommendation }}</span>
+                                                </td>
                                             </tr>
                                         @endif
                                     @endif
