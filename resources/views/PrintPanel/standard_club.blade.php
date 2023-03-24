@@ -592,7 +592,7 @@
                                                     width: 100%;
                                                     height: 35px;
                                                     position: relative;
-                                                    margin-bottom: 18px;
+                                                    margin-bottom: 10px;
                                                 }
 
                                                 #divImage img {

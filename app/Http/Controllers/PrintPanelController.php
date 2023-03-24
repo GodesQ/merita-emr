@@ -512,24 +512,10 @@ class PrintPanelController extends Controller
         $id = $_GET['id'];
         $admission = Admission::select(
             'tran_admission.*',
-            'mast_patient.id as patient_id',
-            'mast_patient.firstname',
-            'mast_patient.lastname',
-            'mast_patient.middlename',
-            'mast_patient.patient_image',
-            'mast_patient.age',
-            'mast_patient.gender',
-            'mast_patient.position_applied',
-            'mast_patient.patient_signature',
             'mast_agency.agencyname',
             'list_package.packagename'
         )
             ->where('tran_admission.id', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                'tran_admission.id'
-            )
             ->leftJoin(
                 'mast_agency',
                 'mast_agency.id',
@@ -540,6 +526,7 @@ class PrintPanelController extends Controller
                 'list_package.id',
                 'tran_admission.package_id'
             )
+            ->with('patient', 'package', 'agency')
             ->first();
 
         $exam_physical = DB::table('exam_physical')
@@ -625,6 +612,7 @@ class PrintPanelController extends Controller
                 'list_package.id',
                 'tran_admission.package_id'
             )
+            ->with('patient', 'package', 'agency')
             ->first();
 
         $exam_physical = DB::table('exam_physical')

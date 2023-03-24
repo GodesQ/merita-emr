@@ -858,7 +858,6 @@ class PatientController extends Controller
                 if (count($completed_exams) == count($patient_exams)) {
                     $complete_patient = true;
                     $patient = Patient::where('id', $id)->first();
-
                     if (!$patient->medical_done_date) {
                         $medical_done_update = Patient::where('id', $id)->update([
                             'medical_done_date' => date('Y-m-d h:i:s'),
@@ -1149,9 +1148,11 @@ class PatientController extends Controller
             $log->description = 'Edit declaration form of patient ' . $patient->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
+
             return response()->json([
-                'status' => 200,
+                'status' => 200
             ]);
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();

@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Auth\PatientAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\AgencyAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\ChartAccountController;
@@ -56,16 +57,17 @@ Route::get('/verify-email', [PatientAuthController::class, 'verify']);
 Route::get('/employee-login', [AdminAuthController::class, 'login']);
 Route::post('/save-employee-login', [AdminAuthController::class, 'save_login']);
 
-Route::get('/agency-login', [AgencyController::class, 'index']);
-Route::post('/save-agency-login', [AgencyController::class, 'check']);
+Route::get('/agency-login', [AgencyAuthController::class, 'login']);
+Route::post('/save-agency-login', [AgencyAuthController::class, 'save_login']);
+
+Route::get('/change_agency_password', [AgencyAuthController::class, 'change_agency_password']);
+Route::post('/update_agency_password', [AgencyAuthController::class, 'update_agency_password']);
 
 Route::get('/password_forget_form', [ForgetPasswordController::class, 'view_password_forget_form']);
 Route::get('/agency_password_forget_form', [ForgetPasswordController::class, 'view_agency_password_forget_form']);
 Route::post('/submit_forget_form', [ForgetPasswordController::class, 'submit_forget_form']);
 Route::get('/password_reset_form', [ForgetPasswordController::class, 'view_password_reset_form']);
 Route::post('/submit_reset_form', [ForgetPasswordController::class, 'submit_reset_form']);
-Route::get('/change_agency_password', [AgencyController::class, 'change_agency_password']);
-Route::post('/update_agency_password', [AgencyController::class, 'update_agency_password']);
 
 Route::view('/new_skuld', 'PrintPanel.new-skuld');
 
@@ -105,9 +107,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // ----------------------------------------- START AGENCY ACCESS --------------------------------------- //
 
-    Route::get('/change_password', [AgencyController::class, 'change_password']);
+    Route::get('/change_password', [AgencyAuthController::class, 'change_password']);
 
-    Route::post('/store_password', [AgencyController::class, 'store_password']);
+    Route::post('/store_password', [AgencyAuthController::class, 'store_password']);
 
     Route::get('agency_dashboard', [AgencyController::class, 'view_dashboard']);
 
@@ -127,18 +129,19 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/referral_pdf', [PrintController::class, 'referral_pdf']);
 
-    Route::get('/hold_employee', [AgencyController::class, 'hold_employee'])->name('hold_employee');
+    Route::get('/hold_employee', [ReferralController::class, 'hold_employee'])->name('hold_employee');
 
-    Route::get('/activate_employee', [AgencyController::class, 'activate_employee'])->name('activate_employee');
+    Route::get('/activate_employee', [ReferralController::class, 'activate_employee'])->name('activate_employee');
 
-    Route::get('/add_refferal_slip', [AgencyController::class, 'add_refferal_slip']);
+    Route::get('/add_refferal_slip', [ReferralController::class, 'add_refferal_slip']);
 
-    Route::post('/store_refferal', [AgencyController::class, 'store_refferal']);
+    Route::post('/store_refferal', [ReferralController::class, 'store_refferal']);
 
-    Route::get('/edit_referral', [AgencyController::class, 'edit_referral']);
-    Route::post('/update_referral', [AgencyController::class, 'update_referral']);
+    Route::get('/edit_referral', [ReferralController::class, 'edit_referral']);
 
-    Route::get('/referral', [AgencyController::class, 'view_referral']);
+    Route::post('/update_referral', [ReferralController::class, 'update_referral']);
+
+    Route::get('/referral', [ReferralController::class, 'view_referral']);
 
     // ----------------------------------------- END AGENCY ACCESS --------------------------------------- //
 

@@ -174,8 +174,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ date_format(new DateTime($date_from), 'd') }} -
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
-                                        <td width="20%">INVOICE: <span
-                                                style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
+                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -192,9 +191,9 @@ function convertNumber($num = false, $currency = 'Pesos')
                                     border="0" style="margin-top: 1rem;">
                                     <tbody>
                                         <tr>
-                                            <td colspan="10" align="center"
-                                                style="font-size: 15px; font-weight: 500; border: none !important;">
-                                                STATEMENT OF ACCOUNT</td>
+                                            <td colspan="10" align="center" style="font-size: 15px; font-weight: 500; border: none !important;">
+                                                STATEMENT OF ACCOUNT
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td align="left" class="brdAll" width="10%">DATE</td>

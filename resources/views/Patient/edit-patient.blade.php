@@ -723,8 +723,7 @@
                                                                                 <span class="danger">*</span>
                                                                             </label>
                                                                             <fieldset>
-                                                                                <input name="area_visited" type="text" id="" placeholder="Country, State, City"
-                                                                                    class="form-control"
+                                                                                <input name="area_visited" type="text" id="" placeholder="Country, State, City" class="form-control"
                                                                                     value="{{$declarationForm->area_visited}}" />
                                                                             </fieldset>
                                                                         </div>
@@ -736,8 +735,7 @@
                                                                             </label>
                                                                             <div class="row">
                                                                                 <div class="col-md-6">
-                                                                                    <label class="font-weight-bold"
-                                                                                        for="">Arrival</label>
+                                                                                    <label class="font-weight-bold" for="">Arrival</label>
                                                                                     <input name="travel_arrival_date" id="" placeholder=""
                                                                                         class="form-control" type="date" max="2050-12-31"
                                                                                         value="{{$declarationForm->travel_arrival}}" />

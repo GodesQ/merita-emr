@@ -89,13 +89,9 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="">Currency</label> <br>
-                                                <div
-                                                    class="d-inline-block custom-control custom-radio mr-1">
-                                                    <input type="radio" class="custom-control-input"
-                                                        id="currency1" value="Dollar"
-                                                        name="currency">
-                                                    <label class="custom-control-label"
-                                                        for="currency1">Dollar</label>
+                                                <div class="d-inline-block custom-control custom-radio mr-1">
+                                                    <input type="radio" class="custom-control-input" id="currency1" value="Dollar" name="currency">
+                                                    <label class="custom-control-label" for="currency1">Dollar</label>
                                                 </div>
                                                 <div
                                                     class="d-inline-block custom-control custom-radio mr-1">

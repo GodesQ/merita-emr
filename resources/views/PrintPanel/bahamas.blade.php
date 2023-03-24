@@ -64,9 +64,8 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span>Name (last, first, middle): <span
-                                                style="margin-left: 0.5rem; border-bottom: 1px solid black;">{{$admission->lastname}},
-                                                {{$admission->firstname}} {{$admission->middlename}}</span></span>
+                                        <span>Name (last, first, middle):
+                                            <span style="margin-left: 0.5rem; border-bottom: 1px solid black;">{{ optional($admission->patient)->lastname }}, {{ optional($admission->patient)->firstname }} {{ optional($admission->patient)->middlename }}</span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -77,14 +76,14 @@
                                                     style="margin-left: 0.5rem; border-bottom: 1px solid black;">{{date_format(new DateTime($patientInfo->birthdate), "d F Y")}}</span>
                                             </div>
                                             <div style="width: 50%">Sex: <span style="margin-left: 2rem;">
-                                                @if($admission->gender == 'Male')
+                                                @if(optional($admission->patient)->gender == 'Male')
                                                      <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                 @else
                                                      <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                 @endif
                                                 MALE
                                                 <span style="margin-left: 2rem;">
-                                                @if($admission->gender == 'Female')
+                                                @if(optional($admission->patient)->gender == 'Female')
                                                      <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                 @else
                                                      <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -451,7 +450,7 @@
                                                 <tr>
                                                     <td>19. </td>
                                                     <td>
-                                                        Do you smoke? 
+                                                        Do you smoke?
                                                     </td>
                                                     <td>
                                                         @if($exam_physical)
@@ -1224,9 +1223,9 @@
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; padding: 0 1.5rem; position: relative;">
                                                         @if($admission->agency_id != 19)
-                                                            @if($admission->patient_signature)
-                                                                <img src="@php echo base64_decode($admission->patient_signature) @endphp" width="170%"/>
-                                                            @elseif ($admission->signature)
+                                                            @if(optional($admission->patient)->patient_signature)
+                                                                <img src="@php echo base64_decode(optional($admission->patient)->patient_signature) @endphp" width="170%"/>
+                                                            @elseif (optional($admission->patient)->signature)
                                                                 <img src="data:image/jpeg;base64,{{$admission->signature}}" width="170%"/>
                                                             @else
                                                                 <div style="width: 150%;height: 40px; position: absolute; top: -30px; left: 0px;"></div>
