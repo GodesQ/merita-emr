@@ -175,7 +175,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
                                         <td width="20%">INVOICE: <span
-                                                style="border: none; border-bottom: 1px solid black;">{{ $invoice_number }}000{{ $page }}</span>
+                                                style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
                                         </td>
                                     </tr>
                                     <tr>

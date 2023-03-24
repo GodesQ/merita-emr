@@ -422,7 +422,7 @@
                                                 </b> {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
                                             </td>
                                         </tr>
-                                        @endif
+                                    @endif
                                 @endforelse
                             </tbody>
                         </table>
