@@ -10,4 +10,5 @@ class ChartAccount extends Model
     use HasFactory;
     protected $table = 'actgmast_coa';
     public $timestamps = false;
+    protected $guarded = [];
 }
