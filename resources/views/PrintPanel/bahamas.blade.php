@@ -1164,10 +1164,10 @@
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; padding: 0 1.5rem; position: relative;">
                                                         @if($admission->agency_id != 19)
-                                                            @if($admission->patient_signature)
-                                                                <img src="@php echo base64_decode($admission->patient_signature) @endphp" width="150%"/>
-                                                            @elseif ($admission->signature)
-                                                                <img src="data:image/jpeg;base64,{{$admission->signature}}" width="150%"/>
+                                                            @if(optional($admission->patient)->patient_signature)
+                                                                <img src="@php echo base64_decode(optional($admission->patient)->patient_signature) @endphp" width="170%"/>
+                                                            @elseif (optional($admission->patient)->signature)
+                                                                <img src="data:image/jpeg;base64,{{$admission->signature}}" width="170%"/>
                                                             @else
                                                                 <div style="width: 150%;height: 40px; position: absolute; top: -30px; left: 0px;"></div>
                                                             @endif
