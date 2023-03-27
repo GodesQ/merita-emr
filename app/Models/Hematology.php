@@ -10,7 +10,8 @@ class Hematology extends Model
     use HasFactory;
     protected $table = 'examlab_hema';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

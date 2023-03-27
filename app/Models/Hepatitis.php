@@ -11,7 +11,7 @@ class Hepatitis extends Model
     protected $table = 'examlab_hepa';
     public $timestamps = false;
     protected $guarded = [];
-    
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

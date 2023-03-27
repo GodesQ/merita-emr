@@ -11,7 +11,7 @@ class UltraSound extends Model
     protected $table = 'exam_ultrasound';
     public $timestamps = false;
     protected $guarded = [];
-    
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

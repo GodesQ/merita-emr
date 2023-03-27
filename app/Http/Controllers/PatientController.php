@@ -364,6 +364,7 @@ class PatientController extends Controller
             $scheduled_patients = DB::table('sched_patients')
                 ->where('date', $today_date)
                 ->get();
+
             $latest_schedule = DB::table('sched_patients')
                 ->where('patientcode', $data['patientCode'])
                 ->latest('date')

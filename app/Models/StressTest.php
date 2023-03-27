@@ -10,7 +10,8 @@ class StressTest extends Model
     use HasFactory;
     protected $table = 'exam_stresstest';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

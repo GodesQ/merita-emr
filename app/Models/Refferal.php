@@ -10,6 +10,7 @@ class Refferal extends Model
     use HasFactory;
     protected $table = 'refferal';
     public $timestamps = false;
+    protected $guarded = [];
 
     public function package() {
         return $this->belongsTo(ListPackage::class, 'package_id');

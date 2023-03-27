@@ -10,7 +10,8 @@ class Fecalysis extends Model
     use HasFactory;
     protected $table = 'examlab_feca';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

@@ -10,4 +10,5 @@ class Requests extends Model
     use HasFactory;
     protected $table = 'requests';
     public $timestamps = false;
+    protected $guarded = [];
 }

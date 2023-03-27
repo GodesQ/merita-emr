@@ -10,7 +10,8 @@ class CardiacRiskFactor extends Model
     use HasFactory;
     protected $table = 'exam_crf';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

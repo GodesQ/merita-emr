@@ -10,7 +10,8 @@ class Pregnancy extends Model
     use HasFactory;
     protected $table = 'examlab_pregnancy';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

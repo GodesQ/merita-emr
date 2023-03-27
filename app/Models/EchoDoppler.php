@@ -10,7 +10,8 @@ class EchoDoppler extends Model
     use HasFactory;
     protected $table = 'exam_echodoppler';
     public $timestamps = false;
-    
+    protected $guarded = [];
+
     public function admission() {
         $this->belongsTo(Admission::class, 'admission_id');
     }

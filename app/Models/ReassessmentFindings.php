@@ -10,4 +10,5 @@ class ReassessmentFindings extends Model
     use HasFactory;
     protected $table = 'reassessment';
     public $timestamps = false;
+    protected $guarded = [];
 }

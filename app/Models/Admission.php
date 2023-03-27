@@ -10,6 +10,7 @@ class Admission extends Model
     use HasFactory;
     protected $table = 'tran_admission';
     public $timestamps = false;
+    protected $guarded = [];
 
     public function patient()
     {

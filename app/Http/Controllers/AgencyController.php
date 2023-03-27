@@ -24,8 +24,9 @@ use PDF;
 
 class AgencyController extends Controller
 {
-    public function filter_agency_employee(Request $request) {
-        if($request->action == "filter") {
+    public function filter_agency_employee(Request $request)
+    {
+        if ($request->action == 'filter') {
             session()->put([
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -44,20 +45,27 @@ class AgencyController extends Controller
         try {
             $data = session()->all();
             $category_count = [];
-            $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
-            $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
-            $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
-            $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
+            $deck_counts = Admission::where('agency_id', $data['agencyId'])
+                ->where('category', 'DECK SERVICES')
+                ->count();
+            $engine_counts = Admission::where('agency_id', $data['agencyId'])
+                ->where('category', 'ENGINE SERVICES')
+                ->count();
+            $catering_counts = Admission::where('agency_id', $data['agencyId'])
+                ->where('category', 'CATERING SERVICES')
+                ->count();
+            $other_counts = Admission::where('agency_id', $data['agencyId'])
+                ->where('category', 'OTHER SERVICES')
+                ->count();
 
-            $category_count = array(
-                "deck" => $deck_counts,
-                "engine" => $engine_counts,
-                "catering" => $catering_counts,
-                "other" => $other_counts,
-            );
+            $category_count = [
+                'deck' => $deck_counts,
+                'engine' => $engine_counts,
+                'catering' => $catering_counts,
+                'other' => $other_counts,
+            ];
 
             return view('layouts.agency-dashboard', compact('data', 'category_count'));
-
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -72,42 +80,45 @@ class AgencyController extends Controller
             if ($request->ajax()) {
                 $session = session()->all();
 
-                $patients = Patient::select('*')->whereHas("patientinfo", function($q) {
+                $patients = Patient::select('*')->whereHas('patientinfo', function ($q) {
                     $agency_ids = [59, 58, 57, 55];
 
-                    if(session()->get('agencyId') == 58) {
-                        return $q->where('agency_id', session()->get('agencyId'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BLUE TERN'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BLUETERN'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BOLDTERN'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BOLD TERN'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAVETERN'))
-                        ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAVE TERN'));
+                    if (session()->get('agencyId') == 58) {
+                        return $q
+                            ->where('agency_id', session()->get('agencyId'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BLUE TERN'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BLUETERN'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLDTERN'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLD TERN'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAVETERN'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAVE TERN'));
                     }
 
-                    if(session()->get('agencyId') == 55) {
-                        return $q->where('agency_id', session()->get('agencyId'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BOLETTE'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BOLETTE'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BRAEMAR'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BRAEMAR'));
+                    if (session()->get('agencyId') == 55) {
+                        return $q
+                            ->where('agency_id', session()->get('agencyId'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BOLETTE'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLETTE'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BRAEMAR'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAEMAR'));
                     }
 
-                    if(session()->get('agencyId') == 57) {
-                        return $q->where('agency_id', session()->get('agencyId'))
-                            ->where(DB::raw('upper(vessel)'),  strtoupper('BALMORAL'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('BOREALIS'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BALMORAL'))
-                            ->orWhere(DB::raw('upper(vessel)'),  strtoupper('MS BOREALIS'));
+                    if (session()->get('agencyId') == 57) {
+                        return $q
+                            ->where('agency_id', session()->get('agencyId'))
+                            ->where(DB::raw('upper(vessel)'), strtoupper('BALMORAL'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOREALIS'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BALMORAL'))
+                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BOREALIS'));
                     }
 
-                    if(!in_array(session()->get('agencyId'), $agency_ids)){
+                    if (!in_array(session()->get('agencyId'), $agency_ids)) {
                         return $q->where('agency_id', session()->get('agencyId'));
                     }
                 });
 
-                if($data['start_date'] && $data['end_date']) {
-                    $patients = $patients->whereHas('admission', function($q) use ($data) {
+                if ($data['start_date'] && $data['end_date']) {
+                    $patients = $patients->whereHas('admission', function ($q) use ($data) {
                         return $q->whereBetween('trans_date', [$data['start_date'], $data['end_date']]);
                     });
                 }
@@ -115,7 +126,7 @@ class AgencyController extends Controller
                 return Datatables::of($patients)
                     ->addIndexColumn()
                     ->addColumn('medical_package', function ($row) {
-                        if($row->admission) {
+                        if ($row->admission) {
                             return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';
                         } else {
                             return $package = $row->patientinfo->package ? $row->patientinfo->package->packagename : 'NO PACKAGE';
@@ -131,66 +142,60 @@ class AgencyController extends Controller
                         return $row->admission ? $row->admission->category : $row->patientinfo->category;
                     })
                     ->addColumn('status', function ($row) {
-
                         $patientInfo = $row->patientinfo;
                         $completed_patients = '';
                         $ongoing_patients = '';
                         $pending_patients = '';
                         $queue_patients = '';
 
-                        if($row->admission) {
-                            if(!$row->admission->package) return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                        if ($row->admission) {
+                            if (!$row->admission->package) {
+                                return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                            }
                             $patient_package = $row->admission->package;
                         } else {
-                            if(!$row->patientinfo->package) return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                            if (!$row->patientinfo->package) {
+                                return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                            }
                             $patient_package = $row->patientinfo->package;
                         }
 
                         $patient_exams = DB::table('list_packagedtl')
-                            ->select(
-                                'list_packagedtl.*',
-                                'list_exam.examname as examname',
-                                'list_exam.category as category',
-                                'list_exam.section_id'
-                            )
+                            ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id')
                             ->where('main_id', $patient_package->id)
-                            ->leftJoin(
-                                'list_exam',
-                                'list_exam.id',
-                                'list_packagedtl.exam_id'
-                            )->get();
+                            ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                            ->get();
 
                         return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
                     })
                     ->addColumn('action', function ($row) {
-                        $actionBtn = '<a href="agency_emp?id=' .$row['id'] .'" class="btn btn-secondary btn-sm"><i class="feather icon-eye"></i></a>';
+                        $actionBtn = '<a href="agency_emp?id=' . $row['id'] . '" class="btn btn-secondary btn-sm"><i class="feather icon-eye"></i></a>';
                         return $actionBtn;
                     })
                     ->filter(function ($instance) use ($request) {
-
                         # filter for register
-                        if($request->status == 1) {
-                            $instance->where('admission_id', null)->whereHas('patientinfo', function($q) {
+                        if ($request->status == 1) {
+                            $instance->where('admission_id', null)->whereHas('patientinfo', function ($q) {
                                 $q->whereNotNull('medical_package');
                             });
                         }
 
                         # filter for admitted
-                        if($request->status == 2) {
+                        if ($request->status == 2) {
                             $instance->whereNotNull('admission_id')->whereHas('admission', function ($q) {
                                 $q->where('lab_status', null)->whereNotNull('package_id');
                             });
                         }
 
                         # filter for reassessment
-                        if($request->status == 3) {
+                        if ($request->status == 3) {
                             $instance->whereHas('admission', function ($q) {
                                 $q->where('lab_status', 1)->whereNotNull('package_id');
                             });
                         }
 
                         # filter for fit to work
-                        if($request->status == 4) {
+                        if ($request->status == 4) {
                             // $instance->where('lab_status', 2)->latest('id');
                             $instance->whereHas('admission', function ($q) {
                                 $q->where('lab_status', 2)->whereNotNull('package_id');
@@ -198,14 +203,14 @@ class AgencyController extends Controller
                         }
 
                         # filter for unfit to work
-                        if($request->status == 5) {
+                        if ($request->status == 5) {
                             $instance->whereHas('admission', function ($q) {
                                 $q->where('lab_status', 3)->whereNotNull('package_id');
                             });
                         }
 
                         # filter for unfit to work temporarily
-                        if($request->status == 6) {
+                        if ($request->status == 6) {
                             $instance->whereHas('admission', function ($q) {
                                 $q->where('lab_status', 4)->whereNotNull('package_id');
                             });
@@ -214,15 +219,15 @@ class AgencyController extends Controller
                         # if the user search
                         if (!empty($request->get('search'))) {
                             $query = $request->get('search');
-                            $instance->where('firstname', 'LIKE', '%' . $query . '%')
-                            ->orWhere('lastname', 'LIKE', '%' . $query . '%')
-                            ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
-                            ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', "%".$query."%")
-                            ->whereHas('admission', function($q) {
-                                return $q->where('agency_id', session()->get('agencyId'));
-                            });
+                            $instance
+                                ->where('firstname', 'LIKE', '%' . $query . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $query . '%')
+                                ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
+                                ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
+                                ->whereHas('admission', function ($q) {
+                                    return $q->where('agency_id', session()->get('agencyId'));
+                                });
                         }
-
                     }, true)
                     ->rawColumns(['status', 'action'])
                     ->make(true);
@@ -234,11 +239,14 @@ class AgencyController extends Controller
         }
     }
 
-    public function view_agency_emp(Request $request) {
+    public function view_agency_emp(Request $request)
+    {
         try {
             $data = session()->all();
             $id = $request->id;
-            $patient = Patient::where('id', $id)->with('patientinfo', 'admission')->first();
+            $patient = Patient::where('id', $id)
+                ->with('patientinfo', 'admission')
+                ->first();
             // dd($patient);
 
             return view('Agency.agency-emp', compact('patient', 'data'));
@@ -249,28 +257,17 @@ class AgencyController extends Controller
         }
     }
 
-    public function select_agencies(Request $request) {
+    public function select_agencies(Request $request)
+    {
         try {
             $id = $request->id;
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )->where('list_package.agency_id', $id)
-                ->leftJoin(
-                    'mast_agency',
-                    'mast_agency.id',
-                    '=',
-                    'list_package.agency_id'
-                )
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->where('list_package.agency_id', $id)
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
             $agency = Agency::where('id', $id)->first();
 
-            return response()->json([
-                $packages, $agency
-            ]);
-
+            return response()->json([$packages, $agency]);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -278,7 +275,8 @@ class AgencyController extends Controller
         }
     }
 
-    public function view_documentation() {
+    public function view_documentation()
+    {
         try {
             $data = session()->all();
             return view('Agency.documentation', compact('data'));
@@ -314,9 +312,7 @@ class AgencyController extends Controller
                             '<a href="edit_agency?id=' .
                             $row['id'] .
                             '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-    <a href="#" id="' .
-                            $row['id'] .
-                            '" class="delete-agency btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                            <a href="#" id="' . $row['id'] . '" class="delete-agency btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
@@ -344,12 +340,12 @@ class AgencyController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required|email|unique:mast_agency'
+                'email' => 'required|email|unique:mast_agency',
             ]);
 
             $latestData = DB::table('mast_agency')
-            ->latest('agencycode')
-            ->first();
+                ->latest('agencycode')
+                ->first();
 
             $lastAgencyCode = substr($latestData->agencycode, 4);
             // new row code
@@ -390,21 +386,14 @@ class AgencyController extends Controller
                     'password' => $password,
                 ];
                 Mail::to($request->email)->send(new AgencyPassword($details));
-                return redirect('/agencies')->with(
-                    'status',
-                    'Agency Added Successfully'
-                );
+                return redirect('/agencies')->with('status', 'Agency Added Successfully');
             } else {
-                return redirect('/login')->with(
-                    'fail',
-                    'Something went wrong. Try Again later.'
-                );
+                return redirect('/login')->with('fail', 'Something went wrong. Try Again later.');
             }
         } catch (\Exception $exception) {
-
             $request->validate([
                 'commission' => 'numeric|required',
-                'email' => 'required|email|unique:mast_agency'
+                'email' => 'required|email|unique:mast_agency',
             ]);
 
             $message = $exception->getMessage();
@@ -459,7 +448,6 @@ class AgencyController extends Controller
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
-
     }
 
     public function delete_agency(Request $request)
@@ -481,17 +469,17 @@ class AgencyController extends Controller
         }
     }
 
-    public function submit_agency_password_form(Request $request) {
+    public function submit_agency_password_form(Request $request)
+    {
         try {
-             Mail::to($request->email)->send(new AgencyResetPassword($request->email, $request->id));
-             return response()->json([
-                        "status" => 200
-                    ]);
+            Mail::to($request->email)->send(new AgencyResetPassword($request->email, $request->id));
+            return response()->json([
+                'status' => 200,
+            ]);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
     }
-
 }

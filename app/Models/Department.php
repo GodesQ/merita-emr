@@ -10,4 +10,5 @@ class Department extends Model
     use HasFactory;
     protected $table = 'main_dept';
     public $timestamps = false;
+    protected $guarded = [];
 }

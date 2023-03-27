@@ -10,4 +10,5 @@ class MedicalHistory extends Model
     use HasFactory;
     protected $table = 'medical_history';
     public $timestamps = false;
+    protected $guarded = [];
 }

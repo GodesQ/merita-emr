@@ -10,4 +10,5 @@ class ListSection extends Model
     use HasFactory;
     protected $table = 'list_section';
     public $timestamps = false;
+    protected $guarded = [];
 }
