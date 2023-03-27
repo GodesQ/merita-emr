@@ -13,32 +13,19 @@ use App\Models\EmployeeLog;
 class BloodSerologyController extends Controller
 {
     //
-    public function add_bloodsero()
-    {   
+    public function add_bloodsero(Request $request)
+    {
         try {
-            $id = $_GET['id'];
-            $admission = Admission::select(
-                'tran_admission.*',
-                'mast_patient.firstname as firstname',
-                'mast_patient.lastname as lastname',
-                'mast_patient.id as patient_id'
-            )
-                ->where('tran_admission.id', $id)
-                ->leftJoin(
-                    'mast_patient',
-                    'mast_patient.patientcode',
-                    'tran_admission.patientcode'
-                )
-                ->latest('mast_patient.id')
-                ->first();
-                
+            $id = $request->id;
+            $admission = Admission::where('tran_admission.id', $id)->latest('id')->with('patient')->first();
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Blood_Serology.add-bloodserology', compact('admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -48,7 +35,7 @@ class BloodSerologyController extends Controller
     }
 
     public function store_bloodsero(Request $request)
-    {   
+    {
         try {
             $data = $request->except('_token', 'patient_id', 'peme_date', 'patientname', 'patientcode', 'action', 'id');
             $save = BloodSerology::create($data);
@@ -73,37 +60,20 @@ class BloodSerologyController extends Controller
         }
     }
 
-    public function edit_bloodsero()
-    {   
+    public function edit_bloodsero(Request $request)
+    {
         try {
-            $id = $_GET['id'];
-            $exam = BloodSerology::select(
-                'examlab_bloodsero.*',
-                'tran_admission.patientcode as patientcode'
-            )
-                ->where('examlab_bloodsero.admission_id', $id)
-                ->leftJoin(
-                    'tran_admission',
-                    'tran_admission.id',
-                    'examlab_bloodsero.admission_id'
-                )
-                ->latest('id')
-                ->first();
+            $id = $request->id;
+            $exam = BloodSerology::where('admission_id', $id)->latest('id')->with('admission')->first();
 
-            $patient = Patient::where('patientcode', $exam->patientcode)->first();
-            $admission = Admission::where('id', $exam->admission_id)->with('patient')->first();
-            
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
-            return view(
-                'Blood_Serology.edit-bloodserology',
-                compact('exam', 'patient', 'admission', 'medical_techs', 'pathologists')
-            );
+
+            return view('Blood_Serology.edit-bloodserology', compact('exam', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -112,7 +82,7 @@ class BloodSerologyController extends Controller
     }
 
     public function update_bloodsero(Request $request)
-    {   
+    {
         try {
             $data = $request->except('_token', 'peme_date', 'patientname', 'patientcode', 'action', 'id');
             $id = $request->id;

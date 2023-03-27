@@ -19,7 +19,7 @@
                         <div class="card-header">
                             <div class="card-title">
                                 <h3>Add Blood Serology</h3>
-                                <a href="patient_edit?id={{ $admission->patient_id }}&patientcode={{ $admission->patientcode }}"
+                                <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $admission->patientcode }}"
                                     class="float-right btn btn-primary">Back to Patient</a>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                                 @endif
                                 @csrf
                                 <input required type="hidden" name="admission_id" value="{{ $admission->id }}">
-                                <input type="hidden" name="patient_id" value="{{ $admission->patient_id }}">
+                                <input type="hidden" name="patient_id" value="{{ $admission->patient->id }}">
                                 <table id="tblExam" width="100%" cellpadding="2" cellspacing="2"
                                     class="table table-bordered">
                                     <tbody>
@@ -64,7 +64,7 @@
                                             <td><b>Patient</b></td>
                                             <td>
                                                 <input required name="patientname" id="patientname" type="text"
-                                                    value="{{ $admission->lastname . ', ' . $admission->firstname }}"
+                                                    value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                     class="form-control" readonly="">
                                             </td>
                                             <td><b>Patient Code</b></td>

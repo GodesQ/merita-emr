@@ -11,8 +11,8 @@ class BloodSerology extends Model
     protected $table = 'examlab_bloodsero';
     public $timestamps = false;
     protected $guarded = [];
-    
+
     public function admission() {
-        $this->belongsTo(Admission::class, 'admission_id');
+        return $this->belongsTo(Admission::class, 'admission_id');
     }
 }

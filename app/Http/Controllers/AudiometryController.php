@@ -14,11 +14,12 @@ use App\Models\EmployeeLog;
 class AudiometryController extends Controller
 {
     //
-    public function add_audiometry()
+    public function add_audiometry(Request $request)
     {
         try {
             $id = $request->id;
-            $admission = Admission::where('tran_admission.id', $id)->with('patient')->latest('mast_patient.id')->first();
+
+            $admission = Admission::where('id', $id)->with('patient')->latest('id')->first();
 
             $audiometricians = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Audiometrician%')
@@ -40,22 +41,16 @@ class AudiometryController extends Controller
     {
         try {
             $data = $request->except('_token', 'action', 'patient_id', 'patientname', 'patientcode', 'peme_date', 'id');
-            $save = DB::table('exam_audio')->insert($data);
+            $save = Audiometry::create($data);
 
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description =
-                'Add Audiometry from Patient ' . $request->patientcode;
+            $log->description = 'Add Audiometry from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 
-            $path =
-                'patient_edit?id=' .
-                $request->patient_id .
-                '&patientcode=' .
-                $request->patientcode;
-
+            $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
             return redirect($path)->with('status', 'Audiometry added.')->with('redirect', 'basic-exam;child-basic-tab;child-basic-component;baseVerticalLeft1-tab1;tabVerticalLeft1');
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -68,29 +63,18 @@ class AudiometryController extends Controller
     {
         try {
             $id = $_GET['id'];
-            $exam = Audiometry::select(
-                'exam_audio.*',
-                'tran_admission.patientcode as patientcode'
-            )
-                ->where('exam_audio.admission_id', $id)
-                ->leftJoin(
-                    'tran_admission',
-                    'tran_admission.id',
-                    'exam_audio.admission_id'
-                )
-                ->latest('id')
-                ->first();
 
-            $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
-            $admission = Admission::where('id', $exam->admission_id)->with('exam_audio')->first();
+            $exam = Audiometry::where('admission_id', $id)->with('admission')->latest('id')->first();
 
             $audiometricians = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Audiometrician%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Audiometrician%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
+
             $otolaries = User::where('position', 'LIKE', '%Otolaryngologist%')->get();
-            return view('Audiometry.edit-audiometry', compact('exam', 'patient', 'admission', 'audiometricians', 'otolaries'));
+
+            return view('Audiometry.edit-audiometry', compact('exam', 'audiometricians', 'otolaries'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -103,14 +87,12 @@ class AudiometryController extends Controller
         try {
             $id = $request->id;
             $data = $request->except('_token', 'action', 'patient_id', 'patientname', 'patientcode', 'peme_date', 'id', 'admission_id', 'trans_date');
-            $save = DB::table('exam_audio')->where('id', $id)->update($data);
-            //  dd($save);
+            $save = Audiometry::where('id', $id)->update($data);
 
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description =
-                'Update Audiometry from Patient ' . $request->patientcode;
+            $log->description = 'Update Audiometry from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 

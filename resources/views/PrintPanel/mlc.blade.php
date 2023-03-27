@@ -529,32 +529,23 @@
                                                                     <span class="fontMed"><span style="margin-right: 8rem;">RESULT:</span>
                                                                         FIT FOR SEA DUTY
                                                                         @if ($exam_physical)
-                                                                        @if (preg_match('/Fit/i',
-                                                                        $exam_physical->fit))
-                                                                        <img src="../../../app-assets/images/icoCheck.gif"
-                                                                            width="10">
+                                                                        @if ($exam_physical->fit == 'Fit')
+                                                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                         @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
                                                                         @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT
-                                                                        FOR SEA DUTY
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT FOR SEA DUTY
                                                                         @if ($exam_physical)
-                                                                        @if (!preg_match('/Fit/i',
-                                                                        $exam_physical->fit))
-                                                                        <img src="../../../app-assets/images/icoCheck.gif"
-                                                                            width="10">
+                                                                        @if ($exam_physical->fit == 'Unfit')
+                                                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                         @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
                                                                         @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
                                                                     </span>
                                                                 </td>

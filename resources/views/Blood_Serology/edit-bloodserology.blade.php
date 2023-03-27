@@ -23,7 +23,7 @@
                                         <h3>Edit Blood Serology</h3>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}"
+                                        <a href="patient_edit?id={{ $exam->admission->patient->id }}&patientcode={{ $exam->admission->patientcode }}"
                                             class="btn btn-primary">Back to Patient</a>
                                         <button
                                             onclick='window.open("/examlab_bloodsero_print?id={{ $exam->admission_id }}&type=both", "width=800,height=650").print()'
@@ -37,8 +37,7 @@
                                 @if (Session::get('status'))
                                     @push('scripts')
                                         <script>
-                                            let toaster = toastr.success(
-                                                '{{ Session::get('status') }}', 'Success');
+                                            let toaster = toastr.success('{{ Session::get('status') }}', 'Success');
                                         </script>
                                     @endpush
                                 @endif
@@ -50,7 +49,7 @@
                                         <td width="92"><b>PEME Date</b></td>
                                         <td width="247">
                                             <input name="peme_date" type="text" id="peme_date"
-                                                value="{{ $admission->trans_date ? $admission->trans_date : null }}"
+                                                value="{{ $exam->admission->trans_date ? $exam->admission->trans_date : null }}"
                                                 class="form-control" readonly />
                                         </td>
                                         <td width="113"><b>Admission No.</b></td>
@@ -74,11 +73,11 @@
                                         <td><b>Patient</b></td>
                                         <td>
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
+                                                value="{{ $exam->admission->patient->lastname . ', ' . $exam->admission->patient->firstname }}"
                                                 class="form-control" readonly />
                                         <td><b>Patient Code</b></td>
                                         <td><input name="patientcode" id="patientcode" type="text"
-                                                value="{{ $exam->patientcode }}" class="form-control" readonly /></td>
+                                                value="{{ $exam->admission->patientcode }}" class="form-control" readonly /></td>
                                         </td>
                                     </tr>
                                 </table>

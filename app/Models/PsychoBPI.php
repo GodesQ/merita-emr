@@ -13,6 +13,6 @@ class PsychoBPI extends Model
     protected $guarded = [];
 
     public function admission() {
-        $this->belongsTo(Admission::class, 'admission_id');
+        return $this->belongsTo(Admission::class, 'admission_id');
     }
 }

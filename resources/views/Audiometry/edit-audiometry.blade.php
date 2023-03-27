@@ -23,7 +23,7 @@
                                         <h3>Edit Audiometry</h3>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}"
+                                        <a href="patient_edit?id={{ $exam->admission->patient->id }}&patientcode={{ $exam->patientcode }}"
                                             class="btn btn-primary">Back to Patient</a>
                                         <button
                                             onclick='window.open("/exam_audiometry_print?id={{ $exam->admission_id }}", "width=800,height=650").print()'
@@ -50,7 +50,7 @@
                                             <td width="92"><b>PEME Date</b></td>
                                             <td width="247">
                                                 <input required name="peme_date" type="text" id="peme_date"
-                                                    value="{{ $admission->trans_date }}" class="form-control"
+                                                    value="{{ date_format( new DateTime($exam->admission->trans_date), 'F d, Y') }}" class="form-control"
                                                     readonly="">
                                             </td>
                                             <td width="113"><b>Admission No.</b></td>
@@ -66,7 +66,7 @@
                                         <tr>
                                             <td><b>Exam Date</b></td>
                                             <td><input required name="trans_date" type="text" id="trans_date"
-                                                    value="{{ $exam->trans_date }}" class="form-control" readonly="">
+                                                    value="{{ date_format( new DateTime($exam->trans_date), 'F d, Y') }}" class="form-control" readonly="">
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
@@ -76,12 +76,12 @@
                                             <td>
                                                 <input required required required name="patientname" id="patientname"
                                                     type="text"
-                                                    value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                    value="{{ $exam->admission->patient->lastname . ', ' . $exam->admission->patient->firstname }}"
                                                     class="form-control" readonly="">
                                             </td>
                                             <td><b>Patient Code</b></td>
                                             <td><input required required required name="patientcode" id="patientcode"
-                                                    type="text" value="{{ $exam->patientcode }}" class="form-control"
+                                                    type="text" value="{{ $exam->admission->patient->patientcode }}" class="form-control"
                                                     readonly=""></td>
                                         </tr>
                                     </tbody>
