@@ -572,7 +572,7 @@ class PrintPanelController extends Controller
         // dd($exam_physical)
 
         $patientInfo = DB::table('mast_patientinfo')
-            ->where('main_id', $admission->patient_id)
+            ->where('main_id', $admission->patient->id)
             ->first();
 
         $medical_director = User::where('position', 'Medical Director')->first();
