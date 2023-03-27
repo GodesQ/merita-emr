@@ -51,7 +51,7 @@
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agencyname))
                                                 {{'Bahia Shipping Services, Inc.'}}
                                             @else
                                                 {{$admission->agencyname}}
@@ -289,8 +289,8 @@
                                                     <td align="left" valign="top" class="brdLeftBtm ">{{$exam->esr}}</td>
                                                     <td valign="top" class="brdLeftBtm">
                                                         <?= $admission->gender == 'Male'
-                        ? '0 - 10 mm/hr'
-                        : '0 - 20 mm/hr' ?>
+                                                            ? '0 - 10 mm/hr'
+                                                            : '0 - 20 mm/hr' ?>
                                                     </td>
                                                 </tr>
                                                 @endif

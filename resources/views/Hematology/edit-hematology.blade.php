@@ -73,10 +73,11 @@
                             <table width="100%" border="0" cellpadding="2" cellspacing="2" class="table no-border">
                                 <tbody>
                                     <tr class="brdAll">
-                                        <td colspan="2" class="brdBtm"><b>EXAMINATION</b></td>
-                                        <td width="601" class="brdBtm"><b>RESULTS</b></td>
-                                        <td width="601" class="brdBtm"><b>FINDINGS</b></td>
-                                        <td width="601" class="brdBtm"><b>RECOMMENDATION</b></td>
+                                        <td colspan="2" width="10%" class="brdBtm"><b>EXAMINATION</b></td>
+                                        <td width="15%" class="brdBtm"><b>RESULTS</b></td>
+                                        <td width="10%"><b>NORMAL VALUES</b></td>
+                                        <td width="20%" class="brdBtm"><b>FINDINGS</b></td>
+                                        <td width="40%" class="brdBtm"><b>RECOMMENDATION</b></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="left" valign="top" class="brdAll">
@@ -85,6 +86,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="hemoglobin"
                                                 type="text" class="form-control" id="hemoglobin"
                                                 value="{{ $exam->hemoglobin }}"></td>
+                                        <td>120 - 170 g/L</td>
                                         <td align="left" valign="top" class="brdAll"><input name="hemoglobin_findings"
                                                 type="text" class="form-control" id="hemoglobin_findings"
                                                 value="{{ $exam->hemoglobin_findings }}"></td>
@@ -97,6 +99,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="hematocrit"
                                                 type="text" class="form-control" id="hematocrit"
                                                 value="{{ $exam->hematocrit }}"></td>
+                                        <td>0.40 - 0.54</td>
                                         <td align="left" valign="top" class="brdAll"><input name="hematocrit_findings"
                                                 type="text" class="form-control" id="hematocrit_findings"
                                                 value="{{ $exam->hematocrit_findings }}"></td>
@@ -108,6 +111,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">WBC</td>
                                         <td align="left" valign="top" class="brdAll"><input name="wbc" type="text"
                                                 class="form-control" id="wbc" value="{{ $exam->wbc }}"></td>
+                                        <td>5 - 10 x 10<sup>9</sup> /L</td>
                                         <td align="left" valign="top" class="brdAll"><input name="wbc_findings"
                                                 type="text" class="form-control" id="wbc_findings"
                                                 value="{{ $exam->wbc_findings }}"></td>
@@ -119,6 +123,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">RBC</td>
                                         <td align="left" valign="top" class="brdAll"><input name="rbc" type="text"
                                                 class="form-control" id="rbc" value="{{ $exam->rbc }}"></td>
+                                        <td>3.5 - 5.5 10<sup>12</sup> /L</td>
                                         <td align="left" valign="top" class="brdAll"><input name="rbc_findings"
                                                 type="text" class="form-control" id="rbc_findings"
                                                 value="{{ $exam->rbc_findings }}"></td>
@@ -134,6 +139,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="neuthrophils"
                                                 type="text" class="form-control" id="neuthrophils"
                                                 value="{{ $exam->neuthrophils }}"></td>
+                                        <td>0.50 - 0.70</td>
                                         <td align="left" valign="top" class="brdAll"><input name="neuthrophils_findings"
                                                 type="text" class="form-control" id="neuthrophils_findings"
                                                 value="{{ $exam->neuthrophils_findings }}"></td>
@@ -148,6 +154,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="lymphocytes"
                                                 type="text" class="form-control" id="lymphocytes"
                                                 value="{{ $exam->lymphocytes }}"></td>
+                                        <td>0.20 - 0.40</td>
                                         <td align="left" valign="top" class="brdAll"><input name="lymphocytes_findings"
                                                 type="text" class="form-control" id="lymphocytes_findings"
                                                 value="{{ $exam->lymphocytes_findings }}"></td>
@@ -161,6 +168,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="monophils" type="text"
                                                 class="form-control" id="monophils" value="{{ $exam->monophils }}">
                                         </td>
+                                        <td>0.00 - 0.10</td>
                                         <td align="left" valign="top" class="brdAll"><input name="monophils_findings"
                                                 type="text" class="form-control" id="monophils_findings"
                                                 value="{{ $exam->monophils_findings }}"></td>
@@ -175,6 +183,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="eosinophils"
                                                 type="text" class="form-control" id="eosinophils"
                                                 value="{{ $exam->eosinophils }}"></td>
+                                        <td>0.00 - 0.05</td>
                                         <td align="left" valign="top" class="brdAll"><input name="eosinophils_findings"
                                                 type="text" class="form-control" id="eosinophils_findings"
                                                 value="{{ $exam->eosinophils_findings }}"></td>
@@ -188,6 +197,7 @@
                                         <td align="left" valign="top" class="brdAll"><input name="baspophils"
                                                 type="text" class="form-control" id="baspophils"
                                                 value="{{ $exam->baspophils }}"></td>
+                                        <td>0.00 - 0.01</td>
                                         <td align="left" valign="top" class="brdAll"><input name="baspophils_findings"
                                                 type="text" class="form-control" id="baspophils_findings"
                                                 value="{{ $exam->baspophils_findings }}"></td>
@@ -199,6 +209,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">Platelet</td>
                                         <td align="left" valign="top" class="brdAll"><input name="platelet" type="text"
                                                 class="form-control" id="platelet" value="{{ $exam->platelet }}"></td>
+                                        <td>150 - 450 X 10<sup>9</sup> /L</td>
                                         <td align="left" valign="top" class="brdAll"><input name="platelet_findings"
                                                 type="text" class="form-control" id="platelet_findings"
                                                 value="{{ $exam->platelet_findings }}"></td>
@@ -215,11 +226,12 @@
                                                 echo $exam->blood == "B" ? "checked" : " " @endphp>B
                                             <input name="blood" type="radio" class="m-1" id="blood_2" value="AB" @php
                                                 echo $exam->blood == "AB" ? "checked" : " " @endphp>AB
-                                            <input name="blood" type="radio" class="m-1" id="blood_3" value="O" @php
+                                            <br><input name="blood" type="radio" class="m-1" id="blood_3" value="O" @php
                                                 echo $exam->blood == "O" ? "checked" : " " @endphp>O
                                             <input name="blood" type="radio" class="m-1" id="blood_4" value="" @php echo
                                                 $exam->blood == "" ? "checked" : " " @endphp>Reset
                                         </td>
+                                        <td></td>
                                         <td align="left" valign="top" class="brdAll"><input name="blood_findings"
                                                 type="text" class="form-control" id="blood_findings"
                                                 value="{{ $exam->blood_findings }}"></td>
@@ -234,6 +246,7 @@
                                             <input name="rhfactor" type="radio" class="m-1" id="rhfactor_1" value="-" {{$exam->rhfactor == '-' ? "checked" : null}}>-
                                             <input name="rhfactor" type="radio" class="m-1" id="rhfactor_2" value="" {{$exam->rhfactor == '' ? "checked" : null}}>
                                         </td>
+                                        <td></td>
                                         <td align="left" valign="top" class="brdAll"><input name="rhfactor_findings"
                                                 type="text" class="form-control" id="rhfactor_findings"
                                                 value="{{ $exam->rhfactor_findings }}"></td>
@@ -245,6 +258,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">ESR</td>
                                         <td align="left" valign="top" class="brdAll"><input name="esr" type="text"
                                                 class="form-control" id="esr" value="{{ $exam->esr }}"></td>
+                                        <td><?php echo $admission->gender == 'Male' ? '0 - 10 mm/hr' : '0 - 20 mm/hr' ?></td>
                                         <td align="left" valign="top" class="brdAll"><input name="esr_findings"
                                                 type="text" class="form-control" id="esr_findings"
                                                 value="{{ $exam->esr_findings }}"></td>
@@ -256,6 +270,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">Bleeding Time</td>
                                         <td align="left" valign="top" class="brdAll"><input name="bleeding" type="text"
                                                 class="form-control" id="bleeding" value="{{ $exam->bleeding }}"></td>
+                                        <td>1-7 Minutes</td>
                                         <td align="left" valign="top" class="brdAll"><input name="bleeding_findings"
                                                 type="text" class="form-control" id="bleeding_findings"
                                                 value="{{ $exam->bleeding_findings }}"></td>
@@ -267,6 +282,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">Clotting Time</td>
                                         <td align="left" valign="top" class="brdAll"><input name="clotting" type="text"
                                                 class="form-control" id="clotting" value="{{ $exam->clotting }}"></td>
+                                        <td>5-15 Minutes</td>
                                         <td align="left" valign="top" class="brdAll"><input name="clotting_findings"
                                                 type="text" class="form-control" id="clotting_findings"
                                                 value="{{ $exam->clotting_findings }}"></td>
@@ -279,6 +295,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">MCV</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mcv" type="text"
                                                 class="form-control" id="mcv" value="{{ $exam->mcv }}"></td>
+                                        <td>80 - 100 fL5</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mcv_findings"
                                                 type="text" class="form-control" id="mcv_findings"
                                                 value="{{ $exam->mcv_findings }}"></td>
@@ -290,6 +307,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">MCH</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mch" type="text"
                                                 class="form-control" id="mch" value="{{ $exam->mch }}"></td>
+                                        <td>27 - 34 pg</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mch_findings"
                                                 type="text" class="form-control" id="mch_findings"
                                                 value="{{ $exam->mch_findings }}"></td>
@@ -301,6 +319,7 @@
                                         <td colspan="2" align="left" valign="top" class="brdAll">MCHC</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mchc" type="text"
                                                 class="form-control" id="mchc" value="{{ $exam->mchc }}"></td>
+                                        <td>320 - 360 g/L</td>
                                         <td align="left" valign="top" class="brdAll"><input name="mchc_findings"
                                                 type="text" class="form-control" id="mchc_findings"
                                                 value="{{ $exam->mchc_findings }}"></td>
@@ -316,6 +335,7 @@
                                             <input name="others_result" type="text" class="form-control"
                                                 id="others_result" value="{{ $exam->others_result }}">
                                         </th>
+                                        <td></td>
                                         <td align="left" valign="top" class="brdAll"><input name="others_findings"
                                                 type="text" class="form-control" id="others_findings"
                                                 value="{{ $exam->others_findings }}"></td>
