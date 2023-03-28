@@ -25,7 +25,7 @@ class PhysicalController extends Controller
 {
     //
     public function edit_physical(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $exam = PhysicalExam::select(
@@ -40,7 +40,7 @@ class PhysicalController extends Controller
                 )
                 ->latest('id')
                 ->first();
-                
+
             $exam_xray = XRay::where('admission_id', $id)->latest('id')->first();
             $exam_ecg = ECG::where('admission_id', $id)->latest('id')->first();
             $exam_hema = Hematology::where('admission_id', $id)->latest('id')->first();
@@ -56,7 +56,7 @@ class PhysicalController extends Controller
             $admission = Admission::where('id', $exam->admission_id)->first();
             $physicians = User::where('position', 'LIKE', '%Physician%')->get();
             return view('Physical.edit-physical', compact('exam', 'patient', 'medical_history', 'admission', 'physicians', 'exam_xray', 'exam_ecg', 'exam_hema', 'exam_urin', 'exam_feca', 'exam_bloodsero', 'exam_hiv', 'exam_psycho', 'exam_cardio'));
-            
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -65,15 +65,19 @@ class PhysicalController extends Controller
     }
 
     public function update_physical(Request $request)
-    {   
-        
+    {
         $id = $request->id;
-        $data = $request->except('_token', 'action', 'patient_id', 'patientname', 'patientcode', 'id', 'admission_id');
-        
-        $save = DB::table('exam_physical')
-              ->where('id', $id)
-              ->update($data);
-              
+        $data = $request->except('_token', 'action', 'patient_id', 'patientname', 'patientcode');
+
+        $physical = PhysicalExam::find($id);
+
+        $attributes = $physical->getAttributes();
+
+        $final_data = array_merge(array_fill_keys(array_keys($attributes), null), $data);
+
+        $physical->fill($final_data);
+        $physical->save();
+
         PhysicalExam::where('id', $id)->update([
             "a1" => $request->has('a1') ? 'Yes' : null,
             "a2" => $request->has('a2') ? 'Yes' : null,
@@ -95,9 +99,9 @@ class PhysicalController extends Controller
             "c4" => $request->has('c4') ? 'Yes' : null,
             "c5" => $request->has('c5') ? 'Yes' : null,
             "c6" => $request->has('c6') ? 'Yes' : null
-            
+
         ]);
-        
+
         Cardiovascular::where('admission_id', $request->admission_id)->update([
             "height" => $request->height,
             "weight" => $request->weight,
@@ -111,8 +115,8 @@ class PhysicalController extends Controller
             'Update PhysicalExam from Patient ' . $request->patientcode;
         $log->date = date('Y-m-d');
         $log->save();
-        
-        if ($save) {
+
+        if ($physical) {
             return back()->with('status', 'Physical Exam updated.');
         } else {
             return back()->with('status', 'Physical Exam not update.');
@@ -135,7 +139,7 @@ class PhysicalController extends Controller
             )
             ->latest('mast_patient.id')
             ->first();
-        
+
         $exam_xray = XRay::where('admission_id', $admission->id)->latest('id')->first();
         $exam_ecg = ECG::where('admission_id', $admission->id)->latest('id')->first();
         $exam_hema = Hematology::where('admission_id', $admission->id)->latest('id')->first();
@@ -145,19 +149,19 @@ class PhysicalController extends Controller
         $exam_hiv = HIV::where('admission_id', $admission->id)->latest('id')->first();
         $exam_psycho = Psychological::where('admission_id', $admission->id)->latest('id')->first();
         $exam_cardio = CardioVascular::where('admission_id', $admission->id)->latest('id')->first();
-        
+
         $patient = Patient::where('patientcode', $admission->patientcode)->latest('id')->first();
         $medical_history = MedicalHistory::where('main_id', $patient->id)->first();
         $physicians = User::where('position', 'LIKE', '%Physician%')->get();
-        
-        
+
+
         return view('Physical.add-physical', compact('admission', 'medical_history', 'physicians', 'exam_xray', 'exam_ecg', 'exam_hema', 'exam_urin', 'exam_feca', 'exam_bloodsero', 'exam_hiv', 'exam_psycho', 'exam_cardio'));
     }
 
     public function store_physical(Request $request) {
         $data = $request->except('_token', 'action', 'patient_id', 'patientname', 'patientcode', 'peme_date', 'id');
         $save = DB::table('exam_physical')->insert($data);
-        
+
         Cardiovascular::where('admission_id', $request->admission_id)->update([
             "height" => $request->height,
             "weight" => $request->weight,

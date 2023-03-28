@@ -4,7 +4,7 @@
         <div class="col-md-6">
             <h4>Basic & Special Exams</h4>
             @if ($exam_physical)
-                @if($exam_physical->remarks_status == 'findings' && $exam_physical->recommendation)
+                @if($exam_physical->remarks_status == 'findings' && $exam_physical->recommendations)
                 <div class="my-75">
                     <h5><b>PE</b></h5>
                     <span style="font-size: 12px;">@php echo
