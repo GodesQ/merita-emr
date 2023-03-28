@@ -1177,7 +1177,7 @@
                                                     <td  width="25%" style="margin-left: 1rem;">
                                                         Date (day/month/year):
                                                     </td>
-                                                    <td valign="bottom" width="23%" style="border-bottom: 1px solid black;">{{$exam_physical ? date_format(new DateTime($exam_physical->trans_date), "d F Y") : null}}</td>
+                                                    <td valign="bottom" width="23%" style="border-bottom: 1px solid black;">{{ $exam_physical ? date_format(new DateTime($exam_physical->trans_date), "d F Y") : null }}</td>
                                                     <td  width="10%"></td>
                                                 </tr>
                                             </tbody>
@@ -1197,7 +1197,7 @@
                                                             <img src="../../../app-assets/images/signatures/rex_bahamas_signature.png" width="76" height="60" style="object-fit: cover; object-position: top;" />
                                                         @endif
                                                     </td>
-                                                    <td width="1%"></td>
+                                                    <td  width="1%"></td>
                                                     <td  width="25%" valign="bottom">Name: (Typed or printed)</td>
                                                     <td  width="23%" valign="bottom" style="border-bottom: 1px solid black; padding: 0 1.5rem;">REX A. GAID</td>
                                                     <td  width="10%"></td>
@@ -1226,7 +1226,7 @@
                                                             @if(optional($admission->patient)->patient_signature)
                                                                 <img src="@php echo base64_decode(optional($admission->patient)->patient_signature) @endphp" width="170%"/>
                                                             @elseif (optional($admission->patient)->signature)
-                                                                <img src="data:image/jpeg;base64,{{$admission->signature}}" width="170%"/>
+                                                                <img src="data:image/jpeg;base64,{{ $admission->signature }}" width="170%"/>
                                                             @else
                                                                 <div style="width: 150%;height: 40px; position: absolute; top: -30px; left: 0px;"></div>
                                                             @endif

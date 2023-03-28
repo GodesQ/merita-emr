@@ -268,7 +268,6 @@
                                 a = 0
 
                                 response[0].forEach(element => {
-                                    console.log(element.firstname);
                                     // Search list item start with entered letters and create list
                                     if (a === 0) {
                                         $activeItemClass = "current_item"
@@ -282,7 +281,7 @@
                                                             </div>
                                                         </a>
                                                     </li>`;
-                                    
+
                                     // $startList +=
                                     //     '<li class="auto-suggestion d-flex align-items-center justify-content-between cursor-pointer ' +
                                     //     $activeItemClass +
@@ -295,7 +294,7 @@
                                     //     element.lastname +
                                     //     '"></span>' +
                                     //     "<span>" +
-                                    //     element.firstname + " " 
+                                    //     element.firstname + " "
                                     //     "</span>" +
                                     //     "</div>"
                                     a++
@@ -583,6 +582,6 @@
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         })
-  
+
 
 })(window, document, jQuery);

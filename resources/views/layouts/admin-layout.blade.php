@@ -263,6 +263,21 @@
     <script src="../../../app-assets/js/scripts/pages/app-invoice.js"></script>
 
     <script>
+
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        let lastClick = 0;
+        radioButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                const thisClick = Date.now();
+                if (thisClick - lastClick < 500) {
+                    this.checked = false;
+                } else {
+                    this.checked = true;
+                }
+                lastClick = thisClick;
+            });
+        });
+
     $("#search-input").change(function() {
         let searchValue = $("#search-input").val();
         let csrf = '{{ csrf_token() }}';
@@ -282,7 +297,6 @@
             }
         });
     });
-
     // window.addEventListener('resize', function(event){
     //     if(window.innerWidth <= 1024) {
     //         $('body').classList.remove("menu-expanded");
