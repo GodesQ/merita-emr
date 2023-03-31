@@ -53,6 +53,7 @@
                                 <th>Lastname</th>
                                 <th>Position</th>
                                 <th>Username</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -69,6 +70,46 @@
 
 @push('scripts')
 <script type="text/javascript">
+
+function updateStatus(status, e) {
+    let id = $(e).attr('data-id');
+    let csrf = '{{ csrf_token() }}';
+    Swal.fire({
+        title: 'Are you sure you want to change status?',
+        text: "You won't be able to revert this!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, change it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '{{route("employee.update_status")}}',
+                method: 'post',
+                data: {
+                    id: id,
+                    status: status,
+                    _token: csrf
+                },
+                success: function(response) {
+                    if(response.status) {
+                        Swal.fire(
+                            'Updated',
+                            'Record has been updated.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    })
+}
+
 $(document).ready(function() {
 
     $(document).on('click', '.delete-employee', function(e) {
@@ -136,6 +177,10 @@ $(document).ready(function() {
             {
                 data: 'username',
                 name: 'username'
+            },
+            {
+                data: 'status',
+                name: 'status'
             },
             {
                 data: 'action',

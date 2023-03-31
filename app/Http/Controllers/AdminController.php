@@ -29,85 +29,45 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    // show employee login page
-    public function employee_index()
+    public function employee_documentation()
     {
-        return view('Auth.employee-login');
-    }
-
-    public function check_employee(Request $request)
-    {
-        //VALIDATE REQUEST
-        $request->validate([
-            'password' => 'required',
-        ]);
-
-        $employeeInfo = User::where('username', '=', $request->name)->first();
-        if (!$employeeInfo) {
-            return back()->with('fail', 'Invalid Username');
-        } else {
-            //check password
-            if (Hash::check($request->password, $employeeInfo->password)) {
-                $request->session()->put([
-                    'classification' => 'employee',
-                    'employeeCode' => $employeeInfo->employeecode,
-                    'employeeId' => $employeeInfo->id,
-                    'employeeFirstname' => $employeeInfo->firstname,
-                    'employeeLastname' => $employeeInfo->lastname,
-                    'dept_id' => $employeeInfo->dept_id,
-                    'employee_image' => $employeeInfo->employee_image,
-                    'payment_type' => 'package',
-                    'request_date' => date("Y-m-d")
-                ]);
-                return redirect('/dashboard');
-            } else {
-                return back()->with('fail', 'Invalid Password');
-            }
-        }
-    }
-
-    public function employee_documentation() {
         $data = session()->all();
         return view('Employee.employee-documentation', compact('data'));
     }
 
-    public function today_patients(Request $request) {
+    public function today_patients(Request $request)
+    {
         $data = session()->all();
-        $today = $data["request_date"];
+        $today = $data['request_date'];
         if ($request->ajax()) {
-
-            $schedule_patients = SchedulePatient::select(
-                'sched_patients.patientcode',
-                DB::raw('MAX(patient_id) as patient_id'),
-                DB::raw('MAX(date) as date')
-            )
-            ->where('sched_patients.date', '=', $today)
-            ->with('patient')
-            ->groupBy('sched_patients.patientcode')
-            ->get();
+            $schedule_patients = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
+                ->where('sched_patients.date', '=', $today)
+                ->with('patient')
+                ->groupBy('sched_patients.patientcode')
+                ->get();
 
             return DataTables::of($schedule_patients)
                 ->addIndexColumn()
                 ->addColumn('patient_image', function ($row) {
-                    if($row->patient->patient_image) {
-                        $patient_image = '<img height="50" width="50" src="../../../app-assets/images/profiles/'.$row->patient->patient_image.'?'.$row->updated_date.'"/>';
-                    }else {
+                    if ($row->patient->patient_image) {
+                        $patient_image = '<img height="50" width="50" src="../../../app-assets/images/profiles/' . $row->patient->patient_image . '?' . $row->updated_date . '"/>';
+                    } else {
                         $patient_image = '<img height="50" width="50"  src="../../../app-assets/images/profiles/profilepic.jpg"/>';
                     }
                     return $patient_image;
                 })
                 ->addColumn('patientname', function ($row) {
-                    $patientname = '<a href="patient_edit?id=' . $row->patient_id .'&patientcode=' .$row->patientcode. '" class="font-weight-bold secondary">'.$row->patient->lastname.', '.$row->patient->firstname.'</a>';
+                    $patientname = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '" class="font-weight-bold secondary">' . $row->patient->lastname . ', ' . $row->patient->firstname . '</a>';
                     return $patientname;
                 })
                 ->addColumn('package', function ($row) {
-                    return  $row->patient->patientinfo->package ? $row->patient->patientinfo->package->packagename : null;
+                    return $row->patient->patientinfo->package ? $row->patient->patientinfo->package->packagename : null;
                 })
                 ->addColumn('agency', function ($row) {
                     return $row->patient->patientinfo->agency ? $row->patient->patientinfo->agency->agencyname : null;
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="patient_edit?id=' . $row->patient_id .'&patientcode=' .$row->patientcode. '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
+                    $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patient_image', 'patientname'])
@@ -124,13 +84,9 @@ class AdminController extends Controller
             ->latest('id')
             ->get();
 
-        $today = $data["request_date"];
+        $today = $data['request_date'];
 
-        $schedule_patients_status = SchedulePatient::select(
-                'sched_patients.patientcode',
-                DB::raw('MAX(patient_id) as patient_id'),
-                DB::raw('MAX(date) as date')
-            )
+        $schedule_patients_status = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
             ->where('sched_patients.date', '=', $today)
             ->with('patient')
             ->groupBy('sched_patients.patientcode')
@@ -145,58 +101,29 @@ class AdminController extends Controller
         $fit_patients = [];
 
         foreach ($schedule_patients_status as $key => $patient) {
-
-            if($patient->patient) {
+            if ($patient->patient) {
                 $admission = Admission::where('id', $patient->patient->admission_id)->first();
             } else {
                 $admission = null;
             }
 
             $patient_exams = DB::table('list_packagedtl')
-                ->select(
-                    'list_packagedtl.*',
-                    'list_exam.examname as examname',
-                    'list_exam.category as category',
-                    'list_exam.section_id',
-                    'list_section.sectionname'
-                )
+                ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
                 ->where('main_id', $patient->patient->patientinfo->medical_package)
-                ->leftJoin(
-                    'list_exam',
-                    'list_exam.id',
-                    'list_packagedtl.exam_id'
-                )
-                ->leftJoin(
-                    'list_section',
-                    'list_section.id',
-                    'list_exam.section_id'
-                )
+                ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                 ->get();
 
             if (!$patient_exams) {
                 $patient_exams = DB::table('list_packagedtl')
-                    ->select(
-                        'list_packagedtl.*',
-                        'list_exam.examname as examname',
-                        'list_exam.category as category',
-                        'list_exam.section_id',
-                        'list_section.sectionname'
-                    )
+                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
                     ->where('main_id', $patient->patient->admission->package_id)
-                    ->leftJoin(
-                        'list_exam',
-                        'list_exam.id',
-                        'list_packagedtl.exam_id'
-                    )
-                    ->leftJoin(
-                        'list_section',
-                        'list_section.id',
-                        'list_exam.section_id'
-                    )
+                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                     ->get();
             }
 
-            $patient_status = (new PatientController)->patientStatus($patient->patient->admission_id, $patient_exams);
+            $patient_status = (new PatientController())->patientStatus($patient->patient->admission_id, $patient_exams);
 
             $exam_audio = $patient_status['exam_audio'];
             $exam_crf = $patient_status['exam_crf'];
@@ -231,7 +158,6 @@ class AdminController extends Controller
                     return $exam == 'completed';
                 });
 
-
                 $on_going_exams = array_filter($exams, function ($exam) {
                     return $exam == '';
                 });
@@ -242,43 +168,17 @@ class AdminController extends Controller
 
             if (!$admission) {
                 array_push($queue_patients, $patient);
-            } else if($admission->lab_status == 2) {
+            } elseif ($admission->lab_status == 2) {
                 array_push($fit_patients, $patient);
             } else {
-                if (
-                    $exam_audio == null &&
-                    $exam_crf == null &&
-                    $exam_cardio == null &&
-                    $exam_dental == null &&
-                    $exam_ecg == null &&
-                    $exam_echodoppler == null &&
-                    $exam_echoplain == null &&
-                    $exam_ishihara == null &&
-                    $exam_psycho == null &&
-                    $exam_psychobpi == null &&
-                    $exam_stressecho == null &&
-                    $exam_stresstest == null &&
-                    $exam_ultrasound == null &&
-                    $exam_visacuity == null &&
-                    $exam_xray == null &&
-                    $exam_blood_serology == null &&
-                    $examlab_hiv == null &&
-                    $examlab_drug == null &&
-                    $examlab_feca == null &&
-                    $examlab_feca == null &&
-                    $examlab_hepa == null &&
-                    $examlab_pregnancy == null &&
-                    $examlab_urin == null &&
-                    $examlab_misc == null
-                ) {
+                if ($exam_audio == null && $exam_crf == null && $exam_cardio == null && $exam_dental == null && $exam_ecg == null && $exam_echodoppler == null && $exam_echoplain == null && $exam_ishihara == null && $exam_psycho == null && $exam_psychobpi == null && $exam_stressecho == null && $exam_stresstest == null && $exam_ultrasound == null && $exam_visacuity == null && $exam_xray == null && $exam_blood_serology == null && $examlab_hiv == null && $examlab_drug == null && $examlab_feca == null && $examlab_feca == null && $examlab_hepa == null && $examlab_pregnancy == null && $examlab_urin == null && $examlab_misc == null) {
                     array_push($pending_patients, $patient);
                 } else {
-
                     if (count($on_going_exams)) {
                         array_push($ongoing_patients, $patient);
                     }
                 }
-                if(count($completed_exams)) {
+                if (count($completed_exams)) {
                     if (count($completed_exams) == count($patient_exams)) {
                         array_push($completed_patients, $patient);
                     }
@@ -286,72 +186,30 @@ class AdminController extends Controller
             }
         }
 
-        return view(
-            'layouts.dashboard',
-            compact(
-                'data',
-                'ongoing_patients',
-                'completed_patients',
-                'pending_patients',
-                'queue_patients',
-                'fit_patients'
-            )
-        );
+        return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
     }
 
-    public function month_scheduled_patients(Request $request) {
+    public function month_scheduled_patients(Request $request)
+    {
         $scheduled_month_patients = DB::table('sched_patients')
-        ->select(
-            'sched_patients.patientcode',
-            DB::raw('MAX(sched_patients.patient_id) as patient_id'),
-            DB::raw('MAX(sched_patients.date) as date'),
-            DB::raw('MAX(mast_patient.lastname) as lastname'),
-            DB::raw('MAX(mast_patient.firstname) as firstname'),
-            DB::raw('MAX(mast_patient.patient_image) as patient_image'),
-            DB::raw('MAX(mast_patient.admission_id) as admission_id'),
-            DB::raw('MAX(mast_patientinfo.medical_package) as medical_package'),
-            DB::raw('MAX(tran_admission.package_id) as package_id'),
-            DB::raw('MAX(tran_admission.lab_status) as lab_status'),
-            DB::raw('MAX(list_package.packagename) as packagename'),
-            DB::raw('MAX(mast_agency.agencyname) as agencyname')
-        )
-        ->whereBetween('sched_patients.date', [date('Y-m-t'), date('Y-m-t')])
-        ->leftJoin(
-            'mast_patient',
-            'mast_patient.id',
-            'sched_patients.patient_id'
-        )
-        ->leftJoin(
-            'mast_patientinfo',
-            'mast_patientinfo.main_id',
-            'sched_patients.patient_id'
-        )
-        ->leftJoin(
-            'tran_admission',
-            'tran_admission.id',
-            'mast_patient.admission_id'
-        )
-        ->leftJoin(
-            'list_package',
-            'list_package.id',
-            'mast_patientinfo.medical_package'
-        )
-        ->leftJoin(
-            'mast_agency',
-            'mast_agency.id',
-            'mast_patientinfo.agency_id'
-        )
-        ->groupBy('sched_patients.patientcode')
-        ->get();
+            ->select('sched_patients.patientcode', DB::raw('MAX(sched_patients.patient_id) as patient_id'), DB::raw('MAX(sched_patients.date) as date'), DB::raw('MAX(mast_patient.lastname) as lastname'), DB::raw('MAX(mast_patient.firstname) as firstname'), DB::raw('MAX(mast_patient.patient_image) as patient_image'), DB::raw('MAX(mast_patient.admission_id) as admission_id'), DB::raw('MAX(mast_patientinfo.medical_package) as medical_package'), DB::raw('MAX(tran_admission.package_id) as package_id'), DB::raw('MAX(tran_admission.lab_status) as lab_status'), DB::raw('MAX(list_package.packagename) as packagename'), DB::raw('MAX(mast_agency.agencyname) as agencyname'))
+            ->whereBetween('sched_patients.date', [date('Y-m-t'), date('Y-m-t')])
+            ->leftJoin('mast_patient', 'mast_patient.id', 'sched_patients.patient_id')
+            ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'sched_patients.patient_id')
+            ->leftJoin('tran_admission', 'tran_admission.id', 'mast_patient.admission_id')
+            ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->groupBy('sched_patients.patientcode')
+            ->get();
 
         // dd($scheduled_month_patients);
 
         $data = [];
         foreach ($scheduled_month_patients as $key => $scheduled_month_patient) {
             $patient = [
-                "title" => $scheduled_month_patient->firstname . " " . $scheduled_month_patient->lastname,
-                "start" => $scheduled_month_patient->date,
-                "url" => url('') . "/" . 'patient_edit?id='.$scheduled_month_patient->patient_id.'&patientcode='.$scheduled_month_patient->patientcode.''
+                'title' => $scheduled_month_patient->firstname . ' ' . $scheduled_month_patient->lastname,
+                'start' => $scheduled_month_patient->date,
+                'url' => url('') . '/' . 'patient_edit?id=' . $scheduled_month_patient->patient_id . '&patientcode=' . $scheduled_month_patient->patientcode . '',
             ];
             array_push($data, $patient);
         }
@@ -359,7 +217,8 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    public function scheduled_patients() {
+    public function scheduled_patients()
+    {
         $data = session()->all();
         return view('scheduled_patients', compact('data'));
     }
@@ -373,24 +232,9 @@ class AdminController extends Controller
     public function logs_table(Request $request)
     {
         if ($request->ajax()) {
-            $data = EmployeeLog::select(
-                'employee_logs.*',
-                'mast_employee.firstname as firstname',
-                'mast_employee.lastname as lastname',
-                'mast_employee.dept_id as dept_id',
-                'mast_employee.employeecode as employeecode',
-                'main_dept.dept as dept'
-            )
-                ->leftJoin(
-                    'mast_employee',
-                    'mast_employee.id',
-                    'employee_logs.employee_id'
-                )
-                ->leftJoin(
-                    'main_dept',
-                    'main_dept.id',
-                    'mast_employee.dept_id'
-                );
+            $data = EmployeeLog::select('employee_logs.*', 'mast_employee.firstname as firstname', 'mast_employee.lastname as lastname', 'mast_employee.dept_id as dept_id', 'mast_employee.employeecode as employeecode', 'main_dept.dept as dept')
+                ->leftJoin('mast_employee', 'mast_employee.id', 'employee_logs.employee_id')
+                ->leftJoin('main_dept', 'main_dept.id', 'mast_employee.dept_id');
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -424,17 +268,26 @@ class AdminController extends Controller
             $data = User::select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('status', function($row) {
+                    if($row->ynactive) {
+                        return $badge = '<div class="badge badge-success">Active</div>';
+                    } else {
+                        return $badge = '<div class="badge badge-danger">Inactive</div>';
+                    }
+                })
                 ->addColumn('action', function ($row) {
-                    $actionBtn =
-                        '<a href="edit_employees?id=' .
-                        $row['id'] .
-                        '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-<a href="#" id="' .
-                        $row['id'] .
-                        '" class="delete-employee btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                    if($row->ynactive) {
+                        $actionBtn ='<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                        <a href="#" id="' . $row['id'] . '" class="delete-employee btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
+                        <button class="btn btn-sm btn-danger" data-id="'.$row->id.'" onclick="updateStatus(0, this)"><i class="fa fa-user-times"></i></button>';
+                    } else {
+                        $actionBtn ='<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                        <a href="#" id="' . $row['id'] . '" class="delete-employee btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
+                        <button class="btn btn-sm btn-success" data-id="'.$row->id.'" onclick="updateStatus(1, this)"><i class="fa fa-user-plus"></i></button>';
+                    }
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'status'])
                 ->toJson();
         }
     }
@@ -462,26 +315,22 @@ class AdminController extends Controller
         $latestEmployeeCode = $lastEmployeeCode + 1;
         $employeeCode = 'E' . date('y') . '-0000' . $latestEmployeeCode;
         $departments = Department::all();
-        return view(
-            'Employee.add-employee',
-            compact('employeeCode', 'departments', 'data')
-        );
+        return view('Employee.add-employee', compact('employeeCode', 'departments', 'data'));
     }
 
     public function store_employees(Request $request)
     {
-
         // dd($request->all());
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            "email" => "required|email|unique:mast_employee",
+            'email' => 'required|email|unique:mast_employee',
         ]);
 
         $name = null;
 
-        if($request->employee_image) {
-            $name = time() . '.' . explode('/', explode(':', substr($request->employee_image, 0,strpos($request->employee_image, ';')))[1])[1];
+        if ($request->employee_image) {
+            $name = time() . '.' . explode('/', explode(':', substr($request->employee_image, 0, strpos($request->employee_image, ';')))[1])[1];
             Image::make($request->employee_image)->save(public_path('app-assets/images/employees/') . $name);
         }
 
@@ -500,7 +349,7 @@ class AdminController extends Controller
             'dept_id' => $request->dept,
             'license_no' => $request->license_no,
             'license_expdate' => $request->license_expdate,
-            'created_date' => date('Y-m-d')
+            'created_date' => date('Y-m-d'),
         ]);
 
         $employee_info = DB::table('mast_employeeinfo')->insert([
@@ -512,7 +361,7 @@ class AdminController extends Controller
             'otherposition' => $request->otherposition,
             'religion' => $request->religion,
             'birthdate' => $request->birthdate,
-            'birthplace' => $request->birthplace
+            'birthplace' => $request->birthplace,
         ]);
 
         $employeeInfo = session()->all();
@@ -523,7 +372,7 @@ class AdminController extends Controller
         $log->save();
 
         if ($employee && employee_info) {
-            return redirect('/employees')->with('status','Employee added successfully.' );
+            return redirect('/employees')->with('status', 'Employee added successfully.');
         }
     }
 
@@ -532,35 +381,12 @@ class AdminController extends Controller
         $data = session()->all();
         $id = $_GET['id'];
         $departments = Department::all();
-        $employee = User::select(
-            'mast_employee.*',
-            'main_dept.dept as dept_name',
-            'mast_employeeinfo.address as address',
-            'mast_employeeinfo.contactno as contactno',
-            'mast_employeeinfo.religion as religion',
-            'mast_employeeinfo.gender as gender',
-            'mast_employeeinfo.maritalstatus as maritalstatus',
-            'mast_employeeinfo.birthdate as birthdate',
-            'mast_employeeinfo.birthplace as birthplace',
-            'mast_employeeinfo.otherposition as otherposition'
-        )
+        $employee = User::select('mast_employee.*', 'main_dept.dept as dept_name', 'mast_employeeinfo.address as address', 'mast_employeeinfo.contactno as contactno', 'mast_employeeinfo.religion as religion', 'mast_employeeinfo.gender as gender', 'mast_employeeinfo.maritalstatus as maritalstatus', 'mast_employeeinfo.birthdate as birthdate', 'mast_employeeinfo.birthplace as birthplace', 'mast_employeeinfo.otherposition as otherposition')
             ->where('mast_employee.id', $id)
-            ->leftJoin(
-                'main_dept',
-                'main_dept.id',
-                '=',
-                'mast_employee.dept_id'
-            )
-            ->leftJoin(
-                'mast_employeeinfo',
-                'mast_employeeinfo.main_id',
-                'mast_employee.id'
-            )
+            ->leftJoin('main_dept', 'main_dept.id', '=', 'mast_employee.dept_id')
+            ->leftJoin('mast_employeeinfo', 'mast_employeeinfo.main_id', 'mast_employee.id')
             ->first();
-        return view(
-            'Employee.edit-employee',
-            compact('employee', 'departments', 'data')
-        );
+        return view('Employee.edit-employee', compact('employee', 'departments', 'data'));
     }
 
     public function update_employees(Request $request)
@@ -569,26 +395,9 @@ class AdminController extends Controller
         if ($request->old_image === $request->employee_image) {
             $name = $request->old_image;
         } else {
-            $name =
-                time() .
-                '.' .
-                explode(
-                    '/',
-                    explode(
-                        ':',
-                        substr(
-                            $request->employee_image,
-                            0,
-                            strpos($request->employee_image, ';')
-                        )
-                    )[1]
-                )[1];
-            Image::make($request->employee_image)->save(
-                public_path('app-assets/images/employees/') . $name
-            );
-            $userOldPhoto =
-                public_path('app-assets/images/employees/') .
-                $request->old_image;
+            $name = time() . '.' . explode('/', explode(':', substr($request->employee_image, 0, strpos($request->employee_image, ';')))[1])[1];
+            Image::make($request->employee_image)->save(public_path('app-assets/images/employees/') . $name);
+            $userOldPhoto = public_path('app-assets/images/employees/') . $request->old_image;
             // remove old image
             @unlink($userOldPhoto);
         }
@@ -610,18 +419,19 @@ class AdminController extends Controller
         $employee->updated_date = date('Y-m-d');
         $save = $employee->save();
 
-        $employee_info = DB::table('mast_employeeinfo')->where('main_id', $request->id)->update([
-                "address" => $request->address,
-                "contactno" => $request->contactno,
-                "religion" => $request->religion,
-                "gender" => $request->gender,
-                "otherposition" => $request->otherposition,
-                "maritalstatus" => $request->maritalstatus,
-                "birthdate" => $request->birthdate,
-                "birthplace" => $request->birthplace,
-                "gender" => $request->gender,
+        $employee_info = DB::table('mast_employeeinfo')
+            ->where('main_id', $request->id)
+            ->update([
+                'address' => $request->address,
+                'contactno' => $request->contactno,
+                'religion' => $request->religion,
+                'gender' => $request->gender,
+                'otherposition' => $request->otherposition,
+                'maritalstatus' => $request->maritalstatus,
+                'birthdate' => $request->birthdate,
+                'birthplace' => $request->birthplace,
+                'gender' => $request->gender,
             ]);
-
 
         $employeeInfo = session()->all();
         $log = new EmployeeLog();
@@ -631,10 +441,18 @@ class AdminController extends Controller
         $log->save();
 
         if ($save) {
-            return response()->json([
-                'status' => 200,
-            ]);
+            return response()->json(['status' => 200]);
         }
+    }
+
+    public function update_status(Request $request) {
+        $id = $request->id;
+        $employee = User::where('id', $id)->first();
+        $employee->ynactive = $request->status;
+        $save = $employee->save();
+
+
+        if($save) return response()->json(['status' => true, 'message' => 'Update Successfully']);
     }
 
     // -------------------------------------------------------------------- START: DEPARTMENT (CRUD) -------------------------------------------------------------------- //
@@ -707,10 +525,7 @@ class AdminController extends Controller
         $id = $_GET['id'];
         $department = Department::where('id', $id)->first();
         $employees = User::where('dept_id', $id)->get();
-        return view(
-            'Department.edit-department',
-            compact('department', 'data', 'employees')
-        );
+        return view('Department.edit-department', compact('department', 'data', 'employees'));
     }
     public function update_department(Request $request)
     {
@@ -746,8 +561,7 @@ class AdminController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn =
-                        '<a href="#" id="' . $row['id'] .'" class="delete-cashier-or btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                    $actionBtn = '<a href="#" id="' . $row['id'] . '" class="delete-cashier-or btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patientname'])
@@ -755,57 +569,60 @@ class AdminController extends Controller
         }
     }
 
-    public function add_cashier_or() {
+    public function add_cashier_or()
+    {
         $data = session()->all();
         return view('CashierOR.add-cashier-or', compact('data'));
     }
 
-    public function store_cashier_or(Request $request) {
+    public function store_cashier_or(Request $request)
+    {
         // dd($request->all());
         $latestRecord = CashierOR::latest('serial_no')->first();
         // create serial no
         $serial = $latestRecord->serial_no + 1;
-        $serial_no = str_pad($serial,5,"0",STR_PAD_LEFT);
+        $serial_no = str_pad($serial, 5, '0', STR_PAD_LEFT);
         // create or number
-        $or = substr($latestRecord->trans_no,6,7);
+        $or = substr($latestRecord->trans_no, 6, 7);
         $num = $or + 1;
-        $trans_no = "OR".date('y')."-".str_pad($num,6,"0",STR_PAD_LEFT);
+        $trans_no = 'OR' . date('y') . '-' . str_pad($num, 6, '0', STR_PAD_LEFT);
 
-		$save = CashierOR::insert([
-		    "serial_no" => $serial_no,
-		    "trans_no" => $trans_no,
-		    "admission_id" => $request->admission_id,
-		    "agency_id" => $request->agency_id,
-		    "payor" => $request->payor,
-		    "payment_user" => $request->payment_user,
-		    "paying_type" => $request->payment_type,
-		    "particulars" => $request->particulars,
-		    "tin_no" => $request->tin_no,
-		    "amount_due" => $request->amount_due,
-		    "discount" => $request->discount,
-		    "amount" => $request->amount,
-		    "status" => $request->status,
-		    "trans_date" => $request->trans_date,
-		]);
-		return back()->with('status', 'Generate Payment Sucessfully');
+        $save = CashierOR::insert([
+            'serial_no' => $serial_no,
+            'trans_no' => $trans_no,
+            'admission_id' => $request->admission_id,
+            'agency_id' => $request->agency_id,
+            'payor' => $request->payor,
+            'payment_user' => $request->payment_user,
+            'paying_type' => $request->payment_type,
+            'particulars' => $request->particulars,
+            'tin_no' => $request->tin_no,
+            'amount_due' => $request->amount_due,
+            'discount' => $request->discount,
+            'amount' => $request->amount,
+            'status' => $request->status,
+            'trans_date' => $request->trans_date,
+        ]);
+        return back()->with('status', 'Generate Payment Sucessfully');
     }
 
-    public function update_cashier_or(Request $request) {
+    public function update_cashier_or(Request $request)
+    {
         $save = CashierOR::where('id', $request->id)->update([
-		    "admission_id" => $request->admission_id,
-		    "agency_id" => $request->agency_id,
-		    "payor" => $request->payor,
-		    "payment_user" => $request->payment_user,
-		    "paying_type" => $request->payment_type,
-		    "particulars" => $request->particulars,
-		    "tin_no" => $request->tin_no,
-		    "amount_due" => $request->amount_due,
-		    "discount" => $request->discount,
-		    "amount" => $request->amount,
-		    "status" => $request->status,
-		    "trans_date" => $request->trans_date,
-		]);
-		return back()->with('status', 'Update Payment Sucessfully');
+            'admission_id' => $request->admission_id,
+            'agency_id' => $request->agency_id,
+            'payor' => $request->payor,
+            'payment_user' => $request->payment_user,
+            'paying_type' => $request->payment_type,
+            'particulars' => $request->particulars,
+            'tin_no' => $request->tin_no,
+            'amount_due' => $request->amount_due,
+            'discount' => $request->discount,
+            'amount' => $request->amount,
+            'status' => $request->status,
+            'trans_date' => $request->trans_date,
+        ]);
+        return back()->with('status', 'Update Payment Sucessfully');
     }
 
     public function delete_cashier_or(Request $request)
@@ -823,35 +640,16 @@ class AdminController extends Controller
 
     public function admission_selects()
     {
-        $admissions = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname'
-        )
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.patientcode',
-                '=',
-                'tran_admission.patientcode'
-            )
+        $admissions = Admission::select('tran_admission.*', 'mast_patient.lastname as lastname', 'mast_patient.firstname as firstname')
+            ->leftJoin('mast_patient', 'mast_patient.patientcode', '=', 'tran_admission.patientcode')
             ->get();
 
         $admission_list = '';
-        $admission_list .=
-            '<input list="patient" name="browser" id="browser" class="form-control admission-input">';
+        $admission_list .= '<input list="patient" name="browser" id="browser" class="form-control admission-input">';
         $admission_list .= '<datalist id="patient">';
 
         foreach ($admissions as $admission) {
-            $admission_list .=
-                '<option value="' .
-                $admission->id .
-                '">' .
-                $admission->lastname .
-                '' .
-                ', ' .
-                ' ' .
-                $admission->firstname .
-                '</option>';
+            $admission_list .= '<option value="' . $admission->id . '">' . $admission->lastname . '' . ', ' . ' ' . $admission->firstname . '</option>';
         }
 
         $admission_list .= '</datalist>';
@@ -859,44 +657,45 @@ class AdminController extends Controller
         echo $admission_list;
     }
 
-    public function support() {
+    public function support()
+    {
         $data = session()->all();
         return view('Support.support', compact('data'));
     }
 
-    public function store_support(Request $request) {
-
+    public function store_support(Request $request)
+    {
         $this->validate($request, [
             'ss_issue' => 'required',
-            'ss_issue.*' => 'mimes:pdf,jpg,png,jpeg'
+            'ss_issue.*' => 'mimes:pdf,jpg,png,jpeg',
         ]);
         if ($request->hasFile('ss_issue')) {
             $file_name = $request->file('ss_issue')->getClientOriginalName();
-            $save_ss = $request->file('ss_issue')->move(public_path().'/app-assets/images/support/', $file_name);
-            if($save_ss) {
+            $save_ss = $request->file('ss_issue')->move(public_path() . '/app-assets/images/support/', $file_name);
+            if ($save_ss) {
                 $save = DB::table('support')->insert([
-                   "role" => $request->role,
-                   "name" => $request->name,
-                   "email" => $request->email,
-                   "subject" => $request->subject,
-                   "issue" => $request->issue,
-                   "ss_issue" => $file_name
+                    'role' => $request->role,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'subject' => $request->subject,
+                    'issue' => $request->issue,
+                    'ss_issue' => $file_name,
                 ]);
 
                 $data = [
-                    "role" => $request->role,
-                    "name" => $request->name,
-                    "email" => $request->email,
-                    "subject" => $request->subject,
-                    "issue" => $request->issue,
-                    "ss_issue" => $file_name
+                    'role' => $request->role,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'subject' => $request->subject,
+                    'issue' => $request->issue,
+                    'ss_issue' => $file_name,
                 ];
 
                 Mail::to(env('DEVELOPER_EMAIL'))->send(new Support($data));
 
-                if($request->role == 'employee') {
+                if ($request->role == 'employee') {
                     return redirect('/dashboard')->with('success_support', 'Successfully Sent');
-                } else if($request->role == 'patient') {
+                } elseif ($request->role == 'patient') {
                     return redirect('/patient_info')->with('success_support', 'Successfully Sent');
                 } else {
                     return redirect('/agency_dashboard')->with('success_support', 'Successfully Sent');

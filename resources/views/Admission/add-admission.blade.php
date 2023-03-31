@@ -336,7 +336,7 @@ const itemForm = document.querySelector('.items-form');
 let count1 = 0;
 let count2 = 20;
 addItem.addEventListener('click', () => {
-  
+
   const addForm = document.createElement('div');
   addForm.classList.add('item-form-container', 'row', 'border', 'p-1');
   addForm.innerHTML = `<div class="item-name-container col-md-3">

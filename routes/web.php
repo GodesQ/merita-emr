@@ -341,6 +341,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::delete('/employee_delete', [AdminController::class, 'delete_employee'])->name('employee.delete');
 
+        Route::post('/employee_update_status', [AdminController::class, 'update_status'])->name('employee.update_status');
+
         Route::get('/list_section', [SectionController::class, 'view_list_section'])->name('section.index');
 
         Route::get('/get_list_section', [SectionController::class, 'get_list_section'])->name('section.get');

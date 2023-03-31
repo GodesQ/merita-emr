@@ -26,6 +26,7 @@ class AdminAuthController extends Controller
 
         if(!$employee) return back()->with('fail', 'The username you entered is incorrect. Please check and try again.');
         if (!Hash::check($request->password, $employee->password)) return back()->with('fail', 'The password you entered is incorrect. Please check and try again.');
+        if(!$request->ynactive) return back()->with('fail', 'This account is inactive. Please contact your system administrator to configure.');
 
         $request->session()->put([
             'classification' => 'employee',
