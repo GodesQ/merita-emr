@@ -42,7 +42,7 @@ class PatientController extends Controller
             $patientInfo = PatientInfo::where('main_id', $data['patientId'])->first();
 
             $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
-                ->leftJoin('mast_agency', ' .id', '=', 'list_package.agency_id')
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
             $patient_email = session()->has('email') ? session()->get('email') : null;
