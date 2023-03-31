@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <div style="height: 100vh; margin: 0;">
+    <div style="min-height: 100vh; margin: 0; max-height: 200vh;">
         <table valign="top" width="100%" style="overflow: hidden;" cellspacing="0" cellpadding="0" id="table" class="brdNone main-table">
             <tbody>
                 <tr>
