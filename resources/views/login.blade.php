@@ -69,14 +69,14 @@
                                     <div class="card-body">
                                         <form class="form-horizontal" action="/save-login" method="POST">
                                             @if(Session::get('fail'))
-                                            <div class="alert alert-danger">
-                                                {{Session::get('fail')}}
-                                            </div>
+                                                <div class="alert alert-danger">
+                                                    {{Session::get('fail')}}
+                                                </div>
                                             @endif
                                             @if(Session::get('success'))
-                                            <div class="alert alert-success">
-                                                {{Session::get('success')}}
-                                            </div>
+                                                <div class="alert alert-success">
+                                                    {{Session::get('success')}}
+                                                </div>
                                             @endif
                                             @csrf
                                             <fieldset class="form-group position-relative has-icon-left">

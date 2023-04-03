@@ -13,6 +13,16 @@
                 </div>
                 @endif
             @endif
+            @if ($exam_physical)
+                @if($exam_physical->pe1_recommendation)
+                    <div class="my-75">
+                        <h5><b>PE-1</b></h5>
+                        <span style="font-size: 12px;">@php echo
+                            nl2br($exam_physical->pe1_recommendation)@endphp</span>
+                        <input type="hidden" value="PE-1: @php echo nl2br($exam_physical->pe1_recommendation) @endphp" name="recommendation[]" />
+                    </div>
+                @endif
+            @endif
             @if ($exam_visacuity)
                 @if($exam_visacuity->remarks_status == 'findings' && $exam_visacuity->recommendation)
                 <div class="my-75">

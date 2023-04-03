@@ -568,6 +568,12 @@
                                                     <textarea name="specify" cols="20" rows="2" id="specify"
                                                         class="form-control">{{$exam->specify}}</textarea></td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <h6>PE1 Recommendation</h6>
+                                                    <textarea name="pe1_recommendation" cols="20" rows="2" id="pe1_recommendation"
+                                                        class="form-control"><?php echo nl2br($exam->pe1_recommendation) ?></textarea></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
