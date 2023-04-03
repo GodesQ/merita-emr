@@ -251,10 +251,10 @@ class PrintPanelController extends Controller
         return view('Transmittal.transmittal', compact('agencies'));
     }
 
+    public function daily_patient(Request $request) {
+        $from_date = $request->date_from;
+        $to_date = $request->date_to;
 
-    public function daily_patient() {
-        $from_date = $_GET['date_from'];
-        $to_date = $_GET['date_to'];
         $today_patients = Admission::select(
             "patientcode",
             DB::raw('MAX(tran_admission.id) as id'),
@@ -271,8 +271,6 @@ class PrintPanelController extends Controller
         ->with('patient', 'agency', 'package')
          ->groupBy('patientcode')
          ->get();
-
-        //  dd($today_patients);
 
          $patients = [];
 
@@ -371,9 +369,10 @@ class PrintPanelController extends Controller
         return view('PrintPanel.daily_patient_form', compact('data'));
     }
 
-    public function follow_up_print() {
-        $id = $_GET['id'];
-        $admission_id = $_GET['admission_id'];
+    public function follow_up_print(Request $request) {
+        $id = $request->id;
+        $admission_id = $request->admission_id;
+
         $patient = Patient::select('mast_patient.*', 'mast_agency.agencyname')
         ->where('mast_patient.id', $id)
         ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
@@ -381,7 +380,6 @@ class PrintPanelController extends Controller
         ->first();
 
         $admission = Admission::where('id', $admission_id)->latest('id')->with('exam_physical', 'exam_ecg', 'exam_xray')->first();
-        // dd($admission);
 
         $records = ReassessmentFindings::where('admission_id', $admission_id)->get();
 
@@ -395,77 +393,9 @@ class PrintPanelController extends Controller
     public function lab_result(Request $request) {
         $id = $request->id;
 
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.id as patient_id',
-            'mast_patient.firstname',
-            'mast_patient.lastname',
-            'mast_patient.middlename',
-            'mast_patient.patient_image',
-            'mast_patient.age',
-            'mast_patient.gender',
-            'mast_patient.position_applied',
-            'mast_patient.patient_signature',
-            'mast_agency.agencyname',
-            'list_package.packagename'
-        )
-            ->where('tran_admission.id', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                'tran_admission.agency_id'
-            )
-            ->leftJoin(
-                'list_package',
-                'list_package.id',
-                'tran_admission.package_id'
-            )
+        $admission = Admission::where('id', $id)
+            ->with('patient', 'agency', 'package', 'exam_bloodsero', 'exam_drug', 'exam_feca', 'exam_pregnancy', 'exam_hema', 'exam_hepa', 'exam_hiv', 'exam_urin')
             ->first();
-
-        $exam_bloodsero = DB::table('examlab_bloodsero')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_drug = DB::table('examlab_drug')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_feca = DB::table('examlab_feca')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_pregnancy = DB::table('examlab_pregnancy')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_hema = DB::table('examlab_hema')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_hepa = DB::table('examlab_hepa')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_hiv = DB::table('examlab_hiv')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
-
-        $exam_urin = DB::table('examlab_urin')
-        ->where('admission_id', $id)
-        ->latest('id')
-        ->first();
 
         $additional_exams = DB::table('tran_admissiondtl')
                 ->select(
@@ -497,215 +427,34 @@ class PrintPanelController extends Controller
 
         $additional = implode(', ', $add_exams);
 
-        return view('PrintPanel.lab_result', compact('admission', 'exam_hema', 'exam_hiv', 'exam_bloodsero', 'exam_drug', 'exam_feca', 'exam_hepa', 'exam_urin', 'exam_pregnancy', 'additional'));
+        return view('PrintPanel.lab_result', compact('admission', 'additional'));
     }
 
     public function land_based_print(Request $request) {
-        $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.id as patient_id',
-            'mast_patient.firstname',
-            'mast_patient.lastname',
-            'mast_patient.middlename',
-            'mast_patient.patient_image',
-            'mast_patient.signature',
-            'mast_patient.age',
-            'mast_patient.gender',
-            'mast_patient.position_applied',
-            'mast_patient.patient_signature',
-            'mast_agency.agencyname',
-            'list_package.packagename'
-        )
-            ->where('tran_admission.id', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                'tran_admission.agency_id'
-            )
-            ->leftJoin(
-                'list_package',
-                'list_package.id',
-                'tran_admission.package_id'
-            )
+        $id = $request->id;
+        $admission = Admission::where('tran_admission.id', $id)
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
             ->first();
 
-        $exam_audio = DB::table('exam_audio')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $exam_ishihara = DB::table('exam_ishihara')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $exam_psycho = DB::table('exam_psycho')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-
-        $exam_physical = DB::table('exam_physical')
-            ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice', 'mast_employee.lastname as physician_lastname', 'mast_employee.firstname as physician_firstname', 'mast_employee.middlename as physician_middlename', 'mast_employee.signature as physician_signature', 'mast_employee.license_no as physician_licenseno')
-            ->where('exam_physical.admission_id', '=', $id)
-            ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
-            ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
-            ->leftJoin('list_tier4', 'list_tier4.id', 'exam_physical.tier4_id')
-            ->leftJoin('mast_employee', 'mast_employee.id', 'exam_physical.technician_id')
-            ->latest('id')
-            ->first();
-
-            // dd($exam_physical);
-
-        $exam_visacuity = DB::table('exam_visacuity')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $patientInfo = DB::table('mast_patientinfo')
-            ->where('main_id', $admission->patient_id)
-            ->first();
-        return view('PrintPanel.land_base', compact('admission', 'patientInfo', 'exam_audio', 'exam_physical', 'exam_ishihara', 'exam_visacuity', 'exam_psycho'));
+        return view('PrintPanel.land_base', compact('admission'));
     }
 
     public function north_england_print(Request $request) {
-        $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.id as patient_id',
-            'mast_patient.firstname',
-            'mast_patient.lastname',
-            'mast_patient.middlename',
-            'mast_patient.patient_image',
-            'mast_patient.signature',
-            'mast_patient.age',
-            'mast_patient.gender',
-            'mast_patient.position_applied',
-            'mast_patient.patient_signature',
-            'mast_agency.agencyname',
-            'list_package.packagename'
-        )
-            ->where('tran_admission.id', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                'tran_admission.agency_id'
-            )
-            ->leftJoin(
-                'list_package',
-                'list_package.id',
-                'tran_admission.package_id'
-            )
+        $id = $request->id;
+        $admission = Admission::where('tran_admission.id', $id)
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
             ->first();
 
-        $exam_audio = DB::table('exam_audio')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $exam_ishihara = DB::table('exam_ishihara')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-
-        $exam_physical = DB::table('exam_physical')
-            ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice', 'mast_employee.lastname as physician_lastname', 'mast_employee.firstname as physician_firstname', 'mast_employee.middlename as physician_middlename', 'mast_employee.signature as physician_signature', 'mast_employee.license_no as physician_licenseno')
-            ->where('exam_physical.admission_id', '=', $id)
-            ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
-            ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
-            ->leftJoin('list_tier4', 'list_tier4.id', 'exam_physical.tier4_id')
-            ->leftJoin('mast_employee', 'mast_employee.id', 'exam_physical.technician_id')
-            ->latest('id')
-            ->first();
-
-        $exam_visacuity = DB::table('exam_visacuity')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $patientInfo = DB::table('mast_patientinfo')
-            ->where('main_id', $admission->patient_id)
-            ->first();
-        return view('PrintPanel.north_england', compact('admission', 'patientInfo', 'exam_audio', 'exam_physical', 'exam_ishihara', 'exam_visacuity'));
+        return view('PrintPanel.north_england', compact('admission'));
     }
 
     public function standard_club_print(Request $request) {
-        $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.id as patient_id',
-            'mast_patient.firstname',
-            'mast_patient.lastname',
-            'mast_patient.middlename',
-            'mast_patient.patient_image',
-            'mast_patient.signature',
-            'mast_patient.age',
-            'mast_patient.gender',
-            'mast_patient.position_applied',
-            'mast_patient.patient_signature',
-            'mast_agency.agencyname',
-            'list_package.packagename'
-        )
-            ->where('tran_admission.id', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                'tran_admission.agency_id'
-            )
-            ->leftJoin(
-                'list_package',
-                'list_package.id',
-                'tran_admission.package_id'
-            )
+        $id = $request->id;
+        $admission = Admission::where('tran_admission.id', $id)
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
             ->first();
 
-        $exam_audio = DB::table('exam_audio')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $exam_ishihara = DB::table('exam_ishihara')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-
-        $exam_physical = DB::table('exam_physical')
-            ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice', 'mast_employee.lastname as physician_lastname', 'mast_employee.firstname as physician_firstname', 'mast_employee.middlename as physician_middlename', 'mast_employee.signature as physician_signature', 'mast_employee.license_no as physician_licenseno')
-            ->where('exam_physical.admission_id', '=', $id)
-            ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
-            ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
-            ->leftJoin('list_tier4', 'list_tier4.id', 'exam_physical.tier4_id')
-            ->leftJoin('mast_employee', 'mast_employee.id', 'exam_physical.technician_id')
-            ->latest('id')
-            ->first();
-
-        $exam_visacuity = DB::table('exam_visacuity')
-            ->where('admission_id', '=', $id)
-            ->latest('id')
-            ->first();
-
-        $patientInfo = DB::table('mast_patientinfo')
-            ->where('main_id', $admission->patient_id)
-            ->first();
-        return view('PrintPanel.standard_club', compact('admission', 'patientInfo', 'exam_audio', 'exam_physical', 'exam_ishihara', 'exam_visacuity'));
+        return view('PrintPanel.standard_club', compact('admission'));
     }
 
     public function medical_record(Request $request) {

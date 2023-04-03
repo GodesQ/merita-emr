@@ -65,39 +65,39 @@
                             <tr>
                               <td colspan="2">SURNAME/LAST NAME:<br>
                                 <b>
-                                {{$admission->lastname}}
+                                {{$admission->patient->lastname}}
                                 </b>
                               </td>
                               <td colspan="2">GIVEN NAME:<br>
                                 <b>
-                                {{$admission->firstname}}
+                                {{$admission->patient->firstname}}
                                 </b>
                               </td>
                               <td width="134">MIDDLE NAME:<br>
                                 <b>
-                                <?=$admission->middlename?>
+                                <?=$admission->patient->middlename?>
                                 </b>
                               </td>
                             </tr>
                             <tr>
                               <td width="129">AGE:<br>
                                 <b>
-                                <?=$admission->age?>
+                                <?=$admission->patient->age?>
                                 </b>
                               </td>
                               <td colspan="2">DATE OF BIRTH: (DAY/MONTH/YEAR)<br>
                                 <b>
-                                {{date_format(new DateTime($patientInfo->birthdate), "d F Y")}}
+                                {{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}
                                 </b>
                               </td>
                               <td width="161">PLACE OF BIRTH:<br>
                                 <b>
-                                <?=$patientInfo->birthplace?>
+                                <?=$admission->patient->patientinfo->birthplace?>
                                 </b>
                               </td>
                               <td>NATIONALITY:<br>
                                 <b>
-                                <?=$patientInfo->nationality?>
+                                <?=$admission->patient->patientinfo->nationality?>
                                 </b>
                               </td>
                             </tr>
@@ -109,31 +109,31 @@
                               </td>
                               <td colspan="2">CIVIL STATUS:<br>
                                 <b>
-                                <?=$patientInfo->maritalstatus?>
+                                <?=$admission->patient->patientinfo->maritalstatus?>
                                 </b>
                               </td>
                               <td>RELIGION:<br>
                                 <b>
-                                <?=$patientInfo->religion?>
+                                <?=$admission->patient->patientinfo->religion?>
                                 </b>
                               </td>
                             </tr>
                             <tr>
                               <td colspan="5">ADDRESS:<br>
                                 <b>
-                                <?=$patientInfo->address?>
+                                <?=$admission->patient->patientinfo->address?>
                                 </b>
                               </td>
                             </tr>
                             <tr>
                               <td colspan="3">PASSPORT NO.:<br>
                                 <b>
-                                <?=$patientInfo->passportno?>
+                                <?=$admission->patient->patientinfo->passportno?>
                                 </b>
                               </td>
                               <td colspan="2">COUNTRY OF DESTINATION:<br>
                                 <b>
-                                <?=$patientInfo->country_destination?>
+                                <?=$admission->patient->patientinfo->country_destination?>
                                 </b>
                               </td>
                             </tr>
@@ -145,7 +145,7 @@
                               </td>
                               <td colspan="2">COMPANY:<br>
                                 <b>
-                                <?=$admission->agencyname?>
+                                <?=$admission->agency->agencyname?>
                                 </b>
                               </td>
                             </tr>
@@ -161,8 +161,8 @@
                                     <td width="87%" valign="middle">SATISFACTORY HEARING? </td>
                                     <td width="4%" valign="middle">YES</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_audio)
-                                    @if ($exam_audio->hearing == "unaided")
+                                    @if ($admission->exam_audio)
+                                    @if ($admission->exam_audio->hearing == "unaided")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                     @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -173,8 +173,8 @@
                                     </td>
                                     <td width="3%" valign="middle">NO</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_audio)
-                                    @if ($exam_audio->hearing == "aided")
+                                    @if ($admission->exam_audio)
+                                    @if ($admission->exam_audio->hearing == "aided")
                                     <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                     @else
                                     <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -183,7 +183,7 @@
                                     <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                     @endif
                                     </td>
-                                  </tr>                    
+                                  </tr>
                                 </table>
                               </td>
                             </tr>
@@ -194,8 +194,8 @@
                                     <td width="87%" valign="middle">SATISFACTORY SIGHT? </td>
                                     <td width="4%" valign="middle">YES</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_visacuity)
-                                        @if (preg_match('/normal/i', $exam_visacuity->remarks_status))
+                                    @if ($admission->exam_visacuity)
+                                        @if (preg_match('/normal/i', $admission->exam_visacuity->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -206,8 +206,8 @@
                                     </td>
                                     <td width="3%" valign="middle">NO</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_visacuity)
-                                        @if (!preg_match('/normal/i', $exam_visacuity->remarks_status))
+                                    @if ($admission->exam_visacuity)
+                                        @if (!preg_match('/normal/i', $admission->exam_visacuity->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -216,7 +216,7 @@
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                     @endif
                                     </td>
-                                  </tr>                    
+                                  </tr>
                                 </table>
                               </td>
                             </tr>
@@ -227,8 +227,8 @@
                                     <td width="87%" valign="middle">SATISFACTORY COLOR VISION? (WHEN REQUIRED) </td>
                                     <td width="4%" valign="middle">YES</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_visacuity)
-                                        @if (preg_match('/normal/i', $exam_visacuity->remarks_status))
+                                    @if ($admission->exam_visacuity)
+                                        @if (preg_match('/normal/i', $admission->exam_visacuity->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -239,8 +239,8 @@
                                     </td>
                                     <td width="3%" valign="middle">NO</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_visacuity)
-                                        @if (!preg_match('/normal/i', $exam_visacuity->remarks_status))
+                                    @if ($admission->exam_visacuity)
+                                        @if (!preg_match('/normal/i', $admission->exam_visacuity->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -260,8 +260,8 @@
                                     <td width="87%" valign="middle">SATISFACTORY PSYCHOLOGICAL TEST? </td>
                                     <td width="4%" valign="middle">YES</td>
                                     <td width="3%" valign="middle">
-                                    @if ($exam_psycho)
-                                        @if (preg_match('/normal/i', $exam_psycho->remarks_status))
+                                    @if ($admission->exam_psycho)
+                                        @if (preg_match('/normal/i', $admission->exam_psycho->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -272,8 +272,8 @@
                                     </td>
                                     <td width="3%" valign="middle">NO</td>
                                     <td width="3%" valign="middle">
-                                     @if ($exam_psycho)
-                                        @if (!preg_match('/normal/i', $exam_psycho->remarks_status))
+                                     @if ($admission->exam_psycho)
+                                        @if (!preg_match('/normal/i', $admission->exam_psycho->remarks_status))
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -291,13 +291,13 @@
                                     <table width="100%" border="0" cellpadding="3" cellspacing="3" id="tblNoneRight">
                                         <tr>
                                             <td width="87%" valign="middle">NO LIMITATIONS OR RESTRICTIONS ON FITNESS? <br> If “NO” specify limitations or restrictions: <br>
-                                                <textarea name="co" type="text" id="co" value="" class="brdNone" style="width:400px;height: 30px;font-size: 10px;text-align:left;border: none;">{{$exam_physical ? $exam_physical->describe_restriction : null}}</textarea>
+                                                <textarea name="co" type="text" id="co" value="" class="brdNone" style="width:400px;height: 30px;font-size: 10px;text-align:left;border: none;">{{$admission->exam_physical ? $admission->exam_physical->describe_restriction : null}}</textarea>
                                             </td>
                                             <td width="4%" valign="middle">YES</td>
                                             <td width="3%" valign="middle">
-                                                @if ($exam_physical)
+                                                @if ($admission->exam_physical)
                                                 @if (preg_match('/Without Restriction/i',
-                                                $exam_physical->restriction))
+                                                $admission->exam_physical->restriction))
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                 @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -308,9 +308,9 @@
                                             </td>
                                             <td width="3%" valign="middle">NO</td>
                                             <td width="3%" valign="middle">
-                                                @if ($exam_physical)
+                                                @if ($admission->exam_physical)
                                                 @if (!preg_match('/Without Restriction/i',
-                                                $exam_physical->restriction))
+                                                $admission->exam_physical->restriction))
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                 @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -350,9 +350,9 @@
                               <td>
                                 <table width="678" border="0" cellpadding="0" cellspacing="0">
                                   <tr>
-                                    <td width="250" height="160" align="center" style="border: 1px solid black;"> 
-                                        @if($admission->patient_image)
-                                        <img src="../../../app-assets/images/profiles/{{$admission->patient_image . '?' . $admission->updated_date}}"
+                                    <td width="250" height="160" align="center" style="border: 1px solid black;">
+                                        @if($admission->patient->patient_image)
+                                        <img src="../../../app-assets/images/profiles/{{$admission->patient->patient_image . '?' . $admission->patient->updated_date}}"
                                             alt="Patient Picture" width="130" height="130"
                                             class="brdAll">
                                         @else
@@ -369,17 +369,17 @@
                                         <tr>
                                           <td height="20">
                                             <span style="padding: 1px 10px; border-bottom: 1px solid black;">
-                                                <?=$admission->lastname . ", " . $admission->firstname . ' ' . $admission->middlename?>
+                                                <?=$admission->patient->lastname . ", " . $admission->patient->firstname . ' ' . $admission->patient->middlename?>
                                             </span>
                                           </td>
                                         </tr>
                                         <tr>
                                           <td valign="middle">
                                           	<span class="fontMed">RESULT:<br>
-                                                FIT 
-                                                @if ($exam_physical)
+                                                FIT
+                                                @if ($admission->exam_physical)
                                                 @if (preg_match('/Fit/i',
-                                                $exam_physical->fit))
+                                                $admission->exam_physical->fit))
                                                 <img src="../../../app-assets/images/icoCheck.gif"
                                                     width="10">
                                                 @else
@@ -391,9 +391,9 @@
                                                     width="10">
                                                 @endif
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT
-                                                @if ($exam_physical)
+                                                @if ($admission->exam_physical)
                                                 @if (!preg_match('/Fit/i',
-                                                $exam_physical->fit))
+                                                $admission->exam_physical->fit))
                                                 <img src="../../../app-assets/images/icoCheck.gif"
                                                     width="10">
                                                 @else
@@ -418,15 +418,15 @@
                                       <table width="500" border="0" cellpadding="5" style="margin-top: -60px;" cellspacing="0" class="size10">
                                         <tr>
                                           <td height="40" valign="bottom">
-                                            @if($exam_physical && $admission->agency_id != 19)
-                                            <img src="{{$exam_physical->physician_signature}}" width="80" />
+                                            @if($admission->exam_physical && $admission->agency_id != 19)
+                                            <img src="{{$admission->exam_physical->first_tech->signature}}" width="80" />
                                             @endif<br>
                                             @if($admission->agency_id == 19)
                                                 <br>
                                                 <br>
                                             @endif
-                                            @if($exam_physical)
-                                            <span style="font-size: 14px;">{{$exam_physical->physician_firstname}} {{$exam_physical->physician_middlename[0]}}. {{$exam_physical->physician_lastname}}</span>
+                                            @if($admission->exam_physical)
+                                            <span style="font-size: 14px;">{{$admission->exam_physical->first_tech->firstname}} {{$admission->exam_physical->first_tech->middlename[0]}}. {{$admission->exam_physical->first_tech->lastname}}</span>
                                             @endif
                                           </td>
                                           <td>&nbsp;</td>
@@ -434,13 +434,13 @@
                                         <tr>
                                             <td colspan="2" style="font-size: 10px;">
                                                 <span class="brdTop" style="padding: 7px 0px 0px 0px;">
-                                                    NAME AND SIGNATURE OF EXAMINING/AUTHORIZED PHYSICIAN 
+                                                    NAME AND SIGNATURE OF EXAMINING/AUTHORIZED PHYSICIAN
                                                 </span>
                                             </td>
                                         </tr>
                                         <tr>
                                           <td colspan="2" style="font-size: 11px;">DATE OF EXAMINATION:
-                                            {{$exam_physical ? date_format(new DateTime($exam_physical->date_examination), "d F Y") : null}}
+                                            {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}
                                           </td>
                                         </tr>
                                         <tr>
@@ -460,7 +460,7 @@
                                                 <div style="margin-top: 0px;">
                                                      MEDICAL DIRECTOR
                                                 </div>
-                                               
+
                                             </td>
                                           <td>&nbsp; </td>
                                         </tr>
@@ -489,7 +489,7 @@
                                             position: relative;
                                             margin-bottom: 18px;
                                         }
-    
+
                                         #divImage img {
                                             position: absolute;
                                             width: 100px;
@@ -504,11 +504,11 @@
                                     <td width="48%" align="center">
                                     <div id="divImage">
                                         @if($admission->agency_id != 19)
-                                            @if($admission->patient_signature)
-                                                <img src="@php echo base64_decode($admission->patient_signature) @endphp"  />
-                                            @elseif ($admission->signature)
-                                                <img src="data:image/jpeg;base64,{{$admission->signature}}" />
-                                            @else 
+                                            @if($admission->patient->patient_signature)
+                                                <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp"  />
+                                            @elseif ($admission->patient->signature)
+                                                <img src="data:image/jpeg;base64,{{$admission->patient->signature}}" />
+                                            @else
                                                 <div style="width: 150px;height: 40px;"></div>
                                             @endif
                                         @endif
@@ -519,9 +519,9 @@
                                   </tr>
                                   <tr>
                                     <td width="30%">APPLICANT’S NAME AND SIGNATURE: </td>
-                                    <td align="center" style="border-bottom:solid 1px black"><b><?=$admission->lastname . ", " . $admission->firstname . ' ' . $admission->middlename?></b></td>
+                                    <td align="center" style="border-bottom:solid 1px black"><b><?=$admission->patient->lastname . ", " . $admission->patient->firstname . ' ' . $admission->patient->middlename?></b></td>
                                     <td>DATE:</td>
-                                    <td style="border-bottom:solid 1px black">{{$exam_physical ? date_format(new DateTime($exam_physical->peme_date), "d F Y") : null}}</td>
+                                    <td style="border-bottom:solid 1px black">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->peme_date), "d F Y") : null}}</td>
                                   </tr>
                                   <tr>
                                     <td colspan="4">(THIS SIGNATURE SHOULD BE AFFIXED IN THE PRESENCE OF THE EXAMINING PHYSICIAN)</td>
@@ -532,11 +532,11 @@
                             <tr>
                               <td colspan="6" style="font-size:12px">
                                 <b>Date of Issuance of PEME Certificate:</b> <br>
-                                {{$exam_physical ? date_format(new DateTime($exam_physical->peme_date), "d F Y") : null}}
+                                {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->peme_date), "d F Y") : null}}
                               </td>
                               <td width="51%" style="font-size:12px">
                                 <b>Date of Expiration of PEME Certificate:</b> <br>
-                                {{$exam_physical ? date_format(new DateTime($exam_physical->date_expiration), "d F Y") : null}}
+                                {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_expiration), "d F Y") : null}}
                               </td>
                             </tr>
                           </table>
@@ -551,7 +551,7 @@
                             <tbody>
                                 <tr>
                                     <td width="92%" style="font-size: 11px;">
-                                        FORM NO. 42 / REV. 0 / 15-06-2022 
+                                        FORM NO. 42 / REV. 0 / 15-06-2022
                                     </td>
                                     <td width="8%" align="right" >
                                         &nbsp;
