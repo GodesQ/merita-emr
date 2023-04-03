@@ -2395,7 +2395,7 @@
                                     </a>
                                 </li>
                                 @if($patientCode)
-                                    @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
+                                    @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '7')
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-follow" data-toggle="pill"
                                                 href="#account-vertical-follow" aria-expanded="false">
