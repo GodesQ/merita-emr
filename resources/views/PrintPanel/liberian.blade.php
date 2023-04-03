@@ -12,7 +12,7 @@
             text-indent: 0;
             font-size: 16px !important;
         }
-        
+
         .s1 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -21,7 +21,7 @@
             text-decoration: none;
             font-size: 14pt;
         }
-        
+
         .s2 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -30,7 +30,7 @@
             text-decoration: none;
             font-size: 12pt;
         }
-        
+
         .s3 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -39,7 +39,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s4 {
             color: black;
             font-family: Arial, sans-serif;
@@ -48,7 +48,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s5 {
             color: black;
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
             font-size: 8.5pt;
             vertical-align: -2pt;
         }
-        
+
         .s6 {
             color: black;
             font-family: Arial, sans-serif;
@@ -67,7 +67,7 @@
             text-decoration: none;
             font-size: 8.5pt;
         }
-        
+
         .s7 {
             color: black;
             font-family: Symbol, serif;
@@ -76,7 +76,7 @@
             text-decoration: none;
             font-size: 10pt;
         }
-        
+
         .s8 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -85,7 +85,7 @@
             text-decoration: none;
             font-size: 10pt;
         }
-        
+
         .s9 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -94,7 +94,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s10 {
             color: black;
             font-family: Arial, sans-serif;
@@ -103,7 +103,7 @@
             text-decoration: none;
             font-size: 9pt;
         }
-        
+
         .s11 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -113,7 +113,7 @@
             font-size: 8pt;
             vertical-align: 1pt;
         }
-        
+
         .s12 {
             color: black;
             font-family: Arial, sans-serif;
@@ -122,7 +122,7 @@
             text-decoration: underline;
             font-size: 10pt;
         }
-        
+
         .s13 {
             color: black;
             font-family: Arial, sans-serif;
@@ -131,7 +131,7 @@
             text-decoration: none;
             font-size: 10pt;
         }
-        
+
         .s15 {
             color: black;
             font-family: Arial, sans-serif;
@@ -140,7 +140,7 @@
             text-decoration: underline;
             font-size: 9pt;
         }
-        
+
         .s16 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -149,7 +149,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s17 {
             color: #010101;
             font-family: Arial, sans-serif;
@@ -159,7 +159,7 @@
             font-size: 8pt;
             vertical-align: 1pt;
         }
-        
+
         .s18 {
             color: #010101;
             font-family: Arial, sans-serif;
@@ -168,7 +168,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s19 {
             color: black;
             font-family: Arial, sans-serif;
@@ -177,7 +177,7 @@
             text-decoration: underline;
             font-size: 8.5pt;
         }
-        
+
         .s20 {
             color: #010101;
             font-family: Arial, sans-serif;
@@ -187,7 +187,7 @@
             font-size: 9pt;
             vertical-align: 1pt;
         }
-        
+
         .s21 {
             color: #010101;
             font-family: Arial, sans-serif;
@@ -197,7 +197,7 @@
             font-size: 9pt;
             vertical-align: 1pt;
         }
-        
+
         .s22 {
             color: #010101;
             font-family: Arial, sans-serif;
@@ -206,7 +206,7 @@
             text-decoration: underline;
             font-size: 8pt;
         }
-        
+
         .s24 {
             color: black;
             font-family: Arial, sans-serif;
@@ -215,7 +215,7 @@
             text-decoration: underline;
             font-size: 11pt;
         }
-        
+
         .s25 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -224,7 +224,7 @@
             text-decoration: none;
             font-size: 12pt;
         }
-        
+
         p {
             color: black;
             font-family: "Times New Roman", serif;
@@ -234,7 +234,7 @@
             font-size: 10pt;
             margin: 0pt;
         }
-        
+
         .s26 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -243,7 +243,7 @@
             text-decoration: none;
             font-size: 8pt;
         }
-        
+
         .s27 {
             color: black;
             font-family: "Times New Roman", serif;
@@ -252,16 +252,16 @@
             text-decoration: none;
             font-size: 12pt;
         }
-        
+
         li {
             display: block;
         }
-        
+
         #l1 {
             padding-left: 0pt;
             counter-reset: c1 1;
         }
-        
+
         #l1>li>*:first-child:before {
             counter-increment: c1;
             content: "("counter(c1, lower-latin)") ";
@@ -272,11 +272,11 @@
             text-decoration: none;
             font-size: 10pt;
         }
-        
+
         #l1>li:first-child>*:first-child:before {
             counter-increment: c1 0;
         }
-        
+
         table,
         tbody {
             vertical-align: top;
@@ -292,13 +292,13 @@
 <body>
     <p style="text-indent: 0pt;text-align: left;"><br></p>
     <table cellspacing="0" cellpadding="0" width="100%">
-        <tbody> 
+        <tbody>
             <tr style="height:60pt">
                 <td style="width:100%;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="7">
                     <p class="s1" style="padding-top: 10pt;padding-left: 20pt;padding-right: 38pt;text-indent: 0pt;text-align: center;"><a name="bookmark0">PHYSICAL EXAMINATION REPORT/CERTIFICATE</a> <a name="bookmark2" style="position: absolute; right: 3rem;">ANNEX 2</a></p>
                     <p class="s2" style="padding-top: 2pt;padding-left: 20pt;padding-right: 38pt;text-indent: 0pt;text-align: center;"><a name="bookmark1">DEPUTY COMMISSIONER OF MARITIME AFFAIRS</a></p>
                     <p class="s2" style="padding-left: 450pt;padding-right: 20pt;text-indent: 0pt;text-align: center;">
-                        <a name="" style="font-size: 10px;">CERTIFICATE CODE: <br> <br> <span style="padding: 0.5rem; border: 2px solid black; margin-top: 1rem;">{{$exam_physical ? $exam_physical->liberian_code : null}}</span></a>
+                        <a name="" style="font-size: 10px;">CERTIFICATE CODE: <br> <br> <span style="padding: 0.5rem; border: 2px solid black; margin-top: 1rem;">{{$admission->exam_physical ? $admission->exam_physical->liberian_code : null}}</span></a>
                     </p>
                     <p class="s2" style="padding-left: 24pt;padding-right: 38pt;text-indent: 0pt;line-height: 13pt;text-align: center;">THE REPUBLIC OF LIBERIA</p>
                 </td>
@@ -310,15 +310,15 @@
                             <tr style="height:22pt">
                                 <td width="33%" style="border: 1pt solid black;">
                                     <p class="s3">LAST NAME OF APPLICANT</p>
-                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->lastname}}</p>
+                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->patient->lastname}}</p>
                                 </td>
                                 <td width="33%" style="border: 1pt solid black;">
                                     <p class="s3">FIRSTNAME</p>
-                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->firstname}}</p>
+                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->patient->firstname}}</p>
                                 </td>
                                 <td width="33%" style="border: 1pt solid black;">
                                     <p class="s3">MIDDLE INITIAL</p>
-                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->middlename}}</p>
+                                    <p class="s4" style="font-weight: 700;padding-left: 1rem;"> {{$admission->patient->middlename}}</p>
                                 </td>
                             </tr>
                             <tr>
@@ -327,9 +327,9 @@
                                     <table width="100%">
                                         <tbody>
                                             <tr>
-                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($patientInfo->birthdate), "F")}}</td>
-                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($patientInfo->birthdate), "d")}}</td>
-                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($patientInfo->birthdate), "Y")}}</td>
+                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "F")}}</td>
+                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d")}}</td>
+                                                <td style="font-weight: 700;" width="33%">{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "Y")}}</td>
                                             </tr>
                                             <tr>
                                                 <td>MONTH</td>
@@ -344,7 +344,7 @@
                                     <table width="100%">
                                         <tbody>
                                             <tr>
-                                                <td style="font-weight: 700;" width="70%">{{$patientInfo->birthplace}}</td>
+                                                <td style="font-weight: 700;" width="70%">{{$admission->patient->patientinfo->birthplace}}</td>
                                                 <td style="font-weight: 700;" width="30%">Phil's</td>
                                             </tr>
                                             <tr>
@@ -357,8 +357,8 @@
                                 <td>
                                     <p>Sex</p>
                                     <p class="s3" style="padding-top: 4pt;padding-left: 4pt;text-indent: 0pt;text-align: left;">
-                                        MALE <span>@php echo $admission->gender == "Male" ? '<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="10">' :'<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="10">' @endphp</span>
-                                        FEMALE <span>@php echo $admission->gender == "Female" ? '<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="10">' :'<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="10">' @endphp</span>
+                                        MALE <span>@php echo $admission->patient->gender == "Male" ? '<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="10">' :'<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="10">' @endphp</span>
+                                        FEMALE <span>@php echo $admission->patient->gender == "Female" ? '<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="10">' :'<img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="10">' @endphp</span>
                                     </p>
                                 </td>
                             </tr>
@@ -382,7 +382,7 @@
                                                 </td>
                                                 <td width="25%">RATING</td>
                                                 <td width="25%">
-                                                    @if($admission->category ==  'DECK SERVICES') 
+                                                    @if($admission->category ==  'DECK SERVICES')
                                                         <img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox">
                                                     @else
                                                         <img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="20" height='15' class="checkbox">
@@ -398,7 +398,7 @@
                                             <tr>
                                                 <td width="25%">ENGINEER</td>
                                                 <td width="25%">
-                                                    @if($admission->category ==  'ENGINE SERVICES') 
+                                                    @if($admission->category ==  'ENGINE SERVICES')
                                                         <img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox">
                                                     @else
                                                         <img style="margin-left: 2rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="20" height='15' class="checkbox">
@@ -418,7 +418,7 @@
                                 </td>
                                 <td width="50%">
                                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 15pt;text-align: left;">MAILING ADDRESS OF APPLICANT:</p>
-                                    <p style="padding-left: 5pt;">{{$patientInfo->address}}</p>
+                                    <p style="padding-left: 5pt;">{{$admission->patient->patientinfo->address}}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -437,26 +437,26 @@
                             <tr style="height:22pt">
                                 <td style="width:16%;border: 0.5px solid black;">
                                     <p class="s3" style="padding-left: 6pt;padding-right: 20pt;text-indent: 0pt;line-height: 9pt;text-align: center;">HEIGHT</p>
-                                    <p class="s10" style="padding-top: 1pt;padding-left: 4pt;padding-right: 28pt;text-indent: 0pt;text-align: center;">{{$exam_physical ? $exam_physical->height : null}}</p>
+                                    <p class="s10" style="padding-top: 1pt;padding-left: 4pt;padding-right: 28pt;text-indent: 0pt;text-align: center;">{{$admission->exam_physical ? $admission->exam_physical->height : null}}</p>
                                 </td>
                                 <td style="width:16%;border: 0.5px solid black;">
                                     <p class="s3" style="padding-left: 5pt;padding-right: 14pt;text-indent: 0pt;line-height: 9pt;text-align: center;">WEIGHT</p>
-                                    <p class="s10" style="padding-left: 4pt;padding-right: 14pt;text-indent: 0pt;text-align: center;">{{$exam_physical ? $exam_physical->weight : null}}</p>
+                                    <p class="s10" style="padding-left: 4pt;padding-right: 14pt;text-indent: 0pt;text-align: center;">{{$admission->exam_physical ? $admission->exam_physical->weight : null}}</p>
                                 </td>
                                 <td style="width:16%;border: 0.5px solid black;">
                                     <p class="s3" style="padding-left: 5pt;padding-right: 6pt;text-indent: 0pt;line-height: 9pt;text-align: center;">BLOOD PRESSURE</p>
-                                    <p class="s10" style="padding-top: 1pt;padding-left: 5pt;padding-right: 6pt;text-indent: 0pt;text-align: center;">{{$exam_physical ? $exam_physical->systollic . '/' . $exam_physical->diastollic : null}}</p>
+                                    <p class="s10" style="padding-top: 1pt;padding-left: 5pt;padding-right: 6pt;text-indent: 0pt;text-align: center;">{{$admission->exam_physical ? $admission->exam_physical->systollic . '/' . $admission->exam_physical->diastollic : null}}</p>
                                 </td>
                                 <td style="width:16%;border: 0.5px solid black;" colspan="2">
                                     <p class="s3" style="padding-left: 6pt;text-indent: 0pt;line-height: 9pt;text-align: left;">PULSE</p>
-                                    <p class="s10" style="padding-left: 36pt;padding-right: 41pt;text-indent: 0pt;text-align: center;">{{$exam_physical ? $exam_physical->pulse : null}}</p>
+                                    <p class="s10" style="padding-left: 36pt;padding-right: 41pt;text-indent: 0pt;text-align: center;">{{$admission->exam_physical ? $admission->exam_physical->pulse : null}}</p>
                                 </td>
                                 <td style="width:16%;border: 0.5px solid black;">
                                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">RESPIRATION</p>
-                                    <p class="s10" style="padding-left: 29pt;text-indent: 0pt;text-align: left;">{{$exam_physical ? $exam_physical->respiration : null}}</p>
+                                    <p class="s10" style="padding-left: 29pt;text-indent: 0pt;text-align: left;">{{$admission->exam_physical ? $admission->exam_physical->respiration : null}}</p>
                                 </td>
                                 <td style="width:16%;border: 0.5px solid black;">
-                                    <p class="s3" style="padding-left: 4pt;text-indent: 0pt;line-height: 9pt;text-align: left;">GENERAL APPEARANCE</p> 
+                                    <p class="s3" style="padding-left: 4pt;text-indent: 0pt;line-height: 9pt;text-align: left;">GENERAL APPEARANCE</p>
                                     <p class="s6" style="padding-top: 4pt;padding-left: 10pt;text-indent: 0pt;line-height: 10pt;text-align: left;">NORMAL</p>
                                 </td>
                             </tr>
@@ -480,26 +480,26 @@
                                             </tr>
                                             <tr>
                                                 <td>WITHOUT GLASSES</td>
-                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$exam_visacuity ? $exam_visacuity->ufvos : null}}</div></td>
+                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$admission->exam_visacuity ? $admission->exam_visacuity->ufvos : null}}</div></td>
                                                 <td align="center" style="font-size: 12px;">/</td>
-                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$exam_visacuity ? $exam_visacuity->ufvod : null}}</div></td>
+                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$admission->exam_visacuity ? $admission->exam_visacuity->ufvod : null}}</div></td>
                                             </tr>
                                             <tr>
                                                 <td>WITH GLASSES</td>
-                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$exam_visacuity ? $exam_visacuity->cfvos : '&nbsp;'}}</div></td>
+                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$admission->exam_visacuity ? $admission->exam_visacuity->cfvos : '&nbsp;'}}</div></td>
                                                 <td align="center" style="font-size: 12px;">/</td>
-                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$exam_visacuity ? $exam_visacuity->cfvod : '&nbsp;'}}</div></td>
+                                                <td align="center"><div style="border-bottom: 1px solid black;">{{$admission->exam_visacuity ? $admission->exam_visacuity->cfvod : '&nbsp;'}}</div></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <p style="width: 100%; padding-left: 5pt;padding-right: 100pt;text-indent: 0pt;line-height: 16pt;text-align: left;">
                                         <span class="s3">DATE OF LAST COLOR VISION TEST (Day/Month/Year)</span>
-                                        <span>{{$exam_ishihara ? date_format(new DateTime($exam_ishihara->trans_date), "d/F/Y") : null}}</span> <span style="background-color: gray;margin-left: 2rem;">Testing Required every 6 years</span>
+                                        <span>{{$admission->exam_ishihara ? date_format(new DateTime($admission->exam_ishihara->trans_date), "d/F/Y") : null}}</span> <span style="background-color: gray;margin-left: 2rem;">Testing Required every 6 years</span>
                                        </p>
                                        <p style="padding-left: 5pt;padding-right: 123pt;text-indent: 0pt;line-height: 16pt;text-align: left;"><span class="s3"> COLOR VISION MEETS STANDARDS IN STCW CODE, TABLE A-I/9?</span>
                                             <span class="s9">YES </span><span class="s8">
-                                                @if($exam_ishihara)
-                                                    @if($exam_ishihara->remarks_status == "normal")
+                                                @if($admission->exam_ishihara)
+                                                    @if($admission->exam_ishihara->remarks_status == "normal")
                                                         <img style="margin-left: 1rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="20" height='15'>
                                                     @else
                                                         <img style="margin-left: 1rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="20" height='15'>
@@ -507,8 +507,8 @@
                                                 @endif
                                             </span>
                                             <span class="s9">NO </span><span class="s7">
-                                                @if($exam_ishihara)
-                                                    @if($exam_ishihara->remarks_status == "findings")
+                                                @if($admission->exam_ishihara)
+                                                    @if($admission->exam_ishihara->remarks_status == "findings")
                                                         <img style="margin-left: 1rem; margin-right: 1rem;" src="../../../app-assets/images/icoCheck.gif" width="20" height='15'>
                                                     @else
                                                         <img style="margin-left: 1rem; margin-right: 1rem;" src="../../../app-assets/images/icoUncheck.gif" width="20" height='15'>
@@ -528,10 +528,10 @@
                         <tbody>
                             <tr style="height:22pt">
                                 <td style="width:561pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" colspan="7">
-                                    <p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left; font-size: 12px !important;">COLOR TEST TYPE: BOOK ¨ LANTERN ¨ CHECK  IF COLOR TEST IS NORMAL 
-                                        <span style="margin: 1rem 0.5rem;">YELLOW <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span> 
-                                        <span style="margin: 1rem 0.5rem;">RED <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span> 
-                                        <span style="margin: 1rem 0.5rem;">GREEN <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span> 
+                                    <p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left; font-size: 12px !important;">COLOR TEST TYPE: BOOK ¨ LANTERN ¨ CHECK  IF COLOR TEST IS NORMAL
+                                        <span style="margin: 1rem 0.5rem;">YELLOW <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span>
+                                        <span style="margin: 1rem 0.5rem;">RED <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span>
+                                        <span style="margin: 1rem 0.5rem;">GREEN <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span>
                                         <span style="margin: 1rem 0.5rem;">BLUE <img src="../../../app-assets/images/icoCheck.gif" width="20" height='15' class="checkbox"></span>
                                     </p>
                                 </td>
@@ -550,16 +550,16 @@
                                                 <td class="brdRight" width="50%">
                                                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">HEAD AND NECK</p>
                                                     <p class="s4" style="padding-left: 10pt;text-indent: 0pt;line-height: 15pt;text-align: left;">
-                                                        @if($exam_physical)
-                                                            {{$exam_physical->a2 == "Yes" ? "NORMAL" : "&nbsp;"}}
+                                                        @if($admission->exam_physical)
+                                                            {{$admission->exam_physical->a2 == "Yes" ? "NORMAL" : "&nbsp;"}}
                                                         @endif
                                                     </p>
                                                 </td>
                                                 <td  width="50%">
                                                     <p class="s3" style="padding-left: 4pt;text-indent: 0pt;line-height: 9pt;text-align: left;">HEART (CARDIOVASCULAR)</p>
                                                     <p class="s4" style="padding-top: 1pt;padding-left: 4pt;text-indent: 0pt;text-align: left;">ECG:
-                                                       @if($exam_physical)
-                                                        {{$exam_physical->ecg == "normal" ? "NORMAL" : $exam_physical->ecg_findings}}
+                                                       @if($admission->exam_physical)
+                                                        {{$admission->exam_physical->ecg == "normal" ? "NORMAL" : $admission->exam_physical->ecg_findings}}
                                                         @endif
                                                     </p>
                                                 </td>
@@ -568,8 +568,8 @@
                                                 <td class="brdRight" width="50%">
                                                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">LUNGS</p>
                                                     <p class="s4" style="padding-left: 10pt;text-indent: 0pt;line-height: 15pt;text-align: left;">
-                                                        @if($exam_physical)
-                                                            {{$exam_physical->a2 == "Yes" ? "NORMAL" : "&nbsp;"}}
+                                                        @if($admission->exam_physical)
+                                                            {{$admission->exam_physical->a2 == "Yes" ? "NORMAL" : "&nbsp;"}}
                                                         @endif
                                                     </p>
                                                 </td>
@@ -609,24 +609,24 @@
                         <div>
                             <div style="border-bottom: 1px solid black; width: 200px; display: flex; justify-content: center;">
                                 @if($admission->agency_id != 19)
-                                    @if($admission->patient_signature)
-                                        <img src="@php echo base64_decode($admission->patient_signature) @endphp" width="150px" />
+                                    @if($admission->patient->patient_signature)
+                                        <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp" width="150px" />
                                     @elseif ($admission->signature)
-                                        <img src="data:image/jpeg;base64,{{$admission->signature}}" width="150px"/>
-                                    @else 
+                                        <img src="data:image/jpeg;base64,{{$admission->patient->signature}}" width="150px"/>
+                                    @else
                                         <div style="width: 150px;height: 40px;"></div>
                                     @endif
                                 @endif
                             </div>
-                            <div class="s3" style="text-align: center;">SIGNATURE OF APPLICANT</div>  
+                            <div class="s3" style="text-align: center;">SIGNATURE OF APPLICANT</div>
                         </div>
                         <div>
-                            <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">{{$exam_physical ? date_format(new DateTime($exam_physical->date_examination), "d F Y") : null}}</div>
-                            <div class="s3" style="text-align: center">DATE OF EXAM</div>  
+                            <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}</div>
+                            <div class="s3" style="text-align: center">DATE OF EXAM</div>
                         </div>
                         <div>
-                            <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">{{$exam_physical ? date_format(new DateTime($exam_physical->date_expiration), "d F Y") : null}}</div>
-                            <div class="s3" style="text-align: center">EXPIRY DATE</div>  
+                            <div style="border-bottom: 1px solid black; width: 200px; text-align: center;">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_expiration), "d F Y") : null}}</div>
+                            <div class="s3" style="text-align: center">EXPIRY DATE</div>
                         </div>
 
                     </div>
@@ -634,65 +634,65 @@
                     <p class="s3" style="padding-left: 425pt;text-indent: 0pt;line-height: 20pt;text-align: left;">(NAME OF APPLICANT)</p>
                     <p style="text-indent: 0pt;text-align: left;"><br></p>
                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                        @if($admission->gender == "Male")
+                        @if($admission->patient->gender == "Male")
                             (<u>HE</u>)
                         @else
-                            HE 
-                        @endif 
-                        @if($admission->gender == "Female")
+                            HE
+                        @endif
+                        @if($admission->patient->gender == "Female")
                             (<u>SHE</u>)
                         @else
-                            SHE 
-                        @endif 
-                         IS FOUND TO BE 
-                         @if($exam_physical)
-                            @if($exam_physical->fit == "Fit")
+                            SHE
+                        @endif
+                         IS FOUND TO BE
+                         @if($admission->exam_physical)
+                            @if($admission->exam_physical->fit == "Fit")
                                 (<u>FIT</u> )
                             @else
-                                (FIT) 
+                                (FIT)
                             @endif
                          @else
-                            (FIT) 
+                            (FIT)
                          @endif
-                         @if($exam_physical)
-                            @if($exam_physical->fit == "Unfit")
+                         @if($admission->exam_physical)
+                            @if($admission->exam_physical->fit == "Unfit")
                                 (<u>NOT FIT</u> )
                             @else
-                                (NOT FIT) 
+                                (NOT FIT)
                             @endif
                          @else
-                            (NOT FIT) 
-                         @endif 
-                          FOR DUTY AS A: (<span class="duty_as">MASTER</span>, <span class="duty_as">MATE</span>, <span class="duty_as">ENGINEER</span>, <span class="duty_as">RADIO OFFICER</span>, <span class="duty_as">RATING</span>, <span class="duty_as">MOU DECK</span>, <span class="duty_as">MOU ENGINE</span> or <span class="duty_as">SUPERNUMERARY</span>). IF EMPLOYED AS A WATCHSTANDER 
-                            @if($admission->gender == "Male")
+                            (NOT FIT)
+                         @endif
+                          FOR DUTY AS A: (<span class="duty_as">MASTER</span>, <span class="duty_as">MATE</span>, <span class="duty_as">ENGINEER</span>, <span class="duty_as">RADIO OFFICER</span>, <span class="duty_as">RATING</span>, <span class="duty_as">MOU DECK</span>, <span class="duty_as">MOU ENGINE</span> or <span class="duty_as">SUPERNUMERARY</span>). IF EMPLOYED AS A WATCHSTANDER
+                            @if($admission->patient->gender == "Male")
                             (<u>HE</u>)
                             @else
-                                HE 
-                            @endif 
-                            @if($admission->gender == "Female")
+                                HE
+                            @endif
+                            @if($admission->patient->gender == "Female")
                                 (<u>SHE</u>)
                             @else
-                                SHE 
-                            @endif 
-                             IS FOUND TO BE 
-                             @if($exam_physical)
-                                @if($exam_physical->fit == "Fit")
+                                SHE
+                            @endif
+                             IS FOUND TO BE
+                             @if($admission->exam_physical)
+                                @if($admission->exam_physical->fit == "Fit")
                                     (<u>FIT</u> )
                                 @else
-                                    (FIT) 
+                                    (FIT)
                                 @endif
                              @else
-                                (FIT) 
+                                (FIT)
                              @endif
-                             @if($exam_physical)
-                                @if($exam_physical->fit == "Unfit")
+                             @if($admission->exam_physical)
+                                @if($admission->exam_physical->fit == "Unfit")
                                     (<u>NOT FIT</u> )
                                 @else
-                                    (NOT FIT) 
+                                    (NOT FIT)
                                 @endif
                              @else
-                                (NOT FIT) 
-                             @endif 
+                                (NOT FIT)
+                             @endif
                              FOR DUTIES?
                          </p>
                 </td>
@@ -702,9 +702,9 @@
                     <p class="s8" style="padding-top: 6pt;padding-left: 5pt;text-indent: 0pt;text-align: justify; font-size: 11px;">NAME AND DEGREE OF PHYSICIAN <span class="s19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TERESITA  F.  GONZALES  M.D. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                     <p class="s8" style="padding-top: 6pt;padding-left: 5pt;padding-right: 5pt;text-indent: 0pt;line-height: 161%;text-align: justify; font-size: 11px;">ADDRESS <span class="s20">&nbsp;5th Floor Jettac Bldg 920 Pres. Quirino Ave.cor. San Antonio, Malate, Manila </span><span class="s21"> </span><br>NAME OF PHYSICIAN'S CERTIFICATING AUTHORITY <span class="s22">&nbsp;PROFESSIONAL REGULATION COMMISSION </span>
                         <span class="s18"> </span><br>DATE OF ISSUE OF PHYSICIAN'S CERTIFICATE<span class="s19"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JUNE  14,  1984 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
-                    <p class="s8" style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: justify; font-size: 11px;">SIGNATURE OF PHYSICIAN 
-                    <u style="margin-right: 12rem;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> 
-                    DATE OF EXAMINATION<span class="s9">: </span><span class="s24">{{$exam_physical ? date_format(new DateTime($exam_physical->date_examination), "d F Y") : null}}</span></p>
+                    <p class="s8" style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: justify; font-size: 11px;">SIGNATURE OF PHYSICIAN
+                    <u style="margin-right: 12rem;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                    DATE OF EXAMINATION<span class="s9">: </span><span class="s24">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}</span></p>
                 </td>
             </tr>
             <tr style="height:84pt">
@@ -773,13 +773,13 @@
             <p style="text-indent: 0pt;text-align: left; border-bottom: 1px solid black;"><br></p><br>
             <p style="padding-top: 30pt;text-indent: 0pt;text-align: left;">RLM-l05M (REV. 06/16) <span class="s27">2</span></p>
     </div>
-    
-    
+
+
     <script>
         let checkbox = document.querySelectorAll('.checkbox');
-        
+
         let duty_as = document.querySelectorAll('.duty_as');
-        
+
         for(let i = 0; i < duty_as.length; i++) {
             duty_as[i].addEventListener('click', (e) => {
                 if(e.target.classList.contains('underlined')) {
@@ -793,7 +793,7 @@
                 }
             })
         }
-        
+
 
         for(let i = 0; i < checkbox.length; i++) {
             checkbox[i].addEventListener('click', (e) => {

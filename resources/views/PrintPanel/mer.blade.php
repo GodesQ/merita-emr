@@ -84,17 +84,17 @@
                                                 <td colspan="2">
                                                     SURNAME/LASTNAME<br>
                                                     <span class="lblName"
-                                                        style='font-weight: 700;'>{{ $admission->lastname }}</span>
+                                                        style='font-weight: 700;'>{{ $admission->patient->lastname }}</span>
                                                 </td>
                                                 <td>
                                                     GIVEN NAME<br>
                                                     <span class="lblName"
-                                                        style='font-weight: 700;'>{{ $admission->firstname }}</span>
+                                                        style='font-weight: 700;'>{{ $admission->patient->firstname }}</span>
                                                 </td>
                                                 <td>
                                                     MIDDLE NAME<br>
                                                     <span class="lblName"
-                                                        style='font-weight: 700;'>{{ $admission->middlename }}</span>
+                                                        style='font-weight: 700;'>{{ $admission->patient->middlename }}</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -106,7 +106,7 @@
                                                                 <td>AGE</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>{{ $admission->age }}</b>&nbsp;</td>
+                                                                <td><b>{{ $admission->patient->age }}</b>&nbsp;</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -119,7 +119,7 @@
                                                                 <td>DATE OF BIRTH: (DAY/MONTH/YEAR)</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>{{ date_format(new DateTime($patientInfo->birthdate), 'd F Y') }}</b>&nbsp;
+                                                                <td><b>{{ date_format(new DateTime($admission->patient->patientinfo->birthdate), 'd F Y') }}</b>&nbsp;
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -134,7 +134,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>{{ $patientInfo->birthplace }}</b>&nbsp;</td>
+                                                                <td><b>{{ $admission->patient->patientinfo->birthplace }}</b>&nbsp;</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -147,7 +147,7 @@
                                                                 <td>NATIONALITY :</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>{{ $patientInfo->nationality }}</b>&nbsp;</td>
+                                                                <td><b>{{ $admission->patient->patientinfo->nationality }}</b>&nbsp;</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -171,30 +171,30 @@
                                                 </td>
                                                 <td>CIVIL STATUS:&nbsp;&nbsp;
                                                     Single
-                                                    @if ($patientInfo->maritalstatus == 'Single' || $patientInfo->maritalstatus == 'SINGLE')
+                                                    @if ($admission->patient->patientinfo->maritalstatus == 'Single' || $admission->patient->patientinfo->maritalstatus == 'SINGLE')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>
                                                     @endif
                                                     Married
-                                                    @if ($patientInfo->maritalstatus == 'Married' || $patientInfo->maritalstatus == 'MARRIED')
+                                                    @if ($admission->patient->patientinfo->maritalstatus == 'Married' || $admission->patient->patientinfo->maritalstatus == 'MARRIED')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>
                                                     @endif
                                                 </td>
                                                 <td> RELIGION:
-                                                    <b>{{ $patientInfo->religion == 'OTHERS' ? $patientInfo->religion_other : $patientInfo->religion }}</b>
+                                                    <b>{{ $admission->patient->patientinfo->religion == 'OTHERS' ? $admission->patient->patientinfo->religion_other : $admission->patient->patientinfo->religion }}</b>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">ADDRESS : <b>{{ $patientInfo->address }}</b></td>
+                                                <td colspan="4">ADDRESS : <b>{{ $admission->patient->patientinfo->address }}</b></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">PASSPORT NUMBER : <b>
-                                                        {{ $patientInfo->passportno }}</b></td>
+                                                        {{ $admission->patient->patientinfo->passportno }}</b></td>
                                                 <td colspan="2">SEAMAN'S BOOK(SIRB) NUMBER : <b>
-                                                        {{ $patientInfo->srbno }} </b></td>
+                                                        {{ $admission->patient->patientinfo->srbno }} </b></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4">
@@ -248,10 +248,10 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="4">NAME OF COMPANY : <b>
-                                                        @if (preg_match('/Bahia/i', $admission->agencyname))
+                                                        @if (preg_match('/Bahia/i', $admission->agency->agencyname))
                                                             {{ 'Bahia Shipping Services, Inc.' }}
                                                         @else
-                                                            {{ $admission->agencyname }}
+                                                            {{ $admission->agency->agencyname }}
                                                         @endif
                                                     </b></td>
                                             </tr>
@@ -287,8 +287,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick1 == 'Yes' || $exam_physical->sick1 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick1 == 'Yes' || $admission->exam_physical->sick1 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -298,8 +298,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick1 == 'No' || $exam_physical->sick1 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick1 == 'No' || $admission->exam_physical->sick1 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -313,8 +313,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick11 == 'Yes' || $exam_physical->sick11 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick11 == 'Yes' || $admission->exam_physical->sick11 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -324,8 +324,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick11 == 'No' || $exam_physical->sick11 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick11 == 'No' || $admission->exam_physical->sick11 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -351,8 +351,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick2 == 'Yes' || $exam_physical->sick2 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick2 == 'Yes' || $admission->exam_physical->sick2 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -362,8 +362,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick2 == 'No' || $exam_physical->sick2 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick2 == 'No' || $admission->exam_physical->sick2 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -377,8 +377,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick12 == 'Yes' || $exam_physical->sick12 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick12 == 'Yes' || $admission->exam_physical->sick12 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -388,8 +388,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick12 == 'No' || $exam_physical->sick12 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick12 == 'No' || $admission->exam_physical->sick12 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -400,12 +400,12 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Last Menstrual Period
-                                                                        :</b><br>{{ $exam_physical ? $exam_physical->last_menstrual : null }}
+                                                                        :</b><br>{{ $admission->exam_physical ? $admission->exam_physical->last_menstrual : null }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick29 == 'Yes' || $exam_physical->sick29 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick29 == 'Yes' || $admission->exam_physical->sick29 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -415,8 +415,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick29 == 'No' || $exam_physical->sick29 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick29 == 'No' || $admission->exam_physical->sick29 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -432,8 +432,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick3 == 'Yes' || $exam_physical->sick3 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick3 == 'Yes' || $admission->exam_physical->sick3 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -443,8 +443,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick3 == 'No' || $exam_physical->sick3 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick3 == 'No' || $admission->exam_physical->sick3 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -458,8 +458,8 @@
                                                                         Pain :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick13 == 'Yes' || $exam_physical->sick13 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick13 == 'Yes' || $admission->exam_physical->sick13 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -469,8 +469,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick13 == 'No' || $exam_physical->sick13 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick13 == 'No' || $admission->exam_physical->sick13 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -484,8 +484,8 @@
                                                                         Disorder :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick22 == 'Yes' || $exam_physical->sick22 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick22 == 'Yes' || $admission->exam_physical->sick22 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -495,8 +495,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick22 == 'No' || $exam_physical->sick22 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick22 == 'No' || $admission->exam_physical->sick22 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -514,8 +514,8 @@
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick4 == 'Yes' || $exam_physical->sick4 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick4 == 'Yes' || $admission->exam_physical->sick4 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -525,8 +525,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick4 == 'No' || $exam_physical->sick4 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick4 == 'No' || $admission->exam_physical->sick4 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -540,8 +540,8 @@
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick14 == 'Yes' || $exam_physical->sick14 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick14 == 'Yes' || $admission->exam_physical->sick14 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -551,8 +551,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick14 == 'No' || $exam_physical->sick14 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick14 == 'No' || $admission->exam_physical->sick14 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -566,8 +566,8 @@
                                                                         Pain/Arthritis/Rheumatic :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick23 == 'Yes' || $exam_physical->sick23 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick23 == 'Yes' || $admission->exam_physical->sick23 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -577,8 +577,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick23 == 'No' || $exam_physical->sick23 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick23 == 'No' || $admission->exam_physical->sick23 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -594,8 +594,8 @@
                                                                         or Sleep Disorders :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick5 == 'Yes' || $exam_physical->sick5 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick5 == 'Yes' || $admission->exam_physical->sick5 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -605,8 +605,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick5 == 'No' || $exam_physical->sick5 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick5 == 'No' || $admission->exam_physical->sick5 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -620,8 +620,8 @@
                                                                         :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick15 == 'Yes' || $exam_physical->sick15 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick15 == 'Yes' || $admission->exam_physical->sick15 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -631,8 +631,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick15 == 'No' || $exam_physical->sick15 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick15 == 'No' || $admission->exam_physical->sick15 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -646,8 +646,8 @@
                                                                         Familial Disorders:</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick24 == 'Yes' || $exam_physical->sick24 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick24 == 'Yes' || $admission->exam_physical->sick24 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -657,8 +657,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick24 == 'No' || $exam_physical->sick24 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick24 == 'No' || $admission->exam_physical->sick24 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -674,8 +674,8 @@
                                                                         Mental Disorders :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick6 == 'Yes' || $exam_physical->sick6 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick6 == 'Yes' || $admission->exam_physical->sick6 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -685,8 +685,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick6 == 'No' || $exam_physical->sick6 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick6 == 'No' || $admission->exam_physical->sick6 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -700,8 +700,8 @@
                                                                         Disorder (e.g Goiter) :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick16 == 'Yes' || $exam_physical->sick16 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick16 == 'Yes' || $admission->exam_physical->sick16 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -711,8 +711,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick16 == 'No' || $exam_physical->sick16 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick16 == 'No' || $admission->exam_physical->sick16 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -726,8 +726,8 @@
                                                                         Diseases :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick25 == 'Yes' || $exam_physical->sick25 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick25 == 'Yes' || $admission->exam_physical->sick25 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -737,8 +737,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick25 == 'No' || $exam_physical->sick25 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick25 == 'No' || $admission->exam_physical->sick25 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -754,8 +754,8 @@
                                                                         Disorders :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick7 == 'Yes' || $exam_physical->sick7 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick7 == 'Yes' || $admission->exam_physical->sick7 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -765,8 +765,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick7 == 'No' || $exam_physical->sick7 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick7 == 'No' || $admission->exam_physical->sick7 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -780,8 +780,8 @@
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick17 == 'Yes' || $exam_physical->sick17 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick17 == 'Yes' || $admission->exam_physical->sick17 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -791,8 +791,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick17 == 'No' || $exam_physical->sick17 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick17 == 'No' || $admission->exam_physical->sick17 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -807,12 +807,12 @@
 
                                                                         Typoid Fever Date:<br>
                                                                     </b>
-                                                                    {{ $exam_physical ? $exam_physical->tropical_disease : null }}
+                                                                    {{ $admission->exam_physical ? $admission->exam_physical->tropical_disease : null }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick26 == 'Yes' || $exam_physical->sick26 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick26 == 'Yes' || $admission->exam_physical->sick26 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -822,8 +822,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick26 == 'No' || $exam_physical->sick26 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick26 == 'No' || $admission->exam_physical->sick26 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -838,8 +838,8 @@
                                                                 <td><b>Deafness, Other Ear
                                                                         Disorders :</b></td>
                                                                 <td align="center"><span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick8 == 'Yes' || $exam_physical->sick8 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick8 == 'Yes' || $admission->exam_physical->sick8 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -849,8 +849,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick8 == 'No' || $exam_physical->sick8 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick8 == 'No' || $admission->exam_physical->sick8 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -864,8 +864,8 @@
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick18 == 'Yes' || $exam_physical->sick18 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick18 == 'Yes' || $admission->exam_physical->sick18 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -875,8 +875,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick18 == 'No' || $exam_physical->sick18 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick18 == 'No' || $admission->exam_physical->sick18 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -902,8 +902,8 @@
                                                                         Disorders :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick9 == 'Yes' || $exam_physical->sick9 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick9 == 'Yes' || $admission->exam_physical->sick9 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -913,8 +913,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick9 == 'No' || $exam_physical->sick9 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick9 == 'No' || $admission->exam_physical->sick9 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -928,8 +928,8 @@
                                                                         Pain,Gastritis or Ulcer :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick19 == 'Yes' || $exam_physical->sick19 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick19 == 'Yes' || $admission->exam_physical->sick19 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -939,8 +939,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick19 == 'No' || $exam_physical->sick19 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick19 == 'No' || $admission->exam_physical->sick19 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -951,11 +951,11 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Asthma (Specify) :</b>
-                                                                    {{ optional($exam_physical)->asthma }}</td>
+                                                                    {{ optional($admission->exam_physical)->asthma }}</td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick27 == 'Yes' || $exam_physical->sick27 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick27 == 'Yes' || $admission->exam_physical->sick27 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -965,8 +965,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick27 == 'No' || $exam_physical->sick27 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick27 == 'No' || $admission->exam_physical->sick27 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -982,8 +982,8 @@
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick10 == 'Yes' || $exam_physical->sick10 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick10 == 'Yes' || $admission->exam_physical->sick10 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -993,8 +993,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick10 == 'No' || $exam_physical->sick10 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick10 == 'No' || $admission->exam_physical->sick10 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1007,8 +1007,8 @@
                                                                 <td><b>Other Abdominal Disorders :</b></td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick20 == 'Yes' || $exam_physical->sick20 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick20 == 'Yes' || $admission->exam_physical->sick20 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1018,8 +1018,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick20 == 'No' || $exam_physical->sick20 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick20 == 'No' || $admission->exam_physical->sick20 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1030,12 +1030,12 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Allergies (Specify)
-                                                                        :</b>{{ $exam_physical ? $exam_physical->allergies : null }}
+                                                                        :</b>{{ $admission->exam_physical ? $admission->exam_physical->allergies : null }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick30 == 'Yes' || $exam_physical->sick30 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick30 == 'Yes' || $admission->exam_physical->sick30 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1045,8 +1045,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick30 == 'No' || $exam_physical->sick30 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick30 == 'No' || $admission->exam_physical->sick30 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1070,12 +1070,12 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Operations (Specify)
-                                                                        :</b>{{ $exam_physical ? $exam_physical->operations : null }}
+                                                                        :</b>{{ $admission->exam_physical ? $admission->exam_physical->operations : null }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick31 == 'Yes' || $exam_physical->sick31 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick31 == 'Yes' || $admission->exam_physical->sick31 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1085,8 +1085,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick31 == 'No' || $exam_physical->sick31 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick31 == 'No' || $admission->exam_physical->sick31 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1097,12 +1097,12 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Immunization (Specify) :</b>
-                                                                    <br>{{ $exam_physical ? $exam_physical->vaccination : null }}
+                                                                    <br>{{ $admission->exam_physical ? $admission->exam_physical->vaccination : null }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick32 == 'Yes' || $exam_physical->sick32 == '1')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick32 == 'Yes' || $admission->exam_physical->sick32 == '1')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1112,8 +1112,8 @@
                                                                         @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        @if ($exam_physical)
-                                                                            @if ($exam_physical->sick32 == 'No' || $exam_physical->sick32 == '0')
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick32 == 'No' || $admission->exam_physical->sick32 == '0')
                                                                                 ☑
                                                                             @else
                                                                                 ☐
@@ -1156,8 +1156,8 @@
                                                                                     <p><b><br>
                                                                                             <div
                                                                                                 style="width: 130px; height: 130px;padding: 0.2rem; border: 1px solid black;">
-                                                                                                @if ($admission->patient_image)
-                                                                                                    <img src="../../../app-assets/images/profiles/{{ $admission->patient_image }}"
+                                                                                                @if ($admission->patient->patient_image)
+                                                                                                    <img src="../../../app-assets/images/profiles/{{ $admission->patient->patient_image }}"
                                                                                                         alt="Patient Picture"
                                                                                                         width="100%"
                                                                                                         height="100%"
@@ -1180,15 +1180,15 @@
                                                                                     ship?</td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question1 == 'Yes' || $exam_physical->question1 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question1 == 'Yes' || $admission->exam_physical->question1 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question1 == 'No' || $exam_physical->question1 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question1 == 'No' || $admission->exam_physical->question1 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1200,15 +1200,15 @@
                                                                                     hospitalized?</td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question2 == 'Yes' || $exam_physical->question2 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question2 == 'Yes' || $admission->exam_physical->question2 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question2 == 'No' || $exam_physical->question2 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question2 == 'No' || $admission->exam_physical->question2 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1220,15 +1220,15 @@
                                                                                     unfit for sea duty?</td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question3 == 'Yes' || $exam_physical->question3 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question3 == 'Yes' || $admission->exam_physical->question3 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question3 == 'No' || $exam_physical->question3 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question3 == 'No' || $admission->exam_physical->question3 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1241,15 +1241,15 @@
                                                                                 </td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question4 == 'Yes' || $exam_physical->question4 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question4 == 'Yes' || $admission->exam_physical->question4 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question4 == 'No' || $exam_physical->question4 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question4 == 'No' || $admission->exam_physical->question4 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1262,15 +1262,15 @@
                                                                                     illness?</td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question5 == 'Yes' || $exam_physical->question5 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question5 == 'Yes' || $admission->exam_physical->question5 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question5 == 'No' || $exam_physical->question5 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question5 == 'No' || $admission->exam_physical->question5 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1284,15 +1284,15 @@
                                                                                 </td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question6 == 'Yes' || $exam_physical->question6 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question6 == 'Yes' || $admission->exam_physical->question6 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question6 == 'No' || $exam_physical->question6 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question6 == 'No' || $admission->exam_physical->question6 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1304,15 +1304,15 @@
                                                                                     medication?</td>
                                                                                 <td colspan="2" align="center">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question7 == 'Yes' || $exam_physical->question7 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question7 == 'Yes' || $admission->exam_physical->question7 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question7 == 'No' || $exam_physical->question7 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question7 == 'No' || $admission->exam_physical->question7 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1323,7 +1323,7 @@
                                                                                 <td colspan="3" height="35"
                                                                                     valign="top">&nbsp;Comments:
                                                                                     <br>
-                                                                                    @php echo nl2br(optional($exam_physical)->comments) @endphp
+                                                                                    @php echo nl2br(optional($admission->exam_physical)->comments) @endphp
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -1344,15 +1344,15 @@
                                                                                 <td colspan="2" align="center"
                                                                                     valign="top">
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question8 == 'Yes' || $exam_physical->question8 == '1' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question8 == 'Yes' || $admission->exam_physical->question8 == '1' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
                                                                                     </span>
                                                                                     <span style="font-size: 20px;">
-                                                                                        @if ($exam_physical)
-                                                                                            {{ $exam_physical->question8 == 'No' || $exam_physical->question8 == '0' ? '☑' : '☐' }}
+                                                                                        @if ($admission->exam_physical)
+                                                                                            {{ $admission->exam_physical->question8 == 'No' || $admission->exam_physical->question8 == '0' ? '☑' : '☐' }}
                                                                                         @else
                                                                                             ☐
                                                                                         @endif
@@ -1362,7 +1362,7 @@
                                                                             <tr>
                                                                                 <td colspan="2" valign="top"
                                                                                     height="35">
-                                                                                    @php echo nl2br(optional($exam_physical)->purpose) @endphp
+                                                                                    @php echo nl2br(optional($admission->exam_physical)->purpose) @endphp
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -1413,12 +1413,12 @@
                                                                                             <tr>
                                                                                                 <td valign="top">
                                                                                                     HEIGHT(cm):<br>
-                                                                                                    <b>{{ $exam_physical ? $exam_physical->height : null }}</b>
+                                                                                                    <b>{{ $admission->exam_physical ? $admission->exam_physical->height : null }}</b>
                                                                                                 </td>
                                                                                                 <td colspan="2"
                                                                                                     valign="top">
                                                                                                     WEIGHT (kg):<br>
-                                                                                                    <b>{{ $exam_physical ? $exam_physical->weight : null }}</b>
+                                                                                                    <b>{{ $admission->exam_physical ? $admission->exam_physical->weight : null }}</b>
                                                                                                 </td>
                                                                                                 <td colspan="2"
                                                                                                     align="left"
@@ -1426,32 +1426,32 @@
                                                                                                     BLOOD
                                                                                                     PRESSURE:<br>
                                                                                                     Systolic:
-                                                                                                    <b><u>{{ $exam_physical ? $exam_physical->systollic : null }}</u></b>
+                                                                                                    <b><u>{{ $admission->exam_physical ? $admission->exam_physical->systollic : null }}</u></b>
                                                                                                     <br>
-                                                                                                    Diastolic:<b><u>{{ $exam_physical ? $exam_physical->diastollic : null }}</u></b>
+                                                                                                    Diastolic:<b><u>{{ $admission->exam_physical ? $admission->exam_physical->diastollic : null }}</u></b>
                                                                                                 </td>
                                                                                                 <td colspan="2"
                                                                                                     valign="top">
                                                                                                     PULSE
-                                                                                                    RATE:<b><br><u>{{ $exam_physical ? $exam_physical->pulse : null }}</u></b>/min
+                                                                                                    RATE:<b><br><u>{{ $admission->exam_physical ? $admission->exam_physical->pulse : null }}</u></b>/min
                                                                                                     <br>
                                                                                                     Regular
-                                                                                                    Rhythm:<b><u>{{ $exam_physical ? $exam_physical->rhythm : null }}</u></b>
+                                                                                                    Rhythm:<b><u>{{ $admission->exam_physical ? $admission->exam_physical->rhythm : null }}</u></b>
                                                                                                 </td>
                                                                                                 <td colspan="2"
                                                                                                     valign="top">
                                                                                                     RESPIRATION:<b><br>
-                                                                                                        <u>{{ $exam_physical ? $exam_physical->respiration : null }}</u>
+                                                                                                        <u>{{ $admission->exam_physical ? $admission->exam_physical->respiration : null }}</u>
                                                                                                     </b>/min</td>
                                                                                                 <td valign="top">BMI
                                                                                                     :<br>
                                                                                                     @if ($admission->agency_id == 22)
                                                                                                         <b>
-                                                                                                            {{ $exam_physical->height && $exam_physical->weight ? (int) floor($exam_physical->weight / (($exam_physical->height / 100) * ($exam_physical->height / 100))) : null }}
+                                                                                                            {{ $admission->exam_physical->height && $admission->exam_physical->weight ? (int) floor($admission->exam_physical->weight / (($admission->exam_physical->height / 100) * ($admission->exam_physical->height / 100))) : null }}
                                                                                                         </b>
                                                                                                     @else
                                                                                                         <b>
-                                                                                                            {{ $exam_physical ? $exam_physical->bmi : null }}
+                                                                                                            {{ $admission->exam_physical ? $admission->exam_physical->bmi : null }}
                                                                                                         </b>
                                                                                                     @endif
                                                                                                 </td>
@@ -1487,31 +1487,31 @@
                                                                                                 <td>Uncorrected</td>
                                                                                                 <td width="9%">OD
                                                                                                     <b>
-                                                                                                        {{ $exam_visacuity ? $exam_visacuity->ufvod : null }}
+                                                                                                        {{ $admission->exam_visacuity ? $admission->exam_visacuity->ufvod : null }}
                                                                                                     </b>
                                                                                                 </td>
                                                                                                 <td width="9%">OS
                                                                                                     <b>
-                                                                                                        {{ $exam_visacuity ? $exam_visacuity->ufvos : null }}
+                                                                                                        {{ $admission->exam_visacuity ? $admission->exam_visacuity->ufvos : null }}
                                                                                                     </b>
                                                                                                 </td>
                                                                                                 <td width="9%">ODJ
                                                                                                     <b>
-                                                                                                        {{ $exam_visacuity ? $exam_visacuity->unvodj : null }}
+                                                                                                        {{ $admission->exam_visacuity ? $admission->exam_visacuity->unvodj : null }}
                                                                                                     </b>
                                                                                                 </td>
                                                                                                 <td width="10%">OSJ
                                                                                                     <b>
-                                                                                                        {{ $exam_visacuity ? $exam_visacuity->unvosj : null }}
+                                                                                                        {{ $admission->exam_visacuity ? $admission->exam_visacuity->unvosj : null }}
                                                                                                     </b>
                                                                                                 </td>
                                                                                                 <td align="center"
                                                                                                     width="12%">
                                                                                                     Adequate
                                                                                                     <b>
-                                                                                                        @if ($exam_ishihara)
+                                                                                                        @if ($admission->exam_ishihara)
                                                                                                             <span
-                                                                                                                style="font-size: 20px;">{{ $exam_ishihara->result == 'Adequate' ? '☑' : '☐' }}</span>
+                                                                                                                style="font-size: 20px;">{{ $admission->exam_ishihara->result == 'Adequate' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span
                                                                                                                 style="font-size: 20px;">☐</span>
@@ -1520,16 +1520,16 @@
                                                                                                 </td>
                                                                                                 <td align="center">Right</td>
                                                                                                 <td width="10%"><b>
-                                                                                                        @if ($exam_audio)
-                                                                                                            <span style="font-size: 20px;">{{ $exam_audio->right_ear_result == 'Adequate' ? '☑' : '☐' }}</span>
+                                                                                                        @if ($admission->exam_audio)
+                                                                                                            <span style="font-size: 20px;">{{ $admission->exam_audio->right_ear_result == 'Adequate' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span style="font-size: 20px;">☐</span>
                                                                                                         @endif
                                                                                                     </b> Adequate
                                                                                                 </td>
                                                                                                 <td width="11%"><b>
-                                                                                                        @if ($exam_audio)
-                                                                                                            <span style="font-size: 20px;">{{ $exam_audio->right_ear_result == 'Inadequate' ? '☑' : '☐' }}</span>
+                                                                                                        @if ($admission->exam_audio)
+                                                                                                            <span style="font-size: 20px;">{{ $admission->exam_audio->right_ear_result == 'Inadequate' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span style="font-size: 20px;">☐</span>
                                                                                                         @endif
@@ -1543,14 +1543,14 @@
                                                                                             <tr>
                                                                                                 <td width="11%">
                                                                                                     Corrected</td>
-                                                                                                <td>OD <b>{{ $exam_visacuity ? $exam_visacuity->cfvod : null }}</b></td>
-                                                                                                <td>OS <b>{{ $exam_visacuity ? $exam_visacuity->cfvod : null }}</b></td>
-                                                                                                <td>ODJ <b>{{ $exam_visacuity ? $exam_visacuity->cnvodj : null }}</b></td>
-                                                                                                <td>OSJ <b>{{ $exam_visacuity ? $exam_visacuity->cnvosj : null }}</b></td>
+                                                                                                <td>OD <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cfvod : null }}</b></td>
+                                                                                                <td>OS <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cfvod : null }}</b></td>
+                                                                                                <td>ODJ <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cnvodj : null }}</b></td>
+                                                                                                <td>OSJ <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cnvosj : null }}</b></td>
                                                                                                 <td align="center">
                                                                                                     Defective<b>
-                                                                                                        @if ($exam_ishihara)
-                                                                                                            <span style="font-size: 20px;">{{ $exam_ishihara->result == 'Defective' ? '☑' : '☐' }}</span>
+                                                                                                        @if ($admission->exam_ishihara)
+                                                                                                            <span style="font-size: 20px;">{{ $admission->exam_ishihara->result == 'Defective' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span style="font-size: 20px;">☐</span>
                                                                                                         @endif
@@ -1558,16 +1558,16 @@
                                                                                                 </td>
                                                                                                 <td align="center">Left</td>
                                                                                                 <td><b>
-                                                                                                        @if ($exam_audio)
-                                                                                                            <span style="font-size: 20px;">{{ $exam_audio->left_ear_result == 'Adequate' ? '☑' : '☐' }}</span>
+                                                                                                        @if ($admission->exam_audio)
+                                                                                                            <span style="font-size: 20px;">{{ $admission->exam_audio->left_ear_result == 'Adequate' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span style="font-size: 20px;">☐</span>
                                                                                                         @endif
                                                                                                     </b> Adequate
                                                                                                 </td>
                                                                                                 <td><b>
-                                                                                                        @if($exam_audio)
-                                                                                                            <span style="font-size: 20px;">{{ $exam_audio->left_ear_result == 'Inadequate' ? '☑' : '☐' }}</span>
+                                                                                                        @if($admission->exam_audio)
+                                                                                                            <span style="font-size: 20px;">{{ $admission->exam_audio->left_ear_result == 'Inadequate' ? '☑' : '☐' }}</span>
                                                                                                         @else
                                                                                                             <span style="font-size: 20px;">☐</span>
                                                                                                         @endif
@@ -1629,200 +1629,200 @@
                                                 <td><b>Skin</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
 
-                                                        {{ optional($exam_physical)->a1 == 'Yes' ? '☑' : '☐' }}
+                                                        {{ optional($admission->exam_physical)->a1 == 'Yes' ? '☑' : '☐' }}
 
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a1_findings ? $exam_physical->a1_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a1_findings ? $admission->exam_physical->a1_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Neck,Lymph Nodes,Thyroid</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b1 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b1 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b1_findings ? $exam_physical->b1_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b1_findings ? $admission->exam_physical->b1_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Genito-urinary System</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c2 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c2 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c2_findings ? $exam_physical->c2_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c2_findings ? $admission->exam_physical->c2_findings : null }}
                                                         @endif
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Head, neck, scalp</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a2 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a2 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a2_findings ? $exam_physical->a2_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a2_findings ? $admission->exam_physical->a2_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Chest-Breast-Axilla</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b2 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b2 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center">
                                                     <b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b3_findings ? $exam_physical->b3_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b3_findings ? $admission->exam_physical->b3_findings : null }}
                                                         @endif
                                                     </b>
                                                 </td>
                                                 <td><b>Inguinals, Genitals</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c3 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c3 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c3_findings ? $exam_physical->c3_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c3_findings ? $admission->exam_physical->c3_findings : null }}
                                                         @endif
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Eyes, external</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a3 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a3 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a3_findings ? $exam_physical->a3_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a3_findings ? $admission->exam_physical->a3_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Lungs</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b3 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b3 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b4_findings ? $exam_physical->b4_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b4_findings ? $admission->exam_physical->b4_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Extremities</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c3 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c3 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c4_findings ? $exam_physical->c4_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c4_findings ? $admission->exam_physical->c4_findings : null }}
                                                         @endif
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Pupils,Opthalmoscopic</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a4 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a4 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a4_findings ? $exam_physical->a4_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a4_findings ? $admission->exam_physical->a4_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Heart</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b4 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b4 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b5_findings ? $exam_physical->b5_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b5_findings ? $admission->exam_physical->b5_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Reflexes</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c4 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c4 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c5_findings ? $exam_physical->c5_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c5_findings ? $admission->exam_physical->c5_findings : null }}
                                                         @endif
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Ears</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a5 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a5 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a5_findings ? $exam_physical->a5_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a5_findings ? $admission->exam_physical->a5_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Abdomen</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b5 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b5 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b6_findings ? $exam_physical->b6_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b6_findings ? $admission->exam_physical->b6_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Dental(Teeth/Gums)</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c5 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c5 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c6_findings ? $exam_physical->c6_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c6_findings ? $admission->exam_physical->c6_findings : null }}
                                                         @endif
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Noses, Sinuses</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a6 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a6 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a6_findings ? $exam_physical->a6_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a6_findings ? $admission->exam_physical->a6_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Back</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b6 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b6 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b7_findings ? $exam_physical->b7_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b7_findings ? $admission->exam_physical->b7_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td>&nbsp;</td>
@@ -1832,24 +1832,24 @@
                                             <tr>
                                                 <td><b>Mouth, Throat</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a7 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a7 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->a7_findings ? $exam_physical->a7_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->a7_findings ? $admission->exam_physical->a7_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td><b>Anus-rectum</b></td>
                                                 <td align="center" style="font-size: 20px;"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->b7 == 'Yes' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->b7 == 'Yes' ? '☑' : '☐' }}
                                                         @endif
                                                     </b></td>
                                                 <td align="center"><b>
-                                                        @if ($exam_physical)
-                                                            {{ $exam_physical->c1_findings ? $exam_physical->c1_findings : null }}
+                                                        @if ($admission->exam_physical)
+                                                            {{ $admission->exam_physical->c1_findings ? $admission->exam_physical->c1_findings : null }}
                                                         @endif
                                                     </b></td>
                                                 <td>&nbsp;</td>
@@ -1874,18 +1874,18 @@
                                                         style="width: 100%; display: flex; align-items: center; justify-content: center;">
                                                         <span style="margin-right: 0.2rem;">Specify: </span>
                                                         <span>
-                                                            {{ $exam_physical ? $exam_physical->xray_findings : null }}</span>
+                                                            {{ $admission->exam_physical ? $admission->exam_physical->xray_findings : null }}</span>
                                                     </div>
                                                 </td>
                                                 <td width="19%"><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->chest == 'normal' || $exam_physical->chest == 'normal' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->chest == 'normal' || $admission->exam_physical->chest == 'normal' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Normal<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->chest == 'findings' || $exam_physical->chest == 'findings' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->chest == 'findings' || $admission->exam_physical->chest == 'findings' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>With Findings</td>
                                                 <td width="3%">D. URINALYSIS :
@@ -1898,26 +1898,26 @@
                                                     </div>
                                                 </td>
                                                 <td width="19%" valign="top"><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->urinalysis == 'normal' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->urinalysis == 'normal' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Normal<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->urinalysis == 'findings' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->urinalysis == 'findings' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>With Findings</td>
                                                 <td width="13%">G. HIV/AIDS Test :</td>
                                                 <td width="21%"><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->hiv == 'Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->hiv == 'Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Reactive<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->hiv == 'Non Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->hiv == 'Non Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b> Non-Reactive </td>
                                             </tr>
@@ -1927,18 +1927,18 @@
                                                         style="width: 100%; display: flex; align-items: center; justify-content: center;">
                                                         <span style="margin-right: 0.2rem;">Specify: </span>
                                                         <span style="font-size: 10px;">
-                                                            {{ $exam_physical ? $exam_physical->ecg_findings : null }}</span>
+                                                            {{ $admission->exam_physical ? $admission->exam_physical->ecg_findings : null }}</span>
                                                     </div>
                                                 </td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->ecg == 'normal' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->ecg == 'normal' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Normal<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->ecg == 'findings' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->ecg == 'findings' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>With Findings</td>
                                                 <td> E. STOOL EXAM : <br>
@@ -1951,58 +1951,58 @@
                                                     </div>
                                                 </td>
                                                 <td valign="top"><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->stool == 'normal' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->stool == 'normal' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Normal<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->stool == 'findings' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->stool == 'findings' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>With Findings</td>
                                                 <td>H. RPR :</td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->rph == 'Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->rph == 'Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Reactive<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->rph == 'Non Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->rph == 'Non Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Non-Reactive</td>
                                             </tr>
                                             <tr>
                                                 <td>C. CBC :</td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->cbc == 'normal' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->cbc == 'normal' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Normal<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->cbc == 'findings' || $exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->cbc == 'findings' || $admission->exam_physical->chest == 'Non-Significant' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>With Findings</td>
                                                 <td>F. Hepatitis B :</td>
                                                 <td valign="top"><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->hepa_b == 'Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->hepa_b == 'Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Reactive <b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->hepa_b == 'Non Reactive' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->hepa_b == 'Non Reactive' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>Non-Reactive</td>
                                                 <td colspan="2">I. BLOOD TYPE(Specify) :<b>
                                                     </b>
-                                                    @if ($exam_physical)
-                                                        {{ $exam_physical->blood_type ? $exam_physical->blood_type : null }}
+                                                    @if ($admission->exam_physical)
+                                                        {{ $admission->exam_physical->blood_type ? $admission->exam_physical->blood_type : null }}
                                                     @endif
                                                 </td>
                                             </tr>
@@ -2015,8 +2015,8 @@
                                                 <td width="15%">Psychological Test</td>
                                                 <td width="5%">
                                                     <span style="font-size: 13px; font-weight: 600;">
-                                                        @if ($exam_physical)
-                                                            @if ($exam_physical->psychological == 'normal')
+                                                        @if ($admission->exam_physical)
+                                                            @if ($admission->exam_physical->psychological == 'normal')
                                                                 ☑
                                                             @else
                                                                 ☐
@@ -2029,8 +2029,8 @@
                                                 </td>
                                                 <td width="85%">
                                                     <span style="font-size: 13px; font-weight: 600;">
-                                                        @if ($exam_physical)
-                                                            @if ($exam_physical->psychological == 'evaluation')
+                                                        @if ($admission->exam_physical)
+                                                            @if ($admission->exam_physical->psychological == 'evaluation')
                                                                 ☑
                                                             @else
                                                                 ☐
@@ -2052,8 +2052,8 @@
                                                     Test</td>
                                             </tr>
                                             <td>
-                                                @if ($exam_physical)
-                                                    @php echo nl2br($exam_physical->additional_labtest) @endphp
+                                                @if ($admission->exam_physical)
+                                                    @php echo nl2br($admission->exam_physical->additional_labtest) @endphp
                                                 @endif
                                             </td>
                                         </tbody>
@@ -2073,50 +2073,50 @@
                                             <tr>
                                                 <td width="32%">Basic DOH Mandatory Medical Examination :</td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_medexam == 'passed' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_medexam == 'passed' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b> PASSED <b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_medexam == 'findings' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_medexam == 'findings' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>WITH SIGNIFICANT FINDINGS</td>
                                             </tr>
                                             <tr>
                                                 <td>Additional Laboratory Test :</td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_labtest == 'passed' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_labtest == 'passed' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>PASSED<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_labtest == 'findings' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_labtest == 'findings' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>WITH SIGNIFICANT FINDINGS</td>
                                             </tr>
                                             <tr>
                                                 <td>Flag/Host Medical and Laboratory Requirements</td>
                                                 <td><b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_labrequirements == 'passed' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_labrequirements == 'passed' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>PASSED<b>
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->summary_labrequirements == 'findings' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->summary_labrequirements == 'findings' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b>WITH SIGNIFICANT FINDINGS</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2"><b>REMARKS/SPECIAL NEEDS SPECIFY</b>(Specify e.g.
                                                     with medication,diet restriction etc.)<br>
-                                                    @if ($exam_physical)
-                                                        {{ $exam_physical->remarks ? $exam_physical->remarks : null }}
+                                                    @if ($admission->exam_physical)
+                                                        {{ $admission->exam_physical->remarks ? $admission->exam_physical->remarks : null }}
                                                     @endif
                                                 </td>
                                             </tr>
@@ -2138,15 +2138,15 @@
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
                                                 <td width="33%" align="left"><b>FIT FOR LOOK OUT DUTY
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->duty == 'Fit' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->duty == 'Fit' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b></td>
                                                 <td width="28%" align="center"><b>NOT FIT FOR LOOK OUT DUTY
-                                                        @if ($exam_physical)
+                                                        @if ($admission->exam_physical)
                                                             <span
-                                                                style="font-size: 20px;">{{ $exam_physical->duty == 'Unfit' ? '☑' : '☐' }}</span>
+                                                                style="font-size: 20px;">{{ $admission->exam_physical->duty == 'Unfit' ? '☑' : '☐' }}</span>
                                                         @endif
                                                     </b></td>
                                                 <td width="27%">&nbsp;</td>
@@ -2165,31 +2165,31 @@
                                             <tr>
                                                 <td><b>FIT</b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'DECK SERVICES' && optional($exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'CATERING SERVICES' && optional($exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'OTHER SERVICES' && optional($exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
                                                     </b></td>
                                             </tr>
                                             <tr>
                                                 <td><b>UNFIT</b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'DECK SERVICES' && optional($exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'CATERING SERVICES' && optional($exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'OTHER SERVICES' && optional($exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                        {{ $admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
                                                     </b></td>
                                             </tr>
                                         </tbody>
@@ -2206,29 +2206,29 @@
                                                             <tr>
                                                                 <td width="19%" height="29">WITH RESTRICTIONS:
                                                                     <b>
-                                                                        @if ($exam_physical)
+                                                                        @if ($admission->exam_physical)
                                                                             <span
-                                                                                style="font-size: 20px;">{{ $exam_physical->restriction == 'with restriction' ? '☑' : '☐' }}</span>
+                                                                                style="font-size: 20px;">{{ $admission->exam_physical->restriction == 'with restriction' ? '☑' : '☐' }}</span>
                                                                         @endif
                                                                     </b>
                                                                 </td>
                                                                 <td width="25%">WITHOUT RESTRICTIONS: <b>
-                                                                        @if ($exam_physical)
+                                                                        @if ($admission->exam_physical)
                                                                             <span
-                                                                                style="font-size: 20px;">{{ $exam_physical->restriction == 'without restriction' ? '☑' : '☐' }}</span>
+                                                                                style="font-size: 20px;">{{ $admission->exam_physical->restriction == 'without restriction' ? '☑' : '☐' }}</span>
                                                                         @endif
                                                                     </b></td>
                                                                 <td width="20%">VISUAL AIDS REQUIRED:</td>
                                                                 <td width="6%" valign="top">Yes<b>
-                                                                        @if ($exam_physical)
+                                                                        @if ($admission->exam_physical)
                                                                             <span
-                                                                                style="font-size: 20px;">{{ $exam_physical->visual_required ? '☑' : '☐' }}</span>
+                                                                                style="font-size: 20px;">{{ $admission->exam_physical->visual_required ? '☑' : '☐' }}</span>
                                                                         @endif
                                                                     </b></td>
                                                                 <td width="21%" valign="top">No<b>
-                                                                        @if ($exam_physical)
+                                                                        @if ($admission->exam_physical)
                                                                             <span
-                                                                                style="font-size: 20px;">{{ !$exam_physical->visual_required ? '☑' : '☐' }}</span>
+                                                                                style="font-size: 20px;">{{ !$admission->exam_physical->visual_required ? '☑' : '☐' }}</span>
                                                                         @endif
                                                                     </b></td>
                                                             </tr>
@@ -2241,8 +2241,8 @@
                                                             <tr>
                                                                 <td colspan="3" style="border-bottom : 1px solid">
                                                                     <b>
-                                                                        @if ($exam_physical)
-                                                                            {{ $exam_physical->describe_restriction }}
+                                                                        @if ($admission->exam_physical)
+                                                                            {{ $admission->exam_physical->describe_restriction }}
                                                                         @endif
                                                                     </b>
                                                                 </td>
@@ -2271,17 +2271,17 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>(DD/MM/YY):<b>
-                                                                        @if ($exam_physical)
-                                                                            {{ $exam_physical ? date_format(new DateTime($exam_physical->date_examination), 'd F Y') : null }}
+                                                                        @if ($admission->exam_physical)
+                                                                            {{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), 'd F Y') : null }}
                                                                         @endif
                                                                     </b></td>
                                                                 <td>(DD/MM/YY):<b>
-                                                                        @if ($exam_physical)
-                                                                            {{ $exam_physical ? date_format(new DateTime($exam_physical->date_expiration), 'd F Y') : null }}
+                                                                        @if ($admission->exam_physical)
+                                                                            {{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_expiration), 'd F Y') : null }}
                                                                         @endif
                                                                     </b></td>
                                                                 <td><b>
-                                                                        @if ($exam_physical)
+                                                                        @if ($admission->exam_physical)
                                                                             {{ $admission->patientcode }}
                                                                         @endif
                                                                     </b></td>
@@ -2323,7 +2323,7 @@
                                                                                 <td width="25%"
                                                                                     style="border-bottom : 1px solid">
                                                                                     <b>
-                                                                                        @if ($exam_physical)
+                                                                                        @if ($admission->exam_physical)
                                                                                             {{ $medical_director->license_no }}
                                                                                         @endif
                                                                                     </b>
@@ -2382,10 +2382,10 @@
                                                                 <td width="1%" align="right">(</td>
                                                                 <td width="34%" align="center"
                                                                     style="border-bottom : 1px solid"><b>
-                                                                        @if (preg_match('/Bahia/i', $admission->agencyname))
+                                                                        @if (preg_match('/Bahia/i', $admission->agency->agencyname))
                                                                             {{ 'Bahia Shipping Services, Inc.' }}
                                                                         @else
-                                                                            {{ $admission->agencyname }}
+                                                                            {{ $admission->agency->agencyname }}
                                                                         @endif
                                                                     </b></td>
                                                                 <td width="65%">)</td>
@@ -2413,12 +2413,12 @@
                                                             <tr>
                                                                 <td align="center">
                                                                     @if ($admission->agency_id != 19)
-                                                                        @if ($admission->patient_signature)
-                                                                            <img src="@php echo base64_decode($admission->patient_signature) @endphp"
+                                                                        @if ($admission->patient->patient_signature)
+                                                                            <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp"
                                                                                 width="120"
                                                                                 style="object-fit: cover;" />
-                                                                        @elseif ($admission->signature)
-                                                                            <img src="data:image/jpeg;base64,{{ $admission->signature }}"
+                                                                        @elseif ($admission->patient->signature)
+                                                                            <img src="data:image/jpeg;base64,{{ $admission->patient->signature }}"
                                                                                 width="120"
                                                                                 style="object-fit: cover;" />
                                                                         @else
@@ -2434,12 +2434,12 @@
                                                             <tr>
                                                                 <td width="395" align="center"
                                                                     style="border-bottom: 1px black solid; font-weight: 600;">
-                                                                    {{ $admission->lastname . ', ' . $admission->firstname . ' ' . $admission->middlename }}
+                                                                    {{ $admission->patient->lastname . ', ' . $admission->patient->firstname . ' ' . $admission->patient->middlename }}
                                                                 </td>
                                                                 <td width="85" align="center">&nbsp;</td>
                                                                 <td width="182" align="center"
                                                                     style="border-bottom: 1px black solid; text-transform: uppercase;  font-weight: 600;">
-                                                                    {{ $exam_physical ? date_format(new DateTime($exam_physical->trans_date), 'd F Y') : null }}
+                                                                    {{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->trans_date), 'd F Y') : null }}
                                                                 </td>
                                                                 <td width="86" align="center">&nbsp;</td>
                                                             </tr>

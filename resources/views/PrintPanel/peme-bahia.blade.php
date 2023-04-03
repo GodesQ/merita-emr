@@ -4,52 +4,52 @@ function markSlash($val)
 return $val == '' ? ' / ' : $val;
 }
 
-if ($exam_audio) {
-$ar1 = markSlash($exam_audio->air_right1);
-$ar2 = markSlash($exam_audio->air_right2);
-$ar3 = markSlash($exam_audio->air_right3);
-$ar4 = markSlash($exam_audio->air_right4);
-$ar5 = markSlash($exam_audio->air_right5);
-$ar6 = markSlash($exam_audio->air_right6);
-$ar7 = markSlash($exam_audio->air_right7);
-$ar8 = markSlash($exam_audio->air_right8);
-$ar9 = markSlash($exam_audio->air_right9);
-$al1 = markSlash($exam_audio->air_left1);
-$al2 = markSlash($exam_audio->air_left2);
-$al3 = markSlash($exam_audio->air_left3);
-$al4 = markSlash($exam_audio->air_left4);
-$al5 = markSlash($exam_audio->air_left5);
-$al6 = markSlash($exam_audio->air_left6);
-$al7 = markSlash($exam_audio->air_left7);
-$al8 = markSlash($exam_audio->air_left8);
-$al9 = markSlash($exam_audio->air_left9);
-$br1 = markSlash($exam_audio->bone_right1);
-$br2 = markSlash($exam_audio->bone_right2);
-$br3 = markSlash($exam_audio->bone_right3);
-$br4 = markSlash($exam_audio->bone_right4);
-$br5 = markSlash($exam_audio->bone_right5);
-$br6 = markSlash($exam_audio->bone_right6);
-$br7 = markSlash($exam_audio->bone_right7);
-$br8 = markSlash($exam_audio->bone_right8);
-$br9 = markSlash($exam_audio->bone_right9);
-$bl1 = markSlash($exam_audio->bone_left1);
-$bl2 = markSlash($exam_audio->bone_left2);
-$bl3 = markSlash($exam_audio->bone_left3);
-$bl4 = markSlash($exam_audio->bone_left4);
-$bl5 = markSlash($exam_audio->bone_left5);
-$bl6 = markSlash($exam_audio->bone_left6);
-$bl7 = markSlash($exam_audio->bone_left7);
-$bl8 = markSlash($exam_audio->bone_left8);
-$bl9 = markSlash($exam_audio->bone_left9);
-$ff1 = markSlash($exam_audio->free_field1);
-$ff2 = markSlash($exam_audio->free_field2);
-$ff3 = markSlash($exam_audio->free_field3);
-$ff4 = markSlash($exam_audio->free_field4);
-$ff5 = markSlash($exam_audio->free_field5);
-$ff6 = markSlash($exam_audio->free_field6);
-$ff7 = markSlash($exam_audio->free_field7);
-$ff8 = markSlash($exam_audio->free_field8);
-$ff9 = markSlash($exam_audio->free_field9);
+if ($admission->exam_audio) {
+$ar1 = markSlash($admission->exam_audio->air_right1);
+$ar2 = markSlash($admission->exam_audio->air_right2);
+$ar3 = markSlash($admission->exam_audio->air_right3);
+$ar4 = markSlash($admission->exam_audio->air_right4);
+$ar5 = markSlash($admission->exam_audio->air_right5);
+$ar6 = markSlash($admission->exam_audio->air_right6);
+$ar7 = markSlash($admission->exam_audio->air_right7);
+$ar8 = markSlash($admission->exam_audio->air_right8);
+$ar9 = markSlash($admission->exam_audio->air_right9);
+$al1 = markSlash($admission->exam_audio->air_left1);
+$al2 = markSlash($admission->exam_audio->air_left2);
+$al3 = markSlash($admission->exam_audio->air_left3);
+$al4 = markSlash($admission->exam_audio->air_left4);
+$al5 = markSlash($admission->exam_audio->air_left5);
+$al6 = markSlash($admission->exam_audio->air_left6);
+$al7 = markSlash($admission->exam_audio->air_left7);
+$al8 = markSlash($admission->exam_audio->air_left8);
+$al9 = markSlash($admission->exam_audio->air_left9);
+$br1 = markSlash($admission->exam_audio->bone_right1);
+$br2 = markSlash($admission->exam_audio->bone_right2);
+$br3 = markSlash($admission->exam_audio->bone_right3);
+$br4 = markSlash($admission->exam_audio->bone_right4);
+$br5 = markSlash($admission->exam_audio->bone_right5);
+$br6 = markSlash($admission->exam_audio->bone_right6);
+$br7 = markSlash($admission->exam_audio->bone_right7);
+$br8 = markSlash($admission->exam_audio->bone_right8);
+$br9 = markSlash($admission->exam_audio->bone_right9);
+$bl1 = markSlash($admission->exam_audio->bone_left1);
+$bl2 = markSlash($admission->exam_audio->bone_left2);
+$bl3 = markSlash($admission->exam_audio->bone_left3);
+$bl4 = markSlash($admission->exam_audio->bone_left4);
+$bl5 = markSlash($admission->exam_audio->bone_left5);
+$bl6 = markSlash($admission->exam_audio->bone_left6);
+$bl7 = markSlash($admission->exam_audio->bone_left7);
+$bl8 = markSlash($admission->exam_audio->bone_left8);
+$bl9 = markSlash($admission->exam_audio->bone_left9);
+$ff1 = markSlash($admission->exam_audio->free_field1);
+$ff2 = markSlash($admission->exam_audio->free_field2);
+$ff3 = markSlash($admission->exam_audio->free_field3);
+$ff4 = markSlash($admission->exam_audio->free_field4);
+$ff5 = markSlash($admission->exam_audio->free_field5);
+$ff6 = markSlash($admission->exam_audio->free_field6);
+$ff7 = markSlash($admission->exam_audio->free_field7);
+$ff8 = markSlash($admission->exam_audio->free_field8);
+$ff9 = markSlash($admission->exam_audio->free_field9);
 }else {
     $ar1 = null;
     $ar2 = null;
@@ -124,12 +124,12 @@ $ff9 = markSlash($exam_audio->free_field9);
             <tbody>
                 <tr>
                     <td valign="bottom" class=""><img
-                            src="../../../app-assets/images/profiles/{{$admission->patient_image}}"
+                            src="../../../app-assets/images/profiles/{{$admission->patient->patient_image}}"
                             alt="Patient Picture" width="153" height="154" class="brdAll"><br>
                         <b>
-                            {{$admission->lastname}},
-                            {{$admission->firstname}}
-                            {{$admission->middlename}} </b>
+                            {{$admission->patient->lastname}},
+                            {{$admission->patient->firstname}}
+                            {{$admission->patient->middlename}} </b>
                     </td>
                 </tr>
                 <tr>
@@ -149,57 +149,57 @@ $ff9 = markSlash($exam_audio->free_field9);
                                                     <tr>
                                                         <td width="149" valign="top"><b>Address: </b></td>
                                                         <td width="517" valign="top">
-                                                            {{$patientInfo->address}} </td>
+                                                            {{$admission->patient->patientinfo->address}} </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Date of Birth:</b></td>
-                                                        <td width="517" valign="top"> {{date_format(new DateTime($patientInfo->birthdate), "F d, Y")}}</td>
+                                                        <td width="517" valign="top"> {{date_format(new DateTime($admission->patient->patientinfo->birthdate), "F d, Y")}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Contact Number:</b></td>
-                                                        <td width="517" valign="top">{{$patientInfo->contactno}}</td>
+                                                        <td width="517" valign="top">{{$admission->patient->patientinfo->contactno}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Place of Birth:</b></td>
-                                                        <td width="517" valign="top">{{$patientInfo->birthplace}} </td>
+                                                        <td width="517" valign="top">{{$admission->patient->patientinfo->birthplace}} </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Civil Status:</b></td>
-                                                        <td width="517" valign="top">{{strtoupper($patientInfo->maritalstatus)}}
+                                                        <td width="517" valign="top">{{strtoupper($admission->patient->patientinfo->maritalstatus)}}
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Gender:</b></td>
-                                                        <td width="517" valign="top">{{strtoupper($admission->gender)}}</td>
+                                                        <td width="517" valign="top">{{strtoupper($admission->patient->gender)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Nationality:</b></td>
-                                                        <td width="517" valign="top">{{$patientInfo->nationality}}</td>
+                                                        <td width="517" valign="top">{{$admission->patient->patientinfo->nationality}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Age:</b></td>
-                                                        <td width="517" valign="top">{{$admission->age}}</td>
+                                                        <td width="517" valign="top">{{$admission->patient->age}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Passport Valid Date:</b></td>
                                                         <td width="517" valign="top">
-                                                            {{date_format(new DateTime($patientInfo->passport_expdate), "F d, Y")}}
+                                                            {{date_format(new DateTime($admission->patient->patientinfo->passport_expdate), "F d, Y")}}
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>SRB Valid Date:</b></td>
                                                         <td width="517" valign="top">
-                                                            {{date_format(new DateTime($patientInfo->srb_expdate), "F d, Y")}}
+                                                            {{date_format(new DateTime($admission->patient->patientinfo->srb_expdate), "F d, Y")}}
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>Passport:</b></td>
-                                                        <td width="517" valign="top">{{$patientInfo->passportno}}
+                                                        <td width="517" valign="top">{{$admission->patient->patientinfo->passportno}}
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="149" valign="top"><b>SRB Number:</b></td>
-                                                        <td width="517" valign="top">{{$patientInfo->srbno}}
+                                                        <td width="517" valign="top">{{$admission->patient->patientinfo->srbno}}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -216,7 +216,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                 <tr>
                                     <td width="149" valign="top"><b>ID No.:</b></td>
                                     <td width="517" valign="top">
-                                        <p>{{$admission->patientcode}}</p>
+                                        <p>{{$admission->patient->patientcode}}</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -224,10 +224,10 @@ $ff9 = markSlash($exam_audio->free_field9);
                                         <p><b>Manning Company:</b></p>
                                     </td>
                                     <td width="517" valign="top">
-                                        <p>@if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                        <p>@if (preg_match("/Bahia/i", $admission->agency->agencyname))
                                                     {{'Bahia Shipping Services, Inc.'}}
                                                 @else
-                                                    {{$admission->agencyname}}
+                                                    {{$admission->agency->agencyname}}
                                                 @endif</p>
                                     </td>
                                 </tr>
@@ -236,7 +236,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                         <p><b>Package:</b></p>
                                     </td>
                                     <td width="517" valign="top">
-                                        <p>{{$admission->packagename}}</p>
+                                        <p>{{$admission->package->packagename}}</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -245,7 +245,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="517" valign="top">
                                         <p>
-                                            {{$patientInfo->principal}}
+                                            {{$admission->patient->patientinfo->principal}}
                                         </p>
                                     </td>
                                 </tr>
@@ -305,10 +305,10 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="512" valign="top">
                                         <p>
-                                            @if($exam_cardio)
-                                                {{$exam_cardio->height . "cm"}}
+                                            @if($admission->exam_cardio)
+                                                {{$admission->exam_cardio->height . "cm"}}
                                             @else
-                                                {{$exam_physical ? $exam_physical->height . "cm" : null}}
+                                                {{$admission->exam_physical ? $admission->exam_physical->height . "cm" : null}}
                                             @endif
                                         </p>
                                     </td>
@@ -319,10 +319,10 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="512" valign="top">
                                         <p>
-                                            @if($exam_cardio)
-                                                {{$exam_cardio->weight . "kgs"}}
+                                            @if($admission->exam_cardio)
+                                                {{$admission->exam_cardio->weight . "kgs"}}
                                             @else
-                                                {{$exam_physical ? $exam_physical->weight . "kgs" : null}}
+                                                {{$admission->exam_physical ? $admission->exam_physical->weight . "kgs" : null}}
                                             @endif
                                         </p>
                                     </td>
@@ -333,7 +333,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="512" valign="top">
                                         <p>
-                                            {{$exam_cardio ? $exam_cardio->bp : null}}
+                                            {{$admission->exam_cardio ? $admission->exam_cardio->bp : null}}
                                         </p>
                                     </td>
                                 </tr>
@@ -342,10 +342,10 @@ $ff9 = markSlash($exam_audio->free_field9);
                                         <p><b>Doctor:</b></p>
                                     </td>
                                     <td width="512" valign="top">
-                                        @if($exam_cardio)
-                                            <span style="font-size: 10px;">{{$exam_cardio->tech1_firstname}} {{$exam_cardio->tech1_middlename[0]}}. {{$exam_cardio->tech1_lastname}}</span>
+                                        @if($admission->exam_cardio)
+                                            <span style="font-size: 10px;">{{$admission->exam_cardio->first_tech->firstname}} {{$admission->exam_cardio->first_tech->middlename[0]}}. {{$admission->exam_cardio->first_tech->lastname}}</span>
                                         @else
-                                            <span style="font-size: 10px;">{{$exam_physical ? $exam_physical->tech1_firstname . $exam_physical->tech1_middlename[0] . $exam_physical->tech1_lastname : null}}</span>
+                                            <span style="font-size: 10px;">{{$admission->exam_physical ? $admission->exam_physical->first_tech->firstname . $admission->exam_physical->first_tech->middlename[0] . $admission->exam_physical->first_tech->lastname : null}}</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -355,10 +355,10 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="512" valign="top">
                                         <p>
-                                            @if($exam_cardio)
-                                                {{ date_format(new DateTime($exam_cardio->updated_date), "F d, Y")}}
+                                            @if($admission->exam_cardio)
+                                                {{ date_format(new DateTime($admission->exam_cardio->updated_date), "F d, Y")}}
                                             @else
-                                                {{$exam_physical ? date_format(new DateTime($exam_physical->updated_date), "F d, Y") : null}}
+                                                {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->updated_date), "F d, Y") : null}}
                                             @endif
                                         </p>
                                     </td>
@@ -442,13 +442,13 @@ $ff9 = markSlash($exam_audio->free_field9);
                             </tr>
                         </table>
                         <p>Remarks:
-                            {{$exam_audio ? $exam_audio->remarks : null}}<br>
+                            {{$admission->exam_audio ? $admission->exam_audio->remarks : null}}<br>
                             Audiometrician:
-                            @if($exam_audio)
-                                <span style="font-size: 12px;">{{$exam_audio->tech1_firstname}} {{$exam_audio->tech1_middlename[0]}}. {{$exam_audio->tech1_lastname}}</span>
+                            @if($admission->exam_audio)
+                                <span style="font-size: 12px;">{{$admission->exam_audio->first_tech->firstname}} {{$admission->exam_audio->first_tech->middlename[0]}}. {{$admission->exam_audio->first_tech->lastname}}</span>
                             @endif
                             <span style="margin-left:100px">Last updated:
-                                {{$exam_audio ? date_format(new DateTime($exam_audio->updated_date), "F d, Y") : null}}</span>
+                                {{$admission->exam_audio ? date_format(new DateTime($admission->exam_audio->updated_date), "F d, Y") : null}}</span>
                         </p>
                         <p><i>3. Electrodiagram ( ECG)</i></p>
                         <table width="100%" border="0" cellpadding="4" cellspacing="0" class="brdTable">
@@ -459,7 +459,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="529" valign="top">
                                         <p>
-                                            {{$exam_ecg ? $exam_ecg->tech2_lastname . ", " . $exam_ecg->tech2_firstname . " " .  $exam_ecg->tech2_middlename : null}}
+                                            {{$admission->exam_ecg ? $admission->exam_ecg->second_tech->lastname . ", " . $admission->exam_ecg->second_tech->firstname . " " .  $admission->exam_ecg->second_tech->middlename : null}}
                                         </p>
                                     </td>
                                 </tr>
@@ -469,7 +469,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="529" valign="top">
                                         <p>
-                                            {{$exam_ecg ? $exam_ecg->tech1_lastname . ", " . $exam_ecg->tech1_firstname . " " .  $exam_ecg->tech1_middlename : null}}
+                                            {{$admission->exam_ecg ? $admission->exam_ecg->first_tech->lastname . ", " . $admission->exam_ecg->first_tech->firstname . " " .  $admission->exam_ecg->first_tech->middlename : null}}
                                         </p>
                                     </td>
                                 </tr>
@@ -479,7 +479,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="529" valign="top">
                                         <p>
-                                            {{$exam_ecg ? $exam_ecg->remarks : null}}
+                                            {{$admission->exam_ecg ? $admission->exam_ecg->remarks : null}}
                                         </p>
                                     </td>
                                 </tr>
@@ -489,7 +489,7 @@ $ff9 = markSlash($exam_audio->free_field9);
                                     </td>
                                     <td width="529" valign="top">
                                         <p>
-                                            {{$exam_ecg ? date_format(new DateTime($exam_ecg->updated_date), "F d, Y") : null}}
+                                            {{$admission->exam_ecg ? date_format(new DateTime($admission->exam_ecg->updated_date), "F d, Y") : null}}
                                         </p>
                                     </td>
                                 </tr>
@@ -507,48 +507,48 @@ $ff9 = markSlash($exam_audio->free_field9);
                                 <tr>
                                     <td>FEV 1 </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1_predicted : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1_predicted : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1_actual : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1_actual : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1_perc : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1_perc : null}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>FVC </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fvc_predicted : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fvc_predicted : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fvc_actual : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fvc_actual : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fvc_perc : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fvc_perc : null}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>FEV1/ FVC % </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1fvc_predicted : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1fvc_predicted : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1fvc_actual : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1fvc_actual : null}}
                                     </td>
                                     <td height="60" align="center" class="brdLeftBtm">
-                                        {{$exam_crf ? $exam_crf->fev1fvc_perc : null}}
+                                        {{$admission->exam_crf ? $admission->exam_crf->fev1fvc_perc : null}}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <p> Remarks: <br>
-                            @php echo $exam_crf ? nl2br($exam_crf->remarks) : null@endphp
+                            @php echo $admission->exam_crf ? nl2br($admission->exam_crf->remarks) : null@endphp
                             <br>
                             Nurse:
-                            {{$exam_crf ? $exam_crf->tech1_lastname . ", " . $exam_crf->tech1_firstname . " " .  $exam_crf->tech1_middlename : null}}
+                            {{$admission->exam_crf ? $admission->exam_crf->first_tech->lastname . ", " . $admission->exam_crf->first_tech->firstname . " " .  $admission->exam_crf->first_tech->middlename : null}}
                             <span style="margin-left:100px">Last updated:
-                                {{$exam_crf ? date_format(new DateTime($exam_crf->updated_date), "F d, Y") : null}}
+                                {{$admission->exam_crf ? date_format(new DateTime($admission->exam_crf->updated_date), "F d, Y") : null}}
                             </span>
                         </p>
                         <p style="margin-top:20px">
@@ -556,58 +556,58 @@ $ff9 = markSlash($exam_audio->free_field9);
                         <h4><b><u>LABORATORY RESULT:</u></b></h4>
                         <p></p>
                         <p><i>5. Blood Chemistry</i></p>
-                        @if($exam_bloodsero)
-                            @if($exam_bloodsero->remarks_status ==  'findings')
+                        @if($admission->exam_bloodsero)
+                            @if($admission->exam_bloodsero->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_bloodsero->remarks) @endphp
+                                    @php echo nl2br($admission->exam_bloodsero->remarks) @endphp
                                 </p>
                             @endif
                         @endif
                         <p><i>6. Drug Test</i></p>
-                        @if($exam_drug)
-                            @if($exam_drug->remarks_status ==  'findings')
+                        @if($admission->exam_drug)
+                            @if($admission->exam_drug->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_drug->remarks) @endphp
+                                    @php echo nl2br($admission->exam_drug->remarks) @endphp
                                 </p>
                             @endif
                         @endif
                         <p><i>7. Fecalysis</i></p>
-                        @if($exam_feca)
-                            @if($exam_feca->remarks_status ==  'findings')
+                        @if($admission->exam_feca)
+                            @if($admission->exam_feca->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_feca->remarks) @endphp
+                                    @php echo nl2br($admission->exam_feca->remarks) @endphp
                                 </p>
                             @endif
                         @endif
                         <p><i>8. Hematology CBC</i></p>
-                        @if($exam_hema)
-                            @if($exam_hema->remarks_status ==  'findings')
+                        @if($admission->exam_hema)
+                            @if($admission->exam_hema->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_hema->remarks) @endphp
+                                    @php echo nl2br($admission->exam_hema->remarks) @endphp
                                 </p>
                             @endif
                         @endif
                         <p><i>9. Immunology</i></p>
                         <p></p>
                         <p style=""><i>10. Urinalysis</i></p>
-                        @if($exam_urin)
-                            @if($exam_urin->remarks_status ==  'findings')
+                        @if($admission->exam_urin)
+                            @if($admission->exam_urin->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_urin->remarks) @endphp
+                                    @php echo nl2br($admission->exam_urin->remarks) @endphp
                                 </p>
                             @endif
                         @endif
                         <p><i>11. Dental</i></p>
-                        @if($exam_dental)
-                            @if($exam_dental->remarks_status ==  'findings')
+                        @if($admission->exam_dental)
+                            @if($admission->exam_dental->remarks_status ==  'findings')
                                 <p><b>Remarks</b></p>
                                 <p>
-                                    @php echo nl2br($exam_dental->remarks) @endphp
+                                    @php echo nl2br($admission->exam_dental->remarks) @endphp
                                 </p>
                             @endif
                         @endif

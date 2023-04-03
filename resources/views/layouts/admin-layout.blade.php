@@ -183,6 +183,9 @@
                         @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
                             <li><a class="menu-item" href="/transmittal" data-i18n="CRM">Transmittal</a></li>
                         @endif
+                        @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
+                            <li><a class="menu-item" href="/followup_transmittal" data-i18n="CRM">Follow Up Transmittal</a></li>
+                        @endif
                         <li><a class="menu-item" href="/soa" data-i18n="SOA Report">SOA Report</a></li>
                         <li><a class="menu-item" href="/panama" data-i18n="Panama Billing">Panama Billing</a></li>
                         <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian Billing</a></li>

@@ -183,8 +183,8 @@
                                                                         father/mother:</td>
                                                                     <td width="50%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$admission->firstname}}
-                                                                        {{$admission->lastname}}
+                                                                        {{$admission->patient->firstname}}
+                                                                        {{$admission->patient->lastname}}
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -198,7 +198,7 @@
                                                                 <tr>
                                                                     <td width="8%">Gender :</td>
                                                                     <td width="2%">
-                                                                        @if ($admission->gender == "Male")
+                                                                        @if ($admission->patient->gender == "Male")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
@@ -208,7 +208,7 @@
                                                                     </td>
                                                                     <td width="5%">Male</td>
                                                                     <td width="2%">
-                                                                        @if ($admission->gender == "Female")
+                                                                        @if ($admission->patient->gender == "Female")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
@@ -220,7 +220,7 @@
                                                                     <td width="10%">Citizenship: </td>
                                                                     <td width="50%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$patientInfo->nationality}}</td>
+                                                                        {{$admission->patient->patientinfo->nationality}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -234,12 +234,12 @@
                                                                     <td width="25%">Day of birth (yy/mm/dd):</td>
                                                                     <td width="23%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$patientInfo->birthdate}}</td>
+                                                                        {{$admission->patient->patientinfo->birthdate}}</td>
                                                                     <td></td>
                                                                     <td width="25%">Place / Country of birth</td>
                                                                     <td width="25%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$patientInfo->birthplace}}</td>
+                                                                        {{$admission->patient->patientinfo->birthplace}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -253,7 +253,7 @@
                                                                     <td width="25%">Address of residence: </td>
                                                                     <td width="75%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$patientInfo->address}}</td>
+                                                                        {{$admission->patient->patientinfo->address}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td width="25%">Maritime service: </td>
@@ -314,14 +314,14 @@
                                                                     <td width="2%">HEIGHT</td>
                                                                     <td width="5%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        @if($exam_physical)
-                                                                            {{$exam_physical->height}}
+                                                                        @if($admission->exam_physical)
+                                                                            {{$admission->exam_physical->height}}
                                                                         @endif
                                                                     </td>
                                                                     <td width="3%">WEIGHT</td>
                                                                     <td width="5%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$exam_physical ? $exam_physical->weight : null}}
+                                                                        {{$admission->exam_physical ? $admission->exam_physical->weight : null}}
                                                                     </td>
                                                                     <td width="10%">BLOOD PRESSURE</td>
                                                                     <td width="5%"
@@ -329,7 +329,7 @@
                                                                     <td width="3%">PULSE</td>
                                                                     <td width="5%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$exam_physical ? $exam_physical->pulse : null}}
+                                                                        {{$admission->exam_physical ? $admission->exam_physical->pulse : null}}
                                                                     </td>
                                                                     <td width="13%">GENERAL APPEARANCE</td>
                                                                     <td width="5%"
@@ -434,15 +434,15 @@
                                                                         non-prescription or prescription medications?
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_physical)
-                                                                            <span style="text-decoration: {{$exam_physical->question8  == '1' || $exam_physical->question8  == 'Yes' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_physical)
+                                                                            <span style="text-decoration: {{$admission->exam_physical->question8  == '1' || $admission->exam_physical->question8  == 'Yes' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_physical)
-                                                                            <span style="text-decoration: {{$exam_physical->question8  == '0' || $exam_physical->question8  == 'No' ? 'underline' : 'none'}}">NO</span>
+                                                                        @if($admission->exam_physical)
+                                                                            <span style="text-decoration: {{$admission->exam_physical->question8  == '0' || $admission->exam_physical->question8  == 'No' ? 'underline' : 'none'}}">NO</span>
                                                                         @else
                                                                             NO
                                                                         @endif
@@ -461,15 +461,15 @@
                                                                 <tr>
                                                                     <td width="50%">Unaided hearing satisfactory?</td>
                                                                     <td width="5%">
-                                                                        @if($exam_audio)
-                                                                            <span style="text-decoration: {{$exam_audio->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_audio)
+                                                                            <span style="text-decoration: {{$admission->exam_audio->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_audio)
-                                                                            <span style="text-decoration: {{$exam_audio->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
+                                                                        @if($admission->exam_audio)
+                                                                            <span style="text-decoration: {{$admission->exam_audio->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
                                                                         @else
                                                                             NO
                                                                         @endif
@@ -480,17 +480,17 @@
                                                                     <td width="50%">Visual acuity meets standard in STCW
                                                                         Code, Section A-I/9?</td>
                                                                     <td width="5%">
-                                                                        @if($exam_visacuity)
-                                                                            <span style="text-decoration: {{$exam_visacuity->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_visacuity)
+                                                                            <span style="text-decoration: {{$admission->exam_visacuity->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_visacuity)
-                                                                                <span style="text-decoration: {{$exam_visacuity->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
+                                                                        @if($admission->exam_visacuity)
+                                                                                <span style="text-decoration: {{$admission->exam_visacuity->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
                                                                         @else
-                                                                            NO  
+                                                                            NO
                                                                         @endif
                                                                     </td>
                                                                     <td></td>
@@ -499,17 +499,17 @@
                                                                     <td width="50%">Color vision meets standard in STCW
                                                                         Code, Section A-I/9?</td>
                                                                     <td width="5%">
-                                                                        @if($exam_ishihara)
-                                                                            <span style="text-decoration: {{$exam_ishihara->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_ishihara)
+                                                                            <span style="text-decoration: {{$admission->exam_ishihara->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_ishihara)
-                                                                                <span style="text-decoration: {{$exam_ishihara->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
+                                                                        @if($admission->exam_ishihara)
+                                                                                <span style="text-decoration: {{$admission->exam_ishihara->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
                                                                         @else
-                                                                            NO  
+                                                                            NO
                                                                         @endif
                                                                     </td>
                                                                     <td></td>
@@ -527,7 +527,7 @@
                                                                         (Day/Month/Year)</td>
                                                                     <td width="20%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                            {{$exam_ishihara ? $exam_ishihara->trans_date : null}}
+                                                                            {{$admission->exam_ishihara ? $admission->exam_ishihara->trans_date : null}}
                                                                         </td>
                                                                     <td></td>
                                                                 </tr>
@@ -544,17 +544,17 @@
                                                                         necessary to meet the required vision standards?
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_visacuity)
-                                                                            <span style="text-decoration: {{$exam_visacuity->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_visacuity)
+                                                                            <span style="text-decoration: {{$admission->exam_visacuity->remarks_status  == 'normal' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                        @if($exam_visacuity)
-                                                                                <span style="text-decoration: {{$exam_visacuity->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
+                                                                        @if($admission->exam_visacuity)
+                                                                                <span style="text-decoration: {{$admission->exam_visacuity->remarks_status  == 'findings' ? 'underline' : 'none'}}">NO</span>
                                                                         @else
-                                                                            NO  
+                                                                            NO
                                                                         @endif
                                                                     </td>
                                                                     <td width="20%"></td>
@@ -571,15 +571,15 @@
                                                                 <tr>
                                                                     <td width="20%">Able for request duty?</td>
                                                                     <td width="5%">
-                                                                        @if($exam_physical)
-                                                                            <span style="text-decoration: {{$exam_physical->duty  == 'Fit' ? 'underline' : 'none'}}">YES</span>
+                                                                        @if($admission->exam_physical)
+                                                                            <span style="text-decoration: {{$admission->exam_physical->duty  == 'Fit' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
                                                                     </td>
                                                                     <td width="5%">
-                                                                         @if($exam_physical)
-                                                                            <span style="text-decoration: {{$exam_physical->duty  == 'Unfit' ? 'underline' : 'none'}}">YES</span>
+                                                                         @if($admission->exam_physical)
+                                                                            <span style="text-decoration: {{$admission->exam_physical->duty  == 'Unfit' ? 'underline' : 'none'}}">YES</span>
                                                                         @else
                                                                             YES
                                                                         @endif
@@ -612,8 +612,8 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td>
-                                                                                                    @if($exam_physical)
-                                                                                                        @if($exam_physical->fit == "Fit")
+                                                                                                    @if($admission->exam_physical)
+                                                                                                        @if($admission->exam_physical->fit == "Fit")
                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                         @else
                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -636,8 +636,8 @@
                                                                                                         <tbody>
                                                                                                             <tr>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "DECK SERVICES" && $exam_physical->fit == "Fit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "DECK SERVICES" && $admission->exam_physical->fit == "Fit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -645,15 +645,15 @@
                                                                                                                     @else
                                                                                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                                                                     @endif
-                                                                                                                    
+
                                                                                                                 </td>
                                                                                                                 <td>on
                                                                                                                     the
                                                                                                                     deck
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "ENGINE SERVICES" && $exam_physical->fit == "Fit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "ENGINE SERVICES" && $admission->exam_physical->fit == "Fit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -687,8 +687,8 @@
                                                                                                                     service
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "OTHER SERVICES" && $exam_physical->fit == "Fit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "OTHER SERVICES" && $admission->exam_physical->fit == "Fit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -746,8 +746,8 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td>
-                                                                                                    @if($exam_physical)
-                                                                                                        @if($exam_physical->fit == "Unfit")
+                                                                                                    @if($admission->exam_physical)
+                                                                                                        @if($admission->exam_physical->fit == "Unfit")
                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                         @else
                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -797,8 +797,8 @@
                                                                                                         <tbody>
                                                                                                             <tr>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "DECK SERVICES" && $exam_physical->fit == "Unfit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "DECK SERVICES" && $admission->exam_physical->fit == "Unfit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -812,8 +812,8 @@
                                                                                                                     deck
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "ENGINE SERVICES" && $exam_physical->fit == "Unfit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "ENGINE SERVICES" && $admission->exam_physical->fit == "Unfit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -847,8 +847,8 @@
                                                                                                                     service
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    @if($exam_physical)
-                                                                                                                        @if($admission->category == "OTHER SERVICES" && $exam_physical->fit == "Unfit")
+                                                                                                                    @if($admission->exam_physical)
+                                                                                                                        @if($admission->category == "OTHER SERVICES" && $admission->exam_physical->fit == "Unfit")
                                                                                                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                                         @else
                                                                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -911,22 +911,22 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
-                                                                            @if($exam_physical)
-                                                                                @if($exam_physical->restriction == "without restriction")
-                                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                                @else
-                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                                @endif
+                                                                        @if($admission->exam_physical)
+                                                                            @if($admission->exam_physical->restriction == "without restriction")
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                             @else
                                                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                             @endif
+                                                                        @else
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                        @endif
                                                                     </td>
                                                                     <td>without limitations</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        @if($exam_physical)
-                                                                            @if($exam_physical->restriction == "with restriction")
+                                                                        @if($admission->exam_physical)
+                                                                            @if($admission->exam_physical->restriction == "with restriction")
                                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                             @else
                                                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -956,14 +956,14 @@
                                                     <td style="line-height: 20px;">Is the seafarer free from any medical
                                                         condition likely to be aggravatedby service at sea or to render
                                                         the seaferers unfit for such <br>
-                                                        service or to danger the health of other persons on bord. 
-                                                        @if($exam_physical)
-                                                            <span style="text-decoration: {{$exam_physical->fit  == 'Fit' ? 'underline' : 'none'}}">YES</span>
+                                                        service or to danger the health of other persons on bord.
+                                                        @if($admission->exam_physical)
+                                                            <span style="text-decoration: {{$admission->exam_physical->fit  == 'Fit' ? 'underline' : 'none'}}">YES</span>
                                                         @else
                                                             YES
                                                         @endif
-                                                        @if($exam_physical)
-                                                            <span style="text-decoration: {{$exam_physical->fit  == 'Unfit' ? 'underline' : 'none'}}">NO</span>
+                                                        @if($admission->exam_physical)
+                                                            <span style="text-decoration: {{$admission->exam_physical->fit  == 'Unfit' ? 'underline' : 'none'}}">NO</span>
                                                         @else
                                                             NO
                                                         @endif
@@ -980,7 +980,7 @@
                                                                     <td width="10%">Date (dd/mm/yy): </td>
                                                                     <td width="20%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$exam_physical ? date_format(new DateTime($exam_physical->peme_date), "d F Y") : null}}
+                                                                        {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->peme_date), "d F Y") : null}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -989,7 +989,7 @@
                                                                     </td>
                                                                     <td width="20%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$exam_physical ? date_format(new DateTime($exam_physical->date_expiration), "d F Y") : null}}
+                                                                        {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_expiration), "d F Y") : null}}
                                                                     </td>
                                                                     <td width="10%"></td>
                                                                     <td width="20%"></td>
@@ -1052,9 +1052,9 @@
             </tbody>
         </table>
     </center>
-    
+
     <script>
-    
+
         let checkbox = document.querySelectorAll('.checkbox');
         for(let i = 0; i < checkbox.length; i++) {
             checkbox[i].addEventListener('click', (e) => {

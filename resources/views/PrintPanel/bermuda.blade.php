@@ -67,8 +67,8 @@
                                 <tr>
                                     <td>2.0</td>
                                     <td colspan="6">Seafarer Information</td>
-                                    <td rowspan="7" width="130">@if($admission->patient_image)
-                                        <img src="../../../app-assets/images/profiles/{{$admission->patient_image}}"
+                                    <td rowspan="7" width="130">@if($admission->patient->patient_image)
+                                        <img src="../../../app-assets/images/profiles/{{$admission->patient->patient_image}}"
                                             alt="Patient Picture" width="140" height="140" class="brdAll">
                                         @else
                                         <img src="../../../app-assets/images/profiles/profilepic.jpg"
@@ -78,10 +78,10 @@
                                 </tr>
                                 <tr>
                                     <td>2.1</td>
-                                    <td colspan="2">Family Name: <span>{{$admission->lastname}}</span></td>
+                                    <td colspan="2">Family Name: <span>{{$admission->patient->lastname}}</span></td>
                                     <td>2.1.1</td>
-                                    <td colspan="3">First/Middle Name: <span>{{$admission->firstname}}
-                                            {{$admission->middlename}}</span>
+                                    <td colspan="3">First/Middle Name: <span>{{$admission->patient->firstname}}
+                                            {{$admission->patient->middlename}}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -91,18 +91,18 @@
                                 <tr>
                                     <td>2.2</td>
                                     <td>Date of Birth:</td>
-                                    <td>{{date_format(new DateTime($patientInfo->birthdate), "d F Y")}}</td>
+                                    <td>{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}</td>
                                     <td>2.3</td>
                                     <td>Gender:</td>
                                     <td colspan="2">
                                         Male <span>
-                                            @if ($admission->gender == "Male")
+                                            @if ($admission->patient->gender == "Male")
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                             @endif</span>
                                         Female <span>
-                                            @if ($admission->gender == "Female")
+                                            @if ($admission->patient->gender == "Female")
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -112,12 +112,12 @@
                                 <tr>
                                     <td>2.4</td>
                                     <td>Nationality:</td>
-                                    <td colspan="5">{{$patientInfo->nationality}}</td>
+                                    <td colspan="5">{{$admission->patient->patientinfo->nationality}}</td>
                                 </tr>
                                 <tr>
                                     <td>2.4.1</td>
                                     <td colspan="6">Passport or Seafarer’s Book Number:
-                                        <span>{{$patientInfo->passportno}}</span>
+                                        <span>{{$admission->patient->patientinfo->passportno}}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -149,8 +149,8 @@
                                     <td width="30" colspan="2">Hearing satisfactory</td>
                                     <td align="center">Yes</td>
                                     <td align="center">
-                                        @if($exam_audio)
-                                            @if($exam_audio->remarks_status == "normal")
+                                        @if($admission->exam_audio)
+                                            @if($admission->exam_audio->remarks_status == "normal")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -161,8 +161,8 @@
                                     </td>
                                     <td align="center">No</td>
                                     <td align="center" width="100">
-                                        @if($exam_audio)
-                                            @if($exam_audio->remarks_status == "findings")
+                                        @if($admission->exam_audio)
+                                            @if($admission->exam_audio->remarks_status == "findings")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -178,8 +178,8 @@
                                     <td width="30" colspan="2">Unaided Hearing satisfactory</td>
                                     <td align="center">Yes</td>
                                     <td align="center">
-                                        @if($exam_audio)
-                                            @if($exam_audio->hearing == "unaided")
+                                        @if($admission->exam_audio)
+                                            @if($admission->exam_audio->hearing == "unaided")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -190,8 +190,8 @@
                                     </td>
                                     <td align="center">No</td>
                                     <td align="center" width="100">
-                                        @if($exam_audio)
-                                            @if($exam_audio->hearing == "aided")
+                                        @if($admission->exam_audio)
+                                            @if($admission->exam_audio->hearing == "aided")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -207,8 +207,8 @@
                                     <td width="30" colspan="2">Visual Acuity satisfactory</td>
                                     <td align="center">Yes</td>
                                     <td align="center">
-                                        @if($exam_visacuity)
-                                            @if($exam_visacuity->remarks_status == "normal")
+                                        @if($admission->exam_visacuity)
+                                            @if($admission->exam_visacuity->remarks_status == "normal")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -219,8 +219,8 @@
                                     </td>
                                     <td align="center">No</td>
                                     <td align="center" width="100">
-                                        @if($exam_visacuity)
-                                            @if($exam_visacuity->remarks_status == "findings")
+                                        @if($admission->exam_visacuity)
+                                            @if($admission->exam_visacuity->remarks_status == "findings")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -236,8 +236,8 @@
                                     <td width="30" colspan="2">Satisfactory Colour Vision (Deck &amp; Engine Only)</td>
                                     <td align="center">Yes</td>
                                     <td align="center">
-                                        @if($exam_ishihara)
-                                            @if($exam_ishihara->remarks_status == "normal")
+                                        @if($admission->exam_ishihara)
+                                            @if($admission->exam_ishihara->remarks_status == "normal")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -248,8 +248,8 @@
                                     </td>
                                     <td align="center">No</td>
                                     <td align="center" width="100">
-                                        @if($exam_ishihara)
-                                            @if($exam_ishihara->remarks_status == "findings")
+                                        @if($admission->exam_ishihara)
+                                            @if($admission->exam_ishihara->remarks_status == "findings")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -278,8 +278,8 @@
                                         And for what purpose)<span style="margin-left: 3rem;">Contact Lenses</span>
                                     </td>
                                     <td align="center">
-                                        @if($exam_physical)
-                                            @if($exam_physical->visual_required == "Spectacles")
+                                        @if($admission->exam_physical)
+                                            @if($admission->exam_physical->visual_required == "Spectacles")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -292,8 +292,8 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        @if($exam_physical)
-                                            @if($exam_physical->visual_required == "Contact Lenses")
+                                        @if($admission->exam_physical)
+                                            @if($admission->exam_physical->visual_required == "Contact Lenses")
                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -359,7 +359,7 @@
                                             <img src="{{$medical_director->signature}}" width="150" />
                                         @endif
                                     </td>
-                                    <td colspan="4" height="100" align="center"> 
+                                    <td colspan="4" height="100" align="center">
                                         @if($medical_director)
                                             <span style="font-size: 14px; text-transform: uppercase;">{{$medical_director->firstname}} {{$medical_director->middlename[0]}}. {{$medical_director->lastname}} {{$medical_director->title}}</span>
                                         @endif
@@ -402,5 +402,4 @@
         </table>
     </center>
 </body>
-
 </html>

@@ -89,19 +89,19 @@
                                                     <td>
                                                         <b>Surname</b><br>
                                                         <div style="border: 1px solid black !important; padding: 5px;" class="fontBoldLrg">
-                                                            {{$admission->lastname}}
+                                                            {{$admission->patient->lastname}}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <b>Firstname</b><br>
                                                         <div style="border: 1px solid black !important; padding: 5px;" class="fontBoldLrg">
-                                                            {{$admission->firstname}}
+                                                            {{$admission->patient->firstname}}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <b>Middlename</b><br>
                                                         <div style="border: 1px solid black !important; padding: 5px;" class="fontBoldLrg">
-                                                            {{$admission->middlename}}
+                                                            {{$admission->patient->middlename}}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -115,11 +115,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td width="33%" align="top"><b>DATE OF BIRTH (DD/MM/YYYY)</b><br>
-                                                        <div style="border: 1px solid black !important; padding: 5px; margin-right: 10px; text-align: center;" class="fontBoldLrg">{{date_format(new DateTime($patientInfo->birthdate), "d F Y")}}</div>
+                                                        <div style="border: 1px solid black !important; padding: 5px; margin-right: 10px; text-align: center;" class="fontBoldLrg">{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}</div>
                                                     </td>
                                                     <td width="33%" align="top" style="text-align: center;"><b>FEMALE</b> <br>
                                                         <div style="border: 1px solid black !important; padding: 5px; margin-right: 10px; text-align: center;" class="fontBoldLrg">
-                                                            @if($admission->gender == "Female")
+                                                            @if($admission->patient->gender == "Female")
                                                                 YES
                                                             @else
                                                                 &nbsp;&nbsp;
@@ -128,7 +128,7 @@
                                                     </td>
                                                     <td width="33%" align="top" style="text-align: center;"><b>MALE</b> <br>
                                                         <div style="border: 1px solid black !important; padding: 5px; text-align: center;" class="fontBoldLrg">
-                                                            @if($admission->gender == "Male")
+                                                            @if($admission->patient->gender == "Male")
                                                                 YES
                                                             @else
                                                                 &nbsp;&nbsp;
@@ -149,8 +149,8 @@
                                                         <div style="margin-right: 10px;">
                                                             <div style="border: 1px solid black !important; padding: 5px; text-align: center;"><b>Height (CMs)</b></div>
                                                             <div style="border: 1px solid black !important; padding: 5px; text-align: center;" class="fontBoldLrg">
-                                                                @if($exam_physical)
-                                                                    {{$exam_physical->height}}
+                                                                @if($admission->exam_physical)
+                                                                    {{$admission->exam_physical->height}}
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -159,8 +159,8 @@
                                                         <div style="margin-right: 10px;">
                                                             <div style="border: 1px solid black !important; padding: 5px; text-align: center;"><b>Weight (KG)</b></div>
                                                             <div style="border: 1px solid black !important; padding: 5px; text-align: center;" class="fontBoldLrg">
-                                                                @if($exam_physical)
-                                                                    {{$exam_physical->weight}}
+                                                                @if($admission->exam_physical)
+                                                                    {{$admission->exam_physical->weight}}
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -168,8 +168,8 @@
                                                     <td width="33%">
                                                         <div style="border: 1px solid black !important; padding: 5px; text-align: center;"><b>BMI</b></div>
                                                         <div style="border: 1px solid black !important; padding: 5px; text-align: center;" class="fontBoldLrg">
-                                                        @if($exam_physical)
-                                                            {{$exam_physical->bmi}}
+                                                        @if($admission->exam_physical)
+                                                            {{$admission->exam_physical->bmi}}
                                                         @endif
                                                         </div>
                                                     </td>
@@ -177,7 +177,7 @@
                                                 <tr>
                                                     <td style="border: 1px solid black !important;" colspan="3" height="80" valign="top" >
                                                         Comments/Restrictions (if any) : <br>
-                                                         @php echo $exam_physical ? nl2br($exam_physical->describe_restriction) : null @endphp
+                                                         @php echo $admission->exam_physical ? nl2br($admission->exam_physical->describe_restriction) : null @endphp
 
                                                     </td>
                                                 </tr>
@@ -241,7 +241,7 @@
                                     <td colspan="6">
                                         <div>
                                             <b>Home Address</b> <br>
-                                            <div style="border: 1px solid black !important;padding:5px;" class="fontBoldLrg">{{$patientInfo->address}}</div>
+                                            <div style="border: 1px solid black !important;padding:5px;" class="fontBoldLrg">{{$admission->patient->patientinfo->address}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -249,7 +249,7 @@
                                     <td colspan="6">
                                         <div>
                                             <b>Nationatlity</b> <br>
-                                            <div style="border: 1px solid black !important;padding:5px;"  class="fontBoldLrg">{{$patientInfo->nationality}}</div>
+                                            <div style="border: 1px solid black !important;padding:5px;"  class="fontBoldLrg">{{$admission->patient->patientinfo->nationality}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -260,12 +260,12 @@
                                                 <tr>
                                                     <td width="40%" colspan="3" >
                                                         <b style="font-family: sans-serif">PASSPORT NO.</b> <br>
-                                                        <div class="fontBoldLrg" style="border: 1px solid black !important;padding:5px;">{{$patientInfo->passportno}}</div>
+                                                        <div class="fontBoldLrg" style="border: 1px solid black !important;padding:5px;">{{$admission->patient->patientinfo->passportno}}</div>
                                                     </td>
                                                     <td width="20%"></td>
                                                     <td width="40%" colspan="3">
                                                         <b style="font-family: sans-serif">SEAMAN'S BOOK NO.</b> <br>
-                                                        <div class="fontBoldLrg" style="border: 1px solid black !important;padding:5px;">{{$patientInfo->srbno}}</div>
+                                                        <div class="fontBoldLrg" style="border: 1px solid black !important;padding:5px;">{{$admission->patient->patientinfo->srbno}}</div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -310,8 +310,8 @@
                                                 <tr>
                                                     <td style="border: 1px solid black !important;" align="center" width="45%">
                                                         <div style="font-size: 15px;">
-                                                            @if ($exam_audio)
-                                                                @if($exam_audio->remarks_status == 'normal')
+                                                            @if ($admission->exam_audio)
+                                                                @if($admission->exam_audio->remarks_status == 'normal')
                                                                     NORMAL
                                                                 @endif
                                                             @endif
@@ -320,8 +320,8 @@
                                                     <td width="10%"></td>
                                                     <td style="border: 1px solid black !important;" align="center">
                                                         <div style="font-size: 15px;">
-                                                            @if ($exam_visacuity)
-                                                                @if($exam_visacuity->remarks_status == 'normal')
+                                                            @if ($admission->exam_visacuity)
+                                                                @if($admission->exam_visacuity->remarks_status == 'normal')
                                                                     NORMAL
                                                                 @endif
                                                             @endif
@@ -343,8 +343,8 @@
                                                     <td align="center"><div>Defective</div></td>
                                                     <td align="center">
                                                         <div style="font-size: 12px;">
-                                                            @if($exam_ishihara)
-                                                                @if($exam_ishihara->result == 'Defective')
+                                                            @if($admission->exam_ishihara)
+                                                                @if($admission->exam_ishihara->result == 'Defective')
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                                                 @else
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -357,8 +357,8 @@
                                                     </td>
                                                     <td align="center">
                                                         <div style="font-size: 12px;">
-                                                            @if($exam_ishihara)
-                                                                @if($exam_ishihara->result == 'Adequate')
+                                                            @if($admission->exam_ishihara)
+                                                                @if($admission->exam_ishihara->result == 'Adequate')
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                                                 @else
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -371,8 +371,8 @@
                                                     </td>
                                                     <td align="center">
                                                         <div style="font-size: 12px;">
-                                                            @if($exam_physical)
-                                                                @if($exam_physical->duty == 'Fit')
+                                                            @if($admission->exam_physical)
+                                                                @if($admission->exam_physical->duty == 'Fit')
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                                                 @else
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -385,8 +385,8 @@
                                                     </td>
                                                     <td align="center">
                                                         <div style="font-size: 12px;">
-                                                            @if($exam_physical)
-                                                                @if($exam_physical->duty == 'Unfit')
+                                                            @if($admission->exam_physical)
+                                                                @if($admission->exam_physical->duty == 'Unfit')
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                                                 @else
                                                                     <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -406,7 +406,7 @@
                                     <td align="middle" colspan="2">
                                         <div style=" width: 70%; display: flex; align-items: center; justify-content: space-between; float: right;">
                                             <div>Date of last colour vision test</div>
-                                            <div style="width: 50%; border: 1px solid black; padding: 0.5rem;text-align: left;">{{$exam_ishihara ? date_format(new DateTime($exam_ishihara->trans_date), "d/F/Y") : null}}</div>
+                                            <div style="width: 50%; border: 1px solid black; padding: 0.5rem;text-align: left;">{{$admission->exam_ishihara ? date_format(new DateTime($admission->exam_ishihara->trans_date), "d/F/Y") : null}}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -428,14 +428,14 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 1px solid black !important;" align="center">
-                                       @if($exam_physical)
-                                            @if($exam_physical->visual_required == 'Spectacles')
+                                       @if($admission->exam_physical)
+                                            @if($admission->exam_physical->visual_required == 'Spectacles')
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                             @else
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
                                             @endif
                                             <span>Yes</span>
-                                            @if($exam_physical->visual_required != 'Spectacles')
+                                            @if($admission->exam_physical->visual_required != 'Spectacles')
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                             @else
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -446,14 +446,14 @@
                                     </td>
                                     <td></td>
                                     <td style="border: 1px solid black !important;" align="center">
-                                        @if($exam_physical)
-                                            @if($exam_physical->visual_required == 'Contact Lenses')
+                                        @if($admission->exam_physical)
+                                            @if($admission->exam_physical->visual_required == 'Contact Lenses')
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                             @else
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
                                             @endif
                                             <span>Yes</span>
-                                            @if($exam_physical->visual_required != 'Contact Lenses')
+                                            @if($admission->exam_physical->visual_required != 'Contact Lenses')
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoCheck.gif" width="15"></span>
                                             @else
                                                 <span style="margin-right: 0rem;"><img  src="../../../app-assets/images/icoUncheck.gif" width="15"></span>
@@ -492,8 +492,8 @@
                                         <div style="text-align: center;">
                                             <b>FIT</b> for employment at Sea :
                                             <div style="margin-right: 0rem; border: 1px solid black !important;padding: 5px;">
-                                                @if($exam_physical)
-                                                    @if($exam_physical->fit == 'Fit' && $exam_physical->restriction != "with restriction")
+                                                @if($admission->exam_physical)
+                                                    @if($admission->exam_physical->fit == 'Fit' && $admission->exam_physical->restriction != "with restriction")
                                                        YES
                                                     @else
                                                          &nbsp;&nbsp;
@@ -509,8 +509,8 @@
                                         <div style="text-align: center;">
                                             <b>UNFIT</b> for employment at Sea :
                                             <div style="margin-right: 0rem; border: 1px solid black !important;padding: 5px;">
-                                                @if($exam_physical)
-                                                    @if($exam_physical->fit == 'Unfit' && $exam_physical->restriction != "with restriction")
+                                                @if($admission->exam_physical)
+                                                    @if($admission->exam_physical->fit == 'Unfit' && $admission->exam_physical->restriction != "with restriction")
                                                        YES
                                                     @else
                                                          &nbsp;&nbsp;
@@ -527,8 +527,8 @@
                                         <div style="text-align: center; margin-top: 1rem;">
                                             <b>At RISK BUT FIT at Sea</b>
                                             <div style="margin-right: 0rem; border: 1px solid black !important;padding: 5px;">
-                                                @if($exam_physical)
-                                                    @if($exam_physical->restriction == "with restriction")
+                                                @if($admission->exam_physical)
+                                                    @if($admission->exam_physical->restriction == "with restriction")
                                                        YES
                                                     @else
                                                          &nbsp;&nbsp;
@@ -552,8 +552,8 @@
                         <div height="auto" style="border: 1px solid black; width: 97%; padding: 10px; margin-bottom: 2rem; margin-top: 1rem;">
                             <span>Restrictions (if any)</span> <span style="margin-left: 3rem;">Conscession Declaration signed?</span> <span style="margin-left: 3rem;">Prescription?</span>
                             <br>
-                            @if($exam_physical)
-                                @php echo nl2br($exam_physical->comments_restriction)@endphp
+                            @if($admission->exam_physical)
+                                @php echo nl2br($admission->exam_physical->comments_restriction)@endphp
                             @endif
                         </div>
                         <div style="font-size: 12px;">
@@ -596,15 +596,15 @@
                                                 <tr>
                                                     <td width="20%">Date of Examination <br> (DD/MM/YYYY)</td>
                                                     <td width="20%" style="border: 1px solid black !important; padding: 5px;">
-                                                        @if($exam_physical)
-                                                            <input type="text" style="border: none; font-family: serif;" value="{{$exam_physical ? date_format(new DateTime($exam_physical->date_examination), "d F Y") : null}}" />
+                                                        @if($admission->exam_physical)
+                                                            <input type="text" style="border: none; font-family: serif;" value="{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}" />
                                                         @endif
                                                     </td>
                                                     <td width="20%"></td>
                                                     <td width="20%">Date of Expiry <br> (DD/MM/YYYY)</td>
                                                     <td width="20%" style="border: 1px solid black !important; padding: 5px;">
-                                                        @if($exam_physical)
-                                                            <input type="text" style="border: none; font-family: serif;" value="{{$exam_physical ? date_format(new DateTime($exam_physical->date_expiration), "d F Y") : null}}" />
+                                                        @if($admission->exam_physical)
+                                                            <input type="text" style="border: none; font-family: serif;" value="{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_expiration), "d F Y") : null}}" />
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -619,7 +619,7 @@
                 <tr>
                     <td>
                         <div style="font-size: 12px; margin-left: 5px;">
-                           <span>I <span style="border-bottom: 1px solid black; margin: 0 0.5rem 0 0; padding: 0 0.5rem;"> {{$admission->lastname}}, {{$admission->firstname}}  {{$admission->middlename}}</span>confirm that I have been informed of the content of the certificate and the right to get a review</span>
+                           <span>I <span style="border-bottom: 1px solid black; margin: 0 0.5rem 0 0; padding: 0 0.5rem;"> {{$admission->patient->lastname}}, {{$admission->patient->firstname}}  {{$admission->patient->middlename}}</span>confirm that I have been informed of the content of the certificate and the right to get a review</span>
                         </div>
                     </td>
                 </tr>
@@ -631,14 +631,14 @@
                                     <td width="22%">Seafarer Signature :</td>
                                     <td width="20%" style="border: 1px solid black !important;">
                                         @if($admission->agency_id != 19)
-                                            <img src="@php echo base64_decode($admission->patient_signature) @endphp" width="100%" style="object-fit: cover;" />
+                                            <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp" width="100%" style="object-fit: cover;" />
                                         @endif
                                     </td>
                                     <td width="18%"></td>
                                     <td width="20%">Date: DD/MM/YYYY)</td>
                                     <td width="20%" style="border: 1px solid black !important;">
-                                        @if($exam_physical)
-                                            <input type="text" style="border: none; font-family: serif;" value="{{$exam_physical ? date_format(new DateTime($exam_physical->date_examination), "d F Y") : null}}" />
+                                        @if($admission->exam_physical)
+                                            <input type="text" style="border: none; font-family: serif;" value="{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}" />
                                         @endif
                                     </td>
                                 </tr>
@@ -679,8 +679,8 @@
 
                                                     </td>
                                                     <td valign="top">
-                                                        @if($exam_physical)
-                                                        <input type="text" style="border: none; font-family: serif;" value="{{$exam_physical ? date_format(new DateTime($exam_physical->peme_date), "d F Y") : null}}" />
+                                                        @if($admission->exam_physical)
+                                                        <input type="text" style="border: none; font-family: serif;" value="{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->peme_date), "d F Y") : null}}" />
                                                         @endif
                                                     </td>
                                                 </tr>

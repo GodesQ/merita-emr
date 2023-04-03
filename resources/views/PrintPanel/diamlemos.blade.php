@@ -43,11 +43,11 @@
                                     Επωνυμο <br>
                                     Last name
                                 </td>
-                                <td>{{$admission->lastname}}</td>
+                                <td>{{$admission->patient->lastname}}</td>
                                 <td rowspan="2" align="center" style="background-color: whitesmoke;">Ονομα <br>
                                     First Name
                                 </td>
-                                <td>{{$admission->firstname}}</td>
+                                <td>{{$admission->patient->firstname}}</td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
@@ -58,12 +58,12 @@
                                     Μεσαιο Ονομα <br>
                                     Middle Name
                                 </td>
-                                <td>{{$admission->middlename}}</td>
+                                <td>{{$admission->patient->middlename}}</td>
                                 <td rowspan="2" align="center" style="background-color: whitesmoke;">
                                     Εθνικοτητα <br>
                                     Nationality
                                 </td>
-                                <td>{{$patientInfo->nationality}}</td>
+                                <td>{{$admission->patient->patientinfo->nationality}}</td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
@@ -74,12 +74,12 @@
                                     Τοπος Γεννησης <br>
                                     Place Of Birth
                                 </td>
-                                <td>{{$patientInfo->birthplace}}</td>
+                                <td>{{$admission->patient->patientinfo->birthplace}}</td>
                                 <td rowspan="2" align="center" style="background-color: whitesmoke;">
                                     Ημ/Νια Γεννησης <br>
                                     Date Of Birth
                                 </td>
-                                <td>{{date_format(new DateTime($patientInfo->birthdate), "d F Y")}}</td>
+                                <td>{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}</td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
@@ -90,12 +90,12 @@
                                     Τοπος Κατοικιας <br>
                                     Home Address
                                 </td>
-                                <td>{{$patientInfo->address}}</td>
+                                <td>{{$admission->patient->patientinfo->address}}</td>
                                 <td rowspan="2" align="center" style="background-color: whitesmoke;">
                                     Φυλο <br>
                                     Gender
                                 </td>
-                                <td rowspan="2">{{$admission->gender}}</td>
+                                <td rowspan="2">{{$admission->patient->gender}}</td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
@@ -129,7 +129,7 @@
                                         <div>The undersigned medical practitioner hereby declares that:</div>
                                         <div style="font-size: 13px; font-weight: 700;">Είμαι ως νόμιμος κάτοχος άδειας
                                             άσκησης του ιατρικού επαγγέλματος με ειδίκευση στη <span
-                                                style="border-bottom: 1px solid black; margin-left: 1rem;">{{$admission->firstname}} {{$admission->middlename[0]}}. {{$admission->lastname}}</span></div>
+                                                style="border-bottom: 1px solid black; margin-left: 1rem;">{{$admission->patient->firstname}} {{$admission->patient->middlename[0]}}. {{$admission->patient->lastname}}</span></div>
                                         <div style="font-size: 13px; font-weight: 700;">ισάγετε γενική ιατρική ή
                                             παθολογία ή ιατρική της εργασίας],</div>
                                         <div style="font-size: 13px; font-weight: 700;">Δεόντως εξουσιοδοτημέμος από την

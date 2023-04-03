@@ -53,6 +53,10 @@ class Admission extends Model
         return $this->hasOne(DrugTest::class);
     }
 
+    public function exam_urin() {
+        return $this->hasOne(Urinalysis::class);
+    }
+
     public function exam_echodoppler() {
         return $this->hasOne(EchoDoppler::class);
     }

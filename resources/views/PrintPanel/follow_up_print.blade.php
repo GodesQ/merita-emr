@@ -31,12 +31,10 @@
     .findings-table tr {
         height: 30px !important;
     }
-
     @page {
         size: legal;
        margin: 0px 28px;
     }
-
     </style>
 </head>
 <body>

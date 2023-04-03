@@ -776,6 +776,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/transmittal', [PrintPanelController::class, 'transmittal']);
 
+    Route::get('/followup_transmittal', [PrintPanelController::class, 'followup_transmittal']);
+
     Route::get('/daily_patient', [PrintPanelController::class, 'daily_patient']);
 
     Route::get('/data_privacy_print', [PrintController::class, 'data_privacy_print']);

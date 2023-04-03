@@ -80,13 +80,13 @@
                             <tr>
                                 <td width="5%">2. </td>
                                 <td width="5%">Height</td>
-                                <td style="border-bottom:solid 1px black">{{$exam_physical ? $exam_physical->height : null}}
+                                <td style="border-bottom:solid 1px black">{{$admission->exam_physical ? $admission->exam_physical->height : null}}
                                 </td>
                                 <td width="5%">Feet</td>
                                 <td style="border-bottom:solid 1px black"></td>
                                 <td width="5%">in.</td>
                                 <td width="5%">Weight</td>
-                                <td style="border-bottom:solid 1px black">{{$exam_physical ? $exam_physical->weight : null}}</td>
+                                <td style="border-bottom:solid 1px black">{{$admission->exam_physical ? $admission->exam_physical->weight : null}}</td>
                                 <td width="20%">lbs(in under clothes)</td>
                                 <td width="5%">Waist</td>
                                 <td style="border-bottom:solid 1px black"></td>
@@ -99,7 +99,7 @@
                             <tr>
                                 <td width="5%"></td>
                                 <td width="27%">Chest Measurement on respiration</td>
-                                <td width="10%" style="border-bottom:solid 1px black">{{$exam_physical ? $exam_physical->respiration : null}}</td>
+                                <td width="10%" style="border-bottom:solid 1px black">{{$admission->exam_physical ? $admission->exam_physical->respiration : null}}</td>
                                 <td width="5%">in, </td>
                                 <td width="12%">on expiration</td>
                                 <td width="10%" style="border-bottom:solid 1px black"></td>
@@ -112,12 +112,12 @@
                             <tr>
                                 <td width="5%">3. </td>
                                 <td width="33%">Blood Pressure( two readings at rest(sitting)</td>
-                                <td width="10%" style="border-bottom:solid 1px black">{{$exam_physical ? $exam_physical->systollic : null}}/{{$exam_physical ? $exam_physical->diastollic : null}}</td>
+                                <td width="10%" style="border-bottom:solid 1px black">{{$admission->exam_physical ? $admission->exam_physical->systollic : null}}/{{$admission->exam_physical ? $admission->exam_physical->diastollic : null}}</td>
                                 <td width="10%">lying down </td>
                                 <td width="8%" style="border-bottom:solid 1px black"></td>
                                 <td width="1%">)</td>
                                 <td width="14%">4. Pulse Rate</td>
-                                <td width="10%" style="border-bottom:solid 1px black">{{$exam_physical ? $exam_physical->pulse : null}}</td>
+                                <td width="10%" style="border-bottom:solid 1px black">{{$admission->exam_physical ? $admission->exam_physical->pulse : null}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -126,8 +126,8 @@
                             <tr>
                                 <td width="5%">4. </td>
                                 <td width="30%">Date and report of last E.C.G if any</td>
-                                <td width="65%" style="border-bottom:solid 1px black">{{$exam_ecg ? date_format(new DateTime($exam_ecg->trans_date), "d F Y") : null}} 
-                                <span style="margin-left: 2rem;">{{$exam_ecg ? $exam_ecg->remarks : null}}</span></td>
+                                <td width="65%" style="border-bottom:solid 1px black">{{$admission->exam_ecg ? date_format(new DateTime($admission->exam_ecg->trans_date), "d F Y") : null}}
+                                <span style="margin-left: 2rem;">{{$admission->exam_ecg ? $admission->exam_ecg->remarks : null}}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -157,8 +157,8 @@
                                     <td>(a)</td>
                                     <td>Skin</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a1 == "Yes" || $exam_physical->a1 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a1 == "Yes" || $admission->exam_physical->a1 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -168,8 +168,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a1 == "No" || $exam_physical->a1 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a1 == "No" || $admission->exam_physical->a1 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -184,8 +184,8 @@
                                     <td>(b)</td>
                                     <td>Throat & mouth</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a7 == "Yes" || $exam_physical->a7 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a7 == "Yes" || $admission->exam_physical->a7 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -195,8 +195,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a7 == "No" || $exam_physical->a7 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a7 == "No" || $admission->exam_physical->a7 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -211,8 +211,8 @@
                                     <td>(c)</td>
                                     <td>Eyes</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a3 == "Yes" || $exam_physical->a3 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a3 == "Yes" || $admission->exam_physical->a3 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -222,8 +222,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a3 == "No" || $exam_physical->a3 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a3 == "No" || $admission->exam_physical->a3 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -238,8 +238,8 @@
                                     <td>(d)</td>
                                     <td>Ears</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a5 == "Yes" || $exam_physical->a5 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a5 == "Yes" || $admission->exam_physical->a5 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -249,8 +249,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a5 == "No" || $exam_physical->a5 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a5 == "No" || $admission->exam_physical->a5 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -265,8 +265,8 @@
                                     <td>(e)</td>
                                     <td>Nose</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a6 == "Yes" || $exam_physical->a6 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a6 == "Yes" || $admission->exam_physical->a6 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -276,8 +276,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->a6 == "No" || $exam_physical->a6 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->a6 == "No" || $admission->exam_physical->a6 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -292,8 +292,8 @@
                                     <td>(f)</td>
                                     <td>Abdomen</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->b5 == "Yes" || $exam_physical->b5 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->b5 == "Yes" || $admission->exam_physical->b5 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -303,8 +303,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->b5 == "No" || $exam_physical->b5 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->b5 == "No" || $admission->exam_physical->b5 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -347,8 +347,8 @@
                                     <td>(k)</td>
                                     <td>Genito-urinary system</td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->c2 == "Yes" || $exam_physical->c2 == "1")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->c2 == "Yes" || $admission->exam_physical->c2 == "1")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -358,8 +358,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($exam_physical)
-                                        @if ($exam_physical->c2 == "No" || $exam_physical->c2 == "0")
+                                        @if ($admission->exam_physical)
+                                        @if ($admission->exam_physical->c2 == "No" || $admission->exam_physical->c2 == "0")
                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                         @else
                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
