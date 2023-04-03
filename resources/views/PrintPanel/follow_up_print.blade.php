@@ -242,7 +242,7 @@
                                                         <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
                                                     <td valign="top">
-                                                        @if($admission->exam_xray->remarks_status == 'findings')
+                                                        @if($admission->exam_xray->remarks_status == 'findings' && $admission->exam_xray->recommendation)
                                                             <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'findings' ? $admission->exam_xray->recommendation : null }}</span>
                                                         @endif
                                                     </td>
@@ -258,7 +258,7 @@
                                                         <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
                                                     <td valign="top">
-                                                        @if($admission->exam_xray->remarks_status == 'findings')
+                                                        @if($admission->exam_xray->remarks_status == 'findings' && $admission->exam_xray->recommendation)
                                                             <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'findings' ? $admission->exam_xray->recommendation : null }}</span>
                                                         @endif
                                                     </td>
@@ -274,7 +274,7 @@
                                                         <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                     </td>
                                                     <td valign="top">
-                                                        @if($admission->exam_xray->remarks_status == 'findings')
+                                                        @if($admission->exam_xray->remarks_status == 'findings' && $admission->exam_xray->recommendation)
                                                             <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'findings' ? $admission->exam_xray->recommendation : null }}</span>
                                                         @endif
                                                     </td>
