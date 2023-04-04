@@ -488,7 +488,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td width="50%">THIS IS TO CERTIFY THAT A PHYSICAL EXAMINATION WAS GIVEN TO:</td>
-                                                    <td  width="35%" align="center" valign="bottom"  style='border-bottom: 1px solid; font-size: 13px;'>{{$admission->lastname}}, {{$admission->firstname}} {{$admission->middlename}}</td>
+                                                    <td  width="35%" align="center" valign="bottom"  style='border-bottom: 1px solid; font-size: 13px;'>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</td>
                                                     <td  width="15%">&nbsp;</td>
                                                 </tr>
                                                 <tr>
