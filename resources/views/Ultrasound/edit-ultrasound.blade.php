@@ -342,11 +342,11 @@
                                                                 <br>
                                                                 <input name="hbt_exam_status" type="radio"
                                                                     class="m-1" id="hbt_exam_status_0" value="normal"
-                                                                    {{ $exam->kub_exam_status == 'normal' ? 'checked' : null }}>Normal
+                                                                    {{ $exam->hbt_exam_status == 'normal' ? 'checked' : null }}>Normal
                                                                 <input name="hbt_exam_status" type="radio"
                                                                     class="m-1" id="hbt_exam_status_1"
                                                                     value="findings"
-                                                                    {{ $exam->kub_exam_status == 'findings' ? 'checked' : null }}>With
+                                                                    {{ $exam->hbt_exam_status == 'findings' ? 'checked' : null }}>With
                                                                 Findings
                                                             </div>
                                                             <div class="form-group">

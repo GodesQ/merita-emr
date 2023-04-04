@@ -158,7 +158,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>KUB Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->kub_exam_recommendation) ?></span>
-                        <input type="hidden" value="KUB Exam: <?php echo nl2br($exam_ultrasound->kub_exam_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="KUB Exam: <?php echo nl2br($exam_ultrasound->kub_exam_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
@@ -167,7 +167,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>HBT Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?></span>
-                        <input type="hidden" value="HBT Exam: <?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="HBT Exam: <?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
@@ -176,7 +176,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>THYROID Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->thyroid_exam_recommendation) ?></span>
-                        <input type="hidden" value="THYROID Exam: <?php echo nl2br($exam_ultrasound->thyroid_exam_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="THYROID Exam: <?php echo nl2br($exam_ultrasound->thyroid_exam_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
@@ -185,7 +185,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>BREAST Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->breast_exam_recommendation) ?></span>
-                        <input type="hidden" value="BREAST Exam: <?php echo nl2br($exam_ultrasound->breast_exam_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="BREAST Exam: <?php echo nl2br($exam_ultrasound->breast_exam_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
@@ -194,7 +194,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>WHOLE ABDOMEN Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->whole_abdomen_recommendation) ?></span>
-                        <input type="hidden" value="WHOLE ABDOMEN Exam: <?php echo nl2br($exam_ultrasound->whole_abdomen_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="WHOLE ABDOMEN Exam: <?php echo nl2br($exam_ultrasound->whole_abdomen_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
@@ -203,7 +203,7 @@
                     <div class="col-md-6 my-50">
                         <h5><b>GENITALS Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->genitals_exam_recommendation) ?></span>
-                        <input type="hidden" value="GENITALS Exam: <?php echo nl2br($exam_ultrasound->genitals_exam_recommendation) ?>" name="findings[]" />
+                        <input type="hidden" value="GENITALS Exam: <?php echo nl2br($exam_ultrasound->genitals_exam_recommendation) ?>" name="recommendation[]" />
                     </div>
                 @endif
             @endif
