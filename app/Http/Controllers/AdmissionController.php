@@ -424,6 +424,7 @@ class AdmissionController extends Controller
         if (!$request->findings) {
             return back()->with('fail', 'No Significant Findings Found. Failed to Submit');
         }
+        $findings = implode(';', $request->findings);
         $recommendations = $request->recommendation ? implode(';', $request->recommendation) : null;
 
         ReassessmentFindings::insert([
