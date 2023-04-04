@@ -2407,17 +2407,15 @@
                                 @endif
                                 @if($patientCode)
                                     @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-social" data-toggle="pill"
-                                            href="#account-vertical-social" aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Panel
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-social" data-toggle="pill" href="#account-vertical-social" aria-expanded="false">
+                                                <i class="fa fa-print"></i>
+                                                Print Panel
+                                            </a>
+                                        </li>
                                     @endif
                                     <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
+                                        <a class="nav-link d-flex text-white" id="account-pill-connections" data-toggle="pill"
                                             onclick="window.open('/admission_print?id={{$patientCode->id}}').print()"
                                             aria-expanded="false">
                                             <i class="fa fa-print"></i>

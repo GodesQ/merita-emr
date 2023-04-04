@@ -44,7 +44,6 @@
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
-
 <body class="vertical-layout vertical-menu 1-column  bg-full-screen-image blank-page blank-page" data-open="click"
     data-menu="vertical-menu" data-col="1-column">
     <!-- BEGIN: Content-->
@@ -104,12 +103,10 @@
                                         </form>
                                     </div>
                                     <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                                        <span>New to
-                                            Merita ?</span>
+                                        <span>New to Merita?</span>
                                     </p>
                                     <div class="card-body">
-                                        <a href="/register" class="btn btn-outline-danger btn-block"><i
-                                                class="feather icon-user"></i> Register</a>
+                                        <a href="/register" class="btn btn-outline-danger btn-block"><i class="feather icon-user"></i> Register</a>
                                     </div>
                                 </div>
                             </div>

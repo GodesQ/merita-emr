@@ -38,8 +38,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="myModalLabel18"><i class="fa fa-camera"></i>
-                                                        Take
-                                                        Picture
+                                                        Take Picture
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">

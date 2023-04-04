@@ -156,13 +156,13 @@
                                             <tr>
                                                 <td colspan="2">GENDER:&nbsp;&nbsp;
                                                     MALE
-                                                    @if ($admission->gender == 'Male')
+                                                    @if ($admission->patient->gender == 'Male')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>
                                                     @endif
                                                     FEMALE
-                                                    @if ($admission->gender == 'Female')
+                                                    @if ($admission->patient->gender == 'Female')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>

@@ -2569,7 +2569,7 @@
                                                         ID Document no: <span style="border-bottom: 1px solid black;">{{$admission->patientcode}}</span>
                                                     </td>
                                                     <td>Gender: <br>
-                                                        <span style="text-decoration: {{$admission->patient->gender == 'Male' ? 'underline' : 'none' }}">MALE</span> / <span style="text-decoration: {{$admission->gender == 'Female' ? 'underline' : 'none' }}">FEMALE</span>
+                                                        <span style="text-decoration: {{$admission->patient->gender == 'Male' ? 'underline' : 'none' }}">MALE</span> / <span style="text-decoration: {{$admission->patient->gender == 'Female' ? 'underline' : 'none' }}">FEMALE</span>
                                                     </td>
                                                 </tr>
                                                 <tr>

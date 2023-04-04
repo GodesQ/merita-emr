@@ -32,8 +32,7 @@
                         <h2 class="text-bold-600">Agencies</h2>
                     </div>
                     <div class="col-md-1">
-                        <a href="/add_agency" class="btn btn-solid btn-primary">Add
-                        </a>
+                        <a href="/add_agency" class="btn btn-solid btn-primary">Add</a>
                     </div>
                 </div>
             </div>

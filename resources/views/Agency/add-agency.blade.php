@@ -66,8 +66,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Contact Person</label>
-                                                    <input required type="text" class="form-control"
-                                                        name="contact_person">
+                                                    <input required type="text" class="form-control" name="contact_person">
                                                 </div>
                                             </div>
                                         </div>
@@ -81,8 +80,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Registered at</label>
-                                                    <input class="form-control" type="text" name="registered_at" value="@php echo date('Y-m-d');
-                                    @endphp" readonly>
+                                                    <input class="form-control" type="text" name="registered_at" value="@php echo date('Y-m-d'); @endphp" readonly>
                                                 </div>
                                             </div>
                                         </div>

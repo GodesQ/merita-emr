@@ -114,7 +114,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" valign="top">
-                                                        GENDER:&nbsp;&nbsp;{{$admission->gender}} </td>
+                                                        GENDER:&nbsp;&nbsp;{{$admission->patient->gender}} </td>
                                                     <td colspan="2" valign="top">
                                                         CIVIL STATUS: &nbsp;&nbsp;{{$admission->patient->patientinfo->maritalstatus}}</td>
                                                     <td valign="top">

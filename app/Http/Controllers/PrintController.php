@@ -45,6 +45,7 @@ class PrintController extends Controller
     public function exam_audiometry(Request $request)
     {
         $id = $_GET['id'];
+
         $exam = Audiometry::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -170,7 +171,7 @@ class PrintController extends Controller
         $exam = CardioVascular::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
-            
+
         $technician1 = User::where('id', $exam->technician_id)->first();
         return view(
             'PrintTemplates.exam_cardiovascular_print',
@@ -212,7 +213,7 @@ class PrintController extends Controller
         $exam = Dental::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
-        
+
         $exam_services = DB::table('exam_dental_services')->where('main_id', $exam->id)->get();
         $technician1 = User::where('id', $exam->technician_id)->first();
         return view(
@@ -375,7 +376,7 @@ class PrintController extends Controller
 
         $exam = Ishihara::where('admission_id', '=', $id)->first();
         $technician1 = User::where('id', $exam->technician_id)->first();
-        
+
         return view(
             'PrintTemplates.exam_ishihara_print',
             compact('exam', 'admission', 'technician1')
@@ -440,7 +441,7 @@ class PrintController extends Controller
         $exam_psycho = DB::table('exam_psycho')->where('admission_id', $id)->first();
         $technician1 = User::where('id', $exam->technician_id)->first();
         $medical_director = User::where('position', "LIKE", '%Medical Director%')->first();
-        
+
         return view(
             'PrintTemplates.exam_physical_print',
             compact('exam', 'admission', 'technician1', 'patientInfo', 'exam_ishihara', 'exam_xray', 'examlab_feca', 'examlab_hepa', 'examlab_hiv', 'exam_ecg', 'exam_psycho', 'medical_director')
@@ -613,7 +614,7 @@ class PrintController extends Controller
             compact('exam', 'admission', 'technician1')
         );
     }
-    
+
     public function exam_ultrasound(Request $request)
     {
         $id = $_GET['id'];
@@ -643,7 +644,7 @@ class PrintController extends Controller
                 'tran_admission.agency_id'
             )
             ->first();
-        
+
         $exam = UltraSound::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -657,8 +658,8 @@ class PrintController extends Controller
     }
 
     public function exam_visacuity(Request $request)
-    {   
-        
+    {
+
         $id = $_GET['id'];
         $admission = Admission::select(
             'tran_admission.*',
@@ -741,7 +742,7 @@ class PrintController extends Controller
             compact('exam', 'admission', 'technician1', 'technician2')
         );
     }
-    
+
     public function exam_ppd(Request $request)
     {
         $id = $_GET['id'];
@@ -771,11 +772,11 @@ class PrintController extends Controller
                 'tran_admission.agency_id'
             )
             ->first();
-            
+
         $exam = PPD::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
-            
+
         $patientinfo =  DB::table('mast_patientinfo')->where('main_id', $admission->patient_id)->first();
         // dd($patientinfo);
 
@@ -817,38 +818,38 @@ class PrintController extends Controller
                 'tran_admission.agency_id'
             )
             ->first();
-            
+
 
         $exam_blood = BloodSerology::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
-        
+
         $exam_sero = Hepatitis::where('admission_id', '=', $id)
         ->latest('id')
         ->first();
-        
+
         $type = $request->type;
-        
+
         if($type == 'blood') {
             $technician1 = User::where('id', $exam_blood->technician_id)->first();
             $technician2 = User::where('id', $exam_blood->technician2_id)->first();
         }
-        
+
         if($type == 'serology') {
             $technician1 = User::where('id', $exam_sero->technician_id)->first();
             $technician2 = User::where('id', $exam_sero->technician2_id)->first();
         }
-        
+
         if($type == 'both' && $exam_blood) {
             $technician1 = User::where('id', $exam_blood->technician_id)->first();
             $technician2 = User::where('id', $exam_blood->technician2_id)->first();
         }
-        
+
         if($type == 'both' && $exam_sero) {
             $technician1 = User::where('id', $exam_sero->technician_id)->first();
             $technician2 = User::where('id', $exam_sero->technician2_id)->first();
         }
-        
+
         return view(
             'PrintTemplates.examlab_bloodsero_print',
             compact('exam_blood', 'exam_sero', 'admission', 'technician1', 'technician2', 'type')
@@ -873,12 +874,12 @@ class PrintController extends Controller
         $exam = HIV::where('admission_id', '=', $admission->id)
             ->latest('id')
             ->first();
-        
-        
+
+
         $technician1 = User::where('id', $exam->technician_id)->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
         $technician3 = User::where('id', $exam->technician3_id)->first();
-        
+
         return view(
             'PrintTemplates.examlab_hiv_print',
             compact('exam', 'admission', 'gen_info', 'technician1', 'technician2', 'technician3')
@@ -929,8 +930,8 @@ class PrintController extends Controller
 
         $technician1 = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')->where('mast_employee.id', 70)->leftJoin('mast_employeeinfo', 'mast_employeeinfo.main_id', 'mast_employee.id')->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
-        
-        
+
+
         // dd($technician1)
         return view(
             'PrintTemplates.examlab_drug_print',
@@ -1319,9 +1320,9 @@ class PrintController extends Controller
         // ->where('main_id', $patientInfo->medical_package)
         // ->leftJoin('requests', 'requests.id', 'list_package_request.request_id')
         // ->get();
-            
+
         // $exams = [];
-        
+
         // foreach ($requests as $key => $req) {
         //     $requests_exams = DB::table('requests_exam')
         //     ->select('list_exam.examname','requests_exam.exam_id')
@@ -1329,8 +1330,8 @@ class PrintController extends Controller
         //     ->leftJoin('list_exam', 'list_exam.id', 'requests_exam.exam_id')
         //     ->get();
         //     array_push($exams, $requests_exams);
-        // }       
-        
+        // }
+
         // $exam_names = [];
 
         // foreach ($exams as $key => $exam) {
@@ -1338,7 +1339,7 @@ class PrintController extends Controller
         //        array_push($exam_names, $ex->examname);
         //    }
         // }
-        
+
         // // dd($exam_names);
 
         $patient_exams = DB::table('list_packagedtl')
@@ -1361,7 +1362,7 @@ class PrintController extends Controller
                     'list_exam.section_id'
                 )
                 ->get();
-                
+
         $additional_exams = DB::table('tran_admissiondtl')
                 ->select(
                     'tran_admissiondtl.*',
@@ -1382,22 +1383,22 @@ class PrintController extends Controller
                     'list_exam.section_id'
                 )
                 ->get();
-                
+
         $add_exams = [];
         $exams = [];
-    
+
         foreach ($patient_exams as $key => $patient_exam) {
             array_push($exams, $patient_exam->examname);
         }
-        
+
         foreach ($additional_exams as $key => $additional_exam) {
             array_push($add_exams, $additional_exam->examname);
         }
-        
+
         $additional = implode(', ', $add_exams);
-        
+
         // dd($additional);
-    
+
         return view(
             'PrintTemplates.routing_slip_print',
             compact('admission', 'patientInfo', 'exams', 'additional')
@@ -1406,9 +1407,9 @@ class PrintController extends Controller
 
     public function referral_pdf() {
         $email = $_GET['email'];
-        
+
         $referral = Refferal::where('email_employee', $email)->latest('id')->with('package', 'agency')->first();
-        
+
         // if($referral) {
         //     $referral = Patient::select(
         //         'mast_patient.*',
@@ -1429,30 +1430,30 @@ class PrintController extends Controller
         //     ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
         //     ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')->latest('mast_patient.id')->first();
         // }
-        
+
         return view("PrintTemplates.referral_pdf_print", compact('referral'));
     }
 
     public function transmittal_print(Request $request) {
-       
+
         $from_date = $request->input('date_from');
         $to_date = $request->input('date_to');
         $agency_id = $request->input('agency_id');
         $patientstatus = $request->input('patientstatus');
         $bahia_vessel = $request->input('bahia_vessel');
         $hartmann_principal = $request->input('hartmann_principal');
-        
+
         if($agency_id == "") {
-            $patients = $this->patientStatus($patientstatus, $from_date, $to_date); 
+            $patients = $this->patientStatus($patientstatus, $from_date, $to_date);
         } else {
             $patients = $this->patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal);
         }
 
         $additional_columns = $request->additional_columns ? $request->additional_columns : [];
-        
+
         $agency = Agency::where('id', $agency_id)->first();
-        
-        
+
+
         return view('PrintTemplates.transmittal_print', compact('patients', 'from_date', 'to_date', 'patientstatus', 'agency', 'additional_columns'));
     }
 
@@ -1466,7 +1467,7 @@ class PrintController extends Controller
         ->get();
 
         $patient = Patient::where('id', $patient_id)->first();
-        
+
         $patientInfo = DB::table('mast_patientinfo')
         ->select('mast_patientinfo.*', 'mast_agency.agencyname')
         ->where('mast_patientinfo.main_id', $patient_id)
@@ -1475,7 +1476,7 @@ class PrintController extends Controller
 
 
         $requests = [];
-        
+
         foreach ($package_requests as $key => $package_request) {
             $request_exam = DB::table('requests_exam')
             ->select('requests_exam.exam_id', 'list_exam.examname')
@@ -1493,10 +1494,10 @@ class PrintController extends Controller
         return view("PrintTemplates.requests_print", compact('requests', 'patient', 'patientInfo'));
     }
 
-    public function yellow_card_print(Request $request) 
+    public function yellow_card_print(Request $request)
     {
         $id = $_GET['id'];
-        
+
         $patient = Patient::select('mast_patient.*', 'mast_patientinfo.birthdate', 'mast_patientinfo.nationality')
         ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
         ->where('mast_patient.id', $id)
@@ -1506,22 +1507,22 @@ class PrintController extends Controller
         // dd($records);
         return view("PrintTemplates.yellow_card_print", compact('patient', 'records'));
     }
-    
+
     public function patientStatus($patientstatus, $from_date, $to_date) {
             if($patientstatus == "") {
                 $patients = Admission::whereDate('trans_date', '>=', $from_date)
             ->whereDate('trans_date', '<=', $to_date)
-                ->with('exam_audio', 
-                        'exam_ecg', 
-                        'exam_physical', 
-                        'exam_visacuity', 
-                        'exam_bloodsero', 
-                        'patient', 
-                        'exam_crf', 
-                        'exam_cardio', 
-                        'exam_dental', 
-                        'exam_drug', 
-                        'exam_echodoppler', 
+                ->with('exam_audio',
+                        'exam_ecg',
+                        'exam_physical',
+                        'exam_visacuity',
+                        'exam_bloodsero',
+                        'patient',
+                        'exam_crf',
+                        'exam_cardio',
+                        'exam_dental',
+                        'exam_drug',
+                        'exam_echodoppler',
                         'exam_echoplain',
                         'exam_feca',
                         'exam_hema',
@@ -1539,21 +1540,21 @@ class PrintController extends Controller
                         'package',
                         'agency'
                         )->get();
-                
+
             } else {
                $patients = Admission::whereDate('trans_date', '>=', $from_date)
                     ->whereDate('trans_date', '<=', $to_date)
-                    ->with('exam_audio', 
-                    'exam_ecg', 
-                    'exam_physical', 
-                    'exam_visacuity', 
-                    'exam_bloodsero', 
-                    'patient', 
-                    'exam_crf', 
-                    'exam_cardio', 
-                    'exam_dental', 
-                    'exam_drug', 
-                    'exam_echodoppler', 
+                    ->with('exam_audio',
+                    'exam_ecg',
+                    'exam_physical',
+                    'exam_visacuity',
+                    'exam_bloodsero',
+                    'patient',
+                    'exam_crf',
+                    'exam_cardio',
+                    'exam_dental',
+                    'exam_drug',
+                    'exam_echodoppler',
                     'exam_echoplain',
                     'exam_feca',
                     'exam_hema',
@@ -1574,11 +1575,11 @@ class PrintController extends Controller
                         $query->where('fit', $patientstatus);
                     })->get();
             }
-            
-            
+
+
             return $patients;
     }
-    
+
     public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal) {
         if($patientstatus == "") {
                 $patients = Admission::whereDate('trans_date', '>=', $from_date)
@@ -1603,7 +1604,7 @@ class PrintController extends Controller
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                        } 
+                        }
 
                         if($bahia_vessel == 'BOLETTE/BRAEMAR') {
                             return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
@@ -1619,7 +1620,7 @@ class PrintController extends Controller
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
                         }
 
-                    } 
+                    }
 
                     if($agency_id == 55) {
                         if($bahia_vessel == 'BOLETTE/BRAEMAR') {
@@ -1647,7 +1648,7 @@ class PrintController extends Controller
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
                             ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                        } 
+                        }
                     }
                 })
                 ->where(function ($q) use ($hartmann_principal, $agency_id) {
@@ -1655,17 +1656,17 @@ class PrintController extends Controller
                         return $q->where(DB::raw('upper(principal)'),  strtoupper($hartmann_principal));
                     }
                 })
-                ->with('exam_audio', 
-                        'exam_ecg', 
-                        'exam_physical', 
-                        'exam_visacuity', 
-                        'exam_bloodsero', 
-                        'patient', 
-                        'exam_crf', 
-                        'exam_cardio', 
-                        'exam_dental', 
-                        'exam_drug', 
-                        'exam_echodoppler', 
+                ->with('exam_audio',
+                        'exam_ecg',
+                        'exam_physical',
+                        'exam_visacuity',
+                        'exam_bloodsero',
+                        'patient',
+                        'exam_crf',
+                        'exam_cardio',
+                        'exam_dental',
+                        'exam_drug',
+                        'exam_echodoppler',
                         'exam_echoplain',
                         'exam_feca',
                         'exam_hema',
@@ -1711,24 +1712,24 @@ class PrintController extends Controller
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                            } 
-    
+                            }
+
                             if($bahia_vessel == 'BOLETTE/BRAEMAR') {
                                 return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAEMAR'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOLETTE'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
                             }
-    
+
                             if($bahia_vessel == 'BALMORAL/BOREALIS') {
                                 return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOREALIS'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BALMORAL'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
                             }
-    
-                        } 
-    
+
+                        }
+
                         if($agency_id == 55) {
                             if($bahia_vessel == 'BOLETTE/BRAEMAR') {
                                 return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
@@ -1737,7 +1738,7 @@ class PrintController extends Controller
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
                             }
                         }
-    
+
                         if($agency_id == 57) {
                             if($bahia_vessel == 'BALMORAL/BOREALIS') {
                                 return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
@@ -1746,7 +1747,7 @@ class PrintController extends Controller
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
                             }
                         }
-    
+
                         if($agency_id == 58) {
                             if($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
                                 return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLD TERN'))
@@ -1755,20 +1756,20 @@ class PrintController extends Controller
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
                                 ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                            } 
+                            }
                         }
                     })
-                    ->with('exam_audio', 
-                    'exam_ecg', 
-                    'exam_physical', 
-                    'exam_visacuity', 
-                    'exam_bloodsero', 
-                    'patient', 
-                    'exam_crf', 
-                    'exam_cardio', 
-                    'exam_dental', 
-                    'exam_drug', 
-                    'exam_echodoppler', 
+                    ->with('exam_audio',
+                    'exam_ecg',
+                    'exam_physical',
+                    'exam_visacuity',
+                    'exam_bloodsero',
+                    'patient',
+                    'exam_crf',
+                    'exam_cardio',
+                    'exam_dental',
+                    'exam_drug',
+                    'exam_echodoppler',
                     'exam_echoplain',
                     'exam_feca',
                     'exam_hema',
@@ -1790,14 +1791,14 @@ class PrintController extends Controller
         }
         return $patients;
     }
-    
+
     public function data_privacy_print() {
         $id = $_GET['id'];
         $patient = Patient::where('id', $id)->first();
-        
+
         return view('PrintTemplates.data_privacy_form', compact('patient'));
     }
-    
+
     public function cashier_or_print(Request $request) {
         $data = session()->all();
         $id = $request->id;
@@ -1806,14 +1807,14 @@ class PrintController extends Controller
         ->leftJoin('mast_agency', 'mast_agency.id', 'actgtran_or.agency_id')
         ->with('admission')
         ->first();
-        
+
         $print_by = User::where('id', $data['employeeId'])->first();
         $admission = Admission::where('id', $account->admission_id)->first();
         $patient_package = ListPackage::where('id', $admission->package_id)->first();
         $items = [];
-        
+
         if($account->paying_type == "exams") {
-                
+
             if($account->payment_user == 'agency') {
                 $admission_exams = DB::table('tran_admissiondtl')
                 ->select('tran_admissiondtl.*', 'list_exam.examname', 'list_exam.price')
@@ -1829,7 +1830,7 @@ class PrintController extends Controller
                 ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
                 ->get();
             }
-            
+
             foreach ($admission_exams as $key => $exam) {
                 $item_data = [
                     'itemname' => $exam->examname,
@@ -1856,7 +1857,7 @@ class PrintController extends Controller
             ];
              array_push($items, $item_data);
         }
-        
+
         return view('PrintTemplates.cashier_or_print', compact('account', 'print_by', 'items'));
     }
 

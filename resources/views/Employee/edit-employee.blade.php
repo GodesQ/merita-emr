@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-content collapse show">
                         <div class="card-body">
-                            
+
                             @if(Session::get('status'))
                             <div class="success alert-success p-2 my-2 rounded">
                                 {{Session::get('status')}}
@@ -57,8 +57,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h4 class="modal-title" id="myModalLabel18"><i class="fa fa-camera"></i>
-                                                            Take
-                                                            Picture
+                                                            Take Picture
                                                         </h4>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -72,8 +71,7 @@
                                                         <button type="button" class="btn grey btn-outline-secondary"
                                                             data-dismiss="modal">Close</button>
                                                         <button type="button" class="btn btn-outline-primary"
-                                                            onclick="snapShot()">Save
-                                                            changes</button>
+                                                            onclick="snapShot()">Save Changes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,8 +89,7 @@
                                                         <td align="right" valign="top">
                                                             <img src="@php echo $employee->signature @endphp" alt=""
                                                                 class="signature-taken mt-4">
-                                                            @if($employee->employee_image == null || $employee->employee_image
-                                                            == " ")
+                                                            @if($employee->employee_image == null || $employee->employee_image == " ")
                                                             <img src="../../../app-assets/images/profiles/profilepic.jpg"
                                                                 alt="Profile Picture" data-toggle="modal"
                                                                 data-target="#defaultSize"
@@ -218,7 +215,7 @@
                                                                 <button type='button' class="btn btn-solid btn-primary clear-signature">Clear</button>
                                                             </div>
                                                         </td>
-        
+
                                                         <td><b>Department</b></td>
                                                         <td>
                                                             <select name="dept" id="" class="form-control select2">

@@ -16,12 +16,12 @@
                     <div class="card-content p-2">
                         <form name="frm" method="post" action="/store_urinalysis" role="form">
                             @if(Session::get('status'))
-                            <div class="success alert-success p-2 my-2">
-                                {{Session::get('status')}}
-                            </div>
+                                <div class="success alert-success p-2 my-2">
+                                    {{Session::get('status')}}
+                                </div>
                             @endif
                             @csrf
-                            <input required required required type="hidden" name="id" value="{{$admission->id}}">
+                            <input required type="hidden" name="id" value="{{$admission->id}}">
                             <input type="hidden" name="patient_id" value="{{$admission->patient_id}}">
                             <table id="tblExam" width="100%" cellpadding="2" cellspacing="2"
                                 class="table table-bordered">
@@ -35,32 +35,29 @@
                                         <td width="113"><b>Admission No.</b></td>
                                         <td width="322">
                                             <div class="col-md-10" style="margin-left: -14px">
-                                                <input required name="admission_id" type="text"
-                                                    id="admission_id" value="{{$admission->id}}"
-                                                    class="form-control input required required-sm pull-left"
+                                                <input required name="admission_id" type="text" id="admission_id" value="{{$admission->id}}"
+                                                    class="form-control input-sm pull-left"
                                                     placeholder="Admission No." readonly="">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><b>Exam Date</b></td>
-                                        <td><input required required required name="trans_date" type="text"
-                                                id="trans_date" value="<?php echo date(
-                                    'Y-m-d'
-                                ); ?>" class="form-control" readonly=""></td>
+                                        <td><input required name="trans_date" type="text"
+                                                id="trans_date" value="<?php echo date('Y-m-d'); ?>" class="form-control" readonly=""></td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td><b>Patient</b></td>
                                         <td>
-                                            <input required required required name="patientname" id="patientname"
+                                            <input required name="patientname" id="patientname"
                                                 type="text"
                                                 value="{{$admission->lastname . ", " . $admission->firstname}}"
                                                 class="form-control" readonly="">
                                         </td>
                                         <td><b>Patient Code</b></td>
-                                        <td><input required required required name="patientcode" id="patientcode"
+                                        <td><input required name="patientcode" id="patientcode"
                                                 type="text" value="{{$admission->patientcode}}" class="form-control"
                                                 readonly=""></td>
                                     </tr>

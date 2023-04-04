@@ -458,9 +458,11 @@ class PrintPanelController extends Controller
     }
 
     public function medical_record(Request $request) {
-        $patient_id = $_GET['patient_id'];
-        $id = $_GET['id'];
+        $patient_id = $request->patient_id;
+        $id = $request->id;
+
         $medical_history = MedicalHistory::where('main_id', $patient_id)->first();
+
         $admission = Admission::select(
             'tran_admission.*',
             'mast_patient.id as patient_id',

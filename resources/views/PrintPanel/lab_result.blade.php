@@ -103,7 +103,7 @@
                             <tbody>
                                 <tr>
                                     <td width="8%">NAME</td>
-                                    <td width="20%"  style="border-bottom: 1px solid black;">{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</td>
+                                    <td width="20%" style="border-bottom: 1px solid black;">{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</td>
                                     <td width="8%">AGENCY</td>
                                     <td width="25%" style="border-bottom: 1px solid black;">{{$admission->agency->agencyname}}</td>
                                 </tr>
@@ -1105,7 +1105,7 @@
                                         @endif
                                     </td>
                                     <td width="10%">Opium</td>
-                                    <td width="20%" class="fntBldLrg {{optional($admission->exam_drug)->opium == 'Positive' ? 'red-text' : null}}" style="border-bottom: 1px solid black;">
+                                    <td width="20%" class="fntBldLrg {{optional($admission->exam_drug)->opium == 'Positive' ? 'red-text' : null}}" style="border-bottom: 1px solid rgb(0, 0, 0);">
                                         @if($admission->exam_drug)
                                             {{$admission->exam_drug->opium}}
                                         @endif
