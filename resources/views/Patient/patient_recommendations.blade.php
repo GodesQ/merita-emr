@@ -154,7 +154,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->kub_exam_status == 'findings')
+                @if($exam_ultrasound->kub_exam_status == 'findings' && $exam_ultrasound->kub_exam_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>KUB Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->kub_exam_recommendation) ?></span>
@@ -163,7 +163,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->hbt_exam_status == 'findings')
+                @if($exam_ultrasound->hbt_exam_status == 'findings' && $exam_ultrasound->hbt_exam_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>HBT Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?></span>
@@ -172,7 +172,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->thyroid_exam_status == 'findings')
+                @if($exam_ultrasound->thyroid_exam_status == 'findings' && $exam_ultrasound->thyroid_exam_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>THYROID Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->thyroid_exam_recommendation) ?></span>
@@ -181,7 +181,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->breast_exam_status == 'findings')
+                @if($exam_ultrasound->breast_exam_status == 'findings' && $exam_ultrasound->breast_exam_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>BREAST Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->breast_exam_recommendation) ?></span>
@@ -190,7 +190,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->whole_abdomen_status == 'findings')
+                @if($exam_ultrasound->whole_abdomen_status == 'findings' && $exam_ultrasound->whole_abdomen_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>WHOLE ABDOMEN Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->whole_abdomen_recommendation) ?></span>
@@ -199,7 +199,7 @@
                 @endif
             @endif
             @if ($exam_ultrasound)
-                @if($exam_ultrasound->genitals_exam_status == 'findings')
+                @if($exam_ultrasound->genitals_exam_status == 'findings' && $exam_ultrasound->genitals_exam_recommendation)
                     <div class="col-md-6 my-50">
                         <h5><b>GENITALS Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->genitals_exam_recommendation) ?></span>
