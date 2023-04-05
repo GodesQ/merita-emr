@@ -313,7 +313,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 @empty
                                     <tr>
                                         <td>{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>

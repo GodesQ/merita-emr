@@ -308,7 +308,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b2)
+            @if(!$exam_physical->b7)
                 <div class="col-md-6 my-50">
                     <h5><b>Neurology</b></h5>
                     <span style="font-size: 12px;">@php echo
@@ -328,7 +328,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b3)
+            @if(!$exam_physical->b2)
                 <div class="col-md-6 my-50">
                     <h5><b>Breast,Axilla</b></h5>
                     <span style="font-size: 12px;">@php echo
@@ -348,7 +348,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b4)
+            @if(!$exam_physical->b3)
                 <div class="col-md-6 my-50">
                     <h5><b>Chest and Lungs</b></h5>
                     <span style="font-size: 12px;">@php echo
@@ -368,7 +368,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b5)
+            @if(!$exam_physical->b4)
                 <div class="col-md-6 my-50">
                     <h5><b>Heart</b></h5>
                     <span style="font-size: 12px;">@php echo
@@ -388,7 +388,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b6)
+            @if(!$exam_physical->b5)
                 <div class="col-md-6 my-50">
                     <h5><b>Abdomen,Liver,Spleen</b></h5>
                     <span style="font-size: 12px;">@php echo
@@ -408,7 +408,7 @@
             @endif
         @endif
         @if($exam_physical)
-            @if(!$exam_physical->b7)
+            @if(!$exam_physical->b6)
                 <div class="col-md-6 my-50">
                     <h5><b>Back</b></h5>
                     <span style="font-size: 12px;">@php echo
