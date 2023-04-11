@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('name')
 {{$data['firstname'] . " " . $data['lastname']}}
@@ -32,29 +32,29 @@
     @endif
 
     @if(Session::get('success'))
-    <div class="success alert-success p-2 my-2 rounded">
-        {{Session::get('success')}}
-    </div>
-    @push('scripts')
-    <script>
-        document.querySelector("#open-instruction").click();
-        toastr.success('{{ Session::get('success') }}', 'Failed');
-    </script>
-    @endpush
+        <div class="success alert-success p-2 my-2 rounded">
+            {{Session::get('success')}}
+        </div>
+        @push('scripts')
+            <script>
+                document.querySelector("#open-instruction").click();
+                toastr.success('{{ Session::get('success') }}', 'Success');
+            </script>
+        @endpush
     @endif
 
     @if(Session::get('success_support'))
-    @push('scripts')
-        <script>
-            toastr.success('{{Session::get("success_support")}}', 'Success');
-        </script>
-    @endpush
+        @push('scripts')
+            <script>
+                toastr.success('{{Session::get("success_support")}}', 'Success');
+            </script>
+        @endpush
     @endif
 
     @section('latest_schedule')
-    @if($latest_schedule)
-    {{$latest_schedule->date}}
-    @endif
+        @if($latest_schedule)
+            {{$latest_schedule->date}}
+        @endif
     @endsection
 
     @if(Session::get('fail'))

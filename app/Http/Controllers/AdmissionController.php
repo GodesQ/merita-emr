@@ -386,17 +386,6 @@ class AdmissionController extends Controller
         }
 
         if ($request->lab_status == 1) {
-            // $findings = implode(";", $request->findings);
-
-            // ReassessmentFindings::insert([
-            //     "admission_id" => $request->id,
-            //     "patient_id" => $patient->id,
-            //     "findings" => $findings,
-            //     "remarks" => $request->remarks,
-            //     "impression" => $request->impression,
-            //     "date" => date("Y-m-d")
-            // ]);
-
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => 'Pending',
             ]);

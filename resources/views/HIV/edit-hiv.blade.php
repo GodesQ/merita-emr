@@ -30,8 +30,7 @@
                             @endif
                             @csrf
                             <input type="hidden" name="id" value="{{ $exam->id }}">
-                            <table id="tblExam" width="100%" cellpadding="2" cellspacing="2"
-                                class="table table-bordered">
+                            <table id="tblExam" width="100%" cellpadding="2" cellspacing="2" class="table table-bordered">
                                 <tbody>
                                     <tr>
                                         <td width="92"><b>PEME Date</b></td>
@@ -59,14 +58,10 @@
                                     <tr>
                                         <td><b>Patient</b></td>
                                         <td>
-                                            <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
-                                                class="form-control" readonly="">
+                                            <input name="patientname" id="patientname" type="text" value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                class="form-control" readonly></td>
                                         <td><b>Patient Code</b></td>
-                                        <td><input name="patientcode" id="patientcode" type="text"
-                                                value="{{ $exam->patientcode }}" class="form-control" readonly="">
-                                        </td>
-                                        </td>
+                                        <td><input name="patientcode" id="patientcode" type="text"value="{{ $exam->patientcode }}" class="form-control" readonly></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -77,15 +72,10 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <input name="exam" type="radio" class="m-1" id="exam_2" value="enzyme" @php
-                                                echo $exam->exam == "enzyme" ? "checked" : "" @endphp>
-                                            EIA/CMIA/ELFA&nbsp;
-                                            <input name="exam" type="radio" class="m-1" id="exam_0" value="rapid" @php
-                                                echo $exam->exam == "rapid" ? "checked" : "" @endphp>
+                                            <input name="exam" type="radio" class="m-1" id="exam_2" value="enzyme" @php EIA/CMIA/ELFA&nbsp;
+                                            <input name="exam" type="radio" class="m-1" id="exam_0" value="rapid" @php echo $exam->exam == "rapid" ? "checked" : "" @endphp>
                                             RAPID &nbsp;
-                                            <input name="exam" type="radio" class="m-1" id="exam_1" value="particle"
-                                                <blade
-                                                php|%20echo%20%24exam-%3Eexam%20%3D%3D%20%26%2334%3Bparticle%26%2334%3B%20%3F%20%26%2334%3Bchecked%26%2334%3B%20%3A%20%26%2334%3B%26%2334%3B%20%40endphp%3E%0D>
+                                            <input name="exam" type="radio" class="m-1" id="exam_1" value="particle" {{ $exam->exam == 'particle' ? 'checked' : null }}>
                                             Particle Agglutination
                                             <input name="exam" type="radio" class="m-1" id="exam_3" value="others" @php
                                                 echo $exam->exam == "others" ? "checked" : "" @endphp>
@@ -100,7 +90,7 @@
                                         <td width="25%"><b>Result</b></td>
                                         <td colspan="2">
                                             <input name="result" type="radio" id="result_0" class="m-1"
-                                                value="Non Reactive" @php echo $exam->result == "Non Reactive" ? "checked" : "" @endphp>Non Reactive
+                                                value="Non Reactive" {{ $exam->result == "Non Reactive" ? "checked" : "" }}>Non Reactive
                                             <input name="result" type="radio" id="result_1" class="m-1" value="Reactive" @php echo $exam->result == "Reactive" ? "checked" : "" @endphp>
                                                 Reactive
                                             <input name="result" type="radio" id="result_2" class="m-1" value="" @php echo $exam->result == "" ? "checked" : "" @endphp>Reset
@@ -215,20 +205,20 @@
     </div>
     <script>
         document.addEventListener('keydown',handleInputFocusTransfer);
-    
+
         function handleInputFocusTransfer(e){
-        
+
           const focusableInputElements= document.querySelectorAll(`input`);
-        
+
           //Creating an array from the node list
-          const focusable= [...focusableInputElements]; 
-        
+          const focusable= [...focusableInputElements];
+
           //get the index of current item
-          const index = focusable.indexOf(document.activeElement); 
-        
+          const index = focusable.indexOf(document.activeElement);
+
           // Create a variable to store the idex of next item to be focussed
           let nextIndex = 0;
-        
+
           if (e.keyCode === 37) {
             // up arrow
             e.preventDefault();

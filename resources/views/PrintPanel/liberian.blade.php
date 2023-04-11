@@ -630,7 +630,7 @@
                         </div>
 
                     </div>
-                    <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">THIS IS TO CERTIFY THAT A PHYSICAL EXAMINATION WAS GIVEN TO: <span class="s15">&nbsp; {{$admission->lastname}}, {{$admission->firstname}} {{$admission->middlename}} &nbsp;&nbsp;&nbsp; </span></p>
+                    <p class="s3" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">THIS IS TO CERTIFY THAT A PHYSICAL EXAMINATION WAS GIVEN TO: <span class="s15">&nbsp; {{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}} &nbsp;&nbsp;&nbsp; </span></p>
                     <p class="s3" style="padding-left: 425pt;text-indent: 0pt;line-height: 20pt;text-align: left;">(NAME OF APPLICANT)</p>
                     <p style="text-indent: 0pt;text-align: left;"><br></p>
                     <p class="s3" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">

@@ -38,17 +38,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput1">Patient
-                                    Name</label>
-                                <input type="text" id="projectinput1" class="form-control"
-                                    value="{{ $patient->lastname }}, {{ $patient->firstname }}" name="fullname"
-                                    readonly>
+                                <label class="text-bold-600" for="projectinput1">Patient Name</label>
+                                <input type="text" id="projectinput1" class="form-control" value="{{ $patient->lastname }}, {{ $patient->firstname }}" name="fullname" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput1">Patient
-                                    Code</label>
+                                <label class="text-bold-600" for="projectinput1">Patient Code</label>
                                 <input type="text" id="projectinput1" class="form-control"
                                     value="{{ $patient->patientcode }}" name="patientcode" readonly>
                             </div>

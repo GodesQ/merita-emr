@@ -108,10 +108,8 @@
                                         <td><b>Exam Type</b></td>
                                         <td>
                                             <select name="exam_type" id="exam_type" class="form-control">
-                                                <option value="Chest (Child)" @php echo $exam->exam_type == "Chest
-                                                    (Child)" ? "selected=''" : "" @endphp>Chest (Child)</option>
-                                                <option value="Chest (Adult)" @php echo $exam->exam_type == "Chest
-                                                    (Adult)" ? "selected=''" : "" @endphp>Chest (Adult)</option>
+                                                <option value="Chest (Child)" {{ $exam->exam_type == "Chest (Child)" ? "selected=''" : "" }}>Chest (Child)</option>
+                                                <option value="Chest (Adult)" {{ $exam->exam_type == "Chest (Adult)" ? "selected=''" : "" }}>Chest (Adult)</option>
                                             </select>
                                         </td>
                                         <td>&nbsp;</td>
@@ -120,12 +118,8 @@
                                         <td><b>Exam View</b></td>
                                         <td>
                                             <select name="exam_view" id="exam_view" class="form-control">
-                                                <option value="PA 11 X 14" @php echo $exam->exam_view == "PA 11 X 14" ?
-                                                    "selected=''" : "" @endphp>PA 11 X 14</option>
-                                                <option value="PA 14 X 14" @php echo $exam->exam_view == "PA 14 X 14" ?
-                                                    "selected=''" : "" @endphp>PA 14 X 14</option>
-                                                <option value="AP" @php echo $exam->exam_view == "AP" ? "selected=''" :
-                                                    "" @endphp>AP</option>
+                                                <option value="PA 11 X 14" {{ $exam->exam_view == "PA 11 X 14" ?  "selected=''" : "" }}>PA 11 X 14</option>
+                                                <option value="AP" {{ $exam->exam_view == "AP" ? "selected=''" : "" }}>AP</option>
                                                 <option value="Lateral" @php echo $exam->exam_view == "Lateral" ?
                                                     "selected=''" : "" @endphp>Lateral</option>
                                                 <option value="AP/LAT" @php echo $exam->exam_view == "AP/LAT" ?
@@ -275,7 +269,7 @@
                         removeFirstOption();
                         appendOption(arrExamHNType, arrExamHNView)
                         break;
-                    
+
                     case "Chest":
                         removeFirstOption();
                         appendOption(arrExamCType, arrExamCView)
@@ -300,7 +294,7 @@
                         removeFirstOption();
                         appendOption(arrExamLEType, arrExamLEView)
                     break;
-                
+
                     default:
                         break;
             }
@@ -316,7 +310,7 @@
                         removeFirstOption();
                         appendOption(arrExamHNType, arrExamHNView)
                         break;
-                    
+
                     case "Chest":
                         removeFirstOption();
                         appendOption(arrExamCType, arrExamCView)
@@ -341,7 +335,7 @@
                         removeFirstOption();
                         appendOption(arrExamLEType, arrExamLEView)
                     break;
-                
+
                     default:
                         break;
                 }

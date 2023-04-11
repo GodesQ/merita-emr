@@ -468,13 +468,10 @@
                                         <tr>
                                             <td>
                                                 <div class="form-group">
-                                                    <input name="hearing" type="radio" class="m-1" id="hearing_0"
-                                                        value="aided"
-                                                        @php echo $exam->hearing == "aided" ? "checked" : null @endphp>Aided
-                                                    <input name="hearing" type="radio" class="m-1" id="hearing_1"
-                                                        value="unaided"
-                                                        @php echo $exam->hearing == "unaided" ? "checked" :
-                                                null @endphp>Unaided
+                                                    <input name="hearing" type="radio" class="m-1" id="hearing_0" value="aided"
+                                                        {{ $exam->hearing == "aided" ? "checked" : null }}>Aided
+                                                    <input name="hearing" type="radio" class="m-1" id="hearing_1" value="unaided"
+                                                        {{ $exam->hearing == "unaided" ? "checked" : null }}>Unaided
                                                 </div>
                                             </td>
                                         </tr>
@@ -482,8 +479,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <label>Right Ear Result</label>
-                                                    <input name="left_ear_result" type="radio" class="m-1"
-                                                        id="left_ear_result_1" value="Adequate"
+                                                    <input name="left_ear_result" type="radio" class="m-1" id="left_ear_result_1" value="Adequate"
                                                         {{ $exam->left_ear_result == 'Adequate' ? 'checked' : null }}>Adequate
                                                     <input name="left_ear_result" type="radio" class="m-1"
                                                         id="left_ear_result_0" value="Inadequate"
@@ -519,17 +515,10 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <input name="remarks_status" type="radio"
-                                                                        class="m-1" id="remarks_status_0"
-                                                                        value="normal"
-                                                                        @php echo $exam->remarks_status
-                                                                == "normal" ? "checked" : null @endphp>Normal
-                                                                    <input name="remarks_status" type="radio"
-                                                                        class="m-1" id="remarks_status_1"
-                                                                        value="findings"
-                                                                        @php echo
-                                                                    $exam->remarks_status == "findings" ? "checked" : null @endphp>With
-                                                                    Findings
+                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_0" value="normal"
+                                                                        {{ $exam->remarks_status == "normal" ? "checked" : null }}>Normal
+                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings"
+                                                                        {{ $exam->remarks_status == "findings" ? "checked" : null }}>With Findings
                                                                 </div>
                                                             </td>
                                                         </tr>

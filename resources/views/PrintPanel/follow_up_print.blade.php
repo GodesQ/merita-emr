@@ -289,9 +289,9 @@
                                                     <b>ECG:</b> <span style="margin-left: 10px;">{{ $admission->exam_ecg->ecg == 'Significant Findings' ? $admission->exam_ecg->findings : 'Normal'  }}</span>
                                                 </td>
                                                 <td valign="top">
-                                                   @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
-                                                        <b>ECG:</b>
-                                                   @endif
+                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
+                                                            <b>ECG:</b>
+                                                    @endif
                                                    {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
                                                 </td>
                                             </tr>
@@ -300,7 +300,7 @@
 
                                     @foreach($results as $result)
                                         <tr style="height:40px">
-                                            <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null}}</td>
+                                            <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
                                             <td valign="top">
                                                 @php echo nl2br($result['Findings']) @endphp
                                             </td>

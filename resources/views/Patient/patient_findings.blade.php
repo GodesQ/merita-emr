@@ -25,8 +25,7 @@
             @if($exam_dental->remarks_status == 'findings')
             <div class="col-md-6 my-50">
                 <h5><b>Dental</b></h5>
-                <span style="font-size: 12px;">@php echo
-                    nl2br($exam_dental->remarks) @endphp</span>
+                <span style="font-size: 12px;">@php echo nl2br($exam_dental->remarks) @endphp</span>
                 <input type="hidden" value="Dental: @php echo nl2br($exam_dental->remarks) @endphp" name="findings[]" />
             </div>
             @endif
@@ -133,6 +132,7 @@
             </div>
             @endif
         @endif
+
         @if ($exam_ultrasound)
             @if($exam_ultrasound->kub_exam_status == 'findings')
                 <div class="col-md-6 my-50">
@@ -231,8 +231,7 @@
             @if($examlab_feca->remarks_status == 'findings')
             <div class="col-md-6 my-50">
                 <h5><b>Fecalysis</b></h5>
-                <span style="font-size: 12px;">@php echo
-                    nl2br($examlab_feca->remarks) @endphp</span>
+                <span style="font-size: 12px;">@php echo nl2br($examlab_feca->remarks) @endphp</span>
                 <input type="hidden" value="Fecalysis: @php echo nl2br($examlab_feca->remarks) @endphp" name="findings[]" />
             </div>
             @endif

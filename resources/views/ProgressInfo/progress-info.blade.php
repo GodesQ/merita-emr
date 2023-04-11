@@ -44,7 +44,7 @@
         @if (Session::get('success'))
             @push('scripts')
                 <script>
-                    toastr.success('{{ Session::get('success') }}', 'Failed');
+                    toastr.success('{{ Session::get('success') }}', 'Success');
                 </script>
             @endpush
         @endif
