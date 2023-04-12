@@ -378,7 +378,7 @@
                                                     <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
                                                 </td>
                                                 <td valign="top">
-                                                    @if($admission->exam_xray->remarks_status == 'findings')
+                                                    @if($admission->exam_xray->remarks_status == 'findings' && $admission->exam_xray->recommendation)
                                                         <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->remarks_status == 'findings' ? $admission->exam_xray->recommendation : null }}</span>
                                                     @endif
                                                 </td>
@@ -387,7 +387,7 @@
                                     @endif
 
                                     @if($admission->exam_xray)
-                                        @if($admission->exam_xray->exam_type == 'Lumbosacral')
+                                        @if($admission->exam_xray->exam_type == 'Lumbosacral' && $admission->exam_xray->recommendation)
                                             <tr>
                                                 <td valign="top"></td>
                                                 <td valign="top">
@@ -403,7 +403,7 @@
                                     @endif
 
                                     @if($admission->exam_xray)
-                                        @if($admission->exam_xray->exam_type == 'Knees')
+                                        @if($admission->exam_xray->exam_type == 'Knees' && $admission->exam_xray->recommendation)
                                             <tr>
                                                 <td valign="top"></td>
                                                 <td valign="top">
