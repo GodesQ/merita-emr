@@ -60,32 +60,17 @@
                                     <option value="none" selected="" disabled="">Select
                                         Category
                                     </option>
-                                    <option value="DECK SERVICES"
-                                        @php echo $patientCode->
-                                        category ==
-                                        "DECK SERVICES" ? "selected=''" : "" @endphp>
-                                        DECK
-                                        SERVICES
+                                    <option value="DECK SERVICES" {{ $patientCode->category == "DECK SERVICES" ? "selected=''" : "" }}>
+                                        DECK SERVICES
                                     </option>
-                                    <option value="ENGINE SERVICES"
-                                        @php echo $patientCode->
-                                        category
-                                        == "ENGINE SERVICES" ? "selected=''" : "" @endphp>
-                                        ENGINE
-                                        SERVICES</option>
-                                    <option value="CATERING SERVICES"
-                                        @php echo
-                                        $patientCode->
-                                        category
-                                        == "CATERING SERVICES" ? "selected=''" : "" @endphp>
-                                        CATERING
-                                        SERVICES</option>
-                                    <option value="OTHER SERVICES"
-                                        @php echo $patientCode->
-                                        category ==
-                                        "OTHER SERVICES" ? "selected=''" : "" @endphp>
-                                        OTHER
-                                        SERVICES
+                                    <option value="ENGINE SERVICES" {{ $patientCode->category == "ENGINE SERVICES" ? "selected=''" : "" }}>
+                                        ENGINE SERVICES
+                                    </option>
+                                    <option value="CATERING SERVICES" {{ $patientCode->category == "CATERING SERVICES" ? "selected=''" : "" }}>
+                                        CATERING SERVICES
+                                    </option>
+                                    <option value="OTHER SERVICES" {{ $patientCode->category == "OTHER SERVICES" ? "selected=''" : "" }}>
+                                        OTHER SERVICES
                                     </option>
                                 </select>
                             </div>
@@ -113,33 +98,19 @@
                                     Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment1"
-                                            value="Sea-Based" name="employment"
-                                            @php echo
-                                            $patientCode->employment == "Sea-Based" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="employment1">Sea
-                                            Based</label>
+                                        <input type="radio" class="custom-control-input" id="employment1" value="Sea-Based" name="employment"
+                                           {{ $patientCode->employment == "Sea-Based" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="employment1">Sea Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment2"
-                                            name="employment" value="Land-Based"
-                                            @php echo
-                                            $patientCode->employment == "Land-Based" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="employment2">Land
-                                            Based
-                                        </label>
+                                        <input type="radio" class="custom-control-input" id="employment2" name="employment" value="Land-Based"
+                                            {{ $patientCode->employment == "Land-Based" ? "checked" : ""}}>
+                                        <label class="custom-control-label" for="employment2">Land Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment3"
-                                            name="employment" value="Local-Based"
-                                            @php echo
-                                            $patientCode->employment == "Local-Based" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="employment3">Local
-                                            Based
-                                        </label>
+                                        <input type="radio" class="custom-control-input" id="employment3" name="employment" value="Local-Based"
+                                            {{ $patientCode->employment == "Local-Based" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="employment3">Local Based</label>
                                     </div>
                                 </div>
 
@@ -151,25 +122,14 @@
                                     Status</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="emp_status1"
-                                            name="emp_status" value="New Crew"
-                                            @php echo
-                                            $patientCode->emp_status == "New Crew" ?
-                                        "checked"
-                                        :
-                                        "" @endphp>
-                                        <label class="custom-control-label" for="emp_status1">New
-                                            Crew</label>
+                                        <input type="radio" class="custom-control-input" id="emp_status1" name="emp_status" value="New Crew"
+                                            {{ $patientCode->emp_status == "New Crew" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="emp_status1">New Crew</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="emp_status2"
-                                            name="emp_status" value="Ex-Crew"
-                                            @php echo
-                                            $patientCode->emp_status
-                                        == "Ex-Crew" ? "checked" :
-                                        "" @endphp>
-                                        <label class="custom-control-label" for="emp_status2">Ex
-                                            Crew</label>
+                                        <input type="radio" class="custom-control-input" id="emp_status2" name="emp_status" value="Ex-Crew"
+                                            {{ $patientCode->emp_status == "Ex-Crew" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="emp_status2">Ex Crew</label>
                                     </div>
                                 </div>
                             </div>
@@ -178,22 +138,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput2">Admission
-                                    Type</label>
+                                <label class="text-bold-600" for="projectinput2">Admission Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="admit_type1"
-                                            name="admit_type" value="Normal"
-                                            @php echo $patientCode->admit_type == "Normal" ? "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="admit_type1">Regular
-                                            Patient</label>
+                                        <input type="radio" class="custom-control-input" id="admit_type1" name="admit_type" value="Normal"
+                                            {{ $patientCode->admit_type == "Normal" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="admit_type1">Regular Patient</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="admit_type2"
-                                            name="admit_type" value="Rush"
-                                            @php echo $patientCode->admit_type == "Rush" ? "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="admit_type2">Rush
-                                            Patient</label>
+                                        <input type="radio" class="custom-control-input" id="admit_type2" name="admit_type" value="Rush"
+                                            {{ $patientCode->admit_type == "Rush" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="admit_type2">Rush Patient</label>
                                     </div>
                                 </div>
                             </div>
@@ -203,22 +158,14 @@
                                 <label class="text-bold-600" for="projectinput2">Payment Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" name="payment_type"
-                                            id="payment_type3" value="Applicant Paid"
-                                            @php echo
-                                            $patientCode->payment_type == "Applicant Paid" ?
-                                        "checked" : "" @endphp>
+                                        <input type="radio" class="custom-control-input" name="payment_type" id="payment_type3" value="Applicant Paid"
+                                            {{ $patientCode->payment_type == "Applicant Paid" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="payment_type3">Applicant Paid</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="payment_type4"
-                                            name="payment_type" value="Billed"
-                                            @php echo
-                                            $patientCode->payment_type
-                                        == "Billed" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label" for="payment_type4">Billed to
-                                            Agency</label>
+                                        <input type="radio" class="custom-control-input" id="payment_type4" name="payment_type" value="Billed"
+                                            {{ $patientCode->payment_type == "Billed" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="payment_type4">Billed to Agency</label>
                                     </div>
                                 </div>
                             </div>
@@ -226,15 +173,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Last Medical in Merita</label>
-                                <input type="text" id="projectinput1" class="form-control"
-                                    value="{{ $patientCode->last_medical }}" name="last_medical">
+                                <input type="text" id="projectinput1" class="form-control" value="{{ $patientCode->last_medical }}" name="last_medical">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Principal</label>
-                                <input type="text" id="projectinput1" class="form-control"
-                                    value="{{ $patientCode->principal }}" name="principal">
+                                <input type="text" id="projectinput1" class="form-control" value="{{ $patientCode->principal }}" name="principal">
                             </div>
                         </div>
                         <div class="col-md-6">

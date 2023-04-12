@@ -2560,8 +2560,8 @@
                                             style="margin-top: 1rem;">
                                             <tbody>
                                                 <tr>
-                                                    <td>Surname: <span>{{$admission->lastname}}</span></td>
-                                                    <td colspan="2">Given Name(s): <span>{{$admission->firstname}}</span></td>
+                                                    <td>Surname: <span>{{ $admission->patient->lastname }}</span></td>
+                                                    <td colspan="2">Given Name(s): <span>{{ $admission->patient->firstname }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Date of Birth (dd/mm/yyyy): <span>{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}</span></td>
