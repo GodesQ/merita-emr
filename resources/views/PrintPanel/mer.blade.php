@@ -1544,7 +1544,7 @@
                                                                                                 <td width="11%">
                                                                                                     Corrected</td>
                                                                                                 <td>OD <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cfvod : null }}</b></td>
-                                                                                                <td>OS <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cfvod : null }}</b></td>
+                                                                                                <td>OS <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cfvos : null }}</b></td>
                                                                                                 <td>ODJ <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cnvodj : null }}</b></td>
                                                                                                 <td>OSJ <b>{{ $admission->exam_visacuity ? $admission->exam_visacuity->cnvosj : null }}</b></td>
                                                                                                 <td align="center">
