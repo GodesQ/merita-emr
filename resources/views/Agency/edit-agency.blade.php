@@ -102,21 +102,14 @@
                                                     <label for="">Arrangement Type</label><br>
                                                     <div class="my-1">
                                                         <div class="d-inline-block custom-control custom-radio mr-1">
-                                                            <input required type="radio" class="custom-control-input"
-                                                                name="arrangement_type" id="radio1" value="Cash" @php
-                                                                echo $agency->arrangement_type == "Cash" ? "checked" : "
-                                                            " @endphp>
-                                                            <label class="custom-control-label"
-                                                                for="radio1">Cash</label>
+                                                            <input required type="radio" class="custom-control-input"name="arrangement_type" id="radio1"
+                                                            value="Cash" {{ $agency->arrangement_type == "Cash" ? "checked" : "" }}>
+                                                            <label class="custom-control-label"for="radio1">Cash</label>
                                                         </div>
                                                         <div class="d-inline-block custom-control custom-radio mr-1">
-                                                            <input required type="radio" class="custom-control-input"
-                                                                name="arrangement_type" id="radio2" @php echo
-                                                                $agency->arrangement_type == "Charge" ? "checked" : "
-                                                            " @endphp
-                                                            value="Charge">
-                                                            <label class="custom-control-label"
-                                                                for="radio2">Charge</label>
+                                                            <input required type="radio" class="custom-control-input" name="arrangement_type" id="radio2"
+                                                            {{ $agency->arrangement_type == "Charge" ? "checked" : "" }} value="Charge">
+                                                            <label class="custom-control-label" for="radio2">Charge</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -125,15 +118,13 @@
                                         <div class="col-md-1">
                                             <div class="form-group">
                                                 <label for="">Commission (%)</label>
-                                                <input type="text" class="form-control" name="commission"
-                                                    value="{{$agency->commission}}">
+                                                <input type="text" class="form-control" name="commission" value="{{$agency->commission}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Registered at</label>
-                                                <input class="form-control" type="text" name="updated_at" value="@php echo date('Y-m-d');
-                                    @endphp" readonly>
+                                                <input class="form-control" type="text" name="updated_at" value="@php echo date('Y-m-d'); @endphp" readonly>
                                             </div>
                                         </div>
                                     </div>

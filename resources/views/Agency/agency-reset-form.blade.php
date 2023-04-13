@@ -69,34 +69,24 @@
                                             <h2>Change Agency Password</h2>
                                             <form class="form-horizontal" action="/update_agency_password" method="POST">
                                                 @if(Session::get('fail'))
-                                                <div class="alert alert-danger">
-                                                    {{Session::get('fail')}}
-                                                </div>
+                                                    <div class="alert alert-danger">
+                                                        {{Session::get('fail')}}
+                                                    </div>
                                                 @endif
                                                 @csrf
                                                 <input type="hidden" value='{{$id}}' name="agency_id">
                                                 <input type="hidden" value='{{$email}}' name="email">
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="password" name="password" class="form-control"
-                                                        id="user-password" placeholder="Enter Password">
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-key"></i>
-                                                    </div>
-                                                    <span
-                                                        class="danger text-danger">@error('password'){{$message}}@enderror</span>
+                                                    <input type="password" name="password" class="form-control" id="user-password" placeholder="Enter Password">
+                                                    <div class="form-control-position"><i class="fa fa-key"></i></div>
+                                                    <span class="danger text-danger">@error('password'){{$message}}@enderror</span>
                                                 </fieldset>
                                                 <fieldset class="form-group position-relative has-icon-left">
-                                                    <input type="password" name="password_confirmation"
-                                                        class="form-control" id="user-password"
-                                                        placeholder="Confirm Password">
-                                                    <div class="form-control-position">
-                                                        <i class="fa fa-key"></i>
-                                                    </div>
-                                                    <span
-                                                        class="danger text-danger">@error('password_confirmation'){{$message}}@enderror</span>
+                                                    <input type="password" name="password_confirmation" class="form-control" id="user-password" placeholder="Confirm Password">
+                                                    <div class="form-control-position"><i class="fa fa-key"></i></div>
+                                                    <span class="danger text-danger">@error('password_confirmation'){{$message}}@enderror</span>
                                                 </fieldset>
-                                                <button type="submit" class="btn btn-primary btn-block registerbtn"><i
-                                                        class="feather icon-user"></i> Reset Password</button>
+                                                <button type="submit" class="btn btn-primary btn-block registerbtn"><i class="feather icon-user"></i> Reset Password</button>
                                             </form>
                                             <div class="card-body">
                                                 <a href="/agency-login" class="loginbtn">Login Now</a>

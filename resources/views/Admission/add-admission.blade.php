@@ -53,26 +53,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600"
-                                    for="admission_category">Category</label>
+                                <label class="text-bold-600"for="admission_category">Category</label>
                                 <select id="admission_category" onchange="isOtherServices(this)" name="category"
                                     class="form-control">
                                     <option value="none" selected="" disabled="">Select
                                         Category
                                     </option>
-                                    <option value="DECK SERVICES" @php echo $patientInfo->
-                                        category == "DECK SERVICES" ? "selected" : null
-                                        @endphp>DECK SERVICES</option>
-                                    <option value="ENGINE SERVICES" @php echo $patientInfo->
-                                        category == "ENGINE SERVICES" ? "selected" : null
-                                        @endphp>ENGINE SERVICES</option>
-                                    <option value="CATERING SERVICES" @php echo
-                                        $patientInfo->
-                                        category == "CATERING SERVICES" ?
-                                        "selected" : null @endphp>CATERING SERVICES</option>
-                                    <option value="OTHER SERVICES" @php echo $patientInfo->
-                                        category == "OTHER SERVICES" ? "selected" : null
-                                        @endphp>OTHER SERVICES</option>
+                                    <option value="DECK SERVICES" {{ $patientInfo->category == "DECK SERVICES" ? "selected" : null }}>DECK SERVICES</option>
+                                    <option value="ENGINE SERVICES" {{ $patientInfo->category == "ENGINE SERVICES" ? "selected" : null }}>ENGINE SERVICES</option>
+                                    <option value="CATERING SERVICES" {{ $patientInfo->category == "CATERING SERVICES" ? "selected" : null }}>CATERING SERVICES</option>
+                                    <option value="OTHER SERVICES" {{ $patientInfo->category == "OTHER SERVICES" ? "selected" : null }}>OTHER SERVICES</option>
                                 </select>
                             </div>
                             <div class="form-group other-specify-con">
@@ -83,12 +73,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label class="text-bold-600"
-                                        for="companyName">Position</label>
-                                    <input type="text"
-                                        value="{{$patient->position_applied}}"
-                                        id="companyName" class="form-control"
-                                        placeholder="Position" name="position">
+                                    <label class="text-bold-600" for="position">Position</label>
+                                    <input type="text" value="{{$patient->position_applied}}" id="position" class="form-control" placeholder="Position" name="position">
                                 </div>
                             </div>
                         </div>
@@ -96,37 +82,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput2">Employment
-                                    Type</label>
+                                <label class="text-bold-600" for="projectinput2">Employment Type</label>
                                 <div class="container-fluid ">
                                     <div
                                         class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="employment1" value="Sea-Based"
-                                            name="employment">
-                                        <label class="custom-control-label"
-                                            for="employment1">Sea
-                                            Based</label>
+                                        <input type="radio" class="custom-control-input" id="employment1" value="Sea-Based" name="employment">
+                                        <label class="custom-control-label" for="employment1">Sea Based</label>
                                     </div>
                                     <div
                                         class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="employment2" name="employment"
-                                            value="Land-Based">
-                                        <label class="custom-control-label"
-                                            for="employment2">Land
-                                            Based
-                                        </label>
+                                        <input type="radio" class="custom-control-input" id="employment2" name="employment" value="Land-Based">
+                                        <label class="custom-control-label" for="employment2">Land Based</label>
                                     </div>
-                                    <div
-                                        class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="employment3" name="employment"
-                                            value="Local-Based">
-                                        <label class="custom-control-label"
-                                            for="employment3">Local
-                                            Based
-                                        </label>
+                                    <div class="d-inline-block custom-control custom-radio mr-1">
+                                        <input type="radio" class="custom-control-input" id="employment3" name="employment" value="Local-Based">
+                                        <label class="custom-control-label" for="employment3">Local Based</label>
                                     </div>
                                 </div>
 
@@ -134,26 +104,17 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput2">Employment
-                                    Status</label>
-                                <div class="container-fluid ">
+                                <label class="text-bold-600" for="projectinput2">Employment Status</label>
+                                <div class="container-fluid">
                                     <div
                                         class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="emp_status1" name="emp_status"
-                                            value="New Crew">
-                                        <label class="custom-control-label"
-                                            for="emp_status1">New
-                                            Crew</label>
+                                        <input type="radio" class="custom-control-input" id="emp_status1" name="emp_status" value="New Crew">
+                                        <label class="custom-control-label" for="emp_status1">New Crew</label>
                                     </div>
                                     <div
                                         class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="emp_status2" name="emp_status"
-                                            value="Ex-Crew">
-                                        <label class="custom-control-label"
-                                            for="emp_status2">Ex
-                                            Crew</label>
+                                        <input type="radio" class="custom-control-input" id="emp_status2" name="emp_status" value="Ex-Crew">
+                                        <label class="custom-control-label" for="emp_status2">Ex Crew</label>
                                     </div>
                                 </div>
                             </div>
@@ -165,56 +126,32 @@
                                 <label class="text-bold-600" for="projectinput2">Admission
                                     Type</label>
                                 <div class="container-fluid ">
-                                    <div
-                                        class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="admit_type1" name="admit_type"
-                                            value="Normal" @php echo
-                                            $patientInfo->admission_type
-                                        == "Normal" ? "checked" : ""
-                                        @endphp>
-                                        <label class="custom-control-label"
-                                            for="admit_type1">Regular
-                                            Patient</label>
+                                    <div class="d-inline-block custom-control custom-radio mr-1">
+                                        <input type="radio" class="custom-control-input" id="admit_type1" name="admit_type"
+                                         value="Normal" {{ $patientInfo->admission_type == "Normal" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="admit_type1">Regular Patient</label>
                                     </div>
-                                    <div
-                                        class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="admit_type2" name="admit_type" value="Rush"
-                                            @php echo $patientInfo->admission_type == "Rush"
-                                        ?
-                                        "checked" : ""
-                                        @endphp>
-                                        <label class="custom-control-label"
-                                            for="admit_type2">Rush
-                                            Patient</label>
+                                    <div class="d-inline-block custom-control custom-radio mr-1">
+                                        <input type="radio" class="custom-control-input" id="admit_type2" name="admit_type"
+                                        value="Rush" {{ $patientInfo->admission_type == "Rush" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="admit_type2">Rush Patient</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold-600" for="projectinput2">Payment
-                                    Type</label>
-                                <div class="container-fluid ">
+                                <label class="text-bold-600" for="projectinput2">Payment Type</label>
+                                <div class="container-fluid">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            name="payment_type" id="payment_type3"
-                                            value="Applicant Paid" @php echo
-                                            $patientInfo->payment_type == "Applicant Paid" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label"
-                                            for="payment_type3">Applicant Paid</label>
+                                        <input type="radio" class="custom-control-input" name="payment_type" id="payment_type3"
+                                        value="Applicant Paid" {{ $patientInfo->payment_type == "Applicant Paid" ? "checked" : "" }}>
+                                        <label class="custom-control-label"for="payment_type3">Applicant Paid</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input"
-                                            id="payment_type4" name="payment_type"
-                                            value="Billed" @php echo
-                                            $patientInfo->payment_type
-                                        == "Billed" ?
-                                        "checked" : "" @endphp>
-                                        <label class="custom-control-label"
-                                            for="payment_type4">Billed to Agency</label>
+                                        <input type="radio" class="custom-control-input" id="payment_type4" name="payment_type"
+                                        value="Billed" {{ $patientInfo->payment_type == "Billed" ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="payment_type4">Billed to Agency</label>
                                     </div>
                                 </div>
                             </div>
@@ -222,15 +159,13 @@
                         <div class="col-md-6 my-1">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Last Medical in Merita</label>
-                                <input type="text" id="projectinput1" class="form-control"
-                                    value="" name="last_medical">
+                                <input type="text" id="projectinput1" class="form-control" value="" name="last_medical">
                             </div>
                         </div>
                         <div class="col-md-6 my-1">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Principal</label>
-                                <input type="text" id="projectinput1" class="form-control"
-                                    value="{{$patientInfo->principal}}" name="principal">
+                                <input type="text" id="projectinput1" class="form-control" value="{{$patientInfo->principal}}" name="principal">
                             </div>
                         </div>
                         <div class="col-md-6">

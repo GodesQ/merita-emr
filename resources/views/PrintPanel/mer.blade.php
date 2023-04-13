@@ -205,11 +205,9 @@
                                                                 <td>POSITION APPLIED FOR:<br>
                                                                     <b>DECK</b>&nbsp;&nbsp;&nbsp;
                                                                     @if ($admission->category == 'DECK SERVICES')
-                                                                        <img src="../../../app-assets/images/icoCheck.gif"
-                                                                            width="10">
+                                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                     @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
+                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                     @endif&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <b>ENGINE</b>&nbsp;&nbsp;&nbsp;
                                                                     @if ($admission->category == 'ENGINE SERVICES')

@@ -417,13 +417,13 @@
                                                     <td width="3%" valign="middle">NO</td>
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
-                                                        @if ($admission->exam_physical->duty == 'Unfit')
-                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @if ($admission->exam_physical->duty == 'Unfit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
                                                         @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                        @endif
-                                                        @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -443,12 +443,11 @@
                                                     <td width="4%" valign="middle">YES</td>
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
-                                                        @if (preg_match('/Without Restriction/i',
-                                                        $admission->exam_physical->restriction))
-                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                        @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                        @endif
+                                                            @if (preg_match('/Without Restriction/i', $admission->exam_physical->restriction))
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
                                                         @else
                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                         @endif
@@ -456,14 +455,13 @@
                                                     <td width="3%" valign="middle">NO</td>
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
-                                                        @if (!preg_match('/Without Restriction/i',
-                                                        $admission->exam_physical->restriction))
-                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @if (!preg_match('/Without Restriction/i', $admission->exam_physical->restriction))
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
                                                         @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                        @endif
-                                                        @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -522,29 +520,27 @@
                                                             <tr>
                                                                 <td colspan="2">THIS IS TO CERTIFY THAT A MEDICAL AND
                                                                     PHYSICAL EXAMINATION WAS GIVEN TO: <br>
-                                                                    <span class="fontBoldLrg"><u>{{$admission->patient->lastname}},
-                                                                            {{$admission->patient->firstname}}
-                                                                            {{$admission->patient->middlename}}</u></span><br>
+                                                                    <span class="fontBoldLrg"><u>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span style="margin-right: 8rem;">RESULT:</span>
                                                                         FIT FOR SEA DUTY
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->fit == 'Fit')
-                                                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @if ($admission->exam_physical->fit == 'Fit')
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
                                                                         @else
                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT FOR SEA DUTY
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT FOR SEA DUTY
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->fit == 'Unfit')
-                                                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
+                                                                            @if($admission->exam_physical->fit == 'Unfit')
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
                                                                         @else
                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif

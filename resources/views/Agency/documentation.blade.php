@@ -63,27 +63,6 @@
                                         How to Add Referral Slip
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link d-flex" id="account-pill-social" data-toggle="pill"
-                                        href="#account-vertical-social" aria-expanded="false">
-                                        <i class="feather icon-camera"></i>
-                                        Social links
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex" id="account-pill-connections" data-toggle="pill"
-                                        href="#account-vertical-connections" aria-expanded="false">
-                                        <i class="feather icon-feather"></i>
-                                        Connections
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex" id="account-pill-notifications" data-toggle="pill"
-                                        href="#account-vertical-notifications" aria-expanded="false">
-                                        <i class="feather icon-message-circle"></i>
-                                        Notifications
-                                    </a>
-                                </li> -->
                             </ul>
                         </div>
                         <!-- right content section -->
@@ -252,7 +231,7 @@
                                                                         <b>HOLD REFERRAL SLIP =></b>  It means that a referral slip of an employee has an issue or problem, so that the patient is not eligible to register in MERITA EMR.
                                                                     </li>
                                                                     <li>
-                                                                        Once you click hold referral slip, The Patient that you click hold button and Merita will be emailed that this referral slip is hold, 
+                                                                        Once you click hold referral slip, The Patient that you click hold button and Merita will be emailed that this referral slip is hold,
                                                                         and also the specific row of patient will be grayed out.
                                                                     </li>
                                                                 </ul>
@@ -267,7 +246,7 @@
                                                                         <b>ACTIVATE REFERRAL SLIP =></b>  It means that a referral slip of employees is acceptable, so that patient is now applicable to register in MERITA EMR.
                                                                     </li>
                                                                     <li>
-                                                                        Once you click activate referral slip, The patient that you click activate button and Merita Clinic will be emailed that a specified referral slip of patient is activated, 
+                                                                        Once you click activate referral slip, The patient that you click activate button and Merita Clinic will be emailed that a specified referral slip of patient is activated,
                                                                         and the specific row of patient will back into a normal row.
                                                                     </li>
                                                                 </ul>
@@ -293,7 +272,7 @@
                                                                 </div>
                                                                 <div class="col-md-12 my-1">
                                                                     <p>The image below is the form of a referral slip.</p>
-                                                                    <img class="img-fluid" src="../../../app-assets/images/gallery/referral_form.png"  alt="hold button" />  
+                                                                    <img class="img-fluid" src="../../../app-assets/images/gallery/referral_form.png"  alt="hold button" />
                                                                     <p>After the requestor fills out all required inputs, click Save Button to save and send an email with an information of all data, based on the form submitted by the requestor and an attachment of a Printable PDF of Referral Slip to MERITA email and the Employee email. </p>
                                                                 </div>
                                                             </div>

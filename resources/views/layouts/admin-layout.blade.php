@@ -214,56 +214,57 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light navbar-shadow">
-        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 container center-layout"><span
-                class="float-md-left d-block d-md-inline-block">Copyright &copy; 2022 <a
-                    class="text-bold-800 grey darken-2" href="https://meritaclinic.ph" target="_blank">Merita
-                    Diagnostics Clinic, Inc </a></span><span class="float-md-right d-none d-lg-block">Designed &
-                Developed by: <a href="https://godesq.com/" target="_blank">GodesQ Digital Marketing Services</a></span>
+        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 container center-layout">
+            <span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2022
+                <a class="text-bold-800 grey darken-2" href="https://meritaclinic.ph" target="_blank">Merita Diagnostics Clinic, Inc </a>
+            </span>
+            <span class="float-md-right d-none d-lg-block">Designed & Developed by:
+                <a href="https://godesq.com/" target="_blank">GodesQ Digital Marketing Services</a>
+            </span>
         </p>
     </footer>
     <!-- END: Footer-->
 
 
     <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/ui/scrollable.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
-    <script src="../../../app-assets/js/scripts/forms/checkbox-radio.js"></script>
-    <script src="../../../app-assets/js/scripts/modal/components-modal.js"></script>
-    <script src="../../../app-assets/js/scripts/extensions/toastr.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-    <script src="../../../app-assets/js/scripts/forms/select/form-select2.js"></script>
-    <script src="../../../app-assets/js/scripts/navs/navs.js"></script>
+    <script src="{{ asset('app-assets/js/scripts/ui/scrollable.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/icheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/checkbox-radio.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/modal/components-modal.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/extensions/toastr.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/navs/navs.js') }}"></script>
     <!-- END: Page JS-->
-    <script src="../../../app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/toggle/switchery.min.js"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../../app-assets/js/scripts/pages/app-invoice.js"></script>
+    <script src="{{ asset('app-assets/js/scripts/pages/app-invoice.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/moment.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/fullcalendar.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/daygrid.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/timegrid.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/interactions.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/dropzone.min.js"></script>
-    <script src="../../../app-assets/js/scripts/extensions/dropzone.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/toggle/switchery.min.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
-    <script src="../../../app-assets/js/scripts/pages/app-invoice.js"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/moment.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/daygrid.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/timegrid.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/interactions.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/extensions/dropzone.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
 
     <script>
 

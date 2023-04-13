@@ -95,12 +95,14 @@
                                     <td>2.3</td>
                                     <td>Gender:</td>
                                     <td colspan="2">
-                                        Male <span>
+                                        Male
+                                        <span>
                                             @if ($admission->patient->gender == "Male")
-                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                             @else
-                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                            @endif</span>
+                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                            @endif
+                                        </span>
                                         Female <span>
                                             @if ($admission->patient->gender == "Female")
                                             <img src="../../../app-assets/images/icoCheck.gif" width="10">
@@ -125,7 +127,7 @@
                                     <td colspan="3">Department: Rank: <br>
                                         <span class="fontBoldLrg"></span>
                                     </td>
-                                    <td colspan="3">Job: <span class="fontBoldLrg">{{$admission->position}}</span></td>
+                                    <td colspan="3">Job: <span class="fontBoldLrg">{{ $admission->position }}</span></td>
                                 </tr>
                                 <tr>
                                     <td>3.0</td>
