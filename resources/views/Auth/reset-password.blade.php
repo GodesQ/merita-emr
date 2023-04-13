@@ -75,8 +75,7 @@
                                                 @endif
                                                 @csrf
                                                 <input type="hidden" name="verify_token" value="{{ $token }}">
-                                                <input type="hidden" name="classification"
-                                                    value="{{ $classification }}">
+                                                <input type="hidden" name="classification" value="{{ $classification }}">
                                                 <fieldset class="form-group position-relative has-icon-left">
                                                     <input type="email" name="email" class="form-control"
                                                         id="user-email" placeholder="Your Email Address">
