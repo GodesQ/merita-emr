@@ -58,6 +58,7 @@ class ForgetPasswordController extends Controller
     }
 
     public function submit_reset_form(Request $request) {
+
         $AGENCY_WORD = 'agency';
         if($request->classification == $AGENCY_WORD) {
             $request->validate([
@@ -77,7 +78,7 @@ class ForgetPasswordController extends Controller
 
         if($exist_email_and_token) {
             if($request->classification == "patient") {
-                $patient = Patient::where('email', $request->email)->update(['password' => Hash::make($request->password), 'isVerify' => 1]);;
+                $patient = Patient::where('email', $request->email)->update(['password' => Hash::make($request->password), 'isVerify' => 1]);
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
                 return redirect('/login')->with('success', 'Your password has been changed!');
             }
@@ -88,6 +89,7 @@ class ForgetPasswordController extends Controller
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
                 if($save_password) return redirect('/agency-login')->with('success', 'Your password has been changed!');
             }
+
         }else {
             return back()->with('fail', 'Invalid Token');
         }

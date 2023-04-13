@@ -21,7 +21,7 @@ class AgencyAuthController extends Controller
 
         if (!$agency) return back()->with('fail', 'The email you entered is incorrect. Please check and try again.');
 
-        if (!Hash::check($request->password, $agency->password) || !Hash::check($request->password, $agency->ad_password)) return back()->with('fail', 'The password you entered is incorrect. Please check and try again.');
+        if (!Hash::check($request->password, $agency->password)) return back()->with('fail', 'The password you entered is incorrect. Please check and try again.');
 
         $request->session()->put([
             'classification' => 'agency',
@@ -85,6 +85,7 @@ class AgencyAuthController extends Controller
 
     public function update_agency_password(Request $request) {
         try {
+
             $request->validate([
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
