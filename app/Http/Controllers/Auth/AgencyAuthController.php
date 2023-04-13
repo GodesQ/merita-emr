@@ -34,7 +34,6 @@ class AgencyAuthController extends Controller
             'end_date' => null,
         ]);
 
-        $data = session()->all();
         if ($agency->not_first == 0) return redirect('/change_password');
         return redirect('/agency_dashboard');
     }

@@ -73,9 +73,9 @@ class ForgetPasswordController extends Controller
             ]);
         }
 
-        $updatePassword = DB::table('forget_passwords')->where(['email' => $request->email, 'token' => $request->verify_token])->first();
+        $exist_email_and_token = DB::table('forget_passwords')->where(['email' => $request->email, 'token' => $request->verify_token])->first();
 
-        if($updatePassword) {
+        if($exist_email_and_token) {
             if($request->classification == "patient") {
                 $patient = Patient::where('email', $request->email)->update(['password' => Hash::make($request->password), 'isVerify' => 1]);;
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
@@ -86,9 +86,7 @@ class ForgetPasswordController extends Controller
                 $agency = Agency::where('email', $request->email)->first();
                 $save_password = $agency->update(['password' => Hash::make($request->password)]);
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
-                if($agency) {
-                    return redirect('/agency-login')->with('success', 'Your password has been changed!');
-                }
+                if($save_password) return redirect('/agency-login')->with('success', 'Your password has been changed!');
             }
         }else {
             return back()->with('fail', 'Invalid Token');
