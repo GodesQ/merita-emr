@@ -25,7 +25,7 @@ class ForgetPasswordController extends Controller
     }
 
     public function submit_forget_form(Request $request) {
-        
+
         $AGENCY_WORD = 'agency';
         if($request->classification == $AGENCY_WORD) {
             $request->validate([
@@ -36,14 +36,14 @@ class ForgetPasswordController extends Controller
                 "email" => "required|email|exists:mast_patient"
             ]);
         }
-        
-        
+
+
         $token = Str::random(64);
 
         DB::table('forget_passwords')->insert([
-            'email' => $request->email, 
-            'token' => $token, 
-            'classification' => $request->classification, 
+            'email' => $request->email,
+            'token' => $token,
+            'classification' => $request->classification,
             'date' => date("Y-m-d")
           ]);
 
@@ -58,7 +58,7 @@ class ForgetPasswordController extends Controller
     }
 
     public function submit_reset_form(Request $request) {
-        
+
         $AGENCY_WORD = 'agency';
         if($request->classification == $AGENCY_WORD) {
             $request->validate([
@@ -73,24 +73,20 @@ class ForgetPasswordController extends Controller
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
         }
-       
 
-        $updatePassword = DB::table('forget_passwords')->where([
-                                'email' => $request->email, 
-                                'token' => $request->verify_token
-                              ])
-                              ->first();
+        $updatePassword = DB::table('forget_passwords')->where(['email' => $request->email, 'token' => $request->verify_token])->first();
 
         if($updatePassword) {
             if($request->classification == "patient") {
                 $patient = Patient::where('email', $request->email)->update(['password' => Hash::make($request->password), 'isVerify' => 1]);;
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
                 return redirect('/login')->with('success', 'Your password has been changed!');
-            } 
+            }
             else if($request->classification == "agency") {
-                $patient = Agency::where('email', $request->email)->update(['password' => Hash::make($request->password)]);;
+                $agency = Agency::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
-                return redirect('/agency-login')->with('success', 'Your password has been changed!');
+                if($agency) return redirect('/agency-login')->with('success', 'Your password has been changed!');
+
             }
         }else {
             return back()->with('fail', 'Invalid token');

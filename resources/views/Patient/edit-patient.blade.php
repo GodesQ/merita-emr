@@ -1516,21 +1516,21 @@
                                     @endif
                                 @endif
                                 @if($patientCode)
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
-                                        aria-expanded="false" href="#account-vertical-info">
-                                        <i class="feather icon-edit"></i>
-                                        Edit Admission
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
+                                            aria-expanded="false" href="#account-vertical-info">
+                                            <i class="feather icon-edit"></i>
+                                            Edit Admission
+                                        </a>
+                                    </li>
                                 @else
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
-                                        aria-expanded="false" href="#account-vertical-info">
-                                        <i class="feather icon-edit"></i>
-                                        Add Admission
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
+                                            aria-expanded="false" href="#account-vertical-info">
+                                            <i class="feather icon-edit"></i>
+                                            Add Admission
+                                        </a>
+                                    </li>
                                 @endif
                                 <li class="nav-item">
                                     <a class="nav-link d-flex text-white" id="account-vaccination-record" data-toggle="pill"

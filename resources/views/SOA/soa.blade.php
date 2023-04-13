@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <div class="form-group ">
+                                            <div class="form-group">
                                                 <label for="">Exchange Rate</label>
                                                 <input type="text" name="exchange_rate" id="exchange_rate" class="form-control" value="">
                                             </div>

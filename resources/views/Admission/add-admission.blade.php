@@ -23,16 +23,11 @@
                 @csrf
                 <input type="hidden" name="patient_id" value="{{$patient->id}}">
                 <div class="d-none">
-                    <input type="date" max="2050-12-31" name="trans_date" id="" hidden value="<?php echo date(
-                    'Y-m-d'
-                ); ?>">
-                    <input type="hidden" name="package_id"
-                        value="{{$patientInfo->medical_package}}">
-                    <input type="hidden" name="agency_id"
-                        value="{{$patientInfo->agency_id}}">
+                    <input type="date" max="2050-12-31" name="trans_date" id="" hidden value="<?php echo date('Y-m-d'); ?>">
+                    <input type="hidden" name="package_id" value="{{$patientInfo->medical_package}}">
+                    <input type="hidden" name="agency_id" value="{{$patientInfo->agency_id}}">
                     <input type="hidden" name="vessel" value="{{$patientInfo->vessel}}">
-                    <input type="hidden" name="country_destination"
-                        value="{{$patientInfo->country_destination}}">
+                    <input type="hidden" name="country_destination" value="{{$patientInfo->country_destination}}">
                 </div>
                 <div class="form-body">
                     <div class="row">

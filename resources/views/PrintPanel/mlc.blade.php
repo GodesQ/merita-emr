@@ -44,12 +44,13 @@
                                 <td width="396" rowspan="3" align="center" valign="center">
                                     <span class="lblCompName" style="font-size: 30px; font-weight: 800;font-family: serif; color: #156f29">MERITA DIAGNOSTIC CLINIC INC.</span><br
                                         style="margin-bottom: 20px">
-                                    <div style="color: #156f29; font-size: 10px;">5th Flr Jettac Building., #920 Pres. Quirino Ave.
-                                            corner San Antonio St. Malate, Manila, Philippines<br>
-                                                Tel Nos.: (632) 8404-3411 / (633) 7003-0403 * Cell No.: +63917 857-6942 / +63908 890-8850<br>
-                                                Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
-                                                Accredited: DOH (RLS 13-026-2123-MF-2) &#8226; POEA &#8226; MARINA Global Group ISO 9001:2015<br>Skuld
-                                                P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority </div>
+                                    <div style="color: #156f29; font-size: 10px;">
+                                        5th Flr Jettac Building., #920 Pres. Quirino Ave.
+                                        corner San Antonio St. Malate, Manila, Philippines<br>
+                                        Tel Nos.: (632) 8404-3411 / (633) 7003-0403 * Cell No.: +63917 857-6942 / +63908 890-8850<br>
+                                        Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
+                                        Accredited: DOH (RLS 13-026-2123-MF-2) &#8226; POEA &#8226; MARINA Global Group ISO 9001:2015<br>Skuld
+                                        P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority</div>
                                 </td>
                             </tr>
                         </tbody>
