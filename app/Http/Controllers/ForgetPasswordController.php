@@ -83,7 +83,9 @@ class ForgetPasswordController extends Controller
             }
 
             if($request->classification == "agency") {
-                $agency = Agency::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+                $agency = Agency::where('email', $request->email)->first();
+                dd($agency);
+                $save_password = $agency->update(['password' => Hash::make($request->password)]);
                 DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
                 if($agency) {
                     return redirect('/agency-login')->with('success', 'Your password has been changed!');
