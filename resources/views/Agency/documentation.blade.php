@@ -82,8 +82,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="align-self-center">
-                                                                                    <i
-                                                                                        class="icon-question white font-large-2 float-left"></i>
+                                                                                    <i class="icon-question white font-large-2 float-left"></i>
                                                                                 </div>
                                                                                 <div
                                                                                     class="media-body white text-right">

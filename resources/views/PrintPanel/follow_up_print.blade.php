@@ -36,6 +36,7 @@
        margin: 0px 28px;
     }
     </style>
+
 </head>
 <body>
     <div style="min-height: 100vh; margin: 0; max-height: 200vh;">
@@ -297,19 +298,24 @@
                                             </tr>
                                         @endif
                                     @endif
-
-                                    @foreach($results as $result)
+                                    <?php $drag_count = 1; ?>
+                                    @foreach($results as $key => $result)
                                         <tr style="height:40px">
                                             <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
-                                            <td valign="top">
-                                                @php echo nl2br($result['Findings']) @endphp
+                                            <td valign="top"  class="drag">
+                                                <div class="drag" draggable="true" id="cell-finding-{{ $key }}">
+                                                    @php echo nl2br($result['Findings']) @endphp
+                                                </div>
                                             </td>
-                                            <td valign="top">
-                                                @if(isset($result['Recommendation']))
-                                                    @if(!preg_match('/X Ray:/i', $result['Recommendation']))
-                                                        @php echo nl2br($result['Recommendation']) @endphp
+
+                                            <td valign="top" class="drag">
+                                                <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
+                                                    @if(isset($result['Recommendation']))
+                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']))
+                                                            @php echo nl2br($result['Recommendation']) @endphp
+                                                        @endif
                                                     @endif
-                                                @endif
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -668,9 +674,9 @@
             while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 850 ? 1 : 0]) {
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
-                                    <td valign="top">&nbsp;</td>
-                                    <td valign="top">&nbsp;</td>
-                                    <td valign="top">&nbsp;</td>
+                                    <td valign="top"><div>&nbsp;</div></td>
+                                    <td valign="top"><div>&nbsp;</div></td>
+                                    <td valign="top"><div >&nbsp;</div></td>
                                 </tr>`;
                 tableTbody.append(tr);
                 if(mainTable.clientHeight > maximumSize) {
@@ -683,14 +689,52 @@
             while(secondTable.clientHeight <= secondMaxSize) {
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td><div>&nbsp;</div></td>
+                                    <td><div>&nbsp;</div></td>
+                                    <td><div>&nbsp;</div></td>
                                 </tr>`;
                 if(secondTable.clientHeight <= secondMaxSize) {
                     secondTableTbody.append(tr);
                 }
             }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        // Get all the data cells in the table
+        var cells = document.querySelectorAll('.drag');
+        // Loop through each cell and add event listeners for drag and drop
+        for (var i = 0; i < cells.length; i++) {
+        cells[i].addEventListener('dragstart', drag);
+        cells[i].addEventListener('dragover', allowDrop);
+        cells[i].addEventListener('drop', drop);
+        }
+
+        function drag(event) {
+        // Set the data being dragged to the ID of the cell being dragged
+        event.dataTransfer.setData('text', event.target.id);
+        // Add a class to the cell being dragged for visual feedback
+        event.target.classList.add('dragging');
+        }
+
+        function drop(event) {
+        // Prevent the default behavior of the browser when dragging and dropping
+        event.preventDefault();
+
+        // Get the ID of the cell being dropped
+        var data = event.dataTransfer.getData('text');
+
+        // Move the cell being dragged to the new location
+        event.target.appendChild(document.getElementById(data));
+
+        // Remove the dragging class from the cell being dragged
+        document.getElementById(data).classList.remove('dragging');
+        }
+
+        function allowDrop(event) {
+        // Prevent the default behavior of the browser when dragging and dropping
+        event.preventDefault();
         }
 
     </script>
