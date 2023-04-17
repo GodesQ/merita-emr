@@ -303,7 +303,7 @@
                                         <tr style="height:40px">
                                             <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
                                             <td valign="top"  class="drag">
-                                                <div class="drag" draggable="true" id="cell-finding-{{ $key }}">
+                                                <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
                                                     @php echo nl2br($result['Findings']) @endphp
                                                 </div>
                                             </td>
@@ -671,17 +671,21 @@
             let mainTable = document.querySelector('.main-table');
             let tableTbody = document.querySelector('.findings-table').children[0];
 
+            let drag_count = 10;
+
             while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 850 ? 1 : 0]) {
+
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
                                     <td valign="top"><div>&nbsp;</div></td>
-                                    <td valign="top"><div>&nbsp;</div></td>
-                                    <td valign="top"><div >&nbsp;</div></td>
+                                    <td valign="top" class="drag"><div class="drag" draggable="true" id="cell-findings-${drag_count}"></div></td>
+                                    <td valign="top" class="drag"><div class="drag" draggable="true" id="cell-recommendation-${drag_count}"></div></td>
                                 </tr>`;
                 tableTbody.append(tr);
                 if(mainTable.clientHeight > maximumSize) {
                     mainTable.style.overflow = 'hidden';
                 }
+
             }
 
             let secondTable = document.querySelector('.second-table');
