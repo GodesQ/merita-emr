@@ -125,8 +125,8 @@
                                         <div class="form-group">
                                                 <label for=""><b>Remarks</b></label>
                                                 <input name="remarks_status" type="radio" class="m-1"
-                                                id="remarks_status_0" value="normal" @php echo $exam->remarks_status == "normal" ? "checked" : null @endphp>Normal
-                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings" @php echo $exam->remarks_status == "findings" ? "checked" : null @endphp>With Findings
+                                                id="remarks_status_0" value="normal" {{ $exam->remarks_status == "normal" ? "checked" : null }}>Normal
+                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings" {{ $exam->remarks_status == "findings" ? "checked" : null }}>With Findings
                                         </div>
                                         <div class="form-group">
                                             <label class="font-weight-bold">Findings</label>

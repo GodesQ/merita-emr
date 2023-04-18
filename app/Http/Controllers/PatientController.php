@@ -24,35 +24,26 @@ use App\Http\Controllers\AdmissionController;
 use App\Models\Audiometry;
 use App\Models\Refferal;
 use App\Models\PatientInfo;
+use App\Models\DeclarationForm;
 
 class PatientController extends Controller
 {
-    public function documentation()
-    {
-        $data = session()->all();
-        return view('ProgressInfo.documentation', compact('data'));
-    }
 
     public function progress_info(Request $request)
     {
         try {
-            $agencies = Agency::get();
-            $data = session()->all();
+            $agencies = Agency::all();
 
-            $patientInfo = PatientInfo::where('main_id', $data['patientId'])->first();
-
-            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
-                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
-                ->get();
+            $patientInfo = PatientInfo::where('main_id', session()->get('patientId'))->first();
 
             $patient_email = session()->has('email') ? session()->get('email') : null;
+
             $referral = Refferal::where('email_employee', $patient_email)->first();
 
-            if ($patientInfo) {
-                return redirect('/patient_info');
-            }
+            // if the user completed the registration, it will redirect into dashboard.
+            if ($patientInfo)  return redirect('/patient_info');
 
-            return view('ProgressInfo.progress-info', compact('agencies', 'data', 'packages', 'referral'));
+            return view('ProgressInfo.progress-info', compact('agencies', 'referral'));
 
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -63,50 +54,32 @@ class PatientController extends Controller
 
     public function patient_info(Request $request)
     {
-        $data = session()->all();
-        $patient = Patient::where('id', '=', $data['patientId'])
-            ->with('patientinfo')
+        $patient = Patient::where('id', '=', session()->get('patientId'))
+            ->with('patientinfo', 'medical_history', 'declaration_form', 'admission')
             ->latest('created_date')
             ->first();
 
-        if (!$patient->patientinfo) {
-            return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
-        }
+        // if the user is not fully registered, it will redirect to step by step registration.
+        if (!$patient->patientinfo) return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
 
-        $patientRecords = Patient::where('patientcode', '=', $data['patientCode'])->get();
+        $patientRecords = Patient::where('patientcode', session()->get('patientCode'))->get();
 
-        $patientInfo = DB::table('mast_patientinfo')
-            ->select('mast_patientinfo.*', 'mast_agency.agencyname as agencyname', 'list_package.packagename as packagename')
-            ->where('main_id', $data['patientId'])
-            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
-            ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
-            ->latest('id')
-            ->first();
-
-        $medicalHistory = MedicalHistory::where('main_id', '=', $data['patientId'])
-            ->latest('id')
-            ->first();
-
-        $declarationForm = DB::table('declaration_form')
-            ->where('main_id', $data['patientId'])
-            ->latest('id')
-            ->first();
-
-        $patient_package = ListPackage::where('id', $patientInfo->medical_package)->first();
+        $patient_package = ListPackage::where('id', $patient->patientinfo->medical_package)->first();
 
         $patientAdmission = Admission::where('id', $patient->admission_id)->first();
+
         $latest_schedule = DB::table('sched_patients')
             ->where('patientcode', $patient->patientcode)
             ->latest('date')
             ->first();
 
-        return view('ProgressInfo.patient-info', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'patientRecords', 'data', 'latest_schedule', 'patientAdmission'));
+        return view('ProgressInfo.patient-info', compact('patient', 'patientRecords', 'latest_schedule', 'patientAdmission'));
     }
 
     public function see_record(Request $request)
     {
         try {
-            $created_date = $_GET['created'];
+            $created_date = $request->created;
             $patientInfo = Patient::where('created_date', $created_date)->first();
             $request->session()->put('patientId', $patientInfo->id);
             return back();
@@ -117,10 +90,10 @@ class PatientController extends Controller
         }
     }
 
-    public function remedical()
+    public function remedical(Request $request)
     {
         try {
-            $patientcode = $_GET['patientcode'];
+            $patientcode = $request->patientcode;
             $agencies = Agency::all();
             $data = session()->all();
             $patient = Patient::where('patientcode', $patientcode)->first();
@@ -164,27 +137,32 @@ class PatientController extends Controller
             $mast_patient->created_date = $date;
             $mast_patient_save = $mast_patient->save();
 
-            $save_patient_info = DB::table('mast_patientinfo')->insert([
+            $patient_vessel = $request->agencyName == 3 || $request->agencyName == 57 || $request->agencyName == 58 || $request->agencyName == 55 ? $request->bahia_vessel : $request->vessel;
+
+            $save_patient_info = PatientInfo::create([
                 'main_id' => $mast_patient->id,
                 'patientcode' => $request->patientcode,
-                'address' => $request->homeAdress,
+                'address' => strtoupper($request->address),
                 'contactno' => $request->phoneNumber,
-                'occupation' => $request->occupation,
-                'religion' => strtoupper($request->religion),
+                'occupation' => strtoupper($request->occupation),
+                'occupation_other' => $request->occupation == 'OTHER' ? strtoupper($request->occupation_other) : null,
                 'category' => $request->category,
+                'referral' => strtoupper($request->referral),
                 'payment_type' => $request->payment_type,
-                'admission_type' => $request->admit_type,
+                'admission_type' => strtoupper($request->admit_type),
                 'nationality' => strtoupper($request->nationality),
-                'maritalstatus' => $request->civilStatus,
-                'agency_id' => $request->agencyName,
-                'principal' => $request->principal,
-                'agency_address' => $request->address_of_agency,
-                'country_destination' => $request->countryDestination,
+                'religion' => $request->religion,
+                'religion_other' => $request->religion == 'OTHERS' ? strtoupper($request->religion_other) : null,
+                'maritalstatus' => strtoupper($request->civilStatus),
+                'agency_id' => $request->agency_id,
+                'principal' => strtoupper($request->principal),
+                'agency_address' => strtoupper($request->address_of_agency),
+                'country_destination' => strtoupper($request->countryDestination),
                 'medical_package' => $request->medicalPackage,
-                'vessel' => $request->vessel,
-                'passportno' => $request->passportNo,
+                'vessel' => strtoupper($patient_vessel),
+                'passportno' => strtoupper($request->passportNo),
                 'passport_expdate' => $request->passport_expdate,
-                'srbno' => $request->ssrb,
+                'srbno' => strtoupper($request->ssrb),
                 'srb_expdate' => $request->srb_expdate,
                 'birthdate' => $request->birthdate,
                 'birthplace' => $request->birthplace,
@@ -194,11 +172,22 @@ class PatientController extends Controller
             $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $mast_patient->id);
 
             // INSERT DATA TO DECLARATION FORM TABLE
-            $save_declaration_form = DB::insert('insert into declaration_form (main_id, travelled_abroad_recently, area_visited, contact_with_people_being_infected_suspected_diagnose_with_cov, travel_arrival, travel_return, relationship_with_last_people, last_contact_date, fever, cough, shortness_of_breath, persistent_pain_in_chest) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$mast_patient->id, $request->travelled_abroad_recently, $request->area_visited, $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid, $request->travel_arrival_date, $request->travel_return_date, $request->relationship_last_contact_people, $request->last_contact_date, $request->fever, $request->cough, $request->shortness_of_breath, $request->persistent_pain_in_the_chest]);
+             $save_declaration_form = DeclarationForm::create([
+                'main_id' => $mast_patient->id,
+                'travelled_abroad_recently' => $request->travelled_abroad_recently,
+                'area_visited' => $request->area_visited,
+                'contact_with_people_being_infected_suspected_diagnose_with_cov' => $request->contact_with_people_being_infected_suspected_or_diagnosed_with_covid,
+                'travel_arrival' => $request->travel_arrival_date,
+                'travel_return' => $request->travel_return_date,
+                'relationship_with_last_people' => $request->relationship_last_contact_people,
+                'last_contact_date' => $request->last_contact_date,
+                'fever' =>  $request->fever,
+                'cough' => $request->cough,
+                'shortness_of_breath' => $request->shortness_of_breath,
+                'persistent_pain_in_chest' => $request->persistent_pain_in_the_chest
+            ]);
 
-            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
-                return back()->with('status', 'Failed to Submit Data');
-            }
+            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) return back()->with('status', 'Failed to Submit Data');
 
             $request->session()->put('patientId', $mast_patient->id);
 
@@ -357,6 +346,7 @@ class PatientController extends Controller
         try {
             $data = session()->all();
             $today_date = date('Y-m-d');
+
             $schedules = DB::table('sched_patients')
                 ->where('patientcode', $data['patientCode'])
                 ->get();
@@ -401,9 +391,7 @@ class PatientController extends Controller
 
             $save = DB::insert('insert into sched_patients(patient_id, patientcode, date) values(?, ?, ?)', [$data['patientId'], $data['patientCode'], $request->schedule_date]);
 
-            if ($save) {
-                return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
-            }
+            if ($save) return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -616,8 +604,6 @@ class PatientController extends Controller
                 'patient_image.*' => 'mimes:jpg,png,jpeg',
                 'agency' => 'required',
             ]);
-
-            // dd($request->all());
 
             $latest_patientcode = DB::table('mast_patient')
                 ->latest('patientcode')
@@ -972,7 +958,6 @@ class PatientController extends Controller
     public function update_patient_basic(Request $request)
     {
         try {
-
             $name = $request->old_image;
             if ($request->patient_image == $request->old_image) {
                 $name = $request->old_image;

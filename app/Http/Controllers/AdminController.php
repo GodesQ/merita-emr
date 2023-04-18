@@ -29,11 +29,6 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    public function employee_documentation()
-    {
-        $data = session()->all();
-        return view('Employee.employee-documentation', compact('data'));
-    }
 
     public function today_patients(Request $request)
     {

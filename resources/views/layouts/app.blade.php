@@ -65,8 +65,14 @@
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="avatar avatar-online avatar-md">@yield('patient_image')<i></i></div><span
-                                    class="user-name">@yield('name')</span>
+                                <div class="avatar avatar-online avatar-md">
+                                    @if(session()->get('patient_image'))
+                                        <img src="../../../app-assets/images/profiles/{{ session()->get('patient_image') }}" alt="avatar">
+                                    @else
+                                        <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
+                                    @endif
+                                </div>
+                                <span class="user-name">{{ session()->get('firstname') . ' ' . session()->get('lastname') }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="/documentation"><i class="feather icon-file"></i>Documentation</a>

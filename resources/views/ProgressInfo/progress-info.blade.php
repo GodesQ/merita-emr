@@ -1,17 +1,5 @@
 @extends('layouts.app')
 
-@section('name')
-    {{ $data['firstname'] . ' ' . $data['lastname'] }}
-@endsection
-
-@section('patient_image')
-    @if ($data['patient_image'] != null || $data['patient_image'] != '')
-        <img src="../../../app-assets/images/profiles/{{ $data['patient_image'] }}" alt="avatar">
-    @else
-        <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
-    @endif
-@endsection
-
 @section('content')
     <style>
         .form-control {
@@ -87,10 +75,9 @@
                                                     @csrf
                                                     <h4 class="form-section"><i class="feather icon-user"></i> Personal Info
                                                     </h4>
-                                                    <input required type="hidden" value="{{ $data['patientId'] }}"
+                                                    <input required type="hidden" value="{{ session()->get('patientId') }}"
                                                         name="main_id">
-                                                    <input type="hidden" name="patientcode"
-                                                        value="{{ $data['patientCode'] }}">
+                                                    <input type="hidden" name="patientcode" value="{{ session()->get('patientCode') }}">
                                                     <div class=" row">
                                                         <div class="col-lg-3">
                                                             <div class="form-group">
@@ -1588,7 +1575,7 @@
                                                                                         name="last_menstrual_period"
                                                                                         id="last_menstrual_period2">
                                                                                     <label class="custom-control-label"
-                                                                                        for="last_menstrual_period2">N/A</label>
+                                                                                        for="last_menstrual_period2">NO</label>
                                                                                 </div>
                                                                             </fieldset>
                                                                         </td>

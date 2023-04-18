@@ -275,18 +275,6 @@ class AgencyController extends Controller
         }
     }
 
-    public function view_documentation()
-    {
-        try {
-            $data = session()->all();
-            return view('Agency.documentation', compact('data'));
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
-        }
-    }
-
     public function view_agencies(Request $request)
     {
         try {

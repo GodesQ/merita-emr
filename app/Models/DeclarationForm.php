@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MedicalHistory extends Model
+class DeclarationForm extends Model
 {
     use HasFactory;
-    protected $table = 'medical_history';
-    public $timestamps = false;
+    protected $table = 'declaration_form';
     protected $guarded = [];
+    public $timestamps = false;
 
     public function patient() {
         return $this->hasOne(Patient::class, 'main_id');
     }
+
 }

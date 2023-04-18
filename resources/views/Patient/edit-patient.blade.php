@@ -1949,10 +1949,8 @@
                                                     <div class="col-md-6 col-xl-12 my-50">
                                                         <fieldset>
                                                             <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="customCheck" id="customCheck1" checked disabled>
-                                                                <label class="custom-control-label text-white"
-                                                                    for="customCheck1">{{$key}}</label>
+                                                                <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck1" checked disabled>
+                                                                <label class="custom-control-label text-white" for="customCheck1">{{$key}}</label>
                                                             </div>
                                                         </fieldset>
                                                     </div>
@@ -1966,21 +1964,18 @@
                                         role="tabpanel">
                                         <div class="row">
                                             @if ($on_going_exams)
-                                            @foreach ($on_going_exams as $key => $patient_exam)
-                                            <div class="col-md-6 col-xl-12 my-50">
-                                                <fieldset>
-                                                    <div class="custom-control custom-checkbox ">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            name="customCheck" id="customCheck1" disabled>
-                                                        <label class="custom-control-label text-white"
-                                                            style="word-break: break-all;"
-                                                            for="customCheck1">{{$key}}</label>
+                                                @foreach ($on_going_exams as $key => $patient_exam)
+                                                    <div class="col-md-6 col-xl-12 my-50">
+                                                        <fieldset>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input" name="customCheck" id="customCheck1" disabled>
+                                                                <label class="custom-control-label text-white" style="word-break: break-all;" for="customCheck1">{{$key}}</label>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
-                                                </fieldset>
-                                            </div>
-                                            @endforeach
+                                                @endforeach
                                             @else
-                                            <div class="white">No Exams Found</div>
+                                                <div class="white">No Exams Found</div>
                                             @endif
                                         </div>
                                     </div>
@@ -1999,9 +1994,9 @@
 
 
 <script>
-document.querySelector('#admission-btn').addEventListener('click', () => {
-    document.querySelector('#account-pill-info').click();
-})
+    document.querySelector('#admission-btn').addEventListener('click', () => {
+        document.querySelector('#account-pill-info').click();
+    })
 </script>
 
 @endsection
@@ -2064,8 +2059,7 @@ function getPackages(e) {
             $('#address_of_agency').val(response[1].address);
             $('#packages option').remove();
             response[0].forEach(element => {
-                $(`<option value=${element.id}>${element.packagename}</option>`).appendTo(
-                    '#packages');
+                $(`<option value=${element.id}>${element.packagename}</option>`).appendTo('#packages');
             });
             if(bahia_ids.includes(response[1].id)) {
                 getBahiaVessels(response[1], false);

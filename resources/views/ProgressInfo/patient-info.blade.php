@@ -1,17 +1,5 @@
  @extends('layouts.app')
 
-@section('name')
-{{$data['firstname'] . " " . $data['lastname']}}
-@endsection
-
-@section('patient_image')
-@if($data['patient_image'] != null || $data['patient_image'] != "")
-<img src="../../../app-assets/images/profiles/{{$data['patient_image']}}" alt="avatar">
-@else
-<img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
-@endif
-@endsection
-
 @section('content')
 <style>
     .table th, .table td {
@@ -21,14 +9,15 @@
 <!-- BEGIN: Content-->
 <div class="container-lg container-fluid">
     @if(Session::get('status'))
-    <div class="warning alert-warning p-2 my-2 rounded">
-        {{Session::get('status')}}
-    </div>
+        <div class="warning alert-warning p-2 my-2 rounded">
+            {{Session::get('status')}}
+        </div>
     @endif
+
     @if(Session::get('status_schedule'))
-    <div class="success alert-success p-2 my-2 rounded">
-        {{Session::get('status_schedule')}}
-    </div>
+        <div class="success alert-success p-2 my-2 rounded">
+            {{Session::get('status_schedule')}}
+        </div>
     @endif
 
     @if(Session::get('success'))
@@ -79,10 +68,10 @@
             Patient Code : <b>{{$patient->patientcode}} </b>
         </div>
         <div class="col-md-12 my-25">
-            Agency : <b>{{$patientInfo->agencyname ? $patientInfo->agencyname : null}}</b>
+            Agency : <b>{{ optional($patient->patientinfo->agency)->agencyname ? optional($patient->patientinfo->agency)->agencyname : null}}</b>
         </div>
         <div class="col-md-12 my-25">
-            Medical Package : <b>{{$patientInfo->packagename ? $patientInfo->packagename : null}} </b>
+            Medical Package : <b>{{ optional($patient->patientinfo->package)->packagename ? optional($patient->patientinfo->package)->packagename : null}} </b>
         </div>
     </div>
     @endsection
@@ -99,10 +88,10 @@
                     Patient Code : <b>{{$patient->patientcode}} </b>
                 </div>
                 <div class="col-md-12 my-25">
-                    Agency : <b>{{$patientInfo->agencyname ? $patientInfo->agencyname : null}}</b>
+                    Agency : <b>{{ optional($patient->patientinfo->agency)->agencyname }}</b>
                 </div>
                 <div class="col-md-12 my-25">
-                    Medical Package : <b>{{$patientInfo->packagename ? $patientInfo->packagename : null}} </b>
+                    Medical Package : <b>{{ optional($patient->patientinfo->package)->packagename }} </b>
                 </div>
             </div>
         </div>
@@ -114,41 +103,40 @@
                         <span aria-hidden="true">×</span>
                     </button>
                     @if ($latest_schedule)
-                    You are scheduled on: <strong>{{$latest_schedule->date}}</strong><a href="/edit_schedule"
-                        class="alert-link ml-1 float-lg-right">Do you want to
-                        re-schedule?</a>
+                        You are scheduled on: <strong>{{$latest_schedule->date}}</strong><a href="/edit_schedule"
+                            class="alert-link ml-1 float-lg-right">Do you want to
+                            re-schedule?</a>
                     @else
-                    <span>No record of schedule</span>
+                        <span>No record of schedule</span>
                     @endif
                 </div>
             </div>
-            <div class="col-md-2"></div>
-            @if($patientAdmission)
-            <div class="col-sm-12">
-                <div class="alert alert-info alert-dismissible mb-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    Your Laboratory Result Status:
-                    <strong>
-                        @if ($patientAdmission->lab_status == 2)
-                        <b><u>FIT TO WORK</u></b>
-                        @elseif ($patientAdmission->lab_status == 1)
-                        <b><u>RE ASSESSMENT</u></b>
-                        @endif
-                    </strong>
-                    <a href="/laboratory_result" class="alert-link ml-1 float-lg-right">View Result</a>
+            @if($patient->admission)
+                <div class="col-sm-12">
+                    <div class="alert alert-info alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        Your Laboratory Result Status:
+                        <strong>
+                            @if ($patient->admission->lab_status == 2)
+                                <b><u>FIT TO WORK</u></b>
+                            @elseif ($patient->admission->lab_status == 1)
+                                <b><u>RE ASSESSMENT</u></b>
+                            @endif
+                        </strong>
+                        <a href="/laboratory_result" class="alert-link ml-1 float-lg-right">View Result</a>
+                    </div>
                 </div>
-            </div>
             @else
-            <div class="col-sm-12">
-                <div class="alert alert-warning alert-dismissible mb-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <strong>You are not admitted</strong></a>.
+                <div class="col-sm-12">
+                    <div class="alert alert-warning alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>You are not admitted</strong></a>.
+                    </div>
                 </div>
-            </div>
             @endif
         </div>
 
@@ -160,12 +148,9 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/progress-patient-info">Home</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="#">Patient</a>
-                                </li>
-                                <li class="breadcrumb-item active">Patient Information
-                                </li>
+                                <li class="breadcrumb-item"><a href="/progress-patient-info">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Patient</a></li>
+                                <li class="breadcrumb-item active">Patient Information</li>
                             </ol>
                         </div>
                     </div>
@@ -209,16 +194,17 @@
                                     <h3>Medical Records <span class="primary h6">(DD/MM/YYYY)</span></h3>
                                     <ul class="list-group">
                                         @foreach ($patientRecords as $patientRecord)
-                                        <li class="list-group-item @php echo session()->get('patientId') == $patientRecord->id ? "
-                                            active" : " " @endphp"><a
-                                                class="@php echo session()->get('patientId') == $patientRecord->id ? "
-                                                text-white" : " " @endphp"
-                                                href="/see_record?created={{$patientRecord->created_date}}">{{date_format(new DateTime($patientRecord->created_date), "d-m-Y")}}</a>
-                                        </li>
+                                            <li class="list-group-item {{ session()->get('patientId') == $patientRecord->id ? "active" : null }}">
+                                                <a class="{{ session()->get('patientId') == $patientRecord->id ? " text-white" : null }}"
+                                                    href="/see_record?created={{$patientRecord->created_date}}">
+                                                    {{date_format(new DateTime($patientRecord->created_date), "F d, Y")}}
+                                                </a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
+
                             <!-- right content section -->
                             <div class="col-md-9">
                                 <div class="card">
@@ -234,39 +220,28 @@
                                                         <table class="table table-borderless table-responsive">
                                                             <tbody>
                                                                 <tr class="col-12">
-                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Firstname:
-                                                                    </td>
-                                                                    <td class="col-sm-2">
-                                                                        {{$patient->firstname}}</td>
+                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Firstname: </td>
+                                                                    <td class="col-sm-2">{{$patient->firstname}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
-                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Lastname:
-                                                                    </td>
-                                                                    <td class="col-sm-2">
-                                                                        {{$patient->lastname}}</td>
+                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Lastname: </td>
+                                                                    <td class="col-sm-2">{{$patient->lastname}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
-                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Middlename:
-                                                                    </td>
-                                                                    <td class="col-sm-2">
-                                                                        {{$patient->middlename}}</td>
+                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Middlename: </td>
+                                                                    <td class="col-sm-2">{{$patient->middlename}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
-                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Contact No :
-                                                                    </td>
-                                                                    <td class="col-sm-2">
-                                                                        {{$patientInfo->contactno}}
-                                                                    </td>
+                                                                    <td class="col-md-6 col-lg-4 col-sm-6">Contact No :</td>
+                                                                    <td class="col-sm-2">{{$patient->patientinfo->contactno}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Email:</td>
-                                                                    <td class="col-sm-2">{{$patient->email}}
-                                                                    </td>
+                                                                    <td class="col-sm-2">{{$patient->email}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Address:</td>
-                                                                    <td class="col-sm-2">
-                                                                        {{$patientInfo->address}}</td>
+                                                                    <td class="col-sm-2">{{$patient->patientinfo->address}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Gender:</td>
@@ -281,34 +256,34 @@
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Occupation:
                                                                     </td>
                                                                     <td class="col-sm-2">
-                                                                        {{$patientInfo->occupation}}
+                                                                        {{$patient->patientinfo->occupation}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Nationality:
                                                                     </td>
                                                                     <td class="col-sm-2">
-                                                                        {{$patientInfo->nationality}}
+                                                                        {{$patient->patientinfo->nationality}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Religion:
                                                                     </td>
                                                                     <td class="col-sm-2">
-                                                                        {{$patientInfo->religion}}
+                                                                        {{$patient->patientinfo->religion}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Marital
                                                                         Status:</td>
                                                                     <td class="col-sm-2">
-                                                                        {{$patientInfo->maritalstatus}}
+                                                                        {{$patient->patientinfo->maritalstatus}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Admission Type:</td>
                                                                     <td class="col-sm-2">
-                                                                        {{$patientInfo->admission_type}}
+                                                                        {{$patient->patientinfo->admission_type}}
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -323,61 +298,61 @@
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Agency Name:
                                                                     </td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->agencyname ? $patientInfo->agencyname : null}}</td>
+                                                                        {{ optional($patient->patientinfo->agency)->agencyname }}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Agency
                                                                         Address:</td>
                                                                     <td class="users-view-name col-sm-2">
-                                                                        {{$patientInfo->agency_address}}</td>
+                                                                        {{ $patient->patientinfo->agency_address }}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Country
                                                                         Destination:</td>
                                                                     <td class="users-view-email col-sm-2">
-                                                                        {{$patientInfo->country_destination}}</td>
+                                                                        {{$patient->patientinfo->country_destination}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Medical
                                                                         Package:</td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->packagename ? $patientInfo->packagename : null}}</td>
+                                                                        {{optional($patient->patientinfo->package)->packagename}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Vessel:</td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->vessel}}</td>
+                                                                        {{$patient->patientinfo->vessel}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Passport NO:
                                                                     </td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->passportno}}</td>
+                                                                        {{$patient->patientinfo->passportno}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">SRB NO:</td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->srbno}}</td>
+                                                                        {{$patient->patientinfo->srbno}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Principal:</td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->principal}}</td>
+                                                                        {{$patient->patientinfo->principal}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td class="col-md-6 col-lg-4 col-sm-6">Referral:</td>
                                                                     <td class="users-view-username col-sm-2">
-                                                                        {{$patientInfo->referral}}</td>
+                                                                        {{$patient->patientinfo->referral}}</td>
                                                                 </tr>
                                                                 <tr class="col-12">
                                                                     <td colspan="2">
                                                                         <div class="row">
                                                                             <div class="col-lg-6 col-sm-12">
-                                                                                <h6><b>Remarks for Passport Expiration Date ({{$patientInfo->passport_expdate ? $patientInfo->passport_expdate : "No Record"}})</b></h6>
+                                                                                <h6><b>Remarks for Passport Expiration Date ({{$patient->patientinfo->passport_expdate ? $patient->patientinfo->passport_expdate : "No Record"}})</b></h6>
                                                                                 <p id="remarks-passport"></p>
                                                                             </div>
                                                                             <div class="col-lg-6 col-sm-12">
-                                                                                <h6><b>Remarks for SSRB Expiration Date ({{$patientInfo->srb_expdate ? $patientInfo->srb_expdate : "No Record"}})</b></h6>
+                                                                                <h6><b>Remarks for SSRB Expiration Date ({{$patient->patientinfo->srb_expdate ? $patient->patientinfo->srb_expdate : "No Record"}})</b></h6>
                                                                                 <p id="remarks-srb"></p>
                                                                             </div>
                                                                         </div>
@@ -390,7 +365,7 @@
                                                 <div class="tab-pane fade" id="account-vertical-connections"
                                                     role="tabpanel" aria-labelledby="account-pill-connections"
                                                     aria-expanded="false">
-                                                    @if($medicalHistory)
+                                                    @if($patient->medical_history)
                                                     <div class="row">
                                                         <div class="col-md-12 col-lg-4">
                                                             <table class="table">
@@ -399,13 +374,10 @@
                                                                         <td class="col-12">
                                                                             Head and Neck Injury
                                                                         </td>
-                                                                        <td>@if($medicalHistory->head_and_neck_injury
-                                                                            == 0)
-                                                                            <span
-                                                                                class="btn btn-solid btn-warning">No</span>
+                                                                        <td>@if($patient->medical_history->head_and_neck_injury == 0)
+                                                                                <span class="btn btn-solid btn-warning">No</span>
                                                                             @else
-                                                                            <span
-                                                                                class="btn btn-solid btn-success">Yes</span>
+                                                                                <span class="btn btn-solid btn-success">Yes</span>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
@@ -413,13 +385,11 @@
                                                                         <td class="col-12">
                                                                             Frequent Headache
                                                                         </td>
-                                                                        <td>@if($medicalHistory->frequent_headache
-                                                                            == 0)
-                                                                            <span
-                                                                                class="btn btn-solid btn-warning">No</span>
+                                                                        <td>
+                                                                            @if($patient->medical_history->frequent_headache == 0)
+                                                                                <span class="btn btn-solid btn-warning">No</span>
                                                                             @else
-                                                                            <span
-                                                                                class="btn btn-solid btn-success">Yes</span>
+                                                                                <span class="btn btn-solid btn-success">Yes</span>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
@@ -427,13 +397,10 @@
                                                                         <td class="col-12">
                                                                             Frequent Dizziness
                                                                         </td>
-                                                                        <td>@if($medicalHistory->frequent_dizziness
-                                                                            == 0)
-                                                                            <span
-                                                                                class="btn btn-solid btn-warning">No</span>
+                                                                        <td>@if($patient->medical_history->frequent_dizziness == 0)
+                                                                                <span class="btn btn-solid btn-warning">No</span>
                                                                             @else
-                                                                            <span
-                                                                                class="btn btn-solid btn-success">Yes</span>
+                                                                                <span class="btn btn-solid btn-success">Yes</span>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
@@ -441,13 +408,10 @@
                                                                         <td class="col-12">
                                                                             Fainting Spells, Fits
                                                                         </td>
-                                                                        <td>@if($medicalHistory->fainting_spells_fits
-                                                                            == 0)
-                                                                            <span
-                                                                                class="btn btn-solid btn-warning">No</span>
+                                                                        <td>@if($patient->medical_history->fainting_spells_fits == 0)
+                                                                                <span class="btn btn-solid btn-warning">No</span>
                                                                             @else
-                                                                            <span
-                                                                                class="btn btn-solid btn-success">Yes</span>
+                                                                                <span class="btn btn-solid btn-success">Yes</span>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
@@ -455,7 +419,7 @@
                                                                         <td class="col-12">
                                                                             Seizures
                                                                         </td>
-                                                                        <td>@if($medicalHistory->seizures
+                                                                        <td>@if($patient->medical_history->seizures
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -469,7 +433,7 @@
                                                                         <td class="col-12">
                                                                             Other neurological disorders
                                                                         </td>
-                                                                        <td>@if($medicalHistory->other_neurological_disorders
+                                                                        <td>@if($patient->medical_history->other_neurological_disorders
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -483,7 +447,7 @@
                                                                         <td class="col-12">
                                                                             Insomia or Sleep disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->insomia_or_sleep_disorder
+                                                                        <td>@if($patient->medical_history->insomia_or_sleep_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -498,7 +462,7 @@
                                                                             Depression, other mental
                                                                             disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->depression_other_mental_disorder
+                                                                        <td>@if($patient->medical_history->depression_other_mental_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -513,7 +477,7 @@
                                                                             Eye problems / Error of
                                                                             refraction
                                                                         </td>
-                                                                        <td>@if($medicalHistory->eye_problems_or_error_refraction
+                                                                        <td>@if($patient->medical_history->eye_problems_or_error_refraction
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -527,7 +491,7 @@
                                                                         <td class="col-12">
                                                                             Deafness / Ear disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->deafness_or_ear_disorder
+                                                                        <td>@if($patient->medical_history->deafness_or_ear_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -541,7 +505,7 @@
                                                                         <td class="col-12">
                                                                             Nose or Throat disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->nose_or_throat_disorder
+                                                                        <td>@if($patient->medical_history->nose_or_throat_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -554,7 +518,7 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Tuberculosis </td>
-                                                                        <td>@if($medicalHistory->tuberculosis
+                                                                        <td>@if($patient->medical_history->tuberculosis
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -568,7 +532,7 @@
                                                                         <td class="col-12">
                                                                             Signed off as sick
                                                                         </td>
-                                                                        <td>@if($medicalHistory->signed_off_as_sick
+                                                                        <td>@if($patient->medical_history->signed_off_as_sick
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -582,7 +546,7 @@
                                                                         <td class="col-12">
                                                                             Repatriation form ship
                                                                         </td>
-                                                                        <td>@if($medicalHistory->repatriation_form_ship
+                                                                        <td>@if($patient->medical_history->repatriation_form_ship
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -596,7 +560,7 @@
                                                                         <td class="col-12">
                                                                             Declared Unfit for sea duty
                                                                         </td>
-                                                                        <td>@if($medicalHistory->declared_unfit_for_sea_duty
+                                                                        <td>@if($patient->medical_history->declared_unfit_for_sea_duty
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -610,7 +574,7 @@
                                                                         <td class="col-12">
                                                                             Previous Hospitalization
                                                                         </td>
-                                                                        <td>@if($medicalHistory->previous_hospitalization
+                                                                        <td>@if($patient->medical_history->previous_hospitalization
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -626,7 +590,7 @@
                                                                             perform
                                                                             duties of <br> designed position
                                                                         </td>
-                                                                        <td>@if($medicalHistory->feel_healthy
+                                                                        <td>@if($patient->medical_history->feel_healthy
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -648,7 +612,7 @@
                                                                         <td class="col-12">
                                                                             Other Lung disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->other_lung_disorder
+                                                                        <td>@if($patient->medical_history->other_lung_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -662,7 +626,7 @@
                                                                         <td class="col-12">
                                                                             High Blood Pressure
                                                                         </td>
-                                                                        <td>@if($medicalHistory->high_blood_pressure
+                                                                        <td>@if($patient->medical_history->high_blood_pressure
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -676,7 +640,7 @@
                                                                         <td class="col-12">
                                                                             Heart Disease / Vascular
                                                                         </td>
-                                                                        <td>@if($medicalHistory->heart_disease_or_vascular
+                                                                        <td>@if($patient->medical_history->heart_disease_or_vascular
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -690,7 +654,7 @@
                                                                         <td class="col-12">
                                                                             Chest pain
                                                                         </td>
-                                                                        <td>@if($medicalHistory->chest_pain
+                                                                        <td>@if($patient->medical_history->chest_pain
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -704,7 +668,7 @@
                                                                         <td class="col-12">
                                                                             Rheumatic Fever
                                                                         </td>
-                                                                        <td>@if($medicalHistory->rheumatic_fever
+                                                                        <td>@if($patient->medical_history->rheumatic_fever
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -718,7 +682,7 @@
                                                                         <td class="col-12">
                                                                             Diabetes Mellitus
                                                                         </td>
-                                                                        <td>@if($medicalHistory->diabetes_mellitus
+                                                                        <td>@if($patient->medical_history->diabetes_mellitus
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -732,7 +696,7 @@
                                                                         <td class="col-12">
                                                                             Endocrine disorders (goiter)
                                                                         </td>
-                                                                        <td>@if($medicalHistory->endocrine_disorders
+                                                                        <td>@if($patient->medical_history->endocrine_disorders
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -746,7 +710,7 @@
                                                                         <td class="col-12">
                                                                             Cancer or Tumor
                                                                         </td>
-                                                                        <td>@if($medicalHistory->cancer_or_tumor
+                                                                        <td>@if($patient->medical_history->cancer_or_tumor
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -760,7 +724,7 @@
                                                                         <td class="col-12">
                                                                             Blood disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->blood_disorder
+                                                                        <td>@if($patient->medical_history->blood_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -774,7 +738,7 @@
                                                                         <td class="col-12">
                                                                             Stomach pain, Gastritis
                                                                         </td>
-                                                                        <td>@if($medicalHistory->stomach_pain_or_gastritis
+                                                                        <td>@if($patient->medical_history->stomach_pain_or_gastritis
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -788,7 +752,7 @@
                                                                         <td class="col-12">
                                                                             Ulcer
                                                                         </td>
-                                                                        <td>@if($medicalHistory->ulcer
+                                                                        <td>@if($patient->medical_history->ulcer
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -802,7 +766,7 @@
                                                                         <td class="col-12">
                                                                             Other Abdominal Disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->other_abdominal_disorder
+                                                                        <td>@if($patient->medical_history->other_abdominal_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -816,7 +780,7 @@
                                                                         <td class="col-12">
                                                                             Medical certificate restricted
                                                                         </td>
-                                                                        <td>@if($medicalHistory->medical_certificate_restricted
+                                                                        <td>@if($patient->medical_history->medical_certificate_restricted
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -829,7 +793,7 @@
                                                                         <td class="col-12">
                                                                             Medical certificate revoked
                                                                         </td>
-                                                                        <td>@if($medicalHistory->medical_certificate_revoked
+                                                                        <td>@if($patient->medical_history->medical_certificate_revoked
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -843,7 +807,7 @@
                                                                         <td class="col-12">
                                                                             Aware of any medical problems
                                                                         </td>
-                                                                        <td>@if($medicalHistory->aware_of_any_medical_problems
+                                                                        <td>@if($patient->medical_history->aware_of_any_medical_problems
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -857,7 +821,7 @@
                                                                         <td class="col-12">
                                                                             Aware of any disease / illness
                                                                         </td>
-                                                                        <td>@if($medicalHistory->aware_of_any_disease_or_illness
+                                                                        <td>@if($patient->medical_history->aware_of_any_disease_or_illness
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -870,9 +834,9 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Operation(s) <br>
-                                                                            <b><u>{{$medicalHistory->operation_other}}</u></b>
+                                                                            <b><u>{{$patient->medical_history->operation_other}}</u></b>
                                                                         </td>
-                                                                        <td>@if($medicalHistory->operations
+                                                                        <td>@if($patient->medical_history->operations
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -893,7 +857,7 @@
                                                                         <td class="col-12">
                                                                             Gynecological Disorders
                                                                         </td>
-                                                                        <td>@if($medicalHistory->gynecological_disorder
+                                                                        <td>@if($patient->medical_history->gynecological_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -907,7 +871,7 @@
                                                                         <td class="col-12">
                                                                             Last Menstrual Period
                                                                         </td>
-                                                                        <td>@if($medicalHistory->last_menstrual_period
+                                                                        <td>@if($patient->medical_history->last_menstrual_period
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -921,7 +885,7 @@
                                                                         <td class="col-12">
                                                                             Pregnancy
                                                                         </td>
-                                                                        <td>@if($medicalHistory->pregnancy
+                                                                        <td>@if($patient->medical_history->pregnancy
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -935,7 +899,7 @@
                                                                         <td class="col-12">
                                                                             Kidney or Bladder Disorder
                                                                         </td>
-                                                                        <td>@if($medicalHistory->kidney_or_bladder_disorder
+                                                                        <td>@if($patient->medical_history->kidney_or_bladder_disorder
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -949,7 +913,7 @@
                                                                         <td class="col-12">
                                                                             Back Injury / Joint pain
                                                                         </td>
-                                                                        <td>@if($medicalHistory->back_injury_or_joint_pain
+                                                                        <td>@if($patient->medical_history->back_injury_or_joint_pain
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -962,7 +926,7 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Arthritis </td>
-                                                                        <td>@if($medicalHistory->arthritis
+                                                                        <td>@if($patient->medical_history->arthritis
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -976,7 +940,7 @@
                                                                         <td class="col-12">
                                                                             Genetic, Heredity or Familial
                                                                             Dis. </td>
-                                                                        <td>@if($medicalHistory->genetic_heredity_or_familial_dis
+                                                                        <td>@if($patient->medical_history->genetic_heredity_or_familial_dis
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -991,7 +955,7 @@
                                                                             Sexually Transmitted Disease
                                                                             (Syphilis)
                                                                         </td>
-                                                                        <td>@if($medicalHistory->sexually_transmitted_disease
+                                                                        <td>@if($patient->medical_history->sexually_transmitted_disease
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1005,7 +969,7 @@
                                                                         <td class="col-12">
                                                                             Tropical Disease - Malaria
                                                                         </td>
-                                                                        <td>@if($medicalHistory->tropical_disease_or_malaria
+                                                                        <td>@if($patient->medical_history->tropical_disease_or_malaria
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1019,7 +983,7 @@
                                                                         <td class="col-12">
                                                                             Thypoid Fever
                                                                         </td>
-                                                                        <td>@if($medicalHistory->thypoid_fever
+                                                                        <td>@if($patient->medical_history->thypoid_fever
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1033,7 +997,7 @@
                                                                         <td class="col-12">
                                                                             Schistosomiasis
                                                                         </td>
-                                                                        <td>@if($medicalHistory->schistosomiasis
+                                                                        <td>@if($patient->medical_history->schistosomiasis
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1047,7 +1011,7 @@
                                                                         <td class="col-12">
                                                                             Asthma
                                                                         </td>
-                                                                        <td>@if($medicalHistory->asthma
+                                                                        <td>@if($patient->medical_history->asthma
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1060,9 +1024,9 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Allergies <br>
-                                                                            <b><u>{{$medicalHistory->allergies_other}}</u></b>
+                                                                            <b><u>{{$patient->medical_history->allergies_other}}</u></b>
                                                                         </td>
-                                                                        <td>@if($medicalHistory->allergies
+                                                                        <td>@if($patient->medical_history->allergies
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1075,7 +1039,7 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Smoking </td>
-                                                                        <td>@if($medicalHistory->smoking
+                                                                        <td>@if($patient->medical_history->smoking
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1089,7 +1053,7 @@
                                                                         <td class="col-12">
                                                                             Taking medication for
                                                                             Hypertension </td>
-                                                                        <td>@if($medicalHistory->taking_medication_for_hypertension
+                                                                        <td>@if($patient->medical_history->taking_medication_for_hypertension
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1103,7 +1067,7 @@
                                                                         <td class="col-12">
                                                                             Taking medication for Diabetes
                                                                         </td>
-                                                                        <td>@if($medicalHistory->taking_medication_for_diabetes
+                                                                        <td>@if($patient->medical_history->taking_medication_for_diabetes
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1116,7 +1080,7 @@
                                                                     <tr>
                                                                         <td class="col-12">
                                                                             Vaccination </td>
-                                                                        <td>@if($medicalHistory->vaccination
+                                                                        <td>@if($patient->medical_history->vaccination
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1136,14 +1100,14 @@
                                                 <div class="tab-pane fade" id="account-vertical-notifications"
                                                     role="tabpanel" aria-labelledby="account-pill-notifications"
                                                     aria-expanded="false">
-                                                    @if($declarationForm)
+                                                    @if($patient->declaration_form)
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="col-md-12">
                                                                 <h4>Have you travelled abroad recently?</h4>
                                                             </div>
                                                             <div class="col-md-4 mt-1">
-                                                                @if($declarationForm->travelled_abroad_recently
+                                                                @if($patient->declaration_form->travelled_abroad_recently
                                                                 == 0)
                                                                 <span
                                                                     class="btn btn-solid btn-warning isTravelAbroad">No</span>
@@ -1162,7 +1126,7 @@
                                                                     <input disabled name="area_visited" type="text"
                                                                         id="" placeholder="Country, State, City"
                                                                         class="form-control"
-                                                                        value="{{$declarationForm->area_visited}}" />
+                                                                        value="{{$patient->declaration_form->area_visited}}" />
                                                                 </fieldset>
                                                             </div>
                                                         </div>
@@ -1178,7 +1142,7 @@
                                                                         <input disabled name="travel_arrival_date" id=""
                                                                             placeholder="" class="form-control"
                                                                             type="text"
-                                                                            value="{{$declarationForm->travel_arrival}}" />
+                                                                            value="{{$patient->declaration_form->travel_arrival}}" />
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label class="font-weight-bold"
@@ -1186,7 +1150,7 @@
                                                                         <input disabled name="travel_return_date" id=""
                                                                             placeholder="" class="form-control"
                                                                             type="text"
-                                                                            value="{{$declarationForm->travel_return}}" />
+                                                                            value="{{$patient->declaration_form->travel_return}}" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1199,7 +1163,7 @@
                                                                 </h4>
                                                             </div>
                                                             <div class="col-md-4 mt-1">
-                                                                @if($declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov
+                                                                @if($patient->declaration_form->contact_with_people_being_infected_suspected_diagnose_with_cov
                                                                 == 0)
                                                                 <span
                                                                     class="btn btn-solid btn-warning contact-with-cov">No</span>
@@ -1219,7 +1183,7 @@
                                                                             name="relationship_last_contact_people"
                                                                             id="" placeholder="" class="form-control"
                                                                             type="text"
-                                                                            value="{{$declarationForm->relationship_with_last_people}}" />
+                                                                            value="{{$patient->declaration_form->relationship_with_last_people}}" />
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label class="font-weight-bold" for="">Last
@@ -1228,7 +1192,7 @@
                                                                         <input disabled name="last_contact_date" id=""
                                                                             placeholder="" class="form-control"
                                                                             type="text"
-                                                                            value="{{$declarationForm->last_contact_date}}" />
+                                                                            value="{{$patient->declaration_form->last_contact_date}}" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1239,7 +1203,7 @@
                                                                     <tr>
                                                                         <td class="col-12 h4">Fever</td>
                                                                         <td>
-                                                                            @if($declarationForm->fever
+                                                                            @if($patient->declaration_form->fever
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1251,7 +1215,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="col-12 h4">Cough</td>
-                                                                        <td> @if($declarationForm->cough
+                                                                        <td> @if($patient->declaration_form->cough
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1265,7 +1229,7 @@
                                                                         <td class="col-12 h4">Shortness of
                                                                             Breath</td>
                                                                         <td>
-                                                                            @if($declarationForm->shortness_of_breath
+                                                                            @if($patient->declaration_form->shortness_of_breath
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1280,7 +1244,7 @@
                                                                             Pain in the
                                                                             Chest</td>
                                                                         <td>
-                                                                            @if($declarationForm->persistent_pain_in_chest
+                                                                            @if($patient->declaration_form->persistent_pain_in_chest
                                                                             == 0)
                                                                             <span
                                                                                 class="btn btn-solid btn-warning">No</span>
@@ -1344,7 +1308,7 @@ hasContactWithCovid();
 
 const getRemarksPassport = () => {
     let months;
-    let d1 = new Date('{{$patientInfo->passport_expdate}}');
+    let d1 = new Date('{{$patient->patientinfo->passport_expdate}}');
     let d2 = new Date();
     let remarksPassport = document.querySelector("#remarks-passport");
     months = (d1.getFullYear() - d2.getFullYear()) * 12;
@@ -1374,7 +1338,7 @@ const getRemarksPassport = () => {
 
 const getRemarksSRB = () => {
     let months;
-    let d1 = new Date('{{$patientInfo->srb_expdate}}');
+    let d1 = new Date('{{$patient->patientinfo->srb_expdate}}');
     let d2 = new Date();
     let remarksSRB = document.querySelector("#remarks-srb");
     months = (d1.getFullYear() - d2.getFullYear()) * 12;

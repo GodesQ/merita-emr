@@ -26,4 +26,12 @@ class Patient extends Model
     public function sched_patients() {
         return $this->hasOne(SchedPatient::class, 'patient_id');
     }
+
+    public function declaration_form() {
+        return $this->hasOne(DeclarationForm::class, 'main_id');
+    }
+
+    public function medical_history() {
+        return $this->hasOne(MedicalHistory::class, 'main_id');
+    }
 }

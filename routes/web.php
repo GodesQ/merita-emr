@@ -44,6 +44,7 @@ use App\Http\Controllers\PrintPanelController;
 use App\Http\Controllers\SOAController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\DocumentationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PatientAuthController::class, 'login']);
@@ -77,7 +78,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     // ----------------------------------------- START PATIENT ACCESS --------------------------------------- //
     Route::get('/see_record', [PatientController::class, 'see_record']);
 
-    Route::get('/documentation', [PatientController::class, 'documentation']);
+    Route::get('/documentation', [DocumentationController::class, 'patient_documentation']);
 
     Route::get('/patient_info', [PatientController::class, 'patient_info']);
 
@@ -117,7 +118,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/filter_agency_employee', [AgencyController::class, 'filter_agency_employee']);
 
-    Route::get('/agency_documentation', [AgencyController::class, 'view_documentation']);
+    Route::get('/agency_documentation', [DocumentationController::class, 'agency_documentation']);
 
     Route::get('/agency_emp', [AgencyController::class, 'view_agency_emp']);
 
@@ -151,7 +152,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/dashboard', [AdminController::class, 'view_dashboard']);
 
-    Route::get('/employee_documentation', [AdminController::class, 'employee_documentation']);
+    Route::get('/employee_documentation', [DocumentationController::class, 'employee_documentation']);
 
     Route::get('/patients', [PatientController::class, 'view_patients'])->name('patients.index');
 

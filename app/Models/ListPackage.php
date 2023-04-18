@@ -21,6 +21,10 @@ class ListPackage extends Model
         return $this->belongsTo(PatientInfo::class);
     }
 
+    public function agency() {
+        return $this->belongsTo(Agency::class, 'agency_id');
+    }
+
     // public function exams() {
     //     return $this->hasMany(List);
     // }
