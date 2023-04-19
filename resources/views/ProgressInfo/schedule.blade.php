@@ -1,17 +1,5 @@
 @extends('layouts.app')
 
-@section('name')
-{{$data['firstname'] . " " . $data['lastname']}}
-@endsection
-
-@section('patient_image')
-@if($data['patient_image'] != null || $data['patient_image'] != "")
-<img src="../../../app-assets/images/profiles/{{$data['patient_image']}}" alt="avatar">
-@else
-<img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
-@endif
-@endsection
-
 @section('content')
 <div class="app-content content">
     <div class="content-body my-2">

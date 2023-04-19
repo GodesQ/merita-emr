@@ -120,12 +120,15 @@ class PatientController extends Controller
     public function store_remedical(Request $request)
     {
         try {
+
+            $current_patient = Patient::where('patientcode', $request->patientcode)->latest('id')->first();
+
             $date = date('Y-m-d h:i:s');
             $mast_patient = new Patient();
             $mast_patient->patientcode = $request->patientcode;
             $mast_patient->patient_signature = $request->patient_signature;
             $mast_patient->email = $request->email;
-            $mast_patient->password = $request->password;
+            $mast_patient->password = $current_patient->password;
             $mast_patient->lastname = strtoupper($request->lastName);
             $mast_patient->middlename = strtoupper($request->middleName);
             $mast_patient->firstname = strtoupper($request->firstName);

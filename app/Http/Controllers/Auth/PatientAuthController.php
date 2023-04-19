@@ -25,7 +25,7 @@ class PatientAuthController extends Controller
             'password' => 'required',
         ]);
 
-        $patient = Patient::where('email', '=', $request->email)->latest('id')->with('patientinfo')->first();
+        $patient = Patient::where('email', $request->email)->latest('id')->with('patientinfo')->first();
 
         if(!$patient) return back()->with("fail", "The email you entered is incorrect. Please check and try again.");
         if(!Hash::check($request->password, $patient->password)) return back()->with("fail", "The password you entered is incorrect. Please check and try again.");
