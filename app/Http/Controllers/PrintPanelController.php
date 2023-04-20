@@ -457,6 +457,15 @@ class PrintPanelController extends Controller
         return view('PrintPanel.standard_club', compact('admission'));
     }
 
+    public function standard_club_north_print(Request $request) {
+        $id = $request->id;
+        $admission = Admission::where('tran_admission.id', $id)
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
+            ->first();
+
+        return view('PrintPanel.north_standard_club', compact('admission'));
+    }
+
     public function medical_record(Request $request) {
         $patient_id = $request->patient_id;
         $id = $request->id;

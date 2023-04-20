@@ -159,6 +159,16 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/land_based.jpg" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/standard_club_north_print?id={{$patientCode->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print North Standard Club</button>
+            </div>
+        </div>
+    </div>
 </div>
 {{-- @extends('layouts.admin-layout')
 

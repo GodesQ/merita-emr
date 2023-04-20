@@ -401,6 +401,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/north_england_print', [PrintPanelController::class, 'north_england_print']);
 
     Route::get('/standard_club_print', [PrintPanelController::class, 'standard_club_print']);
+    Route::get('/standard_club_north_print', [PrintPanelController::class, 'standard_club_north_print']);
+
 
     Route::get('/bermuda_print', [PrintPanelController::class, 'bermuda_print']);
     Route::get('/cayman_print', [PrintPanelController::class, 'cayman_print']);
