@@ -93,11 +93,31 @@
        <b>Stress Test :</b> {{$patient->exam_stresstest->remarks}} <br>
    @endif
 @endif
+
 @if($patient->exam_ultrasound)
-   @if($patient->exam_ultrasound->remarks_status == "findings")
-       <b>Ultrasound :</b> {{$patient->exam_ultrasound->remarks}} <br>
+   @if($patient->exam_ultrasound->kub_exam_status == "findings")
+       <b>KUB Ultrasound :</b> {{$patient->exam_ultrasound->kub_exam_findings}} <br>
    @endif
 @endif
+
+@if($patient->exam_ultrasound)
+   @if($patient->exam_ultrasound->hbt_exam_status == "findings")
+       <b>HBT Ultrasound :</b> {{$patient->exam_ultrasound->hbt_exam_findings}} <br>
+   @endif
+@endif
+
+@if($patient->exam_ultrasound)
+   @if($patient->exam_ultrasound->thyroid_exam_status == "findings")
+       <b>THYROID Ultrasound :</b> {{$patient->exam_ultrasound->thyroid_exam_findings}} <br>
+   @endif
+@endif
+
+@if($patient->exam_ultrasound)
+   @if($patient->exam_ultrasound->breast_exam_status == "findings")
+       <b>BREAST Ultrasound :</b> {{$patient->exam_ultrasound->breast_exam_findings}} <br>
+   @endif
+@endif
+
 @if($patient->exam_xray)
    @if($patient->exam_xray->remarks_status == "findings")
        <b>Xray :</b> {{$patient->exam_xray->remarks}} <br>
@@ -201,7 +221,7 @@
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->albumin_findings)
        <b>ALBUMIN :</b> {{$patient->albumin_findings}} <br>
-   @endif 
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->globulin_findings)
@@ -211,27 +231,27 @@
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sodium_findings)
        <b>SODIUM :</b> {{$patient->sodium_findings}} <br>
-   @endif 
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->potassium_findings)
        <b>POTASSIUM :</b> {{$patient->potassium_findings}} <br>
-   @endif 
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->chloride_findings)
        <b>CHLORIDE :</b> {{$patient->chloride_findings}} <br>
-   @endif 
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->calcium_findings)
        <b>CALCIUM :</b> {{$patient->calcium_findings}} <br>
-   @endif 
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ag_ratio_findings)
        <b>A/G RATIO :</b> {{$patient->ag_ratio_findings}} <br>
-   @endif 
+   @endif
 @endif
 
 @if($patient->exam_hepa)
@@ -492,5 +512,5 @@
 @if($patient->exam_physical)
    @if($patient->exam_physical->c6_findings)
        <b>Dental(Teeth/Gums) :</b> {{$patient->c6_findings}} <br>
-   @endif 
+   @endif
 @endif -->

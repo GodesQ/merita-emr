@@ -590,24 +590,18 @@
                                                                 <td height="20" valign="bottom">1.Have you ever been
                                                                     signed off as sick or repatriated from a ship?
                                                                 </td>
-                                                                <td width="48" align="center" valign="bottom"><input
-                                                                        name="question1" type="radio" style="width: 20px; height: 20px;" id="question1"
-                                                                        value="1" @php echo $exam->question1 == "Yes" ||
-                                                                    $exam->question1 == "1" ? "checked" : ""
+                                                                <td width="48" align="center" valign="bottom"><input name="question1" type="radio" style="width: 20px; height: 20px;" id="question1"
+                                                                        value="1" @php echo $exam->question1 == "Yes" || $exam->question1 == "1" ? "checked" : ""
                                                                     @endphp></td>
-                                                                <td width="43" align="center" valign="bottom"><input
-                                                                        name="question1" type="radio" style="width: 20px; height: 20px;" id="question1"
-                                                                        value="0" @php echo $exam->question1 == "No" ||
-                                                                    $exam->question1 == "0" ? "checked" : ""
+                                                                <td width="43" align="center" valign="bottom"><input name="question1" type="radio" style="width: 20px; height: 20px;" id="question1"
+                                                                        value="0" @php echo $exam->question1 == "No" || $exam->question1 == "0" ? "checked" : ""
                                                                     @endphp></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>&nbsp;</td>
                                                                 <td>2. Have you ever been hospitalized?</td>
                                                                 <td align="center"><input name="question2" type="radio" style="width: 20px; height: 20px;"
-                                                                        id="question2" value="1" @php echo
-                                                                        $exam->question2 == "Yes" ||
-                                                                    $exam->question2 == "1" ? "checked" : ""
+                                                                        id="question2" value="1" @php echo $exam->question2 == "Yes" || $exam->question2 == "1" ? "checked" : ""
                                                                     @endphp>
                                                                 </td>
                                                                 <td align="center"><input name="question2" type="radio" style="width: 20px; height: 20px;"
@@ -2074,6 +2068,7 @@
 window.addEventListener('load', () => {
     computeBMI();
 })
+
 function computeBMI() {
     if (frm.height.value != '' && frm.weight.value != '') {
         var num = frm.weight.value / ((frm.height.value / 100) * (frm.height.value / 100));

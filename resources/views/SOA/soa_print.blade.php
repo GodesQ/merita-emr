@@ -107,12 +107,6 @@ function convertNumber($num = false, $currency = 'Pesos')
             margin: 0.6rem;
         }
 
-        @media print {
-            body {
-                height: 100vh;
-            }
-        }
-
         #pageFooter {
             display: table-footer-group;
         }

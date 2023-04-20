@@ -1,23 +1,10 @@
 @extends('layouts.app')
 
-@section('name')
-{{$data['firstname'] . " " . $data['lastname']}}
-@endsection
-
-@section('patient_image')
-@if($data['patient_image'] != null || $data['patient_image'] != "")
-<img src="../../../app-assets/images/profiles/{{$data['patient_image']}}" alt="avatar">
-@else
-<img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
-@endif
-@endsection
-
 @section('remedical')
-            <div class="mx-1 my-25">
-                <a href="/remedical?patientcode={{session()->get('patientCode')}}" class="text-white btn btn-primary"><i class="fa fa-pencil"></i>
-                    Re Medical</a>
-            </div>
-    @endsection
+    <div class="mx-1 my-25">
+        <a href="/remedical?patientcode={{session()->get('patientCode')}}" class="text-white btn btn-primary"><i class="fa fa-pencil"></i>Re Medical</a>
+    </div>
+@endsection
 
 @section('content')
 <style>
@@ -65,10 +52,8 @@
                                                 <h4 class="form-section"><i class="feather icon-user"></i> Personal
                                                     Info
                                                 </h4>
-                                                <input required type="hidden" value="{{$data['patientId']}}"
-                                                    name="main_id">
-                                                <input type="hidden" name="patientcode"
-                                                    value="{{$data['patientCode']}}">
+                                                <input required type="hidden" value="{{$data['patientId']}}" name="main_id">
+                                                <input type="hidden" name="patientcode" value="{{$data['patientCode']}}">
                                                 <div class=" row">
                                                     <div class="col-md-4">
                                                         <div class="form-group">

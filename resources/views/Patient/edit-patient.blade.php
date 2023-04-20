@@ -1641,14 +1641,14 @@
                                     </b></span>
                             </h5>
                             <div class="my-1">
-                                <button type="button" class="btn btn-sm p-75 m-25 text-white btn-outline-primary {{$patientCode->lab_status == 1 ? 'active' : null}}" data-toggle="modal" data-target="#pendingModal">
+                                <button type="button" class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{$patientCode->lab_status == 1 ? 'active' : null}}" data-toggle="modal" data-target="#pendingModal">
                                     PENDING
                                 </button>
-                                <button data-toggle="modal" data-target="#fitModal" type="button" class="btn btn-sm p-75 m-25 text-white btn-outline-success {{$patientCode->lab_status == 2 ? 'active' : null}}" id="done-btn">FIT</button>
-                                <button type="button" class="btn btn-sm p-75 m-25 text-white btn-outline-primary {{$patientCode->lab_status == 3 ? 'active' : null}}" data-toggle="modal" data-target="#unfitModal">
+                                <button data-toggle="modal" data-target="#fitModal" type="button" class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{$patientCode->lab_status == 2 ? 'active' : null}}" id="done-btn">FIT</button>
+                                <button type="button" class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{$patientCode->lab_status == 3 ? 'active' : null}}" data-toggle="modal" data-target="#unfitModal">
                                     UNFIT
                                 </button>
-                                <button data-toggle="modal" data-target="#unfitTempModal" type="button" class="btn btn-sm p-75 text-white m-25 btn-outline-info {{$patientCode->lab_status == 4 ? 'active' : null}}"
+                                <button data-toggle="modal" data-target="#unfitTempModal" type="button" class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{$patientCode->lab_status == 4 ? 'active' : null}}"
                                     id="done-btn">UNFIT TEMP</button>
                             </div>
                             <div class="modal fade" id="fitModal" tabindex="-1" role="dialog" aria-lablledby="done-btn" aria-hidden="true">
@@ -2008,6 +2008,101 @@
 <script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 <script src="../../../app-assets/js/scripts/custom.js"></script>
+
+{{-- <script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script> --}}
+
+{{-- <script>
+    var tmr;
+
+    function onSign() {
+        if (IsSigWebInstalled()) {
+            var ctx = document.getElementById('cnv').getContext('2d');
+            SetDisplayXSize(500);
+            SetDisplayYSize(100);
+            SetTabletState(0, tmr);
+            SetJustifyMode(0);
+            ClearTablet();
+            if (tmr == null) {
+                tmr = SetTabletState(1, ctx, 50);
+            } else {
+                SetTabletState(0, tmr);
+                tmr = null;
+                tmr = SetTabletState(1, ctx, 50);
+            }
+        } else {
+            alert("Unable to communicate with SigWeb. Please confirm that SigWeb is installed and running on this PC.");
+        }
+    }
+
+    function onClear() {
+        ClearTablet();
+    }
+
+    function onDone() {
+        if (NumberOfTabletPoints() == 0) {
+            alert("Please sign before continuing");
+        } else {
+            SetTabletState(0, tmr);
+            //RETURN TOPAZ-FORMAT SIGSTRING
+            SetSigCompressionMode(1);
+            document.FORM1.bioSigData.value = GetSigString();
+            document.FORM1.sigStringData.value = GetSigString();
+            //this returns the signature in Topaz's own format, with biometric information
+
+
+            //RETURN BMP BYTE ARRAY CONVERTED TO BASE64 STRING
+            SetImageXSize(500);
+            SetImageYSize(100);
+            SetImagePenWidth(5);
+            GetSigImageB64(SigImageCallback);
+        }
+    }
+
+    function SigImageCallback(str) {
+        document.FORM1.sigImageData.value = str;
+    }
+
+    function endDemo() {
+        ClearTablet();
+        SetTabletState(0, tmr);
+    }
+
+    function close() {
+        if (resetIsSupported) {
+            Reset();
+        } else {
+            endDemo();
+        }
+    }
+
+    //Perform the following actions on
+    //	1. Browser Closure
+    //	2. Tab Closure
+    //	3. Tab Refresh
+    window.onbeforeunload = function(evt) {
+        close();
+        clearInterval(tmr);
+        evt.preventDefault(); //For Firefox, needed for browser closure
+    };
+
+    onSign();
+</script> --}}
+
+<script>
+    const medicalStatusButtons = document.querySelectorAll('.medical-status-btn');
+
+    medicalStatusButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            const thisClick = Date.now();
+            if (thisClick - lastClick < 500) {
+                console.log(false);
+            } else {
+                console.log(true);
+            }
+            lastClick = thisClick;
+        });
+    });
+</script>
 
 <script>
 let agency = document.querySelector('#agency');
