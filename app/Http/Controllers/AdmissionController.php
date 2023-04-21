@@ -331,12 +331,10 @@ class AdmissionController extends Controller
 
 
         if($request->lab_status == 0) {
-            if($admission->lab_status != null) {
-                PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
-                // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission));
-                }
+            PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
+            // ReassessmentFindings::where('admission_id', $admission->id)->delete();
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission));
             }
         }
 
