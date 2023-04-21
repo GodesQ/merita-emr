@@ -483,40 +483,39 @@
                                     <td colspan="4">I HAVE READ AND UNDERSTOOD THE CONTENTS OF THE ABOVE AND THE INTEGRAL NOTES HEREOF. </td>
                                   </tr>
                                   <style>
-                                        #divImage {
-                                            width: 100%;
-                                            height: 15px;
-                                            position: relative;
-                                            margin-bottom: 18px;
-                                        }
+                                    #divImage {
+                                        width: 100%;
+                                        height: 25px;
+                                        position: relative;
+                                        margin-bottom: 10px;
+                                    }
 
-                                        #divImage img {
-                                            position: absolute;
-                                            width: 100px;
-                                            height: 40px;
-                                            top: 1%;
-                                            left: 35%;
-                                            object-fit: cover;
-                                        }
+                                    #divImage img {
+                                        position: absolute;
+                                        width: 50%;
+                                        height: 35px;
+                                        top: 20%;
+                                        left: 25%;
+                                    }
                                     </style>
-                                  <tr>
-                                    <td width="27%">&nbsp;</td>
-                                    <td width="48%" align="center">
-                                    <div id="divImage">
-                                        @if($admission->agency_id != 19)
-                                            @if($admission->patient->patient_signature)
-                                                <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp"  />
-                                            @elseif ($admission->patient->signature)
-                                                <img src="data:image/jpeg;base64,{{$admission->patient->signature}}" />
-                                            @else
-                                                <div style="width: 150px;height: 40px;"></div>
-                                            @endif
-                                        @endif
-                                    </div>
-                                    </td>
-                                    <td width="6%">&nbsp;</td>
-                                    <td width="19%">&nbsp;</td>
-                                  </tr>
+                                    <tr>
+                                        <td width="27%">&nbsp;</td>
+                                        <td width="48%" align="center">
+                                            <div id="divImage">
+                                                @if($admission->agency_id != 19)
+                                                    @if($admission->patient->patient_signature)
+                                                        <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp" class="signature-taken" />
+                                                    @elseif ($admission->patient->signature)
+                                                        <img src="data:image/jpeg;base64,{{$admission->patient->signature}}" class="signature-taken"/>
+                                                    @else
+                                                        <div style="width: 150px;height: 40px;"></div>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td width="6%">&nbsp;</td>
+                                        <td width="19%">&nbsp;</td>
+                                    </tr>
                                   <tr>
                                     <td width="30%">APPLICANT’S NAME AND SIGNATURE: </td>
                                     <td align="center" style="border-bottom:solid 1px black"><b><?=$admission->patient->lastname . ", " . $admission->patient->firstname . ' ' . $admission->patient->middlename?></b></td>

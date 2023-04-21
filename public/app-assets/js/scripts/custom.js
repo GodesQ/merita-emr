@@ -11,10 +11,6 @@ function openCamera() {
 function snapShot() {
     document.querySelector('.close').click();
     Webcam.snap(function(data_uri) {
-        // display results in page
-        console.log(data_uri);
-        // document.querySelector('.image-taken').innerHTML =
-        //     '<img src="' + data_uri + '" />';
         document.querySelector('.image-taken').src = data_uri;
         document.querySelector('.patient-image').value = data_uri;
     });
@@ -60,7 +56,7 @@ function onClear() {
 
 function onDone() {
     if (NumberOfTabletPoints() != 0) {
-        SetJustifyMode(1);
+        SetJustifyMode(5);
         SetImageXSize(300);
         SetImageYSize(100);
         SetImagePenWidth(10);
