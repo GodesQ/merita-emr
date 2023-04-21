@@ -60,6 +60,7 @@ function onClear() {
 
 function onDone() {
     if (NumberOfTabletPoints() != 0) {
+        SetJustifyMode(1);
         SetImageXSize(300);
         SetImageYSize(100);
         SetImagePenWidth(10);
