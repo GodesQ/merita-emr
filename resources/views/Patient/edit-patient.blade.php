@@ -1648,7 +1648,9 @@
                                     UNFIT
                                 </button>
                                 <button data-toggle="modal" data-target="#unfitTempModal" type="button" class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{$patientCode->lab_status == 4 ? 'active' : null}}" id="done-btn">UNFIT TEMP</button>
-                                <button class="btn btn-outline-warning medical-status-btn" id="reset-medical-status-btn">Reset</button>
+                                @if($patientCode->lab_status)
+                                    <button class="btn btn-outline-warning medical-status-btn" id="reset-medical-status-btn">Reset</button>
+                                @endif
                             </div>
                             <div class="modal fade" id="fitModal" tabindex="-1" role="dialog" aria-lablledby="done-btn" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
