@@ -16,7 +16,7 @@ class ResetLabStatus extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($patient, $agency, $admission)
     {
         $this->patient = $patient;
         $this->agency = $agency;
