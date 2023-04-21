@@ -177,6 +177,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::post('/store_patient', [PatientController::class, 'store_patient'])->name('patients.store');
 
+        Route::post('/update_patient_signature', [PatientController::class, 'update_patient_signature'])->name('update_patient_signature');
+
         Route::post('/update_patient_basic', [PatientController::class, 'update_patient_basic'])->name('update_patient_basic');
 
         Route::post('/update_patient_agency', [PatientController::class, 'update_patient_agency'])->name('update_patient_agency');
@@ -229,9 +231,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         ->name('admission.delete')
         ->middleware([Transaction::class]);
 
-    Route::post('/update_lab_result', [AdmissionController::class, 'update_lab_result'])
-        ->name('update_lab_result')
-        ->middleware([Transaction::class]);
+    Route::post('/update_lab_result', [AdmissionController::class, 'update_lab_result'])->name('update_lab_result')->middleware([Transaction::class]);
+    Route::post('/reset_lab_result', [AdmissionController::class, 'reset_lab_result'])->name('reset_lab_result')->middleware([Transaction::class]);
 
     Route::post('create_followup', [AdmissionController::class, 'create_followup']);
 

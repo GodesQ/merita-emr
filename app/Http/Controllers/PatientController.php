@@ -958,6 +958,26 @@ class PatientController extends Controller
         ]);
     }
 
+    public function update_patient_signature(Request $request) {
+        if ($request->old_signature == $request->signature) {
+            $signature = $request->old_signature;
+        } else {
+            if (preg_match('/^data:image\/png;base64,/', $request->signature)) {
+                $sign = $request->signature;
+                $signature = base64_encode($sign);
+            } else {
+                $sign = 'data:image/png;base64,' . $request->signature;
+                $signature = base64_encode($sign);
+            }
+        }
+
+        $mast_patient = Patient::where('id', $request->id)->first();
+        $mast_patient->patient_signature = $signature;
+        $save = $mast_patient->save();
+
+        if($save) return response()->json(['status' => true, 'message' => 'Signature updated successfully.'], 200);
+    }
+
     public function update_patient_basic(Request $request)
     {
         try {
@@ -971,15 +991,15 @@ class PatientController extends Controller
                 Image::make($request->patient_image)->save(public_path('app-assets/images/profiles/') . $name);
             }
 
-            if ($request->old_signature == $request->signature) {
-                $signature = $request->old_signature;
-            } else {
-                $signature = base64_encode($request->signature);
-            }
+            // if ($request->old_signature == $request->signature) {
+            //     $signature = $request->old_signature;
+            // } else {
+            //     $sign = 'data:image/png;base64,' . $request->signature;
+            //     $signature = base64_encode($sign);
+            // }
 
-            $mast_patient = Patient::where('id', '=', $request->main_id)->first();
+            $mast_patient = Patient::where('id', $request->main_id)->first();
             $mast_patient->patient_image = $name;
-            $mast_patient->patient_signature = $signature;
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);
             $mast_patient->suffix = strtoupper($request->suffix);

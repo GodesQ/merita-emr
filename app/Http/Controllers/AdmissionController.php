@@ -14,6 +14,7 @@ use App\Models\Agency;
 use App\Models\PhysicalExam;
 use App\Models\User;
 use App\Models\ReassessmentFindings;
+use App\Mail\ResetLabStatus;
 use App\Mail\FitToWork;
 use App\Mail\UnfitToWork;
 use App\Mail\UnfitTempToWork;
@@ -295,16 +296,19 @@ class AdmissionController extends Controller
         $res = Admission::find($id)->delete();
     }
 
+    public function reset_lab_result(Request $request) {
+        $admission = Admission::where('id', $request->id)->first();
+    }
+
     public function update_lab_result(Request $request)
     {
-        // dd($request->all());
         $admission = Admission::where('id', $request->id)->first();
-        $admission->lab_status = isset($request->lab_status) ? $request->lab_status : null;
+        $admission->lab_status = $request->lab_status != 0 ? $request->lab_status : null;
         $admission->remarks = isset($request->remarks) ? $request->remarks : null;
         $admission->doctor_prescription = isset($request->doctor_prescription) ? $request->doctor_prescription : null;
         $admission->prescription = isset($request->prescription) ? $request->prescription : null;
         $admission->prescription_date = $request->lab_status == 1 ? date('Y-m-d') : null;
-        $admission->cause_of_unfit = $request->cause_of_unfit ? $request->cause_of_unfit : null;
+        $admission->cause_of_unfit = isset($request->cause_of_unfit) ? $request->cause_of_unfit : null;
         $save = $admission->save();
 
         if (isset($request->schedule)) {
@@ -319,11 +323,20 @@ class AdmissionController extends Controller
             ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
             ->first();
 
-        $agency = Agency::where('id', $request->agency_id)->first();
+        $agency = Agency::where('id', $admission->agency_id)->first();
 
         $recipients = [$agency->email, $patient->email, env('PROCESSING_EMAIL')];
 
         $doctor = User::where('id', $request->doctor_prescription)->first();
+
+        if($request->lab_status == 0) {
+            PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
+
+            // // ReassessmentFindings::where('admission_id', $admission->id)->delete();
+            // foreach ($recipients as $key => $recipient) {
+            //     Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission));
+            // }
+        }
 
         if ($request->lab_status == 2) {
             PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);

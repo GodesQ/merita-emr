@@ -21,7 +21,6 @@ function snapShot() {
 }
 
 const canvas = document.querySelector(".signature");
-const ctx = canvas.getContext('2d');
 
 const signaturePad = new SignaturePad(canvas, {
     penWidth: 2,
@@ -29,13 +28,102 @@ const signaturePad = new SignaturePad(canvas, {
 
 
 document.querySelector('.clear-signature').addEventListener('click', () => {
-    // console.log(signaturePad.removeBlanks());
     signaturePad.clear();
 })
 
+var tmr;
 
+function onSign() {
+    if (IsSigWebInstalled()) {
+        var ctx = document.querySelector('.signature').getContext('2d');
+        SetDisplayXSize(500);
+        SetDisplayYSize(100);
+        SetTabletState(0, tmr);
+        SetJustifyMode(0);
+        ClearTablet();
+        if (tmr == null) {
+            tmr = SetTabletState(1, ctx, 50);
+        } else {
+            SetTabletState(0, tmr);
+            tmr = null;
+            tmr = SetTabletState(1, ctx, 50);
+        }
+    } else {
+        alert("Unable to communicate with SigWeb. Please confirm that SigWeb is installed and running on this PC.");
+    }
+}
 
+function onClear() {
+    ClearTablet();
+    document.querySelector('#signature_data').value = '';
+}
 
+function onDone() {
+    if (NumberOfTabletPoints() != 0) {
+        SetImageXSize(300);
+        SetImageYSize(100);
+        SetImagePenWidth(10);
+        GetSigImageB64(SigImageCallback);
+
+    } else if(!signaturePad._isEmpty) {
+        submit_patient_signature(signaturePad.toDataURL())
+    } else {
+        Swal.fire(
+            'Failed!',
+            'Please sign before continuing!',
+            'warning'
+        )
+    }
+}
+
+function SigImageCallback(str) {
+    submit_patient_signature(str);
+}
+window.onbeforeunload = function(evt) {
+    close();
+    clearInterval(tmr);
+    evt.preventDefault(); //For Firefox, needed for browser closure
+};
+
+onSign();
+
+function submit_patient_signature(str) {
+    let old_signature_value = document.querySelector('#old_signature').value;
+    let patient_id = $('#patient_id').val();
+    let csrf = $('#patient-signature-form input[name="_token"]').val();
+
+    let data = {
+        "_token": csrf,
+        "id": patient_id,
+        "old_signature": old_signature_value,
+        "signature": str,
+    }
+
+    $.ajax({
+        url: "/update_patient_signature",
+        method: 'POST',
+        data: data,
+        success: function(response) {
+            if (response.status) {
+                Swal.fire(
+                    'Update!',
+                    'Update Successfully!',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Not Send!',
+                    'Update Failed!',
+                    'warning'
+                )
+            }
+        }
+    });
+}
 
 function isTravelAbroadRecently(e) {
     if (e.value == 1) {
@@ -130,7 +218,7 @@ $("#update_patient_basic").submit(function(e) {
         let oldSignature = $("#old_signature").val();
         let signatureInput = document.querySelector('#signature_data');
         signatureInput.value = oldSignature;
-        
+
         const fd = new FormData(this);
         submitForm(fd, "/update_patient_basic");
     } else {

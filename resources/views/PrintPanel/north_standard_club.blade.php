@@ -553,8 +553,7 @@
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
-                                                                <td valign="top">NAME OF ISSUING AUTHORITY: TERESITA F.
-                                                                    GONZALES, MD <br>
+                                                                <td valign="top">NAME OF ISSUING AUTHORITY: TERESITA F. GONZALES, MD <br>
                                                                     ADDRESS: 5th & 6th Flr Jettac Bldg., 920 Quirino
                                                                     Ave. Cor. San Antonio St. Malate Manila <br>
                                                                     <br>

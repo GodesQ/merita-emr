@@ -1,25 +1,39 @@
+<style>
+    .patient-signature {
+        border: 1px solid black;
+    }
+</style>
+
 <fieldset class="my-2">
-    <form action="#" id="update_patient_basic" method="POST">
+    <form action="#" id="patient-signature-form" method="post">
         @csrf
+        <input type="hidden" name="patient_id" id="patient_id" value="{{ $patient->id }}">
         <input type="hidden" name="old_signature" id="old_signature" value="{{ $patient->patient_signature }}">
         <input type="hidden" name="signature" id="signature_data">
+    </form>
+    <div class="col-md-8 d-flex justify-content align-items-center">
+        <img class=" image-taken" src="../../../app-assets/images/profiles/profilepic.jpg" />
+        <div class="d-flex flex-column my-2 mx-4">
+            <canvas class="signature" width="320" height="95"></canvas>
+            <div class="btn-group">
+                <button type='button' class="btn btn-solid btn-primary clear-signature" onclick="javascript:onClear()">Clear</button>
+                <button type='button' class="btn btn-solid btn-success" onclick="javascript:onDone()">Save</button>
+            </div>
+
+        </div>
+    </div>
+
+    <form action="#" id="update_patient_basic" method="POST">
+        @csrf
         <input type="hidden" name="main_id" value="{{ $patient->id }}">
         <input type="hidden" name="old_image" value="{{ $patient->patient_image }}">
         <input type="hidden" name="patientcode" value="{{ $patient->patientcode }}">
         <input type="hidden" class="patient-image" name="patient_image" value="{{ $patient->patient_image }}">
-        <div class="col-md-8 d-flex justify-content align-items-center">
-            <img class=" image-taken" src="../../../app-assets/images/profiles/profilepic.jpg" />
-            <div class="d-flex flex-column my-2 mx-4">
-                <canvas class="signature" width="320" height="95"></canvas>
-                <button type='button' class="btn btn-solid btn-primary clear-signature">Clear</button>
-            </div>
-        </div>
         <div class=" row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="firstName3">First Name :<span class="danger">*</span></label>
-                    <input type="text" class="form-control to_upper" id="firstName3" name="firstName"
-                        value="{{ $patient->firstname }}">
+                    <input type="text" class="form-control to_upper" id="firstName3" name="firstName" value="{{ $patient->firstname }}">
                 </div>
             </div>
 
@@ -29,8 +43,7 @@
                         Last Name :
                         <span class="danger">*</span>
                     </label>
-                    <input type="text" class="form-control lastname to_upper" id="lastName3" name="lastName"
-                        value="{{ $patient->lastname }}">
+                    <input type="text" class="form-control lastname to_upper" id="lastName3" name="lastName" value="{{ $patient->lastname }}">
                 </div>
             </div>
 
@@ -171,16 +184,11 @@
                             value="ROMAN CATHOLIC">ROMAN CATHOLIC</option>
                         <option {{ $patientInfo->religion == 'IGLESIA NI CRISTO' ? 'selected' : null }}
                             value="IGLESIA NI CRISTO">IGLESIA NI CRISTO</option>
-                        <option {{ $patientInfo->religion == 'EVANGELICALS' ? 'selected' : null }}
-                            value="EVANGELICALS">EVANGELICALS</option>
-                        <option {{ $patientInfo->religion == 'SEVENTH DAY ADVENTIST' ? 'selected' : null }}
-                            value="SEVENTH DAY ADVENTIST">SEVENTH DAY ADVENTIST</option>
-                        <option {{ $patientInfo->religion == 'ISLAM' ? 'selected' : null }} value="ISLAM">ISLAM
-                        </option>
-                        <option {{ $patientInfo->religion == 'UECFI' ? 'selected' : null }} value="UECFI">UECFI
-                        </option>
-                        <option {{ $patientInfo->religion == 'OTHERS' ? 'selected' : null }} value="OTHERS">OTHERS
-                        </option>
+                        <option {{ $patientInfo->religion == 'EVANGELICALS' ? 'selected' : null }} value="EVANGELICALS">EVANGELICALS</option>
+                        <option {{ $patientInfo->religion == 'SEVENTH DAY ADVENTIST' ? 'selected' : null }} value="SEVENTH DAY ADVENTIST">SEVENTH DAY ADVENTIST</option>
+                        <option {{ $patientInfo->religion == 'ISLAM' ? 'selected' : null }} value="ISLAM">ISLAM</option>
+                        <option {{ $patientInfo->religion == 'UECFI' ? 'selected' : null }} value="UECFI">UECFI</option>
+                        <option {{ $patientInfo->religion == 'OTHERS' ? 'selected' : null }} value="OTHERS">OTHERS</option>
                     </select>
                     <br>
                     <div class="form-group religion_other_container" style="display: none;">
