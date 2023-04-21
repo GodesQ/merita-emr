@@ -128,11 +128,11 @@
                                                         <div><b>Dear {{$patient->firstname}} {{$patient->lastname}},</b></div> <br>
                                                         <div>
                                                             I am writing to inform you that we have reviewed your recent lab exams, and as a result, we need to reset your medical status at our Merita Diagnostic Clinic. We understand that this may come as a surprise to you, and we apologize for any inconvenience this may cause.
-
+                                                            <br>
                                                             At our clinic, we strive to provide the highest level of care to all our patients, and that includes ensuring that your medical record is accurate and up-to-date. Based on the results of your lab exams, we have determined that your medical status needs to be updated to reflect your current health condition.
-
+                                                            <br>
                                                             We understand that this may be concerning for you, and we are here to support you every step of the way. If you have any questions or concerns about your new medical status or any other aspect of your care, please do not hesitate to contact us. Our team of healthcare professionals is always available to assist you.
-
+                                                            <br>
                                                             We value your trust in us and thank you for choosing Merita Diagnostic Clinic for your healthcare needs. We are committed to providing you with the best possible care, and we look forward to continuing to serve you.
                                                         </div> <br><br>
                                                         <div>
