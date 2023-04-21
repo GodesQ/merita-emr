@@ -49,7 +49,7 @@ function onSign() {
             tmr = SetTabletState(1, ctx, 50);
         }
     } else {
-        alert("Unable to communicate with SigWeb. Please confirm that SigWeb is installed and running on this PC.");
+        // alert("Unable to communicate with SigWeb. Please confirm that SigWeb is installed and running on this PC.");
     }
 }
 
