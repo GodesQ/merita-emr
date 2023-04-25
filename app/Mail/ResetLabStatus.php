@@ -30,7 +30,7 @@ class ResetLabStatus extends Mailable
      */
     public function build()
     {
-        return $this->subject('Review of Lab Results and Resetting of Your Medical Status')
+        return $this->from('processing@meritaclinic.ph')->subject('Review of Lab Results and Resetting of Your Medical Status')
         ->view('emails.reset-lab-status', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
     }
 }

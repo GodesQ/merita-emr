@@ -30,8 +30,8 @@ class UnfitTempToWork extends Mailable
      * @return $this
      */
     public function build()
-    {   
-        return $this->subject('Laboratory Result Status')
+    {
+        return $this->from('processing@meritaclinic.ph')->subject('Laboratory Result Status')
         ->view('emails.unfittemp-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
     }
 }
