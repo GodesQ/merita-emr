@@ -325,16 +325,15 @@ class AdmissionController extends Controller
 
         $agency = Agency::where('id', $admission->agency_id)->first();
 
-        $recipients = [$agency->email, $patient->email, env('PROCESSING_EMAIL')];
+        $recipients = [$agency->email, $patient->email, env('MAIL_USERNAME')];
 
         $doctor = User::where('id', $request->doctor_prescription)->first();
 
 
         if($request->lab_status == 0) {
             PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
-            // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission));
+                Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission))->from(env('PROCESSING_EMAIL'));
             }
         }
 
@@ -356,7 +355,7 @@ class AdmissionController extends Controller
             ]);
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
+                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf))->from(env('PROCESSING_EMAIL'));;
             }
         }
 
@@ -371,7 +370,7 @@ class AdmissionController extends Controller
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission));
+                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission))->from(env('PROCESSING_EMAIL'));;
             }
         }
 
@@ -394,7 +393,7 @@ class AdmissionController extends Controller
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
+                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf))->from(env('PROCESSING_EMAIL'));;
             }
         }
 
@@ -412,7 +411,7 @@ class AdmissionController extends Controller
             }
 
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf))->from(env('PROCESSING_EMAIL'));;
             }
         }
 

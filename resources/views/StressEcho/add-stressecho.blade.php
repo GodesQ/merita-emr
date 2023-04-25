@@ -37,7 +37,7 @@
                                 class="table table-bordered table-responsive">
                                 <tbody>
                                     <tr>
-                                        <td width="92"><b>PEMEE Date</b></td>
+                                        <td width="92"><b>PEME Date</b></td>
                                         <td width="247">
                                             <input required required required name="peme_date" type="text"
                                                 id="peme_date" value="{{$admission->trans_date}}" class="form-control"

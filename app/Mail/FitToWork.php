@@ -18,7 +18,6 @@ class FitToWork extends Mailable
      */
     public function __construct($patient, $agency, $admission, $pdf)
     {
-        //
         $this->patient = $patient;
         $this->agency = $agency;
         $this->admission = $admission;
@@ -32,17 +31,13 @@ class FitToWork extends Mailable
      * @return $this
      */
     public function build()
-    {   
+    {
         $pdf = $this->pdf;
         if($pdf != null) {
-            return $this->subject('Laboratory Result Status')
-            ->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission])
+            return $this->subject('Laboratory Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission])
             ->attachData($this->pdf->output(), 'prescription.pdf');
         } else {
-             return $this->subject('Laboratory Result Status')
-        ->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
+             return $this->subject('Laboratory Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
         }
-       
-
     }
 }
