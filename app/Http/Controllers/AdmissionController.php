@@ -333,7 +333,7 @@ class AdmissionController extends Controller
         if($request->lab_status == 0) {
             PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission))->from(env('PROCESSING_EMAIL'));
+                Mail::to($recipient)->from('processing@meritaclinic.ph')->send(new ResetLabStatus($patient, $agency, $admission));
             }
         }
 
@@ -355,7 +355,7 @@ class AdmissionController extends Controller
             ]);
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf))->from(env('PROCESSING_EMAIL'));;
+                Mail::to($recipient)->from('processing@meritaclinic.ph')->send(new FitToWork($patient, $agency, $admission, $pdf));
             }
         }
 
@@ -370,7 +370,7 @@ class AdmissionController extends Controller
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission))->from(env('PROCESSING_EMAIL'));;
+                Mail::to($recipient)->from('processing@meritaclinic.ph')->send(new UnfitToWork($patient, $agency, $admission))->from('processing@meritaclinic.ph');
             }
         }
 
@@ -393,7 +393,7 @@ class AdmissionController extends Controller
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf))->from(env('PROCESSING_EMAIL'));;
+                Mail::to($recipient)->from('processing@meritaclinic.ph')->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
             }
         }
 
@@ -411,7 +411,7 @@ class AdmissionController extends Controller
             }
 
             foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf))->from(env('PROCESSING_EMAIL'));;
+                Mail::to($recipient)->from('processing@meritaclinic.ph')->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
             }
         }
 
