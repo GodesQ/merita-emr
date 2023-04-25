@@ -325,7 +325,7 @@ class AdmissionController extends Controller
 
         $agency = Agency::where('id', $admission->agency_id)->first();
 
-        $recipients = [$agency->email, $patient->email, env('MAIL_USERNAME')];
+        $recipients = [$agency->email, $patient->email, env('NOREPLY_EMAIL')];
 
         $doctor = User::where('id', $request->doctor_prescription)->first();
 
