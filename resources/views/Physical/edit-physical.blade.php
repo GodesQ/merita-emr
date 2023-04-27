@@ -2065,9 +2065,7 @@
 
 @push('scripts')
 <script>
-window.addEventListener('load', () => {
-    computeBMI();
-})
+
 
 function computeBMI() {
     if (frm.height.value != '' && frm.weight.value != '') {
