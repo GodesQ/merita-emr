@@ -166,27 +166,73 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_0" value="normal" {{ $exam->remarks_status == "normal" ? 'checked' : null }}>Normal
-                                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings" {{ $exam->remarks_status == "findings" ? 'checked' : null }}>With Findings
+                                                            <div class="form-group skull_group">
+                                                                <input name="skull_remarks_status" type="radio" class="m-1" id="skull_remarks_status_0" value="normal" {{ $exam->skull_remarks_status == "normal" ? 'checked' : null }}>Normal
+                                                                <input name="skull_remarks_status" type="radio" class="m-1" id="skull_remarks_status_1" value="findings" {{ $exam->skull_remarks_status == "findings" ? 'checked' : null }}>With Findings
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <input name="nasal_remarks_status" type="radio" class="m-1" id="nasal_remarks_status_0" value="normal" {{ $exam->nasal_remarks_status == "normal" ? 'checked' : null }}>Normal
+                                                                <input name="nasal_remarks_status" type="radio" class="m-1" id="nasal_remarks_status_1" value="findings" {{ $exam->nasal_remarks_status == "findings" ? 'checked' : null }}>With Findings
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <input name="chest_remarks_status" type="radio" class="m-1" id="chest_remarks_status_0" value="normal" {{ $exam->chest_remarks_status == "normal" ? 'checked' : null }}>Normal
+                                                                <input name="chest_remarks_status" type="radio" class="m-1" id="chest_remarks_status_1" value="findings" {{ $exam->chest_remarks_status == "findings" ? 'checked' : null }}>With Findings
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <input name="lumbosacral_remarks_status" type="radio" class="m-1" id="lumbosacral_remarks_status_0" value="normal" {{ $exam->lumbosacral_remarks_status == "findings" ? 'checked' : null }}>Normal
+                                                                <input name="lumbosacral_remarks_status" type="radio" class="m-1" id="lumbosacral_remarks_status_1" value="findings" {{ $exam->lumbosacral_remarks_status == "findings" ? 'checked' : null }}>With Findings
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <input name="knees_remarks_status" type="radio" class="m-1" id="knees_remarks_status_0" value="normal" {{ $exam->knees_remarks_status == "normal" ? 'checked' : null }}>Normal
+                                                                <input name="knees_remarks_status" type="radio" class="m-1" id="knees_remarks_status_1" value="findings" {{ $exam->knees_remarks_status == "findings" ? 'checked' : null }}>With Findings
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">Findings</label>
-                                                                <textarea class="form-control" name="remarks"
-                                                                    id="" cols="30" rows="6">{{ $exam->remarks }}</textarea>
+                                                            <div class="form-group skull_group">
+                                                                <label class="font-weight-bold">Skull Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="skull_findings" id="" cols="30" rows="6">{{ $exam->skull_findings }}</textarea>
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <label class="font-weight-bold">Nasal Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="nasal_findings" id="" cols="30" rows="6">{{ $exam->nasal_findings }}</textarea>
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <label class="font-weight-bold">Chest Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="chest_findings" id="" cols="30" rows="6">{{ $exam->chest_findings }}</textarea>
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <label class="font-weight-bold">Lumbosacral Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="lumbosacral_findings" id="" cols="30" rows="6">{{ $exam->lumbosacral_findings }}</textarea>
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <label class="font-weight-bold">Knees Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="knees_findings" id="" cols="30" rows="6">{{ $exam->knees_findings }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="recommendation"
-                                                                    id="" cols="30" rows="6">{{ $exam->recommendation }}</textarea>
+                                                            <div class="form-group skull_group">
+                                                                <label class="font-weight-bold">Skull Recommendation</label>
+                                                                <textarea placeholder="Skull Recommendation" class="form-control" name="skull_recommendations" id="" cols="30" rows="6">{{ $exam->skull_recommendations }}</textarea>
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <label class="font-weight-bold">Nasal Recommendation</label>
+                                                                <textarea placeholder="Nasal Recommendation" class="form-control" name="nasal_recommendations" id="" cols="30" rows="6">{{ $exam->nasal_recommendations }}</textarea>
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <label class="font-weight-bold">Chest Recommendation</label>
+                                                                <textarea placeholder="Chest Recommendation" class="form-control" name="chest_recommendations" id="" cols="30" rows="6">{{ $exam->chest_recommendations }}</textarea>
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <label class="font-weight-bold">Lumbosacral Recommendation</label>
+                                                                <textarea placeholder="Lumbosacral Recommendation" class="form-control" name="lumbosacral_recommendations" id="" cols="30" rows="6">{{ $exam->lumbosacral_recommendations }}</textarea>
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <label class="font-weight-bold">Knees Recommendation</label>
+                                                                <textarea placeholder="Knees Recommendation" class="form-control" name="knees_recommendations" id="" cols="30" rows="6">{{ $exam->knees_recommendations }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -225,7 +271,7 @@
                                                                 <select required name="technician2_id"
                                                                     id="technician2_id" class="form-control">
                                                                     @foreach($radiologists as $radiologist)
-                                                                    <option value={{$radiologist->id}} {{$radiologist->id == $exam->technician_id ? "selected" : null}} >{{$radiologist->firstname}} {{$radiologist->lastname}}</option>
+                                                                        <option value={{$radiologist->id}} {{$radiologist->id == $exam->technician_id ? "selected" : null}}>{{$radiologist->firstname}} {{$radiologist->lastname}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -359,6 +405,46 @@
                     $(`<option value='${arr}' ${selected}>${arr}</option>`).appendTo(exam_view);
                 })
             }
+
+            window.addEventListener('load', () => {
+                selectExam(exam);
+
+                $(document).ready(function() {
+                    dispExam($('#exam_type').val());
+                });
+            });
+
+        $('#exam_type').change(function() {
+            dispExam($('#exam_type').val());
+        });
+
+        function dispExam(exam) {
+            $('.skull_group').hide();
+            $('.nasal_group').hide();
+            $('.lumbosacral_group').hide();
+            $('.knees_group').hide();
+            $('.chest_group').hide();
+
+            if(exam == 'Chest (Adult)') {
+                $('.chest_group').show();
+            }
+
+            if(exam == 'Skull') {
+                $('.skull_group').show();
+            }
+
+            if(exam == 'Nasal') {
+                $('.nasal_group').show();
+            }
+
+            if(exam == 'Lumbosacral') {
+                $('.lumbosacral_group').show();
+            }
+
+            if(exam == 'Knees') {
+                $('.knees_group').show();
+            }
+        }
 
         </script>
     @endpush

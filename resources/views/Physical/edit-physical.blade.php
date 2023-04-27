@@ -869,7 +869,7 @@
                                                                     <div class="col-md-12">
                                                                         <input name="bmi" type="text"
                                                                             class="form-control" id="bmi" value="{{ $exam->bmi }}"
-                                                                            size="20" readonly="">
+                                                                            size="20">
                                                                     </div>
                                                                 </td>
                                                                 <td align="center">

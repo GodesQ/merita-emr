@@ -1205,7 +1205,7 @@ return mysqli_fetch_array($result);
                                                                     <div class="col-md-12">
                                                                         <input name="bmi" type="text"
                                                                             class="form-control" id="bmi" value="{{$exam_cardio ? $exam_cardio->bmi : null}}"
-                                                                            size="20" readonly="">
+                                                                            size="20">
                                                                     </div>
                                                                 </td>
                                                                 <td align="center">

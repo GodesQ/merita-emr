@@ -139,25 +139,73 @@ Mediastinum, diaphragm, and bony thorax are unremarkable.</textarea>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_0" value="normal">Normal
-                                                                <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings">With Findings
+                                                            <div class="form-group skull_group">
+                                                                <input name="skull_remark_status" type="radio" class="m-1" id="skull_remark_status_0" value="normal">Normal
+                                                                <input name="skull_remark_status" type="radio" class="m-1" id="skull_remark_status_1" value="findings">With Findings
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <input name="nasal_remark_status" type="radio" class="m-1" id="nasal_remark_status_0" value="normal">Normal
+                                                                <input name="nasal_remark_status" type="radio" class="m-1" id="nasal_remark_status_1" value="findings">With Findings
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <input name="chest_remark_status" type="radio" class="m-1" id="chest_remark_status_0" value="normal">Normal
+                                                                <input name="chest_remark_status" type="radio" class="m-1" id="chest_remark_status_1" value="findings">With Findings
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <input name="lumbosacral_remark_status" type="radio" class="m-1" id="lumbosacral_remark_status_0" value="normal">Normal
+                                                                <input name="lumbosacral_remark_status" type="radio" class="m-1" id="lumbosacral_remark_status_1" value="findings">With Findings
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <input name="knees_remark_status" type="radio" class="m-1" id="knees_remark_status_0" value="normal">Normal
+                                                                <input name="knees_remark_status" type="radio" class="m-1" id="knees_remark_status_1" value="findings">With Findings
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">Findings</label>
-                                                                <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6"></textarea>
+                                                            <div class="form-group skull_group">
+                                                                <label class="font-weight-bold">Skull Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="skull_findings" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <label class="font-weight-bold">Nasal Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="nasal_findings" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <label class="font-weight-bold">Chest Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="chest_findings" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <label class="font-weight-bold">Lumbosacral Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="lumbosacral_findings" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <label class="font-weight-bold">Knees Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="knees_findings" id="" cols="30" rows="6"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30" rows="6"></textarea>
+                                                            <div class="form-group skull_group">
+                                                                <label class="font-weight-bold">Skull Recommendation</label>
+                                                                <textarea placeholder="Skull Recommendation" class="form-control" name="skull_recommendations" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group nasal_group">
+                                                                <label class="font-weight-bold">Nasal Recommendation</label>
+                                                                <textarea placeholder="Nasal Recommendation" class="form-control" name="nasal_recommendations" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group chest_group">
+                                                                <label class="font-weight-bold">Chest Recommendation</label>
+                                                                <textarea placeholder="Chest Recommendation" class="form-control" name="chest_recommendations" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group lumbosacral_group">
+                                                                <label class="font-weight-bold">Lumbosacral Recommendation</label>
+                                                                <textarea placeholder="Lumbosacral Recommendation" class="form-control" name="lumbosacral_recommendations" id="" cols="30" rows="6"></textarea>
+                                                            </div>
+                                                            <div class="form-group knees_group">
+                                                                <label class="font-weight-bold">Knees Recommendation</label>
+                                                                <textarea placeholder="Knees Recommendation" class="form-control" name="knees_recommendations" id="" cols="30" rows="6"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -218,12 +266,12 @@ Mediastinum, diaphragm, and bony thorax are unremarkable.</textarea>
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        
+
         function selectExam(e) {
             // global selection
             const arrExamHNType = ["Skull", "Nasal", "Paranasal Sinuses", "Cervical Spine"];
             const arrExamHNView = ["AP","Lateral","AP/LAT","Skull Series","Water`s View","Townes View"];
-            const arrExamCType = ["Chest (Adult)", "Chest (Child)"];
+            const arrExamCType = ["Chest (Adult)"];
             const arrExamCView = ["PA 11 X 14","PA 14 X 14","PA 14 X 14","AP","Lateral","AP/LAT","APL (Lordotic)","Spot Film","Lateral Decubitus"];
             const arrExamAType = ["Plain Abdomen (Adult)","Plain Abdomen (Child)","KUB","Pelvimetry"];
             const arrExamAView = ["Upright","Supine","AP","Lateral","AP/LAT"];
@@ -231,7 +279,7 @@ Mediastinum, diaphragm, and bony thorax are unremarkable.</textarea>
             const arrExamSTView = ["AP","Lateral","AP/LAT","Oblique"];
             const arrExamUEType = ["Clavicle","Scapula","Shoulder","Humerus","Elbow Joint","Forearm","Wrist Joint","Hands/Fingers"]
             const arrExamUEView = ["AP","Lateral","AP/LAT","Oblique"];
-            const arrExamLEType = ["Pelvic Bone","Hips (Adult)","Hips (Child)","Knees","Femur","Ankle Joint","Foot", "Toes", "Thigh", "Legs"];
+            const arrExamLEType = ["Pelvic Bone","Hips","Knees","Femur","Ankle Joint","Foot", "Toes", "Thigh", "Legs"];
             const arrExamLEView = ["AP","Lateral","AP/LAT","Oblique"];
 
             // parent element
@@ -245,7 +293,7 @@ Mediastinum, diaphragm, and bony thorax are unremarkable.</textarea>
                     $('#findings').val(``);
                     $('#impression').val(``);
                     break;
-                
+
                 case "Chest":
                     removeFirstOption();
                     appendOption(arrExamCType, arrExamCView, e)
@@ -284,10 +332,12 @@ Pedicle are within normal.`);
                     $('#findings').val(`No osseous or joint space abnormality`);
                     $('#impression').val(`Normal both knees.`)
                 break;
-            
+
                 default:
                     break;
             }
+
+            dispExam($('#exam_type').val());
         }
 
         function removeFirstOption() {
@@ -300,60 +350,89 @@ Pedicle are within normal.`);
             type.forEach(arr => {
                 if(exam.value == "Skeletal") {
                     if(arr == 'Lumbosacral') {
-                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);   
+                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);
                     } else {
-                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);   
-                    }    
+                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);
+                    }
                 }
-                
+
                 if(exam.value == "Lower Extremities") {
                     if(arr == 'Knees') {
-                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);   
+                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);
                     } else {
-                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);   
-                    }    
+                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);
+                    }
                 }
-                
+
                 if(exam.value == "Chest") {
                     if(arr == 'Chest (Adult)') {
-                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);   
+                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_type);
                     } else {
-                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);   
-                    }    
+                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);
+                    }
                 }
-                
-                return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);   
-                
+
+                return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_type);
+
             });
 
             // append view option
             view.forEach(arr => {
-                
+
                 if(exam.value == "Skeletal" || exam.value == "Lower Extremities") {
                     if(arr == 'AP/LAT') {
-                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_view);   
+                        return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_view);
                     } else {
-                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_view);   
-                    }    
+                        return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_view);
+                    }
                 }
-                
-                // if() {
-                //     if(arr == 'AP/LAT') {
-                //         return $(`<option value='${arr}' selected>${arr}</option>`).appendTo(exam_view);   
-                //     } else {
-                //         return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_view);   
-                //     }    
-                // }
-                
+
                 return $(`<option value='${arr}'>${arr}</option>`).appendTo(exam_view);
             })
         }
-        
+
         let exam = document.querySelector('#exam');
+
         window.addEventListener('load', () => {
            selectExam(exam);
-           console.log(exam.value);
+
+           $(document).ready(function() {
+                dispExam($('#exam_type').val());
+            });
         });
+
+        $('#exam_type').change(function() {
+            dispExam($('#exam_type').val());
+        });
+
+        function dispExam(exam) {
+            $('.skull_group').hide();
+            $('.nasal_group').hide();
+            $('.lumbosacral_group').hide();
+            $('.knees_group').hide();
+            $('.chest_group').hide();
+
+            if(exam == 'Chest (Adult)') {
+                $('.chest_group').show();
+            }
+
+            if(exam == 'Skull') {
+                $('.skull_group').show();
+            }
+
+            if(exam == 'Nasal') {
+                $('.nasal_group').show();
+            }
+
+            if(exam == 'Lumbosacral') {
+                $('.lumbosacral_group').show();
+            }
+
+            if(exam == 'Knees') {
+                $('.knees_group').show();
+            }
+        }
+
 
     </script>
 @endpush
