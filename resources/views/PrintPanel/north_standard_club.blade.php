@@ -27,6 +27,36 @@
     <center>
         <table width="680" border="0" cellpadding="0" cellspacing="0">
             <tr>
+                <td>
+                    <img src="../../../app-assets/images/logo/marine-med-logo.png" width="90" height="90" alt="">
+                </td>
+                <td>
+                    <table width="100%" cellpadding="2" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td width="20" rowspan="3" align="center">
+                                    <img src="../../../app-assets/images/logo/logo.jpg" width="70" height="70" alt="">
+                                </td>
+                                <td width="396" rowspan="3" align="center" valign="center">
+                                    <span class="lblCompName" style="font-size: 20px; font-weight: 800;font-family: serif; color: #156f29">MERITA DIAGNOSTIC CLINIC INC.</span><br
+                                        style="margin-bottom: 20px">
+                                    <div style="color: #156f29; font-size: 9px;">
+                                        5th Flr Jettac Building., #920 Pres. Quirino Ave.
+                                        corner San Antonio St. Malate, Manila, Philippines<br>
+                                        Tel Nos.: (632) 8404-3411 / (633) 7003-0403 * Cell No.: +63917 857-6942 / +63908 890-8850<br>
+                                        Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
+                                        Accredited: DOH (RLS 13-026-2123-MF-2) &#8226; POEA &#8226; MARINA Global Group ISO 9001:2015<br>Skuld
+                                        P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <img width="120" src="../../../app-assets/images/logo/standardclub_north.png">
+                </td>
+            </tr>
+            <tr>
                 <td height="100" colspan="3" align="center" valign="bottom" class="lblReport">
                     <table width="100%" border="0" cellpacing="0" cellpadding="2">
                         <tr>
@@ -543,13 +573,13 @@
                                                                     TERESITA F. GONZALES, MD<br>
                                                                     MEDICAL DIRECTOR
                                                                 </td>
-                                                                <td><img width="170" src="../../../app-assets/images/logo/standardclub_north.png"></td>
+                                                                <td></td>
                                                             </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="120" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="100" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
