@@ -37,7 +37,7 @@
                 <td>
                     <table width="545" cellpadding="5" cellspacing="0">
                         <tbody>
-
+                            @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
                                 <tr>
                                     <td width="10" rowspan="3" align="center">
                                         <img src="../../../app-assets/images/logo/logo.jpg" width="65" height="65" alt="">
@@ -54,7 +54,7 @@
                                             P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority</div>
                                     </td>
                                 </tr>
-
+                            @endif
                         </tbody>
                     </table>
                 </td>
