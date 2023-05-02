@@ -50,7 +50,7 @@
                                     <td width="7%" rowspan="5" align="center"><img src="../../../app-assets/images/logo/logo.jpg" width="80" height="80" alt=""></td>
                                     <td width="73%" align="center">
                                         <span style="font-size: 25px; font-weight: 800;">MERITA DIAGNOSTIC CLINIC INC.</span> <br>
-                                        <span>5th &amp; 6th Flr Jettac Bldg., 920 Quirino Ave. Cor. San Antonio St. Malate, Manila</span>
+                                        <span>5th &amp; 6th Flr Jettac Bldg., 920 Quirino Ave. Cor.. San Antonio St. Malate, Manila</span>
                                     </td>
                                     <td width="20%"></td>
                                 </tr>
