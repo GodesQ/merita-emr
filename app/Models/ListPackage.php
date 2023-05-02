@@ -22,7 +22,7 @@ class ListPackage extends Model
     }
 
     public function agency() {
-        return $this->belongsTo(Agency::class, 'agency_id');
+        return $this->hasOne(Agency::class, 'id', 'agency_id');
     }
 
     public function patientsinfo()

@@ -1,6 +1,18 @@
 @extends('layouts.admin-layout')
 
 @section('content')
+<style>
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
+
+    @media screen and (max-width: 1140px) {
+        .data-table tbody tr td {
+            font-size: 10px;
+        }
+    }
+</style>
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
@@ -20,14 +32,13 @@
             @endif
 
             <div class="row">
-                <div class="col-xl-4 col-lg-12">
+                <div class="col-xl-6 col-lg-12">
                     <div class="container mb-1 p-0">
                         <input type="date" max="2050-12-31" name="request_date" value="{{session()->get('request_date')}}" id="request_date" class="form-control">
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Total Numbers of Medical Packages Today</h4>
-                            <span class="sub-heading">click the patient name or the edit button to edit or view the patient's information.</span>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -43,10 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-xl-12">
-
-                </div>
-                <div class="col-xl-4 col-xl-12">
+                <div class="col-xl-6 col-xl-12">
 
                 </div>
             </div>
@@ -87,5 +95,18 @@
                 }
             ],
         })
+
+        $("#request_date").change( function(e){
+            $.ajax({
+                url: "/dashboard",
+                data: {
+                    "request_date" : e.target.value
+                },
+                success: function(result){
+                    console.log(result);
+                    location.reload();
+                }
+            });
+        });
     </script>
 @endpush

@@ -74,25 +74,28 @@ class AdminController extends Controller
         $today = session()->get('request_date');
 
         if($request->ajax()) {
+            $patientCounts = Patient::select('mast_patientinfo.medical_package', DB::raw('count(*) as count'))
+                ->join('mast_patientinfo', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
+                ->join('sched_patients', 'mast_patient.id', '=', 'sched_patients.patient_id')
+                ->where('sched_patients.date', $today)
+                ->groupBy('mast_patientinfo.medical_package')
+                ->get()
+                ->keyBy('medical_package');
 
-            $packages = ListPackage::with(['patientinfo' => function($q) {
-                $q->select('medical_package', 'main_id');
-            }])
-            ->select('*')
-            ->get();
+            $packages = ListPackage::select('id', 'packagename', 'agency_id')
+                ->with('agency')
+                ->get()
+                ->map(function($row) use ($patientCounts) {
+                    $row->total = $patientCounts->get($row->id)->count ?? 0;
+                    $row->packagename = $row->packagename . ' ' . '(' . optional($row->agency)->agencyname . ')';
+                    return $row;
+                })
+                ->filter(function($row) {
+                    return $row->total > 0;
+                });
 
             return DataTables::of($packages)
                 ->addIndexColumn()
-                ->addColumn('total', function ($row) {
-                    $today = session()->get('request_date');
-                    $patientCount = $row->patientinfo->whereHas('patient', function($q) use ($today) {
-                            $q->whereHas('sched_patients', function($q) use ($today) {
-                                $q->where('date', $today);
-                            });
-                        })
-                        ->count();
-                    return $patientCount;
-                })
                 ->toJson();
 
         }
@@ -209,13 +212,14 @@ class AdminController extends Controller
             }
         }
 
+
         return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
 
-        if(session()->get('dept_id') == 1 || session()->get('dept_id') == 8) {
-            return view('layouts.admin-dashboard');
-        } else {
-
-        }
+        // if(session()->get('dept_id') == 1 || session()->get('dept_id') == 8) {
+        //     return view('layouts.admin-dashboard');
+        // } else {
+        //     return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
+        // }
     }
 
     public function month_scheduled_patients(Request $request)
