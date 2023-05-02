@@ -23,6 +23,7 @@
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
+
             @if(Session::get('fail'))
                 <div class="danger alert-danger p-2 my-2 rounded">
                     {{Session::get('fail')}}
@@ -38,9 +39,9 @@
 
             <div class="row">
                 <div class="col-xl-8 col-lg-12">
-                    <div class="container mb-1 p-0">
-                        <input type="date" max="2050-12-31" name="request_date" value="{{session()->get('request_date')}}" id="request_date" class="form-control">
-                    </div>
+                        <div class="container mb-1 p-0">
+                            <input type="date" max="2050-12-31" name="request_date" value="{{session()->get('request_date')}}" id="request_date" class="form-control">
+                        </div>
                     <div class="card">
                         <div class="row">
                             <div class="col-md-12">
@@ -307,11 +308,11 @@
     </div>
 </div>
 @if(Session::get('success_support'))
-@push('scripts')
-<script>
-    toastr.success('{{Session::get("success_support")}}', 'Success');
-</script>
-@endpush
+    @push('scripts')
+    <script>
+        toastr.success('{{Session::get("success_support")}}', 'Success');
+    </script>
+    @endpush
 @endif
 @endsection
 

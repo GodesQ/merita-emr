@@ -70,6 +70,20 @@ class AdminController extends Controller
         }
     }
 
+    public function today_medical_packages(Request $request) {
+        $today = $data['request_date'];
+        if($request->ajax()) {
+            $packages = ListPackage::select('*');
+
+            return DataTables::of($packages)
+                    ->addIndexColumn()
+                    ->addColumn('total', function ($row) {
+
+                    })
+                    ->toJson();
+        }
+    }
+
     // RETURN TO DASHBOARD PAGE
     public function view_dashboard(Request $request)
     {

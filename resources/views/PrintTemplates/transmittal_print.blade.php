@@ -92,7 +92,7 @@
                             @endif
                         </tr>
                         @php
-                            $count = 1; 
+                            $count = 1;
                         @endphp
                         @if (count($patients) != 0)
                         @foreach ($patients as $key => $patient)
@@ -110,8 +110,8 @@
                                 </td>
                                 <td align="left" valign="top">@include('Transmittal.patients-recommendations', [$patient])</td>
                                 <td align="left" valign="top">
-                                    <?php 
-                                        if($patient->lab_status  == '3') { 
+                                    <?php
+                                        if($patient->lab_status  == '3') {
                                             $status = 'Unfit';
                                         } else if($patient->lab_status  == '2') {
                                             $status = 'Fit';
@@ -123,8 +123,10 @@
                                             $status = '';
                                         }
                                     ?>
+                                    <?php $pe_status = null; ?>
                                     @if($patient->exam_physical)
                                         <?php
+                                            $pe_status = null;
                                             if($patient->exam_physical->fit == 'Fit') {
                                                 $pe_status = 'Fit to Work';
                                             } else if($patient->exam_physical->fit == 'Unfit') {
@@ -158,7 +160,7 @@
                                     </td>
                                 @endif
                                 <td align="left">
-                                    
+
                                 </td>
                                 @if(in_array("vessel", $additional_columns))
                                     <td align="left">{{$patient->vesselname}}</td>
@@ -180,7 +182,7 @@
                                     </td>
                                 @endif
                             </tr>
-                            
+
                         @endforeach
                         @else
                         <tr>
@@ -193,7 +195,7 @@
             </td>
         </tr>
     </table>
-    
+
     <script>
         window.addEventListener('load', () => {
             let url_string = location.href;
@@ -204,36 +206,36 @@
             }else {
                 var data = [];
             	var rows = document.querySelectorAll(".brdTable tr");
-            			
+
             	for (var i = 0; i < rows.length; i++) {
             		var row = [], cols = rows[i].querySelectorAll("td, th");
             		for (var j = 0; j < cols.length; j++) {
             		        let col = cols[j].innerText.replace(/,|\n/g, " ")
             		        row.push(col);
                     }
-            		data.push(row.join(",")); 	
+            		data.push(row.join(","));
             	}
-            
+
             	downloadCSVFile(data.join("\n"), 'transmittal_report');
             	window.close();
-            } 
+            }
         });
-        
+
         function downloadCSVFile(csv, filename) {
             var csv_file, download_link;
-            
+
             csv_file = new Blob([csv], {type: "text/csv"});
-            
+
             download_link = document.createElement("a");
-            
+
             download_link.download = filename;
-            
+
             download_link.href = window.URL.createObjectURL(csv_file);
-            
+
             download_link.style.display = "none";
-            
+
             document.body.appendChild(download_link);
-            
+
             download_link.click();
         }
     </script>

@@ -158,6 +158,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/today_patients', [AdminController::class, 'today_patients']);
 
+    Route::get('/today_medical_packages', [AdminController::class, 'today_medical_packages']);
+
     Route::post('/submit_agency_password_form', [AgencyController::class, 'submit_agency_password_form']);
 
     //------------------------------- CRUD OF PATIENT IN ADMIN ACCESS ---------------------------------------- //
