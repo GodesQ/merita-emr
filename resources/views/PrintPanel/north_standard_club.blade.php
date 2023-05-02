@@ -20,28 +20,32 @@
     .fontMed {
         font: normal 12px constantia;
     }
+    @page {
+        size: letter;
+        margin: 0;
+    }
     </style>
 </head>
 
 <body>
     <center>
-        <table width="680" border="0" cellpadding="0" cellspacing="0">
+        <table width="710" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
-                    <img src="../../../app-assets/images/logo/marine-med-logo.png" width="90" height="90" alt="">
+                    <img src="../../../app-assets/images/logo/marine-med-logo.png" width="70" height="70" alt="">
                 </td>
                 <td>
-                    <table width="470" cellpadding="5" cellspacing="0">
+                    <table width="545" cellpadding="5" cellspacing="0">
                         <tbody>
-                            @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+
                                 <tr>
-                                    <td width="20" rowspan="3" align="center">
-                                        <img src="../../../app-assets/images/logo/logo.jpg" width="70" height="70" alt="">
+                                    <td width="10" rowspan="3" align="center">
+                                        <img src="../../../app-assets/images/logo/logo.jpg" width="65" height="65" alt="">
                                     </td>
-                                    <td width="396" rowspan="3" align="center" valign="center">
-                                        <span class="lblCompName" style="font-size: 20px; font-weight: 800;font-family: serif; color: #156f29">MERITA DIAGNOSTIC CLINIC INC.</span><br
-                                            style="margin-bottom: 20px">
-                                        <div style="color: #156f29; font-size: 8px;">
+                                    <td width="525" rowspan="3" align="center" valign="center">
+                                        <span class="lblCompName" style="font-size: 26px; font-weight: 800;font-family: serif; color: #156f29">MERITA DIAGNOSTIC CLINIC INC.</span><br
+                                            style="margin-bottom: 10px">
+                                        <div style="color: #156f29; font-size: 10.5px;">
                                             5th Flr Jettac Building., #920 Pres. Quirino Ave.
                                             corner San Antonio St. Malate, Manila, Philippines<br>
                                             Tel Nos.: (632) 8404-3411 / (633) 7003-0403 * Cell No.: +63917 857-6942 / +63908 890-8850<br>
@@ -50,12 +54,12 @@
                                             P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority</div>
                                     </td>
                                 </tr>
-                            @endif
+
                         </tbody>
                     </table>
                 </td>
                 <td>
-                    <img width="120" src="../../../app-assets/images/logo/standardclub_north.png">
+                    <img width="100" src="../../../app-assets/images/logo/standardclub_north.png">
                 </td>
             </tr>
             <tr>
@@ -91,10 +95,10 @@
             </tr>
             <tr>
                 <td colspan="3" valign="top">
-                    <table width="680" border="0" cellspacing="1" cellpadding="0">
+                    <table width="710" border="0" cellspacing="1" cellpadding="0">
                         <tr>
                             <td align="center">
-                                <table width="680" border="0" cellpadding="3" cellspacing="0" class="brdMLC">
+                                <table width="710" border="0" cellpadding="3" cellspacing="0" class="brdMLC">
                                     <tr>
                                         <td colspan="2" valign="top" style="text-transform: uppercase;">
                                             SURNAME/LAST NAME:<br>
@@ -498,7 +502,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <table width="678" border="0" cellpadding="0" cellspacing="0" class="brdAll">
+                                <table width="710" border="0" cellpadding="0" cellspacing="0" class="brdAll">
                                     <tr>
                                         <td>
                                             <table width="678" border="0" cellpadding="3" cellspacing="0">
@@ -581,7 +585,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="100" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="70" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
@@ -606,7 +610,7 @@
 
                         <tr>
                             <td>
-                                <table width="680" border="0" cellpadding="2" cellspacing="0" class="brdMLC">
+                                <table width="710" border="0" cellpadding="2" cellspacing="0" class="brdMLC">
                                     <tr>
                                         <td colspan="7">
                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" id="brdNone">

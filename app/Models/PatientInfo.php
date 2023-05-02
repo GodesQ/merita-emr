@@ -25,4 +25,5 @@ class PatientInfo extends Model
     public function package() {
         return $this->hasOne(ListPackage::class, 'id', 'medical_package');
     }
+
 }

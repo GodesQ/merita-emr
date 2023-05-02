@@ -71,16 +71,30 @@ class AdminController extends Controller
     }
 
     public function today_medical_packages(Request $request) {
-        $today = $data['request_date'];
+        $today = session()->get('request_date');
+
         if($request->ajax()) {
-            $packages = ListPackage::select('*');
+
+            $packages = ListPackage::with(['patientinfo' => function($q) {
+                $q->select('medical_package', 'main_id');
+            }])
+            ->select('*')
+            ->get();
 
             return DataTables::of($packages)
-                    ->addIndexColumn()
-                    ->addColumn('total', function ($row) {
+                ->addIndexColumn()
+                ->addColumn('total', function ($row) {
+                    $today = session()->get('request_date');
+                    $patientCount = $row->patientinfo->whereHas('patient', function($q) use ($today) {
+                            $q->whereHas('sched_patients', function($q) use ($today) {
+                                $q->where('date', $today);
+                            });
+                        })
+                        ->count();
+                    return $patientCount;
+                })
+                ->toJson();
 
-                    })
-                    ->toJson();
         }
     }
 
@@ -196,6 +210,12 @@ class AdminController extends Controller
         }
 
         return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
+
+        if(session()->get('dept_id') == 1 || session()->get('dept_id') == 8) {
+            return view('layouts.admin-dashboard');
+        } else {
+
+        }
     }
 
     public function month_scheduled_patients(Request $request)

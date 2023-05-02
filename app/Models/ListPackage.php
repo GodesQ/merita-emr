@@ -18,11 +18,16 @@ class ListPackage extends Model
     }
 
     public function patientinfo() {
-        return $this->belongsTo(PatientInfo::class);
+        return $this->belongsTo(PatientInfo::class, 'id');
     }
 
     public function agency() {
         return $this->belongsTo(Agency::class, 'agency_id');
+    }
+
+    public function patientsinfo()
+    {
+        return $this->hasMany(PatientInfo::class, 'medical_package');
     }
 
     // public function exams() {
