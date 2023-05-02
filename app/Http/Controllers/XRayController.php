@@ -57,8 +57,8 @@ class XRayController extends Controller
             $exam->chest_findings = $request->chest_findings;
             $exam->chest_recommendations = $request->chest_recommendations;
             $exam->lumbosacral_remarks_status = $request->lumbosacral_remarks_status;
-            $exam->chest_findings = $request->chest_findings;
-            $exam->chest_recommendations = $request->chest_recommendations;
+            $exam->lumbosacral_findings = $request->lumbosacral_findings;
+            $exam->lumbosacral_recommendations = $request->lumbosacral_recommendations;
             $exam->knees_remarks_status = $request->knees_remarks_status;
             $exam->knees_findings = $request->knees_findings;
             $exam->knees_recommendations = $request->knees_recommendations;
