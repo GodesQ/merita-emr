@@ -31,24 +31,9 @@
                     <img src="../../../app-assets/images/logo/marine-med-logo.png" width="90" height="90" alt="">
                 </td>
                 <td>
-                    <table width="100%" cellpadding="2" cellspacing="0">
+                    <table width="470" cellpadding="5" cellspacing="0">
                         <tbody>
-                            <tr>
-                                <td width="20" rowspan="3" align="center">
-                                    <img src="../../../app-assets/images/logo/logo.jpg" width="70" height="70" alt="">
-                                </td>
-                                <td width="396" rowspan="3" align="center" valign="center">
-                                    <span class="lblCompName" style="font-size: 20px; font-weight: 800;font-family: serif; color: #156f29">MERITA DIAGNOSTIC CLINIC INC.</span><br
-                                        style="margin-bottom: 20px">
-                                    <div style="color: #156f29; font-size: 9px;">
-                                        5th Flr Jettac Building., #920 Pres. Quirino Ave.
-                                        corner San Antonio St. Malate, Manila, Philippines<br>
-                                        Tel Nos.: (632) 8404-3411 / (633) 7003-0403 * Cell No.: +63917 857-6942 / +63908 890-8850<br>
-                                        Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
-                                        Accredited: DOH (RLS 13-026-2123-MF-2) &#8226; POEA &#8226; MARINA Global Group ISO 9001:2015<br>Skuld
-                                        P&amp;I &#8226; West of England P&amp;I &#8226; Oil &amp; Gas UK &#8226; Panama Maritime Authority</div>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </td>
