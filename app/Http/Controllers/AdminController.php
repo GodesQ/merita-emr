@@ -212,14 +212,27 @@ class AdminController extends Controller
             }
         }
 
+        $agencies = Agency::all();
 
-        return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
+        $total_fit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 2);
+        })->count();
 
-        // if(session()->get('dept_id') == 1 || session()->get('dept_id') == 8) {
-        //     return view('layouts.admin-dashboard');
-        // } else {
-        //     return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
-        // }
+        $total_unfit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 3);
+        })->count();
+
+        $total_pending = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+            return $q->where('lab_status', 1);
+        })->count();
+
+        // return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
+
+        if(session()->get('dept_id') == 1) {
+            return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending'));
+        } else {
+            return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
+        }
     }
 
     public function month_scheduled_patients(Request $request)
