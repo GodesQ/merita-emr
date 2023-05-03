@@ -29,7 +29,7 @@
 
 <body>
     <center>
-        <table width="710" border="0" cellpadding="0" cellspacing="0">
+        <table width="735" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <img src="../../../app-assets/images/logo/marine-med-logo.png" width="70" height="70" alt="">
@@ -59,7 +59,7 @@
                     </table>
                 </td>
                 <td>
-                    <img width="100" src="../../../app-assets/images/logo/standardclub_north.png">
+                    <img width="125" src="../../../app-assets/images/logo/standardclub_north.png">
                 </td>
             </tr>
             <tr>
@@ -95,10 +95,10 @@
             </tr>
             <tr>
                 <td colspan="3" valign="top">
-                    <table width="710" border="0" cellspacing="1" cellpadding="0">
+                    <table width="735" border="0" cellspacing="1" cellpadding="0">
                         <tr>
                             <td align="center">
-                                <table width="710" border="0" cellpadding="3" cellspacing="0" class="brdMLC">
+                                <table width="735" border="0" cellpadding="3" cellspacing="0" class="brdMLC">
                                     <tr>
                                         <td colspan="2" valign="top" style="text-transform: uppercase;">
                                             SURNAME/LAST NAME:<br>
@@ -502,7 +502,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <table width="710" border="0" cellpadding="0" cellspacing="0" class="brdAll">
+                                <table width="735" border="0" cellpadding="0" cellspacing="0" class="brdAll">
                                     <tr>
                                         <td>
                                             <table width="678" border="0" cellpadding="3" cellspacing="0">
@@ -610,7 +610,7 @@
 
                         <tr>
                             <td>
-                                <table width="710" border="0" cellpadding="2" cellspacing="0" class="brdMLC">
+                                <table width="735" border="0" cellpadding="2" cellspacing="0" class="brdMLC">
                                     <tr>
                                         <td colspan="7">
                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" id="brdNone">
