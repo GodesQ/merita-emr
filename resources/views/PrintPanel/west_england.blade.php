@@ -616,7 +616,7 @@
                                                                                         <br>
                                                                                         <span style="margin-left:280px">
                                                                                             @if($admission->exam_physical)
-                                                                                                @if($admission->exam_physical->first_tech->tech1_signature)
+                                                                                                @if($admission->exam_physical->first_tech->signature)
                                                                                                     <img src="{{$admission->exam_physical->first_tech->signature}}" alt="e-Signature" width="80" height="25">
                                                                                                 @endif
                                                                                             @endif
