@@ -106,131 +106,133 @@ class AdminController extends Controller
     {
         isset($_GET['request_date']) ? session()->put('request_date', $_GET['request_date']) : null;
         $data = session()->all();
-        $patients = Patient::limit(5)
-            ->latest('id')
-            ->get();
-
         $today = $data['request_date'];
-
-        $schedule_patients_status = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
-            ->where('sched_patients.date', '=', $today)
-            ->with('patient')
-            ->groupBy('sched_patients.patientcode')
-            ->get();
-
-        // dd($schedule_patients_status);
-
-        $completed_patients = [];
-        $ongoing_patients = [];
-        $pending_patients = [];
-        $queue_patients = [];
-        $fit_patients = [];
-
-        foreach ($schedule_patients_status as $key => $patient) {
-            if ($patient->patient) {
-                $admission = Admission::where('id', $patient->patient->admission_id)->first();
-            } else {
-                $admission = null;
-            }
-
-            $patient_exams = DB::table('list_packagedtl')
-                ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                ->where('main_id', $patient->patient->patientinfo->medical_package)
-                ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
-                ->get();
-
-            if (!$patient_exams) {
-                $patient_exams = DB::table('list_packagedtl')
-                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                    ->where('main_id', $patient->patient->admission->package_id)
-                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
-                    ->get();
-            }
-
-            $patient_status = (new PatientController())->patientStatus($patient->patient->admission_id, $patient_exams);
-
-            $exam_audio = $patient_status['exam_audio'];
-            $exam_crf = $patient_status['exam_crf'];
-            $exam_cardio = $patient_status['exam_cardio'];
-            $exam_dental = $patient_status['exam_dental'];
-            $exam_ecg = $patient_status['exam_ecg'];
-            $exam_echodoppler = $patient_status['exam_echodoppler'];
-            $exam_echoplain = $patient_status['exam_echoplain'];
-            $exam_ishihara = $patient_status['exam_ishihara'];
-            $exam_physical = $patient_status['exam_physical'];
-            $exam_psycho = $patient_status['exam_psycho'];
-            $exam_psychobpi = $patient_status['exam_psychobpi'];
-            $exam_stressecho = $patient_status['exam_stressecho'];
-            $exam_stresstest = $patient_status['exam_stresstest'];
-            $exam_ultrasound = $patient_status['exam_ultrasound'];
-            $exam_visacuity = $patient_status['exam_visacuity'];
-            $exam_xray = $patient_status['exam_xray'];
-            $exam_blood_serology = $patient_status['exam_blood_serology'];
-            $examlab_hiv = $patient_status['examlab_hiv'];
-            $examlab_feca = $patient_status['examlab_feca'];
-            $examlab_drug = $patient_status['examlab_drug'];
-            $examlab_hema = $patient_status['examlab_hema'];
-            $examlab_hepa = $patient_status['examlab_hepa'];
-            $examlab_pregnancy = $patient_status['examlab_pregnancy'];
-            $examlab_urin = $patient_status['examlab_urin'];
-            $examlab_misc = $patient_status['examlab_misc'];
-
-            $exams = $patient_status['exams'];
-
-            if ($exams) {
-                $completed_exams = array_filter($exams, function ($exam) {
-                    return $exam == 'completed';
-                });
-
-                $on_going_exams = array_filter($exams, function ($exam) {
-                    return $exam == '';
-                });
-            } else {
-                $completed_exams = [];
-                $on_going_exams = [];
-            }
-
-            if (!$admission) {
-                array_push($queue_patients, $patient);
-            } elseif ($admission->lab_status == 2) {
-                array_push($fit_patients, $patient);
-            } else {
-                if ($exam_audio == null && $exam_crf == null && $exam_cardio == null && $exam_dental == null && $exam_ecg == null && $exam_echodoppler == null && $exam_echoplain == null && $exam_ishihara == null && $exam_psycho == null && $exam_psychobpi == null && $exam_stressecho == null && $exam_stresstest == null && $exam_ultrasound == null && $exam_visacuity == null && $exam_xray == null && $exam_blood_serology == null && $examlab_hiv == null && $examlab_drug == null && $examlab_feca == null && $examlab_feca == null && $examlab_hepa == null && $examlab_pregnancy == null && $examlab_urin == null && $examlab_misc == null) {
-                    array_push($pending_patients, $patient);
-                } else {
-                    if (count($on_going_exams)) {
-                        array_push($ongoing_patients, $patient);
-                    }
-                }
-                if (count($completed_exams)) {
-                    if (count($completed_exams) == count($patient_exams)) {
-                        array_push($completed_patients, $patient);
-                    }
-                }
-            }
-        }
-
-        $agencies = Agency::all();
-
-        $total_fit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                return $q->where('lab_status', 2);
-        })->count();
-
-        $total_unfit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                return $q->where('lab_status', 3);
-        })->count();
-
-        $total_pending = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-            return $q->where('lab_status', 1);
-        })->count();
 
         // return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
 
         if(session()->get('dept_id') == 1) {
+
+            $agencies = Agency::all();
+
+            $total_fit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                    return $q->where('lab_status', 2);
+            })->count();
+
+            $total_unfit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                    return $q->where('lab_status', 3);
+            })->count();
+
+            $total_pending = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 1);
+            })->count();
+
             return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending'));
         } else {
+
+            $patients = Patient::limit(5)
+                ->latest('id')
+                ->get();
+
+            $schedule_patients_status = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
+                ->where('sched_patients.date', '=', $today)
+                ->with('patient')
+                ->groupBy('sched_patients.patientcode')
+                ->get();
+
+            // dd($schedule_patients_status);
+
+            $completed_patients = [];
+            $ongoing_patients = [];
+            $pending_patients = [];
+            $queue_patients = [];
+            $fit_patients = [];
+
+            foreach ($schedule_patients_status as $key => $patient) {
+                if ($patient->patient) {
+                    $admission = Admission::where('id', $patient->patient->admission_id)->first();
+                } else {
+                    $admission = null;
+                }
+
+                $patient_exams = DB::table('list_packagedtl')
+                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
+                    ->where('main_id', $patient->patient->patientinfo->medical_package)
+                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
+                    ->get();
+
+                if (!$patient_exams) {
+                    $patient_exams = DB::table('list_packagedtl')
+                        ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
+                        ->where('main_id', $patient->patient->admission->package_id)
+                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                        ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
+                        ->get();
+                }
+
+                $patient_status = (new PatientController())->patientStatus($patient->patient->admission_id, $patient_exams);
+
+                $exam_audio = $patient_status['exam_audio'];
+                $exam_crf = $patient_status['exam_crf'];
+                $exam_cardio = $patient_status['exam_cardio'];
+                $exam_dental = $patient_status['exam_dental'];
+                $exam_ecg = $patient_status['exam_ecg'];
+                $exam_echodoppler = $patient_status['exam_echodoppler'];
+                $exam_echoplain = $patient_status['exam_echoplain'];
+                $exam_ishihara = $patient_status['exam_ishihara'];
+                $exam_physical = $patient_status['exam_physical'];
+                $exam_psycho = $patient_status['exam_psycho'];
+                $exam_psychobpi = $patient_status['exam_psychobpi'];
+                $exam_stressecho = $patient_status['exam_stressecho'];
+                $exam_stresstest = $patient_status['exam_stresstest'];
+                $exam_ultrasound = $patient_status['exam_ultrasound'];
+                $exam_visacuity = $patient_status['exam_visacuity'];
+                $exam_xray = $patient_status['exam_xray'];
+                $exam_blood_serology = $patient_status['exam_blood_serology'];
+                $examlab_hiv = $patient_status['examlab_hiv'];
+                $examlab_feca = $patient_status['examlab_feca'];
+                $examlab_drug = $patient_status['examlab_drug'];
+                $examlab_hema = $patient_status['examlab_hema'];
+                $examlab_hepa = $patient_status['examlab_hepa'];
+                $examlab_pregnancy = $patient_status['examlab_pregnancy'];
+                $examlab_urin = $patient_status['examlab_urin'];
+                $examlab_misc = $patient_status['examlab_misc'];
+
+                $exams = $patient_status['exams'];
+
+                if ($exams) {
+                    $completed_exams = array_filter($exams, function ($exam) {
+                        return $exam == 'completed';
+                    });
+
+                    $on_going_exams = array_filter($exams, function ($exam) {
+                        return $exam == '';
+                    });
+                } else {
+                    $completed_exams = [];
+                    $on_going_exams = [];
+                }
+
+                if (!$admission) {
+                    array_push($queue_patients, $patient);
+                } elseif ($admission->lab_status == 2) {
+                    array_push($fit_patients, $patient);
+                } else {
+                    if ($exam_audio == null && $exam_crf == null && $exam_cardio == null && $exam_dental == null && $exam_ecg == null && $exam_echodoppler == null && $exam_echoplain == null && $exam_ishihara == null && $exam_psycho == null && $exam_psychobpi == null && $exam_stressecho == null && $exam_stresstest == null && $exam_ultrasound == null && $exam_visacuity == null && $exam_xray == null && $exam_blood_serology == null && $examlab_hiv == null && $examlab_drug == null && $examlab_feca == null && $examlab_feca == null && $examlab_hepa == null && $examlab_pregnancy == null && $examlab_urin == null && $examlab_misc == null) {
+                        array_push($pending_patients, $patient);
+                    } else {
+                        if (count($on_going_exams)) {
+                            array_push($ongoing_patients, $patient);
+                        }
+                    }
+                    if (count($completed_exams)) {
+                        if (count($completed_exams) == count($patient_exams)) {
+                            array_push($completed_patients, $patient);
+                        }
+                    }
+                }
+            }
+
             return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
         }
     }
