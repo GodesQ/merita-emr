@@ -37,7 +37,7 @@
                             <input type="date" max="2050-12-31" name="request_date"
                                 value="{{ session()->get('request_date') }}" id="request_date" class="form-control">
                         </div>
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <h4 class="card-title">Total Numbers of Medical Packages Today</h4>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="col-xl-6 col-lg-12">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-12">
-                                <div class="card">
+                                <div class="card" data-toggle="modal" data-target="#fit-patients" style="cursor: pointer;" onclick="getFitPatients()">
                                     <div class="card-content">
                                         <div class="card-body">
                                             <div class="media">
@@ -73,9 +73,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade text-left" id="fit-patients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel17">Fit Patients</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="fit-patients-container">
+                                                    <div class="fit-patients-header row p-1">
+                                                        <div class="col-md-3">Patient Code</div>
+                                                        <div class="col-md-3">Patient Name</div>
+                                                        <div class="col-md-3">Agency</div>
+                                                        <div class="col-md-3">Package</div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="fit-patients-content row p-1"></div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-12">
-                                <div class="card">
+                                <div class="card" data-toggle="modal" data-target="#unfit-patients" onclick="getUnFitPatients()">
                                     <div class="card-content">
                                         <div class="card-body">
                                             <div class="media">
@@ -90,9 +117,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade text-left" id="unfit-patients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel17">Unfit Patients</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="unfit-patients-container">
+                                                    <div class="unfit-patients-header row p-1">
+                                                        <div class="col-md-3">Patient Code</div>
+                                                        <div class="col-md-3">Patient Name</div>
+                                                        <div class="col-md-3">Agency</div>
+                                                        <div class="col-md-3">Package</div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="unfit-patients-content row p-1"></div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-12">
-                                <div class="card">
+                                <div class="card" data-toggle="modal" data-target="#pending-patients" onclick="getPendingPatients()" style="cursor: pointer;">
                                     <div class="card-content">
                                         <div class="card-body">
                                             <div class="media">
@@ -103,6 +157,33 @@
                                                 <div class="media-right media-middle">
                                                     <i class="icon-user warning font-large-2 float-right"></i>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade text-left" id="pending-patients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel17">Pending Patients</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="pending-patients-container">
+                                                    <div class="pending-patients-header row p-1">
+                                                        <div class="col-md-3">Patient Code</div>
+                                                        <div class="col-md-3">Patient Name</div>
+                                                        <div class="col-md-3">Agency</div>
+                                                        <div class="col-md-3">Package</div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="pending-patients-content row p-1"></div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -367,6 +448,80 @@
                 $(".bahia-group").css("display", "none");
             }
 
+        }
+
+        function getFitPatients() {
+            $.ajax({
+                url: "/today_fit_patients",
+                success: function(results) {
+                    console.log(results);
+                    let output = '';
+
+                    if(results.length > 0) {
+                        results.forEach(result => {
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;
+                        })
+                    } else {
+                        output += `<div class="col-md-12 py-75 text-center">No Patients Found</div>`;
+                    }
+
+                    $('.fit-patients-content').html(output);
+
+                }
+            });
+        }
+
+        function getUnFitPatients() {
+            $.ajax({
+                url: "/today_unfit_patients",
+                success: function(results) {
+                    console.log(results);
+                    let output = '';
+
+                    if(results.length > 0) {
+                        results.forEach(result => {
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;
+                        })
+                    } else {
+                        output += `<div class="col-md-12 py-75 text-center">No Patients Found</div>`;
+                    }
+
+                    $('.unfit-patients-content').html(output);
+
+
+                }
+            });
+        }
+
+        function getPendingPatients() {
+            $.ajax({
+                url: "/today_pending_patients",
+                success: function(results) {
+                    console.log(results);
+                    let output = '';
+
+                    if(results.length > 0) {
+                        results.forEach(result => {
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
+                                        <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;
+                        })
+                    } else {
+                        output += `<div class="col-md-12 py-75 text-center">No Patients Found</div>`;
+                    }
+
+                    $('.pending-patients-content').html(output);
+
+
+                }
+            });
         }
     </script>
 @endpush

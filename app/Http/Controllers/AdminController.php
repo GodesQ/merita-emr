@@ -237,6 +237,33 @@ class AdminController extends Controller
         }
     }
 
+    public function today_fit_patients() {
+        $today = session()->get('request_date');
+        $fit_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 2);
+        })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
+
+        return response()->json($fit_patients);
+    }
+
+    public function today_unfit_patients() {
+        $today = session()->get('request_date');
+        $unfit_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 3);
+        })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
+
+        return response()->json($unfit_patients);
+    }
+
+    public function today_pending_patients() {
+        $today = session()->get('request_date');
+        $pending_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
+                return $q->where('lab_status', 1);
+        })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
+
+        return response()->json($pending_patients);
+    }
+
     public function month_scheduled_patients(Request $request)
     {
         $scheduled_month_patients = DB::table('sched_patients')
