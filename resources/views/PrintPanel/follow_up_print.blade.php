@@ -182,7 +182,11 @@
                                                     <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
                                                 @endif
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                @if($admission->exam_physical)
+                                                    <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>

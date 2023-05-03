@@ -1086,10 +1086,19 @@ return mysqli_fetch_array($result);
                                         <tbody>
                                             <tr>
                                                 <td height="31">
-                                                    <p><b>PAST PEME</b>: (Where was the last PEME, what were the
-                                                        Findings,when)</p>
-                                                    <textarea name="past_peme" cols="10" rows="2" id="past_peme"
-                                                        class="form-control"></textarea>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <p><b>PAST PEME</b>: (Where was the last PEME, what were the
+                                                                Findings,when)</p>
+                                                            <textarea name="past_peme" cols="10" rows="2" id="past_peme"
+                                                                class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p><b>PAST PEME RECOMMENDATION</b></p>
+                                                            <textarea name="past_peme_recommendation" cols="10" rows="2" id="past_peme_recommendation"
+                                                                class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
