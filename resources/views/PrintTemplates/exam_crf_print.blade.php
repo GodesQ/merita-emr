@@ -126,7 +126,9 @@
               </tr>
               <tr>
                 <td colspan="4" align="right"><b>TOTAL POINTS:</b></td>
-                <td align="center" class="brdTop">@php echo $exam->age_points + $exam->hdl_points + $exam->hdl_points + $exam->sbp_points + $exam->smoker_points + $exam->diabetes_points + $exam->ecg_points @endphp</td>
+                <td align="center" class="brdTop">
+                    <?php echo $exam->hdl_points + $exam->total_points + $exam->sbp_points + $exam->sbp_points + $exam->smoker_points + $exam->diabetes_points ?>
+                </td>
                 <td align="right">&nbsp;</td>
               </tr>
               </tbody></table>
