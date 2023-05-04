@@ -79,8 +79,7 @@ class AdminController extends Controller
                 ->join('sched_patients', 'mast_patient.id', '=', 'sched_patients.patient_id')
                 ->where('sched_patients.date', $today)
                 ->groupBy('mast_patientinfo.medical_package')
-                ->get()
-                ->keyBy('medical_package');
+                ->get();
 
             $packages = ListPackage::select('id', 'packagename', 'agency_id')
                 ->with('agency')

@@ -35,7 +35,7 @@
               <tr>
                 <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm"><b>REQUESTED BY:</b><br>
                   <span style="font-size:15px">
-                      @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                      @if (preg_match("/Bahia/i", $admission->agencyname))
                         {{'Bahia Shipping Services, Inc.'}}
                     @else
                         {{$admission->agencyname}}
@@ -89,7 +89,7 @@
                 <td><b>:</b></td>
                 <td>{{$exam->total_result}}</td>
                 <td align="right">&nbsp;</td>
-                <td align="center">{{$exam->total_result}}</td>
+                <td align="center">{{$exam->total_points}}</td>
                 <td align="right">&nbsp;</td>
               </tr>
               <tr>
@@ -97,7 +97,7 @@
                 <td><b>:</b></td>
                 <td>{{$exam->sbp_result}}</td>
                 <td align="right">&nbsp;</td>
-                <td align="center">{{$exam->total_resbp_pointssult}}</td>
+                <td align="center">{{$exam->sbp_points}}</td>
                 <td align="right">&nbsp;</td>
               </tr>
               <tr>
@@ -139,7 +139,7 @@
         </tr>
                 <tr>
           <td height="100" align="center"><span class="lblReport">SPIROMETRY RESULTS </span></td>
-        </tr>    
+        </tr>
             <tr>
           <td align="center"><table width="425" border="0" cellspacing="0" cellpadding="2">
             <tbody><tr>
@@ -243,7 +243,7 @@
         </tr>
       </tbody></table>
     </center>
-    
-    
+
+
     </body>
     </html>

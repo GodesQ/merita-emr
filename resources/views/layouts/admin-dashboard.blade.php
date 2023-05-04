@@ -459,7 +459,7 @@
 
                     if(results.length > 0) {
                         results.forEach(result => {
-                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}>${result.patient.patientcode}</a></div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;
@@ -483,7 +483,7 @@
 
                     if(results.length > 0) {
                         results.forEach(result => {
-                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}>${result.patient.patientcode}</a></div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;
@@ -508,7 +508,7 @@
 
                     if(results.length > 0) {
                         results.forEach(result => {
-                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}}>${result.patient.patientcode}</a></div>
+                            output += `<div class="col-md-3 border-bottom py-75"><a href=/patient_edit?id=${result.patient.id}&patientcode=${result.patient.patientcode}>${result.patient.patientcode}</a></div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.firstname} ${result.patient.lastname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.agency.agencyname}</div>
                                         <div class="col-md-3 border-bottom py-75">${result.patient.patientinfo.package.packagename}</div>`;

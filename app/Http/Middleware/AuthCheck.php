@@ -15,7 +15,7 @@ class AuthCheck
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {   
+    {
         if(!session()->has(['classification'])) {
             return redirect('/login')->with('fail', 'You must be logged in');
         }
