@@ -333,10 +333,16 @@
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td>
-                                            <b>{{ optional($admission->exam_physical)->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
+                                        <td valign="top">
+                                            @if($admission->exam_physical)
+                                                <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
+                                            @endif
                                         </td>
-                                        <td></td>
+                                        <td valign="top">
+                                            @if($admission->exam_physical)
+                                                <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td></td>
