@@ -583,7 +583,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="130" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="140" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
@@ -593,7 +593,7 @@
                                                                     <br>
                                                                     PHYSICIAN’S CERTIFYING AUTHORITY: PROFESSIONAL
                                                                     REGULATION COMMISSION <br>
-                                                                    PHYSICIAN’S LICENSE NUMBER: {{$admission->exam_physical ? $admission->exam_physical->first_tech->licenseno : null}}
+                                                                    PHYSICIAN’S LICENSE NUMBER: {{$admission->exam_physical ? $admission->exam_physical->first_tech->license_no : null}}
                                                                 </td>
                                                             </tr>
                                                         </table>
