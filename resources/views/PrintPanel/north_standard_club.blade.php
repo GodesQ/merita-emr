@@ -21,7 +21,7 @@
         font: normal 12px constantia;
     }
     @page {
-        size: letter;
+        size: A4;
         margin: 0;
     }
     </style>
@@ -503,7 +503,7 @@
                                 <table width="735" border="0" cellpadding="0" cellspacing="0" class="brdAll">
                                     <tr>
                                         <td>
-                                            <table width="678" border="0" cellpadding="3" cellspacing="0">
+                                            <table width="735" border="0" cellpadding="3" cellspacing="0">
                                                 <tr>
                                                     <td width="178" align="center" valign="middle" class="brdBtm"
                                                         style="padding-top:20px;">
@@ -518,7 +518,7 @@
                                                         @endif<br>
                                                         <span class="fontMed">{{$admission->patient->patientcode}}</span>
                                                     </td>
-                                                    <td width="500" class="brdLeftBtm">
+                                                    <td width="550" class="brdLeftBtm">
                                                         <table width="500" border="0" cellpadding="0" cellspacing="0"
                                                             class="size10">
                                                             <tr>
@@ -583,7 +583,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="70" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="130" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
