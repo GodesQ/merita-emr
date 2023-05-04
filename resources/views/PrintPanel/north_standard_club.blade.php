@@ -61,7 +61,7 @@
                 </td>
             </tr>
             <tr>
-                <td height="100" colspan="3" align="center" valign="bottom" class="lblReport">
+                <td height="90" colspan="3" align="center" valign="bottom" class="lblReport">
                     <table width="100%" border="0" cellpacing="0" cellpadding="2">
                         <tr>
                             <td class="brdAll">
@@ -593,7 +593,7 @@
                                                                     <br>
                                                                     PHYSICIAN’S CERTIFYING AUTHORITY: PROFESSIONAL
                                                                     REGULATION COMMISSION <br>
-                                                                    PHYSICIAN’S LICENSE NUMBER: {{$admission->exam_physical ? $admission->exam_physical->first_tech->license_no : null}}
+                                                                    PHYSICIAN’S LICENSE NUMBER: 055997
                                                                 </td>
                                                             </tr>
                                                         </table>
