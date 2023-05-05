@@ -74,6 +74,7 @@ class AdminController extends Controller
         $today = session()->get('request_date');
 
         if($request->ajax()) {
+
             $patientCounts = Patient::select('mast_patientinfo.medical_package', DB::raw('count(*) as count'))
                 ->join('mast_patientinfo', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
                 ->join('sched_patients', function ($join) use ($today) {

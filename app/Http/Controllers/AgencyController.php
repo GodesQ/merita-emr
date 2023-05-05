@@ -45,18 +45,14 @@ class AgencyController extends Controller
         try {
             $data = session()->all();
             $category_count = [];
-            $deck_counts = Admission::where('agency_id', $data['agencyId'])
-                ->where('category', 'DECK SERVICES')
-                ->count();
-            $engine_counts = Admission::where('agency_id', $data['agencyId'])
-                ->where('category', 'ENGINE SERVICES')
-                ->count();
-            $catering_counts = Admission::where('agency_id', $data['agencyId'])
-                ->where('category', 'CATERING SERVICES')
-                ->count();
-            $other_counts = Admission::where('agency_id', $data['agencyId'])
-                ->where('category', 'OTHER SERVICES')
-                ->count();
+
+            $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
+
+            $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
+
+            $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
+
+            $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
 
             $category_count = [
                 'deck' => $deck_counts,
@@ -66,6 +62,7 @@ class AgencyController extends Controller
             ];
 
             return view('layouts.agency-dashboard', compact('data', 'category_count'));
+
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();

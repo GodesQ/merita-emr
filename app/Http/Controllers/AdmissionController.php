@@ -231,6 +231,7 @@ class AdmissionController extends Controller
     public function update_admission(Request $request)
     {
         $admission = Admission::where('id', $request->main_id)->first();
+        $admission->trans_date = $request->trans_date;
         $admission->agency_id = $request->agency_id;
         $admission->package_id = $request->package_id;
         $admission->employment = $request->employment;

@@ -72,7 +72,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <input name="exam" type="radio" class="m-1" id="exam_2" value="enzyme" @php EIA/CMIA/ELFA&nbsp;
+                                            <input name="exam" type="radio" class="m-1" id="exam_2" value="enzyme"/> EIA/CMIA/ELFA&nbsp
                                             <input name="exam" type="radio" class="m-1" id="exam_0" value="rapid" @php echo $exam->exam == "rapid" ? "checked" : "" @endphp>
                                             RAPID &nbsp;
                                             <input name="exam" type="radio" class="m-1" id="exam_1" value="particle" {{ $exam->exam == 'particle' ? 'checked' : null }}>

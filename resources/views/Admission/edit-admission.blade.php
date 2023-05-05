@@ -27,8 +27,6 @@
                 @csrf
                 <input type="hidden" value="{{ $patientCode->id }}" name="main_id">
                 <div class="d-none">
-                    <input type="date" max="2050-12-31" name="trans_date" id="" hidden
-                        value="<?php echo date('Y-m-d'); ?>">
                     <input type="hidden" name="package_id" value="{{ $patientInfo->medical_package }}">
                     <input type="hidden" name="agency_id" value="{{ $patientInfo->agency_id }}">
                     <input type="hidden" name="vessel" value="{{ $patientInfo->vessel }}">
@@ -36,13 +34,20 @@
                 </div>
                 <div class="form-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="text-bold-600" for="projectinput1">Peme Date</label>
+                                <input type="datetime-local" max="2050-12-31" class="form-control"
+                                    value="{{ $patientCode->trans_date }}" name="trans_date">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Patient Name</label>
                                 <input type="text" id="projectinput1" class="form-control" value="{{ $patient->lastname }}, {{ $patient->firstname }}" name="fullname" readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Patient Code</label>
                                 <input type="text" id="projectinput1" class="form-control"
