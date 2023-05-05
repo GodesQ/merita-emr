@@ -136,6 +136,7 @@ class AdminController extends Controller
                 ->where('sched_patients.date', '=', $today)
                 ->with('patient')
                 ->groupBy('sched_patients.patientcode')
+
                 ->get();
 
             // dd($schedule_patients_status);

@@ -560,7 +560,7 @@
                                                                     <br>
                                                                     PHYSICIAN’S CERTIFYING AUTHORITY: PROFESSIONAL
                                                                     REGULATION COMMISSION <br>
-                                                                    PHYSICIAN’S LICENSE NUMBER: {{$admission->exam_physical ? $admission->exam_physical->first_tech->licenseno : null}}
+                                                                    PHYSICIAN’S LICENSE NUMBER: 055997
                                                                 </td>
                                                             </tr>
                                                         </table>

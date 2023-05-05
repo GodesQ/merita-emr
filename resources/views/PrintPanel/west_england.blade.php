@@ -661,10 +661,7 @@
                                                                                         PHYSICIAN’S CERTIFYING
                                                                                         AUTHORITY: PROFESSIONAL
                                                                                         REGULATION COMMISSION <br><br>
-                                                                                        PHYSICIAN’S LICENSE NUMBER:
-                                                                                        @if ($admission->exam_physical)
-                                                                                        {{$admission->exam_physical->license_no}}
-                                                                                        @endif </td>
+                                                                                        PHYSICIAN’S LICENSE NUMBER: 055997</td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
