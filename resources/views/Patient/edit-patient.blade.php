@@ -1133,9 +1133,16 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" role="tablist">
                                         @forelse($followup_records as $key => $followup_record)
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="{{ $key }}" data-toggle="tab" aria-controls="fl{{ $key }}" href="#fl{{ $key }}" role="tab" aria-selected="true">{{date_format(new DateTime($followup_record->date), "F d, Y")}}</a>
-                                            </li>
+                                            @if($loop->first)
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="{{ $key }}" data-toggle="tab" aria-controls="fl{{ $key }}" href="#fl{{ $key }}" role="tab" aria-selected="true">{{date_format(new DateTime($patientCode->trans_date), "F d, Y")}}</a>
+                                                </li>
+                                            @else
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="{{ $key }}" data-toggle="tab" aria-controls="fl{{ $key }}" href="#fl{{ $key }}" role="tab" aria-selected="true">{{date_format(new DateTime($followup_record->date), "F d, Y")}}</a>
+                                                </li>
+                                            @endif
+
                                         @empty
 
                                         @endforelse

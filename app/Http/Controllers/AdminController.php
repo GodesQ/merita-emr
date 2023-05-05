@@ -76,8 +76,10 @@ class AdminController extends Controller
         if($request->ajax()) {
             $patientCounts = Patient::select('mast_patientinfo.medical_package', DB::raw('count(*) as count'))
                 ->join('mast_patientinfo', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
-                ->join('sched_patients', 'mast_patient.id', '=', 'sched_patients.patient_id')
-                ->where('sched_patients.date', $today)
+                ->join('sched_patients', function ($join) use ($today) {
+                    $join->on('mast_patient.id', '=', 'sched_patients.patient_id')
+                         ->where('sched_patients.date', '=', $today);
+                })
                 ->groupBy('mast_patientinfo.medical_package')
                 ->get();
 
@@ -87,8 +89,10 @@ class AdminController extends Controller
                     $query->select('mast_patientinfo.medical_package')
                         ->from('mast_patientinfo')
                         ->join('mast_patient', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
-                        ->join('sched_patients', 'mast_patient.id', '=', 'sched_patients.patient_id')
-                        ->where('sched_patients.date', $today)
+                        ->join('sched_patients', function ($join) use ($today) {
+                            $join->on('mast_patient.id', '=', 'sched_patients.patient_id')
+                                 ->where('sched_patients.date', '=', $today);
+                        })
                         ->whereIn('mast_patientinfo.medical_package', $patientCounts->pluck('medical_package')->toArray())
                         ->groupBy('mast_patientinfo.medical_package')
                         ->havingRaw('count(*) >= ?', [1])
@@ -148,7 +152,6 @@ class AdminController extends Controller
                 ->where('sched_patients.date', '=', $today)
                 ->with('patient')
                 ->groupBy('sched_patients.patientcode')
-
                 ->get();
 
             // dd($schedule_patients_status);
