@@ -519,39 +519,49 @@
                                                         <table width="500" border="0" cellpadding="0" cellspacing="0"
                                                             class="size10">
                                                             <tr>
-                                                                <td colspan="2">THIS IS TO CERTIFY THAT A MEDICAL AND
-                                                                    PHYSICAL EXAMINATION WAS GIVEN TO: <br>
+                                                                <td colspan="2">THIS IS TO CERTIFY THAT A MEDICAL AND PHYSICAL EXAMINATION IN ACCORDANCE WITH THE <br>
+                                                                    STANDARD CLUB PART OF NORTHSTANDARD RECOMMENDED PROTOCOLS HAS BEEN  CARRIED OUT <br>
                                                                     <span class="fontBoldLrg"><u>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
-                                                                    <span class="fontMed"><span style="margin-right: 150px;">RESULT:</span>
-                                                                        FIT FOR SEA DUTY
+                                                                    <span class="fontMed"><span style="margin-right: 150px;">RESULT:</span> <br> <span style="margin-left: 80px;">&nbsp;</span>
+                                                                    <span
+                                                                        style="margin-left:50px">FIT
+                                                                        FOR DUTY
                                                                         @if ($admission->exam_physical)
-                                                                            @if (preg_match('/Fit/i', $admission->exam_physical->fit))
-                                                                                <img src="../../../app-assets/images/icoCheck.gif"
-                                                                                    width="10">
-                                                                            @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                                    width="10">
-                                                                            @endif
+                                                                        @if(preg_match('/Fit/i',
+                                                                        $admission->exam_physical->duty) )
+                                                                        <img src="../../../app-assets/images/icoCheck.gif"
+                                                                            width="10">
                                                                         @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                                width="10">
+                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                            width="10">
                                                                         @endif
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT
-                                                                        FOR SEA DUTY
+                                                                        @else
+                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                            width="10">
+                                                                        @endif
+                                                                    </span>
+                                                                    <span
+                                                                        style="margin-left: 20px;">FIT BUT AT RISK <img
+                                                                            src="../../../app-assets/images/icoUncheck.gif"
+                                                                            width="10"></span>
+                                                                    <span
+                                                                        style="margin-left: 20px;">UNFIT FOR DUTY
                                                                         @if ($admission->exam_physical)
-                                                                            @if (!preg_match('/Fit/i', $admission->exam_physical->fit))
-                                                                            <img src="../../../app-assets/images/icoCheck.gif"
-                                                                                width="10">
-                                                                            @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                                width="10">
-                                                                            @endif
+                                                                        @if(!preg_match('/Fit/i',
+                                                                        $admission->exam_physical->duty))
+                                                                        <img src="../../../app-assets/images/icoCheck.gif"
+                                                                            width="10">
                                                                         @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                                width="10">
+                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                            width="10">
                                                                         @endif
+                                                                        @else
+                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                            width="10">
+                                                                        @endif
+                                                                    </span>
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -584,7 +594,7 @@
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
-                                                                <td valign="top">NAME OF ISSUING AUTHORITY: TERESITA F. GONZALES, MD <br>
+                                                                <td valign="top">NAME OF CLINIC: MERITA DIAGNOSTIC CLINIC INC.<br>
                                                                     ADDRESS: 5th & 6th Flr Jettac Bldg., 920 Quirino
                                                                     Ave. Cor. San Antonio St. Malate Manila <br>
                                                                     <br>

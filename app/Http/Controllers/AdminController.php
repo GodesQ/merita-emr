@@ -83,15 +83,27 @@ class AdminController extends Controller
 
             $packages = ListPackage::select('id', 'packagename', 'agency_id')
                 ->with('agency')
+                ->whereIn('id', function($query) use ($patientCounts, $today) {
+                    $query->select('mast_patientinfo.medical_package')
+                        ->from('mast_patientinfo')
+                        ->join('mast_patient', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
+                        ->join('sched_patients', 'mast_patient.id', '=', 'sched_patients.patient_id')
+                        ->where('sched_patients.date', $today)
+                        ->whereIn('mast_patientinfo.medical_package', $patientCounts->pluck('medical_package')->toArray())
+                        ->groupBy('mast_patientinfo.medical_package')
+                        ->havingRaw('count(*) >= ?', [1])
+                        ->get();
+                })
                 ->get()
                 ->map(function($row) use ($patientCounts) {
-                    $row->total = $patientCounts->get($row->id)->count ?? 0;
+                    $row->total = $patientCounts->where('medical_package', $row->id)->first()->count ?? 0;
                     $row->packagename = $row->packagename . ' ' . '(' . optional($row->agency)->agencyname . ')';
                     return $row;
                 })
                 ->filter(function($row) {
                     return $row->total > 0;
                 });
+
 
             return DataTables::of($packages)
                 ->addIndexColumn()
