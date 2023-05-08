@@ -69,8 +69,8 @@
                             <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Surname</b></td>
                             <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>First Name</b></td>
                             <td width="6%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Middle Name</b></td>
-                            <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Position</b></td>
                             <td width="1%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Age</b></td>
+                            <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Position</b></td>
                             <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Findings</b></td>
                             <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Recommendation</b></td>
                             @if(in_array("vital_signs", $additional_columns))
@@ -103,8 +103,8 @@
                                 <td align="left">{{$patient->patient ? $patient->patient->lastname . " " . $patient->patient->suffix : null}}</td>
                                 <td align="left">{{$patient->patient ? $patient->patient->firstname : null}}</td>
                                 <td align="left">{{$patient->patient ? $patient->patient->middlename : null}}</td>
-                                <td align="left">{{$patient->position}}</td>
                                 <td align="left">{{$patient->patient ? $patient->patient->age : null}}</td>
+                                <td align="left">{{$patient->position}}</td>
                                 <td align="left" valign="top">
                                     @include('Transmittal.patients-findings', [$patient])
                                 </td>
