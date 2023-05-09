@@ -524,7 +524,7 @@
                                                                     <span class="fontBoldLrg"><u>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
-                                                                    <span class="fontMed"><span style="margin-right: 150px;">RESULT:</span> <br> <span style="margin-left: 80px;">&nbsp;</span>
+                                                                    <span class="fontMed"><span>RESULT:</span>  <span style="margin-left: 30px;">&nbsp;</span>
                                                                     <span
                                                                         style="margin-left:50px">FIT
                                                                         FOR DUTY
