@@ -14,6 +14,15 @@
                 @endif
             @endif
             @if ($exam_physical)
+                @if($exam_physical->vital_sign_recommendation)
+                    <div class="my-75">
+                        <h5><b>Vital Sign</b></h5>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_physical->vital_sign_recommendation) @endphp</span>
+                        <input type="hidden" value="Vital Sign: @php echo nl2br($exam_physical->vital_sign_recommendation) @endphp" name="recommendation[]" />
+                    </div>
+                @endif
+            @endif
+            @if ($exam_physical)
                 @if($exam_physical->pe1_recommendation)
                     <div class="my-75">
                         <h5><b>PE-1</b></h5>
@@ -102,6 +111,7 @@
                 </div>
                 @endif
             @endif
+
             @if ($exam_cardio)
                 @if($exam_cardio->remarks_status == 'findings' && $exam_cardio->recommendation)
                 <div class="my-75">
@@ -112,6 +122,7 @@
                 </div>
                 @endif
             @endif
+
             @if ($exam_stresstest)
                 @if($exam_stresstest->remarks_status == 'findings' && $exam_stresstest->recommendation)
                 <div class="my-75">
@@ -122,6 +133,7 @@
                 </div>
                 @endif
             @endif
+
             @if ($exam_echoplain)
                 @if($exam_echoplain->remarks_status == 'findings' && $exam_echoplain->recommendation)
                 <div class="my-75">
@@ -143,6 +155,7 @@
                 </div>
                 @endif
             @endif
+
             @if ($exam_stressecho)
                 @if($exam_stressecho->remarks_status == 'findings' && $exam_stressecho->recommendation)
                 <div class="my-75">
@@ -153,6 +166,7 @@
                 </div>
                 @endif
             @endif
+
             @if ($exam_ultrasound)
                 @if($exam_ultrasound->kub_exam_status == 'findings' && $exam_ultrasound->kub_exam_recommendation)
                     <div class="col-md-6 my-50">
@@ -162,6 +176,7 @@
                     </div>
                 @endif
             @endif
+
             @if ($exam_ultrasound)
                 @if($exam_ultrasound->hbt_exam_status == 'findings' && $exam_ultrasound->hbt_exam_recommendation)
                     <div class="col-md-6 my-50">
@@ -171,6 +186,7 @@
                     </div>
                 @endif
             @endif
+
             @if ($exam_ultrasound)
                 @if($exam_ultrasound->thyroid_exam_status == 'findings' && $exam_ultrasound->thyroid_exam_recommendation)
                     <div class="col-md-6 my-50">
