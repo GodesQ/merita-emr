@@ -22,33 +22,34 @@
 
         @if ($exam_dental)
             @if($exam_dental->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Dental</b></h5>
-                <span style="font-size: 12px;">@php echo nl2br($exam_dental->remarks) @endphp</span>
-                <input type="hidden" value="Dental: @php echo nl2br($exam_dental->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Dental</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_dental->remarks) @endphp</span>
+                    <input type="hidden" value="Dental: @php echo nl2br($exam_dental->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
 
         @if ($exam_psycho)
             @if($exam_psycho->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Psychological</b></h5>
-                <span style="font-size: 12px;">@php echo nl2br($exam_psycho->remarks) @endphp</span>
-                <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Psychological</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_psycho->remarks) @endphp</span>
+                    <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
 
         @if ($exam_audio)
             @if($exam_audio->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Audiometry</b></h5>
-                <span style="font-size: 12px; ">@php echo nl2br($exam_audio->remarks) @endphp</span>
-                <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Audiometry</b></h5>
+                    <span style="font-size: 12px; ">@php echo nl2br($exam_audio->remarks) @endphp</span>
+                    <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
+
         @if ($exam_ishihara)
             @if($exam_ishihara->remarks_status == 'findings')
             <div class="col-md-6 my-50">
@@ -210,8 +211,7 @@
             @if($examlab_hema->remarks_status == 'findings')
                 <div class="col-md-6 my-50">
                     <h5><b>Hematology</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($examlab_hema->remarks) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($examlab_hema->remarks) @endphp</span>
                     <input type="hidden" value="Hematology: @php echo nl2br($examlab_hema->remarks) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -219,33 +219,31 @@
 
         @if ($examlab_urin)
             @if($examlab_urin->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Urinalysis</b></h5>
-                <span style="font-size: 12px;">@php echo
-                    nl2br($examlab_urin->remarks) @endphp</span>
-                <input type="hidden" value="Urinalysis: @php echo nl2br($examlab_urin->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Urinalysis</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($examlab_urin->remarks) @endphp</span>
+                    <input type="hidden" value="Urinalysis: @php echo nl2br($examlab_urin->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
 
         @if ($examlab_pregnancy)
             @if($examlab_pregnancy->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Pregnancy</b></h5>
-                <span style="font-size: 12px;">@php echo
-                    nl2br($examlab_pregnancy->remarks) @endphp</span>
-                <input type="hidden" value="Pregnancy: @php echo nl2br($examlab_pregnancy->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Pregnancy</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($examlab_pregnancy->remarks) @endphp</span>
+                    <input type="hidden" value="Pregnancy: @php echo nl2br($examlab_pregnancy->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
 
         @if ($examlab_feca)
             @if($examlab_feca->remarks_status == 'findings')
-            <div class="col-md-6 my-50">
-                <h5><b>Fecalysis</b></h5>
-                <span style="font-size: 12px;">@php echo nl2br($examlab_feca->remarks) @endphp</span>
-                <input type="hidden" value="Fecalysis: @php echo nl2br($examlab_feca->remarks) @endphp" name="findings[]" />
-            </div>
+                <div class="col-md-6 my-50">
+                    <h5><b>Fecalysis</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($examlab_feca->remarks) @endphp</span>
+                    <input type="hidden" value="Fecalysis: @php echo nl2br($examlab_feca->remarks) @endphp" name="findings[]" />
+                </div>
             @endif
         @endif
 
@@ -253,8 +251,7 @@
             @if($examlab_hepa->remarks_status == 'findings')
             <div class="col-md-6 my-50">
                 <h5><b>Hepatitis</b></h5>
-                <span style="font-size: 12px;">@php echo
-                    nl2br($examlab_hepa->remarks) @endphp</span>
+                <span style="font-size: 12px;">@php echo nl2br($examlab_hepa->remarks) @endphp</span>
                 <input type="hidden" value="Hepatitis: @php echo nl2br($examlab_hepa->remarks) @endphp" name="findings[]" />
             </div>
             @endif
@@ -290,6 +287,7 @@
                 </div>
             @endif
         @endif
+
         @if($exam_physical)
             @if(!$exam_physical->a1)
                 <div class="col-md-6 my-50">
@@ -300,6 +298,7 @@
                 </div>
             @endif
         @endif
+
         @if($exam_physical)
             @if(!$exam_physical->b1)
                 <div class="col-md-6 my-50">
@@ -310,13 +309,13 @@
                 </div>
             @endif
         @endif
+
         @if($exam_physical)
             @if(!$exam_physical->a2)
                 <div class="col-md-6 my-50">
                     <h5><b>Head, Neck,Scalp</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->a2_findings) @endphp</span>
-                    <input type="hidden" value="Head, Neck,Scalp: @php echo nl2br($exam_physical->a2_findings) @endphp" name="findings[]" />
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a2_findings) @endphp</span>
+                    <input type="hidden" value="Head, Neck, Scalp: @php echo nl2br($exam_physical->a2_findings) @endphp" name="findings[]" />
                 </div>
             @endif
         @endif
@@ -324,8 +323,7 @@
             @if(!$exam_physical->b7)
                 <div class="col-md-6 my-50">
                     <h5><b>Neurology</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->b2_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b2_findings) @endphp</span>
                     <input type="hidden" value="Neurology: @php echo nl2br($exam_physical->b2_findings) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -334,8 +332,7 @@
             @if(!$exam_physical->a3)
                 <div class="col-md-6 my-50">
                     <h5><b>Eyes(external)</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->a3_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a3_findings) @endphp</span>
                     <input type="hidden" value="Eyes(external): @php echo nl2br($exam_physical->a3_findings) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -344,8 +341,7 @@
             @if(!$exam_physical->b2)
                 <div class="col-md-6 my-50">
                     <h5><b>Breast,Axilla</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->b3_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b3_findings) @endphp</span>
                     <input type="hidden" value="Breast,Axilla: @php echo nl2br($exam_physical->b3_findings) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -364,8 +360,7 @@
             @if(!$exam_physical->b3)
                 <div class="col-md-6 my-50">
                     <h5><b>Chest and Lungs</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->b4_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b4_findings) @endphp</span>
                     <input type="hidden" value="Chest and Lungs: @php echo nl2br($exam_physical->b4_findings) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -374,8 +369,7 @@
             @if(!$exam_physical->a5)
                 <div class="col-md-6 my-50">
                     <h5><b>Ears</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->a5_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a5_findings) @endphp</span>
                     <input type="hidden" value="Ears: @php echo nl2br($exam_physical->a5_findings) @endphp" name="findings[]" />
                 </div>
             @endif
@@ -394,8 +388,7 @@
             @if(!$exam_physical->a6)
                 <div class="col-md-6 my-50">
                     <h5><b>Nose,Sinuses</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_physical->a6_findings) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a6_findings) @endphp</span>
                     <input type="hidden" value="Nose,Sinuses: @php echo nl2br($exam_physical->a6_findings) @endphp" name="findings[]" />
                 </div>
             @endif

@@ -29,6 +29,96 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
+    public function migrate_patients(Request $request) {
+        $patients = DB::table('mast_patient')
+            ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
+            ->groupBy('name')
+            ->havingRaw('COUNT(*) > 1')
+            ->get();
+
+        foreach ($patients as $patient) {
+            // Find the first registered record based on the created_date in each group
+            $firstRecord = DB::table('mast_patient')
+                ->where('firstname', $patient->firstname)
+                ->where('middlename', $patient->middlename)
+                ->where('lastname', $patient->lastname)
+                ->orderBy('created_date', 'ASC')
+                ->first();
+
+            // Update the patientcode value for all other records in the group
+            DB::table('mast_patient')
+                ->where('firstname', $patient->firstname)
+                ->where('middlename', $patient->middlename)
+                ->where('lastname', $patient->lastname)
+                ->where('id', '<>', $firstRecord->id)
+                ->update(['registered_patientcode' => DB::raw('patientcode'), 'patientcode' => $firstRecord->patientcode]);
+        }
+
+        echo 'success';
+    }
+
+    public function followup_results(Request $request) {
+        $reassessmentData = DB::table('reassessment')->where('admission_id', '14219')->get();
+
+        foreach ($reassessmentData as $data) {
+
+            $prefix_to_remove = [
+               ['Dental: ', 'dental', 'Dental'],
+                ['PE: ', 'pe', 'PE'],
+                ['Visual Acuity: ', 'visual_acuity', 'Visual Acuity'],
+                ['Psychological: ', 'psychological', 'Psychological'],
+                ['Audiometry: ', 'audiometry', 'Audiometry'],
+                ['Ishihara: ', 'ishihara', 'Ishihara'],
+                ['Cardiac Risk Factor: ', 'crf', 'Cardiac Risk Factor'],
+                ['Cardiovascular: ', 'cardio', 'Cardiovascular'],
+                ['Stress Test: ', 'stress_test', 'Stress Test'],
+                ['2D Echo Plain: ', 'echo_plain', '2D Echo Plain'],
+                ['2D Echo Doppler: ', 'echo_doppler', '2D Echo Doppler'],
+                ['PPD: ', 'ppd', 'PPD'],
+                ['Stress Echo: ', 'stress_echo', 'Stress Echo'],
+                ['KUB Exam: ', 'kub', 'KUB Exam'],
+                ['HBT Exam: ', 'hbt', 'HBT Exam'],
+                ['THYROID Exam: ', 'thyroid', 'THYROID Exam'],
+                ['BREAST Exam: ', 'breast', 'BREAST Exam'],
+                ['WHOLE ABDOMEN Exam: ','whole_abdomen', 'WHOLE ABDOMEN'],
+                ['GENITALS Exam: ', 'genitals', 'GENITALS'],
+                ['Psycho BPI: ', 'psycho_bpi', 'Psycho BPI'],
+                ['Hematology: ', 'hematology', 'Hematology'],
+                ['Urinalysis: ', 'urinalysis', 'Urinalysis'],
+                ['Pregnancy: ', 'pregnancy', 'Pregnancy'],
+                ['Fecalysis: ', 'fecalysis', 'Fecalysis'],
+                ['Hepatitis: ', 'hepatitis', 'Hepatitis'],
+                ['HIV: ', 'hiv', 'HIV'],
+                ['Drug Test: ', 'drug_test', 'Drug Test'],
+            ];
+
+            $findings = [];
+            $recommendations = [];
+
+            foreach ($prefix_to_remove as $key => $prefix) {
+                if (strpos($data->findings, $prefix[0]) !== false) {
+                    $finding_pos = strpos($data->findings, $prefix[0]);
+                    $result_findings = substr($data->findings, $finding_pos, strpos($data->findings, ";", $finding_pos) - $finding_pos);
+                    if(!$result_findings) {
+                        $result_findings = substr($data->findings, $finding_pos, strlen($data->findings));
+                    }
+                    $result_findings_value = substr($result_findings, strlen($prefix[0]));
+                    array_push($findings, [$prefix[0] => $result_findings_value]);
+                }
+
+                if (strpos($data->remarks, $prefix[0]) !== false) {
+                    $recommendation_pos = strpos($data->remarks, $prefix[0]);
+                    $result_recommendations = substr($data->remarks, $recommendation_pos, strpos($data->remarks, ";", $recommendation_pos) - $recommendation_pos);
+                    if(!$result_recommendations) {
+                        $result_recommendations = substr($data->remarks, $recommendation_pos, strlen($data->remarks));
+                    }
+                    $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
+                    array_push($recommendations, [$prefix[0] => $result_recommendations_value]);
+                }
+            }
+            dd($findings, $recommendations);
+        }
+    }
 
     public function today_patients(Request $request)
     {

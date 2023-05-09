@@ -503,13 +503,9 @@
                                                     <td width="178" align="center" valign="middle" class="brdBtm"
                                                         style="padding-top:20px;">
                                                         @if($admission->patient->patient_image)
-                                                        <img src="../../../app-assets/images/profiles/{{$admission->patient->patient_image . '?' . $admission->updated_date}}"
-                                                            alt="Patient Picture" width="140" height="140"
-                                                            class="brdAll">
+                                                            <img src="../../../app-assets/images/profiles/{{$admission->patient->patient_image . '?' . $admission->updated_date}}" alt="Patient Picture" width="140" height="140" class="brdAll">
                                                         @else
-                                                        <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                            alt="Patient Picture" width="140" height="140"
-                                                            class="brdAll">
+                                                            <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="Patient Picture" width="140" height="140" class="brdAll">
                                                         @endif<br>
                                                         <span class="fontMed">{{$admission->patient->patientcode}}</span>
                                                     </td>

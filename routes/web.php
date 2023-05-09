@@ -75,6 +75,9 @@ Route::view('/new_skuld', 'PrintPanel.new-skuld');
 // ----------------------------------------------- AUTHENTICATION -------------------------------------------- //
 
 Route::group(['middleware' => ['AuthCheck']], function () {
+    Route::get('/migrate-patients', [AdminController::class, 'migrate_patients']);
+
+    Route::get('/followup_results', [AdminController::class, 'followup_results']);
     // ----------------------------------------- START PATIENT ACCESS --------------------------------------- //
     Route::get('/see_record', [PatientController::class, 'see_record']);
 

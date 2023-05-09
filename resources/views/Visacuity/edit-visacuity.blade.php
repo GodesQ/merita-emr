@@ -22,11 +22,11 @@
                     <div class="card-content p-2">
                         <form name="frm" method="post" action="/update_visacuity" role="form">
                             @if(Session::get('status'))
-                            @push('scripts')
-                            <script>
-                            toastr.success('{{ Session::get("status")}}', 'Success');
-                            </script>
-                            @endpush
+                                @push('scripts')
+                                    <script>
+                                        toastr.success('{{ Session::get("status")}}', 'Success');
+                                    </script>
+                                @endpush
                             @endif
                             @csrf
                             <input type="hidden" name="id" value="{{ $exam->id }}">

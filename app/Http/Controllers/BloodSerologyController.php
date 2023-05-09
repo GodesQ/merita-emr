@@ -12,7 +12,6 @@ use App\Models\EmployeeLog;
 
 class BloodSerologyController extends Controller
 {
-    //
     public function add_bloodsero(Request $request)
     {
         try {

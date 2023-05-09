@@ -92,7 +92,7 @@
                                         <td width="24%"><b>EXAMINATION</b></td>
                                         <td width="26%"> <b>RESULTS</b></td>
                                         <td width="50%"><b>NORMAL VALUE</b></td>
-                                        <td width="50%"><b>FINDINGS</b></td>
+                                        {{-- <td width="50%"><b>FINDINGS</b></td> --}}
                                         <td width="50%"><b>RECOMMENDATION</b></td>
                                     </tr>
                                     <tr>
@@ -104,9 +104,9 @@
                                                 value="{{ $exam->hba1c }}" />
                                         </td>
                                         <td class="">4.0-6.4%</td>
-                                        <td><input name="hba1c_findings" type="text" class="form-control"
+                                        {{-- <td><input name="hba1c_findings" type="text" class="form-control"
                                                 style="width:350px" id="hba1c_findings"
-                                                value="{{ $exam->hba1c_findings }}"></td>
+                                                value="{{ $exam->hba1c_findings }}"></td> --}}
                                         <td><input name="hba1c_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="hba1c_recommendation"
                                                 value="{{ $exam->hba1c_recommendation }}"></td>
@@ -120,9 +120,9 @@
                                                 value="{{ $exam->ppbg }}">
                                         </td>
                                         <td class=""> &lt; 200 mg/dL</td>
-                                        <td><input name="ppbg_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ppbg_findings" type="text" class="form-control"
                                                 style="width:350px" id="ppbg_findings"
-                                                value="{{ $exam->ppbg_findings }}"></td>
+                                                value="{{ $exam->ppbg_findings }}"></td> --}}
                                         <td><input name="ppbg_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ppbg_recommendation"
                                                 value="{{ $exam->ppbg_recommendation }}"></td>
@@ -136,9 +136,9 @@
                                                 value="{{ $exam->fbs }}" />
                                         </td>
                                         <td class=""> 70-110 mg/dL </td>
-                                        <td><input name="fbs_findings" type="text" class="form-control"
+                                        {{-- <td><input name="fbs_findings" type="text" class="form-control"
                                                 style="width:350px" id="fbs_findings" value="{{ $exam->fbs_findings }}">
-                                        </td>
+                                        </td> --}}
                                         <td><input name="fbs_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="fbs_recommendation"
                                                 value="{{ $exam->fbs_recommendation }}"></td>
@@ -151,9 +151,9 @@
                                                 value="{{ $exam->bun }}" />
                                         </td>
                                         <td class=""> 5-20 mg/dL </td>
-                                        <td><input name="bun_findings" type="text" class="form-control"
+                                        {{-- <td><input name="bun_findings" type="text" class="form-control"
                                                 style="width:350px" id="bun_findings" value="{{ $exam->bun_findings }}">
-                                        </td>
+                                        </td> --}}
                                         <td><input name="bun_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="bun_recommendation"
                                                 value="{{ $exam->bun_recommendation }}"></td>
@@ -167,9 +167,9 @@
                                                 value="{{ $exam->creatinine }}" />
                                         </td>
                                         <td class=""> 0.8-1.2 mg/dL </td>
-                                        <td><input name="creatinine_findings" type="text" class="form-control"
+                                        {{-- <td><input name="creatinine_findings" type="text" class="form-control"
                                                 style="width:350px" id="creatinine_findings"
-                                                value="{{ $exam->creatinine_findings }}"></td>
+                                                value="{{ $exam->creatinine_findings }}"></td> --}}
                                         <td><input name="creatinine_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="creatinine_recommendation"
                                                 value="{{ $exam->creatinine_recommendation }}"></td>
@@ -183,9 +183,9 @@
                                                 value="{{ $exam->cholesterol }}" />
                                         </td>
                                         <td class=""> 125-200 mg/dL </td>
-                                        <td><input name="cholesterol_findings" type="text" class="form-control"
+                                        {{-- <td><input name="cholesterol_findings" type="text" class="form-control"
                                                 style="width:350px" id="cholesterol_findings"
-                                                value="{{ $exam->cholesterol_findings }}"></td>
+                                                value="{{ $exam->cholesterol_findings }}"></td> --}}
                                         <td><input name="cholesterol_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="cholesterol_recommendation"
                                                 value="{{ $exam->cholesterol_recommendation }}"></td>
@@ -199,9 +199,9 @@
                                                 id="triglycerides" value="{{ $exam->triglycerides }}" />
                                         </td>
                                         <td class=""> M:40-160 F:35-130 </td>
-                                        <td><input name="triglycerides_findings" type="text" class="form-control"
+                                        {{-- <td><input name="triglycerides_findings" type="text" class="form-control"
                                                 style="width:350px" id="triglycerides_findings"
-                                                value="{{ $exam->triglycerides_findings }}"></td>
+                                                value="{{ $exam->triglycerides_findings }}"></td> --}}
                                         <td><input name="triglycerides_recommendation" type="text"
                                                 class="form-control" style="width:350px"
                                                 id="triglycerides_recommendation"
@@ -216,8 +216,8 @@
                                                 value="{{ $exam->hdl }}" />
                                         </td>
                                         <td class=""> &gt;40 mg/dL </td>
-                                        <td><input name="hdl_findings" type="text" class="form-control"
-                                                style="width:350px" id="hdl_findings" value="{{ $exam->hdl_findings }}">
+                                        {{-- <td><input name="hdl_findings" type="text" class="form-control"
+                                                style="width:350px" id="hdl_findings" value="{{ $exam->hdl_findings }}"> --}}
                                         </td>
                                         <td><input name="hdl_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="hdl_recommendation"
@@ -232,9 +232,9 @@
                                                 value="{{ $exam->ldl }}" />
                                         </td>
                                         <td class=""> &lt;100 mg/dL </td>
-                                        <td><input name="ldl_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ldl_findings" type="text" class="form-control"
                                                 style="width:350px" id="ldl_findings" value="{{ $exam->ldl_findings }}">
-                                        </td>
+                                        </td> --}}
                                         <td><input name="ldl_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ldl_recommendation"
                                                 value="{{ $exam->ldl_recommendation }}"></td>
@@ -246,9 +246,9 @@
                                                 value="{{ $exam->vldl }}" />
                                         </td>
                                         <td class=""> M:8-32 F:7-26 </td>
-                                        <td><input name="vldl_findings" type="text" class="form-control"
+                                        {{-- <td><input name="vldl_findings" type="text" class="form-control"
                                                 style="width:350px" id="vldl_findings"
-                                                value="{{ $exam->vldl_findings }}"></td>
+                                                value="{{ $exam->vldl_findings }}"></td> --}}
                                         <td><input name="vldl_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="vldl_recommendation"
                                                 value="{{ $exam->vldl_recommendation }}"></td>
@@ -262,9 +262,9 @@
                                                 value="{{ $exam->uricacid }}" />
                                         </td>
                                         <td class=""> 140-430 umol/L </td>
-                                        <td><input name="uricacid_findings" type="text" class="form-control"
+                                        {{-- <td><input name="uricacid_findings" type="text" class="form-control"
                                                 style="width:350px" id="uricacid_findings"
-                                                value="{{ $exam->uricacid_findings }}"></td>
+                                                value="{{ $exam->uricacid_findings }}"></td> --}}
                                         <td><input name="uricacid_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="uricacid_recommendation"
                                                 value="{{ $exam->uricacid_recommendation }}"></td>
@@ -278,9 +278,9 @@
                                                 value="{{ $exam->sgot }}" />
                                         </td>
                                         <td class=""> 0-40 u/L </td>
-                                        <td><input name="sgot_findings" type="text" class="form-control"
+                                        {{-- <td><input name="sgot_findings" type="text" class="form-control"
                                                 style="width:350px" id="sgot_findings"
-                                                value="{{ $exam->sgot_findings }}"></td>
+                                                value="{{ $exam->sgot_findings }}"></td> --}}
                                         <td><input name="sgot_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="sgot_recommendation"
                                                 value="{{ $exam->sgot_recommendation }}"></td>
@@ -294,9 +294,9 @@
                                                 value="{{ $exam->sgpt }}" />
                                         </td>
                                         <td class="">0-41 u/L</td>
-                                        <td><input name="sgpt_findings" type="text" class="form-control"
+                                        {{-- <td><input name="sgpt_findings" type="text" class="form-control"
                                                 style="width:350px" id="sgpt_findings"
-                                                value="{{ $exam->sgpt_findings }}"></td>
+                                                value="{{ $exam->sgpt_findings }}"></td> --}}
                                         <td><input name="sgpt_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="sgpt_recommendation"
                                                 value="{{ $exam->sgpt_recommendation }}"></td>
@@ -310,9 +310,9 @@
                                                 value="{{ $exam->ggt }}" />
                                         </td>
                                         <td class=""> 0-55 u/L </td>
-                                        <td><input name="ggt_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ggt_findings" type="text" class="form-control"
                                                 style="width:350px" id="ggt_findings" value="{{ $exam->ggt_findings }}">
-                                        </td>
+                                        </td> --}}
                                         <td><input name="ggt_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ggt_recommendation"
                                                 value="{{ $exam->ggt_recommendation }}"></td>
@@ -326,9 +326,9 @@
                                                 value="{{ $exam->alkphos }}" />
                                         </td>
                                         <td class=""> 35-129 u/L </td>
-                                        <td><input name="alkphos_findings" type="text" class="form-control"
+                                        {{-- <td><input name="alkphos_findings" type="text" class="form-control"
                                                 style="width:350px" id="alkphos_findings"
-                                                value="{{ $exam->alkphos_findings }}"></td>
+                                                value="{{ $exam->alkphos_findings }}"></td> --}}
                                         <td><input name="alkphos_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="alkphos_recommendation"
                                                 value="{{ $exam->alkphos_recommendation }}"></td>
@@ -342,9 +342,9 @@
                                                 id="ttlbilirubin" value="{{ $exam->ttlbilirubin }}" />
                                         </td>
                                         <td class="">5-21 umol/L</td>
-                                        <td><input name="ttlbilirubin_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ttlbilirubin_findings" type="text" class="form-control"
                                                 style="width:350px" id="ttlbilirubin_findings"
-                                                value="{{ $exam->ttlbilirubin_findings }}"></td>
+                                                value="{{ $exam->ttlbilirubin_findings }}"></td> --}}
                                         <td><input name="ttlbilirubin_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ttlbilirubin_recommendation"
                                                 value="{{ $exam->ttlbilirubin_recommendation }}"></td>
@@ -358,9 +358,9 @@
                                                 id="dirbilirubin" value="{{ $exam->dirbilirubin }}" />
                                         </td>
                                         <td class=""> 0-5.1 umol/L </td>
-                                        <td><input name="dirbilirubin_findings" type="text" class="form-control"
+                                        {{-- <td><input name="dirbilirubin_findings" type="text" class="form-control"
                                                 style="width:350px" id="dirbilirubin_findings"
-                                                value="{{ $exam->dirbilirubin_findings }}"></td>
+                                                value="{{ $exam->dirbilirubin_findings }}"></td> --}}
                                         <td><input name="dirbilirubin_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="dirbilirubin_recommendation"
                                                 value="{{ $exam->dirbilirubin_recommendation }}"></td>
@@ -374,9 +374,9 @@
                                                 id="indbilirubin" value="{{ $exam->indbilirubin }}" />
                                         </td>
                                         <td class=""> 0-16 umol/L </td>
-                                        <td><input name="indbilirubin_findings" type="text" class="form-control"
+                                        {{-- <td><input name="indbilirubin_findings" type="text" class="form-control"
                                                 style="width:350px" id="indbilirubin_findings"
-                                                value="{{ $exam->indbilirubin_findings }}"></td>
+                                                value="{{ $exam->indbilirubin_findings }}"></td> --}}
                                         <td><input name="indbilirubin_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="indbilirubin_recommendation"
                                                 value="{{ $exam->indbilirubin_recommendation }}"></td>
@@ -390,9 +390,9 @@
                                                 value="{{ $exam->ttlprotein }}" />
                                         </td>
                                         <td class=""> 66-87 g/L </td>
-                                        <td><input name="ttlprotein_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ttlprotein_findings" type="text" class="form-control"
                                                 style="width:350px" id="ttlprotein_findings"
-                                                value="{{ $exam->ttlprotein_findings }}"></td>
+                                                value="{{ $exam->ttlprotein_findings }}"></td> --}}
                                         <td><input name="ttlprotein_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ttlprotein_recommendation"
                                                 value="{{ $exam->ttlprotein_recommendation }}"></td>
@@ -406,9 +406,9 @@
                                                 value="{{ $exam->albumin }}" />
                                         </td>
                                         <td width="50%" class=""> 35-52 g/L </td>
-                                        <td><input name="albumin_findings" type="text" class="form-control"
+                                        {{-- <td><input name="albumin_findings" type="text" class="form-control"
                                                 style="width:350px" id="albumin_findings"
-                                                value="{{ $exam->albumin_findings }}"></td>
+                                                value="{{ $exam->albumin_findings }}"></td> --}}
                                         <td><input name="albumin_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="albumin_recommendation"
                                                 value="{{ $exam->albumin_recommendation }}"></td>
@@ -422,9 +422,9 @@
                                                 value="{{ $exam->globulin }}" />
                                         </td>
                                         <td class=""> 31-35 g/L </td>
-                                        <td><input name="globulin_findings" type="text" class="form-control"
+                                        {{-- <td><input name="globulin_findings" type="text" class="form-control"
                                                 style="width:350px" id="globulin_findings"
-                                                value="{{ $exam->globulin_findings }}"></td>
+                                                value="{{ $exam->globulin_findings }}"></td> --}}
                                         <td><input name="globulin_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="globulin_recommendation"
                                                 value="{{ $exam->globulin_recommendation }}"></td>
@@ -438,9 +438,9 @@
                                                 value="{{ $exam->sodium }}" />
                                         </td>
                                         <td class="">135.0-148 mmol/L</td>
-                                        <td><input name="sodium_findings" type="text" class="form-control"
+                                        {{-- <td><input name="sodium_findings" type="text" class="form-control"
                                                 style="width:350px" id="sodium_findings"
-                                                value="{{ $exam->sodium_findings }}"></td>
+                                                value="{{ $exam->sodium_findings }}"></td> --}}
                                         <td><input name="sodium_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="sodium_recommendation"
                                                 value="{{ $exam->sodium_recommendation }}"></td>
@@ -453,9 +453,9 @@
                                                 value="{{ $exam->potassium }}" />
                                         </td>
                                         <td class="">3.5-5.3 mmol/L</td>
-                                        <td><input name="potassium_findings" type="text" class="form-control"
+                                        {{-- <td><input name="potassium_findings" type="text" class="form-control"
                                                 style="width:350px" id="potassium_findings"
-                                                value="{{ $exam->potassium_findings }}"></td>
+                                                value="{{ $exam->potassium_findings }}"></td> --}}
                                         <td><input name="potassium_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="potassium_recommendation"
                                                 value="{{ $exam->potassium_recommendation }}"></td>
@@ -468,9 +468,9 @@
                                                 oninput="getBloodRemarks(this, 'CHLORIDE', '96', '108', '{{ $exam->chloride }}')" />
                                         </td>
                                         <td class="">96.0-108 mmol/L</td>
-                                        <td><input name="chloride_findings" type="text" class="form-control"
+                                        {{-- <td><input name="chloride_findings" type="text" class="form-control"
                                                 style="width:350px" id="chloride_findings"
-                                                value="{{ $exam->chloride_findings }}"></td>
+                                                value="{{ $exam->chloride_findings }}"></td> --}}
                                         <td><input name="chloride_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="chloride_recommendation"
                                                 value="{{ $exam->chloride_recommendation }}"></td>
@@ -483,9 +483,9 @@
                                                 oninput="getBloodRemarks(this, 'CALCIUM', '2.10', '2.90', '{{ $exam->calcium }}')" />
                                         </td>
                                         <td class="">2.10-2.90 mmol/L</td>
-                                        <td><input name="calcium_findings" type="text" class="form-control"
+                                        {{-- <td><input name="calcium_findings" type="text" class="form-control"
                                                 style="width:350px" id="calcium_findings"
-                                                value="{{ $exam->calcium_findings }}"></td>
+                                                value="{{ $exam->calcium_findings }}"></td> --}}
                                         <td><input name="calcium_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="calcium_recommendation"
                                                 value="{{ $exam->calcium_recommendation }}"></td>
@@ -498,9 +498,9 @@
                                                 oninput="getBloodRemarks(this, 'AG RATIO', '0.6', '1.7')">
                                         </td>
                                         <td class="">1: 0.6-1.7</td>
-                                        <td><input name="ag_ratio_findings" type="text" class="form-control"
+                                        {{-- <td><input name="ag_ratio_findings" type="text" class="form-control"
                                                 style="width:350px" id="ag_ratio_findings"
-                                                value="{{ $exam->ag_ratio_findings }}"></td>
+                                                value="{{ $exam->ag_ratio_findings }}"></td> --}}
                                         <td><input name="ag_ratio_recommendation" type="text" class="form-control"
                                                 style="width:350px" id="ag_ratio_recommendation"
                                                 value="{{ $exam->ag_ratio_recommendation }}"></td>
@@ -514,10 +514,10 @@
                                             <input name="others_result" type="text" class="form-control"
                                                 id="others_result" value="{{ $exam->others_result }}" />
                                         </td>
-                                        <td valign="bottom">
+                                        {{-- <td valign="bottom">
                                             <input name="others_nv" type="text" class="form-control"
                                                 style="width:200px" id="others_nv" value="{{ $exam->others_nv }}" />
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 </table>
                                 <!-- <table width="100%" border="0" cellpadding="2" cellspacing="2" class="table table-bordered table-responsive">

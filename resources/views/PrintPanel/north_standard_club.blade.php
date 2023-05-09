@@ -408,22 +408,22 @@
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
                                                             @if ($admission->exam_physical->duty == 'Fit' || $admission->exam_physical->duty == 'Fit Restriction')
-                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
                                                         @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                        @endif
-                                                        @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                         @endif
                                                     </td>
                                                     <td width="3%" valign="middle">NO</td>
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
-                                                        @if ($admission->exam_physical->duty == 'Unfit')
-                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                        @else
-                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                        @endif
+                                                            @if ($admission->exam_physical->duty == 'Unfit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
                                                         @else
                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                         @endif

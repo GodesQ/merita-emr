@@ -540,7 +540,7 @@
                                                             <td>
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">Findings</label>
-                                                                    <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6"></textarea>
+                                                                    <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6">PURETONE AUDIOMETRY RESULTS SUGGEST NORMAL BILATERAL HEARING ACUITY</textarea>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -548,33 +548,12 @@
                                                             <td>
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">Recommendation</label>
-                                                                    <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"
-                                                                        rows="6"></textarea>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30" rows="6"></textarea>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-group">
-                                                    <label for=""><b>Remarks</b></label>
-                                                    <input name="remarks_status" type="radio" class="m-1"
-                                                        id="remarks_status_0" value="normal">Normal
-                                                    <input name="remarks_status" type="radio" class="m-1"
-                                                        id="remarks_status_1" value="findings">With Findings
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold">Findings</label>
-                                                    <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6">PURETONE AUDIOMETRY RESULTS SUGGEST NORMAL BILATERAL HEARING ACUITY</textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="font-weight-bold">Recommendation</label>
-                                                    <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"
-                                                        rows="6"></textarea>
-                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

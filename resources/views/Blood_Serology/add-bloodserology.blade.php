@@ -87,7 +87,7 @@
                                             <td><b>EXAMINATION</b></td>
                                             <td> <b>RESULTS</b></td>
                                             <td><b>NORMAL VALUE</b></td>
-                                            <td width="40%"><b>FINDINGS</b></td>
+                                            {{-- <td width="40%"><b>FINDINGS</b></td> --}}
                                             <td width="40%"><b>RECOMMENDATIONS</b></td>
                                         </tr>
                                         <tr>
@@ -97,8 +97,8 @@
                                                     type="text" class="form-control" id="hba1c" value="">
                                             </td>
                                             <td class="">4.0-6.4%</td>
-                                            <td><input name="hba1c_findings" type="text" class="form-control"
-                                                    style="width:350px" id="hba1c_findings" value=""></td>
+                                            {{-- <td><input name="hba1c_findings" type="text" class="form-control"
+                                                    style="width:350px" id="hba1c_findings" value=""></td> --}}
                                             <td><input name="hba1c_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="hba1c_recommendation" value=""></td>
                                         </tr>
@@ -109,8 +109,8 @@
                                                     type="text" class="form-control" id="ppbg" value="">
                                             </td>
                                             <td class=""> &lt; 200 mg/dL</td>
-                                            <td><input name="ppbg_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ppbg_findings" value=""></td>
+                                                {{-- <td><input name="ppbg_findings" type="text" class="form-control"
+                                                        style="width:350px" id="ppbg_findings" value=""></td> --}}
                                             <td><input name="ppbg_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="ppbg_recommendation" value=""></td>
                                         </tr>
@@ -121,8 +121,8 @@
                                                     type="text" class="form-control" id="fbs" value="">
                                             </td>
                                             <td class=""> 70-110 mg/dL </td>
-                                            <td><input name="fbs_findings" type="text" class="form-control"
-                                                    style="width:350px" id="fbs_findings" value=""></td>
+                                            {{-- <td><input name="fbs_findings" type="text" class="form-control"
+                                                    style="width:350px" id="fbs_findings" value=""></td> --}}
                                             <td><input name="fbs_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="fbs_recommendation" value=""></td>
                                         </tr>
@@ -133,8 +133,8 @@
                                                     type="text" class="form-control" id="bun" value="">
                                             </td>
                                             <td class=""> 5-20 mg/dL </td>
-                                            <td><input name="bun_findings" type="text" class="form-control"
-                                                    style="width:350px" id="bun_findings" value=""></td>
+                                            {{-- <td><input name="bun_findings" type="text" class="form-control"
+                                                    style="width:350px" id="bun_findings" value=""></td> --}}
                                             <td><input name="bun_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="bun_recommendation" value=""></td>
                                         </tr>
@@ -146,8 +146,8 @@
                                                     class="form-control" id="creatinine" value="">
                                             </td>
                                             <td class=""> 0.8-1.2 mg/dL </td>
-                                            <td><input name="creatinine_findings" type="text" class="form-control"
-                                                    style="width:350px" id="creatinine_findings" value=""></td>
+                                            {{-- <td><input name="creatinine_findings" type="text" class="form-control"
+                                                    style="width:350px" id="creatinine_findings" value=""></td> --}}
                                             <td><input name="creatinine_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="creatinine_recommendation" value=""></td>
@@ -160,8 +160,8 @@
                                                     class="form-control" id="cholesterol" value="">
                                             </td>
                                             <td class=""> 125-200 mg/dL </td>
-                                            <td><input name="cholesterol_findings" type="text" class="form-control"
-                                                    style="width:350px" id="cholesterol_findings" value=""></td>
+                                            {{-- <td><input name="cholesterol_findings" type="text" class="form-control"
+                                                    style="width:350px" id="cholesterol_findings" value=""></td> --}}
                                             <td><input name="cholesterol_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="cholesterol_recommendation" value=""></td>
@@ -174,8 +174,8 @@
                                                     class="form-control" id="triglycerides" value="">
                                             </td>
                                             <td class=""> M:40-160 F:35-130 </td>
-                                            <td><input name="triglycerides_findings" type="text" class="form-control"
-                                                    style="width:350px" id="triglycerides_findings" value=""></td>
+                                            {{-- <td><input name="triglycerides_findings" type="text" class="form-control"
+                                                    style="width:350px" id="triglycerides_findings" value=""></td> --}}
                                             <td><input name="triglycerides_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="triglycerides_recommendation" value=""></td>
@@ -188,8 +188,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> &gt;40 mg/dL </td>
-                                            <td><input name="hdl_findings" type="text" class="form-control"
-                                                    style="width:350px" id="hdl_findings" value=""></td>
+                                            {{-- <td><input name="hdl_findings" type="text" class="form-control"
+                                                    style="width:350px" id="hdl_findings" value=""></td> --}}
                                             <td><input name="hdl_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="hdl_recommendation" value=""></td>
                                         </tr>
@@ -201,8 +201,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> &lt;100 mg/dL </td>
-                                            <td><input name="ldl_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ldl_findings" value=""></td>
+                                            {{-- <td><input name="ldl_findings" type="text" class="form-control"
+                                                    style="width:350px" id="ldl_findings" value=""></td> --}}
                                             <td><input name="ldl_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="ldl_recommendation" value=""></td>
                                         </tr>
@@ -214,8 +214,8 @@
                                                     id="vldl" value="">
                                             </td>
                                             <td class=""> M:8-32 F:7-26 </td>
-                                            <td><input name="vldl_findings" type="text" class="form-control"
-                                                    style="width:350px" id="vldl_findings" value=""></td>
+                                            {{-- <td><input name="vldl_findings" type="text" class="form-control"
+                                                    style="width:350px" id="vldl_findings" value=""></td> --}}
                                             <td><input name="vldl_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="vldl_recommendation" value=""></td>
                                         </tr>
@@ -227,8 +227,8 @@
                                                     id="uricacid" value="">
                                             </td>
                                             <td class=""> 140-430 umol/L </td>
-                                            <td><input name="uricacid_findings" type="text" class="form-control"
-                                                    style="width:350px" id="uricacid_findings" value=""></td>
+                                            {{-- <td><input name="uricacid_findings" type="text" class="form-control"
+                                                    style="width:350px" id="uricacid_findings" value=""></td> --}}
                                             <td><input name="uricacid_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="uricacid_recommendation" value=""></td>
                                         </tr>
@@ -240,8 +240,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> 0-40 u/L </td>
-                                            <td><input name="sgot_findings" type="text" class="form-control"
-                                                    style="width:350px" id="sgot_findings" value=""></td>
+                                            {{-- <td><input name="sgot_findings" type="text" class="form-control"
+                                                    style="width:350px" id="sgot_findings" value=""></td> --}}
                                             <td><input name="sgot_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="sgot_recommendation" value=""></td>
                                         </tr>
@@ -253,8 +253,8 @@
                                                     value="">
                                             </td>
                                             <td class="">0-41 u/L</td>
-                                            <td><input name="sgpt_findings" type="text" class="form-control"
-                                                    style="width:350px" id="sgpt_findings" value=""></td>
+                                            {{-- <td><input name="sgpt_findings" type="text" class="form-control"
+                                                    style="width:350px" id="sgpt_findings" value=""></td> --}}
                                             <td><input name="sgpt_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="sgpt_recommendation" value=""></td>
                                         </tr>
@@ -266,8 +266,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> 0-55 u/L </td>
-                                            <td><input name="ggt_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ggt_findings" value=""></td>
+                                            {{-- <td><input name="ggt_findings" type="text" class="form-control"
+                                                    style="width:350px" id="ggt_findings" value=""></td> --}}
                                             <td><input name="ggt_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="ggt_recommendation" value=""></td>
                                         </tr>
@@ -279,8 +279,8 @@
                                                     id="alkphos" value="">
                                             </td>
                                             <td class=""> 35-129 u/L </td>
-                                            <td><input name="alkphos_findings" type="text" class="form-control"
-                                                    style="width:350px" id="alkphos_findings" value=""></td>
+                                            {{-- <td><input name="alkphos_findings" type="text" class="form-control"
+                                                    style="width:350px" id="alkphos_findings" value=""></td> --}}
                                             <td><input name="alkphos_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="alkphos_recommendation" value=""></td>
                                         </tr>
@@ -292,8 +292,8 @@
                                                     oninput="getBloodRemarks(this, 'TOTAL BILIRUBIN', '5', '21')">
                                             </td>
                                             <td class="">5-21 umol/L</td>
-                                            <td><input name="ttlbilirubin_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ttlbilirubin_findings" value=""></td>
+                                            {{-- <td><input name="ttlbilirubin_findings" type="text" class="form-control"
+                                                    style="width:350px" id="ttlbilirubin_findings" value=""></td> --}}
                                             <td><input name="ttlbilirubin_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="ttlbilirubin_recommendation" value=""></td>
@@ -306,8 +306,8 @@
                                                     oninput="getBloodRemarks(this, 'DIRECT BILIRUBIN', '0', '5.1')">
                                             </td>
                                             <td class=""> 0-5.1 umol/L </td>
-                                            <td><input name="dirbilirubin_findings" type="text" class="form-control"
-                                                    style="width:350px" id="dirbilirubin_findings" value=""></td>
+                                            {{-- <td><input name="dirbilirubin_findings" type="text" class="form-control"
+                                                    style="width:350px" id="dirbilirubin_findings" value=""></td> --}}
                                             <td><input name="dirbilirubin_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="dirbilirubin_recommendation" value=""></td>
@@ -320,8 +320,8 @@
                                                     oninput="getBloodRemarks(this, 'INDIRECT BILIRUBIN', '0', '16')">
                                             </td>
                                             <td class=""> 0-16 umol/L </td>
-                                            <td><input name="indbilirubin_findings" type="text" class="form-control"
-                                                    style="width:350px" id="indbilirubin_findings" value=""></td>
+                                            {{-- <td><input name="indbilirubin_findings" type="text" class="form-control"
+                                                    style="width:350px" id="indbilirubin_findings" value=""></td> --}}
                                             <td><input name="indbilirubin_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="indbilirubin_recommendation" value=""></td>
@@ -335,8 +335,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> 66-87 g/L </td>
-                                            <td><input name="ttlprotein_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ttlprotein_findings" value=""></td>
+                                            {{-- <td><input name="ttlprotein_findings" type="text" class="form-control"
+                                                    style="width:350px" id="ttlprotein_findings" value=""></td> --}}
                                             <td><input name="ttlprotein_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="ttlprotein_recommendation" value=""></td>
@@ -348,8 +348,8 @@
                                                     oninput="getBloodRemarks(this, 'ALBUMIN', '35', '52')" value="">
                                             </td>
                                             <td width="50%" class=""> 35-52 g/L </td>
-                                            <td><input name="albumin_findings" type="text" class="form-control"
-                                                    style="width:350px" id="albumin_findings" value=""></td>
+                                            {{-- <td><input name="albumin_findings" type="text" class="form-control"
+                                                    style="width:350px" id="albumin_findings" value=""></td> --}}
                                             <td><input name="albumin_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="albumin_recommendation" value=""></td>
                                         </tr>
@@ -361,8 +361,8 @@
                                                     value="">
                                             </td>
                                             <td class=""> 31-35 g/L </td>
-                                            <td><input name="globulin_findings" type="text" class="form-control"
-                                                    style="width:350px" id="globulin_findings" value=""></td>
+                                            {{-- <td><input name="globulin_findings" type="text" class="form-control"
+                                                    style="width:350px" id="globulin_findings" value=""></td> --}}
                                             <td><input name="globulin_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="globulin_recommendation" value=""></td>
                                         </tr>
@@ -374,8 +374,8 @@
                                                     oninput="getBloodRemarks(this, 'SODIUM', '135', '148')">
                                             </td>
                                             <td class="">135.0-148 mmol/L</td>
-                                            <td><input name="sodium_findings" type="text" class="form-control"
-                                                    style="width:350px" id="sodium_findings" value=""></td>
+                                            {{-- <td><input name="sodium_findings" type="text" class="form-control"
+                                                    style="width:350px" id="sodium_findings" value=""></td> --}}
                                             <td><input name="sodium_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="sodium_recommendation" value=""></td>
                                         </tr>
@@ -388,8 +388,8 @@
                                                     value="">
                                             </td>
                                             <td class="">3.5-5.3 mmol/L</td>
-                                            <td><input name="potassium_findings" type="text" class="form-control"
-                                                    style="width:350px" id="potassium_findings" value=""></td>
+                                            {{-- <td><input name="potassium_findings" type="text" class="form-control"
+                                                    style="width:350px" id="potassium_findings" value=""></td> --}}
                                             <td><input name="potassium_recommendation" type="text"
                                                     class="form-control" style="width:350px"
                                                     id="potassium_recommendation" value=""></td>
@@ -403,8 +403,8 @@
                                                     value="">
                                             </td>
                                             <td class="">96.0-108 mmol/L</td>
-                                            <td><input name="chloride_findings" type="text" class="form-control"
-                                                    style="width:350px" id="chloride_findings" value=""></td>
+                                            {{-- <td><input name="chloride_findings" type="text" class="form-control"
+                                                    style="width:350px" id="chloride_findings" value=""></td> --}}
                                             <td><input name="chloride_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="chloride_recommendation" value=""></td>
                                         </tr>
@@ -416,8 +416,8 @@
                                                     value="">
                                             </td>
                                             <td class="">2.10-2.90 mmol/L</td>
-                                            <td><input name="calcium_findings" type="text" class="form-control"
-                                                    style="width:350px" id="calcium_findings" value=""></td>
+                                            {{-- <td><input name="calcium_findings" type="text" class="form-control"
+                                                    style="width:350px" id="calcium_findings" value=""></td> --}}
                                             <td><input name="calcium_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="calcium_recommendation" value=""></td>
                                         </tr>
@@ -430,8 +430,8 @@
                                                     value="">
                                             </td>
                                             <td class="">1: 0.6-1.7</td>
-                                            <td><input name="ag_ratio_findings" type="text" class="form-control"
-                                                    style="width:350px" id="ag_ratio_findings" value=""></td>
+                                            {{-- <td><input name="ag_ratio_findings" type="text" class="form-control"
+                                                    style="width:350px" id="ag_ratio_findings" value=""></td> --}}
                                             <td><input name="ag_ratio_recommendation" type="text" class="form-control"
                                                     style="width:350px" id="ag_ratio_recommendation" value=""></td>
                                         </tr>
@@ -444,10 +444,10 @@
                                                 <input name="others_result" type="text" class="form-control"
                                                     id="others_result" value="">
                                             </td>
-                                            <td valign="bottom">
+                                            {{-- <td valign="bottom">
                                                 <input name="others_nv" type="text" class="form-control"
                                                     style="width:200px" id="others_nv" value="">
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     </tbody>
                                 </table>

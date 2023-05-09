@@ -1446,7 +1446,7 @@
                                     class="col-md-12 col-xl-5 col-lg-12 d-xl-flex align-items-center justify-content-center">
                                     <button class="btn btn-solid p-0 open-camera" onclick="openCamera()">
                                         @if($patient->patient_image == null || $patient->patient_image == "" || !file_exists(public_path('app-assets/images/profiles/') . $patient->patient_image))
-                                        <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="Profile Picture" data-toggle="modal" data-target="#defaultSize" class="users-avatar-shadow rounded" height="110" width="110">
+                                            <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="Profile Picture" data-toggle="modal" data-target="#defaultSize" class="users-avatar-shadow rounded" height="110" width="110">
                                         @else
                                         <img src="../../../app-assets/images/profiles/{{$patient->patient_image . '?' . $patient->updated_date}}"
                                             data-toggle="modal" data-target="#defaultSize" alt="Profile Picture"
