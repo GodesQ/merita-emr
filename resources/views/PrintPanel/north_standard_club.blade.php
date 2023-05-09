@@ -407,7 +407,7 @@
                                                     <td width="4%" valign="middle">YES</td>
                                                     <td width="3%" valign="middle">
                                                         @if ($admission->exam_physical)
-                                                        @if ($admission->exam_physical->duty == 'Fit')
+                                                            @if ($admission->exam_physical->duty == 'Fit' || $admission->exam_physical->duty == 'Fit Restriction')
                                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                         @else
                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -551,11 +551,11 @@
                                                                     <span
                                                                         style="margin-left: 20px;">UNFIT FOR DUTY
                                                                         @if ($admission->exam_physical)
-                                                                        @if($admission->exam_physical->duty == 'Unfit')
-                                                                            <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
+                                                                            @if($admission->exam_physical->duty == 'Unfit')
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
                                                                         @else
                                                                         <img src="../../../app-assets/images/icoUncheck.gif"
                                                                             width="10">
