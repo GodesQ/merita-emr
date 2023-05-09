@@ -1182,10 +1182,8 @@ return mysqli_fetch_array($result);
                                                     <table width="100%" border="0" cellspacing="2" cellpadding="2">
                                                         <tbody>
                                                             <tr>
-                                                                <td width="10%" align="center"><b>WEIGHT (kg)</b>
-                                                                </td>
-                                                                <td width="11%" align="center"><b>HEIGHT (cm)</b>
-                                                                </td>
+                                                                <td width="10%" align="center"><b>WEIGHT (kg)</b></td>
+                                                                <td width="11%" align="center"><b>HEIGHT (cm)</b></td>
                                                                 <td width="19%" align="center"><b>BMI</b></td>
                                                                 <td width="14%" align="center"><b>BLOOD PRESSURE</b>
                                                                 </td>
@@ -1246,6 +1244,12 @@ return mysqli_fetch_array($result);
                                                                         <input name="rhythm" type="text" id="rhythm"
                                                                             value="NORMAL" size="10" class="form-control">
                                                                     </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="7">
+                                                                    Vital Sign Recommendation: <br>
+                                                                    <textarea name="vital_sign_recommendation" id="vital_sign_recommendation" cols="30" rows="3" class="form-control"></textarea>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

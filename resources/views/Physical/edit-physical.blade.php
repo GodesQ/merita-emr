@@ -915,6 +915,12 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td colspan="7">
+                                                                    <b>Vital Sign Recommendation: </b> <br>
+                                                                    <textarea name="vital_sign_recommendation" id="vital_sign_recommendation" cols="10" rows="3" class="form-control">{{ $exam->vital_sign_recommendation }}</textarea>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </td>
