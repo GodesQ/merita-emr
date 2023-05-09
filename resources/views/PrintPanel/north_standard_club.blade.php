@@ -526,17 +526,14 @@
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span>RESULT:</span>  <span style="margin-left: 30px;">&nbsp;</span>
                                                                     <span
-                                                                        style="margin-left:50px">FIT
-                                                                        FOR DUTY
+                                                                        style="margin-left:50px">FIT FOR DUTY
                                                                         @if ($admission->exam_physical)
-                                                                        @if(preg_match('/Fit/i',
-                                                                        $admission->exam_physical->duty) )
-                                                                        <img src="../../../app-assets/images/icoCheck.gif"
-                                                                            width="10">
-                                                                        @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
-                                                                        @endif
+                                                                            @if(preg_match('/Fit/i',
+                                                                            $admission->exam_physical->duty) )
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
                                                                         @else
                                                                         <img src="../../../app-assets/images/icoUncheck.gif"
                                                                             width="10">
@@ -580,7 +577,7 @@
                                                                     <br>
                                                                     DATE OF EXAMINATION:
                                                                          {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}<br><br>
-                                                                    APPROVED BY:<br><br><br>
+                                                                    APPROVED BY:<br><br><br><br>
                                                                     TERESITA F. GONZALES, MD<br>
                                                                     MEDICAL DIRECTOR
                                                                 </td>
