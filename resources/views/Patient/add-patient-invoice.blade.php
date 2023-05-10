@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                 <hr>
-        
+
                                 <!-- invoice product details -->
                                 <div class="invoice-product-details">
                                     <div class="container-fluid m-1 p-1 border {{$patient->patientinfo->payment_type == 'Billed' ? 'package' : 'applicant_paid'}}">
@@ -75,7 +75,7 @@
                                                     <div class="col-md-12 border p-1 {{$exam['charge']}}">
                                                         <div class="row">
                                                             <div class="col-md-3 text-center">
-                                                                {{$exam['examname']}} 
+                                                                {{$exam['examname']}}
                                                                 @if($exam['charge'] == 'package')
                                                                     <?php $exams_agency .= $exam['examname'] . '/ ' ?>
                                                                 @else
@@ -84,7 +84,7 @@
                                                                 </div>
                                                             <div class="col-md-2 text-center">Exams</div>
                                                             <div class="col-md-2 text-center">
-                                                                {{$exam['price']}} 
+                                                                {{$exam['price']}}
                                                                 @if($exam['charge'] == 'package')
                                                                     <?php $total_exams_agency += $exam['price'] ?>
                                                                 @else
@@ -167,7 +167,7 @@
                                             <button type="submit" class="btn btn-primary mt-1 btn-block">Save</button>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
     let particulars = document.querySelector('#particulars');
     let agency_items = document.querySelectorAll(`.package`);
     let applicant_items = document.querySelectorAll(`.applicant_paid`);
-    
+
     function selectPaymentType(e) {
         if(e.value == 'package') {
             subTotal.value =  Number('{{$total_package}}').toFixed(2);
@@ -206,11 +206,11 @@
             particulars.value = '';
         }
     }
-    
+
     function setSubTotal(e) {
         document.querySelector('#total-sub').textContent = e.value;
     }
-    
+
     function compute() {
         let tin_no = document.querySelector('#tin_no');
         let discount = document.querySelector('#discount');
@@ -218,7 +218,7 @@
         let totalDiscount = document.querySelector('#total-discount');
         let totalVat = document.querySelector('#total-vat');
         let totalAmount = document.querySelector('#total-amount');
-        
+
         let discount_total = discount.value;
         let total = Number(subTotal.value) - Number(discount_total);
         let tvat = Number(total);
@@ -226,26 +226,26 @@
         totalDiscount.textContent = Number(discount_total).toFixed(2);
         totalAmount.textContent = Number(tvat).toFixed(2);
         document.querySelector('#amount').value = Number(tvat).toFixed(2);
-        
+
     }
-    
+
     function updatePayment(e) {
             let payment_user = document.querySelector('#payment_user');
             let bill_to_agency_btn = document.querySelector('#bill_to_agency');
             let bill_to_applicant_btn = document.querySelector('#bill_to_applicant');
-            let agency = '{{$patient->patientinfo->agency->agencyname}}';
+            let agency = '{{optional($patient->patientinfo->agency)->agencyname}}';
             let applicant = '{{$patient->firstname}} {{strlen($patient->middlename) > 0 ? $patient->middlename[0] : $patient->middlename}} {{$patient->lastname}}';
             let payor = document.querySelector('#payor');
             let packageRadio = document.querySelector('#radio1');
             const radioButtons = document.querySelectorAll('#store_cashier_or input[name="payment_type"]');
-            
+
             if(e == 'package') {
                 setAgencyItems(applicant_items, agency_items, radioButtons);
                 bill_to_agency_btn.classList.add('active');
                 bill_to_applicant_btn.classList.remove('active');
                 payor.value = agency;
                 payment_user.value = 'agency';
-                if('{{$patient->patientinfo->payment_type}}' == "Applicant Paid") {
+                if('{{optional($patient->patientinfo)->payment_type}}' == "Applicant Paid") {
                     packageRadio.disabled = true;
                     packageRadio.parentElement.classList.add('d-none');
                     packageRadio.parentElement.classList.remove('d-inline-block');
@@ -261,7 +261,7 @@
                 bill_to_agency_btn.classList.remove('active');
                 payor.value = applicant;
                 payment_user.value = 'applicant';
-                if('{{$patient->patientinfo->payment_type}}' == "Billed") {
+                if('{{optional($patient->patientinfo)->payment_type}}' == "Billed") {
                     packageRadio.disabled = true;
                     packageRadio.parentElement.classList.add('d-none');
                     packageRadio.parentElement.classList.remove('d-inline-block');
@@ -273,19 +273,19 @@
                 }
             }
         }
-        
+
     function setApplicantItems(applicant_items, agency_items) {
         const radioButtons = document.querySelectorAll('#store_cashier_or input[name="payment_type"]');
         agency_items.forEach(item => {
             item.classList.add('d-none');
             item.classList.remove('d-block');
         });
-        
+
         applicant_items.forEach(item => {
             item.classList.remove('d-none');
             item.classList.add('d-block');
         });
-        
+
         for (const radioButton of radioButtons) {
             if (radioButton.checked) {
                 let selectedSize = radioButton.value;
@@ -297,21 +297,21 @@
                 break;
             }
         }
-        
-        
+
+
     }
-    
+
     function setAgencyItems(applicant_items, agency_items, radioButtons) {
         applicant_items.forEach(item => {
             item.classList.add('d-none');
             item.classList.remove('d-block', 'paid');
         });
-        
+
         agency_items.forEach(item => {
             item.classList.remove('d-none');
             item.classList.add('d-block', 'paid');
         });
-        
+
         for (const radioButton of radioButtons) {
             if (radioButton.checked) {
                 let selectedSize = radioButton.value;

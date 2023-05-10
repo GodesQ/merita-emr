@@ -30,31 +30,35 @@ use Intervention\Image\Facades\Image;
 class AdminController extends Controller
 {
     public function migrate_patients(Request $request) {
-        $patients = DB::table('mast_patient')
-            ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
-            ->groupBy('name')
-            ->havingRaw('COUNT(*) > 1')
-            ->get();
+        // $patients = DB::table('mast_patient')
+        //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
+        //     ->groupBy('name')
+        //     ->havingRaw('COUNT(*) > 1')
+        //     ->get();
 
-        foreach ($patients as $patient) {
-            // Find the first registered record based on the created_date in each group
-            $firstRecord = DB::table('mast_patient')
-                ->where('firstname', $patient->firstname)
-                ->where('middlename', $patient->middlename)
-                ->where('lastname', $patient->lastname)
-                ->orderBy('created_date', 'ASC')
-                ->first();
+        // foreach ($patients as $patient) {
+        //     // Find the first registered record based on the created_date in each group
+        //     $firstRecord = DB::table('mast_patient')
+        //         ->where('firstname', $patient->firstname)
+        //         ->where('middlename', $patient->middlename)
+        //         ->where('lastname', $patient->lastname)
+        //         ->orderBy('created_date', 'ASC')
+        //         ->first();
 
-            // Update the patientcode value for all other records in the group
-            DB::table('mast_patient')
-                ->where('firstname', $patient->firstname)
-                ->where('middlename', $patient->middlename)
-                ->where('lastname', $patient->lastname)
-                ->where('id', '<>', $firstRecord->id)
-                ->update(['registered_patientcode' => DB::raw('patientcode'), 'patientcode' => $firstRecord->patientcode]);
-        }
+        //     // Update the patientcode value for all other records in the group
+        //     DB::table('mast_patient')
+        //         ->where('firstname', $patient->firstname)
+        //         ->where('middlename', $patient->middlename)
+        //         ->where('lastname', $patient->lastname)
+        //         ->where('id', '<>', $firstRecord->id)
+        //         ->update(['registered_patientcode' => DB::raw('patientcode'), 'patientcode' => $firstRecord->patientcode]);
+        // }
 
-        echo 'success';
+        // echo 'success';
+
+        $patients = Patient::where('patientcode', 'P19-000010')->update([
+            'patientcode' => DB::raw('registered_patientcode')
+        ]);
     }
 
     public function followup_results(Request $request) {
@@ -116,7 +120,7 @@ class AdminController extends Controller
                     array_push($recommendations, [$prefix[0] => $result_recommendations_value]);
                 }
             }
-            dd($findings, $recommendations);
+
         }
     }
 

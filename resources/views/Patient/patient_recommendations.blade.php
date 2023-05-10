@@ -26,8 +26,7 @@
                 @if($exam_physical->pe1_recommendation)
                     <div class="my-75">
                         <h5><b>PE-1</b></h5>
-                        <span style="font-size: 12px;">@php echo
-                            nl2br($exam_physical->pe1_recommendation)@endphp</span>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_physical->pe1_recommendation)@endphp</span>
                         <input type="hidden" value="PE-1: @php echo nl2br($exam_physical->pe1_recommendation) @endphp" name="recommendation[]" />
                     </div>
                 @endif
