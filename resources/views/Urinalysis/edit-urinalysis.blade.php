@@ -13,7 +13,7 @@
                                     <h3>Edit Urinalysis</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
+                                    <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
                                     <button onclick='window.open("/examlab_urinalysis_print?id={{$exam->admission_id}}", "width=800,height=650").print()' class="btn btn-dark btn-solid" title="Print">Print</button>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <td><b>Patient</b></td>
                                         <td>
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                 class="form-control" readonly="">
                                         </td>
                                         <td><b>Patient Code</b></td>
@@ -132,7 +132,7 @@
                                             <select name="spgravity" id="spgravity" class="form-control move">
                                                 <option value="">--SELECT--</option>
                                                 <option {{$exam->spgravity == "1.000" ? "selected" : null}} value="1.000">1.000</option>
-                                                <option {{$exam->spgravity == "1.005" ? "selected" : null}} value="1.005">1.005</option> 
+                                                <option {{$exam->spgravity == "1.005" ? "selected" : null}} value="1.005">1.005</option>
                                                 <option {{$exam->spgravity == "1.010" ? "selected" : null}} value="1.010">1.010</option>
                                                 <option {{$exam->spgravity == "1.015" ? "selected" : null}} value="1.015">1.015</option>
                                                 <option {{$exam->spgravity == "1.020" ? "selected" : null}} value="1.020">1.020</option>
@@ -147,7 +147,7 @@
                                         <td>
                                             <input name="sugar" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="sugar_0" value="Negative" @php
                                             echo $exam->sugar == "Negative" ? "checked" : "" @endphp>Negative
-                                                
+
                                             <input name="sugar" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="sugar_1" value="+1" @php
                                                 echo $exam->sugar == "+1" ? "checked" : "" @endphp>+1
                                             <input name="sugar" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="sugar_2" value="+2" @php
@@ -230,7 +230,7 @@
                                             <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_1" value="+1" @php echo $exam->bilirubin == "+1" ? "checked" : "" @endphp> +1
                                             <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_2" value="+2" @php echo $exam->bilirubin == "+2" ? "checked" : "" @endphp> +2
                                             <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_3" value="+3" @php echo $exam->bilirubin == "+3" ? "checked" : "" @endphp> +3
-                                            <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_4" value="+4" @php echo $exam->bilirubin == "+4" ? "checked" : "" @endphp> +4    
+                                            <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_4" value="+4" @php echo $exam->bilirubin == "+4" ? "checked" : "" @endphp> +4
                                             <input name="bilirubin" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="bilirubin_5" value="" @php echo $exam->bilirubin == "" ? "checked" : ""@endphp>Reset
                                         </td>
                                         <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -244,7 +244,7 @@
                                             <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_1" value="+1" @php echo $exam->nitrite == "+1" ? "checked" : "" @endphp> +1
                                             <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_2" value="+2" @php echo $exam->nitrite == "+2" ? "checked" : "" @endphp> +2
                                             <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_3" value="+3" @php echo $exam->nitrite == "+3" ? "checked" : "" @endphp> +3
-                                            <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_4" value="+4" @php echo $exam->nitrite == "+4" ? "checked" : "" @endphp> +4    
+                                            <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_4" value="+4" @php echo $exam->nitrite == "+4" ? "checked" : "" @endphp> +4
                                             <input name="nitrite" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="nitrite_5" value="" @php echo $exam->nitrite == "" ? "checked" : ""@endphp>Reset
                                         </td>
                                         <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -258,7 +258,7 @@
                                             <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_1" value="+1" @php echo $exam->leukocyte == "+1" ? "checked" : "" @endphp> +1
                                             <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_2" value="+2" @php echo $exam->leukocyte == "+2" ? "checked" : "" @endphp> +2
                                             <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_3" value="+3" @php echo $exam->leukocyte == "+3" ? "checked" : "" @endphp> +3
-                                            <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_4" value="+4" @php echo $exam->leukocyte == "+4" ? "checked" : "" @endphp> +4    
+                                            <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_4" value="+4" @php echo $exam->leukocyte == "+4" ? "checked" : "" @endphp> +4
                                             <input name="leukocyte" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="leukocyte_5" value="" @php echo $exam->leukocyte == "" ? "checked" : ""@endphp>Reset
                                         </td>
                                         <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -271,7 +271,7 @@
                                                 <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_1" value="+1" @php echo $exam->blood == "+1" ? "checked" : "" @endphp> +1
                                                 <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_2" value="+2" @php echo $exam->blood == "+2" ? "checked" : "" @endphp> +2
                                                 <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_3" value="+3" @php echo $exam->blood == "+3" ? "checked" : "" @endphp> +3
-                                                <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_4" value="+4" @php echo $exam->blood == "+4" ? "checked" : "" @endphp> +4    
+                                                <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_4" value="+4" @php echo $exam->blood == "+4" ? "checked" : "" @endphp> +4
                                                 <input name="blood" type="radio" style="width: 20px; height: 20px;" class="m-1 move" id="blood_5" value="" @php echo $exam->blood == "" ? "checked" : ""@endphp>Reset
                                         </td>
                                         <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -332,7 +332,7 @@
                                             <input name="phosphates" type="radio" {{$exam->phosphates == "Many" ? "checked" : null}} style="width: 20px; height: 20px;" class="m-1 move" id="bacteria_3" value="Many">Many
                                             <input name="phosphates" type="radio" {{$exam->phosphates == "" ? "checked" : null}} style="width: 20px; height: 20px;" class="m-1 move" id="bacteria_4" value="">Reset
                                         </td>
-                                        
+
                                         <td>&nbsp;</td>
                                     </tr>
                                     <tr>
@@ -437,19 +437,19 @@
     </div>
     <script>
         document.addEventListener('keydown', handleInputFocusTransfer);
-    
+
         function handleInputFocusTransfer(e){
           const focusableInputElements= document.querySelectorAll(`.move`);
-        
+
           //Creating an array from the node list
-          const focusable= [...focusableInputElements]; 
-        
+          const focusable= [...focusableInputElements];
+
           //get the index of current item
-          const index = focusable.indexOf(document.activeElement); 
-        
+          const index = focusable.indexOf(document.activeElement);
+
           // Create a variable to store the idex of next item to be focussed
           let nextIndex = 0;
-        
+
           if (e.keyCode === 37) {
             // up arrow
             e.preventDefault();

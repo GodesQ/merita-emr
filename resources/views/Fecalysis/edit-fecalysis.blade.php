@@ -13,7 +13,7 @@
                                     <h3>Edit Fecalysis</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
+                                    <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
                                     <button onclick='window.open("/examlab_fecalysis_print?id={{$exam->admission_id}}", "width=800,height=650").print()' class="btn btn-dark btn-solid" title="Print">Print</button>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <td><b>Patient</b></td>
                                         <td colspan="3">
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                 class="form-control move" readonly="">
                                         </td>
                                     </tr>
@@ -156,10 +156,10 @@
                                     </tr>
                                     <tr>
                                         <td align="left"><b>Stool Culture</b></td>
-                                        <td valign="center"> 
+                                        <td valign="center">
                                             <input name="stool_status" type="radio" class="m-1 move" id="stool_status_0" value="normal" {{$exam->stool_status == 'normal' ? 'checked' : null}}>Normal
-                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_1" value="findings" {{$exam->stool_status == 'findings' ? 'checked' : null}}>Findings 
-                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_2" value="" {{$exam->stool_status == '' ? 'checked' : null}}>Reset 
+                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_1" value="findings" {{$exam->stool_status == 'findings' ? 'checked' : null}}>Findings
+                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_2" value="" {{$exam->stool_status == '' ? 'checked' : null}}>Reset
                                         </td>
                                         <td align="left" valign="center">
                                             <input name="stool_culture" type="text" class="form-control move" id="stool_culture" value="{{ $exam->stool_culture }}">
@@ -240,20 +240,20 @@
     </div>
     <script>
         document.addEventListener('keydown',handleInputFocusTransfer);
-    
+
         function handleInputFocusTransfer(e){
-        
+
           const focusableInputElements= document.querySelectorAll(`.move`);
-        
+
           //Creating an array from the node list
-          const focusable= [...focusableInputElements]; 
-        
+          const focusable= [...focusableInputElements];
+
           //get the index of current item
-          const index = focusable.indexOf(document.activeElement); 
-        
+          const index = focusable.indexOf(document.activeElement);
+
           // Create a variable to store the idex of next item to be focussed
           let nextIndex = 0;
-        
+
           if (e.keyCode === 37) {
             // up arrow
             e.preventDefault();

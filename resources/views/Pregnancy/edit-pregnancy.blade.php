@@ -13,7 +13,7 @@
                                     <h3>Edit Pregnancy</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
+                                    <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
                                     <button onclick='window.open("/examlab_pregnancy_print?id={{$exam->admission_id}}", "width=800,height=650").print()' class="btn btn-dark btn-solid" title="Print">Print</button>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <td><b>Patient</b></td>
                                         <td>
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                 class="form-control" readonly="">
                                         </td>
                                         <td><b>Patient Code</b></td>
@@ -91,7 +91,7 @@
                                                 value="Negative" @php echo $exam->result == "Negative" ? "checked" : ""
                                             @endphp>Negative
                                             <input name="result" type="radio" class="m-1" id="result_1" value="Positive" @php echo $exam->result == "Positive" ? "checked" : "" @endphp>
-                                                
+
                                             <input name="result" type="radio" class="m-1" id="result_2" value="" @php
                                                 echo $exam->result == "" ? "checked" : "" @endphp>Reset
                                         </td>
@@ -171,20 +171,20 @@
     </div>
     <script>
         document.addEventListener('keydown',handleInputFocusTransfer);
-    
+
         function handleInputFocusTransfer(e){
-        
+
           const focusableInputElements= document.querySelectorAll(`input`);
-        
+
           //Creating an array from the node list
-          const focusable= [...focusableInputElements]; 
-        
+          const focusable= [...focusableInputElements];
+
           //get the index of current item
-          const index = focusable.indexOf(document.activeElement); 
-        
+          const index = focusable.indexOf(document.activeElement);
+
           // Create a variable to store the idex of next item to be focussed
           let nextIndex = 0;
-        
+
           if (e.keyCode === 37) {
             // up arrow
             e.preventDefault();

@@ -13,7 +13,7 @@
                                     <h3>Edit ECG</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
+                                    <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
                                     <button onclick='window.open("/exam_ecg_print?id={{$exam->admission_id}}", "width=800,height=650").print()' class="btn btn-dark btn-solid" title="Print">Print</button>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                         <td><b>Patient</b></td>
                                         <td colspan="3">
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                 class="form-control my-1" readonly="">
                                         </td>
                                     </tr>
@@ -238,16 +238,16 @@
 
     function handleInputFocusTransfer(e){
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();
