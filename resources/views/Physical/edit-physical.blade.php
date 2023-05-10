@@ -60,7 +60,7 @@
                                     <h3>Edit Physical Exam</h3>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="patient_edit?id={{ $patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
+                                    <a href="patient_edit?id={{ $admission->patient->id }}&patientcode={{ $exam->patientcode }}" class="btn btn-primary">Back to Patient</a>
                                     <button onclick='window.open("/exam_physical_print?id={{$exam->admission_id}}", "width=800,height=650").print()' class="btn btn-dark btn-solid" title="Print">Print</button>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                         <td><b>Patient</b></td>
                                         <td>
                                             <input name="patientname" id="patientname" type="text"
-                                                value="{{ $patient->lastname . ', ' . $patient->firstname }}"
+                                                value="{{ $admission->patient->lastname . ', ' . $admission->patient->firstname }}"
                                                 class="form-control" readonly="">
                                         </td>
                                         <td><b>Patient Code</b></td>
