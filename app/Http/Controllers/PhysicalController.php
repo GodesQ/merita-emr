@@ -52,7 +52,7 @@ class PhysicalController extends Controller
             $exam_cardio = CardioVascular::where('admission_id', $id)->latest('id')->first();
 
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
-            $medical_history = MedicalHistory::where('main_id', $patient->id)->first();
+            $medical_history = MedicalHistory::where('main_id', optional($patient)->id)->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
             $physicians = User::where('position', 'LIKE', '%Physician%')->get();
             return view('Physical.edit-physical', compact('exam', 'patient', 'medical_history', 'admission', 'physicians', 'exam_xray', 'exam_ecg', 'exam_hema', 'exam_urin', 'exam_feca', 'exam_bloodsero', 'exam_hiv', 'exam_psycho', 'exam_cardio'));
