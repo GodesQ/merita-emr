@@ -55,8 +55,7 @@
                 @if($exam_psycho->remarks_status == 'findings' && $exam_psycho->recommendation)
                 <div class="my-75">
                     <h5><b>Psychological</b></h5>
-                    <span style="font-size: 12px;">@php echo
-                        nl2br($exam_psycho->recommendation) @endphp</span>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_psycho->recommendation) @endphp</span>
                     <input type="hidden" value="Psychological: @php echo nl2br($exam_psycho->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif
@@ -65,8 +64,7 @@
                 @if($exam_audio->remarks_status == 'findings' && $exam_audio->recommendation)
                 <div class="my-75">
                     <h5><b>Audiometry</b></h5>
-                    <span style="font-size: 12px; ">@php echo
-                        nl2br($exam_audio->recommendation) @endphp</span>
+                    <span style="font-size: 12px; ">@php echo nl2br($exam_audio->recommendation) @endphp</span>
                     <input type="hidden" value="Audiometry: @php echo nl2br($exam_audio->recommendation) @endphp" name="recommendation[]" />
                 </div>
                 @endif

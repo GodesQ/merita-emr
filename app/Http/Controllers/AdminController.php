@@ -56,9 +56,15 @@ class AdminController extends Controller
 
         // echo 'success';
 
-        $patients = Patient::where('patientcode', 'P19-000010')->update([
-            'patientcode' => DB::raw('registered_patientcode')
-        ]);
+        // $patients = Patient::where('patientcode', 'P19-000010')->update([
+        //     'patientcode' => DB::raw('registered_patientcode')
+        // ]);
+
+        DB::table('mast_patient')
+            ->where('firstname', null)
+            ->where('middlename', null)
+            ->where('lastname', null)
+            ->delete();
     }
 
     public function followup_results(Request $request) {
