@@ -295,7 +295,7 @@
                                                 </td>
                                                 <td valign="top">
                                                     @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
-                                                            <b>ECG:</b>
+                                                        <b>ECG:</b>
                                                     @endif
                                                    {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
                                                 </td>

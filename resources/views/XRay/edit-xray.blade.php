@@ -37,7 +37,7 @@
                                         <td width="92"><b>PEME Date</b></td>
                                         <td width="247">
                                             <input name="peme_date" type="text" id="peme_date"
-                                                value="2{{ $admission->peme_date }}" class="form-control" readonly="">
+                                                value="{{ $admission->trans_date }}" class="form-control" readonly="">
                                         </td>
                                         <td width="113"><b>Admission No.</b></td>
                                         <td width="322">

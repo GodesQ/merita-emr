@@ -72,12 +72,12 @@ return date("M/d/Y".$time,strtotime($val));
                         <tr>
                             <td colspan="3"><span style="margin-left:40px; ">This is to certify that
                                     <b>
-                                        <span class="{{$admission->patient->gender == 'Male' ? 'underlined' : ''}}">Mr.</span> / 
-                                        <span class="{{$admission->patient->gender == 'Female' ? 'underlined' : ''}}">Ms.</span> 
+                                        <span class="{{$admission->patient->gender == 'Male' ? 'underlined' : ''}}">Mr.</span> /
+                                        <span class="{{$admission->patient->gender == 'Female' ? 'underlined' : ''}}">Ms.</span>
                                         <u style="text-transform: uppercase;">
                                             {{$admission->patient->lastname . " " . $admission->patient->suffix . ", " .$admission->patient->firstname . " " . $admission->patient->middlename}}
                                         </u>
-                                    </b> 
+                                    </b>
                                     has undergone screening test
                                     for HIV/Acquired Immunodeficiency Syndrome (AIDS),
                                     and was found to be <b><?php echo $exam->result?>*</b> based on laboratory test

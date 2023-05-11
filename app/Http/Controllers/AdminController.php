@@ -24,6 +24,7 @@ use App\Models\Admission;
 use App\Models\CashierOR;
 use App\Models\SchedulePatient;
 use App\Models\EmployeeLog;
+use App\Models\FollowUpResult;
 use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\Facades\Image;
 
@@ -68,7 +69,7 @@ class AdminController extends Controller
     }
 
     public function followup_results(Request $request) {
-        $reassessmentData = DB::table('reassessment')->where('admission_id', '14219')->get();
+        $reassessmentData = DB::table('reassessment')->get();
 
         foreach ($reassessmentData as $data) {
 
@@ -90,7 +91,7 @@ class AdminController extends Controller
                 ['HBT Exam: ', 'hbt', 'HBT Exam'],
                 ['THYROID Exam: ', 'thyroid', 'THYROID Exam'],
                 ['BREAST Exam: ', 'breast', 'BREAST Exam'],
-                ['WHOLE ABDOMEN Exam: ','whole_abdomen', 'WHOLE ABDOMEN'],
+                ['Reflexes: ','whole_abdomen', 'WHOLE ABDOMEN'],
                 ['GENITALS Exam: ', 'genitals', 'GENITALS'],
                 ['Psycho BPI: ', 'psycho_bpi', 'Psycho BPI'],
                 ['Hematology: ', 'hematology', 'Hematology'],
@@ -100,6 +101,77 @@ class AdminController extends Controller
                 ['Hepatitis: ', 'hepatitis', 'Hepatitis'],
                 ['HIV: ', 'hiv', 'HIV'],
                 ['Drug Test: ', 'drug_test', 'Drug Test'],
+                ['Skin: ', 'skin', 'Skin'],
+                ['Neck, Lymph Node,Thyroid: : ', 'neck_lymphnode_thyroid: ', 'Neck, Lymph Node,Thyroid'],
+                ['Head, Neck, Scalp: ', 'head_neck_scalp', 'Head, Neck, Scalp'],
+                ['Neurology: ', 'neurology', 'Neurology'],
+                ['Eyes(external): ', 'eyes_external', 'Eyes(external)'],
+                ['Breast,Axilla: ', 'breast_axilla', 'Breast,Axilla'],
+                ['Pupils: ', 'pupils', 'Pupils'],
+                ['Chest and Lungs: ', 'chest_lungs', 'Chest and Lungs'],
+                ['Ears: ', 'cardio', 'Ears'],
+                ['Heart: ', 'heart', 'Heart'],
+                ['Nose,Sinuses: ', 'nose_sinuses', 'Nose,Sinuses'],
+                ['Abdomen,Liver,Spleen: ', 'abdomen_liver_spleen', 'Abdomen,Liver,Spleen'],
+                ['Mouth,Throat: ', 'mouth_throat', 'Mouth,Throat'],
+                ['Back: ', 'back', 'Back'],
+                ['Anus-Rectum: ', 'anus_rectum', 'Anus-Rectum'],
+                ['Genito-Urinary System: ', 'genito_urinary', 'Genito-Urinary System'],
+                ['Inguinals,Genitals: ', 'thyroid', 'Inguinals,Genitals'],
+                ['Extremities: ', 'breast', 'Extremities'],
+                ['Reflexes: ','whole_abdomen', 'Reflexes'],
+                ['Dental(Teeth/Gums): ', 'dentals_teeth_gums', 'Dental(Teeth/Gums)'],
+                ['HBA1C: ', 'psycho_bpi', 'HBA1C'],
+                ['PPBG: ', 'ppbg', 'PPBG'],
+                ['FBS: ', 'fbs', 'FBS'],
+                ['BUN: ', 'bun', 'BUN'],
+                ['CREATININE: ', 'creatinine', 'CREATININE'],
+                ['CHOLESTEROL: ', 'cholesterol', 'CHOLESTEROL'],
+                ['TRIGLYCERIDES: ', 'triglycerides', 'TRIGLYCERIDES'],
+                ['HDL Chole: ', 'hdl_chole', 'HDL Chole'],
+                ['LDL Chole: ', 'ldl_chole', 'LDL Chole'],
+                ['VLDL Chole: ', 'vldl_chole', 'VLDL Chole'],
+                ['URIC ACID: ', 'uric_acid', 'URIC ACID'],
+                ['SGOT (AST): ', 'sgot_ast', 'SGOT (AST)'],
+                ['SGPT (ALT): ', 'sgpt_alt', 'SGPT (ALT)'],
+                ['GGT: ', 'ggt', 'GGT'],
+                ['ALK. PHOS.: ', 'alk_phos', 'ALK. PHOS.'],
+                ['TOTAL BILIRUBIN: ', 'total_bilirubin', 'TOTAL BILIRUBIN'],
+                ['DIRECT BILIRUBIN: ', 'direct_bilirubin', 'DIRECT BILIRUBIN'],
+                ['INDIRECT BILIRUBIN: ', 'indirect_bilirubin', 'INDIRECT BILIRUBIN'],
+                ['TOTAL PROTEIN: ', 'total_protein', 'TOTAL PROTEIN'],
+                ['ALBUMIN: ', 'albumin', 'ALBUMIN'],
+                ['GLOBULIN: ', 'globulin', 'GLOBULIN'],
+                ['SODIUM: ', 'sodium', 'SODIUM'],
+                ['POTASSIUM: ', 'potassium', 'POTASSIUM'],
+                ['CHLORIDE: ', 'chloride', 'CHLORIDE'],
+                ['CALCIUM: ', 'calcium', 'CALCIUM'],
+                ['A/G RATIO: ', 'ag_ratio', 'A/G RATIO'],
+                ['Hemoglobin: ', 'hemoglobin', 'Hemoglobin'],
+                ['Hematocrit: ', 'hematocrit', 'Hematocrit'],
+                ['RBC: ', 'rbc', 'RBC'],
+                ['WBC: ', 'wbc', 'WBC'],
+                ['Neutrophil: ', 'neutrophil', 'Neutrophil'],
+                ['Lymphocyte: ', 'lymphocyte', 'Lymphocyte'],
+                ['Eosinophil: ', 'eosinophil', 'Eosinophil'],
+                ['Monocyte: ', 'monocyte', 'Monocyte'],
+                ['Basophil: ', 'basophil', 'Basophil'],
+                ['Platelet: ', 'platelet', 'Platelet'],
+                ['Bleeding Time: ', 'bleeding_time', 'Bleeding Time'],
+                ['Clotting Time: ', 'clotting_time', 'Clotting Time'],
+                ['ESR: ', 'esr', 'ESR'],
+                ['MCV: ', 'mcv', 'MCV'],
+                ['MCH: ', 'mch', 'MCH'],
+                ['MCHC: ', 'mchc', 'MCHC'],
+                ['VDRL: ', 'vdrl', 'VDRL'],
+                ['TPHA: ', 'tpha', 'TPHA'],
+                ['HBSAG: ', 'hbsag', 'HBSAG'],
+                ['Anti-HBs: ', 'anti_hbs', 'Anti-HBs'],
+                ['Anti-HBc (lgM): ', 'anti_hbc_lgm', 'Anti-HBc (lgM)'],
+                ['Anti-HBc (lgG): ', 'anti_hbc_lgg', 'Anti-HBc (lgG)'],
+                ['Anti-HAV (lgM): ', 'anti_hav_lgm', 'Anti-HAV (lgM)'],
+                ['Anti-HAV (lgG): ', 'anti_hav_lgg', 'Anti-HAV (lgG)'],
+                ['Anti-HCV: ', 'anti_hcv', 'Anti-HCV'],
             ];
 
             $findings = [];
@@ -113,7 +185,7 @@ class AdminController extends Controller
                         $result_findings = substr($data->findings, $finding_pos, strlen($data->findings));
                     }
                     $result_findings_value = substr($result_findings, strlen($prefix[0]));
-                    array_push($findings, [$prefix[0] => $result_findings_value]);
+                    array_push($findings, ['value' =>  $result_findings_value, 'title' => $prefix[2],'type' => $prefix[1]]);
                 }
 
                 if (strpos($data->remarks, $prefix[0]) !== false) {
@@ -123,10 +195,23 @@ class AdminController extends Controller
                         $result_recommendations = substr($data->remarks, $recommendation_pos, strlen($data->remarks));
                     }
                     $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
-                    array_push($recommendations, [$prefix[0] => $result_recommendations_value]);
+                    array_push($recommendations, ['value' =>  $result_recommendations_value,'title' => $prefix[2], 'type' => $prefix[1]]);
                 }
             }
 
+            foreach ($findings as $key => $finding) {
+                FollowUpResult::updateOrCreate(
+                    ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
+                    ['findings' => $finding['value'], 'exam_title' => $finding['title']]
+                );
+            }
+
+            foreach ($recommendations as $key => $recommendation) {
+                FollowUpResult::updateOrCreate(
+                    ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
+                    ['recommendations' => $recommendation['value'], 'exam_title' => $finding['title']]
+                );
+            }
         }
     }
 
@@ -208,7 +293,6 @@ class AdminController extends Controller
                 ->filter(function($row) {
                     return $row->total > 0;
                 });
-
 
             return DataTables::of($packages)
                 ->addIndexColumn()
@@ -394,7 +478,6 @@ class AdminController extends Controller
             ->get();
 
         // dd($scheduled_month_patients);
-
         $data = [];
         foreach ($scheduled_month_patients as $key => $scheduled_month_patient) {
             $patient = [
@@ -404,7 +487,6 @@ class AdminController extends Controller
             ];
             array_push($data, $patient);
         }
-
         return response()->json($data);
     }
 

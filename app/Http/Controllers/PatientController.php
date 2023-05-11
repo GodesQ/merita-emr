@@ -391,9 +391,7 @@ class PatientController extends Controller
                 $schedule = DB::table('sched_patients')->insert(['patient_id' => $request->patient_id, 'patientcode' => $request->patientcode, 'date' => $request->schedule_date]);
                 return redirect($path)->with('status', 'Add schedule of patient.');
             }
-
             $save = DB::insert('insert into sched_patients(patient_id, patientcode, date) values(?, ?, ?)', [$data['patientId'], $data['patientCode'], $request->schedule_date]);
-
             if ($save) return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
         } catch (\Exception $exception) {
             $message = $exception->getMessage();

@@ -527,12 +527,8 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <input name="remarks_status" type="radio"
-                                                                        class="m-1" id="remarks_status_0"
-                                                                        value="normal">Normal
-                                                                    <input name="remarks_status" type="radio"
-                                                                        class="m-1" id="remarks_status_1"
-                                                                        value="findings">With Findings
+                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_0" value="normal">Normal
+                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings">With Findings
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -583,13 +579,10 @@
                                                             <td><b><span class="brdTop">Otolaryngologist</span>: </b></td>
                                                             <td>
                                                                 <div class="col-md-8">
-                                                                    <select name="technician2_id" id="technician2_id"
-                                                                        class="form-control">
-                                                                        @foreach ($otolaries as $otolary)
-                                                                            <option value={{ $otolary->id }}>
-                                                                                {{ $otolary->lastname }},
-                                                                                {{ $otolary->firstname }}</option>
-                                                                        @endforeach
+                                                                    <select name="technician2_id" id="technician2_id" class="form-control">
+                                                                            @foreach ($otolaries as $otolary)
+                                                                                <option value={{ $otolary->id }}> {{ $otolary->lastname }}, {{ $otolary->firstname }}</option>
+                                                                            @endforeach
                                                                     </select>
                                                                 </div>
                                                             </td>
