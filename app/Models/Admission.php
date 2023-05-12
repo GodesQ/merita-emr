@@ -90,7 +90,7 @@ class Admission extends Model
     }
 
     public function exam_physical() {
-        return $this->hasOne(PhysicalExam::class);
+        return $this->hasOne(PhysicalExam::class)->latest('id');
     }
 
     public function exam_pregnancy() {

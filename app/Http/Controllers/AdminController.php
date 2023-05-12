@@ -197,6 +197,8 @@ class AdminController extends Controller
                     $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
                     array_push($recommendations, ['value' =>  $result_recommendations_value,'title' => $prefix[2], 'type' => $prefix[1]]);
                 }
+
+
             }
 
             foreach ($findings as $key => $finding) {

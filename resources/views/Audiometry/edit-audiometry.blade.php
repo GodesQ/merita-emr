@@ -74,15 +74,13 @@
                                         <tr>
                                             <td><b>Patient</b></td>
                                             <td>
-                                                <input required name="patientname" id="patientname"
-                                                    type="text"
+                                                <input required name="patientname" id="patientname" type="text"
                                                     value="{{ $exam->admission->patient->lastname . ', ' . $exam->admission->patient->firstname }}"
-                                                    class="form-control" readonly="">
+                                                    class="form-control" readonly>
                                             </td>
                                             <td><b>Patient Code</b></td>
-                                            <td><input required name="patientcode" id="patientcode"
-                                                    type="text" value="{{ $exam->admission->patient->patientcode }}" class="form-control"
-                                                    readonly=""></td>
+                                            <td><input required name="patientcode" id="patientcode" type="text" value="{{ $exam->admission->patient->patientcode }}"
+                                                class="form-control" readonly></td>
                                         </tr>
                                     </tbody>
                                 </table>
