@@ -105,289 +105,289 @@
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->hba1c_recommendation)
-       <b>HBA1C :</b> {{$patient->hba1c_recommendation}} <br>
+       <b>HBA1C :</b> {{$patient->exam_bloodsero->hba1c_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ppbg_recommendation)
-       <b>PPBG :</b> {{$patient->ppbg_recommendation}} <br>
+       <b>PPBG :</b> {{$patient->exam_bloodsero->ppbg_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->fbs_recommendation)
-       <b>FBS :</b> {{$patient->fbs_recommendation}} <br>
+       <b>FBS :</b> {{$patient->exam_bloodsero->fbs_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->bun_recommendation)
-       <b>BUN :</b> {{$patient->bun_recommendation}} <br>
+       <b>BUN :</b> {{$patient->exam_bloodsero->bun_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->creatinine_recommendation)
-       <b>CREATININE :</b> {{$patient->creatinine_recommendation}} <br>
+       <b>CREATININE :</b> {{$patient->exam_bloodsero->creatinine_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->cholesterol_recommendation)
-       <b>CHOLESTEROL :</b> {{$patient->cholesterol_recommendation}} <br>
+       <b>CHOLESTEROL :</b> {{$patient->exam_bloodsero->cholesterol_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->triglycerides_recommendation)
-       <b>TRIGLYCERIDES :</b> {{$patient->triglycerides_recommendation}} <br>
+       <b>TRIGLYCERIDES :</b> {{$patient->exam_bloodsero->triglycerides_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->hdl_recommendation)
-       <b>HDL Chole :</b> {{$patient->hdl_recommendation}} <br>
+       <b>HDL Chole :</b> {{$patient->exam_bloodsero->hdl_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ldl_recommendation)
-       <b>LDL Chole :</b> {{$patient->ldl_recommendation}} <br>
+       <b>LDL Chole :</b> {{$patient->exam_bloodsero->ldl_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->vldl_recommendation)
-       <b>VLDL Chole :</b> {{$patient->vldl_recommendation}} <br>
+       <b>VLDL Chole :</b> {{$patient->exam_bloodsero->vldl_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->uricacid_recommendation)
-       <b>URIC ACID :</b> {{$patient->uricacid_recommendation}} <br>
+       <b>URIC ACID :</b> {{$patient->exam_bloodsero->uricacid_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sgot_recommendation)
-       <b>SGOT (AST) :</b> {{$patient->sgot_recommendation}} <br>
+       <b>SGOT (AST) :</b> {{$patient->exam_bloodsero->sgot_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sgpt_recommendation)
-       <b>SGPT (ALT) :</b> {{$patient->sgpt_recommendation}} <br>
+       <b>SGPT (ALT) :</b> {{$patient->exam_bloodsero->sgpt_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ggt_recommendation)
-       <b>GGT :</b> {{$patient->ggt_recommendation}} <br>
+       <b>GGT :</b> {{$patient->exam_bloodsero->ggt_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->alkphos_recommendation)
-       <b>ALK. PHOS. :</b> {{$patient->alkphos_recommendation}} <br>
+       <b>ALK. PHOS. :</b> {{$patient->exam_bloodsero->alkphos_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ttlbilirubin_recommendation)
-       <b>TOTAL BILIRUBIN :</b> {{$patient->ttlbilirubin_recommendation}} <br>
+       <b>TOTAL BILIRUBIN :</b> {{$patient->exam_bloodsero->ttlbilirubin_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->dirbilirubin_recommendation)
-       <b>DIRECT BILIRUBIN :</b> {{$patient->dirbilirubin_recommendation}} <br>
+       <b>DIRECT BILIRUBIN :</b> {{$patient->exam_bloodsero->dirbilirubin_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->indbilirubin_recommendation)
-       <b>INDIRECT BILIRUBIN :</b> {{$patient->indbilirubin_recommendation}} <br>
+       <b>INDIRECT BILIRUBIN :</b> {{$patient->exam_bloodsero->indbilirubin_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ttlprotein_recommendation)
-       <b>TOTAL PROTEIN :</b> {{$patient->ttlprotein_recommendation}} <br>
+       <b>TOTAL PROTEIN :</b> {{$patient->exam_bloodsero->ttlprotein_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->albumin_recommendation)
-       <b>ALBUMIN :</b> {{$patient->albumin_recommendation}} <br>
-   @endif 
+       <b>ALBUMIN :</b> {{$patient->exam_bloodsero->albumin_recommendation}} <br>
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->globulin_recommendation)
-       <b>GLOBULIN :</b> {{$patient->globulin_recommendation}} <br>
+       <b>GLOBULIN :</b> {{$patient->exam_bloodsero->globulin_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sodium_recommendation)
-       <b>SODIUM :</b> {{$patient->sodium_recommendation}} <br>
-   @endif 
+       <b>SODIUM :</b> {{$patient->exam_bloodsero->sodium_recommendation}} <br>
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->potassium_recommendation)
-       <b>POTASSIUM :</b> {{$patient->potassium_recommendation}} <br>
-   @endif 
+       <b>POTASSIUM :</b> {{$patient->exam_bloodsero->potassium_recommendation}} <br>
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->chloride_recommendation)
-       <b>CHLORIDE :</b> {{$patient->chloride_recommendation}} <br>
-   @endif 
+       <b>CHLORIDE :</b> {{$patient->exam_bloodsero->chloride_recommendation}} <br>
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->calcium_recommendation)
-       <b>CALCIUM :</b> {{$patient->calcium_recommendation}} <br>
-   @endif 
+       <b>CALCIUM :</b> {{$patient->exam_bloodsero->calcium_recommendation}} <br>
+   @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ag_ratio_recommendation)
-       <b>A/G RATIO :</b> {{$patient->ag_ratio_recommendation}} <br>
-   @endif 
+       <b>A/G RATIO :</b> {{$patient->exam_bloodsero->ag_ratio_recommendation}} <br>
+   @endif
 @endif
 
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->vdrl_recommendation)
-       <b>VDRL :</b> {{$patient->vdrl_recommendation}} <br>
+       <b>VDRL :</b> {{$patient->exam_hepa->vdrl_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->tpha_recommendation)
-       <b>TPHA :</b> {{$patient->tpha_recommendation}} <br>
+       <b>TPHA :</b> {{$patient->exam_hepa->tpha_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->hbsag_recommendation)
-       <b>HBSAG :</b> {{$patient->hbsag_recommendation}} <br>
+       <b>HBSAG :</b> {{$patient->exam_hepa->hbsag_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbs_recommendation)
-       <b>Anti-HBs :</b> {{$patient->antihbs_recommendation}} <br>
+       <b>Anti-HBs :</b> {{$patient->exam_hepa->antihbs_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->hbeag_recommendation)
-       <b>HBeAg :</b> {{$patient->hbeag_recommendation}} <br>
+       <b>HBeAg :</b> {{$patient->exam_hepa->hbeag_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbe_recommendation)
-       <b>Anti-HBe :</b> {{$patient->antihbe_recommendation}} <br>
+       <b>Anti-HBe :</b> {{$patient->exam_hepa->antihbe_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbclgm_recommendation)
-       <b>Anti-HBc (lgM) :</b> {{$patient->antihbclgm_recommendation}} <br>
+       <b>Anti-HBc (lgM) :</b> {{$patient->exam_hepa->antihbclgm_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbclgg_recommendation)
-       <b>Anti-HBc (lgG) :</b> {{$patient->antihbclgg_recommendation}} <br>
+       <b>Anti-HBc (lgG) :</b> {{$patient->exam_hepa->antihbclgg_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihavlgm_recommendation)
-       <b>Anti-HAV (lgM) :</b> {{$patient->antihavlgm_recommendation}} <br>
+       <b>Anti-HAV (lgM) :</b> {{$patient->exam_hepa->antihavlgm_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihavlgg_recommendation)
-       <b>Anti-HAV (lgG) :</b> {{$patient->antihavlgg_recommendation}} <br>
+       <b>Anti-HAV (lgG) :</b> {{$patient->exam_hepa->antihavlgg_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihcv_recommendation)
-       <b>Anti-HCV :</b> {{$patient->antihcv_recommendation}} <br>
+       <b>Anti-HCV :</b> {{$patient->exam_hepa->antihcv_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->others_recommendation)
-       <b>Others :</b> {{$patient->others_recommendation}} <br>
+       <b>Others :</b> {{$patient->exam_hepa->others_recommendation}} <br>
    @endif
 @endif
 
 @if($patient->exam_hema)
    @if($patient->exam_hema->hemoglobin_recommendation)
-       <b>Hemoglobin :</b> {{$patient->hemoglobin_recommendation}} <br>
+       <b>Hemoglobin :</b> {{$patient->exam_hema->hemoglobin_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->hematocrit_recommendation)
-       <b>Hematocrit :</b> {{$patient->hematocrit_recommendation}} <br>
+       <b>Hematocrit :</b> {{$patient->exam_hema->hematocrit_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->wbc_recommendation)
-       <b>WBC :</b> {{$patient->wbc_recommendation}} <br>
+       <b>WBC :</b> {{$patient->exam_hema->wbc_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->rbc_recommendation)
-       <b>RBC :</b> {{$patient->rbc_recommendation}} <br>
+       <b>RBC :</b> {{$patient->exam_hema->rbc_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->neuthrophils_recommendation)
-       <b>Neutrophil :</b> {{$patient->neuthrophils_recommendation}} <br>
+       <b>Neutrophil :</b> {{$patient->exam_hema->neuthrophils_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->lymphocytes_recommendation)
-       <b>Lymphocyte :</b> {{$patient->lymphocytes_recommendation}} <br>
+       <b>Lymphocyte :</b> {{$patient->exam_hema->lymphocytes_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->eosinophils_recommendation)
-       <b>Monocyte :</b> {{$patient->eosinophils_recommendation}} <br>
+       <b>Monocyte :</b> {{$patient->exam_hema->eosinophils_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->monophils_recommendation)
-       <b>Eosinophil :</b> {{$patient->monophils_recommendation}} <br>
+       <b>Eosinophil :</b> {{$patient->exam_hema->monophils_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->baspophils_recommendation)
-       <b>Basophil :</b> {{$patient->baspophils_recommendation}} <br>
+       <b>Basophil :</b> {{$patient->exam_hema->baspophils_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->platelet_recommendation)
-       <b>Platelet :</b> {{$patient->platelet_recommendation}} <br>
+       <b>Platelet :</b> {{$patient->exam_hema->platelet_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->blood_recommendation)
-       <b>Blood Type :</b> {{$patient->blood_recommendation}} <br>
+       <b>Blood Type :</b> {{$patient->exam_hema->blood_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->rhfactor_recommendation)
-       <b>Rh Factor	 :</b> {{$patient->rhfactor_recommendation}} <br>
+       <b>Rh Factor	 :</b> {{$patient->exam_hema->rhfactor_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->esr_recommendation)
-       <b>ESR :</b> {{$patient->esr_recommendation}} <br>
+       <b>ESR :</b> {{$patient->exam_hema->esr_recommendation}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->bleeding_recommendation)
-    <b>Bleeding Time :</b> {{$patient->bleeding_recommendation}} <br>
+    <b>Bleeding Time :</b> {{$patient->exam_hema->bleeding_recommendation}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->clotting_recommendation)
-    <b>Clotting Time :</b> {{$patient->clotting_recommendation}} <br>
+    <b>Clotting Time :</b> {{$patient->exam_hema->clotting_recommendation}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mcv_recommendation)
-    <b>MCV :</b> {{$patient->mcv_recommendation}} <br>
+    <b>MCV :</b> {{$patient->exam_hema->mcv_recommendation}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mch_recommendation)
-    <b>MCH :</b> {{$patient->mch_recommendation}} <br>
+    <b>MCH :</b> {{$patient->exam_hema->mch_recommendation}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mchc_recommendation)
-    <b>MCHC :</b> {{$patient->mchc_recommendation}} <br>
+    <b>MCHC :</b> {{$patient->exam_hema->mchc_recommendation}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->others_recommendation)
-    <b>OTHERS :</b> {{$patient->others_recommendation}} <br>
+    <b>OTHERS :</b> {{$patient->exam_hema->others_recommendation}} <br>
 @endif
 @endif
 
@@ -490,5 +490,5 @@
 @if($patient->exam_physical)
    @if($patient->exam_physical->c6_findings)
        <b>Dental(Teeth/Gums) :</b> {{$patient->c6_findings}} <br>
-   @endif 
+   @endif
 @endif -->
