@@ -218,7 +218,7 @@ class AdminController extends Controller
     public function today_patients(Request $request)
     {
         $data = session()->all();
-        $today = $request->request_date;
+        $today = session()->get('request_date');
         if ($request->ajax()) {
             $schedule_patients = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
                 ->where('sched_patients.date', '=', $today)
@@ -241,10 +241,18 @@ class AdminController extends Controller
                     return $patientname;
                 })
                 ->addColumn('package', function ($row) {
+                    if($row->patient()->exists()) {
                     return optional($row->patient)->patientinfo->package ? optional($row->patient)->patientinfo->package->packagename : null;
+                    } else {
+                        return null;
+                    }
                 })
                 ->addColumn('agency', function ($row) {
-                    return optional($row->patient)->patientinfo->agency ? optional($row->patient)->patientinfo->agency->agencyname : null;
+                    if($row->patient()->exists()) {
+                        return optional($row->patient)->patientinfo->agency ? optional($row->patient)->patientinfo->agency->agencyname : null;
+                    } else {
+                        return null;
+                    }
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
