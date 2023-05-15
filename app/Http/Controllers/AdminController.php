@@ -237,14 +237,14 @@ class AdminController extends Controller
                     return $patient_image;
                 })
                 ->addColumn('patientname', function ($row) {
-                    $patientname = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '" class="font-weight-bold secondary">' . $row->patient->lastname . ', ' . $row->patient->firstname . '</a>';
+                    $patientname = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '" class="font-weight-bold secondary">' . optional($row->patient)->lastname . ', ' . optional($row->patient)->firstname . '</a>';
                     return $patientname;
                 })
                 ->addColumn('package', function ($row) {
-                    return $row->patient->patientinfo->package ? $row->patient->patientinfo->package->packagename : null;
+                    return optional($row->patient)->patientinfo->package ? optional($row->patient)->patientinfo->package->packagename : null;
                 })
                 ->addColumn('agency', function ($row) {
-                    return $row->patient->patientinfo->agency ? $row->patient->patientinfo->agency->agencyname : null;
+                    return optional($row->patient)->patientinfo->agency ? optional($row->patient)->patientinfo->agency->agencyname : null;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
