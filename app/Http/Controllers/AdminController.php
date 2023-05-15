@@ -229,8 +229,8 @@ class AdminController extends Controller
             return DataTables::of($schedule_patients)
                 ->addIndexColumn()
                 ->addColumn('patient_image', function ($row) {
-                    if ($row->patient->patient_image) {
-                        $patient_image = '<img height="50" width="50" src="../../../app-assets/images/profiles/' . $row->patient->patient_image . '?' . $row->updated_date . '"/>';
+                    if (optional($row->patient)->patient_image) {
+                        $patient_image = '<img height="50" width="50" src="../../../app-assets/images/profiles/' . optional($row->patient)->patient_image . '?' . $row->updated_date . '"/>';
                     } else {
                         $patient_image = '<img height="50" width="50"  src="../../../app-assets/images/profiles/profilepic.jpg"/>';
                     }
