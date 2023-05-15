@@ -125,188 +125,188 @@
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->hba1c_findings)
-       <b>HBA1C :</b> {{$patient->hba1c_findings}} <br>
+       <b>HBA1C :</b> {{$patient->exam_bloodsero->hba1c_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ppbg_findings)
-       <b>PPBG :</b> {{$patient->ppbg_findings}} <br>
+       <b>PPBG :</b> {{$patient->exam_bloodsero->ppbg_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->fbs_findings)
-       <b>FBS :</b> {{$patient->fbs_findings}} <br>
+       <b>FBS :</b> {{$patient->exam_bloodsero->fbs_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->bun_findings)
-       <b>BUN :</b> {{$patient->bun_findings}} <br>
+       <b>BUN :</b> {{$patient->exam_bloodsero->bun_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->creatinine_findings)
-       <b>CREATININE :</b> {{$patient->creatinine_findings}} <br>
+       <b>CREATININE :</b> {{$patient->exam_bloodsero->creatinine_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->cholesterol_findings)
-       <b>CHOLESTEROL :</b> {{$patient->cholesterol_findings}} <br>
+       <b>CHOLESTEROL :</b> {{$patient->exam_bloodsero->cholesterol_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->triglycerides_findings)
-       <b>TRIGLYCERIDES :</b> {{$patient->triglycerides_findings}} <br>
+       <b>TRIGLYCERIDES :</b> {{$patient->exam_bloodsero->triglycerides_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->hdl_findings)
-       <b>HDL Chole :</b> {{$patient->hdl_findings}} <br>
+       <b>HDL Chole :</b> {{$patient->exam_bloodsero->hdl_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ldl_findings)
-       <b>LDL Chole :</b> {{$patient->ldl_findings}} <br>
+       <b>LDL Chole :</b> {{$patient->exam_bloodsero->ldl_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->vldl_findings)
-       <b>VLDL Chole :</b> {{$patient->vldl_findings}} <br>
+       <b>VLDL Chole :</b> {{$patient->exam_bloodsero->vldl_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->uricacid_findings)
-       <b>URIC ACID :</b> {{$patient->uricacid_findings}} <br>
+       <b>URIC ACID :</b> {{ $patient->exam_bloodsero->uricacid_findings }} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sgot_findings)
-       <b>SGOT (AST) :</b> {{$patient->sgot_findings}} <br>
+       <b>SGOT (AST) :</b> {{$patient->exam_bloodsero->sgot_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sgpt_findings)
-       <b>SGPT (ALT) :</b> {{$patient->sgpt_findings}} <br>
+       <b>SGPT (ALT) :</b> {{ $patient->exam_bloodsero->sgpt_findings }} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ggt_findings)
-       <b>GGT :</b> {{$patient->ggt_findings}} <br>
+       <b>GGT :</b> {{ $patient->exam_bloodsero->ggt_findings }} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->alkphos_findings)
-       <b>ALK. PHOS. :</b> {{$patient->alkphos_findings}} <br>
+       <b>ALK. PHOS. :</b> {{ $patient->exam_bloodsero->alkphos_findings }} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ttlbilirubin_findings)
-       <b>TOTAL BILIRUBIN :</b> {{$patient->ttlbilirubin_findings}} <br>
+       <b>TOTAL BILIRUBIN :</b> {{ $patient->exam_bloodsero->ttlbilirubin_findings }} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->dirbilirubin_findings)
-       <b>DIRECT BILIRUBIN :</b> {{$patient->dirbilirubin_findings}} <br>
+       <b>DIRECT BILIRUBIN :</b> {{$patient->exam_bloodsero->dirbilirubin_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->indbilirubin_findings)
-       <b>INDIRECT BILIRUBIN :</b> {{$patient->indbilirubin_findings}} <br>
+       <b>INDIRECT BILIRUBIN :</b> {{$patient->exam_bloodsero->indbilirubin_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ttlprotein_findings)
-       <b>TOTAL PROTEIN :</b> {{$patient->ttlprotein_findings}} <br>
+       <b>TOTAL PROTEIN :</b> {{$patient->exam_bloodsero->ttlprotein_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->albumin_findings)
-       <b>ALBUMIN :</b> {{$patient->albumin_findings}} <br>
+       <b>ALBUMIN :</b> {{$patient->exam_bloodsero->albumin_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->globulin_findings)
-       <b>GLOBULIN :</b> {{$patient->globulin_findings}} <br>
+       <b>GLOBULIN :</b> {{$patient->exam_bloodsero->globulin_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->sodium_findings)
-       <b>SODIUM :</b> {{$patient->sodium_findings}} <br>
+       <b>SODIUM :</b> {{$patient->exam_bloodsero->sodium_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->potassium_findings)
-       <b>POTASSIUM :</b> {{$patient->potassium_findings}} <br>
+       <b>POTASSIUM :</b> {{$patient->exam_bloodsero->potassium_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->chloride_findings)
-       <b>CHLORIDE :</b> {{$patient->chloride_findings}} <br>
+       <b>CHLORIDE :</b> {{$patient->exam_bloodsero->chloride_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->calcium_findings)
-       <b>CALCIUM :</b> {{$patient->calcium_findings}} <br>
+       <b>CALCIUM :</b> {{$patient->exam_bloodsero->calcium_findings}} <br>
    @endif
 @endif
 @if($patient->exam_bloodsero)
    @if($patient->exam_bloodsero->ag_ratio_findings)
-       <b>A/G RATIO :</b> {{$patient->ag_ratio_findings}} <br>
+       <b>A/G RATIO :</b> {{$patient->exam_bloodsero->ag_ratio_findings}} <br>
    @endif
 @endif
 
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->vdrl_findings)
-       <b>VDRL :</b> {{$patient->vdrl_findings}} <br>
+       <b>VDRL :</b> {{$patient->exam_hepa->vdrl_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->tpha_findings)
-       <b>TPHA :</b> {{$patient->tpha_findings}} <br>
+       <b>TPHA :</b> {{$patient->exam_hepa->tpha_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->hbsag_findings)
-       <b>HBSAG :</b> {{$patient->hbsag_findings}} <br>
+       <b>HBSAG :</b> {{$patient->exam_hepa->hbsag_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbs_findings)
-       <b>Anti-HBs :</b> {{$patient->antihbs_findings}} <br>
+       <b>Anti-HBs :</b> {{$patient->exam_hepa->antihbs_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->hbeag_findings)
-       <b>HBeAg :</b> {{$patient->hbeag_findings}} <br>
+       <b>HBeAg :</b> {{$patient->exam_hepa->hbeag_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbe_findings)
-       <b>Anti-HBe :</b> {{$patient->antihbe_findings}} <br>
+       <b>Anti-HBe :</b> {{$patient->exam_hepa->antihbe_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbclgm_findings)
-       <b>Anti-HBc (lgM) :</b> {{$patient->antihbclgm_findings}} <br>
+       <b>Anti-HBc (lgM) :</b> {{$patient->exam_hepa->antihbclgm_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihbclgg_findings)
-       <b>Anti-HBc (lgG) :</b> {{$patient->antihbclgg_findings}} <br>
+       <b>Anti-HBc (lgG) :</b> {{$patient->exam_hepa->antihbclgg_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihavlgm_findings)
-       <b>Anti-HAV (lgM) :</b> {{$patient->antihavlgm_findings}} <br>
+       <b>Anti-HAV (lgM) :</b> {{$patient->exam_hepa->antihavlgm_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihavlgg_findings)
-       <b>Anti-HAV (lgG) :</b> {{$patient->antihavlgg_findings}} <br>
+       <b>Anti-HAV (lgG) :</b> {{$patient->exam_hepa->antihavlgg_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
    @if($patient->exam_hepa->antihcv_findings)
-       <b>Anti-HCV :</b> {{$patient->antihcv_findings}} <br>
+       <b>Anti-HCV :</b> {{$patient->exam_hepa->antihcv_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hepa)
@@ -317,97 +317,97 @@
 
 @if($patient->exam_hema)
    @if($patient->exam_hema->hemoglobin_findings)
-       <b>Hemoglobin :</b> {{$patient->hemoglobin_findings}} <br>
+       <b>Hemoglobin :</b> {{$patient->exam_hema->hemoglobin_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->hematocrit_findings)
-       <b>Hematocrit :</b> {{$patient->hematocrit_findings}} <br>
+       <b>Hematocrit :</b> {{$patient->exam_hema->hematocrit_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->wbc_findings)
-       <b>WBC :</b> {{$patient->wbc_findings}} <br>
+       <b>WBC :</b> {{$patient->exam_hema->wbc_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->rbc_findings)
-       <b>RBC :</b> {{$patient->rbc_findings}} <br>
+       <b>RBC :</b> {{$patient->exam_hema->rbc_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->neuthrophils_findings)
-       <b>Neutrophil :</b> {{$patient->neuthrophils_findings}} <br>
+       <b>Neutrophil :</b> {{$patient->exam_hema->neuthrophils_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->lymphocytes_findings)
-       <b>Lymphocyte :</b> {{$patient->lymphocytes_findings}} <br>
+       <b>Lymphocyte :</b> {{$patient->exam_hema->lymphocytes_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->eosinophils_findings)
-       <b>Monocyte :</b> {{$patient->eosinophils_findings}} <br>
+       <b>Monocyte :</b> {{$patient->exam_hema->eosinophils_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->monophils_findings)
-       <b>Eosinophil :</b> {{$patient->monophils_findings}} <br>
+       <b>Eosinophil :</b> {{$patient->exam_hema->monophils_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->baspophils_findings)
-       <b>Basophil :</b> {{$patient->baspophils_findings}} <br>
+       <b>Basophil :</b> {{$patient->exam_hema->baspophils_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->platelet_findings)
-       <b>Platelet :</b> {{$patient->platelet_findings}} <br>
+       <b>Platelet :</b> {{$patient->exam_hema->platelet_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->blood_findings)
-       <b>Blood Type :</b> {{$patient->blood_findings}} <br>
+       <b>Blood Type :</b> {{$patient->exam_hema->blood_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->rhfactor_findings)
-       <b>Rh Factor	 :</b> {{$patient->rhfactor_findings}} <br>
+       <b>Rh Factor	 :</b> {{$patient->exam_hema->rhfactor_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
    @if($patient->exam_hema->esr_findings)
-       <b>ESR :</b> {{$patient->esr_findings}} <br>
+       <b>ESR :</b> {{$patient->exam_hema->esr_findings}} <br>
    @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->bleeding_findings)
-    <b>Bleeding Time :</b> {{$patient->bleeding_findings}} <br>
+    <b>Bleeding Time :</b> {{$patient->exam_hema->bleeding_findings}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->clotting_findings)
-    <b>Clotting Time :</b> {{$patient->clotting_findings}} <br>
+    <b>Clotting Time :</b> {{$patient->exam_hema->clotting_findings}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mcv_findings)
-    <b>MCV :</b> {{$patient->mcv_findings}} <br>
+    <b>MCV :</b> {{$patient->exam_hema->mcv_findings}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mch_findings)
-    <b>MCH :</b> {{$patient->mch_findings}} <br>
+    <b>MCH :</b> {{$patient->exam_hema->mch_findings}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->mchc_findings)
-    <b>MCHC :</b> {{$patient->mchc_findings}} <br>
+    <b>MCHC :</b> {{$patient->exam_hema->mchc_findings}} <br>
 @endif
 @endif
 @if($patient->exam_hema)
 @if($patient->exam_hema->others_findings)
-    <b>OTHERS :</b> {{$patient->others_findings}} <br>
+    <b>OTHERS :</b> {{$patient->exam_hema->others_findings}} <br>
 @endif
 @endif
 

@@ -888,7 +888,7 @@ class PrintController extends Controller
 
     public function exam_drug(Request $request)
     {
-        $id = $_GET['id'];
+        $id = $request->id;
         $admission = Admission::select(
             'tran_admission.*',
             'mast_patient.lastname as lastname',

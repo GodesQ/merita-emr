@@ -197,8 +197,6 @@ class AdminController extends Controller
                     $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
                     array_push($recommendations, ['value' =>  $result_recommendations_value,'title' => $prefix[2], 'type' => $prefix[1]]);
                 }
-
-
             }
 
             foreach ($findings as $key => $finding) {
@@ -220,7 +218,7 @@ class AdminController extends Controller
     public function today_patients(Request $request)
     {
         $data = session()->all();
-        $today = $data['request_date'];
+        $today = $request->request_date;
         if ($request->ajax()) {
             $schedule_patients = SchedulePatient::select('sched_patients.patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
                 ->where('sched_patients.date', '=', $today)
