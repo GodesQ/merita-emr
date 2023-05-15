@@ -242,7 +242,7 @@ class AdminController extends Controller
                 })
                 ->addColumn('package', function ($row) {
                     if($row->patient()->exists()) {
-                    return optional($row->patient)->patientinfo->package ? optional($row->patient)->patientinfo->package->packagename : null;
+                        return optional($row->patient)->patientinfo->package ? optional($row->patient)->patientinfo->package->packagename : null;
                     } else {
                         return null;
                     }
@@ -652,7 +652,7 @@ class AdminController extends Controller
         $log->date = date('Y-m-d');
         $log->save();
 
-        if ($employee && employee_info) {
+        if ($employee && $employee_info) {
             return redirect('/employees')->with('status', 'Employee added successfully.');
         }
     }
