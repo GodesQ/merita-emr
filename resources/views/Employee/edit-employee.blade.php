@@ -272,5 +272,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+<script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script>
 <script src="../../../app-assets/js/scripts/custom.js"></script>
 @endpush
