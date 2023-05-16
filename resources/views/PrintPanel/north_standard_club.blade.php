@@ -106,7 +106,7 @@
                                             GIVEN NAME:<br>
                                             <span class="fontBoldLrg">{{$admission->patient->firstname}}</span>
                                         </td>
-                                        <td width="255" valign="top" style="text-transform: uppercase;">
+                                        <td width="205" valign="top" style="text-transform: uppercase;">
                                             MIDDLE NAME:<br>
                                             <span class="fontBoldLrg">{{$admission->patient->middlename}}</span>
                                         </td>
@@ -116,11 +116,11 @@
                                             AGE:<br>
                                             <span class="fontMed">{{$admission->patient->age}}</span>
                                         </td>
-                                        <td colspan="2" valign="top">
+                                        <td width="163" valign="top">
                                             DATE OF BIRTH: (DAY/MONTH/YEAR)<br>
                                             <span class="fontMed">{{date_format(new DateTime($admission->patient->patientinfo->birthdate), "d F Y")}}</span>
                                         </td>
-                                        <td width="163" valign="top">
+                                        <td colspan="2" valign="top">
                                             PLACE OF BIRTH:<br>
                                             <span class="fontMed">{{$admission->patient->patientinfo->birthplace}}</span>
                                         </td>
