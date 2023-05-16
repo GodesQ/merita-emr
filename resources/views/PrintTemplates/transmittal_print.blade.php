@@ -147,16 +147,16 @@
                                 @if(in_array("bmi", $additional_columns))
                                     <td align="left">
                                         <b>BMI: </b>
-                                            @if($patient->exam_physical)
-                                                @if($patient->exam_physical->height && $patient->exam_physical->weight)
-                                                    @php
-                                                        $bmi = ($patient->exam_physical->weight / $patient->exam_physical->height / $patient->exam_physical->height) * 10000;
-                                                    @endphp
-                                                    {{number_format($bmi, 2)}}
-                                                @else
-                                                    0
-                                                @endif
+                                        @if($patient->exam_physical)
+                                            @if($patient->exam_physical->height && $patient->exam_physical->weight)
+                                                @php
+                                                    $bmi = ($patient->exam_physical->weight / $patient->exam_physical->height / $patient->exam_physical->height) * 10000;
+                                                @endphp
+                                                {{number_format($bmi, 2)}}
+                                            @else
+                                                0
                                             @endif
+                                        @endif
                                     </td>
                                 @endif
                                 <td align="left">
