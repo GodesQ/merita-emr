@@ -48,7 +48,7 @@
                             </ul>
                             <div class="tab-content px-1 pt-1">
                                 <div class="tab-pane active" id="tab1" role="tabpanel" aria-labelledby="base-tab1">
-                                    <form name="frm" method="POST" action="" id="update_employee" role="form"
+                                    <form name="frm" method="POST" action="{{ route('employee.edit') }}" id="update_employee" role="form"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal fade text-left" id="defaultSize" tabindex="-1" role="dialog"
