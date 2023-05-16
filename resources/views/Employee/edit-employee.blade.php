@@ -197,15 +197,15 @@
                                                     <tr>
                                                         <td><b>Birthdate</b></td>
                                                         <td><input name="birthdate" id="address" type="date" max="2050-12-31"
-                                                                class="form-control" value="{{$employee->birthdate}}"></td>
+                                                                class="form-control" value="{{ $employee->birthdate }}"></td>
                                                         <td><b>Birthplace</b></td>
                                                         <td><input name="birthplace" id="address" type="text"
-                                                                class="form-control" value="{{$employee->birthplace}}"></td>
+                                                                class="form-control" value="{{ $employee->birthplace }}"></td>
                                                     </tr>
                                                     <!--<tr>-->
                                                     <!--    <td><b>Password</b></td>-->
                                                     <!--    <td><input name="password" id="password" type="password"-->
-                                                    <!--            class="form-control" value="{{$employee->password}}"></td>-->
+                                                    <!--            class="form-control" value="{{ $employee->password }}"></td>-->
                                                     <!--</tr>-->
                                                     <tr>
                                                         <td valign="top"><b>Signature</b></td>
@@ -269,9 +269,9 @@
 @endsection
 
 @push('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-<script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script>
-<script src="../../../app-assets/js/scripts/custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script>
+    <script src="../../../app-assets/js/scripts/custom.js"></script>
 @endpush

@@ -169,7 +169,7 @@
                                                     @endif
 
                                                 </td>
-                                                <td>CIVIL STATUS:&nbsp;&nbsp;
+                                                <td>CIVIL STATUS: <br>
                                                     Single
                                                     @if ($admission->patient->patientinfo->maritalstatus == 'Single' || $admission->patient->patientinfo->maritalstatus == 'SINGLE')
                                                         <span style="font-size: 20px;">☑</span>
@@ -178,6 +178,12 @@
                                                     @endif
                                                     Married
                                                     @if ($admission->patient->patientinfo->maritalstatus == 'Married' || $admission->patient->patientinfo->maritalstatus == 'MARRIED')
+                                                        <span style="font-size: 20px;">☑</span>
+                                                    @else
+                                                        <span style="font-size: 20px;">☐</span>
+                                                    @endif
+                                                    Separated
+                                                    @if ($admission->patient->patientinfo->maritalstatus == 'Separated' || $admission->patient->patientinfo->maritalstatus == 'SEPARATED')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>
