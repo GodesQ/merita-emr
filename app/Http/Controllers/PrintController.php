@@ -1538,7 +1538,8 @@ class PrintController extends Controller
                         'exam_ultrasound',
                         'exam_xray',
                         'package',
-                        'agency'
+                        'agency',
+                        'followup'
                         )->get();
 
             } else {
@@ -1570,7 +1571,8 @@ class PrintController extends Controller
                     'exam_ultrasound',
                     'exam_xray',
                     'package',
-                    'agency'
+                    'agency',
+                    'followup'
                     )->whereHas('exam_physical', function ($query) use ($patientstatus) {
                         $query->where('fit', $patientstatus);
                     })->get();
@@ -1682,7 +1684,8 @@ class PrintController extends Controller
                         'exam_ultrasound',
                         'exam_xray',
                         'package',
-                        'agency'
+                        'agency',
+                        'followup'
                         )
                         ->get();
                     // dd($patients);
@@ -1785,7 +1788,8 @@ class PrintController extends Controller
                     'exam_ultrasound',
                     'exam_xray',
                     'package',
-                    'agency'
+                    'agency',
+                    'followup'
                     )
                      ->get();
         }

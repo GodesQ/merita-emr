@@ -17,6 +17,10 @@ class Admission extends Model
         return $this->hasOne(Patient::class, 'admission_id', 'id');
     }
 
+    public function followup() {
+        return $this->hasOne(ReassessmentFindings::class, 'admission_id', 'id');
+    }
+
     public function cashier_or() {
         return $this->belongsTo(CashierOR::class, 'id', 'admission_id');
     }

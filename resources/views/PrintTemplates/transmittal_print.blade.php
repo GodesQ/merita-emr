@@ -12,6 +12,10 @@
         size: landscape legal;
         margin: 1rem;
     }
+    td {
+        padding: 0.3rem;
+        text-align: left;
+    }
 
     </style>
 </head>
@@ -73,13 +77,13 @@
                             <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Position</b></td>
                             <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Findings</b></td>
                             <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Recommendation</b></td>
+                            <td width="2%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
                             @if(in_array("vital_signs", $additional_columns))
                                 <td width="10%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Vital Signs</b></td>
                             @endif
                             @if(in_array("bmi", $additional_columns))
                                 <td bgcolor="#C0C0C0" class="brdLeftBtm">BMI</td>
                             @endif
-                            <td width="2%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
                             <td width="7%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Follow up Date</b></td>
                             @if(in_array("vessel", $additional_columns))
                                 <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Vessel</b></td>
@@ -96,6 +100,20 @@
                         @endphp
                         @if (count($patients) != 0)
                         @foreach ($patients as $key => $patient)
+                            @php
+                                $results = [];
+                                $findings = explode(";", optional($patient->followup)->findings);
+                                $results = array_map(function ($finding) {
+                                    return ['Findings' => $finding];
+                                    }, $findings);
+                                $recommendations = explode(";",optional($patient->followup)->remarks);
+                                foreach($recommendations as $key => $recommendation) {
+                                    if(isset($results[$key])) {
+                                        $results[$key] += ['Recommendation' => $recommendation];
+                                    }
+                                }
+                            @endphp
+
                             <tr>
                                 <td align="left">{{$count++}}</td>
                                 <td align="left">{{$patient->patientcode}}</td>
@@ -106,9 +124,11 @@
                                 <td align="left">{{$patient->patient ? $patient->patient->age : null}}</td>
                                 <td align="left">{{$patient->position}}</td>
                                 <td align="left" valign="top">
-                                    @include('Transmittal.patients-findings', [$patient])
+                                    {{  count($results) > 0 ? $results[0]['Findings'] : null }}
                                 </td>
-                                <td align="left" valign="top">@include('Transmittal.patients-recommendations', [$patient])</td>
+                                <td align="left" valign="top">
+                                    {{ count($results) > 0 ? $results[0]['Recommendation'] : null }}
+                                </td>
                                 <td align="left" valign="top">
                                     <?php
                                         if($patient->lab_status  == '3') {
@@ -141,7 +161,7 @@
                                 @if(in_array("vital_signs", $additional_columns))
                                     <td align="left">
                                         <b>Height: </b>{{$patient->exam_physical ? $patient->exam_physical->height : 0}} <br>
-                                        <b>Weight: </b>{{$patient->exam_physical ? $patient->exam_physical->weight : 0}} <br>
+                                        <b>Weight: </b>{{$patient->exam_physical ? $patient->exam_physical->weight : 0}}
                                     </td>
                                 @endif
                                 @if(in_array("bmi", $additional_columns))
@@ -182,6 +202,54 @@
                                     </td>
                                 @endif
                             </tr>
+
+                            @forelse ($results as $key => $result)
+                                @if($key != 0)
+                                    <tr>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left"></td>
+                                        <td align="left" valign="top">
+                                            @isset($result['Findings'])
+                                                {{ $result['Findings'] }}
+                                            @endisset
+                                        </td>
+                                        <td align="left" valign="top">
+                                            @isset($result['Recommendation'])
+                                                {{ $result['Recommendation'] }}
+                                            @endisset
+                                        </td>
+                                        <td align="left" valign="top"></td>
+                                        @if(in_array("vital_signs", $additional_columns))
+                                            <td align="left"></td>
+                                        @endif
+                                        @if(in_array("bmi", $additional_columns))
+                                            <td align="left"></td>
+                                        @endif
+                                        <td align="left">
+
+                                        </td>
+                                        @if(in_array("vessel", $additional_columns))
+                                            <td align="left"></td>
+                                        @endif
+
+                                        @if(in_array("emp_status", $additional_columns))
+                                            <td align="left">{{$patient->emp_status}}</td>
+                                        @endif
+
+                                        @if(in_array("medical_package", $additional_columns))
+                                            <td align="left"></td>
+                                        @endif
+                                    </tr>
+                                @endif
+                            @empty
+
+                            @endforelse
 
                         @endforeach
                         @else
