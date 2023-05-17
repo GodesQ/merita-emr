@@ -105,7 +105,7 @@
                             <tr>
                               <td colspan="2">GENDER:<br>
                                 <b>
-                                <?=$admission->gender?>
+                                <?=$admission->patient->gender?>
                                 </b>
                               </td>
                               <td colspan="2">CIVIL STATUS:<br>
