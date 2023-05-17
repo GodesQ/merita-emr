@@ -104,7 +104,7 @@
                             </tr>
                             <tr>
                               <td colspan="2">GENDER:<br>
-                                <b>
+                                <b style="text-transform: uppercase">
                                 <?=$admission->patient->gender?>
                                 </b>
                               </td>
