@@ -26,6 +26,7 @@
     @page {
         size: A4;
         margin-top: 0rem;
+        margin-bottom: 0rem;
     }
     </style>
 </head>
