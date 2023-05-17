@@ -358,10 +358,10 @@
                                     <td></td>
                                     <td colspan="3" align="center">
                                         @if($medical_director)
-                                            <img src="{{$medical_director->signature}}" width="150" />
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="50" style="object-fit: cover; transform: translate(-23px, 5px); margin-top: -5px;" />
                                         @endif
                                     </td>
-                                    <td colspan="4" height="100" align="center">
+                                    <td colspan="4" align="center">
                                         @if($medical_director)
                                             <span style="font-size: 14px; text-transform: uppercase;">{{$medical_director->firstname}} {{$medical_director->middlename[0]}}. {{$medical_director->lastname}} {{$medical_director->title}}</span>
                                         @endif
@@ -374,8 +374,12 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td colspan="3">Medical Practitioner’s Official Stamp</td>
-                                    <td colspan="4"> <b><u> Medical Practitioner’s Contact Information</u></b> <br>
+                                    <td colspan="3" valign="top" align="center" height="130">
+                                        <b>Medical Practitioner’s Official Stamp</b>
+
+                                    </td>
+                                    <td colspan="4" valign="top">
+                                        <b ><u style="text-align: center;"> Medical Practitioner’s Contact Information</u></b> <br>
                                         Address: 5 th Floor JettacBldg 920 P. QuirinoAve.cor. San Antonio St., Malate,
                                         Manila Phone: 310-0595 Cell: 0917-8576942 Email:meritadiagnosticclinic@yahoo.com
                                     </td>
@@ -391,7 +395,11 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td colspan="7">Seafarer’s Signature: <span></span>
+                                    <td height="60" valign="bottom" colspan="4">Seafarer’s Signature: <span>
+                                        <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp" class="signature-taken" width="150" height="50" style="object-fit: cover; transform: translate(3px, 0px);" />
+                                    </span>
+                                    </td>
+                                    <td colspan="3" valign="bottom">Serial Number: <span>{{ $admission->patient->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
