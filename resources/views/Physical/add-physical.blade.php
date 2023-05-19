@@ -67,7 +67,7 @@ return mysqli_fetch_array($result);
                             @endif
                             @csrf
                             <input required type="hidden" name="id" value="{{$admission->id}}">
-                            <input type="hidden" name="patient_id" value="{{$admission->patient_id}}">
+                            <input type="hidden" name="patient_id" value="{{$admission->patient->id}}">
                             <table id="tblExam" width="100%" cellpadding="2" cellspacing="2"
                                 class="table table-bordered">
                                 <tbody>
