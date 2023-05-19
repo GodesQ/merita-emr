@@ -106,7 +106,7 @@
                                             GIVEN NAME:<br>
                                             <span class="fontBoldLrg">{{$admission->patient->firstname}}</span>
                                         </td>
-                                        <td width="205" valign="top" style="text-transform: uppercase;">
+                                        <td width="230" valign="top" style="text-transform: uppercase;">
                                             MIDDLE NAME:<br>
                                             <span class="fontBoldLrg">{{$admission->patient->middlename}}</span>
                                         </td>
