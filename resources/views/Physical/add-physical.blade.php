@@ -54,7 +54,7 @@ return mysqli_fetch_array($result);
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add Physical Exam</h3>
-                            <a href="patient_edit?id={{$admission->patient->patient_id}}&patientcode={{$admission->patient->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>
