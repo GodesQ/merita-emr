@@ -151,7 +151,7 @@ class PhysicalController extends Controller
         $exam_cardio = CardioVascular::where('admission_id', $admission->id)->latest('id')->first();
 
         $patient = Patient::where('patientcode', $admission->patientcode)->latest('id')->first();
-        $medical_history = MedicalHistory::where('main_id', $patient->id)->first();
+        $medical_history = MedicalHistory::where('main_id', optional($admission->patient)->id)->first();
         $physicians = User::where('position', 'LIKE', '%Physician%')->get();
 
 
