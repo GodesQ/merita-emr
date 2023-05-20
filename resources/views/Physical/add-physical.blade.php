@@ -54,7 +54,7 @@ return mysqli_fetch_array($result);
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add Physical Exam</h3>
-                            <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ return mysqli_fetch_array($result);
                             @endif
                             @csrf
                             <input required type="hidden" name="id" value="{{$admission->id}}">
-                            <input type="hidden" name="patient_id" value="{{$admission->patient_id}}">
+                            <input type="hidden" name="patient_id" value="{{$admission->patient->id}}">
                             <table id="tblExam" width="100%" cellpadding="2" cellspacing="2"
                                 class="table table-bordered">
                                 <tbody>
@@ -101,12 +101,12 @@ return mysqli_fetch_array($result);
                                         <td>
                                             <input required required required name="patientname" id="patientname"
                                                 type="text"
-                                                value="{{$admission->lastname . ", " . $admission->firstname}}"
+                                                value="{{$admission->patient->lastname . ", " . $admission->patient->firstname}}"
                                                 class="form-control" readonly="">
                                         </td>
                                         <td><b>Patient Code</b></td>
                                         <td><input required required required name="patientcode" id="patientcode"
-                                                type="text" value="{{$admission->patientcode}}" class="form-control"
+                                                type="text" value="{{$admission->patient->patientcode}}" class="form-control"
                                                 readonly=""></td>
                                     </tr>
                                 </tbody>

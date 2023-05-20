@@ -684,7 +684,6 @@
         <div>&nbsp;</div>
         <div>&nbsp;</div>
         <div style="width: 760px; border: 1px solid black; padding: 10px;">
-
             <h2 style="text-align: center;">MEDICAL REQUIREMENTS</h2>
             <p style="text-align: left; font-size: 11px; line-height: 15px;">All applicants for an officer certificate,
                 Seafarer's Identification and Record Book or certification of special qualifications shall be required

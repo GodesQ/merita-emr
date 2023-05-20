@@ -9,7 +9,7 @@
     tr,
     td {
         font-family: sans-serif;
-        font-size: 13.5px;
+        font-size: 12px;
     }
 
     .fontBoldLrg {
@@ -25,7 +25,8 @@
     }
     @page {
         size: A4;
-        margin-top: 1rem;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
     }
     </style>
 </head>
@@ -63,7 +64,7 @@
                         <td align="center">
                           <table width="680" border="0" cellpadding="2" cellspacing="0" class="brdTable">
                             <tr>
-                              <td colspan="2">SURNAME/LAST NAME:<br>
+                              <td colspan="2" width="150">SURNAME/LAST NAME:<br>
                                 <b>
                                 {{$admission->patient->lastname}}
                                 </b>
@@ -103,8 +104,8 @@
                             </tr>
                             <tr>
                               <td colspan="2">GENDER:<br>
-                                <b>
-                                <?=$admission->gender?>
+                                <b style="text-transform: uppercase">
+                                <?=$admission->patient->gender?>
                                 </b>
                               </td>
                               <td colspan="2">CIVIL STATUS:<br>
