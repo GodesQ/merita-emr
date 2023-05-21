@@ -14,7 +14,7 @@ class Admission extends Model
 
     public function patient()
     {
-        return $this->hasOne(Patient::class, 'admission_id', 'id');
+        return $this->hasOne(Patient::class, 'admission_id', 'id')->latest('id');;
     }
 
     public function followup() {
@@ -30,67 +30,67 @@ class Admission extends Model
     }
 
     public function agency() {
-        return $this->belongsTo(Agency::class);
+        return $this->belongsTo(Agency::class)->latest('id');
     }
 
     public function exam_audio() {
-        return $this->hasOne(Audiometry::class);
+        return $this->hasOne(Audiometry::class)->latest('id');
     }
 
     public function exam_bloodsero() {
-        return $this->hasOne(BloodSerology::class);
+        return $this->hasOne(BloodSerology::class)->latest('id');
     }
 
     public function exam_crf() {
-        return $this->hasOne(CardiacRiskFactor::class);
+        return $this->hasOne(CardiacRiskFactor::class)->latest('id');
     }
 
     public function exam_cardio() {
-        return $this->hasOne(CardioVascular::class);
+        return $this->hasOne(CardioVascular::class)->latest('id');
     }
 
     public function exam_dental() {
-        return $this->hasOne(Dental::class);
+        return $this->hasOne(Dental::class)->latest('id');
     }
 
     public function exam_drug() {
-        return $this->hasOne(DrugTest::class);
+        return $this->hasOne(DrugTest::class)->latest('id');
     }
 
     public function exam_urin() {
-        return $this->hasOne(Urinalysis::class);
+        return $this->hasOne(Urinalysis::class)->latest('id');
     }
 
     public function exam_echodoppler() {
-        return $this->hasOne(EchoDoppler::class);
+        return $this->hasOne(EchoDoppler::class)->latest('id');
     }
 
     public function exam_echoplain() {
-        return $this->hasOne(EchoPlain::class);
+        return $this->hasOne(EchoPlain::class)->latest('id');
     }
 
     public function exam_feca() {
-        return $this->hasOne(Fecalysis::class);
+        return $this->hasOne(Fecalysis::class)->latest('id');
     }
 
     public function exam_hema() {
-        return $this->hasOne(Hematology::class);
+        return $this->hasOne(Hematology::class)->latest('id');
     }
 
     public function exam_hepa() {
-        return $this->hasOne(Hepatitis::class);
+        return $this->hasOne(Hepatitis::class)->latest('id');
     }
 
     public function exam_hiv() {
-        return $this->hasOne(HIV::class);
+        return $this->hasOne(HIV::class)->latest('id');
     }
 
     public function exam_ishihara() {
-        return $this->hasOne(Ishihara::class);
+        return $this->hasOne(Ishihara::class)->latest('id');
     }
 
     public function exam_misc() {
-        return $this->hasOne(Miscellaneous::class);
+        return $this->hasOne(Miscellaneous::class)->latest('id');
     }
 
     public function exam_physical() {
@@ -98,44 +98,44 @@ class Admission extends Model
     }
 
     public function exam_pregnancy() {
-        return $this->hasOne(Pregnancy::class);
+        return $this->hasOne(Pregnancy::class)->latest('id');
     }
 
     public function exam_psychobpi() {
-        return $this->hasOne(PsychoBPI::class);
+        return $this->hasOne(PsychoBPI::class)->latest('id');
     }
 
     public function exam_psycho() {
-        return $this->hasOne(Psychological::class);
+        return $this->hasOne(Psychological::class)->latest('id');
     }
 
     public function exam_stressecho() {
-        return $this->hasOne(StressEcho::class);
+        return $this->hasOne(StressEcho::class)->latest('id');
     }
 
     public function exam_stresstest() {
-        return $this->hasOne(StressTest::class);
+        return $this->hasOne(StressTest::class)->latest('id');
     }
 
     public function exam_ultrasound() {
-        return $this->hasOne(UltraSound::class);
+        return $this->hasOne(UltraSound::class)->latest('id');
     }
 
     public function exam_visacuity() {
-        return $this->hasOne(VisualAcuity::class);
+        return $this->hasOne(VisualAcuity::class)->latest('id');
     }
 
     public function exam_xray() {
-        return $this->hasOne(XRay::class);
+        return $this->hasOne(XRay::class)->latest('id');
     }
 
 
     public function exam_ecg() {
-        return $this->hasOne(ECG::class);
+        return $this->hasOne(ECG::class)->latest('id');
     }
 
     public function exam_blood_serology() {
-        return $this->hasOne(BloodSerology::class);
+        return $this->hasOne(BloodSerology::class)->latest('id');
     }
 
 
