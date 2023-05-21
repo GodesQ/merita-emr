@@ -5,7 +5,7 @@
     .form-control {
         padding: 0.2rem;
     }
-    
+
     .table th,
     .table td {
         padding: 0.5rem;
@@ -19,7 +19,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add Echo Plain</h3>
-                            <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>
@@ -346,7 +346,7 @@
                                                         <td width="85%"><textarea name="interpretation"
                                                                 id="interpretation" cols="50" rows="7"
                                                                 class="form-control">
-Normal left ventricular dimension with normal left ventricular mass index and relative wall 
+Normal left ventricular dimension with normal left ventricular mass index and relative wall
 thickness with adequate wall motion and contractility
 Normal left atrium, right atrium, main pulmonary artery and aortic root dimension
 Structurally normal tricuspid, mitral, aortic and pulmonic valves
@@ -434,16 +434,16 @@ No intracardiac thombus nor pericardial effusion</textarea></td>
 
     function handleInputFocusTransfer(e){
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();

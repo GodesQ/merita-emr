@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add PPD</h3>
-                            <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>

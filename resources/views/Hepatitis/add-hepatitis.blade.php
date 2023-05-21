@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add Hepatitis</h3>
-                            <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>
@@ -434,18 +434,18 @@
     document.addEventListener('keydown',handleInputFocusTransfer);
 
     function handleInputFocusTransfer(e){
-    
+
       const focusableInputElements= document.querySelectorAll(`input`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();

@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3>Add Fecalysis</h3>
-                            <a href="patient_edit?id={{$admission->patient_id}}&patientcode={{$admission->patientcode}}"
+                            <a href="patient_edit?id={{$admission->patient->id}}&patientcode={{$admission->patient->patientcode}}"
                                 class="float-right btn btn-primary">Back to Patient</a>
                         </div>
                     </div>
@@ -150,10 +150,10 @@
                                     </tr>
                                     <tr>
                                         <td align="left"><b>Stool Culture</b></td>
-                                        <td valign="center"> 
+                                        <td valign="center">
                                             <input name="stool_status" type="radio" class="m-1 move" id="stool_status_0" value="normal">Normal
-                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_1" value="findings">Findings 
-                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_2" value="">Reset 
+                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_1" value="findings">Findings
+                                            <input name="stool_status" type="radio" class="m-1 move" id="stool_status_2" value="">Reset
                                         </td>
                                         <td align="left" valign="center">
                                             <input name="stool_culture" type="text" class="form-control move" id="stool_culture" value="No Salmonella, Shigella and Cholera isolated.">
@@ -238,18 +238,18 @@
     document.addEventListener('keydown',handleInputFocusTransfer);
 
     function handleInputFocusTransfer(e){
-    
+
       const focusableInputElements= document.querySelectorAll(`.move`);
-    
+
       //Creating an array from the node list
-      const focusable= [...focusableInputElements]; 
-    
+      const focusable= [...focusableInputElements];
+
       //get the index of current item
-      const index = focusable.indexOf(document.activeElement); 
-    
+      const index = focusable.indexOf(document.activeElement);
+
       // Create a variable to store the idex of next item to be focussed
       let nextIndex = 0;
-    
+
       if (e.keyCode === 37) {
         // up arrow
         e.preventDefault();
