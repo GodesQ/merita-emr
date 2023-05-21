@@ -439,7 +439,7 @@
                                                 <tr>
                                                     <td width="87%" valign="middle">FIT BUT AT RISK? <br>
                                                         If "AT RISK" specify limitations or restrictions: <br>
-                                                        <input name="co" value="{{$admission->exam_physical ? $admission->exam_physical->describe_restriction : null}}" class="brdNone" style="width:400px;height: 15px;font-size: 10px;text-align:left;border: none;" />
+                                                        <input name="co" value="{{$admission->exam_physical ? $admission->exam_physical->describe_restriction : null}}" class="brdNone" style="width:450px;height: 15px;font-size: 10px;text-align:left;border: none;" />
                                                     </td>
                                                     <td width="4%" valign="middle">YES</td>
                                                     <td width="3%" valign="middle">
