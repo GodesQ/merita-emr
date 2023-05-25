@@ -10,7 +10,7 @@
         tr,
         td {
             font-family: arial;
-            font-size: 16px;
+            font-size: 15.5px;
         }
 
         .aa {
@@ -110,7 +110,7 @@
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td width="30%">
+                                                <td width="28%">
                                                     <table width="100%" border="0" cellspacing="0"
                                                         cellpadding="0">
                                                         <tbody>
@@ -124,7 +124,7 @@
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td width="32%">
+                                                <td width="37%">
                                                     <table width="100%" border="0" cellspacing="0"
                                                         cellpadding="0">
                                                         <tbody>
@@ -138,7 +138,7 @@
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td width="28%">
+                                                <td width="25%">
                                                     <table width="100%" border="0" cellpadding="0"
                                                         cellspacing="0">
                                                         <tbody>
@@ -183,6 +183,12 @@
                                                     @endif
                                                     Separated
                                                     @if ($admission->patient->patientinfo->maritalstatus == 'Separated' || $admission->patient->patientinfo->maritalstatus == 'SEPARATED')
+                                                        <span style="font-size: 20px;">☑</span>
+                                                    @else
+                                                        <span style="font-size: 20px;">☐</span>
+                                                    @endif
+                                                    Widowed
+                                                    @if ($admission->patient->patientinfo->maritalstatus == 'Widowed' || $admission->patient->patientinfo->maritalstatus == 'WIDOWED')
                                                         <span style="font-size: 20px;">☑</span>
                                                     @else
                                                         <span style="font-size: 20px;">☐</span>
@@ -1435,8 +1441,7 @@
                                                                                                 </td>
                                                                                                 <td colspan="2"
                                                                                                     valign="top">
-                                                                                                    PULSE
-                                                                                                    RATE:<b><br><u>{{ $admission->exam_physical ? $admission->exam_physical->pulse : null }}</u></b>/min
+                                                                                                    PULSE RATE:<b><br><u>{{ $admission->exam_physical ? $admission->exam_physical->pulse : null }}</u></b>/min
                                                                                                     <br>
                                                                                                     Regular
                                                                                                     Rhythm:<b><u>{{ $admission->exam_physical ? $admission->exam_physical->rhythm : null }}</u></b>
@@ -1603,6 +1608,7 @@
                     <div>
                         <span style="font-size: 11px; text-align: left;">DOH-PEMER-SB REVISION 03/10-17-2013</span>
                     </div>
+                    <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <table width="100%" border="1" cellpadding="0" cellspacing="0">
                         <tbody>
