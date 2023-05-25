@@ -30,20 +30,20 @@
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{$admission->patient->lastname . " " . $admission->patient->suffix . ', ' . $admission->patient->firstname . " " . $admission->patient->middlename}}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
+                                        <span style="font-size:15px">{{$admission->patient->age}}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
+                                        <span style="font-size:15px">{{$admission->patient->gender}}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agencyname))
                                                 {{'Bahia Shipping Services, Inc.'}}
                                             @else
                                                 {{$admission->agencyname}}
@@ -107,7 +107,7 @@
                                                   <tr>
                                                     <td align="left">Stool Culture</td>
                                                     <td>{{$exam->stool_culture}}</td>
-                                                </tr> 
+                                                </tr>
                                                 @endif
                                             </tbody>
                                         </table>
@@ -157,7 +157,7 @@
                                                                         {{$technician2->firstname . " " . $technician2->middlename[0] . "." . " " . $technician2->lastname . ", " . $technician2->title}}<br>
                                                                         Pathologist<br>
                                                                         Lic. No.
-                                                                        {{$technician2->license_no}}        
+                                                                        {{$technician2->license_no}}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
