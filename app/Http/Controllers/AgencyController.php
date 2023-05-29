@@ -50,19 +50,19 @@ class AgencyController extends Controller
 
             $patients_deck_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'DECK SERVICES');
-            })->count();
+            })->get();
 
             $patients_engine_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'ENGINE SERVICES');
-            })->count();
+            })->get();
 
             $patients_catering_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'CATERING SERVICES');
-            })->count();
+            })->get();
 
             $patients_other_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'OTHER SERVICES');
-            })->count();
+            })->get();
 
             // $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
 
