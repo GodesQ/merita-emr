@@ -46,19 +46,37 @@ class AgencyController extends Controller
             $data = session()->all();
             $category_count = [];
 
-            $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
+            $agencyId = session()->get('agencyId');
 
-            $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
+            $patients_deck_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
+                return $q->where('agency_id', $agencyId)->where('category', 'DECK SERVICES');
+            })->count();
 
-            $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
+            $patients_engine_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
+                return $q->where('agency_id', $agencyId)->where('category', 'ENGINE SERVICES');
+            })->count();
 
-            $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
+            $patients_catering_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
+                return $q->where('agency_id', $agencyId)->where('category', 'CATERING SERVICES');
+            })->count();
+
+            $patients_other_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
+                return $q->where('agency_id', $agencyId)->where('category', 'OTHER SERVICES');
+            })->count();
+
+            // $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
+
+            // $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
+
+            // $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
+
+            // $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
 
             $category_count = [
-                'deck' => $deck_counts,
-                'engine' => $engine_counts,
-                'catering' => $catering_counts,
-                'other' => $other_counts,
+                'deck' => $patients_deck_count,
+                'engine' => $patients_engine_count,
+                'catering' => $patients_catering_count,
+                'other' => $patients_other_count,
             ];
 
             return view('layouts.agency-dashboard', compact('data', 'category_count'));
@@ -77,40 +95,25 @@ class AgencyController extends Controller
             if ($request->ajax()) {
                 $session = session()->all();
 
-                $patients = Patient::select('*')->whereHas('patientinfo', function ($q) {
+                $agencyId = session()->get('agencyId');
+
+                $patients = Patient::select('*')->whereHas('patientinfo', function ($q) use ($agencyId) {
                     $agency_ids = [59, 58, 57, 55];
 
-                    if (session()->get('agencyId') == 58) {
-                        return $q
-                            ->where('agency_id', session()->get('agencyId'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BLUE TERN'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BLUETERN'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLDTERN'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLD TERN'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAVETERN'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAVE TERN'));
+                    $vessels = [];
+
+                    if ($agencyId == 58) {
+                        $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
+                    } elseif ($agencyId == 55) {
+                        $vessels = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
+                    } elseif ($agencyId == 57) {
+                        $vessels = ['BALMORAL', 'BOREALIS', 'MS BALMORAL', 'MS BOREALIS'];
                     }
 
-                    if (session()->get('agencyId') == 55) {
-                        return $q
-                            ->where('agency_id', session()->get('agencyId'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BOLETTE'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOLETTE'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BRAEMAR'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BRAEMAR'));
-                    }
-
-                    if (session()->get('agencyId') == 57) {
-                        return $q
-                            ->where('agency_id', session()->get('agencyId'))
-                            ->where(DB::raw('upper(vessel)'), strtoupper('BALMORAL'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('BOREALIS'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BALMORAL'))
-                            ->orWhere(DB::raw('upper(vessel)'), strtoupper('MS BOREALIS'));
-                    }
-
-                    if (!in_array(session()->get('agencyId'), $agency_ids)) {
-                        return $q->where('agency_id', session()->get('agencyId'));
+                    if (in_array($agencyId, $agency_ids)) {
+                        $q->whereIn(DB::raw('upper(vessel)'), array_map('strtoupper', $vessels))->orWhere('agency_id', $agencyId);
+                    } else {
+                        $q->where('agency_id', $agencyId);
                     }
                 });
 
