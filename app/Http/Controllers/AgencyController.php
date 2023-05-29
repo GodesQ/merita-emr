@@ -50,19 +50,19 @@ class AgencyController extends Controller
 
             $patients_deck_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'DECK SERVICES');
-            })->get();
+            })->count();
 
             $patients_engine_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'ENGINE SERVICES');
-            })->get();
+            })->count();
 
             $patients_catering_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'CATERING SERVICES');
-            })->get();
+            })->count();
 
             $patients_other_count = Patient::with('patientinfo', 'admission')->whereHas('patientinfo', function($q) use ($agencyId) {
                 return $q->where('agency_id', $agencyId)->where('category', 'OTHER SERVICES');
-            })->get();
+            })->count();
 
             // $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
 
@@ -78,8 +78,6 @@ class AgencyController extends Controller
                 'catering' => $patients_catering_count,
                 'other' => $patients_other_count,
             ];
-
-            dd($category_count);
 
             return view('layouts.agency-dashboard', compact('data', 'category_count'));
 
