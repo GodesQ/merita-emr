@@ -21,21 +21,23 @@ class AgencyAuthController extends Controller
 
         if (!$agency) return back()->with('fail', 'The email you entered is incorrect. Please check and try again.');
 
-        if (!Hash::check($request->password, $agency->password) || !Hash::check($request->password, $agency->ad_password)) return back()->with('fail', 'The password you entered is incorrect. Please check and try again.');
+        if (Hash::check($request->password, $agency->password) || Hash::check($request->password, $agency->ad_password)) {
+            $request->session()->put([
+                'classification' => 'agency',
+                'agencyCode' => $agency->agencycode,
+                'agencyId' => $agency->id,
+                'agencyName' => $agency->agencyname,
+                'address' => $agency->address,
+                'email' => $agency->email,
+                'start_date' => null,
+                'end_date' => null,
+            ]);
 
-        $request->session()->put([
-            'classification' => 'agency',
-            'agencyCode' => $agency->agencycode,
-            'agencyId' => $agency->id,
-            'agencyName' => $agency->agencyname,
-            'address' => $agency->address,
-            'email' => $agency->email,
-            'start_date' => null,
-            'end_date' => null,
-        ]);
+            if ($agency->not_first == 0) return redirect('/change_password');
+            return redirect('/agency_dashboard');
+        }
 
-        if ($agency->not_first == 0) return redirect('/change_password');
-        return redirect('/agency_dashboard');
+        return back()->with('fail', 'The password you entered is incorrect. Please check and try again.');
     }
 
     public function change_password()
