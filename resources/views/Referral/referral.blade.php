@@ -35,7 +35,8 @@
                                 <th>Position Applied</th>
                                 <th>Vessel</th>
                                 <th>SSRB</th>
-                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,6 +83,10 @@ $(document).ready(function() {
             {
                 data: 'ssrb',
                 name: 'ssrb'
+            },
+            {
+                data: 'is_hold',
+                name: 'is_hold'
             },
             {
                 data: 'action',
