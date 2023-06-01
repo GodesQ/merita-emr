@@ -57,6 +57,13 @@ class ReferralController extends Controller
                 ->addColumn('ssrb', function ($row) {
                     return $row->ssrb;
                 })
+                ->addColumn('is_hold', function ($row) {
+                    if($row->is_hold) {
+                        return '<div class="badge badge-danger">Hold</div>';
+                    } else {
+                        return '<div class="badge badge-success">Activated</div>';
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     if($row->is_hold == 0) {
                         $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
@@ -70,7 +77,7 @@ class ReferralController extends Controller
                             return $actionBtn;
                    }
                 })
-                ->rawColumns(['packagename', 'action'])
+                ->rawColumns(['packagename', 'action', 'is_hold'])
                 ->toJson();
     }
 

@@ -92,7 +92,9 @@
                                                         <i class="feather icon-mail"></i>
                                                     </div>
                                                     <span class="danger text-danger">
-                                                        @error('email'){{ $message }}@enderror
+                                                        @error('email')
+                                                            {{ $message }}
+                                                        @enderror
                                                     </span>
                                                 </fieldset>
                                                 <div style="line-height: 15px; font-size: 13px;"
