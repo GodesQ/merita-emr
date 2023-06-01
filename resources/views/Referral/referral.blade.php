@@ -61,31 +61,66 @@ $(document).ready(function() {
         serverSide: true,
         ajax: '/referral_slips_list',
         columns: [{
-                data: 'packagename',
+                {
+                    data: 'packagename',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'packagename'
             },
             {
-                data: 'lastname',
+                {
+                    data: 'lastname',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'lastname'
             },
             {
-                data: 'firstname',
+                {
+                    data: 'firstname',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'firstname'
             },
             {
-                data: 'position_applied',
+                {
+                    data: 'position_applied',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'position_applied'
             },
             {
-                data: 'vessel',
+                {
+                    data: 'vessel',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'vessel'
             },
             {
-                data: 'ssrb',
+                {
+                    data: 'ssrb',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'ssrb'
             },
             {
-                data: 'is_hold',
+                {
+                    data: 'is_hold',
+                    render: function(data) {
+                        return data ? data : 'No Data Found';
+                    }
+                },
                 name: 'is_hold'
             },
             {
