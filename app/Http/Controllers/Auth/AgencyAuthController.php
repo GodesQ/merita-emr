@@ -79,7 +79,7 @@ class AgencyAuthController extends Controller
         }
     }
 
-    public function change_agency_password() {
+    public function change_agency_password(Request $request) {
         $email = $request->email;
         $id = $request->agency_id;
         return view('Agency.agency-reset-form', compact('email', 'id'));
