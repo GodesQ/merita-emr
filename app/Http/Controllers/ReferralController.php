@@ -43,10 +43,10 @@ class ReferralController extends Controller
                     return $row->package->packagename;
                 })
                 ->addColumn('lastname', function ($row) {
-                    return optional($row->patient)->lastname;
+                    return optional($row)->lastname;
                 })
                 ->addColumn('firstname', function ($row) {
-                    return optional($row->patient)->firstname;
+                    return optional($row)->firstname;
                 })
                 ->addColumn('position_applied', function ($row) {
                     return $row->position_applied;
