@@ -1,13 +1,11 @@
 
-@if(Session::get('classification') == 'employee')
-    @extends('layouts.admin-layout')
-@else
-    @extends('layouts.agency-layout')
 
-    @section('name')
-    {{$data['agencyName']}}
-    @endsection
-@endif
+@extends('layouts.agency-layout')
+
+@section('name')
+{{$data['agencyName']}}
+@endsection
+
 
 @section('content')
 
