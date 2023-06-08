@@ -297,9 +297,7 @@ class AgencyController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn =
-                            '<a href="edit_agency?id=' .
-                            $row['id'] .
-                            '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                            '<a href="edit_agency?id=' . $row['id'] .'" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                             <a href="#" id="' . $row['id'] . '" class="delete-agency btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
                     })

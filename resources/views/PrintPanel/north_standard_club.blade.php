@@ -525,42 +525,42 @@
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span>RESULT:</span>  <span style="margin-left: 30px;">&nbsp;</span>
-                                                                    <span  style="margin-left:50px">FIT FOR DUTY
-                                                                        @if ($admission->exam_physical)
-                                                                            @if($admission->exam_physical->duty == 'Fit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                        <span  style="margin-left:50px">FIT FOR DUTY
+                                                                            @if ($admission->exam_physical)
+                                                                                @if($admission->exam_physical->duty == 'Fit')
+                                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
                                                                             @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                                width="10">
                                                                             @endif
-                                                                        @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
-                                                                        @endif
-                                                                    </span>
-                                                                    <span style="margin-left: 20px;">FIT BUT AT RISK
-                                                                        @if ($admission->exam_physical)
-                                                                            @if($admission->exam_physical->duty == 'Fit Restriction')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                        </span>
+                                                                        <span style="margin-left: 20px;">FIT BUT AT RISK
+                                                                            @if ($admission->exam_physical)
+                                                                                @if($admission->exam_physical->duty == 'Fit Restriction')
+                                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
                                                                             @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                             @endif
-                                                                        @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
-                                                                    </span>
-                                                                    <span
-                                                                        style="margin-left: 20px;">UNFIT FOR DUTY
-                                                                        @if ($admission->exam_physical)
-                                                                            @if($admission->exam_physical->duty == 'Unfit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                        </span>
+                                                                        <span
+                                                                            style="margin-left: 20px;">UNFIT FOR DUTY
+                                                                            @if ($admission->exam_physical)
+                                                                                @if($admission->exam_physical->duty == 'Unfit')
+                                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
                                                                             @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                                width="10">
                                                                             @endif
-                                                                        @else
-                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
-                                                                            width="10">
-                                                                        @endif
-                                                                    </span>
+                                                                        </span>
                                                                     </span>
                                                                 </td>
                                                             </tr>
