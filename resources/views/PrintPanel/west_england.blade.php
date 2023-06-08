@@ -490,7 +490,7 @@
                                                                     <td width="4%" valign="middle">YES</td>
                                                                     <td width="3%" valign="middle">
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->question8 == "Yes" || $admission->exam_physical->question8 == "1")
+                                                                        @if ($admission->exam_physical->duty == "Fit Restriction")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
@@ -505,7 +505,7 @@
                                                                     <td width="3%" valign="middle">NO</td>
                                                                     <td width="3%" valign="middle">
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->question8 == "No" || $admission->exam_physical->question8 == "0")
+                                                                        @if ($admission->exam_physical->question8 == "Fit")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
