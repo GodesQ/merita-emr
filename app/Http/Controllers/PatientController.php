@@ -109,6 +109,7 @@ class PatientController extends Controller
             $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
+
             return view('ProgressInfo.remedical', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'data', 'agencies', 'packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -225,7 +226,7 @@ class PatientController extends Controller
                 ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
                 ->first();
 
-            $medicalHistory = MedicalHistory::where('main_id', '=', $data['patientId'])->first();
+            $medicalHistory = MedicalHistory::where('main_id', $data['patientId'])->first();
 
             $declarationForm = DB::table('declaration_form')
                 ->where('main_id', $data['patientId'])
@@ -350,17 +351,11 @@ class PatientController extends Controller
             $data = session()->all();
             $today_date = date('Y-m-d');
 
-            $schedules = DB::table('sched_patients')
-                ->where('patientcode', $data['patientCode'])
-                ->get();
+            $schedules = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->get();
 
-            $scheduled_patients = DB::table('sched_patients')
-                ->where('date', $today_date)
-                ->get();
+            $scheduled_patients = DB::table('sched_patients')->where('date', $today_date)->get();
 
-            $latest_schedule = DB::table('sched_patients')
-                ->where('patientcode', $data['patientCode'])
-                ->latest('date')
+            $latest_schedule = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->latest('date')
                 ->first();
 
             $patient = Patient::where('id', session()->get('patientId'))
@@ -425,11 +420,11 @@ class PatientController extends Controller
     public function update_schedule(Request $request)
     {
         try {
+            dd($request->all());
             $action = $request->action ? $request->action : null;
-            $schedule = DB::table('sched_patients')
-                ->where('id', $request->id)
-                ->update(['date' => $request->schedule_date]);
-            $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
+            $schedule = DB::table('sched_patients')->where('id', $request->id)->update(['date' => $request->schedule_date]);
+
+            $path = 'patient_edit?id=' . $request->patient_id . '&patientocde=' . $request->patientcode;
 
             // if admin is updating re-schedule
             if ($action) {
@@ -861,9 +856,11 @@ class PatientController extends Controller
             }
 
             $latest_schedule = DB::table('sched_patients')
-                ->where('patientcode', $patient->patientcode)
+                ->where('patient_id', $patient->id)
                 ->latest('date')
                 ->first();
+
+
 
             $patient_upload_files = DB::table('mast_patient_files')
                 ->where('main_id', $patient->id)
