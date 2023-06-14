@@ -420,7 +420,6 @@ class PatientController extends Controller
     public function update_schedule(Request $request)
     {
         try {
-            dd($request->all());
             $action = $request->action ? $request->action : null;
             $schedule = DB::table('sched_patients')->where('id', $request->id)->update(['date' => $request->schedule_date]);
 
