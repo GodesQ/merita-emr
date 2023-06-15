@@ -118,7 +118,7 @@
                                                     <td colspan="2" valign="top">
                                                         CIVIL STATUS: &nbsp;&nbsp;{{$admission->patient->patientinfo->maritalstatus}}</td>
                                                     <td valign="top">
-                                                        RELIGION: &nbsp;&nbsp;{{$admission->patient->patientinfo->religion}}</td>
+                                                        RELIGION: &nbsp;&nbsp;{{$admission->patient->patientinfo->religion == 'OTHERS' ? $admission->patient->patientinfo->religion_other : $admission->patient->patientinfo->religion }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="5" valign="top">
