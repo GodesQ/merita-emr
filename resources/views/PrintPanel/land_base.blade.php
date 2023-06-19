@@ -461,7 +461,6 @@
                                                 <div style="margin-top: 0px;">
                                                      MEDICAL DIRECTOR
                                                 </div>
-
                                             </td>
                                           <td>&nbsp; </td>
                                         </tr>

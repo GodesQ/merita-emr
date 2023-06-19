@@ -611,7 +611,7 @@
                                                                                         <span style="margin-left:280px">
                                                                                             @if($admission->exam_physical)
                                                                                                 @if($admission->exam_physical->first_tech->signature)
-                                                                                                <img src="{{$admission->exam_physical->first_tech->signature}}" width="120" style="margin-bottom: -20px; margin-top: -20px; margin-left: -20px;" />
+                                                                                                <img src="{{$admission->exam_physical->first_tech->signature}}" width="120" style="margin-bottom: -30px; margin-top: -25px;" />
                                                                                                 @endif
                                                                                             @endif
                                                                                         </span><br>
