@@ -545,7 +545,7 @@
                                                             <tr>
                                                                 <td colspan="2" valign="bottom" class="">
                                                                     @if($admission->exam_physical && $admission->agency_id != 19)
-                                                                    <img src="{{$admission->exam_physical->first_tech->signature}}" width="120" style="margin-top: -30px;" />
+                                                                    <img src="{{$admission->exam_physical->first_tech->signature}}" width="125" style="margin: -20px 0px; -30px 0px" />
                                                                     @endif<br>
                                                                     @if($admission->agency_id == 19)
                                                                         <br>
