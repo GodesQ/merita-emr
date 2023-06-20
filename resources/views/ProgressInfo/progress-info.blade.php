@@ -73,8 +73,7 @@
                                                 <!-- <hr> -->
                                                 <fieldset>
                                                     @csrf
-                                                    <h4 class="form-section"><i class="feather icon-user"></i> Personal Info
-                                                    </h4>
+                                                    <h4 class="form-section"><i class="feather icon-user"></i> Personal Info</h4>
                                                     <input required type="hidden" value="{{ session()->get('patientId') }}"
                                                         name="main_id">
                                                     <input type="hidden" name="patientcode" value="{{ session()->get('patientCode') }}">
@@ -85,8 +84,7 @@
                                                                     First Name :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required type="text" class="form-control to_upper"
-                                                                    id="firstName3" name="firstName">
+                                                                <input required type="text" class="form-control to_upper" id="firstName3" name="firstName">
                                                             </div>
                                                         </div>
 
@@ -96,8 +94,7 @@
                                                                     Last Name :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required type="text" class="form-control to_upper"
-                                                                    id="lastName3" name="lastName">
+                                                                <input required type="text" class="form-control to_upper" id="lastName3" name="lastName">
                                                             </div>
                                                         </div>
 
@@ -108,8 +105,7 @@
                                                                     <span class="primary h6">(If not applicable, please
                                                                         write N/A)</span>
                                                                 </label>
-                                                                <input type="text" class="form-control to_upper"
-                                                                    name="middleName">
+                                                                <input type="text" class="form-control to_upper" name="middleName">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3">
@@ -117,8 +113,7 @@
                                                                 <label for="lastName3">
                                                                     Suffix :
                                                                 </label>
-                                                                <input type="text" class="form-control to_upper"
-                                                                    name="suffix">
+                                                                <input type="text" class="form-control to_upper" name="suffix">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -152,8 +147,7 @@
                                                                     Age :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required readonly type="number" id="age"
-                                                                    min="18" class="form-control" name="age"
+                                                                <input required readonly type="number" id="age" min="18" class="form-control" name="age"
                                                                     value="{{ optional($referral)->age }}">
                                                             </div>
                                                         </div>
@@ -163,8 +157,7 @@
                                                                     Birthplace :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required type="text" placeholder="City, Country"
-                                                                    class="form-control" name="birthplace">
+                                                                <input required type="text" placeholder="City, Country" class="form-control" name="birthplace">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -321,8 +314,7 @@
                                                                     Country of Destination : <span class="primary h6">(If
                                                                         not applicable, please write N/A)</span>
                                                                 </label>
-                                                                <input required type="text" class="form-control"
-                                                                    name="countryDestination"
+                                                                <input required type="text" class="form-control" name="countryDestination"
                                                                     value="{{ optional($referral)->country_destination }}">
                                                             </div>
                                                         </div>
@@ -330,17 +322,13 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group natural-vessel ">
                                                                 <label for="">
-                                                                    Vessel : <span class="primary h6">(If not applicable,
-                                                                        please write N/A)</span>
+                                                                    Vessel : <span class="primary h6">(If not applicable, please write N/A)</span>
                                                                 </label>
-                                                                <input type="text" class="form-control to_upper"
-                                                                    name="vessel" id="vessel"
-                                                                    value="{{ optional($referral)->vessel }}">
+                                                                <input type="text" class="form-control to_upper" name="vessel" id="vessel" value="{{ optional($referral)->vessel }}">
                                                             </div>
                                                             <div class="form-group bahia-vessel remove">
                                                                 <label for="">Bahia Vessel</label>
-                                                                <select name="bahia_vessel" id=""
-                                                                    class="select2 form-control bahia-select-vessels">
+                                                                <select name="bahia_vessel" id="" class="select2 form-control bahia-select-vessels">
                                                                     <option value=""></option>
                                                                 </select>
                                                             </div>
@@ -364,8 +352,7 @@
                                                                     Passport Expiration Date :
                                                                     <span class="primary h6">(DD/MM/YYYY)</span>
                                                                 </label>
-                                                                <input type="date" max="2050-12-31"
-                                                                    class="form-control" name="passport_expdate"
+                                                                <input type="date" max="2050-12-31" class="form-control" name="passport_expdate"
                                                                     value="{{ optional($referral)->passport_expdate }}">
                                                             </div>
                                                         </div>
@@ -422,9 +409,8 @@
                                                                 </label>
                                                                 <select id="projectinput5" name="category"
                                                                     class="form-control">
-                                                                    <option value="none" selected="" disabled="">
-                                                                        Select
-                                                                        Category
+                                                                    <option value="none" selected disabled>
+                                                                        Select Category
                                                                     </option>
                                                                     <option value="DECK SERVICES">DECK SERVICES</option>
                                                                     <option value="ENGINE SERVICES">ENGINE SERVICES

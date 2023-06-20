@@ -423,7 +423,7 @@ class PatientController extends Controller
             $action = $request->action ? $request->action : null;
             $schedule = DB::table('sched_patients')->where('id', $request->id)->update(['date' => $request->schedule_date]);
 
-            $path = 'patient_edit?id=' . $request->patient_id . '&patientocde=' . $request->patientcode;
+            $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
 
             // if admin is updating re-schedule
             if ($action) {
@@ -442,7 +442,7 @@ class PatientController extends Controller
     {
         try {
             $data = session()->all();
-            $mast_patient = Patient::where('id', '=', $request->main_id)->first();
+            $mast_patient = Patient::where('id', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);
             $mast_patient->middlename = strtoupper($request->middleName);

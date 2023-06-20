@@ -172,8 +172,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 class="form-section"><i class="feather icon-user"></i> Crew Agency Information
-                                    </h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nationality">Nationality</label>
+                                                <input type="text" name="nationality" id="nationality" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="civil_status">Civil Status</label>
+                                                <select name="civil_status" id="civil_status">
+                                                    <option value="Single">Single</option>
+                                                    <option value="Married">Married</option>
+                                                    <option value="Widowed">Widowed</option>
+                                                    <option value="Divorced">Divorced</option>
+                                                    <option value="Separated">Separated</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="gender">Gender</label>
+                                                <select name="gender" id="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="form-section"><i class="feather icon-user"></i> Crew Agency Information</h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -181,7 +209,7 @@
                                                         class="danger">*</span></label>
                                                 <input type="text" id="employer" class="form-control"
                                                     placeholder="Name of Employer" name="employer" readonly
-                                                    value="@php echo session()->get('agencyName') @endphp">
+                                                    value="{{ session()->get('agencyName') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -190,7 +218,7 @@
                                                         class="danger">*</span></label>
                                                 <input type="text" id="agency_address" class="form-control"
                                                     placeholder="Address of Agency" name="agency_address" readonly
-                                                    value="@php echo session()->get('address') @endphp">
+                                                    value="{{ session()->get('address') }}">
                                             </div>
                                         </div>
                                     </div>

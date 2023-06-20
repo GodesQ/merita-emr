@@ -192,6 +192,9 @@ class ReferralController extends Controller
             $refferal->contactno = $request->contactno;
             $refferal->birthdate = $new_birthdate;
             $refferal->age = $request->age;
+            $refferal->civil_status = $request->civil_status;
+            $refferal->nationality  = $request->nationality;
+            $refferal->gender = $request->gender;
             $refferal->position_applied = $request->position_applied;
             $refferal->vessel = $request->vessel;
             $refferal->passport = $request->passport;
