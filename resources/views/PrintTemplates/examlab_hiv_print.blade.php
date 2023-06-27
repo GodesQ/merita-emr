@@ -50,6 +50,12 @@ return date("M/d/Y".$time,strtotime($val));
 <head>
     <title>HIV</title>
     <link href="../../../app-assets/css/print.css" rel="stylesheet" type="text/css">
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
