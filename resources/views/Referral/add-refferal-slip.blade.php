@@ -376,8 +376,7 @@
                                                         <label class="custom-control-label" for="skuld">SKULD</label>
                                                     </div>
                                                     <div class="input-group mt-50 d-none" id="skuld_qty">
-                                                        <input type="number" min="1" max="5"
-                                                            class="form-control" placeholder="Skuld Quantity"
+                                                        <input type="number" min="1" max="5" class="form-control" placeholder="Skuld Quantity"
                                                             name="skuld_qty">
                                                     </div>
                                                 </fieldset>

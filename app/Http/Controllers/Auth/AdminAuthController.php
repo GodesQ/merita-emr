@@ -35,6 +35,7 @@ class AdminAuthController extends Controller
             'employeeFirstname' => $employee->firstname,
             'employeeLastname' => $employee->lastname,
             'dept_id' => $employee->dept_id,
+            'position' => $employee->position,
             'employee_image' => $employee->employee_image,
             'payment_type' => 'package',
             'request_date' => date("Y-m-d")

@@ -620,7 +620,7 @@ class AdminController extends Controller
 
     public function store_employees(Request $request)
     {
-        // dd($request->all());
+
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',

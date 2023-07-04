@@ -50,8 +50,8 @@
                                             <td width="92"><b>PEME Date</b></td>
                                             <td width="247">
                                                 <input required name="peme_date" type="text" id="peme_date"
-                                                    value="{{ date_format( new DateTime($exam->admission->trans_date), 'F d, Y') }}" class="form-control"
-                                                    readonly="">
+                                                    value="{{ date_format(new DateTime($exam->admission->trans_date), 'F d, Y') }}"
+                                                    class="form-control" readonly="">
                                             </td>
                                             <td width="113"><b>Admission No.</b></td>
                                             <td width="322">
@@ -66,7 +66,8 @@
                                         <tr>
                                             <td><b>Exam Date</b></td>
                                             <td><input required name="trans_date" type="text" id="trans_date"
-                                                    value="{{ date_format( new DateTime($exam->trans_date), 'F d, Y') }}" class="form-control" readonly="">
+                                                    value="{{ date_format(new DateTime($exam->trans_date), 'F d, Y') }}"
+                                                    class="form-control" readonly="">
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
@@ -79,8 +80,9 @@
                                                     class="form-control" readonly>
                                             </td>
                                             <td><b>Patient Code</b></td>
-                                            <td><input required name="patientcode" id="patientcode" type="text" value="{{ $exam->admission->patient->patientcode }}"
-                                                class="form-control" readonly></td>
+                                            <td><input required name="patientcode" id="patientcode" type="text"
+                                                    value="{{ $exam->admission->patient->patientcode }}"
+                                                    class="form-control" readonly></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -466,10 +468,12 @@
                                         <tr>
                                             <td>
                                                 <div class="form-group">
-                                                    <input name="hearing" type="radio" class="m-1" id="hearing_0" value="aided"
-                                                        {{ $exam->hearing == "aided" ? "checked" : null }}>Aided
-                                                    <input name="hearing" type="radio" class="m-1" id="hearing_1" value="unaided"
-                                                        {{ $exam->hearing == "unaided" ? "checked" : null }}>Unaided
+                                                    <input name="hearing" type="radio" class="m-1" id="hearing_0"
+                                                        value="aided"
+                                                        {{ $exam->hearing == 'aided' ? 'checked' : null }}>Aided
+                                                    <input name="hearing" type="radio" class="m-1" id="hearing_1"
+                                                        value="unaided"
+                                                        {{ $exam->hearing == 'unaided' ? 'checked' : null }}>Unaided
                                                 </div>
                                             </td>
                                         </tr>
@@ -477,7 +481,8 @@
                                             <td>
                                                 <div class="form-group">
                                                     <label>Right Ear Result</label>
-                                                    <input name="left_ear_result" type="radio" class="m-1" id="left_ear_result_1" value="Adequate"
+                                                    <input name="left_ear_result" type="radio" class="m-1"
+                                                        id="left_ear_result_1" value="Adequate"
                                                         {{ $exam->left_ear_result == 'Adequate' ? 'checked' : null }}>Adequate
                                                     <input name="left_ear_result" type="radio" class="m-1"
                                                         id="left_ear_result_0" value="Inadequate"
@@ -513,10 +518,15 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_0" value="normal"
-                                                                        {{ $exam->remarks_status == "normal" ? "checked" : null }}>Normal
-                                                                    <input name="remarks_status" type="radio" class="m-1" id="remarks_status_1" value="findings"
-                                                                        {{ $exam->remarks_status == "findings" ? "checked" : null }}>With Findings
+                                                                    <input name="remarks_status" type="radio"
+                                                                        class="m-1" id="remarks_status_0"
+                                                                        value="normal"
+                                                                        {{ $exam->remarks_status == 'normal' ? 'checked' : null }}>Normal
+                                                                    <input name="remarks_status" type="radio"
+                                                                        class="m-1" id="remarks_status_1"
+                                                                        value="findings"
+                                                                        {{ $exam->remarks_status == 'findings' ? 'checked' : null }}>With
+                                                                    Findings
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -528,15 +538,18 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-group">
-                                                                    <label class="font-weight-bold">Recommendation</label>
-                                                                    <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"
-                                                                        rows="6">{{ $exam->recommendation }}</textarea>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <label
+                                                                            class="font-weight-bold">Recommendation</label>
+                                                                        <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"
+                                                                            rows="6">{{ $exam->recommendation }}</textarea>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </td>

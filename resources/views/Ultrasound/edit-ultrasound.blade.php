@@ -328,11 +328,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="kub_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->kub_exam_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">KUB Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="kub_exam_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->kub_exam_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">KUB
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="kub_exam_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->kub_exam_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     <tr id="hbt_group">
@@ -354,11 +357,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="hbt_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->hbt_exam_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">HBT Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="hbt_exam_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->hbt_exam_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">HBT
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="hbt_exam_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->hbt_exam_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     <tr id="thyroid_group">
@@ -381,12 +387,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="thyroid_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->thyroid_exam_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">THYROID
-                                                                    Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="thyroid_exam_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->thyroid_exam_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">THYROID
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="thyroid_exam_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->thyroid_exam_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     <tr id="breast_group">
@@ -409,12 +417,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="breast_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->breast_exam_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">BREAST
-                                                                    Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="breast_exam_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->breast_exam_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">BREAST
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="breast_exam_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->breast_exam_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     <tr id="whole_abdomen_group">
@@ -438,12 +448,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="whole_abdomen_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->whole_abdomen_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">WHOLE ABDOMEN
-                                                                    Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="whole_abdomen_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->whole_abdomen_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">WHOLE ABDOMEN
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="whole_abdomen_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->whole_abdomen_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     <tr id="genitals_group">
@@ -466,12 +478,14 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="genitals_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->genitals_exam_findings); ?></textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="font-weight-bold">GENITALS
-                                                                    Recommendation</label>
-                                                                <textarea placeholder="Recommendation" class="form-control" name="genitals_exam_recommendation" id=""
-                                                                    cols="30" rows="6"><?php echo nl2br($exam->genitals_exam_recommendation); ?></textarea>
-                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">GENITALS
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="genitals_exam_recommendation" id=""
+                                                                        cols="30" rows="6"><?php echo nl2br($exam->genitals_exam_recommendation); ?></textarea>
+                                                                </div>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 </tbody>
