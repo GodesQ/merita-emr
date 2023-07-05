@@ -1018,7 +1018,7 @@
                                                     <td class="fntBldLrg" style="border-bottom: 1px solid black;">1: 0.6-1.7</td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center">Total Biliburin</td>
+                                                    <td align="center">Total Bilirubin</td>
                                                     <td class="fntBldLrg {{optional($admission->exam_bloodsero)->ttlbilirubin < 5 || optional($admission->exam_bloodsero)->ttlbilirubin > 21 ? 'red-text': null}}" style="border-bottom: 1px solid black;">
                                                         {{optional($admission->exam_bloodsero)->ttlbilirubin}}
                                                         @if(optional($admission->exam_bloodsero)->ttlbilirubin < 5 && is_numeric(optional($admission->exam_bloodsero)->ttlbilirubin))
@@ -1031,7 +1031,7 @@
                                                     <td class="fntBldLrg" style="border-bottom: 1px solid black;"> 5-21 umol/L</td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center">Direct Biliburin</td>
+                                                    <td align="center">Direct Bilirubin</td>
                                                     <td class="fntBldLrg {{optional($admission->exam_bloodsero)->dirbilirubin < 0 || optional($admission->exam_bloodsero)->dirbilirubin > 5.1 ? 'red-text': null}}" style="border-bottom: 1px solid black;">
                                                         {{optional($admission->exam_bloodsero)->dirbilirubin}}
                                                         @if(optional($admission->exam_bloodsero)->dirbilirubin < 0 && is_numeric(optional($admission->exam_bloodsero)->dirbilirubin))
@@ -1044,7 +1044,7 @@
                                                     <td class="fntBldLrg" style="border-bottom: 1px solid black;"> 0-5.1 umol/L</td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center">Indirect Biliburin</td>
+                                                    <td align="center">Indirect Bilirubin</td>
                                                     <td class="fntBldLrg {{optional($admission->exam_bloodsero)->indbilirubin < 0 || optional($admission->exam_bloodsero)->indbilirubin > 16 ? 'red-text': null}}" style="border-bottom: 1px solid black;">
                                                         {{optional($admission->exam_bloodsero)->indbilirubin}}
                                                             @if(optional($admission->exam_bloodsero)->indbilirubin < 0 && is_numeric(optional($admission->exam_bloodsero)->indbilirubin))
