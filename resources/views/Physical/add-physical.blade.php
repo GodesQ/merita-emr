@@ -1331,6 +1331,32 @@
                                                                 style="width: 20px; height: 20px;" id="sick35"
                                                                 value="0" checked>
                                                         </td>
+                                                        <td width="154" align="center">Amputation</td>
+                                                        <td align="center">
+                                                            <label for="checkbox">YES</label>
+                                                            <input name="sick36" type="radio"
+                                                                style="width: 20px; height: 20px;" id="sick36"
+                                                                value="1" >
+                                                            <label for="checkbox">NO</label>
+                                                            <input name="sick36" type="radio"
+                                                                style="width: 20px; height: 20px;" id="sick36"
+                                                                value="0">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="154" align="center">Infectious/contagious diseases</td>
+                                                        <td align="center">
+                                                            <label for="checkbox">YES</label>
+                                                            <input name="sick37" type="radio"
+                                                                style="width: 20px; height: 20px;" id="sick37"
+                                                                value="1">
+                                                            <label for="checkbox">NO</label>
+                                                            <input name="sick37" type="radio"
+                                                                style="width: 20px; height: 20px;" id="sick37"
+                                                                value="0">
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                     </tr>

@@ -718,9 +718,27 @@
                                                 <tr>
                                                     <td>14. </td>
                                                     <td>Infectious/contagious diseases</td>
-                                                    <td><img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                    <td>
+                                                        @if($admission->exam_physical)
+                                                            @if($admission->exam_physical->sick37 == "Yes" || $admission->exam_physical->sick37 == "1")
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                        @endif
                                                     </td>
-                                                    <td><img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                    <td>
+                                                        @if($admission->exam_physical)
+                                                            @if($admission->exam_physical->sick37 == "No" || $admission->exam_physical->sick37 == "0")
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                            @endif
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 <tr>

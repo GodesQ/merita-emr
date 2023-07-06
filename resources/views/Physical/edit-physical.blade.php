@@ -727,6 +727,23 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td width="154" align="center">Infectious/contagious diseases</td>
+                                                    <td align="center">
+                                                        <label for="checkbox">YES</label>
+                                                        <input name="sick37" type="radio"
+                                                            style="width: 20px; height: 20px;" id="sick37"
+                                                            value="1" {{ $exam->sick37 == 1 ? 'checked' : null }}>
+                                                        <label for="checkbox">NO</label>
+                                                        <input name="sick37" type="radio"
+                                                            style="width: 20px; height: 20px;" id="sick37"
+                                                            value="0" {{ $exam->sick37 == 0 ? 'checked' : null }}>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
                                                     <td align="center">Others</td>
                                                     <td colspan="5">
                                                         <textarea name="others" cols="20" rows="2" id="others" class="form-control">{{ $exam->others }}</textarea>
@@ -1397,23 +1414,19 @@
                                                 <tr>
                                                     <td width="16%" height="21">A.CHEST XRAY</td>
                                                     <td width="13%" height="21">
-                                                        <input name="chest" type="radio"
-                                                            style="width: 20px; height: 20px;" id="radio88"
-                                                            value="normal"
-                                                            @if ($exam_xray) {{ $exam_xray->remarks_status == 'normal' ? 'checked' : null }} @endif>
-                                                        Normal
+                                                        <input name="chest" type="radio" style="width: 20px; height: 20px;" id="radio88" value="normal"
+                                                            @if ($exam) {{ $exam->chest == 'normal' ? 'checked' : null }} @endif> Normal
                                                     </td>
                                                     <td height="21" colspan="2">
                                                         <input name="chest" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio89"
                                                             value="findings"
-                                                            @if ($exam_xray) {{ $exam_xray->remarks_status == 'findings' ? 'checked' : null }} @endif>
-                                                        With Findings
+                                                            @if ($exam) {{ $exam->chest == 'findings' ? 'checked' : null }} @endif> With Findings
                                                         <textarea class="form-control" name="xray_findings">
-@if ($exam_xray)
-{{ $exam_xray->remarks_status == 'findings' ? $exam_xray->remarks : null }}
-@endif
-</textarea>
+                                                            @if ($exam_xray)
+                                                                {{ $exam_xray->remarks_status == 'findings' ? $exam_xray->remarks : null }}
+                                                            @endif
+                                                        </textarea>
                                                     </td>
                                                 </tr>
 
