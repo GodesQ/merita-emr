@@ -65,7 +65,7 @@ return date("M/d/Y".$time,strtotime($val));
                 text-decoration: underline;
             }
         </style>
-        <table width="680" border="0" cellpadding="2" cellspacing="0" class="">
+        <table width="680" border="0" cellpadding="0" cellspacing="0" class="">
             <tr>
                 <td colspan="3" align="left">
                     <table width="100%" border="0" cellspacing="0" cellpadding="4">
@@ -91,7 +91,7 @@ return date("M/d/Y".$time,strtotime($val));
                         </tr>
                         <tr>
                             <td height="80" colspan="3" align="center">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 1rem 0;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0.5rem;">
                                     <tr>
                                         <td width="60%" rowspan="6">
                                             <div style="width: 150px; height: 140px;padding: 0.2rem; border: 1px solid black;">
@@ -150,8 +150,8 @@ return date("M/d/Y".$time,strtotime($val));
                 </td>
             </tr>
             <tr>
-                <td height="30" colspan="3" align="left" valign="middle">
-                    <table width="680" border="0" cellspacing="0" cellpadding="3">
+                <td height="20" colspan="3" align="left" valign="middle">
+                    <table width="680" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td valign="top">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -241,7 +241,7 @@ return date("M/d/Y".$time,strtotime($val));
                 </td>
             </tr>
             <tr>
-                <td height="" colspan="2" align="center">
+                <td height="5" cellpadding="0" colspan="2" align="center">
                     <h2>RESULT *
                         <?=$exam->result?>
                     </h2>
