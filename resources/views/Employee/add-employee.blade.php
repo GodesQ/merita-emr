@@ -140,12 +140,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td><b>Title</b></td>
-                                                    <td><input name="title" id="title" type="text" class="form-control" value="">
+                                                    <td><input name="title" id="title" type="text"
+                                                            class="form-control" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>Position <span class="danger text-danger">*</span></b></td>
-                                                    <td><input name="position" id="position" type="text" class="form-control" value="">
+                                                    <td><input name="position" id="position" type="text"
+                                                            class="form-control" value="">
                                                         <span class="text-danger danger">
                                                             @error('title')
                                                                 {{ $message }}
@@ -213,8 +215,13 @@
                                                         <div class=" my-2">
                                                             <canvas class="signature" width="320"
                                                                 height="95"></canvas> <br>
-                                                            <button type='button'
-                                                                class="btn btn-solid btn-primary clear-signature">Clear</button>
+                                                            <div class="btn-group">
+                                                                <button type='button'
+                                                                    class="btn btn-solid btn-primary clear-signature"
+                                                                    onclick="javascript:onClear()">Clear</button>
+                                                                <button type='button' class="btn btn-solid btn-success"
+                                                                    onclick="javascript:onDone()">Save Signature</button>
+                                                            </div>
                                                         </div>
                                                     </td>
 

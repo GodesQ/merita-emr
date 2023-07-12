@@ -25,6 +25,7 @@ const signaturePad = new SignaturePad(canvas, {
 
 document.querySelector('.clear-signature').addEventListener('click', () => {
     signaturePad.clear();
+    document.querySelector('#signature_data').value = '';
 })
 
 var tmr;
