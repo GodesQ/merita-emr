@@ -194,7 +194,7 @@
                                                     "checked" : "" @endphp>
                                                         </td>
                                                         <td width="132" align="center">Kidney or Bladder Disorder</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick22" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick22"
@@ -254,7 +254,7 @@
                                                         </td>
                                                         <td width="132" align="center"> Back Injury, Joint
                                                             Pain/Arthritis/Rheumatic</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick23" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick23"
@@ -313,7 +313,7 @@
                                                         <td width="132" align="center">Genetic, Hereditary or Familial
                                                             Disorders
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick24" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick24"
@@ -377,7 +377,7 @@
                                                         </td>
                                                         <td width="132" align="center">Sexually Transmitted Diseases
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick25" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick25"
@@ -441,7 +441,7 @@
                                                             <br><input name="tropical_disease" type="input"
                                                                 id="tropical_disease" value="">
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick26" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick26"
@@ -507,7 +507,7 @@
                                                                 name="asthma" type="input" id="asthma"
                                                                 value="">
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick27" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick27"
@@ -569,7 +569,7 @@
                                                         <td width="132" align="center">Allergies(Specify)<br><input
                                                                 name="allergies" type="input" id="allergies"
                                                                 value="{{ $medical_history->allergies_other }}"></td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick30" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick30"
@@ -695,7 +695,7 @@
                                                             <br><input name="vaccination" type="input" id="vaccination"
                                                                 value="">
                                                         </td>
-                                                        <td width="146" align="center">
+                                                        <td width="29" align="center">
                                                             <input name="sick32" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick19"
                                                                 value="1"
@@ -754,7 +754,7 @@
                                                     : "" @endphp>
                                                         </td>
                                                         <td width="132" align="center">Hepatitis A,B,C</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick28" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick28"
@@ -810,7 +810,7 @@
                                                             <br><input name="last_menstrual" type="input"
                                                                 id="last_menstrual" value="">
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick29" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick29"
@@ -877,7 +877,16 @@
                                                             <textarea name="specify" cols="20" rows="2" id="specify" class="form-control"></textarea>
                                                         </td>
                                                     </tr>
-                                                    @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                    @if (
+                                                        !in_array(session()->get('position'), [
+                                                            'Cashier',
+                                                            'Releasing',
+                                                            'Human Resource / Documentation Officer',
+                                                            'Processing officer',
+                                                            'Information Clerk',
+                                                            'Nurse',
+                                                            'Asst accounant',
+                                                        ]))
                                                         <tr>
                                                             <td colspan="6">
                                                                 <h6>PE1 Recommendation</h6>
@@ -918,7 +927,7 @@
                                                                 value="No" checked="">
                                                         </td>
                                                         <td width="132" align="center">Kidney or Bladder Disorder</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick22" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick22"
@@ -956,7 +965,7 @@
                                                         </td>
                                                         <td width="132" align="center"> Back Injury, Joint
                                                             Pain/Arthritis/Rheumatic</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick23" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick23"
@@ -993,7 +1002,7 @@
                                                         <td width="132" align="center">Genetic, Hereditary or Familial
                                                             Disorders
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick24" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick24"
@@ -1032,7 +1041,7 @@
                                                         </td>
                                                         <td width="132" align="center">Sexually Transmitted Diseases
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick25" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick25"
@@ -1070,7 +1079,7 @@
                                                             (e.g.Malaria,Filariaris <br>
                                                             Schistosomiasis - Specific Date)
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick26" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick26"
@@ -1112,7 +1121,7 @@
                                                                 name="asthma" type="input" id="asthma"
                                                                 value="">
                                                         </td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick27" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick27"
@@ -1150,7 +1159,7 @@
                                                         <td width="132" align="center">Allergies(Specify)<br><input
                                                                 name="allergies" type="input" id="allergies"
                                                                 value=""></td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick30" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick30"
@@ -1225,7 +1234,7 @@
                                                                 value="No" checked="">
                                                         </td>
                                                         <td width="132" align="center">Vaccination</td>
-                                                        <td width="146" align="center">
+                                                        <td width="29" align="center">
                                                             <input name="sick32" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick19"
                                                                 value="Yes">
@@ -1259,7 +1268,7 @@
                                                                 value="No" checked="">
                                                         </td>
                                                         <td width="132" align="center">Hepatitis A,B,C</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick28" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick28"
@@ -1297,7 +1306,7 @@
                                                                 value="No" checked="">
                                                         </td>
                                                         <td width="132" align="center">Last Menstrual Period</td>
-                                                        <td width="146" align="center"><label
+                                                        <td width="29" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick29" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick29"
@@ -1336,7 +1345,7 @@
                                                             <label for="checkbox">YES</label>
                                                             <input name="sick36" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick36"
-                                                                value="1" >
+                                                                value="1">
                                                             <label for="checkbox">NO</label>
                                                             <input name="sick36" type="radio"
                                                                 style="width: 20px; height: 20px;" id="sick36"
@@ -1344,7 +1353,8 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="154" align="center">Infectious/contagious diseases</td>
+                                                        <td width="154" align="center">Infectious/contagious diseases
+                                                        </td>
                                                         <td align="center">
                                                             <label for="checkbox">YES</label>
                                                             <input name="sick37" type="radio"
@@ -1543,7 +1553,16 @@
                                                                     Findings,when)</p>
                                                                 <textarea name="past_peme" cols="10" rows="2" id="past_peme" class="form-control"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'Processing officer',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="col-md-6">
                                                                     <p><b>PAST PEME RECOMMENDATION</b></p>
                                                                     <textarea name="past_peme_recommendation" cols="10" rows="2" id="past_peme_recommendation"
@@ -1704,7 +1723,16 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                @if (
+                                                                    !in_array(session()->get('position'), [
+                                                                        'Cashier',
+                                                                        'Releasing',
+                                                                        'Human Resource / Documentation Officer',
+                                                                        'Processing officer',
+                                                                        'Information Clerk',
+                                                                        'Nurse',
+                                                                        'Asst accounant',
+                                                                    ]))
                                                                     <tr>
                                                                         <td colspan="7">
                                                                             Vital Sign Recommendation: <br>
@@ -1729,218 +1757,307 @@
                                         </table>
                                         <div class="my-1">Alongside columns A,B,C put check mark(✔) under "YES" if
                                             Normal. If not Normal, specify findings</div>
-                                        <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                            class="table table-bordered table-responsive">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="140" height="37" align="center"><b>A</b></td>
-                                                    <td width="29" align="center">YES</td>
-                                                    <td width="196" align="center">Significant Findings </td>
-                                                    <td width="135" align="center"><b>B</b></td>
-                                                    <td width="146" align="center">YES</td>
-                                                    <td width="154" align="center">Significant Findings </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="38" align="center">Skin</td>
-                                                    <td width="29" align="center"><input name="a1"
-                                                            type="checkbox" id="a1" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a1_findings" type="text"
-                                                            id="a1_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Neck, Lymph Node,Thyroid</td>
-                                                    <td width="146" align="center"><input name="b1"
-                                                            type="checkbox" id="b1" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b1_findings" type="text"
-                                                            id="b1_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="36" align="center">Head, Neck,Scalp
-                                                    </td>
-                                                    <td width="29" align="center"><input name="a2"
-                                                            type="checkbox" id="a2" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a2_findings" type="text"
-                                                            id="a2_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Neurology</td>
-                                                    <td width="146" align="center"><input name="b7"
-                                                            type="checkbox" id="b7" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b2_findings" type="text"
-                                                            id="b2_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="33" align="center">Eyes(external)
-                                                    </td>
-                                                    <td width="29" align="center"><input name="a3"
-                                                            type="checkbox" id="a3" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a3_findings" type="text"
-                                                            id="a3_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Breast,Axilla</td>
-                                                    <td width="146" align="center"><input name="b2"
-                                                            type="checkbox" id="b2" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b3_findings" type="text"
-                                                            id="b3_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="34" align="center">Pupils</td>
-                                                    <td width="29" align="center"><input name="a4"
-                                                            type="checkbox" id="a4" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a4_findings" type="text"
-                                                            id="a4_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Chest and Lungs</td>
-                                                    <td width="146" align="center"><input name="b3"
-                                                            type="checkbox" id="b3" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b4_findings" type="text"
-                                                            id="b4_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="34" align="center">Ears</td>
-                                                    <td width="29" align="center"><input name="a5"
-                                                            type="checkbox" id="a5" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a5_findings" type="text"
-                                                            id="a5_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Heart</td>
-                                                    <td width="146" align="center"><input name="b4"
-                                                            type="checkbox" id="b4" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b5_findings" type="text"
-                                                            id="b5_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="37" align="center">Nose,Sinuses</td>
-                                                    <td width="29" align="center"><input name="a6"
-                                                            type="checkbox" id="a6" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a6_findings" type="text"
-                                                            id="a6_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Abdomen,Liver,Spleen</td>
-                                                    <td width="146" align="center"><input name="b5"
-                                                            type="checkbox" id="b5" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b6_findings" type="text"
-                                                            id="b6_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="140" height="14" align="center">Mouth,Throat</td>
-                                                    <td width="29" align="center"><input name="a7"
-                                                            type="checkbox" id="a7" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="a7_findings" type="text"
-                                                            id="a7_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td width="135" align="center">Back</td>
-                                                    <td width="146" align="center"><input name="b6"
-                                                            type="checkbox" id="b6" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="b7_findings" type="text"
-                                                            id="b7_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="6" align="center">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="7" align="center"><b>C</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center">&nbsp;</td>
-                                                    <td align="center">YES</td>
-                                                    <td align="center">Significant Findings</td>
-                                                    <td align="center">&nbsp;</td>
-                                                    <td align="center">YES</td>
-                                                    <td align="center">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center">Anus-Rectum</td>
-                                                    <td align="center"><input name="c1" type="checkbox"
-                                                            id="c1" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c1_findings" type="text"
-                                                            id="c1_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td align="center">Genito-Urinary System</td>
-                                                    <td align="center"><input name="c2" type="checkbox"
-                                                            id="c2" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c2_findings" type="text"
-                                                            id="c2_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center">Inguinals,Genitals</td>
-                                                    <td align="center"><input name="c3" type="checkbox"
-                                                            id="c3" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c3_findings" type="text"
-                                                            id="c3_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td align="center">Extremities</td>
-                                                    <td align="center"><input name="c4" type="checkbox"
-                                                            id="c4" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c4_findings" type="text"
-                                                            id="c4_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center">Reflexes</td>
-                                                    <td align="center"><input name="c5" type="checkbox"
-                                                            id="c5" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c5_findings" type="text"
-                                                            id="c5_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                    <td align="center">Dental(Teeth/Gums)</td>
-                                                    <td align="center"><input name="c6" type="checkbox"
-                                                            id="c6" value="Yes" checked>
-                                                    </td>
-                                                    <td align="center"><input name="c6_findings" type="text"
-                                                            id="c6_findings" value="" size="10"
-                                                            class="form-control">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="6" align="center">&nbsp;</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="table-responsive">
+                                            <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                                                class="table table-bordered " style="font-size: 11px !important;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="140" height="37" align="center"><b>A</b></td>
+                                                        <td width="29" align="center">YES</td>
+                                                        <td align="center">Significant Findings </td>
+                                                        <td align="center">Recommendations</td>
+                                                        <td width="135" align="center"><b>B</b></td>
+                                                        <td width="29" align="center">YES</td>
+                                                        <td  align="center">Significant Findings </td>
+                                                        <td align="center">Recommendations</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="38" align="center">Skin</td>
+                                                        <td width="29" align="center"><input name="a1"
+                                                                type="checkbox" id="a1" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a1_findings" type="text"
+                                                                id="a1_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a1_recommendations"
+                                                                type="text" id="a1_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Neck, Lymph Node,Thyroid</td>
+                                                        <td width="29" align="center"><input name="b1"
+                                                                type="checkbox" id="b1" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b1_findings" type="text"
+                                                                id="b1_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b1_recommendations"
+                                                                type="text" id="b1_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="36" align="center">Head,Neck,Scalp
+                                                        </td>
+                                                        <td width="29" align="center"><input name="a2"
+                                                                type="checkbox" id="a2" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a2_findings" type="text"
+                                                                id="a2_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a2_recommendations"
+                                                                type="text" id="a2_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Neurology</td>
+                                                        <td width="29" align="center"><input name="b7"
+                                                                type="checkbox" id="b7" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b2_findings" type="text"
+                                                                id="b2_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b2_recommendations"
+                                                                type="text" id="b2_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="33" align="center">
+                                                            Eyes(external)
+                                                        </td>
+                                                        <td width="29" align="center"><input name="a3"
+                                                                type="checkbox" id="a3" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a3_findings" type="text"
+                                                                id="a3_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a3_recommendations"
+                                                                type="text" id="a3_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Breast,Axilla</td>
+                                                        <td width="29" align="center"><input name="b2"
+                                                                type="checkbox" id="b2" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b3_findings" type="text"
+                                                                id="b3_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b3_recommendations"
+                                                                type="text" id="b3_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="34" align="center">Pupils</td>
+                                                        <td width="29" align="center"><input name="a4"
+                                                                type="checkbox" id="a4" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a4_findings" type="text"
+                                                                id="a4_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a4_recommendations"
+                                                                type="text" id="a4_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Chest and Lungs</td>
+                                                        <td width="29" align="center"><input name="b3"
+                                                                type="checkbox" id="b3" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b4_findings" type="text"
+                                                                id="b4_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b4_recommendations"
+                                                                type="text" id="b4_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="34" align="center">Ears</td>
+                                                        <td width="29" align="center"><input name="a5"
+                                                                type="checkbox" id="a5" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a5_findings" type="text"
+                                                                id="a5_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a5_recommendations"
+                                                                type="text" id="a5_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Heart</td>
+                                                        <td width="29" align="center"><input name="b4"
+                                                                type="checkbox" id="b4" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b5_findings" type="text"
+                                                                id="b5_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b5_recommendations"
+                                                                type="text" id="b5_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="37" align="center">Nose,Sinuses
+                                                        </td>
+                                                        <td width="29" align="center"><input name="a6"
+                                                                type="checkbox" id="a6" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a6_findings" type="text"
+                                                                id="a6_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a6_recommendations"
+                                                                type="text" id="a6_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Abdomen,Liver,Spleen</td>
+                                                        <td width="29" align="center"><input name="b5"
+                                                                type="checkbox" id="b5" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b6_findings" type="text"
+                                                                id="b6_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b6_recommendations"
+                                                                type="text" id="b6_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="140" height="14" align="center">Mouth,Throat
+                                                        </td>
+                                                        <td width="29" align="center"><input name="a7"
+                                                                type="checkbox" id="a7" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="a7_findings" type="text"
+                                                                id="a7_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="a7_recommendations"
+                                                                type="text" id="a7_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td width="135" align="center">Back</td>
+                                                        <td width="29" align="center"><input name="b6"
+                                                                type="checkbox" id="b6" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="b7_findings" type="text"
+                                                                id="b7_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="b7_recommendations"
+                                                                type="text" id="b7_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="8" align="center">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="8" align="center"><b>C</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">&nbsp;</td>
+                                                        <td align="center">YES</td>
+                                                        <td align="center">Significant Findings</td>
+                                                        <td align="center">Recommendations</td>
+                                                        <td align="center">&nbsp;</td>
+                                                        <td align="center">YES</td>
+                                                        <td align="center">Significant Findings</td>
+                                                        <td align="center">Recommendations</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">Anus-Rectum</td>
+                                                        <td align="center"><input name="c1" type="checkbox"
+                                                                id="c1" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c1_findings" type="text"
+                                                                id="c1_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c1_recommendations"
+                                                                type="text" id="c1_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td align="center">Genito-Urinary System</td>
+                                                        <td align="center"><input name="c2" type="checkbox"
+                                                                id="c2" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c2_findings" type="text"
+                                                                id="c2_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c2_recommendations"
+                                                                type="text" id="c2_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">Inguinals,Genitals</td>
+                                                        <td align="center"><input name="c3" type="checkbox"
+                                                                id="c3" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c3_findings" type="text"
+                                                                id="c3_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c3_recommendations"
+                                                                type="text" id="c3_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td align="center">Extremities</td>
+                                                        <td align="center"><input name="c4" type="checkbox"
+                                                                id="c4" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c4_findings" type="text"
+                                                                id="c4_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c4_recommendations"
+                                                                type="text" id="c4_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">Reflexes</td>
+                                                        <td align="center"><input name="c5" type="checkbox"
+                                                                id="c5" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c5_findings" type="text"
+                                                                id="c5_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c5_recommendations"
+                                                                type="text" id="c5_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                        <td align="center">Dental(Teeth/Gums)</td>
+                                                        <td align="center"><input name="c6" type="checkbox"
+                                                                id="c6" value="Yes" checked>
+                                                        </td>
+                                                        <td align="center"><input name="c6_findings" type="text"
+                                                                id="c6_findings" value="" size="10"
+                                                                class="form-control">
+                                                        </td>
+                                                        <td align="center"><input name="c6_recommendations"
+                                                                type="text" id="c6_recommendations" value=""
+                                                                size="10" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="6" align="center">&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="tab-pane" id="tab14" role="tabpanel"
                                         aria-labelledby="base-tab14">
@@ -2501,7 +2618,8 @@
                                                                                                                 colspan="2">
                                                                                                                 <div
                                                                                                                     class="col-md-12">
-                                                                                                                    Describe restrictions
+                                                                                                                    Describe
+                                                                                                                    restrictions
                                                                                                                     **
                                                                                                                     (Refer
                                                                                                                     to
@@ -2513,13 +2631,8 @@
                                                                                                                     of
                                                                                                                     this
                                                                                                                     page).
-                                                                                                                    <textarea
-                                                                                                                    name="describe_restriction"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    style="border-color: green"
-                                                                                                                    id="describe_restriction"
-                                                                                                                    class="form-control"></textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_21___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2529,12 +2642,8 @@
                                                                                                                 <div
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Comments/Restriction/Prescription</b>
-                                                                                                                    <textarea
-                                                                                                                    name="comments_restriction"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    id="comments_restriction"
-                                                                                                                    class="form-control"></textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_22___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2545,12 +2654,8 @@
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Hologram
                                                                                                                         Number</b>
-                                                                                                                    <textarea
-                                                                                                                    name="progressive_notes"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    id="progressive_notes"
-                                                                                                                    class="form-control"></textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_23___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2624,22 +2729,16 @@
                                                                                                                 valign="middle">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="finding"
-                                                                                                                    rows="3"
-                                                                                                                    class="form-control"
-                                                                                                                    id="finding"></textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_24___ />
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                             <td valign="middle"
                                                                                                                 colspan="2">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="recommendations"
-                                                                                                                    rows="3"
-                                                                                                                    class="form-control"
-                                                                                                                    id="recommendations"></textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_25___ />
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                         </tr>

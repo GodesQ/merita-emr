@@ -284,6 +284,202 @@
             @endif
         </div>
 
+        @if($exam_physical)
+            @if(!$exam_physical->a1)
+                <div class="col-md-6 my-50">
+                    <h5><b>Skin</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->a1_recommendations) @endphp</span>
+                     <input type="hidden" value="Skin: @php echo nl2br($exam_physical->a1_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+
+        @if($exam_physical)
+            @if(!$exam_physical->b1)
+                <div class="col-md-6 my-50">
+                    <h5><b>Neck, Lymph Node,Thyroid</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->b1_recommendations) @endphp</span>
+                    <input type="hidden" value="Neck, Lymph Node,Thyroid: @php echo nl2br($exam_physical->b1_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+
+        @if($exam_physical)
+            @if(!$exam_physical->a2)
+                <div class="col-md-6 my-50">
+                    <h5><b>Head, Neck,Scalp</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a2_recommendations) @endphp</span>
+                    <input type="hidden" value="Head, Neck, Scalp: @php echo nl2br($exam_physical->a2_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b7)
+                <div class="col-md-6 my-50">
+                    <h5><b>Neurology</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b2_recommendations) @endphp</span>
+                    <input type="hidden" value="Neurology: @php echo nl2br($exam_physical->b2_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->a3)
+                <div class="col-md-6 my-50">
+                    <h5><b>Eyes(external)</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a3_recommendations) @endphp</span>
+                    <input type="hidden" value="Eyes(external): @php echo nl2br($exam_physical->a3_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b2)
+                <div class="col-md-6 my-50">
+                    <h5><b>Breast,Axilla</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b3_recommendations) @endphp</span>
+                    <input type="hidden" value="Breast,Axilla: @php echo nl2br($exam_physical->b3_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->a4)
+                <div class="col-md-6 my-50">
+                    <h5><b>Pupils</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->a4_recommendations) @endphp</span>
+                    <input type="hidden" value="Pupils: @php echo nl2br($exam_physical->a4_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b3)
+                <div class="col-md-6 my-50">
+                    <h5><b>Chest and Lungs</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->b4_recommendations) @endphp</span>
+                    <input type="hidden" value="Chest and Lungs: @php echo nl2br($exam_physical->b4_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->a5)
+                <div class="col-md-6 my-50">
+                    <h5><b>Ears</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a5_recommendations) @endphp</span>
+                    <input type="hidden" value="Ears: @php echo nl2br($exam_physical->a5_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b4)
+                <div class="col-md-6 my-50">
+                    <h5><b>Heart</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->b5_recommendations) @endphp</span>
+                    <input type="hidden" value="Heart: @php echo nl2br($exam_physical->b5_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->a6)
+                <div class="col-md-6 my-50">
+                    <h5><b>Nose,Sinuses</b></h5>
+                    <span style="font-size: 12px;">@php echo nl2br($exam_physical->a6_recommendations) @endphp</span>
+                    <input type="hidden" value="Nose,Sinuses: @php echo nl2br($exam_physical->a6_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b5)
+                <div class="col-md-6 my-50">
+                    <h5><b>Abdomen,Liver,Spleen</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->b6_recommendations) @endphp</span>
+                    <input type="hidden" value="Abdomen,Liver,Spleen: @php echo nl2br($exam_physical->b6_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->a7)
+                <div class="col-md-6 my-50">
+                    <h5><b>Mouth,Throat</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->a7_recommendations) @endphp</span>
+                    <input type="hidden" value="Mouth,Throat: @php echo nl2br($exam_physical->a7_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->b6)
+                <div class="col-md-6 my-50">
+                    <h5><b>Back</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->b7_recommendations) @endphp</span>
+                    <input type="hidden" value="Back: @php echo nl2br($exam_physical->b7_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c1)
+                <div class="col-md-6 my-50">
+                    <h5><b>Anus-Rectum</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c1_recommendations) @endphp</span>
+                    <input type="hidden" value="Anus-Rectum: @php echo nl2br($exam_physical->c1_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c2)
+                <div class="col-md-6 my-50">
+                    <h5><b>Genito-Urinary System</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c2_recommendations) @endphp</span>
+                    <input type="hidden" value="Genito-Urinary System: @php echo nl2br($exam_physical->c2_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c3)
+                <div class="col-md-6 my-50">
+                    <h5><b>Inguinals,Genitals</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c3_recommendations) @endphp</span>
+                    <input type="hidden" value="Inguinals,Genitals: @php echo nl2br($exam_physical->c3_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c4)
+                <div class="col-md-6 my-50">
+                    <h5><b>Extremities</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c4_recommendations) @endphp</span>
+                    <input type="hidden" value="Extremities: @php echo nl2br($exam_physical->c4_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c5)
+                <div class="col-md-6 my-50">
+                    <h5><b>Reflexes</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c5_recommendations) @endphp</span>
+                    <input type="hidden" value="Reflexes: @php echo nl2br($exam_physical->c5_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+        @if($exam_physical)
+            @if(!$exam_physical->c6)
+                <div class="col-md-6 my-50">
+                    <h5><b>Dental(Teeth/Gums)</b></h5>
+                    <span style="font-size: 12px;">@php echo
+                        nl2br($exam_physical->c6_recommendations) @endphp</span>
+                    <input type="hidden" value="Dental(Teeth/Gums): @php echo nl2br($exam_physical->c6_recommendations) @endphp" name="recommendation[]" />
+                </div>
+            @endif
+        @endif
+
         @if($exam_blood_serology)
             @if($exam_blood_serology->fbs_recommendation)
                 <div class="col-md-6 my-50">

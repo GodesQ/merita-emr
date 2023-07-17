@@ -99,6 +99,7 @@
                             $count = 1;
                         @endphp
                         @if (count($patients) != 0)
+
                         @foreach ($patients as $key => $patient)
                             @php
                                 $results = [];
@@ -250,6 +251,166 @@
                             @empty
 
                             @endforelse
+
+                            @if (optional($patient->exam_xray)->lumbosacral_findings || optional($patient->exam_xray)->lumbosacral_recommendations)
+                            <tr>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->lumbosacral_findings }}
+                                </td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->lumbosacral_recommendations }}
+                                </td>
+                                <td align="left" valign="top"></td>
+                                @if(in_array("vital_signs", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                @if(in_array("bmi", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                <td align="left">
+
+                                </td>
+                                @if(in_array("vessel", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+
+                                @if(in_array("emp_status", $additional_columns))
+                                    <td align="left">{{$patient->emp_status}}</td>
+                                @endif
+
+                                @if(in_array("medical_package", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                            </tr>
+                        @endif
+
+                        @if (optional($patient->exam_xray)->chest_findings || optional($patient->exam_xray)->chest_recommendations)
+                            <tr>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->chest_findings }}
+                                </td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->chest_recommendations }}
+                                </td>
+                                <td align="left" valign="top"></td>
+                                @if(in_array("vital_signs", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                @if(in_array("bmi", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                <td align="left">
+
+                                </td>
+                                @if(in_array("vessel", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+
+                                @if(in_array("emp_status", $additional_columns))
+                                    <td align="left">{{$patient->emp_status}}</td>
+                                @endif
+
+                                @if(in_array("medical_package", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                            </tr>
+                        @endif
+
+                        @if (optional($patient->exam_xray)->knees_findings || optional($patient->exam_xray)->knees_recommendations)
+                            <tr>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->knees_findings }}
+                                </td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->knees_recommendations }}
+                                </td>
+                                <td align="left" valign="top"></td>
+                                @if(in_array("vital_signs", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                @if(in_array("bmi", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                <td align="left">
+
+                                </td>
+                                @if(in_array("vessel", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+
+                                @if(in_array("emp_status", $additional_columns))
+                                    <td align="left">{{$patient->emp_status}}</td>
+                                @endif
+
+                                @if(in_array("medical_package", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                            </tr>
+                        @endif
+
+                        @if (optional($patient->exam_xray)->skull_findings || optional($patient->exam_xray)->skull_recommendations)
+                            <tr>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left"></td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->skull_findings }}
+                                </td>
+                                <td align="left" valign="top">
+                                    {{ optional($patient->exam_xray)->skull_recommendations }}
+                                </td>
+                                <td align="left" valign="top"></td>
+                                @if(in_array("vital_signs", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                @if(in_array("bmi", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                                <td align="left">
+
+                                </td>
+                                @if(in_array("vessel", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+
+                                @if(in_array("emp_status", $additional_columns))
+                                    <td align="left">{{$patient->emp_status}}</td>
+                                @endif
+
+                                @if(in_array("medical_package", $additional_columns))
+                                    <td align="left"></td>
+                                @endif
+                            </tr>
+                        @endif
 
                         @endforeach
                         @else

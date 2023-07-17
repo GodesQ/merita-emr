@@ -756,7 +756,16 @@
                                                         <textarea name="specify" cols="20" rows="2" id="specify" class="form-control">{{ $exam->specify }}</textarea>
                                                     </td>
                                                 </tr>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (
+                                                    !in_array(session()->get('position'), [
+                                                        'Cashier',
+                                                        'Releasing',
+                                                        'Human Resource / Documentation Officer',
+                                                        'Processing officer',
+                                                        'Information Clerk',
+                                                        'Nurse',
+                                                        'Asst accounant',
+                                                    ]))
                                                     <tr>
                                                         <td colspan="6">
                                                             <h6>PE1 Recommendation</h6>
@@ -981,7 +990,16 @@
                                                                     Findings,when)</p>
                                                                 <textarea name="past_peme" cols="10" rows="2" id="past_peme" class="form-control">{{ $exam->past_peme }}</textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'Processing officer',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="col-md-6">
                                                                     <p><b>PAST PEME RECOMMENDATION</b></p>
                                                                     <textarea name="past_peme_recommendation" cols="10" rows="2" id="past_peme_recommendation"
@@ -1173,27 +1191,37 @@
                                                 <tr>
                                                     <td width="140" height="37" align="center"><b>A</b></td>
                                                     <td width="29" align="center">YES</td>
-                                                    <td width="196" align="center">Significant Findings </td>
+                                                    <td align="center">Significant Findings </td>
+                                                    <td align="center">Recommendations</td>
                                                     <td width="135" align="center"><b>B</b></td>
-                                                    <td width="146" align="center">YES</td>
-                                                    <td width="154" align="center">Significant Findings </td>
+                                                    <td width="29" align="center">YES</td>
+                                                    <td  align="center">Significant Findings </td>
+                                                    <td align="center">Recommendations</td>
                                                 </tr>
                                                 <tr>
                                                     <td width="140" height="38" align="center">Skin</td>
                                                     <td width="29" align="center"><input value="Yes"
                                                             name="a1" type="checkbox" id="a1"
-                                                            @php echo $exam->a1 == "Yes" ? "checked" : "" @endphp></td>
+                                                            {{ $exam->a1 == 'Yes' ? 'checked' : '' }}></td>
                                                     <td align="center"><input name="a1_findings" type="text"
                                                             id="a1_findings" value="{{ $exam->a1_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="a1_recommendations" type="text"
+                                                            id="a1_recommendations" value="{{ $exam->a1_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                     <td width="135" align="center">Neck, Lymph Node,Thyroid</td>
                                                     <td width="146" align="center"><input value="Yes"
                                                             name="b1" type="checkbox" id="b1"
-                                                            @php echo $exam->b1 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b1 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b1_findings" type="text"
                                                             id="b1_findings" value="{{ $exam->b1_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b1_recommendations" type="text"
+                                                            id="b1_recommendations" value="{{ $exam->b1_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1202,19 +1230,27 @@
                                                     </td>
                                                     <td width="29" align="center"><input value="Yes"
                                                             name="a2" type="checkbox" id="a2"
-                                                            @php echo $exam->a2 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a2 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a2_findings" type="text"
                                                             id="a2_findings" value="{{ $exam->a2_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a2_recommendations" type="text"
+                                                            id="a2_recommendations" value="{{ $exam->a2_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Neurology</td>
                                                     <td width="146" align="center"><input name="b7"
                                                             type="checkbox" id="b7" value="Yes"
-                                                            @php echo $exam->b7 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b7 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b2_findings" type="text"
                                                             id="b2_findings" value="{{ $exam->b2_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b2_recommendations" type="text"
+                                                            id="b2_recommendations" value="{{ $exam->b2_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1223,19 +1259,27 @@
                                                     </td>
                                                     <td width="29" align="center"><input name="a3"
                                                             type="checkbox" id="a3" value="Yes"
-                                                            @php echo $exam->a3 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a3 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a3_findings" type="text"
                                                             id="a3_findings" value="{{ $exam->a3_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a3_recommendations" type="text"
+                                                            id="a3_recommendations" value="{{ $exam->a3_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Breast,Axilla</td>
                                                     <td width="146" align="center"><input name="b2"
                                                             type="checkbox" id="b2" value="Yes"
-                                                            @php echo $exam->b2 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b2 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b3_findings" type="text"
                                                             id="b3_findings" value="{{ $exam->b3_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b3_recommendations" type="text"
+                                                            id="b3_recommendations" value="{{ $exam->b3_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1243,19 +1287,27 @@
                                                     <td width="140" height="34" align="center">Pupils</td>
                                                     <td width="29" align="center"><input name="a4"
                                                             type="checkbox" id="a4" value="Yes"
-                                                            @php echo $exam->a4 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a4 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a4_findings" type="text"
                                                             id="a4_findings" value="{{ $exam->a4_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a4_recommendations" type="text"
+                                                            id="a4_recommendations" value="{{ $exam->a4_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Chest and Lungs</td>
                                                     <td width="146" align="center"><input name="b3"
                                                             type="checkbox" id="b3" value="Yes"
-                                                            @php echo $exam->b3 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b3 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b4_findings" type="text"
                                                             id="b4_findings" value="{{ $exam->b4_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b4_recommendations" type="text"
+                                                            id="b4_recommendations" value="{{ $exam->b4_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1263,19 +1315,27 @@
                                                     <td width="140" height="34" align="center">Ears</td>
                                                     <td width="29" align="center"><input name="a5"
                                                             type="checkbox" id="a5" value="Yes"
-                                                            @php echo $exam->a5 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a5 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a5_findings" type="text"
                                                             id="a5_findings" value="{{ $exam->a5_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a5_recommendations" type="text"
+                                                            id="a5_recommendations" value="{{ $exam->a5_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Heart</td>
                                                     <td width="146" align="center"><input name="b4"
                                                             type="checkbox" id="b4" value="Yes"
-                                                            @php echo $exam->b4 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b4 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b5_findings" type="text"
                                                             id="b5_findings" value="{{ $exam->b5_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b5_recommendations" type="text"
+                                                            id="b5_recommendations" value="{{ $exam->b5_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1283,19 +1343,27 @@
                                                     <td width="140" height="37" align="center">Nose,Sinuses</td>
                                                     <td width="29" align="center"><input name="a6"
                                                             type="checkbox" id="a6" value="Yes"
-                                                            @php echo $exam->a6 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a6 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a6_findings" type="text"
                                                             id="a6_findings" value="{{ $exam->a6_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a6_recommendations" type="text"
+                                                            id="a6_recommendations" value="{{ $exam->a6_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Abdomen,Liver,Spleen</td>
                                                     <td width="146" align="center"><input name="b5"
                                                             type="checkbox" id="b5" value="Yes"
-                                                            @php echo $exam->b5 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b5 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b6_findings" type="text"
                                                             id="b6_findings" value="{{ $exam->b6_findings }}"
+                                                            size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="b6_recommendations" type="text"
+                                                            id="b6_recommendations" value="{{ $exam->b6_recommendations }}"
                                                             size="10" class="form-control">
                                                     </td>
                                                 </tr>
@@ -1303,94 +1371,128 @@
                                                     <td width="140" height="14" align="center">Mouth,Throat</td>
                                                     <td width="29" align="center"><input name="a7"
                                                             type="checkbox" id="a7" value="Yes"
-                                                            @php echo $exam->a7 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->a7 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="a7_findings" type="text"
                                                             id="a7_findings" value="{{ $exam->a7_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="a7_recommendations" type="text"
+                                                            id="a7_recommendations" value="{{ $exam->a7_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td width="135" align="center">Back</td>
                                                     <td width="146" align="center"><input name="b6"
                                                             type="checkbox" id="b6" value="Yes"
-                                                            @php echo $exam->b6 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->b6 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="b7_findings" type="text"
                                                             id="b7_findings" value="{{ $exam->b7_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="b7_recommendations" type="text"
+                                                            id="b7_recommendations" value="{{ $exam->b7_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="6" align="center">&nbsp;</td>
+                                                    <td colspan="8" align="center">&nbsp;</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="7" align="center"><b>C</b></td>
+                                                    <td colspan="8" align="center"><b>C</b></td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center">&nbsp;</td>
                                                     <td align="center">YES</td>
                                                     <td align="center">Significant Findings</td>
+                                                    <td align="center">Recommendations</td>
                                                     <td align="center">&nbsp;</td>
                                                     <td align="center">YES</td>
-                                                    <td align="center">&nbsp;</td>
+                                                    <td align="center">Significant Findings</td>
+                                                    <td align="center">Recommendations</td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center">Anus-Rectum</td>
                                                     <td align="center"><input name="c1" type="checkbox"
                                                             id="c1" value="Yes"
-                                                            @php echo $exam->c1 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c1 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c1_findings" type="text"
                                                             id="c1_findings" value="{{ $exam->c1_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="c1_recommendations" type="text"
+                                                            id="c1_recommendations" value="{{ $exam->c1_recommendations }}"
+                                                            size="10" class="form-control">
+                                                    </td>
                                                     <td align="center">Genito-Urinary System</td>
                                                     <td align="center"><input name="c2" type="checkbox"
                                                             id="c2" value="Yes"
-                                                            @php echo $exam->c2 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c2 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c2_findings" type="text"
                                                             id="c2_findings" value="{{ $exam->c2_findings }}"
                                                             size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="c2_recommendations" type="text"
+                                                        id="c2_recommendations" value="{{ $exam->c2_recommendations }}"
+                                                        size="10" class="form-control">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center">Inguinals,Genitals</td>
                                                     <td align="center"><input name="c3" type="checkbox"
                                                             id="c3" value="Yes"
-                                                            @php echo $exam->c3 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c3 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c3_findings" type="text"
                                                             id="c3_findings" value="{{ $exam->c3_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="c3_recommendations" type="text"
+                                                        id="c3_recommendations" value="{{ $exam->c2_recommendations }}"
+                                                        size="10" class="form-control">
+                                                    </td>
                                                     <td align="center">Extremities</td>
                                                     <td align="center"><input name="c4" type="checkbox"
                                                             id="c4" value="Yes"
-                                                            @php echo $exam->c4 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c4 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c4_findings" type="text"
                                                             id="c4_findings" value="{{ $exam->c4_findings }}"
                                                             size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="c4_recommendations" type="text"
+                                                        id="c4_recommendations" value="{{ $exam->c4_recommendations }}"
+                                                        size="10" class="form-control">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center">Reflexes</td>
                                                     <td align="center"><input name="c5" type="checkbox"
                                                             id="c5" value="Yes"
-                                                            @php echo $exam->c5 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c5 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c5_findings" type="text"
                                                             id="c5_findings" value="{{ $exam->c5_findings }}"
                                                             size="10" class="form-control">
                                                     </td>
+                                                    <td align="center"><input name="c5_recommendations" type="text"
+                                                        id="c5_recommendations" value="{{ $exam->c5_recommendations }}"
+                                                        size="10" class="form-control">
+                                                    </td>
                                                     <td align="center">Dental(Teeth/Gums)</td>
                                                     <td align="center"><input name="c6" type="checkbox"
                                                             id="c6" value="Yes"
-                                                            @php echo $exam->c6 == "Yes" ? "checked" : "" @endphp>
+                                                            {{ $exam->c6 == "Yes" ? "checked" : "" }}>
                                                     </td>
                                                     <td align="center"><input name="c6_findings" type="text"
                                                             id="c6_findings" value="{{ $exam->c6_findings }}"
                                                             size="10" class="form-control">
+                                                    </td>
+                                                    <td align="center"><input name="c6_recommendations" type="text"
+                                                        id="c6_recommendations" value="{{ $exam->c6_recommendations }}"
+                                                        size="10" class="form-control">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1414,18 +1516,22 @@
                                                 <tr>
                                                     <td width="16%" height="21">A.CHEST XRAY</td>
                                                     <td width="13%" height="21">
-                                                        <input name="chest" type="radio" style="width: 20px; height: 20px;" id="radio88" value="normal"
-                                                            @if ($exam) {{ $exam->chest == 'normal' ? 'checked' : null }} @endif> Normal
+                                                        <input name="chest" type="radio"
+                                                            style="width: 20px; height: 20px;" id="radio88"
+                                                            value="normal"
+                                                            @if ($exam) {{ $exam->chest == 'normal' ? 'checked' : null }} @endif>
+                                                        Normal
                                                     </td>
                                                     <td height="21" colspan="2">
                                                         <input name="chest" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio89"
                                                             value="findings"
-                                                            @if ($exam) {{ $exam->chest == 'findings' ? 'checked' : null }} @endif> With Findings
+                                                            @if ($exam) {{ $exam->chest == 'findings' ? 'checked' : null }} @endif>
+                                                        With Findings
                                                         <textarea class="form-control" name="xray_findings">
                                                             @if ($exam_xray)
-                                                                {{ $exam_xray->remarks_status == 'findings' ? $exam_xray->remarks : null }}
-                                                            @endif
+{{ $exam_xray->remarks_status == 'findings' ? $exam_xray->remarks : null }}
+@endif
                                                         </textarea>
                                                     </td>
                                                 </tr>
@@ -2080,13 +2186,8 @@ echo
                                                                                                                     of
                                                                                                                     this
                                                                                                                     page).
-                                                                                                                    <textarea
-                                                                                                                    name="describe_restriction"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    style="border-color: green"
-                                                                                                                    id="describe_restriction"
-                                                                                                                    class="form-control">{{ $exam->describe_restriction }}</textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_20___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2096,8 +2197,8 @@ echo
                                                                                                                 <div
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Comments/Restriction/Prescription</b>
-                                                                                                                    <textarea name="comments_restriction" cols="70" rows="3"
-                                                                                                                    class="form-control">{{$exam->comments_restriction}}</textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_21___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2108,12 +2209,8 @@ echo
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Hologram
                                                                                                                         Number</b>
-                                                                                                                    <textarea
-                                                                                                                    name="progressive_notes"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    id="progressive_notes"
-                                                                                                                    class="form-control">{{$exam->progressive_notes}}</textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_22___ />
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2190,22 +2287,16 @@ echo
                                                                                                                 valign="middle">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="finding"
-                                                                                                                    rows="5"
-                                                                                                                    class="form-control"
-                                                                                                                    id="finding">{{ $exam->finding }}</textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_23___ />
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                             <td valign="middle"
                                                                                                                 colspan="2">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="recommendations"
-                                                                                                                    rows="5"
-                                                                                                                    class="form-control"
-                                                                                                                    id="recommendations">{{ $exam->recommendations }}</textarea>
+                                                                                                                    <blade
+                                                                                                                        ___html_tags_24___ />
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                         </tr>
