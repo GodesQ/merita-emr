@@ -2631,8 +2631,13 @@
                                                                                                                     of
                                                                                                                     this
                                                                                                                     page).
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_21___ />
+                                                                                                                    <textarea
+                                                                                                                    name="describe_restriction"
+                                                                                                                    cols="70"
+                                                                                                                    rows="3"
+                                                                                                                    style="border-color: green"
+                                                                                                                    id="describe_restriction"
+                                                                                                                    class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2642,8 +2647,12 @@
                                                                                                                 <div
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Comments/Restriction/Prescription</b>
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_22___ />
+                                                                                                                    <textarea
+                                                                                                                    name="comments_restriction"
+                                                                                                                    cols="70"
+                                                                                                                    rows="3"
+                                                                                                                    id="comments_restriction"
+                                                                                                                    class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2654,8 +2663,12 @@
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Hologram
                                                                                                                         Number</b>
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_23___ />
+                                                                                                                        <textarea
+                                                                                                                        name="progressive_notes"
+                                                                                                                        cols="70"
+                                                                                                                        rows="3"
+                                                                                                                        id="progressive_notes"
+                                                                                                                        class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2729,16 +2742,22 @@
                                                                                                                 valign="middle">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_24___ />
+                                                                                                                    <textarea
+                                                                                                                    name="finding"
+                                                                                                                    rows="3"
+                                                                                                                    class="form-control"
+                                                                                                                    id="finding"></textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                             <td valign="middle"
                                                                                                                 colspan="2">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_25___ />
+                                                                                                                    <textarea
+                                                                                                                    name="recommendations"
+                                                                                                                    rows="3"
+                                                                                                                    class="form-control"
+                                                                                                                    id="recommendations"></textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                         </tr>

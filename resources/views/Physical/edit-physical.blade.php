@@ -1396,10 +1396,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="8" align="center">&nbsp;</td>
+                                                    <td colspan="6" align="center">&nbsp;</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="8" align="center"><b>C</b></td>
+                                                    <td colspan="7" align="center"><b>C</b></td>
                                                 </tr>
                                                 <tr>
                                                     <td align="center">&nbsp;</td>
@@ -2186,8 +2186,13 @@ echo
                                                                                                                     of
                                                                                                                     this
                                                                                                                     page).
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_20___ />
+                                                                                                                    <textarea
+                                                                                                                    name="describe_restriction"
+                                                                                                                    cols="70"
+                                                                                                                    rows="3"
+                                                                                                                    style="border-color: green"
+                                                                                                                    id="describe_restriction"
+                                                                                                                    class="form-control">{{ $exam->describe_restriction }}</textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2197,8 +2202,8 @@ echo
                                                                                                                 <div
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Comments/Restriction/Prescription</b>
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_21___ />
+                                                                                                                    <textarea name="comments_restriction" cols="70" rows="3"
+                                                                                                                    class="form-control">{{$exam->comments_restriction}}</textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2209,8 +2214,12 @@ echo
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Hologram
                                                                                                                         Number</b>
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_22___ />
+                                                                                                                    <textarea
+                                                                                                                        name="progressive_notes"
+                                                                                                                        cols="70"
+                                                                                                                        rows="3"
+                                                                                                                        id="progressive_notes"
+                                                                                                                        class="form-control">{{$exam->progressive_notes}}</textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2287,16 +2296,22 @@ echo
                                                                                                                 valign="middle">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_23___ />
+                                                                                                                    <textarea
+                                                                                                                    name="finding"
+                                                                                                                    rows="5"
+                                                                                                                    class="form-control"
+                                                                                                                    id="finding">{{ $exam->finding }}</textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                             <td valign="middle"
                                                                                                                 colspan="2">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <blade
-                                                                                                                        ___html_tags_24___ />
+                                                                                                                    <textarea
+                                                                                                                    name="recommendations"
+                                                                                                                    rows="5"
+                                                                                                                    class="form-control"
+                                                                                                                    id="recommendations">{{ $exam->recommendations }}</textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                         </tr>
