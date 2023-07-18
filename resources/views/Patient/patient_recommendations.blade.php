@@ -13,7 +13,7 @@
                 </div>
                 @endif
             @endif
-            @if ($exam_physical)
+            {{-- @if ($exam_physical)
                 @if($exam_physical->vital_sign_recommendation)
                     <div class="my-75">
                         <h5><b>Vital Sign</b></h5>
@@ -21,7 +21,7 @@
                         <input type="hidden" value="Vital Sign: @php echo nl2br($exam_physical->vital_sign_recommendation) @endphp" name="recommendation[]" />
                     </div>
                 @endif
-            @endif
+            @endif --}}
             @if ($exam_physical)
                 @if($exam_physical->pe1_recommendation)
                     <div class="my-75">

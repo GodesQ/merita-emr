@@ -193,7 +193,11 @@
                                             <td valign="top">
                                                 <b>VITAL SIGN:</b>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                @if ($admission->exam_physical)
+                                                    <b>Vital Sign</b>: {{ optional($admission->exam_physical)->vital_sign_recommendation }}
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>
@@ -315,7 +319,7 @@
                                             <td valign="top" class="drag">
                                                 <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
                                                     @if(isset($result['Recommendation']))
-                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']))
+                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']))
                                                             @php echo nl2br($result['Recommendation']) @endphp
                                                         @endif
                                                     @endif
@@ -341,6 +345,17 @@
                                         <td valign="top">
                                             @if($admission->exam_physical)
                                                 <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top"></td>
+                                        <td valign="top">
+                                            <b>VITAL SIGN:</b>
+                                        </td>
+                                        <td valign="top">
+                                            @if ($admission->exam_physical)
+                                                {{ optional($admission->exam_physical)->vital_sign_recommendation }}
                                             @endif
                                         </td>
                                     </tr>
