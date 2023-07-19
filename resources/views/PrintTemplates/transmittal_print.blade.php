@@ -263,10 +263,10 @@
                                 <td align="left"></td>
                                 <td align="left"></td>
                                 <td align="left" valign="top">
-                                    <b>Lumbosacral Xray:</b> {{ optional($patient->exam_xray)->lumbosacral_findings }}
+                                    @if(optional($patient->exam_xray)->lumbosacral_findings) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_findings }}
                                 </td>
                                 <td align="left" valign="top">
-                                    <b>Lumbosacral Xray:</b> {{ optional($patient->exam_xray)->lumbosacral_recommendations }}
+                                    @if(optional($patient->exam_xray)->lumbosacral_recommendations) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_recommendations }}
                                 </td>
                                 <td align="left" valign="top"></td>
                                 @if(in_array("vital_signs", $additional_columns))
@@ -303,10 +303,10 @@
                                 <td align="left"></td>
                                 <td align="left"></td>
                                 <td align="left" valign="top">
-                                    <b>Chest Xray:</b> {{ optional($patient->exam_xray)->chest_findings }}
+                                    @if(optional($patient->exam_xray)->chest_findings)<b>Chest Xray:</b>@endif {{ optional($patient->exam_xray)->chest_findings }}
                                 </td>
                                 <td align="left" valign="top">
-                                    <b>Chest Xray:</b> {{ optional($patient->exam_xray)->chest_recommendations }}
+                                    @if(optional($patient->exam_xray)->chest_recommendations)<b>Chest Xray:</b>@endif {{ optional($patient->exam_xray)->chest_recommendations }}
                                 </td>
                                 <td align="left" valign="top"></td>
                                 @if(in_array("vital_signs", $additional_columns))
@@ -343,10 +343,10 @@
                                 <td align="left"></td>
                                 <td align="left"></td>
                                 <td align="left" valign="top">
-                                    <b>Knees Xray:</b> {{ optional($patient->exam_xray)->knees_findings }}
+                                    @if(optional($patient->exam_xray)->knees_findings)<b>Knees Xray:</b>@endif {{ optional($patient->exam_xray)->knees_findings }}
                                 </td>
                                 <td align="left" valign="top">
-                                    <b>Knees Xray:</b> {{ optional($patient->exam_xray)->knees_recommendations }}
+                                    @if(optional($patient->exam_xray)->knees_recommendations)<b>Knees Xray:</b>@endif {{ optional($patient->exam_xray)->knees_recommendations }}
                                 </td>
                                 <td align="left" valign="top"></td>
                                 @if(in_array("vital_signs", $additional_columns))
@@ -383,10 +383,10 @@
                                 <td align="left"></td>
                                 <td align="left"></td>
                                 <td align="left" valign="top">
-                                    <b>Skull Xray:</b> {{ optional($patient->exam_xray)->skull_findings }}
+                                    @if(optional($patient->exam_xray)->knees_findings)<b>Skull Xray:</b>@endif {{ optional($patient->exam_xray)->skull_findings }}
                                 </td>
                                 <td align="left" valign="top">
-                                    <b>Skull Xray:</b> {{ optional($patient->exam_xray)->skull_recommendations }}
+                                    @if(optional($patient->exam_xray)->skull_recommendations)<b>Skull Xray:</b>@endif {{ optional($patient->exam_xray)->skull_recommendations }}
                                 </td>
                                 <td align="left" valign="top"></td>
                                 @if(in_array("vital_signs", $additional_columns))
