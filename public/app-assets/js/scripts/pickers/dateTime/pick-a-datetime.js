@@ -81,7 +81,8 @@
 		labelMonthSelect: 'Pick a Month',
 		labelYearSelect: 'Pick a Year',
 		selectMonths: true,
-		selectYears: true
+		selectYears: 150,
+        format: 'dd/mm/yyyy'
 	});
 
 	// With Select

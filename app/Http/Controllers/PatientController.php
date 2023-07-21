@@ -247,6 +247,11 @@ class PatientController extends Controller
     public function save_progress_info(Request $request)
     {
         try {
+
+            $srb_expdate = \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d');
+            $passport_expdate = \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d');
+            $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
+
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);
@@ -281,10 +286,10 @@ class PatientController extends Controller
                 'medical_package' => $request->medicalPackage,
                 'vessel' => strtoupper($patient_vessel),
                 'passportno' => strtoupper($request->passportNo),
-                'passport_expdate' => $request->passport_expdate,
+                'passport_expdate' => $passport_expdate,
                 'srbno' => strtoupper($request->ssrb),
-                'srb_expdate' => $request->srb_expdate,
-                'birthdate' => $request->birthdate,
+                'srb_expdate' => $srb_expdate,
+                'birthdate' => $birthdate,
                 'birthplace' => $request->birthplace,
             ]);
 

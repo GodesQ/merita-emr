@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="../../../app-assets/vendors/css/forms/selects/select2.min.css">
     <!-- link(rel='stylesheet', type='text/css', href=app_assets_path+'/css'+rtl+'/pages/users.css')-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.css') }}">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
     <link rel="stylesheet" href="{{ asset('app-assets/css/all.css') }}" <!-- END: Page CSS-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -185,6 +188,14 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
     <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
     <script src="../../../app-assets/vendors/js/extensions/jquery.knob.min.js"></script>
@@ -217,6 +228,8 @@
     <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js"></script>
     <script src="../../../app-assets/js/scripts/forms/select/form-select2.js"></script>
     <script src="../../../app-assets/js/scripts/modal/components-modal.js"></script>
+    <script src="../../../app-assets/js/scripts/pickers/dateTime/bootstrap-datetime.js"></script>
+    <script src="../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- END: Page JS-->

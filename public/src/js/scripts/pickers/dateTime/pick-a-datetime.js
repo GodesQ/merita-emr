@@ -81,7 +81,7 @@
 		labelMonthSelect: 'Pick a Month',
 		labelYearSelect: 'Pick a Year',
 		selectMonths: true,
-		selectYears: true
+		selectYears: 50
 	});
 
 	// With Select
