@@ -206,9 +206,9 @@
                                 <td class="brdRight" align="left">IVS (ed)</td>
                                 <td align="center" class="brdRight">
                                     @if($exam->ivsed)
-                                         <input name="ivsed" type="text" id="ivsed" 
-                                        value="{{$exam->ivsed}} {{$exam->ivsed < '0.8' ? 'L' : null}}" 
-                                        class="brdNone {{$exam->ivsed < '0.8' ? 'text-red' : null}}" 
+                                         <input name="ivsed" type="text" id="ivsed"
+                                        value="{{$exam->ivsed}} {{$exam->ivsed < '0.8' ? 'L' : null}}"
+                                        class="brdNone {{$exam->ivsed < '0.8' ? 'text-red' : null}}"
                                         style="width:50px;text-align:center;">
                                     @endif
                                 </td class="brdRight">
@@ -293,7 +293,7 @@
                                          <input name="aorta" type="text" id="aorta"
                                         value="{{$exam->aorta}} {{$exam->aorta < '2.3' ? 'L' : null}}"
                                         class="brdNone {{$exam->aorta < '2.3' ? 'text-red' : null}}"
-                                        style="width:50px;text-align:center;">        
+                                        style="width:50px;text-align:center;">
                                     @endif
                                 </td>
                                 <td class="brdRight" align="center">(2.3 - 3.5)</td>
@@ -306,7 +306,7 @@
                                         <input name="vcf_simp" type="text"
                                         id="vcf_simp" value="{{$exam->vcf_simp}} {{$exam->vcf_simp < '0.5' ? 'L' : null}}"
                                         class="brdNone {{$exam->vcf_simp < '0.5' ? 'text-red' : null}}"
-                                        style="width:50px;text-align:center;">        
+                                        style="width:50px;text-align:center;">
                                     @endif
                                 </td>
                                 <td colspan="3" align="center">(0.5 - 1.0)</td>
@@ -319,7 +319,7 @@
                                         value="{{$exam->laap}} {{$exam->laap < '2.6' ? 'L' : null}}"
                                         class="brdNone {{$exam->laap < '2.6' ? 'text-red' : null}}"
                                         style="width:50px;text-align:center;">
-                                    @endif  
+                                    @endif
                                 </td>
                                 <td class="brdRight" align="center">(2.6 - 3.8)</td>
                                 <td align="left" class="brdRight brdBtm">LV Mass</td>
@@ -490,82 +490,6 @@
                                 <td colspan="2">&nbsp;</td>
                             </tr>
                             <tr>
-                                <table width="100%" cellpadding="0" cellspacing="0" class="brdAll">
-                                    <tbody>
-                                        <tr>
-                                            <td align="center" class="brdAll" style="padding: 5px;"><b
-                                                style="font-size:17px;">SPECTRAL AND COLOR FLOW DOPPLER</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <table width="100%" cellpadding="4" border="0" cellspacing="0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="brdAll" rowspan="2">Valve</td>
-                                                            <td class="brdAll" rowspan="2">MAX Velocity <br> m/sec</td>
-                                                            <td class="brdAll" rowspan="2">PEAK GRADIENT <br> mm Hg</td>
-                                                            <td class="brdAll" rowspan="2">ORIFICE AREA <br>cm2</td>
-                                                            <td class="brdAll" rowspan="2">VTI</td>
-                                                            <td colspan="3" class="brdAll">REGURGITATION</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdAll">Ratio</td>
-                                                            <td class="brdAll">Jet Area</td>
-                                                            <td class="brdAll">Gradient</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdRight">Aortic</td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdRight">Mitral</td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdRight">Tricuspid</td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdRight">Pulmonic</td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="brdRight">PA Pressure</td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                            <td class="brdRight"></td>
-                                                        </tr>   
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </tr>
-                            <tr>
                                 <table width="100%" cellpadding="2" cellspacing="0" class="brdTable">
                                     <tbody>
                                         <tr>
@@ -575,7 +499,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="13%" valign="top"><b>Interpretation:</b></td>
-                                                            <td width="87%" valign="top">@php echo nl2br($exam->interpretation) @endphp
+                                                            <td width="87%" valign="top" style="font-size: 16px !important;">@php echo nl2br($exam->interpretation) @endphp
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -589,7 +513,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="13%" valign="top"><b>Conclusion:</b></td>
-                                                            <td width="87%" valign="top">@php echo nl2br($exam->conclusion) @endphp</td>
+                                                            <td width="87%" valign="top" style="font-size: 16px !important;">@php echo nl2br($exam->conclusion) @endphp</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -602,7 +526,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="13%" valign="top"><b>Remarks:</b></td>
-                                                            <td width="87%" valign="top">@php echo nl2br($exam->remarks) @endphp</td>
+                                                            <td width="87%" valign="top" style="font-size: 16px !important;">@php echo nl2br($exam->remarks) @endphp</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

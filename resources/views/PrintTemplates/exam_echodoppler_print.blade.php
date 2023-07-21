@@ -560,7 +560,7 @@
                                                                 <tr>
                                                                     <td width="15%" valign="top"><b>Interpretation:</b>
                                                                     </td>
-                                                                    <td width="85%" valign="top">
+                                                                    <td width="85%" valign="top" style="font-size: 17px !important;">
                                                                         {{$exam->interpretation}}</td>
                                                                 </tr>
                                                             </tbody>
@@ -575,7 +575,7 @@
                                                                 <tr>
                                                                     <td width="15%" valign="top"><b>Color Flow Doppler:</b>
                                                                     </td>
-                                                                    <td width="85%" valign="top">{{ $exam->doppler }}</td>
+                                                                    <td width="85%" valign="top" style="font-size: 17px !important;">{{ $exam->doppler }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -588,7 +588,7 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td width="15%" valign="top"><b>Conclusion:</b></td>
-                                                                    <td width="85%" valign="top">{{$exam->conclusion}}</td>
+                                                                    <td width="85%" valign="top" style="font-size: 17px !important;">{{$exam->conclusion}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
