@@ -247,7 +247,6 @@ class PatientController extends Controller
     public function save_progress_info(Request $request)
     {
         try {
-
             $srb_expdate = \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d');
             $passport_expdate = \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d');
             $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');

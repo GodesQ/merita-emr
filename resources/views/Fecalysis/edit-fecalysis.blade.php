@@ -55,9 +55,8 @@
                                         </tr>
                                         <tr>
                                             <td><b>Exam Date</b></td>
-                                            <td><input name="trans_date" type="text" id="trans_date"
-                                                    value="{{ $exam->trans_date }}" class="form-control move"
-                                                    readonly=""></td>
+                                            <td><input name="trans_date" type="date" id="trans_date"
+                                                value="{{ $exam->trans_date }}" class="form-control"></td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                         </tr>

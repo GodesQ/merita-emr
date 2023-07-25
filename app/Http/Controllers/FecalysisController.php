@@ -14,7 +14,7 @@ class FecalysisController extends Controller
 {
     //
     public function edit_fecalysis(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $exam = Fecalysis::select(
@@ -29,17 +29,17 @@ class FecalysisController extends Controller
                 )
                 ->latest('id')
                 ->first();
-    
+
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
-            
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Fecalysis.edit-fecalysis', compact('exam', 'patient', 'admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -49,10 +49,11 @@ class FecalysisController extends Controller
     }
 
     public function update_fecalysis(Request $request)
-    {   
+    {
         try {
             $id = $request->id;
             $exam = Fecalysis::findOrFail($id);
+            $exam->trans_date = $request->trans_date;
             $exam->color = $request->color;
             $exam->consistency = $request->consistency;
             $exam->pus = $request->pus;
@@ -89,7 +90,7 @@ class FecalysisController extends Controller
         }
     }
     public function add_fecalysis()
-    {   
+    {
         try {
             $id = $_GET['id'];
             $admission = Admission::select(
@@ -106,14 +107,14 @@ class FecalysisController extends Controller
                 )
                 ->latest('mast_patient.id')
                 ->first();
-                
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Fecalysis.add-fecalysis', compact('admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -123,7 +124,7 @@ class FecalysisController extends Controller
     }
 
     public function store_fecalysis(Request $request)
-    {   
+    {
         try {
             $exam = new Fecalysis();
             $exam->trans_date = $request->trans_date;
@@ -145,7 +146,7 @@ class FecalysisController extends Controller
             $exam->technician2_id = $request->technician2_id;
             $exam->epithelial = $request->epithelial;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
@@ -153,7 +154,7 @@ class FecalysisController extends Controller
                 'Add Fecalysis from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             $path =
                 'patient_edit?id=' .
                 $request->patient_id .
