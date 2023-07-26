@@ -308,7 +308,7 @@
                                                                             aria-controls="tabVerticalLeft2"
                                                                             href="#tabVerticalLeft2" role="tab"
                                                                             aria-selected="false">Cardiac
-                                                                            Risk Factor </a>
+                                                                            Risk Factor / Spirometry </a>
                                                                     </li>
                                                                     <li class="nav-item vertical-tab-border">
                                                                         <a class="nav-link child-basic-tab nav-link-width {{$exam_cardio ? 'exam-done' : null}}"
