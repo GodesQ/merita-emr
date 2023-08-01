@@ -200,7 +200,6 @@ class AdminController extends Controller
                 ->groupBy('sched_patients.patientcode')
                 ->get();
 
-            dd($schedule_patients_status);
 
             // dd($schedule_patients_status);
 
