@@ -215,12 +215,16 @@ class AdminController extends Controller
                     $admission = null;
                 }
 
-                $patient_exams = DB::table('list_packagedtl')
+                $patient_exams = null;
+
+                if($patient->patient) {
+                    $patient_exams = DB::table('list_packagedtl')
                     ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                    ->where('main_id', optional($patient->patient)->patientinfo->medical_package)
+                    ->where('main_id', $patient->patient->patientinfo->medical_package)
                     ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
                     ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                     ->get();
+                }
 
                 if (!$patient_exams) {
                     $patient_exams = DB::table('list_packagedtl')
