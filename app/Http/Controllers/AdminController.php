@@ -68,172 +68,6 @@ class AdminController extends Controller
             ->delete();
     }
 
-    public function followup_results(Request $request) {
-        $reassessmentData = DB::table('reassessment')->get();
-
-        foreach ($reassessmentData as $data) {
-
-            $prefix_to_remove = [
-               ['Dental: ', 'dental', 'Dental'],
-                ['PE: ', 'pe', 'PE'],
-                ['Visual Acuity: ', 'visual_acuity', 'Visual Acuity'],
-                ['Psychological: ', 'psychological', 'Psychological'],
-                ['Audiometry: ', 'audiometry', 'Audiometry'],
-                ['Ishihara: ', 'ishihara', 'Ishihara'],
-                ['Cardiac Risk Factor: ', 'crf', 'Cardiac Risk Factor'],
-                ['Cardiovascular: ', 'cardio', 'Cardiovascular'],
-                ['Stress Test: ', 'stress_test', 'Stress Test'],
-                ['2D Echo Plain: ', 'echo_plain', '2D Echo Plain'],
-                ['2D Echo Doppler: ', 'echo_doppler', '2D Echo Doppler'],
-                ['PPD: ', 'ppd', 'PPD'],
-                ['Stress Echo: ', 'stress_echo', 'Stress Echo'],
-                ['KUB Exam: ', 'kub', 'KUB Exam'],
-                ['HBT Exam: ', 'hbt', 'HBT Exam'],
-                ['THYROID Exam: ', 'thyroid', 'THYROID Exam'],
-                ['BREAST Exam: ', 'breast', 'BREAST Exam'],
-                ['Reflexes: ','whole_abdomen', 'WHOLE ABDOMEN'],
-                ['GENITALS Exam: ', 'genitals', 'GENITALS'],
-                ['Psycho BPI: ', 'psycho_bpi', 'Psycho BPI'],
-                ['Hematology: ', 'hematology', 'Hematology'],
-                ['Urinalysis: ', 'urinalysis', 'Urinalysis'],
-                ['Pregnancy: ', 'pregnancy', 'Pregnancy'],
-                ['Fecalysis: ', 'fecalysis', 'Fecalysis'],
-                ['Hepatitis: ', 'hepatitis', 'Hepatitis'],
-                ['HIV: ', 'hiv', 'HIV'],
-                ['Drug Test: ', 'drug_test', 'Drug Test'],
-                ['Skin: ', 'skin', 'Skin'],
-                ['Neck, Lymph Node,Thyroid: : ', 'neck_lymphnode_thyroid: ', 'Neck, Lymph Node,Thyroid'],
-                ['Head, Neck, Scalp: ', 'head_neck_scalp', 'Head, Neck, Scalp'],
-                ['Neurology: ', 'neurology', 'Neurology'],
-                ['Eyes(external): ', 'eyes_external', 'Eyes(external)'],
-                ['Breast,Axilla: ', 'breast_axilla', 'Breast,Axilla'],
-                ['Pupils: ', 'pupils', 'Pupils'],
-                ['Chest and Lungs: ', 'chest_lungs', 'Chest and Lungs'],
-                ['Ears: ', 'cardio', 'Ears'],
-                ['Heart: ', 'heart', 'Heart'],
-                ['Nose,Sinuses: ', 'nose_sinuses', 'Nose,Sinuses'],
-                ['Abdomen,Liver,Spleen: ', 'abdomen_liver_spleen', 'Abdomen,Liver,Spleen'],
-                ['Mouth,Throat: ', 'mouth_throat', 'Mouth,Throat'],
-                ['Back: ', 'back', 'Back'],
-                ['Anus-Rectum: ', 'anus_rectum', 'Anus-Rectum'],
-                ['Genito-Urinary System: ', 'genito_urinary', 'Genito-Urinary System'],
-                ['Inguinals,Genitals: ', 'thyroid', 'Inguinals,Genitals'],
-                ['Extremities: ', 'breast', 'Extremities'],
-                ['Reflexes: ','whole_abdomen', 'Reflexes'],
-                ['Dental(Teeth/Gums): ', 'dentals_teeth_gums', 'Dental(Teeth/Gums)'],
-                ['HBA1C: ', 'psycho_bpi', 'HBA1C'],
-                ['PPBG: ', 'ppbg', 'PPBG'],
-                ['FBS: ', 'fbs', 'FBS'],
-                ['BUN: ', 'bun', 'BUN'],
-                ['CREATININE: ', 'creatinine', 'CREATININE'],
-                ['CHOLESTEROL: ', 'cholesterol', 'CHOLESTEROL'],
-                ['TRIGLYCERIDES: ', 'triglycerides', 'TRIGLYCERIDES'],
-                ['HDL Chole: ', 'hdl_chole', 'HDL Chole'],
-                ['LDL Chole: ', 'ldl_chole', 'LDL Chole'],
-                ['VLDL Chole: ', 'vldl_chole', 'VLDL Chole'],
-                ['URIC ACID: ', 'uric_acid', 'URIC ACID'],
-                ['SGOT (AST): ', 'sgot_ast', 'SGOT (AST)'],
-                ['SGPT (ALT): ', 'sgpt_alt', 'SGPT (ALT)'],
-                ['GGT: ', 'ggt', 'GGT'],
-                ['ALK. PHOS.: ', 'alk_phos', 'ALK. PHOS.'],
-                ['TOTAL BILIRUBIN: ', 'total_bilirubin', 'TOTAL BILIRUBIN'],
-                ['DIRECT BILIRUBIN: ', 'direct_bilirubin', 'DIRECT BILIRUBIN'],
-                ['INDIRECT BILIRUBIN: ', 'indirect_bilirubin', 'INDIRECT BILIRUBIN'],
-                ['TOTAL PROTEIN: ', 'total_protein', 'TOTAL PROTEIN'],
-                ['ALBUMIN: ', 'albumin', 'ALBUMIN'],
-                ['GLOBULIN: ', 'globulin', 'GLOBULIN'],
-                ['SODIUM: ', 'sodium', 'SODIUM'],
-                ['POTASSIUM: ', 'potassium', 'POTASSIUM'],
-                ['CHLORIDE: ', 'chloride', 'CHLORIDE'],
-                ['CALCIUM: ', 'calcium', 'CALCIUM'],
-                ['A/G RATIO: ', 'ag_ratio', 'A/G RATIO'],
-                ['Hemoglobin: ', 'hemoglobin', 'Hemoglobin'],
-                ['Hematocrit: ', 'hematocrit', 'Hematocrit'],
-                ['RBC: ', 'rbc', 'RBC'],
-                ['WBC: ', 'wbc', 'WBC'],
-                ['Neutrophil: ', 'neutrophil', 'Neutrophil'],
-                ['Lymphocyte: ', 'lymphocyte', 'Lymphocyte'],
-                ['Eosinophil: ', 'eosinophil', 'Eosinophil'],
-                ['Monocyte: ', 'monocyte', 'Monocyte'],
-                ['Basophil: ', 'basophil', 'Basophil'],
-                ['Platelet: ', 'platelet', 'Platelet'],
-                ['Bleeding Time: ', 'bleeding_time', 'Bleeding Time'],
-                ['Clotting Time: ', 'clotting_time', 'Clotting Time'],
-                ['ESR: ', 'esr', 'ESR'],
-                ['MCV: ', 'mcv', 'MCV'],
-                ['MCH: ', 'mch', 'MCH'],
-                ['MCHC: ', 'mchc', 'MCHC'],
-                ['VDRL: ', 'vdrl', 'VDRL'],
-                ['TPHA: ', 'tpha', 'TPHA'],
-                ['HBSAG: ', 'hbsag', 'HBSAG'],
-                ['Anti-HBs: ', 'anti_hbs', 'Anti-HBs'],
-                ['Anti-HBc (lgM): ', 'anti_hbc_lgm', 'Anti-HBc (lgM)'],
-                ['Anti-HBc (lgG): ', 'anti_hbc_lgg', 'Anti-HBc (lgG)'],
-                ['Anti-HAV (lgM): ', 'anti_hav_lgm', 'Anti-HAV (lgM)'],
-                ['Anti-HAV (lgG): ', 'anti_hav_lgg', 'Anti-HAV (lgG)'],
-                ['Anti-HCV: ', 'anti_hcv', 'Anti-HCV'],
-                ['SKIN: ', 'skin', 'SKIN'],
-                ['Neck, Lymph Node,Thyroid:', 'neck_lymph_node_thyroid', 'Neck, Lymph Node,Thyroid'],
-                ['Neurology:', 'neurology', 'Neurology'],
-                ['Eyes(external):', 'eyes_external', 'Eyes(external)'],
-                ['Breast,Axilla:', 'breast_axilla', 'Breast,Axilla'],
-                ['Pupils :', 'pupils', 'Pupils'],
-                ['Chest and Lungs:', 'chest_lungs', 'Chest and Lungs'],
-                ['Ears:', 'ears', 'Ears'],
-                ['Heart:', 'heart', 'Heart'],
-                ['Nose,Sinuses:', 'nose_sinuses', 'Nose,Sinuses'],
-                ['Abdomen,Liver,Spleen:', 'abdomen_liver_spleen', 'Abdomen,Liver,Spleen'],
-                ['Mouth,Throat:', 'mouth_throat', 'Mouth,Throat'],
-                ['Back:', 'back', 'Back'],
-                ['Anus-Rectum:', 'anus_rectum', 'Anus-Rectum'],
-                ['Genito-Urinary System:', 'genito_urinary_system', 'Genito-Urinary System'],
-                ['Inguinals,Genitals:', 'inguinals_genitals', 'Inguinals,Genitals'],
-                ['Extremities:', 'extremities', 'Extremities'],
-                ['Reflexes:', 'reflexes', 'Reflexes'],
-                ['Dental(Teeth/Gums):', 'dental_teeth_gums', 'Dental(Teeth/Gums)'],
-            ];
-
-            $findings = [];
-            $recommendations = [];
-
-            foreach ($prefix_to_remove as $key => $prefix) {
-                if (strpos($data->findings, $prefix[0]) !== false) {
-                    $finding_pos = strpos($data->findings, $prefix[0]);
-                    $result_findings = substr($data->findings, $finding_pos, strpos($data->findings, ";", $finding_pos) - $finding_pos);
-                    if(!$result_findings) {
-                        $result_findings = substr($data->findings, $finding_pos, strlen($data->findings));
-                    }
-                    $result_findings_value = substr($result_findings, strlen($prefix[0]));
-                    array_push($findings, ['value' =>  $result_findings_value, 'title' => $prefix[2],'type' => $prefix[1]]);
-                }
-
-                if (strpos($data->remarks, $prefix[0]) !== false) {
-                    $recommendation_pos = strpos($data->remarks, $prefix[0]);
-                    $result_recommendations = substr($data->remarks, $recommendation_pos, strpos($data->remarks, ";", $recommendation_pos) - $recommendation_pos);
-                    if(!$result_recommendations) {
-                        $result_recommendations = substr($data->remarks, $recommendation_pos, strlen($data->remarks));
-                    }
-                    $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
-                    array_push($recommendations, ['value' =>  $result_recommendations_value,'title' => $prefix[2], 'type' => $prefix[1]]);
-                }
-            }
-
-            foreach ($findings as $key => $finding) {
-                FollowUpResult::updateOrCreate(
-                    ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
-                    ['findings' => $finding['value'], 'exam_title' => $finding['title']]
-                );
-            }
-
-            foreach ($recommendations as $key => $recommendation) {
-                FollowUpResult::updateOrCreate(
-                    ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
-                    ['recommendations' => $recommendation['value'], 'exam_title' => $finding['title']]
-                );
-            }
-        }
-    }
-
     public function today_patients(Request $request)
     {
         $data = session()->all();
@@ -383,7 +217,7 @@ class AdminController extends Controller
 
                 $patient_exams = DB::table('list_packagedtl')
                     ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                    ->where('main_id', $patient->patient->patientinfo->medical_package)
+                    ->where('main_id', optional($patient->patient)->patientinfo->medical_package)
                     ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
                     ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                     ->get();
@@ -391,7 +225,7 @@ class AdminController extends Controller
                 if (!$patient_exams) {
                     $patient_exams = DB::table('list_packagedtl')
                         ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                        ->where('main_id', $patient->patient->admission->package_id)
+                        ->where('main_id', optional($patient->patient)->admission->package_id)
                         ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
                         ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                         ->get();
@@ -1003,4 +837,170 @@ class AdminController extends Controller
             }
         }
     }
+
+        // public function followup_results(Request $request) {
+    //     $reassessmentData = DB::table('reassessment')->get();
+
+    //     foreach ($reassessmentData as $data) {
+
+    //         $prefix_to_remove = [
+    //            ['Dental: ', 'dental', 'Dental'],
+    //             ['PE: ', 'pe', 'PE'],
+    //             ['Visual Acuity: ', 'visual_acuity', 'Visual Acuity'],
+    //             ['Psychological: ', 'psychological', 'Psychological'],
+    //             ['Audiometry: ', 'audiometry', 'Audiometry'],
+    //             ['Ishihara: ', 'ishihara', 'Ishihara'],
+    //             ['Cardiac Risk Factor: ', 'crf', 'Cardiac Risk Factor'],
+    //             ['Cardiovascular: ', 'cardio', 'Cardiovascular'],
+    //             ['Stress Test: ', 'stress_test', 'Stress Test'],
+    //             ['2D Echo Plain: ', 'echo_plain', '2D Echo Plain'],
+    //             ['2D Echo Doppler: ', 'echo_doppler', '2D Echo Doppler'],
+    //             ['PPD: ', 'ppd', 'PPD'],
+    //             ['Stress Echo: ', 'stress_echo', 'Stress Echo'],
+    //             ['KUB Exam: ', 'kub', 'KUB Exam'],
+    //             ['HBT Exam: ', 'hbt', 'HBT Exam'],
+    //             ['THYROID Exam: ', 'thyroid', 'THYROID Exam'],
+    //             ['BREAST Exam: ', 'breast', 'BREAST Exam'],
+    //             ['Reflexes: ','whole_abdomen', 'WHOLE ABDOMEN'],
+    //             ['GENITALS Exam: ', 'genitals', 'GENITALS'],
+    //             ['Psycho BPI: ', 'psycho_bpi', 'Psycho BPI'],
+    //             ['Hematology: ', 'hematology', 'Hematology'],
+    //             ['Urinalysis: ', 'urinalysis', 'Urinalysis'],
+    //             ['Pregnancy: ', 'pregnancy', 'Pregnancy'],
+    //             ['Fecalysis: ', 'fecalysis', 'Fecalysis'],
+    //             ['Hepatitis: ', 'hepatitis', 'Hepatitis'],
+    //             ['HIV: ', 'hiv', 'HIV'],
+    //             ['Drug Test: ', 'drug_test', 'Drug Test'],
+    //             ['Skin: ', 'skin', 'Skin'],
+    //             ['Neck, Lymph Node,Thyroid: : ', 'neck_lymphnode_thyroid: ', 'Neck, Lymph Node,Thyroid'],
+    //             ['Head, Neck, Scalp: ', 'head_neck_scalp', 'Head, Neck, Scalp'],
+    //             ['Neurology: ', 'neurology', 'Neurology'],
+    //             ['Eyes(external): ', 'eyes_external', 'Eyes(external)'],
+    //             ['Breast,Axilla: ', 'breast_axilla', 'Breast,Axilla'],
+    //             ['Pupils: ', 'pupils', 'Pupils'],
+    //             ['Chest and Lungs: ', 'chest_lungs', 'Chest and Lungs'],
+    //             ['Ears: ', 'cardio', 'Ears'],
+    //             ['Heart: ', 'heart', 'Heart'],
+    //             ['Nose,Sinuses: ', 'nose_sinuses', 'Nose,Sinuses'],
+    //             ['Abdomen,Liver,Spleen: ', 'abdomen_liver_spleen', 'Abdomen,Liver,Spleen'],
+    //             ['Mouth,Throat: ', 'mouth_throat', 'Mouth,Throat'],
+    //             ['Back: ', 'back', 'Back'],
+    //             ['Anus-Rectum: ', 'anus_rectum', 'Anus-Rectum'],
+    //             ['Genito-Urinary System: ', 'genito_urinary', 'Genito-Urinary System'],
+    //             ['Inguinals,Genitals: ', 'thyroid', 'Inguinals,Genitals'],
+    //             ['Extremities: ', 'breast', 'Extremities'],
+    //             ['Reflexes: ','whole_abdomen', 'Reflexes'],
+    //             ['Dental(Teeth/Gums): ', 'dentals_teeth_gums', 'Dental(Teeth/Gums)'],
+    //             ['HBA1C: ', 'psycho_bpi', 'HBA1C'],
+    //             ['PPBG: ', 'ppbg', 'PPBG'],
+    //             ['FBS: ', 'fbs', 'FBS'],
+    //             ['BUN: ', 'bun', 'BUN'],
+    //             ['CREATININE: ', 'creatinine', 'CREATININE'],
+    //             ['CHOLESTEROL: ', 'cholesterol', 'CHOLESTEROL'],
+    //             ['TRIGLYCERIDES: ', 'triglycerides', 'TRIGLYCERIDES'],
+    //             ['HDL Chole: ', 'hdl_chole', 'HDL Chole'],
+    //             ['LDL Chole: ', 'ldl_chole', 'LDL Chole'],
+    //             ['VLDL Chole: ', 'vldl_chole', 'VLDL Chole'],
+    //             ['URIC ACID: ', 'uric_acid', 'URIC ACID'],
+    //             ['SGOT (AST): ', 'sgot_ast', 'SGOT (AST)'],
+    //             ['SGPT (ALT): ', 'sgpt_alt', 'SGPT (ALT)'],
+    //             ['GGT: ', 'ggt', 'GGT'],
+    //             ['ALK. PHOS.: ', 'alk_phos', 'ALK. PHOS.'],
+    //             ['TOTAL BILIRUBIN: ', 'total_bilirubin', 'TOTAL BILIRUBIN'],
+    //             ['DIRECT BILIRUBIN: ', 'direct_bilirubin', 'DIRECT BILIRUBIN'],
+    //             ['INDIRECT BILIRUBIN: ', 'indirect_bilirubin', 'INDIRECT BILIRUBIN'],
+    //             ['TOTAL PROTEIN: ', 'total_protein', 'TOTAL PROTEIN'],
+    //             ['ALBUMIN: ', 'albumin', 'ALBUMIN'],
+    //             ['GLOBULIN: ', 'globulin', 'GLOBULIN'],
+    //             ['SODIUM: ', 'sodium', 'SODIUM'],
+    //             ['POTASSIUM: ', 'potassium', 'POTASSIUM'],
+    //             ['CHLORIDE: ', 'chloride', 'CHLORIDE'],
+    //             ['CALCIUM: ', 'calcium', 'CALCIUM'],
+    //             ['A/G RATIO: ', 'ag_ratio', 'A/G RATIO'],
+    //             ['Hemoglobin: ', 'hemoglobin', 'Hemoglobin'],
+    //             ['Hematocrit: ', 'hematocrit', 'Hematocrit'],
+    //             ['RBC: ', 'rbc', 'RBC'],
+    //             ['WBC: ', 'wbc', 'WBC'],
+    //             ['Neutrophil: ', 'neutrophil', 'Neutrophil'],
+    //             ['Lymphocyte: ', 'lymphocyte', 'Lymphocyte'],
+    //             ['Eosinophil: ', 'eosinophil', 'Eosinophil'],
+    //             ['Monocyte: ', 'monocyte', 'Monocyte'],
+    //             ['Basophil: ', 'basophil', 'Basophil'],
+    //             ['Platelet: ', 'platelet', 'Platelet'],
+    //             ['Bleeding Time: ', 'bleeding_time', 'Bleeding Time'],
+    //             ['Clotting Time: ', 'clotting_time', 'Clotting Time'],
+    //             ['ESR: ', 'esr', 'ESR'],
+    //             ['MCV: ', 'mcv', 'MCV'],
+    //             ['MCH: ', 'mch', 'MCH'],
+    //             ['MCHC: ', 'mchc', 'MCHC'],
+    //             ['VDRL: ', 'vdrl', 'VDRL'],
+    //             ['TPHA: ', 'tpha', 'TPHA'],
+    //             ['HBSAG: ', 'hbsag', 'HBSAG'],
+    //             ['Anti-HBs: ', 'anti_hbs', 'Anti-HBs'],
+    //             ['Anti-HBc (lgM): ', 'anti_hbc_lgm', 'Anti-HBc (lgM)'],
+    //             ['Anti-HBc (lgG): ', 'anti_hbc_lgg', 'Anti-HBc (lgG)'],
+    //             ['Anti-HAV (lgM): ', 'anti_hav_lgm', 'Anti-HAV (lgM)'],
+    //             ['Anti-HAV (lgG): ', 'anti_hav_lgg', 'Anti-HAV (lgG)'],
+    //             ['Anti-HCV: ', 'anti_hcv', 'Anti-HCV'],
+    //             ['SKIN: ', 'skin', 'SKIN'],
+    //             ['Neck, Lymph Node,Thyroid:', 'neck_lymph_node_thyroid', 'Neck, Lymph Node,Thyroid'],
+    //             ['Neurology:', 'neurology', 'Neurology'],
+    //             ['Eyes(external):', 'eyes_external', 'Eyes(external)'],
+    //             ['Breast,Axilla:', 'breast_axilla', 'Breast,Axilla'],
+    //             ['Pupils :', 'pupils', 'Pupils'],
+    //             ['Chest and Lungs:', 'chest_lungs', 'Chest and Lungs'],
+    //             ['Ears:', 'ears', 'Ears'],
+    //             ['Heart:', 'heart', 'Heart'],
+    //             ['Nose,Sinuses:', 'nose_sinuses', 'Nose,Sinuses'],
+    //             ['Abdomen,Liver,Spleen:', 'abdomen_liver_spleen', 'Abdomen,Liver,Spleen'],
+    //             ['Mouth,Throat:', 'mouth_throat', 'Mouth,Throat'],
+    //             ['Back:', 'back', 'Back'],
+    //             ['Anus-Rectum:', 'anus_rectum', 'Anus-Rectum'],
+    //             ['Genito-Urinary System:', 'genito_urinary_system', 'Genito-Urinary System'],
+    //             ['Inguinals,Genitals:', 'inguinals_genitals', 'Inguinals,Genitals'],
+    //             ['Extremities:', 'extremities', 'Extremities'],
+    //             ['Reflexes:', 'reflexes', 'Reflexes'],
+    //             ['Dental(Teeth/Gums):', 'dental_teeth_gums', 'Dental(Teeth/Gums)'],
+    //         ];
+
+    //         $findings = [];
+    //         $recommendations = [];
+
+    //         foreach ($prefix_to_remove as $key => $prefix) {
+    //             if (strpos($data->findings, $prefix[0]) !== false) {
+    //                 $finding_pos = strpos($data->findings, $prefix[0]);
+    //                 $result_findings = substr($data->findings, $finding_pos, strpos($data->findings, ";", $finding_pos) - $finding_pos);
+    //                 if(!$result_findings) {
+    //                     $result_findings = substr($data->findings, $finding_pos, strlen($data->findings));
+    //                 }
+    //                 $result_findings_value = substr($result_findings, strlen($prefix[0]));
+    //                 array_push($findings, ['value' =>  $result_findings_value, 'title' => $prefix[2],'type' => $prefix[1]]);
+    //             }
+
+    //             if (strpos($data->remarks, $prefix[0]) !== false) {
+    //                 $recommendation_pos = strpos($data->remarks, $prefix[0]);
+    //                 $result_recommendations = substr($data->remarks, $recommendation_pos, strpos($data->remarks, ";", $recommendation_pos) - $recommendation_pos);
+    //                 if(!$result_recommendations) {
+    //                     $result_recommendations = substr($data->remarks, $recommendation_pos, strlen($data->remarks));
+    //                 }
+    //                 $result_recommendations_value = substr($result_recommendations, strlen($prefix[0]));
+    //                 array_push($recommendations, ['value' =>  $result_recommendations_value,'title' => $prefix[2], 'type' => $prefix[1]]);
+    //             }
+    //         }
+
+    //         foreach ($findings as $key => $finding) {
+    //             FollowUpResult::updateOrCreate(
+    //                 ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
+    //                 ['findings' => $finding['value'], 'exam_title' => $finding['title']]
+    //             );
+    //         }
+
+    //         foreach ($recommendations as $key => $recommendation) {
+    //             FollowUpResult::updateOrCreate(
+    //                 ['admission_id' => $data->admission_id, 'patient_id' => $data->patient_id, 'followup_date' => $data->date, 'exam_type' => $finding['type']],
+    //                 ['recommendations' => $recommendation['value'], 'exam_title' => $finding['title']]
+    //             );
+    //         }
+    //     }
+    // }
 }

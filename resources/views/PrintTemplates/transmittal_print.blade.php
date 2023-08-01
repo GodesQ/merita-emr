@@ -5,7 +5,7 @@
     <link href="../../../app-assets/css/print.css" rel="stylesheet" type="text/css">
     <style>
     * {
-        font-size: 13px;
+        font-size: 11.5px;
     }
 
     @page {
@@ -67,24 +67,24 @@
                 <table width="100%" border="0" cellspacing="3" cellpadding="5" class="brdTable">
                     <tbody>
                         <tr>
-                            <td width="2%" bgcolor="#C0C0C0" class="brdBtm"><b>No.</b></td>
+                            <td width="1%" bgcolor="#C0C0C0" class="brdBtm"><b>No.</b></td>
                             <td width="1%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Adm.ID</b></td>
-                            <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>PEME Date</b></td>
-                            <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Surname</b></td>
-                            <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>First Name</b></td>
-                            <td width="6%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Middle Name</b></td>
+                            <td width="3%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>PEME Date</b></td>
+                            <td width="3%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Surname</b></td>
+                            <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>First Name</b></td>
+                            <td width="3%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Middle Name</b></td>
                             <td width="1%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Age</b></td>
                             <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Position</b></td>
-                            <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Findings</b></td>
-                            <td width="20%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Recommendation</b></td>
-                            <td width="2%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
+                            <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Findings</b></td>
+                            <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Recommendation</b></td>
+                            <td width="1%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
                             @if(in_array("vital_signs", $additional_columns))
                                 <td width="10%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Vital Signs</b></td>
                             @endif
                             @if(in_array("bmi", $additional_columns))
                                 <td bgcolor="#C0C0C0" class="brdLeftBtm">BMI</td>
                             @endif
-                            <td width="7%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Follow up Date</b></td>
+                            <td width="3%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Follow up Date</b></td>
                             @if(in_array("vessel", $additional_columns))
                                 <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Vessel</b></td>
                             @endif
