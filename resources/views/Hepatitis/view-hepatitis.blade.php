@@ -36,7 +36,7 @@
                 VDRL/RPR
             </td>
             <td>
-                {{ $exam_blood_serology->vdrl_result }}
+                {{ $examlab_hepa->vdrl_result }}
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
