@@ -870,7 +870,7 @@
                                                                             </div>
                                                                         </div>
                                                                         @else
-                                                                            @include('Blood_Serology.view-bloodserology', [$exam_xray])
+                                                                            @include('Blood_Serology.view-bloodserology')
                                                                         @endif
                                                                     </div>
                                                                     <div class="tab-pane child-lab-content" id="tabVerticalLeft22"
@@ -2610,7 +2610,33 @@ window.addEventListener('load', () => {
     if(agency.value == 9) {
         getHartmannPrincipals(true);
     }
+
+    let lastMenstrualPeriodYes = document.querySelector('#last_menstrual_period1');
+    let pregnancyYes = document.querySelector('#pregnancy1');
+    if(lastMenstrualPeriodYes.checked) {
+        document.querySelector('#last_menstrual_other').style.display = 'block';
+    }
+
+    if(pregnancyYes.checked) {
+        document.querySelector('#pregnancy_other').style.display = 'block';
+    }
 })
+
+function selectLastMenstrualPeriod(e) {
+    if(e.value == 1) {
+        document.querySelector('#last_menstrual_other').style.display = 'block';
+    } else {
+        document.querySelector('#last_menstrual_other').style.display = 'none';
+    }
+}
+
+function selectPregnancy(e) {
+    if(e.value == 1) {
+        document.querySelector('#pregnancy_other').style.display = 'block';
+    } else {
+        document.querySelector('#pregnancy_other').style.display = 'none';
+    }
+}
 
 // add Item Table
 let item = document.querySelector('.add-item');

@@ -77,7 +77,7 @@
                                                     <td align="center">
                                                         <b>MEDICAL EXAMINATION REPORT FOR SEAFERERS</b> <br>
                                                         Approved and authorized by the Department of Health (DOH) and the Maritime Industry Authority (MARINA) of the Republic of the Philippines  <br>
-                                                        Issued in compliance with STCW Convention, 1978, as amended Section A-1/9 Paragraph 7 and the Maritime Labour Convention, 2006 
+                                                        Issued in compliance with STCW Convention, 1978, as amended Section A-1/9 Paragraph 7 and the Maritime Labour Convention, 2006
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -88,10 +88,10 @@
                                                     <td class="fontBoldLrg">Surname / Lastname : <br>
                                                         <span>{{ $admission->lastname }}</span>
                                                     </td>
-                                                    <td class="fontBoldLrg">Given Name : <br> 
+                                                    <td class="fontBoldLrg">Given Name : <br>
                                                         <span>{{ $admission->firstname }}</span>
                                                     </td>
-                                                    <td class="fontBoldLrg">Middle Name : <br> 
+                                                    <td class="fontBoldLrg">Middle Name : <br>
                                                         <span>{{ $admission->middlename }}</span>
                                                     </td>
                                                 </tr>
@@ -284,7 +284,9 @@
                                             @endif
                                         </span>
                                     </td>
-                                    <td align="center">Last Menstrual Period</td>
+                                    <td align="center">Last Menstrual Period (Specify) <br>
+                                        <b>{{ date_format(new DateTime($medical_history->last_menstrual_other), 'F d, Y') }}</b>
+                                    </td>
                                     <td>
                                         <span style="font-size: 14px;">
                                             @if ($medical_history)
@@ -373,7 +375,9 @@
                                             @endif
                                         </span>
                                     </td>
-                                    <td align="center">Pregnancy</td>
+                                    <td align="center">Pregnancy (Specify) <br>
+                                        <b>{{ date_format(new DateTime($medical_history->pregnancy_other), 'F d, Y') }}</b>
+                                    </td>
                                     <td>
                                         <span style="font-size: 14px;">
                                             @if ($medical_history)
@@ -1353,7 +1357,7 @@
                                         </span>
                                     </td>
                                     <td align="center">Smoking (Specify) <br>
-                                    
+
                                         {{ optional($medical_history)->smoking_other }}
                                     </td>
                                     <td>
@@ -1682,7 +1686,7 @@
                                                         <img src="@php echo base64_decode($admission->patient_signature) @endphp"  width="100" style="object-fit: cover;" />
                                                     @elseif ($admission->signature)
                                                         <img src="data:image/jpeg;base64,{{$admission->signature}}"  width="100" style="object-fit: cover;"/>
-                                                    @else 
+                                                    @else
                                                         <div style="width: 150px;height: 40px;"></div>
                                                     @endif
                                                 </div>
@@ -1700,7 +1704,7 @@
                                     </td>
                                     <td>
                                         <div style="width: 130px;">
-                                            
+
                                         </div>
                                     </td>
                                 </tr>
@@ -2031,7 +2035,7 @@
                                 <tr>
                                     <td valign="top">Conditions / Medications: </td>
                                     <td>
-                                       
+
                                     </td>
                                     <td style="text-align: center;"><b>Examining Physician:</b> <br>
                                         Name & SIgnature

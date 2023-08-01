@@ -1265,7 +1265,9 @@ class PatientController extends Controller
             $medical_history->operations = $request['operation'];
             $medical_history->gynecological_disorder = $request['gynecological_disorder'];
             $medical_history->last_menstrual_period = $request['last_menstrual_period'];
+            $medical_history->last_menstrual_other = $request['last_menstrual_other'];
             $medical_history->pregnancy = $request['pregnancy'];
+            $medical_history->pregnancy_other = $request['pregnancy_other'];
             $medical_history->kidney_or_bladder_disorder = $request['kidney_or_bladder_disorder'];
             $medical_history->back_injury_or_joint_pain = $request['back_injury_or_joint_pain'];
             $medical_history->arthritis = $request['arthritis'];

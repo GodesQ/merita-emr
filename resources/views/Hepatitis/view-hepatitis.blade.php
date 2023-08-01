@@ -32,6 +32,16 @@
             </td>
         </tr>
         <tr>
+            <td align="left" class="brdAll">
+                VDRL/RPR
+            </td>
+            <td>
+                {{ $exam_blood_serology->vdrl_result }}
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td width="22%" align="left"
                 valign="top">
                 HBsAg</td>

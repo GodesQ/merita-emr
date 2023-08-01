@@ -1680,18 +1680,17 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Last Menstrual Period</th>
+                                                                    <th>Last Menstrual Period <br>
+                                                                        <input type="date" class="form-control" value="{{ $medicalHistory->last_menstrual_other }}" name="last_menstrual_other" id="last_menstrual_other" style="display: none;">
+                                                                    </th>
                                                                     <td>
                                                                         <fieldset>
                                                                             <div class="custom-control custom-radio">
-                                                                                <input required type="radio" value="1"
+                                                                                <input required type="radio"
+                                                                                    value="1"
                                                                                     class="custom-control-input required"
-                                                                                    name="last_menstrual_period"
-                                                                                    id="last_menstrual_period1" @php
-                                                                                    echo
-                                                                                    $medicalHistory->last_menstrual_period
-                                                                                == 1
-                                                                                ? "checked" : "" @endphp>
+                                                                                    name="last_menstrual_period" {{ $medicalHistory->last_menstrual_period == 1 ? 'checked' : null }}
+                                                                                    id="last_menstrual_period1" onchange="selectLastMenstrualPeriod(this)">
                                                                                 <label class="custom-control-label"
                                                                                     for="last_menstrual_period1">YES</label>
                                                                             </div>
@@ -1700,29 +1699,28 @@
                                                                     <td>
                                                                         <fieldset>
                                                                             <div class="custom-control custom-radio">
-                                                                                <input required type="radio" value="0"
+                                                                                <input required type="radio"
+                                                                                    value="0"
                                                                                     class="custom-control-input required"
-                                                                                    name="last_menstrual_period"
-                                                                                    id="last_menstrual_period2" @php
-                                                                                    echo
-                                                                                    $medicalHistory->last_menstrual_period == 0 ? "checked" : "" @endphp>
+                                                                                    name="last_menstrual_period" {{ $medicalHistory->last_menstrual_period == 0 ? 'checked' : null }}
+                                                                                    id="last_menstrual_period2" onchange="selectLastMenstrualPeriod(this)">
                                                                                 <label class="custom-control-label"
-                                                                                    for="last_menstrual_period2">N/A</label>
+                                                                                    for="last_menstrual_period2">NO</label>
                                                                             </div>
                                                                         </fieldset>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Pregnancy</th>
+                                                                    <th>Pregnancy <br>
+                                                                        <input type="date" class="form-control" value="{{ $medicalHistory->pregnancy_other }}" name="pregnancy_other" id="pregnancy_other" style="display: none;">
+                                                                    </th>
                                                                     <td>
                                                                         <fieldset>
                                                                             <div class="custom-control custom-radio">
-                                                                                <input required type="radio" value="1"
+                                                                                <input required type="radio"
+                                                                                    value="1" {{ $medicalHistory->pregnancy == 1 ? 'checked' : null }}
                                                                                     class="custom-control-input required"
-                                                                                    name="pregnancy" id="pregnancy1"
-                                                                                    @php echo $medicalHistory->pregnancy
-                                                                                == 1
-                                                                                ? "checked" : "" @endphp>
+                                                                                    name="pregnancy" id="pregnancy1" onchange="selectPregnancy(this)">
                                                                                 <label class="custom-control-label"
                                                                                     for="pregnancy1">YES</label>
                                                                             </div>
@@ -1731,14 +1729,12 @@
                                                                     <td>
                                                                         <fieldset>
                                                                             <div class="custom-control custom-radio">
-                                                                                <input required type="radio" value="0"
+                                                                                <input required type="radio"
+                                                                                    value="0" {{ $medicalHistory->pregnancy == 0 ? 'checked' : null }}
                                                                                     class="custom-control-input required"
-                                                                                    name="pregnancy" id="pregnancy2"
-                                                                                    @php echo $medicalHistory->pregnancy
-                                                                                == 0
-                                                                                ? "checked" : "" @endphp>
+                                                                                    name="pregnancy" id="pregnancy2" onchange="selectPregnancy(this)">
                                                                                 <label class="custom-control-label"
-                                                                                    for="pregnancy2">NO</label>
+                                                                                    for="pregnancy2">No</label>
                                                                             </div>
                                                                         </fieldset>
                                                                     </td>
@@ -2588,5 +2584,34 @@ function hasContactWithPeopleInfected(e) {
         element.style.display = 'none';
     }
 }
+
+window.addEventListener('load', () =>  {
+    let lastMenstrualPeriodYes = document.querySelector('#last_menstrual_period1');
+    let pregnancyYes = document.querySelector('#pregnancy1');
+    if(lastMenstrualPeriodYes.checked) {
+        document.querySelector('#last_menstrual_other').style.display = 'block';
+    }
+
+    if(pregnancyYes.checked) {
+        document.querySelector('#pregnancy_other').style.display = 'block';
+    }
+});
+
+function selectLastMenstrualPeriod(e) {
+    if(e.value == 1) {
+        document.querySelector('#last_menstrual_other').style.display = 'block';
+    } else {
+        document.querySelector('#last_menstrual_other').style.display = 'none';
+    }
+}
+
+function selectPregnancy(e) {
+    if(e.value == 1) {
+        document.querySelector('#pregnancy_other').style.display = 'block';
+    } else {
+        document.querySelector('#pregnancy_other').style.display = 'none';
+    }
+}
+
 </script>
 @endsection
