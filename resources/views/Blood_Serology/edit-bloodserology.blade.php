@@ -48,7 +48,7 @@
                                     <tr>
                                         <td width="92"><b>PEME Date</b></td>
                                         <td width="247">
-                                            <input name="peme_date" type="date" id="peme_date"
+                                            <input name="peme_date" type="text" id="peme_date"
                                                 value="{{ $exam->admission->trans_date ? $exam->admission->trans_date : null }}"
                                                 class="form-control" readonly />
                                         </td>
