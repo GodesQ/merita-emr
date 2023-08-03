@@ -131,7 +131,7 @@
     <td>LDL Chole</td>
     <td>
         <input
-            oninput="getBloodRemarks(this, 'HDL Chole', '', '100', '@isset($exam) {{ optional($exam)->ldl }} @endisset')"
+            oninput="getBloodRemarks(this, 'LDL Chole', '', '100', '@isset($exam) {{ optional($exam)->ldl }} @endisset')"
             name="ldl" type="text" class="form-control" id="ldl"
             value="@isset($exam) {{ optional($exam)->ldl }} @endisset" />
     </td>

@@ -506,7 +506,7 @@
                                     <td width="60%" colspan="2">
                                         <div style="display: flex; align-items: flex-end; justify-content: flex-start;  width: 100%;">
                                             <div style="width: 15%;">Name :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 85%;">{{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}} </div>
+                                            <div class="fontBoldLrg" style="border-bottom: 1px solid #000; width: 85%;">{{$patient->lastname}}, {{$patient->firstname}} {{$patient->middlename}} </div>
                                         </div>
                                     </td>
                                     <td width="20%">
@@ -588,7 +588,7 @@
                                 </tr>
                                 <tr>
                                     <td style="display: none; text-align: left;">Name :</td>
-                                    <td style="display: none; text-align: left;">{{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}}</td>
+                                    <td style="display: none; text-align: left;">{{$patient->lastname}}, {{$patient->firstname}} {{$patient->middlename}}</td>
                                     <td style="display: none; text-align: left;">Agency : {{$patient->agencyname}}</td>
 
                                 </tr>

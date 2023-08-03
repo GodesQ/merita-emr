@@ -77,7 +77,7 @@
                             <td width="4%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Position</b></td>
                             <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Findings</b></td>
                             <td width="5%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Recommendation</b></td>
-                            <td width="1%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
+                            <td width="2%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Remarks</b></td>
                             @if(in_array("vital_signs", $additional_columns))
                                 <td width="10%" bgcolor="#C0C0C0" class="brdLeftBtm"><b>Vital Signs</b></td>
                             @endif
@@ -157,7 +157,10 @@
                                             }
                                         ?>
                                     @endif
-                                    {{$pe_status}}
+                                    <div style="text-align: center">
+                                        {{$pe_status}} <br>
+                                        <b>({{ date_format(new DateTime($patient->patient->fit_to_work_date), 'M d, Y')}})</b>
+                                    </div>
                                 </td>
                                 @if(in_array("vital_signs", $additional_columns))
                                     <td align="left">

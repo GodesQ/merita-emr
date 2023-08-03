@@ -48,7 +48,7 @@
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agencyname))
                                                 {{'Bahia Shipping Services, Inc.'}}
                                             @else
                                                 {{$admission->agencyname}}
@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
+                                        <span style="font-size:15px">{{date_format(new DateTime($exam_blood->trans_date), "d F Y")}}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
                                             NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
@@ -185,7 +185,7 @@
                                                     <tr>
                                                         <td>TRIGLYCERIDES</td>
                                                         <td class="{{optional($exam_blood)->triglycerides < 35 || optional($exam_blood)->triglycerides > 160 ? 'red-text': null}}">
-                                                            {{optional($exam_blood)->triglycerides}} 
+                                                            {{optional($exam_blood)->triglycerides}}
                                                             @if(optional(optional($exam_blood))->triglycerides < 35 )
                                                                 L
                                                             @endif
@@ -223,7 +223,7 @@
                                                     <tr>
                                                         <td>VLDL Chole</td>
                                                         <td class="{{optional($exam_blood)->vldl < 7 || optional($exam_blood)->vldl > 32 ? 'red-text': null}}">
-                                                            {{optional($exam_blood)->vldl}} 
+                                                            {{optional($exam_blood)->vldl}}
                                                             @if(optional(optional($exam_blood))->vldl < 7 )
                                                             L
                                                             @endif
@@ -297,7 +297,7 @@
                                                                 @if(optional($exam_blood)->ggt > 55)
                                                                     H
                                                                 @endif
-                                                            
+
                                                             </td>
                                                             <td>
                                                                 0-55 u/L
@@ -405,7 +405,7 @@
                                                             35-52 g/L
                                                         </td>
                                                     </tr>
-                                                    @endif  
+                                                    @endif
                                                     @if(optional($exam_blood)->globulin)
                                                     <tr>
                                                         <td>GLOBULIN</td>
@@ -422,7 +422,7 @@
                                                             31-35 g/L
                                                         </td>
                                                     </tr>
-                                                    @endif 
+                                                    @endif
                                                     @if(optional($exam_blood)->sodium)
                                                     <tr>
                                                         <td>SODIUM</td>
@@ -439,7 +439,7 @@
                                                             135-148 mmol/L
                                                         </td>
                                                     </tr>
-                                                    @endif    
+                                                    @endif
                                                     @if(optional($exam_blood)->potassium)
                                                     <tr>
                                                         <td>POTASSIUM</td>
@@ -456,7 +456,7 @@
                                                             3.5.0-5.3 mmol/L
                                                         </td>
                                                     </tr>
-                                                    @endif   
+                                                    @endif
                                                     @if(optional($exam_blood)->chloride)
                                                     <tr>
                                                         <td>CHLORIDE</td>
@@ -490,7 +490,7 @@
                                                             2.10-2.90 mmol/L
                                                         </td>
                                                     </tr>
-                                                    @endif    
+                                                    @endif
                                                     @if(optional($exam_blood)->ag_ratio)
                                                     <tr>
                                                         <td>CALCIUM</td>
@@ -507,7 +507,7 @@
                                                         1: 0.6-1.7
                                                         </td>
                                                     </tr>
-                                                    @endif    
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         @endif
