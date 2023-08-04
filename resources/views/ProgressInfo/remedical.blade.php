@@ -1518,14 +1518,16 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Last Menstrual Period</th>
+                                                                        <th>Last Menstrual Period <br>
+                                                                            <input type="date" class="form-control" name="last_menstrual_other" id="last_menstrual_other" style="display: none;">
+                                                                        </th>
                                                                         <td>
                                                                             <fieldset>
                                                                                 <div class="custom-control custom-radio">
                                                                                     <input required type="radio"
                                                                                         value="1"
                                                                                         class="custom-control-input required"
-                                                                                        name="last_menstrual_period"
+                                                                                        name="last_menstrual_period" onchange="selectLastMenstrualPeriod(this)"
                                                                                         id="last_menstrual_period1">
                                                                                     <label class="custom-control-label"
                                                                                         for="last_menstrual_period1">YES</label>
@@ -1538,7 +1540,7 @@
                                                                                     <input required type="radio"
                                                                                         value="0"
                                                                                         class="custom-control-input required"
-                                                                                        name="last_menstrual_period"
+                                                                                        name="last_menstrual_period" onchange="selectLastMenstrualPeriod(this)"
                                                                                         id="last_menstrual_period2">
                                                                                     <label class="custom-control-label"
                                                                                         for="last_menstrual_period2">N/A</label>
@@ -1547,12 +1549,14 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Pregnancy</th>
+                                                                        <th>Pregnancy <br>
+                                                                            <input type="date" class="form-control" name="pregnancy_other" id="pregnancy_other" style="display: none;">
+                                                                        </th>
                                                                         <td>
                                                                             <fieldset>
                                                                                 <div class="custom-control custom-radio">
                                                                                     <input required type="radio"
-                                                                                        value="1"
+                                                                                        value="1" onchange="selectPregnancy(this)"
                                                                                         class="custom-control-input required"
                                                                                         name="pregnancy" id="pregnancy1">
                                                                                     <label class="custom-control-label"
@@ -1564,7 +1568,7 @@
                                                                             <fieldset>
                                                                                 <div class="custom-control custom-radio">
                                                                                     <input required type="radio"
-                                                                                        value="0"
+                                                                                        value="0" onchange="selectPregnancy(this)"
                                                                                         class="custom-control-input required"
                                                                                         name="pregnancy" id="pregnancy2">
                                                                                     <label class="custom-control-label"
@@ -2444,6 +2448,22 @@
                 element.style.display = 'block';
             } else {
                 element.style.display = 'none';
+            }
+        }
+
+        function selectLastMenstrualPeriod(e) {
+            if(e.value == 1) {
+                document.querySelector('#last_menstrual_other').style.display = 'block';
+            } else {
+                document.querySelector('#last_menstrual_other').style.display = 'none';
+            }
+        }
+
+        function selectPregnancy(e) {
+            if(e.value == 1) {
+                document.querySelector('#pregnancy_other').style.display = 'block';
+            } else {
+                document.querySelector('#pregnancy_other').style.display = 'none';
             }
         }
     </script>
