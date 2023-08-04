@@ -285,17 +285,17 @@
                                         </span>
                                     </td>
                                     <td align="center">Last Menstrual Period (Specify) <br>
-                                        <b>{{ date_format(new DateTime($medical_history->last_menstrual_other), 'F d, Y') }}</b>
+                                        <b>{{ $medical_history->last_menstrual_period == 1 ? date_format(new DateTime($medical_history->last_menstrual_other), 'F d, Y') : '' }}</b>
                                     </td>
                                     <td>
                                         <span style="font-size: 14px;">
                                             @if ($medical_history)
-                                            @if ($medical_history->last_menstrual_period == 'Yes' ||
-                                            $medical_history->last_menstrual_period == '1')
-                                            ☑
-                                            @else
-                                            ☐
-                                            @endif
+                                                @if ($medical_history->last_menstrual_period == 'Yes' ||
+                                                $medical_history->last_menstrual_period == '1')
+                                                ☑
+                                                @else
+                                                ☐
+                                                @endif
                                             @else
                                             ☐
                                             @endif
@@ -376,7 +376,7 @@
                                         </span>
                                     </td>
                                     <td align="center">Pregnancy (Specify) <br>
-                                        <b>{{ date_format(new DateTime($medical_history->pregnancy_other), 'F d, Y') }}</b>
+                                        <b>{{ $medical_history->pregnancy == 1 ? date_format(new DateTime($medical_history->pregnancy_other), 'F d, Y') : '' }}</b>
                                     </td>
                                     <td>
                                         <span style="font-size: 14px;">
