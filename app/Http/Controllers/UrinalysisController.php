@@ -14,7 +14,7 @@ class UrinalysisController extends Controller
 {
     //
     public function edit_urinalysis(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $exam = Urinalysis::select(
@@ -29,17 +29,17 @@ class UrinalysisController extends Controller
                 )
                 ->latest('id')
                 ->first();
-    
+
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
-            
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Urinalysis.edit-urinalysis', compact('exam', 'patient', 'admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -49,10 +49,11 @@ class UrinalysisController extends Controller
     }
 
     public function update_urinalysis(Request $request)
-    {   
+    {
         try {
             $id = $request->id;
             $exam = Urinalysis::findOrFail($id);
+            $exam->trans_date = $request->trans_date;
             $exam->color = $request->color;
             $exam->transparency = $request->transparency;
             $exam->ph = $request->ph;
@@ -79,7 +80,7 @@ class UrinalysisController extends Controller
             $exam->technician_id = $request->technician_id;
             $exam->technician2_id = $request->technician2_id;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
@@ -87,7 +88,7 @@ class UrinalysisController extends Controller
                 'Update Urinalysis from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             if ($save) {
                 return back()->with('status', 'Urinalysis updated.');
             }
@@ -99,7 +100,7 @@ class UrinalysisController extends Controller
     }
 
     public function add_urinalysis()
-    {   
+    {
         try {
             $id = $_GET['id'];
             $admission = Admission::select(
@@ -116,14 +117,14 @@ class UrinalysisController extends Controller
                 )
                 ->latest('mast_patient.id')
                 ->first();
-            
+
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('Urinalysis.add-urinalysis', compact('admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -133,7 +134,7 @@ class UrinalysisController extends Controller
     }
 
     public function store_urinalysis(Request $request)
-    {   
+    {
         try {
             $exam = new Urinalysis();
             $exam->trans_date = $request->trans_date;
@@ -164,7 +165,7 @@ class UrinalysisController extends Controller
             $exam->technician_id = $request->technician_id;
             $exam->technician2_id = $request->technician2_id;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
@@ -172,7 +173,7 @@ class UrinalysisController extends Controller
                 'Add Urinalysis from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             $path =
                 'patient_edit?id=' .
                 $request->patient_id .

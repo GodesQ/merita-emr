@@ -125,7 +125,7 @@ return date("M/d/Y".$time,strtotime($val));
                                                             @endif
                                                             </b><br>
                                                         Date of Medical Examination:
-                                                        <b><?=formatDate($admission->trans_date,11)?></b>
+                                                        <b><?=formatDate($exam->trans_date,11)?></b>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -164,7 +164,7 @@ return date("M/d/Y".$time,strtotime($val));
                                         <td width="60%" align="right">&nbsp;</td>
                                         <td width="20%" align="right"> Date:</td>
                                         <td width="20%" align="center" style="border-bottom : 1px solid"><b>
-                                                <?=formatDate($admission->trans_date,11)?>
+                                                <?=formatDate($exam->trans_date,11)?>
                                             </b></td>
                                     </tr>
                                 </table>

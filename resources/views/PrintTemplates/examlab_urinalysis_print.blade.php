@@ -42,7 +42,7 @@
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agencyname))
                                             {{'Bahia Shipping Services, Inc.'}}
                                         @else
                                             {{$admission->agencyname}}
@@ -52,7 +52,7 @@
                                 </tr>
                                 <tr>
                                     <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
+                                        <span style="font-size:15px">{{date_format(new DateTime($exam->trans_date), "d F Y")}}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
                                             NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span></td>
@@ -187,7 +187,7 @@
                                                                         @if ($technician1)
                                                                             {{$technician1->firstname . " " . $technician1->middlename[0] . "." . " " . $technician1->lastname . ", " . $technician1->title}}<br>
                                                                             Medical Technologist<br>
-                                                                            Lic. No. {{$technician1->license_no}} 
+                                                                            Lic. No. {{$technician1->license_no}}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -210,7 +210,7 @@
                                                                         {{$technician2->firstname . " " . $technician2->middlename[0] . "." . " " . $technician2->lastname . ", " . $technician2->title}}<br>
                                                                         Pathologist<br>
                                                                         Lic. No. {{$technician2->license_no}}
-                                                                        @endif 
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             </tbody>

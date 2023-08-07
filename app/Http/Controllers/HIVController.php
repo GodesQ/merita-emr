@@ -16,7 +16,7 @@ class HIVController extends Controller
 {
     //
     public function edit_hiv(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $exam = HIV::select(
@@ -31,7 +31,7 @@ class HIVController extends Controller
                 )
                 ->latest('id')
                 ->first();
-    
+
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
             $physicians = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
@@ -39,14 +39,14 @@ class HIVController extends Controller
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Physician%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             $med_techs = User::where('position', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             return view('HIV.edit-hiv', compact('exam', 'patient', 'admission', 'physicians', 'med_techs', 'pathologists'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -56,11 +56,12 @@ class HIVController extends Controller
     }
 
     public function update_hiv(Request $request)
-    {   
+    {
         try {
-           
+
             $id = $request->id;
             $exam = HIV::where('id', $id)->first();
+            $exam->trans_date = $request->trans_date;
             $exam->exam = $request->exam;
             $exam->others = $request->others;
             $exam->result = $request->result;
@@ -74,14 +75,14 @@ class HIVController extends Controller
             $exam->technician2_id = $request->technician2_id;
             $exam->technician3_id = $request->technician3_id;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description = 'Update HIV from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             if ($save) {
                 return back()->with('status', 'HIV updated');
             }
@@ -94,7 +95,7 @@ class HIVController extends Controller
     }
 
     public function add_hiv()
-    {   
+    {
         try {
             $id = $_GET['id'];
             $admission = Admission::select(
@@ -116,7 +117,7 @@ class HIVController extends Controller
             ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Physician%')
             ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
             ->get();
-            
+
             $med_techs = User::where('position', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
             ->where('mast_employee.position', 'LIKE', '%Pathologist%')
@@ -133,7 +134,7 @@ class HIVController extends Controller
     }
 
     public function store_hiv(Request $request)
-    {   
+    {
         try {
             $exam = new HIV();
             $exam->trans_date = $request->trans_date;
@@ -151,14 +152,14 @@ class HIVController extends Controller
             $exam->technician2_id = $request->technician2_id;
             $exam->technician3_id = $request->technician3_id;
             $save = $exam->save();
-    
+
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description = 'Add HIV from Patient ' . $request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
-    
+
             $path =
                 'patient_edit?id=' .
                 $request->patient_id .
