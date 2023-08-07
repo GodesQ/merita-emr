@@ -306,6 +306,19 @@
                                             </tr>
                                         @endif
 
+                                        @if($admission->exam_ppd)
+                                            <tr>
+                                                <td valign="top"></td>
+                                                <td valign="top">
+                                                    <b>PPD:</b> <span style="margin-left: 10px;">{{ $admission->exam_ppd->remarks }}</span>
+                                                </td>
+                                                <td valign="top">
+                                                    <b>PPD:</b>
+                                                    <span style="margin-left: 10px;">{{ $admission->exam_ppd->recommendation }}</span>
+                                                </td>
+                                            </tr>
+                                        @endif
+
                                     @endif
                                     <?php $drag_count = 1; ?>
                                     @foreach($results as $key => $result)
@@ -313,14 +326,16 @@
                                             <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
                                             <td valign="top"  class="drag">
                                                 <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
-                                                    @php echo nl2br($result['Findings']) @endphp
+                                                    @if(!preg_match('/PPD:/i', $result['Findings']))
+                                                        @php echo nl2br($result['Findings']) @endphp
+                                                    @endif
                                                 </div>
                                             </td>
 
                                             <td valign="top" class="drag">
                                                 <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
                                                     @if(isset($result['Recommendation']))
-                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']))
+                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
                                                             @php echo nl2br($result['Recommendation']) @endphp
                                                         @endif
                                                     @endif

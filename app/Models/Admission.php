@@ -105,6 +105,10 @@ class Admission extends Model
         return $this->hasOne(PsychoBPI::class)->latest('id');
     }
 
+    public function exam_ppd() {
+        return $this->hasOne(PPD::class)->latest('id');
+    }
+
     public function exam_psycho() {
         return $this->hasOne(Psychological::class)->latest('id');
     }
