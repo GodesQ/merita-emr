@@ -194,9 +194,9 @@
                                                 <b>VITAL SIGN:</b>
                                             </td>
                                             <td valign="top">
-                                                @if ($admission->exam_physical)
+                                                {{-- @if ($admission->exam_physical)
                                                     <b>Vital Sign</b>: {{ optional($admission->exam_physical)->vital_sign_recommendation }}
-                                                @endif
+                                                @endif --}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -205,7 +205,8 @@
 
                                                 <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>
@@ -219,28 +220,36 @@
                                             <td valign="top">
                                                 <b>BMI:</b> <span style="margin-left: 10px;">{{ strpos(optional($admission->exam_physical)->bmi, 'Overweight') ? str_replace('Overweight', '', optional($admission->exam_physical)->bmi) : optional($admission->exam_physical)->bmi }}</span>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                {{ optional($admission->exam_physical)->bmi_recommendation }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>
                                             <td valign="top">
                                                 <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                {{ optional($admission->exam_physical)->bp_recommendation }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>
                                             <td valign="top">
-                                                <b>PR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
+                                                <b>PR:</b><span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>
                                             <td valign="top">
                                                 <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td valign="top">
+                                                {{ optional($admission->exam_physical)->respiration_recommendation }}
+                                            </td>
                                         </tr>
 
                                         @if($admission->exam_xray)
@@ -396,28 +405,36 @@
                                         <td>
                                             <b>BMI:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->bmi }}</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            {{ optional($admission->exam_physical)->bmi_recommedation }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>
                                             <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            {{ optional($admission->exam_physical)->bp_recommendation }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>
                                             <b>PR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>
                                             <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            {{ optional($admission->exam_physical)->respiration_recommendation }}
+                                        </td>
                                     </tr>
                                     @if($admission->exam_xray)
                                         @if($admission->exam_xray->chest_remarks_status)

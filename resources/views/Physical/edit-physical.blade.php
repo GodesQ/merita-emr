@@ -1080,7 +1080,104 @@
                                             <tbody>
                                                 <tr>
                                                     <td colspan="10" align="center">
-                                                        <table width="100%" border="0" cellspacing="2"
+                                                        <table width="100%" cellspacing="0" cellpadding="0" class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td colspan="2"><h2>Vital Signs</h2></td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td valign="center" width="65%">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-4">
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label">Height</label>
+                                                                                    <input type="text" class="form-control" value="{{ $exam ? $exam->height : null }}" name="height" id="height" onkeyup="computeBMI();">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label">Weight</label>
+                                                                                    <input type="text" class="form-control" value="{{ $exam ? $exam->weight : null }}" name="weight" id="weight" onkeyup="computeBMI();">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label">BMI</label>
+                                                                                    <input type="text" class="form-control" value="{{ $exam ? $exam->bmi : null }}" name="bmi" id="bmi">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label for="" class="form-label">Recommendation</label>
+                                                                        <textarea name="bmi_recommendation" id="bmi_recommendation" cols="30" rows="2" class="form-control">{{ $exam->bmi_recommendation }}</textarea>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <label class="form-label">Systollic</label>
+                                                                                <input name="systollic" type="text"
+                                                                                    class="form-control" id="systollic"
+                                                                                    placeholder="Systollic" value="{{ $exam->systollic }}"
+                                                                                    size="10">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="form-label">Diastollic</label>
+                                                                                <input name="diastollic" type="text"
+                                                                                    class="form-control" id="diastollic"
+                                                                                    placeholder="Diastollic" value="{{ $exam->diastollic }}"
+                                                                                    size="10">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label for="" class="form-label">Recommendation</label>
+                                                                        <textarea name="bp_recommendation" id="bp_recommendation" cols="30" rows="2" class="form-control">{{ $exam->bp_recommendation }}</textarea>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <label class="form-label">Pulse Rate</label>
+                                                                                <input name="pulse" type="text"
+                                                                                class="form-control" id="pulse"
+                                                                                value="{{ $exam->pulse }}" size="5">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="form-label">Rhythm</label>
+                                                                                <input name="rhythm" type="text" id="rhythm" value="NORMAL" size="10" class="form-control" value="{{ $exam->rhythm }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label for="" class="form-label">Recommendation</label>
+                                                                        <textarea name="pulse_rhythm_recommendation" id="pulse_rhythm_recommendation" cols="30" rows="2" class="form-control">{{ $exam->pulse_rhythm_recommendation }}</textarea>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label class="form-label">Respiration</label>
+                                                                                <input name="respiration" type="text"
+                                                                                class="form-control" id="respiration"
+                                                                                value="{{ $exam->respiration }}" size="5">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label for="" class="form-label">Recommendation</label>
+                                                                        <textarea name="respiration_recommendation" id="respiration_recommendation" cols="30" rows="2" class="form-control">{{ $exam->respiration_recommendation }}</textarea>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        {{-- <table width="100%" border="0" cellspacing="2"
                                                             cellpadding="2">
                                                             <tbody>
                                                                 <tr>
@@ -1170,7 +1267,7 @@
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
-                                                        </table>
+                                                        </table> --}}
                                                     </td>
                                                 </tr>
                                                 <tr>

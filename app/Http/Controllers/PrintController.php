@@ -1453,6 +1453,7 @@ class PrintController extends Controller
 
         $agency = Agency::where('id', $agency_id)->first();
 
+        // dd($patients[0]);
 
         return view('PrintTemplates.transmittal_print', compact('patients', 'from_date', 'to_date', 'patientstatus', 'agency', 'additional_columns'));
     }
@@ -1539,7 +1540,8 @@ class PrintController extends Controller
                         'exam_xray',
                         'package',
                         'agency',
-                        'followup'
+                        'followup',
+                        'followups'
                         )->get();
 
             } else {
@@ -1572,7 +1574,8 @@ class PrintController extends Controller
                     'exam_xray',
                     'package',
                     'agency',
-                    'followup'
+                    'followup',
+                    'followups'
                     )->whereHas('exam_physical', function ($query) use ($patientstatus) {
                         $query->where('fit', $patientstatus);
                     })->get();

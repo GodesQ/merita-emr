@@ -184,7 +184,16 @@
                                     </td>
                                 @endif
                                 <td align="left">
-
+                                    @if($patient->followups)
+                                        @forelse ($patient->followups as $followup)
+                                            @if($loop->first)
+                                                <span style="margin: 5px 0;">{{ date_format(new DateTime($patient->trans_date), 'F d, Y') }}</span>
+                                            @else
+                                                <span style="margin: 5px 0;">{{ date_format(new DateTime($followup->date), 'F d, Y') }}</span>
+                                            @endif
+                                        @empty
+                                        @endforelse
+                                    @endif
                                 </td>
                                 @if(in_array("vessel", $additional_columns))
                                     <td align="left">{{$patient->vesselname}}</td>
