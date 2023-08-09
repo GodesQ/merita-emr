@@ -58,7 +58,17 @@
                                 </tr>
                                 <tr>
                                     <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($exam_blood->trans_date), "d F Y")}}</span>
+                                        @if($type == 'serology')
+                                            @if($exam_sero)
+                                                <span style="font-size:15px">{{date_format(new DateTime($exam_sero->trans_date), "d F Y")}}</span>
+                                            @endif
+                                        @endif
+
+                                        @if($type == 'blood')
+                                            @if($exam_blood)
+                                                <span style="font-size:15px">{{date_format(new DateTime($exam_blood->trans_date), "d F Y")}}</span>
+                                            @endif
+                                        @endif
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
                                             NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
