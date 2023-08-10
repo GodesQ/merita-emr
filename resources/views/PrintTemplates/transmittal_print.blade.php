@@ -119,13 +119,14 @@
                                 <td align="left">{{$count++}}</td>
                                 <td align="left">{{$patient->patientcode}}</td>
                                 <td align="left">
-                                    @if($patient->followups)
+                                    {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
+                                    {{-- @if($patient->followups)
                                         @if(count($patient->followups) > 1)
                                             {{ date_format(new DateTime($patient->followups[count($patient->followups) - 1]), "d F Y") }}
                                         @else
-                                            {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
+
                                         @endif
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td align="left">{{$patient->patient ? $patient->patient->lastname . " " . $patient->patient->suffix : null}}</td>
                                 <td align="left">{{$patient->patient ? $patient->patient->firstname : null}}</td>
