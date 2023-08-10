@@ -51,6 +51,45 @@
                 </div>
                 @endif
             @endif
+
+            @if ($exam_ecg)
+                @if($exam_ecg->remarks_status == 'Significant Findings')
+                    <div class="col-md-6 my-50">
+                        <h5><b>ECG</b></h5>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_ecg->remarks) @endphp</span>
+                        {{-- <input type="hidden" value="Dental: @php echo nl2br($exam_ecg->remarks) @endphp" name="findings[]" /> --}}
+                    </div>
+                @endif
+            @endif
+
+            @if ($exam_xray)
+                @if($exam_xray->chest_remarks_status == 'findings')
+                    <div class="col-md-6 my-50">
+                        <h5><b>Chest Xray</b></h5>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_xray->chest_recommendations) @endphp</span>
+                    </div>
+                @endif
+            @endif
+
+            @if ($exam_xray)
+                @if($exam_xray->lumbosacral_remarks_status == 'findings')
+                    <div class="col-md-6 my-50">
+                        <h5><b>Lumbosacral Xray</b></h5>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_xray->lumbosacral_recommendations) @endphp</span>
+                    </div>
+                @endif
+            @endif
+
+            @if ($exam_xray)
+                @if($exam_xray->knees_remarks_status == 'findings')
+                    <div class="col-md-6 my-50">
+                        <h5><b>Knees Xray</b></h5>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_xray->knees_recommendations) @endphp</span>
+                    </div>
+                @endif
+            @endif
+
+
             @if ($exam_psycho)
                 @if($exam_psycho->remarks_status == 'findings' && $exam_psycho->recommendation)
                 <div class="my-75">

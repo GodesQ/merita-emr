@@ -278,48 +278,88 @@
                                     </tr>
                                 @endif
                             @empty
-
                             @endforelse
 
+                            @if (optional($patient->exam_ecg)->ecg == 'Significant Findings')
+                                <tr>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left" valign="top">
+                                        @if(optional($patient->exam_ecg)->remarks) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_ecg)->remarks }}
+                                    </td>
+                                    <td align="left" valign="top">
+                                        @if(optional($patient->exam_ecg)->recommendation) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_ecg)->recommendation }}
+                                    </td>
+                                    <td align="left" valign="top"></td>
+                                    @if(in_array("vital_signs", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    @if(in_array("bmi", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    <td align="left">
+
+                                    </td>
+                                    @if(in_array("vessel", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+
+                                    @if(in_array("emp_status", $additional_columns))
+                                        <td align="left">{{$patient->emp_status}}</td>
+                                    @endif
+
+                                    @if(in_array("medical_package", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                </tr>
+                            @endif
+
                             @if (optional($patient->exam_xray)->lumbosacral_findings || optional($patient->exam_xray)->lumbosacral_recommendations)
-                            <tr>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left"></td>
-                                <td align="left" valign="top">
-                                    @if(optional($patient->exam_xray)->lumbosacral_findings) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_findings }}
-                                </td>
-                                <td align="left" valign="top">
-                                    @if(optional($patient->exam_xray)->lumbosacral_recommendations) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_recommendations }}
-                                </td>
-                                <td align="left" valign="top"></td>
-                                @if(in_array("vital_signs", $additional_columns))
+                                <tr>
                                     <td align="left"></td>
-                                @endif
-                                @if(in_array("bmi", $additional_columns))
                                     <td align="left"></td>
-                                @endif
-                                <td align="left">
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left" valign="top">
+                                        @if(optional($patient->exam_xray)->lumbosacral_findings) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_findings }}
+                                    </td>
+                                    <td align="left" valign="top">
+                                        @if(optional($patient->exam_xray)->lumbosacral_recommendations) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_xray)->lumbosacral_recommendations }}
+                                    </td>
+                                    <td align="left" valign="top"></td>
+                                    @if(in_array("vital_signs", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    @if(in_array("bmi", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    <td align="left">
 
-                                </td>
-                                @if(in_array("vessel", $additional_columns))
-                                    <td align="left"></td>
-                                @endif
+                                    </td>
+                                    @if(in_array("vessel", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
 
-                                @if(in_array("emp_status", $additional_columns))
-                                    <td align="left">{{$patient->emp_status}}</td>
-                                @endif
+                                    @if(in_array("emp_status", $additional_columns))
+                                        <td align="left">{{$patient->emp_status}}</td>
+                                    @endif
 
-                                @if(in_array("medical_package", $additional_columns))
-                                    <td align="left"></td>
-                                @endif
-                            </tr>
-                        @endif
+                                    @if(in_array("medical_package", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                </tr>
+                            @endif
+
 
                         @if (optional($patient->exam_xray)->chest_findings || optional($patient->exam_xray)->chest_recommendations)
                             <tr>
@@ -412,7 +452,7 @@
                                 <td align="left"></td>
                                 <td align="left"></td>
                                 <td align="left" valign="top">
-                                    @if(optional($patient->exam_xray)->knees_findings)<b>Skull Xray:</b>@endif {{ optional($patient->exam_xray)->skull_findings }}
+                                    @if(optional($patient->exam_xray)->skull_findings)<b>Skull Xray:</b>@endif {{ optional($patient->exam_xray)->skull_findings }}
                                 </td>
                                 <td align="left" valign="top">
                                     @if(optional($patient->exam_xray)->skull_recommendations)<b>Skull Xray:</b>@endif {{ optional($patient->exam_xray)->skull_recommendations }}
