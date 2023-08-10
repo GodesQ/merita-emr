@@ -185,7 +185,7 @@
                                 @endif
                                 <td align="left">
                                     @if($patient->followups)
-                                        @forelse ($ ->followups as $followup)
+                                        @forelse ($->followups as $followup)
                                             @if($loop->first)
                                                 <span style="margin: 5px 0;">{{ date_format(new DateTime($patient->trans_date), 'F d, Y') }}</span>
                                             @else
