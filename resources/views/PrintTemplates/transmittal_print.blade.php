@@ -159,7 +159,7 @@
                                     @endif
                                     <div style="text-align: center">
                                         {{$pe_status}} <br>
-                                        <b>({{ $pe_status == 'Fit to Work' ? date_format(new DateTime($patient->patient->fit_to_work_date), 'M d, Y') : null }})</b>
+                                        <b>{{ $pe_status == 'Fit to Work' ? '(' . date_format(new DateTime($patient->patient->fit_to_work_date), 'M d, Y') . ')' : null }}</b>
                                     </div>
                                 </td>
                                 @if(in_array("vital_signs", $additional_columns))
