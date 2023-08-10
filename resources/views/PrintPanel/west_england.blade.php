@@ -699,7 +699,7 @@
                                                                         position: absolute;
                                                                         width: 50%;
                                                                         height: 35px;
-                                                                        top: 20%;
+                                                                        top: 22%;
                                                                         left: 25%;
                                                                     }
                                                                 </style>
