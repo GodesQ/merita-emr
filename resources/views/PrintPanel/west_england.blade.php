@@ -697,9 +697,9 @@
 
                                                                     #divImage img {
                                                                         position: absolute;
-                                                                        width: 52%;
+                                                                        width: 45%;
                                                                         height: 35px;
-                                                                        top: 22%;
+                                                                        top: 23%;
                                                                         left: 25%;
                                                                     }
                                                                 </style>
