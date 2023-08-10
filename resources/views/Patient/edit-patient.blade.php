@@ -1164,6 +1164,37 @@
                                                                         @php echo nl2br($finding) @endphp
                                                                     </div>
                                                                 @endforeach
+                                                                @if($exam_ecg)
+                                                                    @if($exam_ecg->remarks_status == 'Significant Findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            ECG: @php echo nl2br($exam_ecg->remarks) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->chest_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Chest Xray: @php echo nl2br($exam_xray->chest_findings) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->lumbosacral_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Lumbosacral Xray: @php echo nl2br($exam_xray->lumbosacral_findings) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->knees_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Knees Xray
+                                                                            @php echo nl2br($exam_xray->knees_findings) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1176,6 +1207,37 @@
                                                                         @php echo nl2br($recommendation) @endphp
                                                                     </div>
                                                                 @endforeach
+                                                                @if($exam_ecg)
+                                                                    @if($exam_ecg->remarks_status == 'Significant Findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            ECG: @php echo nl2br($exam_ecg->recommendation) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->chest_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Chest Xray: @php echo nl2br($exam_xray->chest_recommendations) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->lumbosacral_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Lumbosacral Xray: @php echo nl2br($exam_xray->lumbosacral_recommendations) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+
+                                                                @if ($exam_xray)
+                                                                    @if($exam_xray->knees_remarks_status == 'findings')
+                                                                        <div class="col-md-6 my-50">
+                                                                            Knees Xray
+                                                                            @php echo nl2br($exam_xray->knees_recommendations) @endphp
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>

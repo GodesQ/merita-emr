@@ -56,7 +56,7 @@
                 @if($exam_ecg->remarks_status == 'Significant Findings')
                     <div class="col-md-6 my-50">
                         <h5><b>ECG</b></h5>
-                        <span style="font-size: 12px;">@php echo nl2br($exam_ecg->remarks) @endphp</span>
+                        <span style="font-size: 12px;">@php echo nl2br($exam_ecg->recommendation) @endphp</span>
                         {{-- <input type="hidden" value="Dental: @php echo nl2br($exam_ecg->remarks) @endphp" name="findings[]" /> --}}
                     </div>
                 @endif
