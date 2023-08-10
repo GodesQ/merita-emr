@@ -690,7 +690,7 @@
                                                                 <style>
                                                                     #divImage {
                                                                         width: 100%;
-                                                                        height: 25px;
+                                                                        height: 35px;
                                                                         position: relative;
                                                                         margin-bottom: 10px;
                                                                     }
