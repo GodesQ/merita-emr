@@ -692,12 +692,12 @@
                                                                         width: 100%;
                                                                         height: 35px;
                                                                         position: relative;
-                                                                        margin-bottom: 10px;
+                                                                        margin-bottom: 13px;
                                                                     }
 
                                                                     #divImage img {
                                                                         position: absolute;
-                                                                        width: 50%;
+                                                                        width: 52%;
                                                                         height: 35px;
                                                                         top: 22%;
                                                                         left: 25%;
