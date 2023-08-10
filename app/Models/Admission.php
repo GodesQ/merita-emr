@@ -18,7 +18,7 @@ class Admission extends Model
     }
 
     public function followup() {
-        return $this->hasOne(ReassessmentFindings::class, 'admission_id', 'id');
+        return $this->hasOne(ReassessmentFindings::class, 'admission_id', 'id')->latest('id');
     }
 
     public function followups() {

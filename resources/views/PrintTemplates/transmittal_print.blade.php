@@ -159,7 +159,7 @@
                                     @endif
                                     <div style="text-align: center">
                                         {{$pe_status}} <br>
-                                        <b>({{ date_format(new DateTime($patient->patient->fit_to_work_date), 'M d, Y')}})</b>
+                                        <b>({{ $pe_status == 'Fit to Work' ? date_format(new DateTime($patient->patient->fit_to_work_date), 'M d, Y') : null }})</b>
                                     </div>
                                 </td>
                                 @if(in_array("vital_signs", $additional_columns))
@@ -185,7 +185,7 @@
                                 @endif
                                 <td align="left">
                                     @if($patient->followups)
-                                        @forelse ($patient->followups as $followup)
+                                        @forelse ($ ->followups as $followup)
                                             @if($loop->first)
                                                 <span style="margin: 5px 0;">{{ date_format(new DateTime($patient->trans_date), 'F d, Y') }}</span>
                                             @else
