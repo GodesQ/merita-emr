@@ -69,6 +69,16 @@
                                                 <span style="font-size:15px">{{date_format(new DateTime($exam_blood->trans_date), "d F Y")}}</span>
                                             @endif
                                         @endif
+
+                                        @if($type == 'both')
+                                            @if($exam_blood)
+                                                <span style="font-size:15px">{{date_format(new DateTime($exam_blood->trans_date), "d F Y")}}</span>
+                                            @elseif($exam_sero)
+                                                <span style="font-size:15px">{{date_format(new DateTime($exam_sero->trans_date), "d F Y")}}</span>
+                                            @else
+                                                <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
+                                            @endif
+                                        @endif
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
                                             NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
