@@ -119,10 +119,18 @@
                                 <td align="left">{{$count++}}</td>
                                 <td align="left">{{$patient->patientcode}}</td>
                                 <td align="left">
+                                    {{-- @if($patient->followups)
+                                        @if(count($patient->followups) > 1)
+                                            <?php $latest_followup = $patient->followups()->latest();
+                                            ?>
+                                            {{ date_format(new DateTime($latest_followup->date), "d F Y") }}
+                                        @else
+                                            {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
+                                        @endif
+                                    @endif --}}
                                     @if($patient->followups)
                                         @if(count($patient->followups) > 1)
-                                            <?php $latest_followup = $patient->followups[count($patient->followups) - 1] ?>
-                                            {{ date_format(new DateTime($latest_followup->date), "d F Y") }}
+                                            {{ date_format(new DateTime($patient->followup->date), "d F Y") }}
                                         @else
                                             {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
                                         @endif
