@@ -690,18 +690,17 @@
                                                                 <style>
                                                                     #divImage {
                                                                         width: 100%;
-                                                                        height: 35px;
+                                                                        height: 25px;
                                                                         position: relative;
-                                                                        margin-bottom: 18px;
+                                                                        margin-bottom: 10px;
                                                                     }
 
                                                                     #divImage img {
                                                                         position: absolute;
-                                                                        width: 100px;
-                                                                        height: 50px;
-                                                                        top: 1%;
-                                                                        left: 35%;
-                                                                        object-fit: cover;
+                                                                        width: 50%;
+                                                                        height: 35px;
+                                                                        top: 20%;
+                                                                        left: 25%;
                                                                     }
                                                                 </style>
                                                                 <tr>
@@ -711,7 +710,7 @@
                                                                             @if($admission->agency_id != 19)
                                                                                 @if($admission->patient->patient_signature)
                                                                                     <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp" class="signature-taken" />
-                                                                                @elseif ($admission->signature)
+                                                                                @elseif ($admission->patient->signature)
                                                                                     <img src="data:image/jpeg;base64,{{$admission->patient->signature}}" class="signature-taken"/>
                                                                                 @else
                                                                                     <div style="width: 150px;height: 40px;"></div>
