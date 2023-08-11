@@ -291,10 +291,10 @@
                                     <td align="left"></td>
                                     <td align="left"></td>
                                     <td align="left" valign="top">
-                                        @if(optional($patient->exam_ecg)->remarks) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_ecg)->remarks }}
+                                        @if(optional($patient->exam_ecg)->remarks) <b>ECG:</b> @endif {{ optional($patient->exam_ecg)->remarks }}
                                     </td>
                                     <td align="left" valign="top">
-                                        @if(optional($patient->exam_ecg)->recommendation) <b>Lumbosacral Xray:</b> @endif {{ optional($patient->exam_ecg)->recommendation }}
+                                        @if(optional($patient->exam_ecg)->recommendation) <b>ECG:</b> @endif {{ optional($patient->exam_ecg)->recommendation }}
                                     </td>
                                     <td align="left" valign="top"></td>
                                     @if(in_array("vital_signs", $additional_columns))

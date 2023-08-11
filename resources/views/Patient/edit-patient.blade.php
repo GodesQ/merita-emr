@@ -1165,7 +1165,7 @@
                                                                     </div>
                                                                 @endforeach
                                                                 @if($exam_ecg)
-                                                                    @if($exam_ecg->remarks_status == 'Significant Findings')
+                                                                    @if($exam_ecg->ecg == 'Significant Findings')
                                                                         <div class="col-md-6 my-50">
                                                                             ECG: @php echo nl2br($exam_ecg->remarks) @endphp
                                                                         </div>
@@ -1208,7 +1208,7 @@
                                                                     </div>
                                                                 @endforeach
                                                                 @if($exam_ecg)
-                                                                    @if($exam_ecg->remarks_status == 'Significant Findings')
+                                                                    @if($exam_ecg->ecg == 'Significant Findings')
                                                                         <div class="col-md-6 my-50">
                                                                             ECG: @php echo nl2br($exam_ecg->recommendation) @endphp
                                                                         </div>
