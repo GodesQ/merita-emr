@@ -2545,6 +2545,16 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
+                                                                                                                FIT WITH RESTRICTION
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    style="width: 20px; height: 20px;"
+                                                                                                                    name="seastatus"
+                                                                                                                    id="seafit"
+                                                                                                                    value="seafit with restriction">
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                align="center">
                                                                                                                 UNFIT
                                                                                                                 <input
                                                                                                                     type="radio"

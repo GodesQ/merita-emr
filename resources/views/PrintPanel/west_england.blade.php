@@ -562,7 +562,7 @@
                                                                                         <span class="fontMed">RESULT:<br>
                                                                                             <span style="margin-left:50px">FIT FOR DUTY
                                                                                                 @if ($admission->exam_physical)
-                                                                                                    @if($admission->exam_physical->fit == 'Fit' && $admission->exam_physical->duty == 'Fit')
+                                                                                                    @if($admission->exam_physical->seastatus == 'seafit')
                                                                                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                     @else
                                                                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -574,18 +574,18 @@
                                                                                             </span>
                                                                                             <span style="margin-left: 20px;">FIT BUT AT RISK
                                                                                                 @if ($admission->exam_physical)
-                                                                                                    @if($admission->exam_physical->duty == 'Fit Restriction' && $admission->exam_physical->fit == 'Fit')
+                                                                                                    @if($admission->exam_physical->seastatus == 'seafit with restriction')
                                                                                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                     @else
                                                                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                                                     @endif
                                                                                                 @else
-                                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                                                 @endif
                                                                                             </span>
                                                                                             <span style="margin-left: 20px;">UNFIT FOR DUTY
                                                                                                 @if ($admission->exam_physical)
-                                                                                                    @if($admission->exam_physical->fit == 'Unfit')
+                                                                                                    @if($admission->exam_physical->seastatus == 'seaunfit')
                                                                                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                     @else
                                                                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">

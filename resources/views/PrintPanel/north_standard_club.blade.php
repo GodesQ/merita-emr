@@ -531,9 +531,9 @@
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span>RESULT:</span>  <span style="margin-left: 30px;">&nbsp;</span>
-                                                                        <span  style="margin-left:50px">FIT FOR DUTY
+                                                                        <span style="margin-left:50px">FIT FOR DUTY
                                                                             @if ($admission->exam_physical)
-                                                                                @if($admission->exam_physical->duty == 'Fit')
+                                                                                @if($admission->exam_physical->seastatus == 'seafit')
                                                                                     <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                 @else
                                                                                     <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -545,19 +545,18 @@
                                                                         </span>
                                                                         <span style="margin-left: 20px;">FIT BUT AT RISK
                                                                             @if ($admission->exam_physical)
-                                                                                @if($admission->exam_physical->duty == 'Fit Restriction')
+                                                                                @if($admission->exam_physical->seastatus == 'seafit with restriction')
                                                                                     <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                 @else
                                                                                     <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                                 @endif
                                                                             @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                             @endif
                                                                         </span>
-                                                                        <span
-                                                                            style="margin-left: 20px;">UNFIT FOR DUTY
+                                                                        <span style="margin-left: 20px;">UNFIT FOR DUTY
                                                                             @if ($admission->exam_physical)
-                                                                                @if($admission->exam_physical->duty == 'Unfit')
+                                                                                @if($admission->exam_physical->seastatus == 'seaunfit')
                                                                                     <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                 @else
                                                                                     <img src="../../../app-assets/images/icoUncheck.gif" width="10">

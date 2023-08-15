@@ -2035,56 +2035,24 @@ echo
                                                                                                             <td
                                                                                                                 align="center">
                                                                                                                 FIT
-                                                                                                                <input
-                                                                                                                    type="radio"
-                                                                                                                    style="width: 20px; height: 20px;"
-                                                                                                                    name="seastatus"
-                                                                                                                    id="seafit"
-                                                                                                                    value="seafit"
-                                                                                                                    @php
-echo
-                                                                                                            $exam->seastatus
-                                                                                                            ==
-                                                                                                            "seafit"
-                                                                                                            ?
-                                                                                                            "checked" :
-                                                                                                            "" @endphp>
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit" value="seafit"
+                                                                                                                    {{ $exam->seastatus == "seafit" ? "checked" : "" }}>
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
+                                                                                                                FIT WITH RESTRICTION
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit" value="seafit with restriction"
+                                                                                                                    {{ $exam->seastatus == "seafit with restriction" ? "checked" : "" }}>
+                                                                                                            </td>
+                                                                                                            <td align="center">
                                                                                                                 UNFIT
-                                                                                                                <input
-                                                                                                                    type="radio"
-                                                                                                                    style="width: 20px; height: 20px;"
-                                                                                                                    name="seastatus"
-                                                                                                                    id="seaunfit"
-                                                                                                                    value="seaunfit"
-                                                                                                                    @php
-echo
-                                                                                                            $exam->seastatus
-                                                                                                            ==
-                                                                                                            "seaunfit"
-                                                                                                            ?
-                                                                                                            "checked" :
-                                                                                                            "" @endphp>
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seaunfit" value="seaunfit"
+                                                                                                                    {{ $exam->seastatus == "seaunfit" ? "checked" : "" }}>
                                                                                                             </td>
-                                                                                                            <td
-                                                                                                                align="center">
+                                                                                                            <td align="center">
                                                                                                                 Pending
-                                                                                                                <input
-                                                                                                                    type="radio"
-                                                                                                                    style="width: 20px; height: 20px;"
-                                                                                                                    name="seastatus"
-                                                                                                                    id="seapending"
-                                                                                                                    value="seapending"
-                                                                                                                    @php
-echo
-                                                                                                            $exam->seastatus
-                                                                                                            ==
-                                                                                                            "seapending"
-                                                                                                            ?
-                                                                                                            "checked" :
-                                                                                                            "" @endphp>
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seapending" value="seapending"
+                                                                                                                    {{ $exam->seastatus == "seapending" ? "checked" : "" }}>
                                                                                                             </td>
                                                                                                             <td>&nbsp;
                                                                                                             </td>
