@@ -246,7 +246,9 @@
                                         <td align="left"></td>
                                         <td align="left" valign="top">
                                             @isset($result['Findings'])
-                                                {{ $result['Findings'] }}
+                                                @if(!preg_match('/Hepatitis:/i', $result['Findings']))
+                                                    {{ $result['Findings'] }}
+                                                @endif
                                             @endisset
                                         </td>
                                         <td align="left" valign="top">
