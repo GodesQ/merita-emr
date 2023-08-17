@@ -115,7 +115,11 @@
                               </td>
                               <td>RELIGION:<br>
                                 <b>
-                                <?=$admission->patient->patientinfo->religion?>
+                                    @if($admission->patient->patientinfo->religion == 'OTHERS')
+                                        <?=$admission->patient->patientinfo->religion_other?>
+                                    @else
+                                        <?=$admission->patient->patientinfo->religion?>
+                                    @endif
                                 </b>
                               </td>
                             </tr>
@@ -141,7 +145,7 @@
                             <tr>
                               <td colspan="3">POSITION APPLIED FOR:<br>
                                 <b>
-                                <?=$admission->position?>
+                                    <?=$admission->position?>
                                 </b>
                               </td>
                               <td colspan="2">COMPANY:<br>
