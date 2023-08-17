@@ -373,12 +373,8 @@ class AdmissionController extends Controller
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
 
-            if($patient->email == 'jamesgarnfil15@gmail.com') {
-                Mail::to($patient->email)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
-            } else {
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
-                }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
             }
         }
 
