@@ -518,7 +518,7 @@
                                                                     <span class="fontBoldLrg"><u>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
-                                                                    <span class="fontMed"><span style="margin-right: 5rem;">RESULT:</span>
+                                                                    <span class="fontMed"><span style="margin-right: 3rem;">RESULT:</span>
                                                                         FIT TO WORK
                                                                         @if ($admission->exam_physical)
                                                                             @if ($admission->exam_physical->seastatus == 'fit')
