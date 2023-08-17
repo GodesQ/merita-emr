@@ -562,7 +562,7 @@
                                                                                         <span class="fontMed">RESULT:<br>
                                                                                             <span style="margin-left:50px">FIT FOR DUTY
                                                                                                 @if ($admission->exam_physical)
-                                                                                                    @if($admission->exam_physical->seastatus == 'seafit')
+                                                                                                    @if($admission->exam_physical->seastatus == 'seafit' || $admission->exam_physical->seastatus == 'fit')
                                                                                                         <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                                                     @else
                                                                                                         <img src="../../../app-assets/images/icoUncheck.gif" width="10">

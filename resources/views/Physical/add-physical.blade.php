@@ -2535,7 +2535,17 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
-                                                                                                                FIT
+                                                                                                                FIT TO WORK
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    style="width: 20px; height: 20px;"
+                                                                                                                    name="seastatus"
+                                                                                                                    id="fit"
+                                                                                                                    value="fit">
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                align="center">
+                                                                                                                FIT FOR SEA DUTY
                                                                                                                 <input
                                                                                                                     type="radio"
                                                                                                                     style="width: 20px; height: 20px;"

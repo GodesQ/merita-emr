@@ -2034,7 +2034,13 @@ echo
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
-                                                                                                                FIT
+                                                                                                                FIT TO WORK
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="fit" value="fit"
+                                                                                                                    {{ $exam->seastatus == "fit" ? "checked" : "" }}>
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                align="center">
+                                                                                                                FIT FOR SEA DUTY
                                                                                                                 <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit" value="seafit"
                                                                                                                     {{ $exam->seastatus == "seafit" ? "checked" : "" }}>
                                                                                                             </td>

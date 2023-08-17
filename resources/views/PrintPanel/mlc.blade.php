@@ -519,9 +519,9 @@
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
                                                                     <span class="fontMed"><span style="margin-right: 8rem;">RESULT:</span>
-                                                                        FIT FOR SEA DUTY
+                                                                        FIT TO WORK
                                                                         @if ($admission->exam_physical)
-                                                                            @if ($admission->exam_physical->fit == 'Fit')
+                                                                            @if ($admission->exam_physical->seastatus == 'fit')
                                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                             @else
                                                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
@@ -529,9 +529,21 @@
                                                                         @else
                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
-                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNFIT FOR SEA DUTY
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        FIT FOR SEA DUTY
                                                                         @if ($admission->exam_physical)
-                                                                            @if($admission->exam_physical->fit == 'Unfit')
+                                                                            @if ($admission->exam_physical->seastatus == 'seafit')
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
+                                                                        @else
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                        @endif
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        UNFIT FOR SEA DUTY
+                                                                        @if ($admission->exam_physical)
+                                                                            @if($admission->exam_physical->seastatus == 'seaunfit')
                                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="10">
                                                                             @else
                                                                                 <img src="../../../app-assets/images/icoUncheck.gif" width="10">
