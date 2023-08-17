@@ -369,9 +369,16 @@ class AdmissionController extends Controller
                 'unfit_to_work_date' => $request->unfit_date,
             ]);
 
+            $cause_of_unfit = isset($request->cause_of_unfit) ? $request->cause_of_unfit : null;
+
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission));
+
+            if($patient->email == 'jamesgarnfil15@gmail.com') {
+                Mail::to($patient->email)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
+            } else {
+                foreach ($recipients as $key => $recipient) {
+                    Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
+                }
             }
         }
 

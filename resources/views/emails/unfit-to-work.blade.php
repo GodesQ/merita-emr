@@ -152,16 +152,18 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <!--<tr>-->
-                                            <!--    <td>-->
-                                            <!--        <div style="margin-bottom: 1rem;">-->
-                                            <!--            <div><b>Remarks/Recommendation</b></div>-->
-                                            <!--            <div>-->
-                                            <!--                @php echo nl2br($admission->remarks) @endphp-->
-                                            <!--            </div>-->
-                                            <!--        </div>-->
-                                            <!--    </td>-->
-                                            <!--</tr>-->
+                                            @if($cause_of_unfit)
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-bottom: 1rem;">
+                                                            <div><b>Cause of Unfit</b></div>
+                                                            <div>
+                                                                {{$cause_of_unfit}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </table>
                                     </td>
                                 </tr>
