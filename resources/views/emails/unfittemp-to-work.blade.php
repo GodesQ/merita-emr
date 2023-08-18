@@ -96,7 +96,7 @@
                             style="padding: 20px 20px 0px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Google Sans', Helvetica, Arial, sans-serif; font-size: 3px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                             <img src=" https://meritaclinic.ph/wp-content/uploads/2022/03/Merita-Logo.png" width="125"
                                 height="120" style="display: block; border: 0px;" />
-                            <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 0;">LAB RESULT STATUS</h1>
+                            <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 0;">MEDICAL RESULT STATUS</h1>
                         </td>
                     </tr>
                 </table>
@@ -181,8 +181,9 @@
                     <tr>
                         <td bgcolor="#ffffff" align="center"
                             style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Google Sans', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">If you have any questions, just reply to this email&mdash;we're always
-                                happy to help out.</p>
+                            <p style="margin: 0;">Copy of your medical result(s) was forwarded to your respective agency. Requesting additional copy would require additional fee.
+                                <br><br>
+                                If you have any questions please call our official hotline 84609906—we’re always happy to help</p>
                         </td>
                     </tr>
                     <tr>
