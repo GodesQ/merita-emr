@@ -530,6 +530,7 @@ class AdminController extends Controller
 
     public function update_employee_signature(Request $request) {
         if ($request->old_signature == $request->signature) {
+            return response(['status' => 'Same Signature']);
             $signature = $request->old_signature;
         } else {
             if (preg_match('/^data:image\/png;base64,/', $request->signature)) {
