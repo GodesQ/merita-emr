@@ -534,15 +534,11 @@ class AdminController extends Controller
             $signature = $request->old_signature;
         } else {
             if (preg_match('/^data:image\/png;base64,/', $request->signature)) {
-                return response([
-                    'signature' => $request->signature,
-                    'status' => true
-                ]);
-                $sign = $request->signature;
-                $signature = base64_encode($sign);
+                $signature = $request->signature;
+                // $signature = base64_encode($sign);
             } else {
-                $sign = 'data:image/png;base64,' . $request->signature;
-                $signature = base64_encode($sign);
+                $signature = 'data:image/png;base64,' . $request->signature;
+                // $signature = base64_encode($sign);
                 return response([
                     'signature' => $request->signature,
                     'status' => false
