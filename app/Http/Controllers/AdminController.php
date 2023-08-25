@@ -529,7 +529,6 @@ class AdminController extends Controller
     }
 
     public function update_employee_signature(Request $request) {
-        return response()->json($request->signature);
         if ($request->old_signature == $request->signature) {
             $signature = $request->old_signature;
         } else {
