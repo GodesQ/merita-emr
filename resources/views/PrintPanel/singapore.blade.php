@@ -999,7 +999,7 @@
             </tr>
             <tr>
                 <td>
-                    <table width="100%" cellspacing="0" cellpadding="0" style="margin-bottom: 25rem;">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="margin-bottom: 23.5rem;">
                         <tbody>
                             <tr>
                                 <td>
