@@ -541,9 +541,9 @@ class AdminController extends Controller
             }
         }
 
-        $mast_patient = User::where('id', $request->id)->first();
-        $mast_patient->patient_signature = $signature;
-        $save = $mast_patient->save();
+        $user = User::where('id', $request->id)->first();
+        $user->signature = $signature;
+        $save = $user->save();
 
         if($save) return response()->json(['status' => true, 'message' => 'Signature updated successfully.'], 200);
     }
