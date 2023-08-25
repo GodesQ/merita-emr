@@ -528,6 +528,26 @@ class AdminController extends Controller
         return view('Employee.edit-employee', compact('employee', 'departments', 'data'));
     }
 
+    public function update_employee_signature(Request $request) {
+        if ($request->old_signature == $request->signature) {
+            $signature = $request->old_signature;
+        } else {
+            if (preg_match('/^data:image\/png;base64,/', $request->signature)) {
+                $sign = $request->signature;
+                $signature = base64_encode($sign);
+            } else {
+                $sign = 'data:image/png;base64,' . $request->signature;
+                $signature = base64_encode($sign);
+            }
+        }
+
+        $mast_patient = User::where('id', $request->id)->first();
+        $mast_patient->patient_signature = $signature;
+        $save = $mast_patient->save();
+
+        if($save) return response()->json(['status' => true, 'message' => 'Signature updated successfully.'], 200);
+    }
+
     public function update_employees(Request $request)
     {
         // dd($request->all());

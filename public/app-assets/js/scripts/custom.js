@@ -74,6 +74,29 @@ function onDone() {
     }
 }
 
+function onEmployeeDone() {
+    if (NumberOfTabletPoints() != 0) {
+        SetJustifyMode(5);
+        SetImageXSize(300);
+        SetImageYSize(100);
+        SetImagePenWidth(10);
+        GetSigImageB64(SigEmployeeImageCallback);
+
+    } else if(!signaturePad._isEmpty) {
+        submit_employee_signature(signaturePad.toDataURL())
+    } else {
+        Swal.fire(
+            'Failed!',
+            'Please sign before continuing!',
+            'warning'
+        )
+    }
+}
+
+function SigImageCallback(str) {
+    submit_employee_signature(str);
+}
+
 function SigImageCallback(str) {
     submit_patient_signature(str);
 }
@@ -84,6 +107,44 @@ window.onbeforeunload = function(evt) {
 };
 
 onSign();
+
+function submit_employee_signature(str) {
+    let old_signature_value = document.querySelector('#old_signature').value;
+    let employee_id = $('#employee_id').val();
+    let csrf = $('#update_employee input[name="_token"]').val();
+
+    let data = {
+        "_token": csrf,
+        "id": employee_id,
+        "old_signature": old_signature_value,
+        "signature": str,
+    }
+
+    $.ajax({
+        url: "/update_employee_signature",
+        method: 'POST',
+        data: data,
+        success: function(response) {
+            if (response.status) {
+                Swal.fire(
+                    'Update!',
+                    'Update Successfully!',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(true);
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Not Send!',
+                    'Update Failed!',
+                    'warning'
+                )
+            }
+        }
+    });
+}
 
 function submit_patient_signature(str) {
     let old_signature_value = document.querySelector('#old_signature').value;

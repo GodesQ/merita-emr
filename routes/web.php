@@ -350,6 +350,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::get('/edit_employees', [AdminController::class, 'edit_employees'])->name('employee.edit');
 
+        Route::post('/update_employee_signature', [AdminController::class, 'update_employee_signature'])->name('update_employee_signature');
+
         Route::post('/update_employees', [AdminController::class, 'update_employees'])->name('employee.update');
 
         Route::delete('/employee_delete', [AdminController::class, 'delete_employee'])->name('employee.delete');
@@ -815,6 +817,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/user_profile', [UserController::class, 'user_profile']);
     Route::post('/update_profile', [UserController::class, 'update_profile']);
+
 
     Route::post('/employee_change_password', [UserController::class, 'employee_change_password']);
 

@@ -105,7 +105,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <input type="hidden" name="id" value="{{$employee->id}}">
+                                                        <input type="hidden" name="id" id="employee_id" value="{{$employee->id}}">
                                                         <input type="hidden" name="old_image"
                                                             value="{{$employee->employee_image}}">
                                                         <input type="hidden" name="employee_image" class="patient-image"
@@ -214,7 +214,7 @@
                                                                 <canvas class="signature" width="320" height="95"></canvas> <br>
                                                                 <div class="btn-group">
                                                                     <button type='button' class="btn btn-solid btn-primary clear-signature" onclick="javascript:onClear()">Clear</button>
-                                                                    <button type='button' class="btn btn-solid btn-success" onclick="javascript:onDone()">Save Signature</button>
+                                                                    <button type='button' class="btn btn-solid btn-success" onclick="javascript:onEmployeeDone()">Save Signature</button>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -225,7 +225,7 @@
                                                                 <option value="{{$employee->dept_id}}">{{$employee->dept_name}}
                                                                 </option>
                                                                 @foreach ($departments as $department)
-                                                                <option value="{{$department->id}}">{{$department->dept}}
+                                                                <option value="{{$department->id}}">{{ $department->dept }}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
