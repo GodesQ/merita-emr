@@ -182,7 +182,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="civil_status">Civil Status</label>
-                                                <select name="civil_status" id="civil_status">
+                                                <select name="civil_status" id="civil_status" class="form-control">
                                                     <option value="Single">Single</option>
                                                     <option value="Married">Married</option>
                                                     <option value="Widowed">Widowed</option>
@@ -194,7 +194,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
-                                                <select name="gender" id="gender">
+                                                <select name="gender" id="gender" class="form-control">
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                 </select>
