@@ -31,7 +31,7 @@
                         <div class="col-md-3 form-group">
                             <label>Actions</label><br>
                            <button id="filter_button" name="action" value="filter" class="btn btn-primary btn-solid">Filter</button>
-                           <button id="filter_button" name="action" value="clear" class="btn btn-secondary btn-solid">Select All</button>                            
+                           <button id="filter_button" name="action" value="clear" class="btn btn-secondary btn-solid">Select All</button>
                         </div>
                         <div class="col-md-3 form-group">
                             <label><strong>Status :</strong></label>
@@ -49,7 +49,7 @@
                 </form>
             </div>
         </div>
-        <div class="row p-1">
+        {{-- <div class="row p-1">
             <div class="shadow-sm col-lg-3 bg-white p-1">
                 <span class="h6 font-weight-normal">DECK</span> <br>
                 <div class="h4 font-bold mt-50">{{$category_count['deck']}} PATIENTS</div>
@@ -66,7 +66,7 @@
                 <span class="h6 font-weight-normal">OTHER</span> <br>
                 <div class="h4 font-bold mt-50">{{$category_count['other']}} PATIENTS</div>
             </div>
-        </div>
+        </div> --}}
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -170,8 +170,8 @@
             },
         ],
     });
-    
-    
+
+
     $('#status').change(function() {
         table.draw();
     });
