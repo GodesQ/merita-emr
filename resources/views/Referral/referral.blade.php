@@ -36,7 +36,7 @@
                                 <th>Vessel</th>
                                 <th>SSRB</th>
                                 <th>Status</th>
-                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
