@@ -15,7 +15,7 @@
                 <div>
                     @if($patient->patient_image)
                         <img src="../../../app-assets/images/profiles/{{ $patient->patient_image }}" style="width: 85px; height: 85px; object-fit: cover;" />
-                    @else   
+                    @else
                         <img src="../../../app-assets/images/profiles/profilepic.jpg" style="width: 85px; height: 85px; object-fit: cover;" />
                     @endif
                 </div>
@@ -110,24 +110,27 @@
                 </div>
                 <div class="row my-2">
                     <div class="col-md-6">
-                       <h6><b>Remarks for Passport Expiration Date ({{$patient->patientinfo->passport_expdate ? date_format( new DateTime($patient->patientinfo->passport_expdate), 'F d, Y') : "No Record"}})</b></h6>  
+                       <h6><b>Remarks for Passport Expiration Date ({{$patient->patientinfo->passport_expdate ? date_format( new DateTime($patient->patientinfo->passport_expdate), 'F d, Y') : "No Record"}})</b></h6>
                        <p id="remarks-passport"></p>
                     </div>
                     <div class="col-md-6">
-                       <h6><b>Remarks for SSRB Expiration Date ({{$patient->patientinfo->srb_expdate ? date_format( new DateTime($patient->patientinfo->srb_expdate), 'F d, Y') : "No Record"}})</b></h6>  
+                       <h6><b>Remarks for SSRB Expiration Date ({{$patient->patientinfo->srb_expdate ? date_format( new DateTime($patient->patientinfo->srb_expdate), 'F d, Y') : "No Record"}})</b></h6>
                        <p id="remarks-srb"></p>
                     </div>
                 </div>
                 <hr>
                 <div class="row mt-2">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h6><b>Registered Date :</b> <span>{{ date_format( new DateTime($patient->created_date), 'F d, Y H:i A') }}</span></h6>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h6><b>Admission Date :</b> <span>{{ date_format( new DateTime(optional($patient->admission)->trans_date), 'F d, Y H:i A') }}</span></h6>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h6><b>Medical Done Date :</b> <span>{{$patient->medical_done_date}}</span></h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6><b>Fit to Work Date :</b> <span>{{ $patient->fit_to_work_date ? date_format( new DateTime(optional($patient->fit_to_work_date)), 'F d, Y H:i') : null }}</span></h6>
                     </div>
                 </div>
             </div>
