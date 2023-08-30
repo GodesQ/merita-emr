@@ -93,7 +93,7 @@ function onEmployeeDone() {
     }
 }
 
-function SigImageCallback(str) {
+function SigEmployeeImageCallback(str) {
     submit_employee_signature(str);
 }
 
