@@ -61,11 +61,11 @@ class AdminController extends Controller
         //     'patientcode' => DB::raw('registered_patientcode')
         // ]);
 
-        DB::table('mast_patient')
-            ->where('firstname', null)
-            ->where('middlename', null)
-            ->where('lastname', null)
-            ->delete();
+        // DB::table('mast_patient')
+        //     ->where('firstname', null)
+        //     ->where('middlename', null)
+        //     ->where('lastname', null)
+        //     ->delete();
     }
 
     public function today_patients(Request $request)
