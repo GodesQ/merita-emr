@@ -107,7 +107,7 @@
                 @yield('remedical')
                 <div class="mx-1 my-25">
                     <a href="/laboratory_result" class="text-white btn btn-primary"><i class="fa fa-file"></i>
-                        Laboratory Result Status</a>
+                        Medical Result Status</a>
                 </div>
             </div>
         </div>

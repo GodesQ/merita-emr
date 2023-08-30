@@ -34,10 +34,10 @@ class FitToWork extends Mailable
     {
         $pdf = $this->pdf;
         if($pdf != null) {
-            return $this->from('processing@meritaclinic.ph')->subject('Laboratory Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission])
+            return $this->from('processing@meritaclinic.ph')->subject('Medical Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission])
             ->attachData($this->pdf->output(), 'prescription.pdf');
         } else {
-             return $this->from('processing@meritaclinic.ph')->subject('Laboratory Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
+             return $this->from('processing@meritaclinic.ph')->subject('Medical Result Status')->view('emails.fit-to-work', ["patient" => $this->patient, "agency" => $this->agency, "admission" => $this->admission]);
         }
     }
 }

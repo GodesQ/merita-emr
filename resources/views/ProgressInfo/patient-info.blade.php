@@ -117,7 +117,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        Your Laboratory Result Status:
+                        Your Medical Result Status:
                         <strong>
                             @if ($patient->admission->lab_status == 2)
                                 <b><u>FIT TO WORK</u></b>

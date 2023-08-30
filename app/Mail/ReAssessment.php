@@ -37,14 +37,14 @@ class ReAssessment extends Mailable
             $data = $this->data;
             $schedule = $this->schedule;
             $patient = $this->patient;
-            return $this->from('processing@meritaclinic.ph')->subject('Laboratory Result Status')
+            return $this->from('processing@meritaclinic.ph')->subject('Medical Result Status')
             ->view('emails.reassessment', compact('data', 'schedule', 'patient'))
             ->attachData($this->pdf->output(), 'prescription.pdf');
         } else {
             $data = $this->data;
             $schedule = $this->schedule;
             $patient = $this->patient;
-            return $this->from('processing@meritaclinic.ph')->subject('Laboratory Result Status')
+            return $this->from('processing@meritaclinic.ph')->subject('Medical Result Status')
             ->view('emails.reassessment', compact('data', 'schedule', 'patient'));
         }
 

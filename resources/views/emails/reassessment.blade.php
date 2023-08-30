@@ -79,7 +79,7 @@
     <!-- HIDDEN PREHEADER TEXT -->
     <div
         style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Google Sans', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-        Hello! This is your laboratory result status.
+        Hello! This is your medical result status.
     </div>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <!-- LOGO -->
