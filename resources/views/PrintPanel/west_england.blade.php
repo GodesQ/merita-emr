@@ -617,7 +617,7 @@
                                                                                         @if ($admission->exam_physical)
                                                                                             {{date_format(new DateTime($admission->exam_physical->trans_date), "F d, Y")}}
                                                                                         @endif<br>
-                                                                                        @if($admission->exam_physical && $admission->agency_id != 19)
+                                                                                        @if($admission->exam_physical && $admission->agency_id == 3)
                                                                                             <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="60" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
                                                                                         @else
                                                                                             <br>
