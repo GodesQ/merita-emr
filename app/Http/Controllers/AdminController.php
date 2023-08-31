@@ -33,11 +33,11 @@ class AdminController extends Controller
 {
     public function migrate_patients(Request $request) {
 
-        $patients = Admission::whereIn('agency_id', [58, 55, 57, 59])->with('patient')->get();
+        $patients = Admission::whereIn('package_id', [123, 125, 127, 129])->with('patient')->get();
 
         foreach ($patients as $key => $patient) {
             $patient->update([
-                'agency_id' => 3
+                'package_id' => 3
             ]);
         }
 
