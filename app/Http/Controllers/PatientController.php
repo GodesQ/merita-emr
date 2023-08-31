@@ -254,7 +254,7 @@ class PatientController extends Controller
             $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
 
             if($request->main_id == 14850) {
-                dd($request->all());
+                // dd($request->all());
             }
 
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
