@@ -87,7 +87,7 @@ class AgencyController extends Controller
                     });
                 }
 
-                $patients->with(['patientinfo.package', 'admission.package', 'admission.package.exams']);
+                $patients->with(['patientinfo.package', 'admission.package']);
 
                 $patients = $patients->get();
 
