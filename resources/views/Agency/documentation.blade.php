@@ -152,7 +152,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-xl-6 col-sm-12 col-12">
-                                                                <div class="card bg-primary bg-darken-3">
+                                                                <div class="card" style="background: #e4a917 !important;">
                                                                     <div class="card-content">
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">

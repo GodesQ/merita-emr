@@ -316,7 +316,7 @@ class Admission extends Model
             }
 
             if(count($exams) == count($completed_exams) && !$status) {
-                $status = '<div class="badge mx-1 p-1 bg-success bg-darken-2">MEDICAL DONE</div>';
+                $status = '<div class="badge mx-1 p-1 bg-darken-2" style="background: #e4a917 !important;">MEDICAL DONE</div>';
             }
 
             if (in_array('completed', $exams) && !$status) {
