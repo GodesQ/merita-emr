@@ -349,7 +349,7 @@ class PatientController extends Controller
             if($request->agency_id == 3 || $request->agency_id == 53) {
                 $details = [
                     'name' => strtoupper($request->firstName) . ' ' . strtoupper($request->lastName),
-                    'agency' => 'Bahia Shipping Services, Inc.' . '-' . $request->bahia_vessel
+                    'agency' => 'Bahia Shipping Services, Inc.' . ' - ' . $request->bahia_vessel
                 ];
 
                 $bollete_braemar_vessel = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
