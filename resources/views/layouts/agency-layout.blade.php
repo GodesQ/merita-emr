@@ -106,12 +106,16 @@
                     <a class="btn btn-solid white" style="background-color: #156f29;" href="/agency_dashboard"><i class=" feather icon-home"></i>
                         <span data-i18n="Add Slip">Home</span>
                     </a>
-                    <a class="btn btn-solid white" style="background-color: #156f29;" href="/add_refferal_slip"><i class=" feather icon-file"></i>
-                        <span data-i18n="Add Slip">Add Referral Slip</span>
-                    </a>
-                    <a class="btn btn-solid white" style="background-color: #156f29;" href="/refferal_slips"><i class=" feather icon-file-text"></i>
-                        <span data-i18n="Refferal Slips">Referral Slips</span>
-                    </a>
+                    @if(!in_array(Session::get('agencyId'), [59, 58, 57, 55, 68]))
+                        <a class="btn btn-solid white" style="background-color: #156f29;" href="/add_refferal_slip"><i class=" feather icon-file"></i>
+                            <span data-i18n="Add Slip">Add Referral Slip</span>
+                        </a>
+                    @endif
+                    @if(!in_array(Session::get('agencyId'), [59, 58, 57, 55, 68]))
+                        <a class="btn btn-solid white" style="background-color: #156f29;" href="/refferal_slips"><i class=" feather icon-file-text"></i>
+                            <span data-i18n="Refferal Slips">Referral Slips</span>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

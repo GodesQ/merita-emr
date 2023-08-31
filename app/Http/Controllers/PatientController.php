@@ -358,20 +358,20 @@ class PatientController extends Controller
                 $offshore_vessel = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
 
                 if(in_array($patient_vessel, $bollete_braemar_vessel)) {
-                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    // Mail::to('bssi.bol.hotel.@bahiashipping.ph')->send(new RegisteredUser($details));
+                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    Mail::to('bssi.bol.hotel.@bahiashipping.ph')->send(new RegisteredUser($details));
                 } else if(in_array($patient_vessel, $balmoral_vessel)) {
-                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    // Mail::to('bssi.bl.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
+                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    Mail::to('bssi.bl.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
                 } else if(in_array($patient_vessel, $borealis_vessel)) {
-                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    // Mail::to('bssi.bor.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
+                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    Mail::to('bssi.bor.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
                 } else if(in_array($patient_vessel, $offshore_vessel)) {
-                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    // Mail::to('maan.cortes@bahiashipping.ph')->send(new RegisteredUser($details));
+                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    Mail::to('maan.cortes@bahiashipping.ph')->send(new RegisteredUser($details));
                 } else {
-                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    // Mail::to('bssi.deckeng@bahiashipping.ph')->send(new RegisteredUser($details));
+                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    Mail::to('bssi.deckeng@bahiashipping.ph')->send(new RegisteredUser($details));
                 }
             }
 
