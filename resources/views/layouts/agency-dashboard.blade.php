@@ -5,7 +5,18 @@
 @endsection
 
 @section('content')
+<style>
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
 
+    @media screen and (max-width: 1140px) {
+        .data-table tbody tr td {
+            font-size: 11px;
+        }
+    }
+</style>
 <div class="app-content content">
     <div class="container my-2">
         <div class="card">
