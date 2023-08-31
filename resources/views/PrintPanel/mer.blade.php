@@ -2162,7 +2162,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
@@ -2311,9 +2311,9 @@
                                                             <tr>
                                                                 <td width="51%"><b>NAME AND SIGNATURE OF
                                                                         EXAMINING/AUTHORIZED PHYSICIAN:</b></td>
-                                                                <td width="42%" style="border-bottom : 1px solid">
+                                                                <td width="42%" style="border-bottom : 1px solid; text-align: center !important;">
                                                                     @if($admission->exam_physical && $admission->agency_id != 19)
-                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="250" height="60" style="object-fit: cover; transform: translate(-23px, 19px); margin-top: -25px;" />
+                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="310" height="65" style="object-fit: cover; transform: translate(-23px, 19px); margin-top: -25px;" />
                                                                     @else
                                                                         <br>
                                                                         <br>
@@ -2333,9 +2333,9 @@
                                                                         cellspacing="0" cellpadding="0">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td width="15%"><b>LICENSE NUMBER
+                                                                                <td width="17%"><b>LICENSE NUMBER
                                                                                         :</b></td>
-                                                                                <td width="25%"
+                                                                                <td width="20%"
                                                                                     style="border-bottom : 1px solid">
                                                                                     <b>
                                                                                         @if ($admission->exam_physical)
