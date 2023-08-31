@@ -200,7 +200,7 @@ class AgencyController extends Controller
                                 ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
                                 ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
                                 ->whereHas('admission', function ($q) {
-                                    return $q->where('agency_id', session()->get('agencyId'));
+                                    return $q->where('agency_id', 3)->orWhere('agency_id', session()->get('agencyId'));
                                 });
                         }
                     }, true)
