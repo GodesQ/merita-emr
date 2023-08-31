@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function migrate_patients(Request $request) {
 
         $patients = Admission::whereIn('agency_id', [58, 55, 57, 59])->with('patient')->get();
-        dd($patients);
+
         foreach ($patients as $key => $patient) {
             $patient->update([
                 'agency_id' => 3
