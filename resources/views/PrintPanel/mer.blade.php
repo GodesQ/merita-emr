@@ -2312,6 +2312,12 @@
                                                                 <td width="51%"><b>NAME AND SIGNATURE OF
                                                                         EXAMINING/AUTHORIZED PHYSICIAN:</b></td>
                                                                 <td width="42%" style="border-bottom : 1px solid">
+                                                                    @if($admission->exam_physical && $admission->agency_id != 19)
+                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="250" height="60" style="object-fit: cover; transform: translate(-23px, 19px); margin-top: -25px;" />
+                                                                    @else
+                                                                        <br>
+                                                                        <br>
+                                                                    @endif <br>
                                                                     <b>
                                                                         @if ($medical_director)
                                                                             {{ $medical_director->firstname . ' ' . $medical_director->middlename[0] . '.' . ' ' . $medical_director->lastname }},
