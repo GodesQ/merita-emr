@@ -97,6 +97,13 @@ class AgencyController extends Controller
 
                 return Datatables::of($patients)
                     ->addIndexColumn()
+                    ->addColumn('vessel', function ($row) {
+                        if ($row->admission) {
+                            return $package = $row->admission->vesselname;
+                        } else {
+                            return $package = $row->patientinfo->vessel;
+                        }
+                    })
                     ->addColumn('medical_package', function ($row) {
                         if ($row->admission) {
                             return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';

@@ -84,6 +84,7 @@
                                 <th>Lastname</th>
                                 <th>Firstname</th>
                                 <th>Category</th>
+                                <th>Vessel</th>
                                 <th>Package</th>
                                 <th>Passport No.</th>
                                 <th>SSRB No.</th>
@@ -135,6 +136,12 @@
             {
                 data: 'category',
                 name: 'category',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'vessel',
+                name: 'vessel',
                 orderable: true,
                 searchable: true
             },
