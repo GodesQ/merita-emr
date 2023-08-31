@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\VerificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +24,9 @@ use App\Models\Audiometry;
 use App\Models\Refferal;
 use App\Models\PatientInfo;
 use App\Models\DeclarationForm;
+
+use App\Mail\VerificationMail;
+use App\Mail\RegisteredUser;
 
 class PatientController extends Controller
 {
@@ -324,24 +326,51 @@ class PatientController extends Controller
                     'firstname' => $mast_patient->firstname,
                     'lastname' => $mast_patient->lastname,
                 ]);
+
                 return redirect('/patient_info')->with('status', "Oops! Looks like you're not ready to go in clinic. Please Stay atleast 7 days to continue in medical clinic.");
             }
 
-            if ($request->admit_type == 'Normal') {
-                $request->session()->put([
-                    'classification' => 'patient',
-                    'patientCode' => $mast_patient->patientcode,
-                    'patientId' => $mast_patient->id,
-                    'admissionId' => $mast_patient->admission_id,
-                    'patient_image' => $mast_patient->patient_image,
-                    'created_date' => $mast_patient->created_date,
-                    'firstname' => $mast_patient->firstname,
-                    'lastname' => $mast_patient->lastname,
-                ]);
-                return redirect('/schedule_appointment')->with('success', 'Register Successfully');
-            } else {
-                return redirect('/patient_info')->with('success', 'Register Successfully');
+            $request->session()->put([
+                'classification' => 'patient',
+                'patientCode' => $mast_patient->patientcode,
+                'patientId' => $mast_patient->id,
+                'admissionId' => $mast_patient->admission_id,
+                'patient_image' => $mast_patient->patient_image,
+                'created_date' => $mast_patient->created_date,
+                'firstname' => $mast_patient->firstname,
+                'lastname' => $mast_patient->lastname,
+            ]);
+
+            if($request->agency_id == 3 || $request->agency_id == 53) {
+                $details = [
+                    'name' => $request->firstname . ' ' . $request->lastname,
+                    'agency' => 'Bahia Shipping Services, Inc.' . '-' . $patient_vessel
+                ];
+
+                $bollete_braemar_vessel = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
+                $balmoral_vessel = ['BALMORAL', 'MS BALMORAL'];
+                $borealis_vessel = ['BOREALIS', 'MS BOREALIS'];
+                $offshore_vessel = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
+
+                if(in_array($patient_vessel, $bollete_braemar_vessel)) {
+                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    // Mail::to('bssi.bol.hotel.@bahiashipping.ph')->send(new RegisteredUser($details));
+                } else if(in_array($patient_vessel, $balmoral_vessel)) {
+                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    // Mail::to('bssi.bl.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
+                } else if(in_array($patient_vessel, $borealis_vessel)) {
+                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    // Mail::to('bssi.bor.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
+                } else if(in_array($patient_vessel, $offshore_vessel)) {
+                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    // Mail::to('maan.cortes@bahiashipping.ph')->send(new RegisteredUser($details));
+                } else {
+                    Mail::to('james@godesq.com')->send(new RegisteredUser($details));
+                    // Mail::to('bssi.deckeng@bahiashipping.ph')->send(new RegisteredUser($details));
+                }
             }
+
+            return redirect('/schedule_appointment')->with('success', 'Register Successfully');
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
