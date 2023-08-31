@@ -47,39 +47,7 @@ class AgencyController extends Controller
             $category_count = [];
 
             $agencyId = session()->get('agencyId');
-
-            $patients_deck_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
-                return $q->where('agency_id', $agencyId)->where('category', 'DECK SERVICES');
-            })->count();
-
-            $patients_engine_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
-                return $q->where('agency_id', $agencyId)->where('category', 'ENGINE SERVICES');
-            })->count();
-
-            $patients_catering_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
-                return $q->where('agency_id', $agencyId)->where('category', 'CATERING SERVICES');
-            })->count();
-
-            $patients_other_count = Patient::with('patientinfo', 'admission')->whereHas('admission', function($q) use ($agencyId) {
-                return $q->where('agency_id', $agencyId)->where('category', 'OTHER SERVICES');
-            })->count();
-
-            // $deck_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'DECK SERVICES')->count();
-
-            // $engine_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'ENGINE SERVICES')->count();
-
-            // $catering_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'CATERING SERVICES')->count();
-
-            // $other_counts = Admission::where('agency_id', $data['agencyId'])->where('category', 'OTHER SERVICES')->count();
-
-            $category_count = [
-                'deck' => $patients_deck_count,
-                'engine' => $patients_engine_count,
-                'catering' => $patients_catering_count,
-                'other' => $patients_other_count,
-            ];
-
-            return view('layouts.agency-dashboard', compact('data', 'category_count'));
+            return view('layouts.agency-dashboard', compact('data'));
 
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -98,7 +66,7 @@ class AgencyController extends Controller
                 $agencyId = session()->get('agencyId');
 
                 $patients = Patient::select('*')->whereHas('patientinfo', function ($q) use ($agencyId) {
-                    $agency_ids = [59, 58, 57, 55];
+                    $agency_ids = [59, 58, 57, 55, 68];
 
                     $vessels = [];
 
@@ -107,7 +75,11 @@ class AgencyController extends Controller
                     } elseif ($agencyId == 55) {
                         $vessels = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
                     } elseif ($agencyId == 57) {
-                        $vessels = ['BALMORAL', 'BOREALIS', 'MS BALMORAL', 'MS BOREALIS'];
+                        $vessels = ['BALMORAL', 'MS BALMORAL'];
+                    } elseif ($agencyId == 68) {
+                        $vessels = ['BOREALIS', 'MS BOREALIS'];
+                    } elseif ($agencyId == 59) {
+                        $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN', 'MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR', 'BALMORAL', 'MS BALMORAL', 'BOREALIS', 'MS BOREALIS'];
                     }
 
                     if (in_array($agencyId, $agency_ids)) {
