@@ -257,6 +257,8 @@ class PatientController extends Controller
                 dd($request->all());
             }
 
+            $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
+
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);
@@ -267,7 +269,6 @@ class PatientController extends Controller
             $mast_patient->position_applied = strtoupper($request->positionApplied);
             $mast_patient->created_date = date('Y-m-d h:i:s');
             $mast_patient_save = $mast_patient->save();
-            $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
             $save_patient_info = PatientInfo::create([
                 'main_id' => $request->main_id,
@@ -348,7 +349,7 @@ class PatientController extends Controller
             if($request->agency_id == 3 || $request->agency_id == 53) {
                 $details = [
                     'name' => strtoupper($request->firstName) . ' ' . strtoupper($request->lastName),
-                    'agency' => 'Bahia Shipping Services, Inc.' . '-' . $patient_vessel
+                    'agency' => 'Bahia Shipping Services, Inc.' . '-' . $request->bahia_vessel
                 ];
 
                 $bollete_braemar_vessel = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
