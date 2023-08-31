@@ -65,7 +65,24 @@ class AgencyController extends Controller
 
                 $agencyId = session()->get('agencyId');
 
-                $patients = Patient::select('*')->whereHas('patientinfo', function ($q) use ($agencyId) {
+                $patients = Patient::select('*')
+                ->when(!empty($request->get('search')), function ($query) use ($request) {
+                    $searchQuery = $request->get('search');
+
+                    $query->where(function ($subQuery) use ($searchQuery) {
+                        $subQuery
+                            ->where('firstname', 'LIKE', '%' . $searchQuery . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $searchQuery . '%')
+                            ->orWhere('patientcode', 'LIKE', '%' . $searchQuery . '%')
+                            ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $searchQuery . '%')
+                            ->whereHas('admission', function ($admissionQuery) {
+                                $admissionQuery
+                                    ->where('agency_id', 3)
+                                    ->orWhere('agency_id', session()->get('agencyId'));
+                            });
+                    });
+                })
+                ->whereHas('patientinfo', function ($q) use ($agencyId) {
                     $agency_ids = [59, 58, 57, 55, 68];
 
                     $vessels = [];
@@ -191,18 +208,18 @@ class AgencyController extends Controller
                             });
                         }
 
-                        # if the user search
-                        if (!empty($request->get('search'))) {
-                            $query = $request->get('search');
-                            $instance
-                                ->orWhere('firstname', 'LIKE', '%' . $query . '%')
-                                ->orWhere('lastname', 'LIKE', '%' . $query . '%')
-                                ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
-                                ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
-                                ->whereHas('admission', function ($q) {
-                                    return $q->where('agency_id', 3)->orWhere('agency_id', session()->get('agencyId'));
-                                });
-                        }
+                        // # if the user search
+                        // if (!empty($request->get('search'))) {
+                        //     $query = $request->get('search');
+                        //     $instance
+                        //         ->orWhere('firstname', 'LIKE', '%' . $query . '%')
+                        //         ->orWhere('lastname', 'LIKE', '%' . $query . '%')
+                        //         ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
+                        //         ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
+                        //         ->whereHas('admission', function ($q) {
+                        //             return $q->where('agency_id', 3)->orWhere('agency_id', session()->get('agencyId'));
+                        //         });
+                        // }
                     }, true)
                     ->rawColumns(['status', 'action'])
                     ->make(true);
