@@ -130,7 +130,7 @@
                         <h6><b>Medical Done Date :</b> <span>{{$patient->medical_done_date}}</span></h6>
                     </div>
                     <div class="col-md-3">
-                        <h6><b>Fit to Work Date :</b> <span>{{ $patient->fit_to_work_date ? date_format( new DateTime(optional($patient)->fit_to_work_date), 'F d, Y H:i') : null }}</span></h6>
+                        <h6><b>Fit to Work Date :</b> <span>{{ $patient->fit_to_work_date ? date_format( new DateTime(optional($patient)->fit_to_work_date), 'F d, Y') : null }}</span></h6>
                     </div>
                 </div>
             </div>
