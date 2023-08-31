@@ -33,8 +33,16 @@ class AdminController extends Controller
 {
     public function migrate_patients(Request $request) {
 
-        $patients = PatientInfo::whereIn('agency_id', [58, 55, 57, 59])->with('patient')->get();
+        $patients = PatientInfo::whereIn('medical_package', [123, 125, 127, 129])->with('patient')->get();
         dd($patients);
+
+        foreach ($patients as $key => $patient) {
+            $patient->update([
+                'agency_id' => 3,
+            ]);
+        }
+
+        echo 'Success';
 
         // $patients = DB::table('mast_patient')
         //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))

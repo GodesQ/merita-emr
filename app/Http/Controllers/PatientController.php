@@ -32,7 +32,7 @@ class PatientController extends Controller
     public function progress_info(Request $request)
     {
         try {
-            $agencies = Agency::all();
+            $agencies = Agency::whereNotIn('id', [58, 55, 57, 59])->get();
 
             $patientInfo = PatientInfo::where('main_id', session()->get('patientId'))->first();
 
@@ -94,7 +94,7 @@ class PatientController extends Controller
     {
         try {
             $patientcode = $request->patientcode;
-            $agencies = Agency::all();
+            $agencies = Agency::whereNotIn('id', [58, 55, 57, 59])->get();
             $data = session()->all();
             $patient = Patient::where('patientcode', $patientcode)->first();
             $patientInfo = DB::table('mast_patientinfo')
@@ -216,7 +216,7 @@ class PatientController extends Controller
         try {
             $id = $_GET['id'];
             $data = session()->all();
-            $agencies = DB::select('select * from mast_agency');
+            $agencies = Agency::whereNotIn('id', [58, 55, 57, 59])->get();
             $data = session()->all();
             $patient = Patient::where('id', $data['patientId'])->first();
             $patientInfo = DB::table('mast_patientinfo')
@@ -586,7 +586,7 @@ class PatientController extends Controller
     public function add_patient()
     {
         try {
-            $agencies = Agency::all();
+            $agencies = Agency::whereNotIn('id', [58, 55, 57, 59])->get();
             $data = session()->all();
             return view('Patient.add-patient', compact('agencies', 'data'));
         } catch (\Exception $exception) {
@@ -710,7 +710,7 @@ class PatientController extends Controller
 
             $patient = Patient::where('id', '=', $id)->with('patientinfo')->first();
 
-            $agencies = Agency::all();
+            $agencies = Agency::whereNotIn('id', [58, 55, 57, 59])->get();
             $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
 
             $medicalHistory = MedicalHistory::where('main_id', '=', $id)->first();
