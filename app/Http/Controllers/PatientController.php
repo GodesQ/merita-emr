@@ -253,6 +253,10 @@ class PatientController extends Controller
             $passport_expdate = \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d');
             $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
 
+            if($request->main_id == 14850) {
+                dd($request->all());
+            }
+
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->lastname = strtoupper($request->lastName);

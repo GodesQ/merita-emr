@@ -66,16 +66,14 @@
                                         <div class="card-body">
                                             <form action="/save-info" class="steps-validation wizard-circle"
                                                 id="patient-form" method="POST">
-                                                <input id="agency" type="hidden"
-                                                    value="{{ optional($referral)->agency_id }}" />
+                                                <input id="agency" type="hidden" value="{{ optional($referral)->agency_id }}" />
                                                 <!-- Step 1 -->
                                                 <h6>Personal Info</h6>
                                                 <!-- <hr> -->
                                                 <fieldset>
                                                     @csrf
                                                     <h4 class="form-section"><i class="feather icon-user"></i> Personal Info</h4>
-                                                    <input required type="hidden" value="{{ session()->get('patientId') }}"
-                                                        name="main_id">
+                                                    <input required type="hidden" value="{{ session()->get('patientId') }}" name="main_id">
                                                     <input type="hidden" name="patientcode" value="{{ session()->get('patientCode') }}">
                                                     <div class=" row">
                                                         <div class="col-lg-3">
