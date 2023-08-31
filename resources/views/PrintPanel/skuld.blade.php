@@ -581,7 +581,7 @@
                                         Signature of Medical Practitioner:
                                     </td>
                                     <td style="border: 1px solid black !important;" width="50%">
-                                        @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+                                        @if($admission->exam_physical && $admission->agency_id != 19)
                                             <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="240" height="60" style="object-fit: cover; transform: translate(-45px, 13px); margin-top: -25px;" />
                                         @else
                                             <br>

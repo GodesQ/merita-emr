@@ -2400,7 +2400,7 @@
                             <tbody>
                                 <tr>
                                     <td height="80" valign="bottom" align="center">
-                                        @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+                                        @if($admission->exam_physical && $admission->agency_id != 19)
                                             <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="220" height="70" style="object-fit: cover; transform: translate(13px, 25px); margin-top: -25px;" />
                                         @else
                                             <br>

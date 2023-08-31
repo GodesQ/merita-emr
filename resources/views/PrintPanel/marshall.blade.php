@@ -647,7 +647,14 @@
                             <tbody>
                                 <tr>
                                     <td width="20%" valign="bottom">SIGNATURE OF PHYSICIAN</td>
-                                    <td width="20%" height="40" style="border-bottom: 1px solid black;"></td>
+                                    <td width="20%" height="40" style="border-bottom: 1px solid black;">
+                                        @if($admission->exam_physical && $admission->agency_id != 19)
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="50" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                        @else
+                                            <br>
+                                            <br>
+                                        @endif
+                                    </td>
                                     <td width="20%"></td>
                                     <td width="20%" valign="bottom" style="border-bottom: 1px solid black;" align="center">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}</td>
                                     <td width="10%"></td>

@@ -570,7 +570,7 @@
                                                                     DATE OF EXAMINATION:
                                                                          {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}<br><br>
                                                                     APPROVED BY:<br>
-                                                                    @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+                                                                    @if($admission->exam_physical && $admission->agency_id != 19)
                                                                         <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="50" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
                                                                     @else
                                                                         <br>

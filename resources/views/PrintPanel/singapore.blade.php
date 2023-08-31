@@ -2269,7 +2269,14 @@
                                             <div class="s3" style="text-align: center">Date</div>
                                         </div>
                                         <div>
-                                            <div style="width: 150px; text-align: center;">&nbsp;&nbsp;&nbsp;</div>
+                                            <div style="width: 150px; text-align: center;">
+                                                @if($admission->exam_physical && $admission->agency_id != 19)
+                                                    <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="250" height="60" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                                @else
+                                                    <br>
+                                                    <br>
+                                                @endif
+                                            </div>
                                             <div class="s3" style="text-align: center; border-top: 1px solid black; ">Signature of Medical Practioner</div>
                                         </div>
                                         <div>
@@ -2596,7 +2603,9 @@
                                             <div class="s3" style="text-align: center">Date</div>  <br>
                                         </div>
                                         <div>
-                                            <div style="width: 150px; text-align: center;">&nbsp;&nbsp;&nbsp;</div>
+                                            <div style="width: 150px; text-align: center;">
+                                                <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="250" height="60" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                            </div>
                                             <div class="s3" style="text-align: center; border-top: 1px solid black;">Signature of Authorised <br> Medical Practioner</div>
                                         </div>
                                         <div>

@@ -703,7 +703,7 @@
                     <p class="s8" style="padding-top: 6pt;padding-left: 5pt;padding-right: 5pt;text-indent: 0pt;line-height: 161%;text-align: justify; font-size: 11px;">ADDRESS <span class="s20">&nbsp;5th Floor Jettac Bldg 920 Pres. Quirino Ave.cor. San Antonio, Malate, Manila </span><span class="s21"> </span><br>NAME OF PHYSICIAN'S CERTIFICATING AUTHORITY <span class="s22">&nbsp;PROFESSIONAL REGULATION COMMISSION </span>
                         <span class="s18"> </span><br>DATE OF ISSUE OF PHYSICIAN'S CERTIFICATE<span class="s19"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JUNE  14,  1984 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                     <p class="s8" style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: justify; font-size: 11px;">SIGNATURE OF PHYSICIAN
-                    <u style="margin-right: 12rem;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                    <u style="margin-right: 12rem;"> <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="50" style="object-fit: cover; transform: translate(-30px, 19px); margin-top: -25px;" /></u>
                     DATE OF EXAMINATION<span class="s9">: </span><span class="s24">{{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}</span></p>
                 </td>
             </tr>

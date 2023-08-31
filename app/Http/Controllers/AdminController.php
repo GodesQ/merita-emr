@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Mail\AgencyPassword;
 use App\Models\User;
 use App\Models\Patient;
+use App\Models\PatientInfo;
 use App\Models\MedicalHistory;
 use App\Models\Agency;
 use App\Models\ChartAccount;
@@ -31,6 +32,10 @@ use Intervention\Image\Facades\Image;
 class AdminController extends Controller
 {
     public function migrate_patients(Request $request) {
+
+        $patients = PatientInfo::whereIn('agency_id', [58, 55, 57, 59])->with('patient')->get();
+        dd($patients);
+
         // $patients = DB::table('mast_patient')
         //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
         //     ->groupBy('name')

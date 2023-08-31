@@ -584,7 +584,13 @@
                                                                     <br>
                                                                     DATE OF EXAMINATION:
                                                                          {{$admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), "d F Y") : null}}<br><br>
-                                                                    APPROVED BY:<br><br><br><br>
+                                                                    APPROVED BY:<br>
+                                                                    @if($admission->exam_physical && $admission->agency_id != 19)
+                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="60" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                                                    @else
+                                                                        <br>
+                                                                        <br>
+                                                                    @endif <br>
                                                                     TERESITA F. GONZALES, MD<br>
                                                                     MEDICAL DIRECTOR
                                                                 </td>
