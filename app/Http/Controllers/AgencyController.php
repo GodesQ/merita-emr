@@ -338,7 +338,7 @@ class AgencyController extends Controller
             $addAgencyCode = $lastAgencyCode + 1;
             $agencyCode = 'A' . date('y') . '-0000' . $addAgencyCode;
 
-            $password = bin2hex(random_bytes(10));
+            $password = '123456789';
             $agency = new Agency();
             $agency->agencycode = $agencyCode;
             $agency->agencyname = $request->agencyname;
@@ -363,15 +363,15 @@ class AgencyController extends Controller
             $log->save();
 
             if ($save) {
-                $bodyMessage = '';
+                // $bodyMessage = '';
 
-                $details = [
-                    'title' => 'Verification Email From Merita',
-                    'body' => $bodyMessage,
-                    'email' => $request->email,
-                    'password' => $password,
-                ];
-                Mail::to($request->email)->send(new AgencyPassword($details));
+                // $details = [
+                //     'title' => 'Verification Email From Merita',
+                //     'body' => $bodyMessage,
+                //     'email' => $request->email,
+                //     'password' => $password,
+                // ];
+                // Mail::to($request->email)->send(new AgencyPassword($details));
                 return redirect('/agencies')->with('status', 'Agency Added Successfully');
             } else {
                 return redirect('/login')->with('fail', 'Something went wrong. Try Again later.');

@@ -33,15 +33,15 @@ class AdminController extends Controller
 {
     public function migrate_patients(Request $request) {
 
-        $patients = Admission::whereIn('package_id', [123, 125, 127, 129])->with('patient')->get();
+        // $patients = Admission::whereIn('package_id', [123, 125, 127, 129])->with('patient')->get();
 
-        foreach ($patients as $key => $patient) {
-            $patient->update([
-                'package_id' => 3
-            ]);
-        }
+        // foreach ($patients as $key => $patient) {
+        //     $patient->update([
+        //         'package_id' => 3
+        //     ]);
+        // }
 
-        echo 'Success';
+        // echo 'Success';
 
         // $patients = DB::table('mast_patient')
         //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
