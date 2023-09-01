@@ -2401,7 +2401,7 @@
                                 <tr>
                                     <td height="80" valign="bottom" align="center">
                                         @if($admission->exam_physical && $admission->agency_id != 19)
-                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="220" height="70" style="object-fit: cover; transform: translate(13px, 25px); margin-top: -25px;" />
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="320" height="70" style="object-fit: cover; transform: translate(13px, 20px); margin-top: -25px;" />
                                         @else
                                             <br>
                                             <br>

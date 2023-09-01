@@ -647,9 +647,9 @@
                             <tbody>
                                 <tr>
                                     <td width="20%" valign="bottom">SIGNATURE OF PHYSICIAN</td>
-                                    <td width="20%" height="40" style="border-bottom: 1px solid black;">
+                                    <td width="20%" height="40" style="border-bottom: 1px solid black; text-align: center !important;">
                                         @if($admission->exam_physical && $admission->agency_id != 19)
-                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="50" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="260" height="60" style="object-fit: cover; transform: translate(0px, 19px); margin-top: -25px;" />
                                         @else
                                             <br>
                                             <br>
