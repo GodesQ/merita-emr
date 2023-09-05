@@ -2494,7 +2494,8 @@
                                 <tr>
                                     <td height="50" colspan="5">Signature of medical practitioner: <span style="margin-left: 0.5rem; border-bottom: 1px solid black;">
                                         @if ($medical_director)
-                                            <img width="100" height="40" style="object-fit: cover;" src="{{$medical_director->signature}}">
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="120" height="60" style="object-fit: cover; object-position: center;" />
+                                            {{-- <img width="100" height="40" style="object-fit: cover;" src="{{$medical_director->signature}}"> --}}
                                         @endif
                                     </span>
                                     </td>
@@ -2782,7 +2783,9 @@
                                                     <td height="40">Signature of Approved** Medical Practitioner: <span
                                                             style="margin-left: 0.5rem; border-bottom: 1px solid black;">
                                                         @if ($medical_director)
-                                                            <img width="100" height="20" style="object-fit: cover;" src="{{$medical_director->signature}}">
+                                                            <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="120" height="60" style="object-fit: cover; object-position: center;" />
+
+                                                            {{-- <img width="100" height="20" style="object-fit: cover;" src="{{$medical_director->signature}}"> --}}
                                                         @endif
                                                         </span>
                                                     </td>
