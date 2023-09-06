@@ -271,7 +271,7 @@
                                                                 <select required name="technician2_id"
                                                                     id="technician2_id" class="form-control">
                                                                     @foreach($radiologists as $radiologist)
-                                                                        <option value={{$radiologist->id}} {{$radiologist->id == $exam->technician_id ? "selected" : null}}>{{$radiologist->firstname}} {{$radiologist->lastname}}</option>
+                                                                        <option value={{$radiologist->id}} {{$radiologist->id == $exam->technician2_id ? "selected" : null}}>{{$radiologist->firstname}} {{$radiologist->lastname}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>

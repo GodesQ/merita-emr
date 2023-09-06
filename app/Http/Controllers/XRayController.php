@@ -46,6 +46,7 @@ class XRayController extends Controller
         try {
             $id = $request->id;
             $exam = XRay::where('id', $id)->first();
+            // dd($request->all());
             $exam->trans_date = $request->trans_date;
             $exam->xray_no = $request->xray_no;
             $exam->exam = $request->exam;

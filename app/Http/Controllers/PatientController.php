@@ -359,7 +359,7 @@ class PatientController extends Controller
 
                 if(in_array($patient_vessel, $bollete_braemar_vessel)) {
                     // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('bssi.bol.hotel.@bahiashipping.ph')->send(new RegisteredUser($details));
+                    Mail::to('bssi.bol.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
                 } else if(in_array($patient_vessel, $balmoral_vessel)) {
                     // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
                     Mail::to('bssi.bl.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
