@@ -43,7 +43,7 @@
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agencyname))
                                                 {{'Bahia Shipping Services, Inc.'}}
                                             @else
                                                 {{$admission->agencyname}}
@@ -151,7 +151,7 @@
                                                                                     <td align="center">
                                                                                         @if ($technician2)
                                                                                             @if($technician2->signature)
-                                                                                                <img src="{{$technician2->signature}}" width="150" height="50" style="object-fit: cover;" />
+                                                                                                <img src="{{$technician2->signature}}" width="125" height="60" style="object-fit: cover;" />
                                                                                             @else
                                                                                                 <div style="width: 150px;height: 20px;"></div>
                                                                                             @endif
