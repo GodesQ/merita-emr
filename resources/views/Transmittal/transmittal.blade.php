@@ -75,7 +75,7 @@
                                                         <input type="checkbox" value="vessel"
                                                             class="custom-control-input"
                                                             name="additional_columns[]"
-                                                            id="vessel">
+                                                            id="vessel" checked>
                                                         <label class="custom-control-label"
                                                             for="vessel">Vessel </label>
                                                     </div>
@@ -85,7 +85,7 @@
                                                         <input type="checkbox" value="emp_status"
                                                             class="custom-control-input"
                                                             name="additional_columns[]"
-                                                            id="emp_status">
+                                                            id="emp_status" checked>
                                                         <label class="custom-control-label"
                                                             for="emp_status">Employee Status </label>
                                                     </div>
@@ -95,7 +95,7 @@
                                                         <input type="checkbox" value="medical_package"
                                                             class="custom-control-input"
                                                             name="additional_columns[]"
-                                                            id="medical_package">
+                                                            id="medical_package" checked>
                                                         <label class="custom-control-label"
                                                             for="medical_package">Medical Package </label>
                                                     </div>
