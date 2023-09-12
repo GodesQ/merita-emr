@@ -11,7 +11,7 @@ use App\Models\ReassessmentFindings;
 use App\Models\Patient;
 use App\Models\User;
 use App\Models\MedicalHistory;
-
+use App\Models\ListPackage;
 
 class PrintPanelController extends Controller
 {
@@ -536,6 +536,41 @@ class PrintPanelController extends Controller
             ->first();
         // dd($medical_history);
         return view('PrintPanel.medical-history', compact('admission', 'patientInfo', 'exam_audio', 'exam_physical', 'exam_ishihara', 'exam_visacuity', 'medical_history'));
+    }
+
+    public function packages_report(Request $request) {
+        $agencies = Agency::get();
+        $packages = ListPackage::select('packagename', DB::raw('MAX(id) as id'))->groupBy('packagename')->get();
+        return view('PackagesReport.packages_report', compact('agencies', 'packages'));
+    }
+
+    public function packages_report_print(Request $request) {
+
+        $from_date = new \DateTime($request->from_date);
+        $to_date = new \DateTime($request->to_date);
+
+        $from_month = $from_date->format('F');
+        $from_year = $from_date->format('Y');
+
+        $to_month = $to_date->format('F');
+        $to_year = $to_date->format('Y');
+
+        if ($from_month === $to_month && $from_year === $to_year) {
+            // Dates are in the same month and year
+            $month = $from_month . ' ' . $from_year;
+        } else {
+            // Dates span multiple months or years
+            $month = $from_month . ' - ' . $to_month . ' ' . $from_year;
+        }
+
+        $patients = Admission::whereDate('trans_date', '>=', $request->from_date)
+                    ->whereDate('trans_date', '<=', $request->to_date)
+                    ->with('agency', 'package', 'exam_physical', 'patient')
+                    ->WhereHas('package', function($query) use ($request) {
+                        $query->where('packagename', $request->package);
+                    })->latest('trans_date')->get();
+
+        return view('PrintPanel.packages_report_print', compact('patients', 'month'));
     }
 
 }

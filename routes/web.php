@@ -803,6 +803,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/daily_patient_form', [PrintPanelController::class, 'daily_patient_form']);
 
+    Route::get('/packages_report', [PrintPanelController::class, 'packages_report']);
+    Route::get('/packages_report_print', [PrintPanelController::class, 'packages_report_print']);
+
     Route::get('/soa', [SOAController::class, 'index']);
     Route::get('/soa_print', [SOAController::class, 'soa_print']);
 
