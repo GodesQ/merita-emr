@@ -14,6 +14,11 @@
         text-transform: uppercase;
     }
 
+    table { page-break-inside:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
+
     .fontBoldLrg {
         font: bold 15px constantia;
     }
@@ -33,112 +38,131 @@
     }
     @page {
         size: legal;
-       margin: 0px 28px;
+       margin: 5px 28px;
     }
     </style>
 
 </head>
 <body>
     <div style="min-height: 100vh; margin: 0; max-height: 200vh;">
-        <table valign="top" width="100%" style="overflow: hidden;" cellspacing="0" cellpadding="0" id="table" class="brdNone main-table">
+        <table valign="top" width="100%" style="overflow: hidden;" cellspacing="0" cellpadding="0" border="0" id="table" class="brdNone main-table">
+            <thead>
+                <tr>
+                    <th>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" class="brdNone ">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="0" cellpadding="10" class="brdNone">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="7%" rowspan="5" align="center"><img src="../../../app-assets/images/logo/logo.jpg" width="80" height="80" alt=""></td>
+                                                    <td width="73%" align="center">
+                                                        <span style="font-size: 25px; font-weight: 800;">MERITA DIAGNOSTIC CLINIC INC.</span> <br>
+                                                        <span>5th &amp; 6th Flr Jettac Bldg., 920 Quirino Ave. Cor.. San Antonio St. Malate, Manila</span>
+                                                    </td>
+                                                    <td width="20%"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellspacing="10" cellpadding="0" class="brdNone main-findings-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="60%" colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start;  width: 100%;">
+                                                            <div style="width: 15%;">Name :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->lastname}}, {{$patient->firstname}} {{$patient->middlename}} </div>
+                                                        </div>
+                                                    </td>
+                                                    <td width="20%">
+                                                        <div style="display: flex; align-items: flex-stendart; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 25%;">Age :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%; text-align: center;">{{$patient->age}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td width="20%">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 25%;">Sex :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->gender}}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 40%;">Patient ID :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 60%;">{{$patient->patientcode}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 30%;">PEME :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 70%;">{{ $patient->admission->last_medical }}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 30%;">Position :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 70%;">{{$patient->position_applied}} <span style="font-size: 10px;">({{ $patient->admission->emp_status }})</span></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 15%;">Agency :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->agencyname}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 25%;">Vessel :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->admission->vesselname}}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 15%;">Package :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->admission->package->packagename}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
+                                                            <div style="width: 25%;">Principal :</div>
+                                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{ $patient->admission->principal }}</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <h2 style="font-size: 25px; font-weight: 800; line-height: 10px; margin: 1.5rem 0;">FOLLOW UP FORM</h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="1" class="brdNone ">
+                            <tbody>
+                                <tr>
+                                    <td width="12%" style="font-weight: 800;">DATE</td>
+                                    <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
+                                    <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <table width="100%" cellspacing="0" cellpadding="10" class="brdNone">
-                            <tbody>
-                                <tr>
-                                    <td width="7%" rowspan="5" align="center"><img src="../../../app-assets/images/logo/logo.jpg" width="80" height="80" alt=""></td>
-                                    <td width="73%" align="center">
-                                        <span style="font-size: 25px; font-weight: 800;">MERITA DIAGNOSTIC CLINIC INC.</span> <br>
-                                        <span>5th &amp; 6th Flr Jettac Bldg., 920 Quirino Ave. Cor.. San Antonio St. Malate, Manila</span>
-                                    </td>
-                                    <td width="20%"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <table width="100%" cellspacing="10" cellpadding="0" class="brdNone main-findings-table">
-                            <tbody>
-                                <tr>
-                                    <td width="60%" colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start;  width: 100%;">
-                                            <div style="width: 15%;">Name :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->lastname}}, {{$patient->firstname}} {{$patient->middlename}} </div>
-                                        </div>
-                                    </td>
-                                    <td width="20%">
-                                        <div style="display: flex; align-items: flex-stendart; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 25%;">Age :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%; text-align: center;">{{$patient->age}}</div>
-                                        </div>
-                                    </td>
-                                    <td width="20%">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 25%;">Sex :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->gender}}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 40%;">Patient ID :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 60%;">{{$patient->patientcode}}</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 30%;">PEME :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 70%;">{{ $patient->admission->last_medical }}</div>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 30%;">Position :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 70%;">{{$patient->position_applied}} <span style="font-size: 10px;">({{ $patient->admission->emp_status }})</span></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 15%;">Agency :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->agencyname}}</div>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 25%;">Vessel :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{$patient->admission->vesselname}}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 15%;">Package :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 85%;">{{$patient->admission->package->packagename}}</div>
-                                        </div>
-                                    </td>
-                                    <td colspan="2">
-                                        <div style="display: flex; align-items: flex-end; justify-content: flex-start; width: 100%;">
-                                            <div style="width: 25%;">Principal :</div>
-                                            <div class="fontBoldLrg" style="border-bottom: 1px solid black; width: 75%;">{{ $patient->admission->principal }}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <h2 style="font-size: 25px; font-weight: 800; line-height: 10px; margin: 1.5rem 0;">FOLLOW UP FORM</h2>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <table width="100%" cellspacing="0" border="1" style="border-collapse: collapse !important;" cellpadding="2" class="findings-table">
@@ -147,11 +171,6 @@
                                     <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
                                     <td>Agency: {{ $patient->agencyname }}</td>
                                     <td>Package: {{ $patient->admission->package->packagename }}</td>
-                                </tr>
-                                <tr>
-                                    <td width="12%" style="font-weight: 800;">DATE</td>
-                                    <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
-                                    <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
                                 </tr>
                                 @forelse($records as $key_record => $record)
                                     @php
@@ -513,7 +532,7 @@
             </tbody>
         </table>
     </div>
-    <div style="height: 100vh; margin: 0;">
+    {{-- <div style="height: 100vh; margin: 0;">
         <table valign="top" width="100%" cellspacing="0" cellpadding="0" id="table" class="brdNone second-table">
             <tbody>
                 <tr>
@@ -662,7 +681,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> --}}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
     <script>

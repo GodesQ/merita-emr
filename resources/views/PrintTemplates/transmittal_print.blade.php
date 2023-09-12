@@ -8,6 +8,11 @@
         font-size: 11.5px;
     }
 
+    table { page-break-inside:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
+
     @page {
         size: landscape legal;
         margin: 1rem;
