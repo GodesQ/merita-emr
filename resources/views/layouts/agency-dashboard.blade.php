@@ -123,9 +123,9 @@
         },
         ajax: {
               url: "/agency_patient_table",
-              data: function (d) {
+                data: function (d) {
                     d.status = $('#status').val(),
-                    d.search = $('input[type="search"]').val()
+                    d.search = $('input[type="search"]').val(),
                 }
             },
         columns: [{
@@ -193,5 +193,6 @@
     $('#status').change(function() {
         table.draw();
     });
+
 </script>
 @endpush

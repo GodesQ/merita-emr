@@ -48,7 +48,7 @@
         <table valign="top" width="100%" style="overflow: hidden;" cellspacing="0" cellpadding="0" border="0" id="table" class="brdNone main-table">
             <thead>
                 <tr>
-                    <th>
+                    <th style="border: none !important;">
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" class="brdNone ">
                             <tbody>
                                 <tr>
@@ -150,13 +150,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table width="100%" cellpadding="0" cellspacing="0" border="1" class="brdNone ">
+                        <table width="100%" cellpadding="5" cellspacing="0" border="0" class="brdTable">
                             <tbody>
                                 <tr>
                                     <td width="12%" style="font-weight: 800;">DATE</td>
                                     <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
                                     <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </th>
@@ -188,11 +189,11 @@
 
                                     @if($loop->first)
                                         <tr>
-                                            <td valign="top">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
-                                            <td valign="top">
+                                            <td width="12%" valign="top">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
+                                            <td width="30%" valign="top">
                                                 <b>Past Med History:</b>
                                             </td>
-                                            <td valign="top"></td>
+                                            <td width="28%" valign="top"></td>
                                         </tr>
                                         <tr>
                                             <td valign="top"></td>

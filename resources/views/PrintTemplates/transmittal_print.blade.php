@@ -287,6 +287,46 @@
                             @empty
                             @endforelse
 
+                            @if(optional($patient->exam_physical)->past_peme) 
+                                <tr>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left"></td>
+                                    <td align="left" valign="top">
+                                        @if(optional($patient->exam_physical)->past_peme) <b>PHMX:</b> @endif {{ optional($patient->exam_physical)->past_peme }}
+                                    </td>
+                                    <td align="left" valign="top">
+                                        {{-- @if(optional($patient->exam_physical)->recommendation) <b>ECG:</b> @endif {{ optional($patient->exam_physical)->recommendation }} --}}
+                                    </td>
+                                    <td align="left" valign="top"></td>
+                                    @if(in_array("vital_signs", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    @if(in_array("bmi", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                    <td align="left">
+
+                                    </td>
+                                    @if(in_array("vessel", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+
+                                    @if(in_array("emp_status", $additional_columns))
+                                        <td align="left">{{$patient->emp_status}}</td>
+                                    @endif
+
+                                    @if(in_array("medical_package", $additional_columns))
+                                        <td align="left"></td>
+                                    @endif
+                                </tr>
+                            @endif
+
                             @if (optional($patient->exam_ecg)->ecg == 'Significant Findings')
                                 <tr>
                                     <td align="left"></td>
