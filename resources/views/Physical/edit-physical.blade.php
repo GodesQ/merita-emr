@@ -596,7 +596,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="154" align="center">Tuberculosis</td>
+                                                    <td width="154" align="center">Tuberculosis <br>
+                                                        <input name="tuberculosis" type="text" id="tuberculosis"
+                                                            value="{{ $exam->tuberculosis }}">
+                                                    </td>
                                                     <td width="90" align="center"><label for="checkbox">YES</label>
                                                         <input name="sick10" type="radio"
                                                             style="width: 20px; height: 20px;" id="sick10"

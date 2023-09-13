@@ -987,7 +987,9 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>Tuberculosis :</b>
+                                                                <td><b>Tuberculosis Specify:</b>
+                                                                    <br>
+                                                                    {{ optional($admission->exam_physical)->tuberculosis }}
                                                                 </td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
