@@ -124,8 +124,8 @@
         ajax: {
               url: "/agency_patient_table",
                 data: function (d) {
-                    d.status = $('#status').val(),
-                    d.search = $('input[type="search"]').val(),
+                    d.status = $('#status').val();
+                    d.search = $('input[type="search"]').val();
                 }
             },
         columns: [{
