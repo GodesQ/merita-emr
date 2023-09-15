@@ -518,50 +518,53 @@
                                                                     <span class="fontBoldLrg"><u>{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</u></span><br>
                                                                     <span style="margin-left:20px">NAME OF
                                                                         SEAFARER</span><br>
-                                                                    <span class="fontMed"><span style="margin-right: 3rem;">RESULT:</span>
-                                                                        FIT TO WORK
-                                                                        @if ($admission->exam_physical)
-                                                                            @if ($admission->exam_physical->seastatus == 'fit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                            @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                            @endif
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        FIT FOR SEA DUTY
-                                                                        @if ($admission->exam_physical)
-                                                                            @if ($admission->exam_physical->seastatus == 'seafit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                            @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                            @endif
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        UNFIT FOR SEA DUTY
-                                                                        @if ($admission->exam_physical)
-                                                                            @if($admission->exam_physical->seastatus == 'seaunfit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
-                                                                            @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                            @endif
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
-                                                                        @endif  <br> <br>
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        
-                                                                        FIT FOR TRAINING PURPOSES
-                                                                        @if ($admission->exam_physical)
+                                                                    <span class="fontMed"><span style="margin-right: 2rem;">RESULT:</span>
+                                                                        @if($admission->exam_physical)
                                                                             @if($admission->exam_physical->seastatus == 'trainingfit')
-                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                FIT FOR TRAINING PURPOSES
+                                                                                @if ($admission->exam_physical)
+                                                                                    @if($admission->exam_physical->seastatus == 'trainingfit')
+                                                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                    @else
+                                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                    @endif
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
                                                                             @else
-                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                FIT TO WORK
+                                                                                @if ($admission->exam_physical)
+                                                                                    @if ($admission->exam_physical->seastatus == 'fit')
+                                                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                    @else
+                                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                    @endif
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                FIT FOR SEA DUTY
+                                                                                @if ($admission->exam_physical)
+                                                                                    @if ($admission->exam_physical->seastatus == 'seafit')
+                                                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                    @else
+                                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                    @endif
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                UNFIT FOR SEA DUTY
+                                                                                @if ($admission->exam_physical)
+                                                                                    @if($admission->exam_physical->seastatus == 'seaunfit')
+                                                                                        <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                                    @else
+                                                                                        <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                    @endif
+                                                                                @else
+                                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                                @endif
                                                                             @endif
-                                                                        @else
-                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
                                                                     </span>
                                                                 </td>
