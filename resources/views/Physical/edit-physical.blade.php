@@ -2047,10 +2047,15 @@ echo
                                                                                                                 <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit" value="seafit"
                                                                                                                     {{ $exam->seastatus == "seafit" ? "checked" : "" }}>
                                                                                                             </td>
+                                                                                                            <td align="center">
+                                                                                                                FIT FOR TRAINING PURPOSES
+                                                                                                                <input  type="radio" style="width: 20px; height: 20px;" name="seastatus" id="trainingfit" value="trainingfit" 
+                                                                                                                {{ $exam->seastatus == "trainingfit" ? "checked" : "" }}>
+                                                                                                            </td>
                                                                                                             <td
                                                                                                                 align="center">
                                                                                                                 FIT WITH RESTRICTION
-                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit" value="seafit with restriction"
+                                                                                                                <input type="radio" style="width: 20px; height: 20px;" name="seastatus" id="seafit with restriction" value="seafit with restriction"
                                                                                                                     {{ $exam->seastatus == "seafit with restriction" ? "checked" : "" }}>
                                                                                                             </td>
                                                                                                             <td align="center">

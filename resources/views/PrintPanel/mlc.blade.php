@@ -550,6 +550,17 @@
                                                                             @endif
                                                                         @else
                                                                             <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                        @endif  <br> <br>
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        FIT FOR TRAINING PURPOSES
+                                                                        @if ($admission->exam_physical)
+                                                                            @if($admission->exam_physical->seastatus == 'trainingfit')
+                                                                                <img src="../../../app-assets/images/icoCheck.gif" width="10">
+                                                                            @else
+                                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10">
+                                                                            @endif
+                                                                        @else
+                                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="10">
                                                                         @endif
                                                                     </span>
                                                                 </td>

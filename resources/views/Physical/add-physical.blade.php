@@ -2558,6 +2558,16 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
+                                                                                                                FIT FOR TRAINING PURPOSES
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    style="width: 20px; height: 20px;"
+                                                                                                                    name="seastatus"
+                                                                                                                    id="seafit"
+                                                                                                                    value="trainingfit">
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                align="center">
                                                                                                                 FIT WITH RESTRICTION
                                                                                                                 <input
                                                                                                                     type="radio"
