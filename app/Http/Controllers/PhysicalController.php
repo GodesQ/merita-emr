@@ -40,6 +40,7 @@ class PhysicalController extends Controller
                 )
                 ->latest('id')
                 ->first();
+            // dd($exam);
 
             $exam_xray = XRay::where('admission_id', $id)->latest('id')->first();
             $exam_ecg = ECG::where('admission_id', $id)->latest('id')->first();
