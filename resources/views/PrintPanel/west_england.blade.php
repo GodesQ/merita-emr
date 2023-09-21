@@ -483,7 +483,7 @@
                                                                     <td width="4%" valign="middle">YES</td>
                                                                     <td width="3%" valign="middle">
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->duty == "Fit Restriction")
+                                                                        @if ($admission->exam_physical->seastatus == "seafit with restriction")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
@@ -498,7 +498,7 @@
                                                                     <td width="3%" valign="middle">NO</td>
                                                                     <td width="3%" valign="middle">
                                                                         @if ($admission->exam_physical)
-                                                                        @if ($admission->exam_physical->duty == "Fit")
+                                                                        @if ($admission->exam_physical->seastatus == "seafit")
                                                                         <img src="../../../app-assets/images/icoCheck.gif"
                                                                             width="10">
                                                                         @else
