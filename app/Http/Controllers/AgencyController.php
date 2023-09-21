@@ -56,181 +56,6 @@ class AgencyController extends Controller
         }
     }
 
-    public function agency_patient_table(Request $request)
-    {
-        try {
-            $data = session()->all();
-            if ($request->ajax()) {
-                $session = session()->all();
-
-                $agencyId = session()->get('agencyId');
-
-                $patients = Patient::select('*')
-                ->when(!empty($request->get('search')), function ($query) use ($request) {
-                    $searchQuery = $request->get('search');
-
-                    $query->where(function ($subQuery) use ($searchQuery) {
-                        $subQuery
-                            ->where('firstname', 'LIKE', '%' . $searchQuery . '%')
-                            ->orWhere('lastname', 'LIKE', '%' . $searchQuery . '%')
-                            ->orWhere('patientcode', 'LIKE', '%' . $searchQuery . '%')
-                            ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $searchQuery . '%')
-                            ->whereHas('admission', function ($admissionQuery) {
-                                $admissionQuery
-                                    ->where('agency_id', 3)
-                                    ->orWhere('agency_id', session()->get('agencyId'));
-                            });
-                    });
-                })
-                ->whereHas('patientinfo', function ($q) use ($agencyId) {
-                    $agency_ids = [59, 58, 57, 55, 68];
-
-                    $vessels = [];
-
-                    if ($agencyId == 58) {
-                        $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
-                    } elseif ($agencyId == 55) {
-                        $vessels = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
-                    } elseif ($agencyId == 57) {
-                        $vessels = ['BALMORAL', 'MS BALMORAL'];
-                    } elseif ($agencyId == 68) {
-                        $vessels = ['BOREALIS', 'MS BOREALIS'];
-                    } elseif ($agencyId == 59) {
-                        $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN', 'MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR', 'BALMORAL', 'MS BALMORAL', 'BOREALIS', 'MS BOREALIS'];
-                    }
-
-                    if (in_array($agencyId, $agency_ids)) {
-                        $q->whereIn(DB::raw('upper(vessel)'), array_map('strtoupper', $vessels))->orWhere('agency_id', $agencyId);
-                    } else {
-                        $q->where('agency_id', $agencyId);
-                    }
-                });
-
-                if ($data['start_date'] && $data['end_date']) {
-                    $patients = $patients->whereHas('admission', function ($q) use ($data) {
-                        return $q->whereBetween('trans_date', [$data['start_date'], $data['end_date']]);
-                    });
-                }
-
-                return Datatables::of($patients)
-                    ->addIndexColumn()
-                    ->addColumn('vessel', function ($row) {
-                        return $package = $row->patientinfo->vessel;
-                    })
-                    ->addColumn('medical_package', function ($row) {
-                        if ($row->admission) {
-                            return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';
-                        } else {
-                            return $package = $row->patientinfo->package ? $row->patientinfo->package->packagename : 'NO PACKAGE';
-                        }
-                    })
-                    ->addColumn('passportno', function ($row) {
-                        return $row->patientinfo->passportno;
-                    })
-                    ->addColumn('ssrbno', function ($row) {
-                        return $row->patientinfo->srbno;
-                    })
-                    ->addColumn('category', function ($row) {
-                        return $row->admission ? $row->admission->category : $row->patientinfo->category;
-                    })
-                    ->addColumn('status', function ($row) {
-                        $patientInfo = $row->patientinfo;
-                        $completed_patients = '';
-                        $ongoing_patients = '';
-                        $pending_patients = '';
-                        $queue_patients = '';
-
-                        if ($row->admission) {
-                            if (!$row->admission->package) {
-                                return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
-                            }
-                            $patient_package = $row->admission->package;
-                        } else {
-                            if (!$row->patientinfo->package) {
-                                return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
-                            }
-                            $patient_package = $row->patientinfo->package;
-                        }
-
-                        $patient_exams = DB::table('list_packagedtl')
-                            ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id')
-                            ->where('main_id', $patient_package->id)
-                            ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                            ->get();
-
-                        return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
-                    })
-                    ->addColumn('action', function ($row) {
-                        $actionBtn = '<a href="agency_emp?id=' . $row['id'] . '" class="btn btn-secondary btn-sm"><i class="feather icon-eye"></i></a>';
-                        return $actionBtn;
-                    })
-                    ->filter(function ($instance) use ($request) {
-                        # filter for register
-                        if ($request->status == 1) {
-                            $instance->where('admission_id', null)->whereHas('patientinfo', function ($q) {
-                                $q->whereNotNull('medical_package');
-                            });
-                        }
-
-                        # filter for admitted
-                        if ($request->status == 2) {
-                            $instance->whereNotNull('admission_id')->whereHas('admission', function ($q) {
-                                $q->where('lab_status', null)->whereNotNull('package_id');
-                            });
-                        }
-
-                        # filter for reassessment
-                        if ($request->status == 3) {
-                            $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 1)->whereNotNull('package_id');
-                            });
-                        }
-
-                        # filter for fit to work
-                        if ($request->status == 4) {
-                            // $instance->where('lab_status', 2)->latest('id');
-                            $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 2)->whereNotNull('package_id');
-                            });
-                        }
-
-                        # filter for unfit to work
-                        if ($request->status == 5) {
-                            $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 3)->whereNotNull('package_id');
-                            });
-                        }
-
-                        # filter for unfit to work temporarily
-                        if ($request->status == 6) {
-                            $instance->whereHas('admission', function ($q) {
-                                $q->where('lab_status', 4)->whereNotNull('package_id');
-                            });
-                        }
-
-                        // # if the user search
-                        // if (!empty($request->get('search'))) {
-                        //     $query = $request->get('search');
-                        //     $instance
-                        //         ->orWhere('firstname', 'LIKE', '%' . $query . '%')
-                        //         ->orWhere('lastname', 'LIKE', '%' . $query . '%')
-                        //         ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
-                        //         ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
-                        //         ->whereHas('admission', function ($q) {
-                        //             return $q->where('agency_id', 3)->orWhere('agency_id', session()->get('agencyId'));
-                        //         });
-                        // }
-                    }, true)
-                    ->rawColumns(['status', 'action'])
-                    ->make(true);
-            }
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
-        }
-    }
-
     public function view_agency_emp(Request $request)
     {
         try {
@@ -460,4 +285,155 @@ class AgencyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    // public function agency_patient_table(Request $request)
+    // {
+    //     try {
+    //         $data = session()->all();
+    //         if ($request->ajax()) {
+    //             $session = session()->all();
+
+    //             $agencyId = session()->get('agencyId');
+
+    //             $patients = Patient::select('*')
+    //             ->when(!empty($request->get('search')), function ($query) use ($request) {
+    //                 $searchQuery = $request->get('search');
+
+    //                 $query->where(function ($subQuery) use ($searchQuery) {
+    //                     $subQuery
+    //                         ->where('firstname', 'LIKE', '%' . $searchQuery . '%')
+    //                         ->orWhere('lastname', 'LIKE', '%' . $searchQuery . '%')
+    //                         ->orWhere('patientcode', 'LIKE', '%' . $searchQuery . '%')
+    //                         ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $searchQuery . '%')
+    //                         ->whereHas('admission', function ($admissionQuery) {
+    //                             $admissionQuery
+    //                                 ->where('agency_id', 3)
+    //                                 ->orWhere('agency_id', session()->get('agencyId'));
+    //                         });
+    //                 });
+    //             })
+    //             ->whereHas('patientinfo', function ($q) use ($agencyId) {
+    //                 $agency_ids = [59, 58, 57, 55, 68];
+
+    //                 $vessels = [];
+
+    //                 if ($agencyId == 58) {
+    //                     $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
+    //                 } elseif ($agencyId == 55) {
+    //                     $vessels = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
+    //                 } elseif ($agencyId == 57) {
+    //                     $vessels = ['BALMORAL', 'MS BALMORAL'];
+    //                 } elseif ($agencyId == 68) {
+    //                     $vessels = ['BOREALIS', 'MS BOREALIS'];
+    //                 } elseif ($agencyId == 59) {
+    //                     $vessels = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN', 'MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR', 'BALMORAL', 'MS BALMORAL', 'BOREALIS', 'MS BOREALIS'];
+    //                 }
+
+    //                 if (in_array($agencyId, $agency_ids)) {
+    //                     $q->whereIn(DB::raw('upper(vessel)'), array_map('strtoupper', $vessels))->orWhere('agency_id', $agencyId);
+    //                 } else {
+    //                     $q->where('agency_id', $agencyId);
+    //                 }
+    //             });
+
+    //             if ($data['start_date'] && $data['end_date']) {
+    //                 $patients = $patients->whereHas('admission', function ($q) use ($data) {
+    //                     return $q->whereBetween('trans_date', [$data['start_date'], $data['end_date']]);
+    //                 });
+    //             }
+
+    //             return Datatables::of($patients)
+    //                 ->addIndexColumn()
+    //                 ->addColumn('vessel', function ($row) {
+    //                     return $package = $row->patientinfo->vessel;
+    //                 })
+    //                 ->addColumn('medical_package', function ($row) {
+    //                     if ($row->admission) {
+    //                         return $package = $row->admission->package ? $row->admission->package->packagename : 'NO PACKAGE';
+    //                     } else {
+    //                         return $package = $row->patientinfo->package ? $row->patientinfo->package->packagename : 'NO PACKAGE';
+    //                     }
+    //                 })
+    //                 ->addColumn('passportno', function ($row) {
+    //                     return $row->patientinfo->passportno;
+    //                 })
+    //                 ->addColumn('ssrbno', function ($row) {
+    //                     return $row->patientinfo->srbno;
+    //                 })
+    //                 ->addColumn('category', function ($row) {
+    //                     return $row->admission ? $row->admission->category : $row->patientinfo->category;
+    //                 })
+    //                 ->addColumn('status', function ($row) {
+    //                     $patientInfo = $row->patientinfo;
+
+    //                     if ($row->admission) {
+    //                         if (!$row->admission->package) {
+    //                             return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+    //                         }
+    //                         $patient_package = $row->admission->package;
+    //                     } else {
+    //                         if (!$row->patientinfo->package) {
+    //                             return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+    //                         }
+    //                         $patient_package = $row->patientinfo->package;
+    //                     }
+
+    //                     $patient_exams = DB::table('list_packagedtl')
+    //                         ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id')
+    //                         ->where('main_id', $patient_package->id)
+    //                         ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+    //                         ->get();
+
+    //                     return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
+    //                 })
+    //                 ->addColumn('action', function ($row) {
+    //                     $actionBtn = '<a href="agency_emp?id=' . $row['id'] . '" class="btn btn-secondary btn-sm"><i class="feather icon-eye"></i></a>';
+    //                     return $actionBtn;
+    //                 })
+    //                 ->filter(function ($instance) use ($request) {
+    //                     switch ($request->status) {
+    //                         case 1:
+    //                             $instance->where('admission_id', null)->whereHas('patientinfo', function ($q) {
+    //                                 $q->whereNotNull('medical_package');
+    //                             });
+    //                             break;
+    //                         case 2:
+    //                             $instance->whereNotNull('admission_id')->whereHas('admission', function ($q) {
+    //                                 $q->where('lab_status', null)->whereNotNull('package_id');
+    //                             });
+    //                             break;
+    //                         case 3:
+    //                             $instance->whereHas('admission', function ($q) {
+    //                                 $q->where('lab_status', 1)->whereNotNull('package_id');
+    //                             });
+    //                             break;
+    //                         case 4:
+    //                             $instance->whereHas('admission', function ($q) {
+    //                                 $q->where('lab_status', 2)->whereNotNull('package_id');
+    //                             });
+    //                             break;
+    //                         case 5:
+    //                             $instance->whereHas('admission', function ($q) {
+    //                                 $q->where('lab_status', 3)->whereNotNull('package_id');
+    //                             });
+    //                             break;
+    //                         case 6:
+    //                             $instance->whereHas('admission', function ($q) {
+    //                                 $q->where('lab_status', 4)->whereNotNull('package_id');
+    //                             });
+    //                             break;
+    //                         default:
+    //                             // Handle an unknown status if necessary
+    //                             break;
+    //                     }
+    //                 })
+    //                 ->rawColumns(['status', 'action'])
+    //                 ->make(true);
+    //         }
+    //     } catch (\Exception $exception) {
+    //         $message = $exception->getMessage();
+    //         $file = $exception->getFile();
+    //         return view('errors.error', compact('message', 'file'));
+    //     }
+    // }
 }

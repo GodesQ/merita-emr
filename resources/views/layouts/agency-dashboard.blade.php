@@ -25,24 +25,24 @@
             </div>
             <hr>
             <div class="card-body">
-                <form action="filter_agency_employee">
+                <form action="#">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="start-date">Start Date</label>
-                                <input class="form-control" id="start-date" name="start_date" value="{{ session()->get('start_date') }}" type="date" />
+                                <input class="form-control" id="start_date" name="start_date" value="{{ session()->get('start_date') }}" type="date" />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="end-date">End Date</label>
-                                <input class="form-control" id="end-date" name="end_date" type="date" value="{{ session()->get('end_date') }}" />
+                                <input class="form-control" id="end_date" name="end_date" type="date" value="{{ session()->get('end_date') }}" />
                             </div>
                         </div>
                         <div class="col-md-3 form-group">
                             <label>Actions</label><br>
-                           <button id="filter_button" name="action" value="filter" class="btn btn-primary btn-solid">Filter</button>
-                           <button id="filter_button" name="action" value="clear" class="btn btn-secondary btn-solid">Select All</button>
+                           <button type="button" id="filter_button" name="action" value="filter" class="btn btn-primary btn-solid">Filter</button>
+                           <button type="button" id="selectall_button" name="action" value="clear" class="btn btn-secondary btn-solid">Select All</button>
                         </div>
                         <div class="col-md-3 form-group">
                             <label><strong>Status :</strong></label>
@@ -126,6 +126,8 @@
                 data: function (d) {
                     d.status = $('#status').val();
                     d.search = $('input[type="search"]').val();
+                    d.start_date = $('#start_date').val();
+                    d.end_date = $('#end_date').val();
                 }
             },
         columns: [{
@@ -191,6 +193,17 @@
 
 
     $('#status').change(function() {
+        table.draw();
+    });
+
+    $('#filter_button').click(function() {
+        table.draw();
+    });
+
+    $('#selectall_button').click(function() {
+        $('#start_date').val('');
+        $('#end_date').val('');
+
         table.draw();
     });
 
