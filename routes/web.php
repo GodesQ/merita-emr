@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\Auth\PatientAuthController;
@@ -45,7 +47,8 @@ use App\Http\Controllers\SOAController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\DocumentationController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AgencyDashboardController;
+
 
 Route::get('/', [PatientAuthController::class, 'login']);
 Route::get('/login', [PatientAuthController::class, 'login']);
@@ -117,7 +120,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('agency_dashboard', [AgencyController::class, 'view_dashboard']);
 
-    Route::get('/agency_patient_table', [AgencyController::class, 'agency_patient_table'])->name('agency_patient_table');
+    Route::get('/agency_patient_table', [AgencyDashboardController::class, 'agencyCrewList'])->name('agency_patient_table');
 
     Route::get('/filter_agency_employee', [AgencyController::class, 'filter_agency_employee']);
 
