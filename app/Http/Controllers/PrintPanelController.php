@@ -104,7 +104,7 @@ class PrintPanelController extends Controller
             ->with('patient', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
             ->first();
 
-        return view('PrintPanel.cayman', compact('admission'));
+        return view('PrintPanel.test-cayman', compact('admission'));
     }
 
     public function croatian_print(Request $request)
