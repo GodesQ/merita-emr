@@ -1121,18 +1121,32 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div class="row">
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-3">
                                                                                 <label class="form-label">Systollic</label>
                                                                                 <input name="systollic" type="text"
                                                                                     class="form-control" id="systollic"
                                                                                     placeholder="Systollic" value="{{ $exam->systollic }}"
                                                                                     size="10">
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-3">
                                                                                 <label class="form-label">Diastollic</label>
                                                                                 <input name="diastollic" type="text"
                                                                                     class="form-control" id="diastollic"
                                                                                     placeholder="Diastollic" value="{{ $exam->diastollic }}"
+                                                                                    size="10">
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <label class="form-label">Blood Pressure (sitting)</label>
+                                                                                <input name="bp_sitting" type="text"
+                                                                                    class="form-control" id="bp_sitting"
+                                                                                    placeholder="BP Sitting" value="{{ $exam->bp_sitting }}"
+                                                                                    size="10">
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <label class="form-label">Blood Pressure (laying down)</label>
+                                                                                <input name="bp_laying_down" type="text"
+                                                                                    class="form-control" id="bp_laying_down"
+                                                                                    placeholder="BP Laying Down" value="{{ $exam->bp_laying_down }}"
                                                                                     size="10">
                                                                             </div>
                                                                         </div>
@@ -1165,11 +1179,17 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div class="row">
-                                                                            <div class="col-md-12">
+                                                                            <div class="col-md-6">
                                                                                 <label class="form-label">Respiration</label>
                                                                                 <input name="respiration" type="text"
                                                                                 class="form-control" id="respiration"
                                                                                 value="{{ $exam->respiration }}" size="5">
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label class="form-label">Expiration</label>
+                                                                                <input name="expiration" type="text"
+                                                                                class="form-control" id="expiration"
+                                                                                value="{{ $exam->expiration }}">
                                                                             </div>
                                                                         </div>
                                                                     </td>

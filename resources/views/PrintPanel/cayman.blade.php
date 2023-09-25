@@ -544,10 +544,14 @@
                                                     <tbody>
                                                         <tr>
                                                             <td valign="bottom" width="30%">Chest measurements on respiration</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_physical)->respiration }}
+                                                            </td>
                                                             <td valign="bottom" width="3%"> in,</td>
                                                             <td valign="bottom">on expiration</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_physical)->expiration }}
+                                                            </td>
                                                             <td valign="bottom" width="35%">in.</td>
                                                         </tr>
                                                     </tbody>
