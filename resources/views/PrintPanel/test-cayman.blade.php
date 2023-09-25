@@ -494,15 +494,40 @@
                                             <td width="2%" valign="bottom">2.</td>
                                             <td>
                                                 <table width="85%" cellpadding="0" cellspacing="0">
+                                                    <?php
+                                                        function cmToFeetAndInches($cm) {
+                                                            $inches = $cm / 2.54;
+                                                            $feet = floor($inches / 12);
+                                                            $remainingInches = round($inches % 12);
+                                                            return array('feet' => $feet, 'inches' => $remainingInches);
+                                                        }
+
+                                                        $cm = optional($admission->exam_physical)->height ? optional($admission->exam_physical)->height : 0;
+                                                        $height = cmToFeetAndInches($cm);
+
+                                                        function kgToLbs($kg) {
+                                                            $lbs = $kg * 2.20462;
+                                                            return $lbs;
+                                                        }
+
+                                                        $kg = 78.5;
+                                                        $weight = kgToLbs($kg);
+                                                    ?>
                                                     <tbody>
                                                         <tr>
                                                             <td valign="bottom" width="7%">Height</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ $height['feet'] }}
+                                                            </td>
                                                             <td valign="bottom" width="5%"> Feet</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ $height['inches'] }}
+                                                            </td>
                                                             <td valign="bottom">in.</td>
                                                             <td valign="bottom" width="5%">Weight</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ number_format($weight, 2) }}
+                                                            </td>
                                                             <td valign="bottom" width="19%">lbs (in under clothes)</td>
                                                             <td valign="bottom" width="5%">Waist</td>
                                                             <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
@@ -540,7 +565,9 @@
                                                             <td valign="bottom" width="10%">lying down</td>
                                                             <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
                                                             <td valign="bottom" width="13%">) 4. Pulse Rate</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_physical)->pulse }}
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -590,33 +617,105 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>(a) Skin</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->a1, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->a1, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(b) Throat & mouth</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->a7, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->a7, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(c) Eyes</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->a3, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->a3, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(d) Ears</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->a5, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->a5, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(e) Nose</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->a6, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->a6, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(f) Abdomen</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->b5, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($admission->exam_physical && !in_array($admission->exam_physical->b5, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>(g) Cardiovascular system</td>
@@ -640,8 +739,11 @@
                                                         </tr>
                                                         <tr>
                                                             <td>(k) Genito-urinary system</td>
-                                                            <td><img src="../../../app-assets/images/icoCheck.gif" width="12"></td>
-                                                            <td><img src="../../../app-assets/images/icoUncheck.gif" width="12"></td>
+                                                            @if($admission->exam_physical && !in_array($admission->exam_physical->c2, ['Yes']))
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                            @endif
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -739,7 +841,9 @@
                                                     <tbody>
                                                         <tr>
                                                             <td valign="bottom" width="25%">Date of examination</td>
-                                                            <td valign="bottom" width="25%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" width="25%" style="border-bottom: 1px solid black;">
+                                                                {{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), 'M d, Y') : null }}
+                                                            </td>
                                                             <td valign="bottom" width="0%">&nbsp;</td>
                                                             <td valign="bottom" width="35%">Signature Medical Examiner</td>
                                                             <td valign="bottom" width="15%" style="border-bottom: 1px solid black;" align="center">
@@ -766,5 +870,4 @@
         </div>
     </center>
 </body>
-
 </html>
