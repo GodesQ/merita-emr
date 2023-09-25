@@ -740,6 +740,13 @@
                                                         <tr>
                                                             <td>(k) Genito-urinary system</td>
                                                             <td>
+                                                                @if($admission->exam_physical && in_array($admission->exam_physical->c2, ['Yes']))
+                                                                    <img src="../../../app-assets/images/icoCheck.gif" width="12">
+                                                                @else
+                                                                    <img src="../../../app-assets/images/icoUncheck.gif" width="12">
+                                                                @endif
+                                                            </td>
+                                                            <td>
                                                                 @if($admission->exam_physical && !in_array($admission->exam_physical->c2, ['Yes']))
                                                                     <img src="../../../app-assets/images/icoCheck.gif" width="12">
                                                                 @else
