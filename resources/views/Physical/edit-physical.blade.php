@@ -319,7 +319,7 @@
                                                             style="width: 20px; height: 20px;" id="sick4"
                                                             value="0"
                                                             @php echo
-                                                        $exam->sick4 == "No" || $exam->sick24 == "0" ? "checked" : "" @endphp>
+                                                        $exam->sick4 == "No" || $exam->sick4 == "0" ? "checked" : "" @endphp>
                                                     </td>
                                                     <td width="154" align="center">Rheumatic Fever</td>
                                                     <td width="96" align="center"><label for="checkbox">YES</label>
@@ -2049,7 +2049,7 @@ echo
                                                                                                             </td>
                                                                                                             <td align="center">
                                                                                                                 FIT FOR TRAINING PURPOSES
-                                                                                                                <input  type="radio" style="width: 20px; height: 20px;" name="seastatus" id="trainingfit" value="trainingfit" 
+                                                                                                                <input  type="radio" style="width: 20px; height: 20px;" name="seastatus" id="trainingfit" value="trainingfit"
                                                                                                                 {{ $exam->seastatus == "trainingfit" ? "checked" : "" }}>
                                                                                                             </td>
                                                                                                             <td
