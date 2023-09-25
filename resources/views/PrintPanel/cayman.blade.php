@@ -565,9 +565,14 @@
                                                     <tbody>
                                                         <tr>
                                                             <td valign="bottom" width="35%">Blood pressure (two readings at rest (sitting)</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_physical)->bp_sitting }}
+                                                            </td>
                                                             <td valign="bottom" width="10%">lying down</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_physical)->bp_laying_down }}
+
+                                                            </td>
                                                             <td valign="bottom" width="13%">) 4. Pulse Rate</td>
                                                             <td valign="bottom" align="center" width="10%" style="border-bottom: 1px solid black;">
                                                                 {{ optional($admission->exam_physical)->pulse }}
