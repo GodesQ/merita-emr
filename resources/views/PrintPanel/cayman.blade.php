@@ -589,7 +589,9 @@
                                                     <tbody>
                                                         <tr>
                                                             <td valign="bottom" width="25%">Date and report of last E.C.G if any</td>
-                                                            <td valign="bottom" width="55%" style="border-bottom: 1px solid black;"></td>
+                                                            <td valign="bottom" width="55%" style="border-bottom: 1px solid black;">
+                                                                {{ optional($admission->exam_ecg)->trans_date ? date_format(new DateTime(optional($admission->exam_ecg)->trans_date), 'M d, Y') : null }}
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -818,6 +820,8 @@
                                                     <tr>
                                                         <td valign="top" width="20%">Give details of any operations</td>
                                                         <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black;">
+                                                            {{ optional($admission->exam_physical)->operations }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td contenteditable="true" colspan="4" width="100%" style="border-bottom: 1px solid black; padding: 5px;">&nbsp;</td>
@@ -837,14 +841,16 @@
                                                     <tr>
                                                         <td valign="top" width="16%">Medical condition a.)</td>
                                                         <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black;">
+                                                            {{ optional($admission->exam_physical)->purpose }}
+                                                        </td>
                                                         <td width="1%">b.)</td>
-                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black;">
+                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black;"></td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="bottom" width="15%" align="right">c.)</td>
-                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black; padding: 5px;">
+                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black; padding: 5px;"></td>
                                                         <td valign="bottom" width="1%">d.)</td>
-                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black; padding: 5px;">
+                                                        <td contenteditable="true" valign="bottom" width="35%" style="border-bottom: 1px solid black; padding: 5px;"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
