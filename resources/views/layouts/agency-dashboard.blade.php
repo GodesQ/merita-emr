@@ -121,7 +121,7 @@
     <script>
         let table = $('.data-table').DataTable({
             processing: true,
-            pageLength: 15,
+            pageLength: 20,
             serverSide: true,
             deferRender: true,
             dom: 'Bfrtip',
