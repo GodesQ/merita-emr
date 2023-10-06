@@ -43,7 +43,7 @@
                 <div class="card-content collapse show">
                     <div class="card-body">
                         <h4 class="card-title" id="basic-layout-colored-form-control">Support</h4>
-                        <div class="card-text my-1">Please fill up the form below for us to further investigate your concern. We will attend to your concern from Monday to Friday (8AM - 5PM PHT) or call us at 09458426538.</div>
+                        <div class="card-text my-1">Please fill up the form below for us to further investigate your concern. We will attend to your concern from Monday to Friday (8AM - 5PM PHT) or call us at (+63) 9171524452.</div>
                         <form class="form" action="/store_support" method="POST"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-body">
