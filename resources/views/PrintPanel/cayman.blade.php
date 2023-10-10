@@ -530,7 +530,7 @@
                                                             </td>
                                                             <td valign="bottom" width="19%">lbs (in under clothes)</td>
                                                             <td valign="bottom" width="5%">Waist</td>
-                                                            <td valign="bottom" width="10%" style="border-bottom: 1px solid black;">
+                                                            <td valign="bottom" width="10%" align="center" style="border-bottom: 1px solid black;">
                                                                 {{ optional($admission->exam_physical)->waist ?? null }}
                                                             </td>
                                                             <td width="15%">in.</td>
@@ -592,7 +592,7 @@
                                                         <tr>
                                                             <td valign="bottom" width="25%">Date and report of last E.C.G if any</td>
                                                             <td valign="bottom" width="55%" style="border-bottom: 1px solid black;">
-                                                                {{ optional($admission->exam_ecg)->trans_date ? date_format(new DateTime(optional($admission->exam_ecg)->trans_date), 'M d, Y') : null }}
+                                                                {{ optional($admission->exam_ecg)->trans_date ? date_format(new DateTime(optional($admission->exam_ecg)->trans_date), 'M d, Y') : null }}, 
                                                                 {{  optional($admission->exam_physical)->ecg_findings ?? null }}
                                                             </td>
                                                         </tr>
