@@ -1093,22 +1093,28 @@
                                                                 <tr>
                                                                     <td valign="center" width="65%">
                                                                         <div class="row">
-                                                                            <div class="col-lg-4">
+                                                                            <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                     <label class="form-label">Height</label>
                                                                                     <input type="text" class="form-control" value="{{ $exam ? $exam->height : null }}" name="height" id="height" onkeyup="computeBMI();">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-lg-4">
+                                                                            <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                     <label class="form-label">Weight</label>
                                                                                     <input type="text" class="form-control" value="{{ $exam ? $exam->weight : null }}" name="weight" id="weight" onkeyup="computeBMI();">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-lg-4">
+                                                                            <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                     <label class="form-label">BMI</label>
                                                                                     <input type="text" class="form-control" value="{{ $exam ? $exam->bmi : null }}" name="bmi" id="bmi">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-lg-3">
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label">Waist</label>
+                                                                                    <input type="text" class="form-control" value="{{ $exam ? $exam->waist : null }}" name="waist" id="waist">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
