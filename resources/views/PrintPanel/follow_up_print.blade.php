@@ -533,7 +533,7 @@
             </tbody>
         </table>
     </div>
-    {{-- <div style="height: 100vh; margin: 0;">
+    {{-- <div style="min-height: 100vh; margin: 0;">
         <table valign="top" width="100%" cellspacing="0" cellpadding="0" id="table" class="brdNone second-table">
             <tbody>
                 <tr>
