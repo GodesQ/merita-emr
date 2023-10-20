@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\PatientMedicalResult;
 use Illuminate\Http\Request;
 use App\Models\EmployeeLog;
 use Illuminate\Support\Facades\DB;
@@ -454,4 +455,31 @@ class AdmissionController extends Controller
             ]);
         }
     }
-}
+
+    public function migrate_patient_remarks(Request $request) {
+        $admissions = Admission::whereNotNull('remarks')->with('patient')->get();
+
+        foreach ($admissions as $admission) {
+            if($admission->remarks || $admission->prescription) {
+
+                if($admission->lab_status == 2) {
+                    $generate_at = $admission->patient->fit_to_work_date ?? $admission->trans_date;
+                } else {
+                    $generate_at = $admission->prescription_date ?? $admission->trans_date;
+                }
+
+                PatientMedicalResult::create([
+                    'admission_id' => $admission->id,
+                    'patient_id' => optional($admission->patient)->id,
+                    'remarks' => $admission->remarks,
+                    'prescription' => $admission->prescription,
+                    'doctor_prescription' => $admission->doctor_prescription,
+                    'generate_at' => $generate_at,
+                    'status' => $admission->lab_status
+                ]);
+            }
+        }
+
+        return 'Success';
+    }
+ }

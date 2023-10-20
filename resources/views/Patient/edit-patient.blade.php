@@ -2106,16 +2106,12 @@
                                                                 @csrf
                                                                 <input type="hidden" name="lab_status"
                                                                     value="1">
-                                                                <input type="hidden" name="patientId"
-                                                                    value="{{ $patient->id }}">
-                                                                <input type="hidden" name="agency_id"
-                                                                    value="{{ $patientInfo->agency_id }}">
-                                                                <input type="hidden" name="id"
-                                                                    value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                                <input type="hidden" name="patientId" value="{{ $patient->id }}">
+                                                                <input type="hidden" name="agency_id" value="{{ $patientInfo->agency_id }}">
+                                                                <input type="hidden" name="id" value="@php echo $patientCode ? $patientCode->id : null @endphp">
                                                                 <div class="form-group">
                                                                     <label>Re Schedule</label>
-                                                                    <input class="form-control" type="date"
-                                                                        name="schedule" id="schedule" />
+                                                                    <input class="form-control" type="date" name="schedule" id="schedule" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Remarks/Recommendations:</label>

@@ -17,6 +17,10 @@ class Admission extends Model
         return $this->hasOne(Patient::class, 'admission_id', 'id')->latest('id');;
     }
 
+    public function medical_results() {
+        return $this->hasMany(PatientMedicalResult::class, 'admission_id', 'id')->latest('id');
+    }
+
     public function followup() {
         return $this->hasOne(ReassessmentFindings::class, 'admission_id', 'id')->latest('id');
     }

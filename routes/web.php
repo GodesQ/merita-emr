@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\Agency;
+use App\Http\Middleware\Transaction;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
@@ -78,7 +80,9 @@ Route::view('/new_skuld', 'PrintPanel.new-skuld');
 // ----------------------------------------------- AUTHENTICATION -------------------------------------------- //
 
 Route::group(['middleware' => ['AuthCheck']], function () {
-    Route::get('/migrate-patients', [AdminController::class, 'migrate_patients']);
+    // Route::get('/migrate-patients', [AdminController::class, 'migrate_patients']);
+
+    Route::get('migrate_patient_remarks', [AdmissionController::class, 'migrate_patient_remarks']); 
 
     Route::get('/followup_results', [AdminController::class, 'followup_results']);
     // ----------------------------------------- START PATIENT ACCESS --------------------------------------- //
