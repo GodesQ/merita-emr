@@ -407,17 +407,35 @@ class AdmissionController extends Controller
                 'fit' => 'Pending',
             ]);
 
-            if ($request->prescription != null || $request->prescription != '') {
-                $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
-                    'defaultFont' => 'serif',
-                ]);
-            } else {
-                $pdf = null;
-            }
+            if ($request->remarks) {
+                PatientMedicalResult::updateOrCreate(
+                    // Conditions for updating or creating the record
+                    ['id' => $request->medical_result_id, ],
+                    // Attributes to update or create
+                    [
+                        'reschedule_at' => $request->schedule ?? null,
+                        'generate_at' => $request->generate_at ?? date('Y-m-d'),
+                        'status' => $request->lab_status,
+                        'remarks' => $request->remarks,
+                        'prescription' => $request->prescription ?? null,
+                        'doctor_prescription' => $request->doctor_prescription ?? null,
+                        'admission_id' => $request->id,
+                        'patient_id' => $request->patientId
+                    ]
+                );
+            }            
 
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
-            }
+            // if ($request->prescription != null || $request->prescription != '') {
+            //     $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
+            //         'defaultFont' => 'serif',
+            //     ]);
+            // } else {
+            //     $pdf = null;
+            // }
+
+            // foreach ($recipients as $key => $recipient) {
+            //     Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+            // }
         }
 
         return response()->json([
@@ -459,26 +477,26 @@ class AdmissionController extends Controller
     public function migrate_patient_remarks(Request $request) {
         $admissions = Admission::whereNotNull('remarks')->with('patient')->get();
 
-        foreach ($admissions as $admission) {
-            if($admission->remarks || $admission->prescription) {
+        // foreach ($admissions as $admission) {
+        //     if($admission->remarks || $admission->prescription) {
 
-                if($admission->lab_status == 2) {
-                    $generate_at = $admission->patient->fit_to_work_date ?? $admission->trans_date;
-                } else {
-                    $generate_at = $admission->prescription_date ?? $admission->trans_date;
-                }
+        //         if($admission->lab_status == 2) {
+        //             $generate_at = $admission->patient->fit_to_work_date ?? $admission->trans_date;
+        //         } else {
+        //             $generate_at = $admission->prescription_date ?? $admission->trans_date;
+        //         }
 
-                PatientMedicalResult::create([
-                    'admission_id' => $admission->id,
-                    'patient_id' => optional($admission->patient)->id,
-                    'remarks' => $admission->remarks,
-                    'prescription' => $admission->prescription,
-                    'doctor_prescription' => $admission->doctor_prescription,
-                    'generate_at' => $generate_at,
-                    'status' => $admission->lab_status
-                ]);
-            }
-        }
+        //         PatientMedicalResult::create([
+        //             'admission_id' => $admission->id,
+        //             'patient_id' => optional($admission->patient)->id,
+        //             'remarks' => $admission->remarks,
+        //             'prescription' => $admission->prescription,
+        //             'doctor_prescription' => $admission->doctor_prescription,
+        //             'generate_at' => $generate_at,
+        //             'status' => $admission->lab_status
+        //         ]);
+        //     }
+        // }
 
         return 'Success';
     }

@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Middleware\Agency;
+use App\Http\Middleware\Laboratory;
+use App\Http\Middleware\Ophthalmology;
+use App\Http\Middleware\Physicians;
+use App\Http\Middleware\Psychology;
+use App\Http\Middleware\Radiology;
 use App\Http\Middleware\Transaction;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +55,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AgencyDashboardController;
+use App\Http\Controllers\PatientMedicalResultController;
 
 
 Route::get('/', [PatientAuthController::class, 'login']);
@@ -183,6 +189,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/get_patients', [PatientController::class, 'get_patients'])->name('patients.get');
 
     Route::get('/patient_edit', [PatientController::class, 'edit_patient'])->name('patient_edit');
+
+    Route::get('/get_patient_medical_result/{id}', [PatientMedicalResultController::class, 'getMedicalResult'])->name('get_medical_result');
+    Route::delete('/delete_patient_medical_result', [PatientMedicalResultController::class, 'deleteMedicalResult'])->name('delete_patient_medical_result');
 
     Route::get('/patient_edit/crop_signature', [PatientController::class, 'crop_signature'])->name('patient.crop');
 

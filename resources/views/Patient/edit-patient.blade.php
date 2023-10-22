@@ -1822,11 +1822,7 @@
                                             </div>
                                             <div class="users-view-id text-white">PATIENT ID: {{ $patient->patientcode }}
                                             </div>
-                                            <div class="text-white">ADMISSION ID: @phpecho $patientCode
-                                                    ? $patientCode->id
-                                                : "N /
-                                            A"; @endphp
-                                            </div>
+                                            <div class="text-white">ADMISSION ID: {{ $patientCode ? $patientCode->id : "N / A" }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2094,11 +2090,19 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <div class="d-flex justify-content-end align-items-center">
+                                                        <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-lg-3">
                                                             <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
-                                                                <button class="btn btn-primary">March 20, 2023</button>
-                                                                <button class="btn btn-outline-primary">March 22, 2023</button>
+                                                                @if(count($patient_medical_results) > 0)
+                                                                    @foreach ($patient_medical_results as $medical_result)
+                                                                        <button class="btn {{ $loop->first ? 'btn-primary' : 'btn-outline-primary' }} medical_result_btn" id="{{ $medical_result->id }}">{{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}</button>
+                                                                    @endforeach
+                                                                @else
+                                                                    <h6>No Medical Result</h6>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-9">
@@ -2106,20 +2110,26 @@
                                                                 @csrf
                                                                 <input type="hidden" name="lab_status"
                                                                     value="1">
-                                                                <input type="hidden" name="patientId" value="{{ $patient->id }}">
-                                                                <input type="hidden" name="agency_id" value="{{ $patientInfo->agency_id }}">
-                                                                <input type="hidden" name="id" value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                                <input type="hidden" name="patientId"
+                                                                    value="{{ $patient->id }}">
+                                                                <input type="hidden" name="medical_result_id" id="medical_result_id">
+                                                                <input type="hidden" id="medical_result_generate_at" name="generate_at">
+                                                                <input type="hidden" name="agency_id"
+                                                                    value="{{ $patientInfo->agency_id }}">
+                                                                <input type="hidden" name="id"
+                                                                    value="@php echo $patientCode ? $patientCode->id : null @endphp">
                                                                 <div class="form-group">
                                                                     <label>Re Schedule</label>
-                                                                    <input class="form-control" type="date" name="schedule" id="schedule" />
+                                                                    <input class="form-control" type="date"
+                                                                        name="schedule" id="schedule" />
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Remarks/Recommendations:</label>
-                                                                    <textarea name="remarks" id="" cols="30" rows="10" class="form-control">{{ $patientCode ? $patientCode->remarks : null }}</textarea>
+                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Prescription:</label>
-                                                                    <textarea name="prescription" id="" cols="30" rows="10" class="form-control">{{ $patientCode ? $patientCode->prescription : null }}</textarea>
+                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="">Doctor Prescription</label>
@@ -3025,7 +3035,62 @@
                     "<input type='submit' class='submit-unfittemp btn btn-primary btn-lg' value='Submit'>"
                     )
             });
-        })
+        });
+
+        $('.medical_result_btn').click(function (e) {
+            let id = e.target.getAttribute('id');
+            let $clickedButton = $(e.target); // Wrap e.target in a jQuery object
+
+            $.ajax({
+                url: `/get_patient_medical_result/${id}`,
+                method: "GET",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $('#medical_result_remarks').val(response.medical_result.remarks);
+                        $('#medical_result_prescription').val(response.medical_result.prescription);
+                        $('#medical_result_id').val(response.medical_result.id);
+                        $('#medical_result_generate_at').val(response.medical_result.generate_at);
+
+                        // Remove the classes from all buttons
+                        $('.medical_result_btn').removeClass('btn-primary').addClass('btn-outline-primary');
+
+                        // Add the class to the clicked button
+                        $clickedButton.removeClass('btn-outline-primary').addClass('btn-primary');
+                    } else {
+                        Swal.fire('Not Found!', 'No Medical Result Found', 'error');
+                    }
+                }
+            });
+        });
+
+
+        // Wait for the page to load
+        $(document).ready(function() {
+            // Find the first button with the class 'medical_result_btn'
+            var firstButton = $('.medical_result_btn:first');
+            // Check if the first button exists
+            if (firstButton.length) {
+                firstButton.click();
+            }
+
+            $('.add_new_medical_result_btn').click(function (e) {
+                console.log(e);
+                $('#medical_result_remarks').val('');
+                $('#medical_result_prescription').val('');
+                $('#medical_result_id').val('');
+                $('#medical_result_generate_at').val('');
+            });
+        });
+
+        // $('.add_new_medical_result_btn').click(function (e) {
+        //     console.log(e);
+        //     $('#medical_result_remarks').val('');
+        //     $('#medical_result_prescription').val('');
+        //     $('#medical_result_id').val('');
+        // }); 
 
         function getAge(e) {
             var today = new Date();

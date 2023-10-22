@@ -18,7 +18,7 @@ class Admission extends Model
     }
 
     public function medical_results() {
-        return $this->hasMany(PatientMedicalResult::class, 'admission_id', 'id')->latest('id');
+        return $this->hasMany(PatientMedicalResult::class, 'admission_id', 'id');
     }
 
     public function followup() {
