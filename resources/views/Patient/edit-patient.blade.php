@@ -2004,22 +2004,22 @@
                                             data-toggle="modal" data-target="#pendingModal" data-status="pending">
                                             PENDING
                                         </button>
-                                        {{-- <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="fit">
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 2 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#pendingModal" data-status="fit">
                                             FIT
                                         </button>
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="unfit">
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 3 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#pendingModal" data-status="unfit">
                                             UNFIT
                                         </button>
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="unfit_temp">
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 4 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#pendingModal" data-status="unfit_temp">
                                             UNFIT TEMP
-                                        </button> --}}
-                                        <button data-toggle="modal" data-target="#fitModal" type="button"
+                                        </button>
+                                        {{-- <button data-toggle="modal" data-target="#fitModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{ $patientCode->lab_status == 2 ? 'active' : null }}"
                                             id="done-btn">FIT</button>
                                         <button type="button"
@@ -2029,13 +2029,13 @@
                                         </button>
                                         <button data-toggle="modal" data-target="#unfitTempModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{ $patientCode->lab_status == 4 ? 'active' : null }}"
-                                            id="done-btn">UNFIT TEMP</button>
+                                            id="done-btn">UNFIT TEMP</button> --}}
                                         @if ($patientCode->lab_status)
                                             <button class="btn btn-outline-warning medical-status-btn"
                                                 id="reset-medical-status-btn">Reset</button>
                                         @endif
                                     </div>
-                                    <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
+                                    {{-- <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
                                         aria-lablledby="done-btn" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2090,7 +2090,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="modal fade text-left" id="pendingModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content ">
@@ -2104,24 +2104,41 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    {{-- <div class="d-flex justify-content-end align-items-center">
+                                                    <div class="d-flex justify-content-end align-items-center">
                                                         <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="row">
-                                                        {{-- <div class="col-lg-3">
+                                                        <div class="col-lg-3">
                                                             <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
                                                                 @if(count($patient_medical_results) > 0)
                                                                     @foreach ($patient_medical_results as $medical_result)
-                                                                        <button class="btn {{ $loop->first ? 'btn-primary' : 'btn-outline-primary' }} medical_result_btn" id="{{ $medical_result->id }}">{{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}</button>
+                                                                        <button class="btn {{ $loop->first ? 'btn-primary' : 'btn-outline-primary' }} medical_result_btn" id="{{ $medical_result->id }}">
+                                                                            {{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}
+                                                                            <br> 
+                                                                            @if ($medical_result->status == 2)
+                                                                                <span style="font-size: 10px;">(FIT TO WORK)</span>
+                                                                            @elseif ($medical_result->status == 1)
+                                                                                <span style="font-size: 10px;">(RE ASSESSMENT)</span>
+                                                                            @elseif ($medical_result->status == 3)
+                                                                                <span style="font-size: 10px;">(UNFIT TO WORK)</span>
+                                                                            @elseif ($medical_result->status == 4)
+                                                                                <span style="font-size: 10px;">(UNFIT TEMPORARILY)</span>
+                                                                            @endif
+                                                                        </button>
+                                                                        
                                                                     @endforeach
                                                                 @else
                                                                     <h6>No Medical Result</h6>
                                                                 @endif
                                                             </div>
-                                                        </div> --}}
-                                                        <div class="col-lg-12">
+                                                        </div>
+                                                        <div class="col-lg-9">
                                                             <form id="update_lab_result_pending" action="#" method="POST">
                                                                 @csrf
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Lab Status Name</label>
+                                                                    <input type="text" name="lab_status_name" class="form-control" id="lab_status_name" readonly>
+                                                                </div>
                                                                 <input type="hidden" name="lab_status"
                                                                     value="1" id="lab_status">
                                                                 <input type="hidden" name="patientId"
@@ -2132,7 +2149,7 @@
                                                                     value="{{ $patientInfo->agency_id }}">
                                                                 <input type="hidden" name="id"
                                                                     value="@php echo $patientCode ? $patientCode->id : null @endphp">
-                                                                <div class="form-group">
+                                                                <div class="form-group schedule_group">
                                                                     <label>Re Schedule</label>
                                                                     <input class="form-control" type="date"
                                                                         name="schedule" id="schedule" />
@@ -2143,15 +2160,15 @@
                                                                         value="{{ $patient->unfit_to_work_date }}"
                                                                         type="date" name="unfit_date" id="unfit_date" />
                                                                 </div> --}}
-                                                                <div class="form-group">
-                                                                    <label for="medical_result_remarks" id="remarks-label">Remarks/Recommendations:</label>
-                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control">{{ $patientCode->remarks }}</textarea>
+                                                                <div class="form-group medical_result_remarks_group">
+                                                                    <label for="medical_result_remarks" id="remarks-label">Remarks:</label>
+                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group medical_result_prescription_group">
                                                                     <label for="medical_result_prescription">Prescription:</label>
-                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control">{{ $patientCode->prescription }}</textarea>
+                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group doctor_prescription_group">
                                                                     <label for="doctor_prescription">Doctor Prescription</label>
                                                                     <select required name="doctor_prescription"
                                                                         id="doctor_prescription" class="select2">
@@ -2178,7 +2195,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
+                                    {{-- <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel18" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2225,8 +2242,8 @@
 
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal fade text-left" id="unfitTempModal" tabindex="-1"
+                                    </div> --}}
+                                    {{-- <div class="modal fade text-left" id="unfitTempModal" tabindex="-1"
                                         role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2288,15 +2305,13 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <label class="modal-title text-text-bold-600"
-                                                        id="myModalLabel33">Laboratory
-                                                        Result</label>
+                                                    <label class="modal-title text-text-bold-600" id="myModalLabel33">Laboratory Result</label>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -2972,24 +2987,49 @@
 
         $('.medical-status-btn').click(function(e) {
             let data_status = e.target.getAttribute('data-status');
-
+             
             switch (data_status) {
                 case 'pending' :
                     $('#lab_status_name').val('Pending');
                     $('#lab_status').val(1);
                     $('.unfit_date_group').hide();
+                    $('.schedule_group').show();
+                    $('.medical_result_prescription_group').show();
+                    $('.doctor_prescription_group').show();
                     break;
                 
                 case 'fit' :
                     $('#lab_status_name').val('Fit');
                     $('#lab_status').val(2);
                     $('.unfit_date_group').hide();
+                    $('.schedule_group').hide();
+                    $('.medical_result_prescription_group').show();
+                    $('.doctor_prescription_group').show();
+                    break;
+
+                case 'unfit' :
+                    $('#lab_status_name').val('Unfit');
+                    $('#lab_status').val(3);
+                    $('.unfit_date_group').show();
+                    $('.schedule_group').hide();
+                    $('.medical_result_prescription_group').hide();
+                    $('.doctor_prescription_group').hide();
+                    break;
+
+                case 'unfit_temp' :
+                    $('#lab_status_name').val('Unfit Temporarily');
+                    $('#lab_status').val(4);
+                    $('.unfit_date_group').hide();
+                    $('.schedule_group').show();
+                    $('.medical_result_prescription_group').show();
+                    $('.doctor_prescription_group').show();
                     break;
 
                 default :
+                    
                     break;
             }
-        })
+        });
 
         $('#reset-medical-status-btn').click(function(e) {
             e.preventDefault();
@@ -3094,7 +3134,7 @@
                         $('#medical_result_prescription').val(response.medical_result.prescription);
                         $('#medical_result_id').val(response.medical_result.id);
                         $('#medical_result_generate_at').val(response.medical_result.generate_at);
-
+                        e.target.setAttribute('id', response.medical_result.id);
                         // Remove the classes from all buttons
                         $('.medical_result_btn').removeClass('btn-primary').addClass('btn-outline-primary');
 
@@ -3118,7 +3158,6 @@
             }
 
             $('.add_new_medical_result_btn').click(function (e) {
-                console.log(e);
                 $('#medical_result_remarks').val('');
                 $('#medical_result_prescription').val('');
                 $('#medical_result_id').val('');

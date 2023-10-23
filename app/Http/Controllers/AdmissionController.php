@@ -425,17 +425,17 @@ class AdmissionController extends Controller
                 );
             }            
 
-            if ($request->prescription != null || $request->prescription != '') {
-                $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
-                    'defaultFont' => 'serif',
-                ]);
-            } else {
-                $pdf = null;
-            }
+            // if ($request->prescription != null || $request->prescription != '') {
+            //     $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
+            //         'defaultFont' => 'serif',
+            //     ]);
+            // } else {
+            //     $pdf = null;
+            // }
 
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
-            }
+            // foreach ($recipients as $key => $recipient) {
+            //     Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+            // }
         }
 
         return response()->json([

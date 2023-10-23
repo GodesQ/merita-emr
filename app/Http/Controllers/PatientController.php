@@ -934,7 +934,7 @@ class PatientController extends Controller
             }
 
             if($patientCode) {
-                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at')->where('admission_id', $patientCode->id)->latest('id')->get();
+                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')->where('admission_id', $patientCode->id)->latest('id')->get();
             } else {
                 $patient_medical_results = [];
             }
