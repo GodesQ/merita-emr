@@ -7,7 +7,7 @@ use App\Http\Middleware\Physicians;
 use App\Http\Middleware\Psychology;
 use App\Http\Middleware\Radiology;
 use App\Http\Middleware\Transaction;
-use App\Models\Dental;
+use App\Http\Middleware\Dental;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;

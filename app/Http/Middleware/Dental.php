@@ -20,9 +20,6 @@ class Dental
         if ($data['dept_id'] == 9 || $data['dept_id'] == 1 || $data['dept_id'] == 8) {
             return $next($request);
         }
-        return redirect('/dashboard')->with(
-            'fail',
-            'You cannot access this section'
-        );
+        return redirect('/dashboard')->with('fail', 'You cannot access this section');
     }
 }
