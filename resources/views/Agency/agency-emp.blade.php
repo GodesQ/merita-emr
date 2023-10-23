@@ -134,7 +134,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Remarks</h4>
-                        <div class="container-fluid border-bottom">
+                        <div>@php echo $patient->admission->remarks @endphp</div>
+                        {{-- <div class="container-fluid border-bottom">
                             <div id="accordionWrapa1" role="tablist" aria-multiselectable="true">
                                 <div class="card accordion">
                                     @forelse (optional($patient->admission)->medical_results as $medical_result)
@@ -160,7 +161,7 @@
                                     @endforelse
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
