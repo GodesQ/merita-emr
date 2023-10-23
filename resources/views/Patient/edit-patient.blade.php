@@ -2001,9 +2001,24 @@
                                     <div class="my-1">
                                         <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#pendingModal">
+                                            data-toggle="modal" data-target="#pendingModal" data-status="pending">
                                             PENDING
                                         </button>
+                                        {{-- <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="fit">
+                                            FIT
+                                        </button>
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="unfit">
+                                            UNFIT
+                                        </button>
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" data-status="unfit_temp">
+                                            UNFIT TEMP
+                                        </button> --}}
                                         <button data-toggle="modal" data-target="#fitModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{ $patientCode->lab_status == 2 ? 'active' : null }}"
                                             id="done-btn">FIT</button>
@@ -2049,7 +2064,7 @@
                                                             value="@php echo $patientCode ? $patientCode->id : null @endphp">
                                                         <div class="form-group my-1">
                                                             <input type="text" class="form-control" name=""
-                                                                value="FIT" readonly />
+                                                                value="FIT" readonly id="lab_status_name" />
                                                         </div>
                                                         <div class="prescription-group">
                                                             <div class="form-group">
@@ -2076,13 +2091,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade text-left" id="pendingModal" tabindex="-1"
-                                        role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
+                                    <div class="modal fade text-left" id="pendingModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content ">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel18">
-                                                        PENDING
+                                                    <h4 class="modal-title" id="modalStatusFormLabel">
+                                                        Medical Status
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -2090,11 +2104,11 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="d-flex justify-content-end align-items-center">
+                                                    {{-- <div class="d-flex justify-content-end align-items-center">
                                                         <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="row">
-                                                        <div class="col-lg-3">
+                                                        {{-- <div class="col-lg-3">
                                                             <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
                                                                 @if(count($patient_medical_results) > 0)
                                                                     @foreach ($patient_medical_results as $medical_result)
@@ -2104,12 +2118,12 @@
                                                                     <h6>No Medical Result</h6>
                                                                 @endif
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-9">
+                                                        </div> --}}
+                                                        <div class="col-lg-12">
                                                             <form id="update_lab_result_pending" action="#" method="POST">
                                                                 @csrf
                                                                 <input type="hidden" name="lab_status"
-                                                                    value="1">
+                                                                    value="1" id="lab_status">
                                                                 <input type="hidden" name="patientId"
                                                                     value="{{ $patient->id }}">
                                                                 <input type="hidden" name="medical_result_id" id="medical_result_id">
@@ -2123,18 +2137,24 @@
                                                                     <input class="form-control" type="date"
                                                                         name="schedule" id="schedule" />
                                                                 </div>
+                                                                <div class="form-group unfit_date_group">
+                                                                    <label>Unfit Date</label>
+                                                                    <input class="form-control"
+                                                                        value="{{ $patient->unfit_to_work_date }}"
+                                                                        type="date" name="unfit_date" id="unfit_date" />
+                                                                </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Remarks/Recommendations:</label>
+                                                                    <label for="medical_result_remarks" id="remarks-label">Remarks/Recommendations:</label>
                                                                     <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Prescription:</label>
+                                                                    <label for="medical_result_prescription">Prescription:</label>
                                                                     <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="">Doctor Prescription</label>
+                                                                    <label for="doctor_prescription">Doctor Prescription</label>
                                                                     <select required name="doctor_prescription"
-                                                                        id="" class="select2">
+                                                                        id="doctor_prescription" class="select2">
                                                                         @foreach ($doctors as $doctor)
                                                                             <option value="{{ $doctor->id }}">
                                                                                 {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
@@ -2454,17 +2474,17 @@
     <script>
         const medicalStatusButtons = document.querySelectorAll('.medical-status-btn');
 
-        medicalStatusButtons.forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                const thisClick = Date.now();
-                if (thisClick - lastClick < 500) {
-                    console.log(false);
-                } else {
-                    console.log(true);
-                }
-                lastClick = thisClick;
-            });
-        });
+        // medicalStatusButtons.forEach(function(button) {
+        //     button.addEventListener('click', function(event) {
+        //         const thisClick = Date.now();
+        //         if (thisClick - lastClick < 500) {
+        //             console.log(false);
+        //         } else {
+        //             console.log(true);
+        //         }
+        //         lastClick = thisClick;
+        //     });
+        // });
     </script>
 
     <script>
@@ -2948,6 +2968,27 @@
                 $(this).html(
                     "<input type='submit' class='submit-fit btn btn-primary btn-lg' value='Submit'>")
             });
+        });
+
+        $('.medical-status-btn').click(function(e) {
+            let data_status = e.target.getAttribute('data-status');
+
+            switch (data_status) {
+                case 'pending' :
+                    $('#lab_status_name').val('Pending');
+                    $('#lab_status').val(1);
+                    $('.unfit_date_group').hide();
+                    break;
+                
+                case 'fit' :
+                    $('#lab_status_name').val('Fit');
+                    $('#lab_status').val(2);
+                    $('.unfit_date_group').hide();
+                    break;
+
+                default :
+                    break;
+            }
         })
 
         $('#reset-medical-status-btn').click(function(e) {
