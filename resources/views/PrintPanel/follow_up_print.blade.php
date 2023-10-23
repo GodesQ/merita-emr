@@ -376,11 +376,11 @@
                                     @endforeach
                                 @empty
                                     <tr>
-                                        <td>{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>
-                                        <td>
+                                        <td  width="12%">{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>
+                                        <td  width="30%">
                                             <b>Past Med History:</b>
                                         </td>
-                                        <td></td>
+                                        <td  width="28%"></td>
                                     </tr>
                                     <tr>
                                         <td></td>
