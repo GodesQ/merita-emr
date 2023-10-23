@@ -933,7 +933,11 @@ class PatientController extends Controller
                 $followup_records = [];
             }
 
-            $patient_medical_results = PatientMedicalResult::select('id', 'generate_at')->where('admission_id', $patientCode->id)->latest('id')->get();
+            if($patientCode) {
+                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at')->where('admission_id', $patientCode->id)->latest('id')->get();
+            } else {
+                $patient_medical_results = [];
+            }
             // dd($patient_medical_results);
 
             $exam_groups = $patientCode ? (new AdmissionController())->group_by('date', $additional_exams, $patientCode->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
