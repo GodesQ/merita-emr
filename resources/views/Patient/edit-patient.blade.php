@@ -2137,19 +2137,19 @@
                                                                     <input class="form-control" type="date"
                                                                         name="schedule" id="schedule" />
                                                                 </div>
-                                                                <div class="form-group unfit_date_group">
+                                                                {{-- <div class="form-group unfit_date_group">
                                                                     <label>Unfit Date</label>
                                                                     <input class="form-control"
                                                                         value="{{ $patient->unfit_to_work_date }}"
                                                                         type="date" name="unfit_date" id="unfit_date" />
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="form-group">
                                                                     <label for="medical_result_remarks" id="remarks-label">Remarks/Recommendations:</label>
-                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control"></textarea>
+                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control">{{ $patientCode->remarks }}</textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="medical_result_prescription">Prescription:</label>
-                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control"></textarea>
+                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control">{{ $patientCode->prescription }}</textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="doctor_prescription">Doctor Prescription</label>
