@@ -390,6 +390,21 @@ class PrintPanelController extends Controller
             ));
     }
 
+    public function default_follow_up_print(Request $request) {
+        $id = $request->id;
+        $admission_id = $request->admission_id;
+
+        $patient = Patient::select('mast_patient.*', 'mast_agency.agencyname')
+        ->where('mast_patient.id', $id)
+        ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
+        ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+        ->first();
+
+        $admission = Admission::where('id', $admission_id)->latest('id')->with('exam_physical', 'exam_ecg', 'exam_xray')->first();
+
+        return view('PrintPanel.default_follow_up_print', compact('patient', 'admission'));
+    }
+
     public function lab_result(Request $request) {
         $id = $request->id;
 

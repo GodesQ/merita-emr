@@ -1348,11 +1348,19 @@
                                             <div>
                                                 <a class="btn btn-secondary text-white"
                                                     id="account-pill-connections"data-toggle="pill"
+                                                    onclick="window.open('/default_follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=print')"
+                                                    aria-expanded="false">
+                                                    <i class="fa fa-print"></i>
+                                                    Print Default Follow Up Form
+                                                </a>
+                                                <a class="btn btn-secondary text-white"
+                                                    id="account-pill-connections"data-toggle="pill"
                                                     onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=print')"
                                                     aria-expanded="false">
                                                     <i class="fa fa-print"></i>
                                                     Print Follow Up Form
                                                 </a>
+                                                
                                                 <a onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=download')"
                                                     class="btn btn-secondary text-white"><i class="fa fa-download"></i>
                                                     Download Follow Up Form</a>
@@ -2001,25 +2009,25 @@
                                     <div class="my-1">
                                         <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#pendingModal" data-status="pending">
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="pending_medical_status_btn" data-status="pending">
                                             PENDING
                                         </button>
-                                        <button type="button"
+                                        {{-- <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 2 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#pendingModal" data-status="fit">
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="fit_medical_status_btn" data-status="fit">
                                             FIT
                                         </button>
                                         <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 3 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#pendingModal" data-status="unfit">
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="unfit_medical_status_btn" data-status="unfit">
                                             UNFIT
                                         </button>
                                         <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 4 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#pendingModal" data-status="unfit_temp">
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="unfit_temp_medical_status_btn" data-status="unfit_temp">
                                             UNFIT TEMP
-                                        </button>
-                                        {{-- <button data-toggle="modal" data-target="#fitModal" type="button"
+                                        </button> --}}
+                                        <button data-toggle="modal" data-target="#fitModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{ $patientCode->lab_status == 2 ? 'active' : null }}"
                                             id="done-btn">FIT</button>
                                         <button type="button"
@@ -2029,13 +2037,13 @@
                                         </button>
                                         <button data-toggle="modal" data-target="#unfitTempModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{ $patientCode->lab_status == 4 ? 'active' : null }}"
-                                            id="done-btn">UNFIT TEMP</button> --}}
+                                            id="done-btn">UNFIT TEMP</button>
                                         @if ($patientCode->lab_status)
                                             <button class="btn btn-outline-warning medical-status-btn"
                                                 id="reset-medical-status-btn">Reset</button>
                                         @endif
                                     </div>
-                                    {{-- <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
                                         aria-lablledby="done-btn" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2090,13 +2098,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> --}}
-                                    <div class="modal fade text-left" id="pendingModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
+                                    </div>
+                                    <div class="modal fade text-left" id="medicalStatusModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content ">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="modalStatusFormLabel">
-                                                        Medical Status
+                                                        Pending
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -2104,41 +2112,43 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="d-flex justify-content-end align-items-center">
+                                                    {{-- <div class="d-flex justify-content-end align-items-center">
                                                         <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="row">
                                                         <div class="col-lg-3">
                                                             <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
-                                                                @if(count($patient_medical_results) > 0)
+                                                                {{-- @if(count($patient_medical_results) > 0)
                                                                     @foreach ($patient_medical_results as $medical_result)
-                                                                        <button class="btn {{ $loop->first ? 'btn-primary' : 'btn-outline-primary' }} medical_result_btn" id="{{ $medical_result->id }}">
-                                                                            {{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}
-                                                                            <br> 
-                                                                            @if ($medical_result->status == 2)
-                                                                                <span style="font-size: 10px;">(FIT TO WORK)</span>
-                                                                            @elseif ($medical_result->status == 1)
-                                                                                <span style="font-size: 10px;">(RE ASSESSMENT)</span>
-                                                                            @elseif ($medical_result->status == 3)
-                                                                                <span style="font-size: 10px;">(UNFIT TO WORK)</span>
-                                                                            @elseif ($medical_result->status == 4)
-                                                                                <span style="font-size: 10px;">(UNFIT TEMPORARILY)</span>
-                                                                            @endif
-                                                                        </button>
-                                                                        
+                                                                        <div>
+                                                                            <button class="btn btn-outline-primary medical_result_btn" id="{{ $medical_result->id }}">
+                                                                                {{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}
+                                                                                <br> 
+                                                                                @if ($medical_result->status == 2)
+                                                                                    (FIT TO WORK)
+                                                                                @elseif ($medical_result->status == 1)
+                                                                                    (RE ASSESSMENT)
+                                                                                @elseif ($medical_result->status == 3)
+                                                                                    (UNFIT TO WORK)
+                                                                                @elseif ($medical_result->status == 4)
+                                                                                    (UNFIT TEMPORARILY)
+                                                                                @endif
+                                                                            </button>
+                                                                            <button class="btn btn-sm btn-danger btn-block remove_medical_result_btn" data-id="{{ $medical_result->id }}">Remove</button>
+                                                                        </div>
                                                                     @endforeach
                                                                 @else
                                                                     <h6>No Medical Result</h6>
-                                                                @endif
+                                                                @endif --}}
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-9">
+                                                        <div class="col-lg-12">
                                                             <form id="update_lab_result_pending" action="#" method="POST">
                                                                 @csrf
-                                                                <div class="form-group">
+                                                                {{-- <div class="form-group">
                                                                     <label class="form-label">Lab Status Name</label>
                                                                     <input type="text" name="lab_status_name" class="form-control" id="lab_status_name" readonly>
-                                                                </div>
+                                                                </div> --}}
                                                                 <input type="hidden" name="lab_status"
                                                                     value="1" id="lab_status">
                                                                 <input type="hidden" name="patientId"
@@ -2162,11 +2172,11 @@
                                                                 </div> --}}
                                                                 <div class="form-group medical_result_remarks_group">
                                                                     <label for="medical_result_remarks" id="remarks-label">Remarks:</label>
-                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control"></textarea>
+                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control">{{ $patient->admission->remarks ?? null }}</textarea>
                                                                 </div>
                                                                 <div class="form-group medical_result_prescription_group">
                                                                     <label for="medical_result_prescription">Prescription:</label>
-                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control"></textarea>
+                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control">{{ $patient->admission->prescription ?? null }}</textarea>
                                                                 </div>
                                                                 <div class="form-group doctor_prescription_group">
                                                                     <label for="doctor_prescription">Doctor Prescription</label>
@@ -2195,7 +2205,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
+                                    <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel18" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2242,8 +2252,8 @@
 
                                             </div>
                                         </div>
-                                    </div> --}}
-                                    {{-- <div class="modal fade text-left" id="unfitTempModal" tabindex="-1"
+                                    </div>
+                                    <div class="modal fade text-left" id="unfitTempModal" tabindex="-1"
                                         role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2305,7 +2315,7 @@
 
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
@@ -2986,8 +2996,9 @@
         });
 
         $('.medical-status-btn').click(function(e) {
+            $('.add_new_medical_result_btn').click();
+
             let data_status = e.target.getAttribute('data-status');
-             
             switch (data_status) {
                 case 'pending' :
                     $('#lab_status_name').val('Pending');
@@ -3026,7 +3037,6 @@
                     break;
 
                 default :
-                    
                     break;
             }
         });
@@ -3118,45 +3128,98 @@
             });
         });
 
-        $('.medical_result_btn').click(function (e) {
-            let id = e.target.getAttribute('id');
-            let $clickedButton = $(e.target); // Wrap e.target in a jQuery object
+        let medical_result_btns = document.querySelectorAll('.medical_result_btn');
 
-            $.ajax({
-                url: `/get_patient_medical_result/${id}`,
-                method: "GET",
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    if (response.status == 'success') {
-                        $('#medical_result_remarks').val(response.medical_result.remarks);
-                        $('#medical_result_prescription').val(response.medical_result.prescription);
-                        $('#medical_result_id').val(response.medical_result.id);
-                        $('#medical_result_generate_at').val(response.medical_result.generate_at);
-                        e.target.setAttribute('id', response.medical_result.id);
-                        // Remove the classes from all buttons
-                        $('.medical_result_btn').removeClass('btn-primary').addClass('btn-outline-primary');
+        medical_result_btns.forEach(medical_result_btn => {
+            medical_result_btn.addEventListener('click', function(e) {
+                let id = e.target.getAttribute('id');
+                let clickedButton = $(e.target); // Wrap e.target in a jQuery object
+                
+                // clickedButton.innerHTML = clickedButton;
+                if(id) {
+                    let spinner = $(" <i class='fa fa-refresh spinner'></i>");
+                    clickedButton.append(spinner);
+                    clickedButton.prop("disabled", true);
+                    $.ajax({
+                        url: `/get_patient_medical_result/${id}`,
+                        method: "GET",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                $('#medical_result_remarks').val(response.medical_result.remarks);
+                                $('#medical_result_prescription').val(response.medical_result.prescription);
+                                $('#medical_result_id').val(response.medical_result.id);
+                                $('#medical_result_generate_at').val(response.medical_result.generate_at);
+                                e.target.setAttribute('id', response.medical_result.id);
+                                // Remove the classes from all buttons
+                                $('.medical_result_btn').removeClass('btn-primary').addClass('btn-outline-primary');
 
-                        // Add the class to the clicked button
-                        $clickedButton.removeClass('btn-outline-primary').addClass('btn-primary');
-                    } else {
-                        Swal.fire('Not Found!', 'No Medical Result Found', 'error');
-                    }
+                                switch (response.medical_result.status) {
+                                    case '1' :
+                                        $('#lab_status_name').val('Pending');
+                                        $('#lab_status').val(1);
+                                        $('.unfit_date_group').hide();
+                                        $('.schedule_group').show();
+                                        $('.medical_result_prescription_group').show();
+                                        $('.doctor_prescription_group').show();
+                                        break;
+                                    
+                                    case '2' :
+                                        $('#lab_status_name').val('Fit');
+                                        $('#lab_status').val(2);
+                                        $('.unfit_date_group').hide();
+                                        $('.schedule_group').hide();
+                                        $('.medical_result_prescription_group').show();
+                                        $('.doctor_prescription_group').show();
+                                        break;
+
+                                    case '3' :
+                                        $('#lab_status_name').val('Unfit');
+                                        $('#lab_status').val(3);
+                                        $('.unfit_date_group').show();
+                                        $('.schedule_group').hide();
+                                        $('.medical_result_prescription_group').hide();
+                                        $('.doctor_prescription_group').hide();
+                                        break;
+
+                                    case '4' :
+                                        $('#lab_status_name').val('Unfit Temporarily');
+                                        $('#lab_status').val(4);
+                                        $('.unfit_date_group').hide();
+                                        $('.schedule_group').show();
+                                        $('.medical_result_prescription_group').show();
+                                        $('.doctor_prescription_group').show();
+                                        break;
+
+                                    default :
+                                        break;
+                                }
+
+                                // Add the class to the clicked button
+                                clickedButton.removeClass('btn-outline-primary').addClass('btn-primary');
+                            } else {
+                                console.log(response);
+                                Swal.fire('Not Found!', 'No Medical Result Found', 'error');
+                            }
+                        }
+                    }).done(function(data) {
+                        spinner.remove();
+                        clickedButton.prop("disabled", false);
+                    });
                 }
             });
+        });
+
+        $('.remove_medical_result_btn').click(function(e) {
+            let id = e.target.getAttribute('data-id');
+            
         });
 
 
         // Wait for the page to load
         $(document).ready(function() {
-            // Find the first button with the class 'medical_result_btn'
-            var firstButton = $('.medical_result_btn:first');
-            // Check if the first button exists
-            if (firstButton.length) {
-                firstButton.click();
-            }
-
             $('.add_new_medical_result_btn').click(function (e) {
                 $('#medical_result_remarks').val('');
                 $('#medical_result_prescription').val('');
@@ -3164,13 +3227,6 @@
                 $('#medical_result_generate_at').val('');
             });
         });
-
-        // $('.add_new_medical_result_btn').click(function (e) {
-        //     console.log(e);
-        //     $('#medical_result_remarks').val('');
-        //     $('#medical_result_prescription').val('');
-        //     $('#medical_result_id').val('');
-        // }); 
 
         function getAge(e) {
             var today = new Date();

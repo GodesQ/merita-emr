@@ -62,7 +62,6 @@ class AgencyController extends Controller
             $data = session()->all();
             $id = $request->id;
             $patient = Patient::where('id', $id)->with('patientinfo', 'admission.medical_results')->firstOrFail();
-            // dd($patient);
 
             return view('Agency.agency-emp', compact('patient', 'data'));
         } catch (\Exception $exception) {
