@@ -2012,7 +2012,7 @@
                                             data-toggle="modal" data-target="#medicalStatusModal" id="pending_medical_status_btn" data-status="pending">
                                             PENDING
                                         </button>
-                                        {{-- <button type="button"
+                                        <button type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 2 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="fit_medical_status_btn" data-status="fit">
                                             FIT
@@ -2026,8 +2026,8 @@
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 4 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="unfit_temp_medical_status_btn" data-status="unfit_temp">
                                             UNFIT TEMP
-                                        </button> --}}
-                                        <button data-toggle="modal" data-target="#fitModal" type="button"
+                                        </button>
+                                        {{-- <button data-toggle="modal" data-target="#fitModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{ $patientCode->lab_status == 2 ? 'active' : null }}"
                                             id="done-btn">FIT</button>
                                         <button type="button"
@@ -2037,13 +2037,13 @@
                                         </button>
                                         <button data-toggle="modal" data-target="#unfitTempModal" type="button"
                                             class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{ $patientCode->lab_status == 4 ? 'active' : null }}"
-                                            id="done-btn">UNFIT TEMP</button>
+                                            id="done-btn">UNFIT TEMP</button> --}}
                                         @if ($patientCode->lab_status)
                                             <button class="btn btn-outline-warning medical-status-btn"
                                                 id="reset-medical-status-btn">Reset</button>
                                         @endif
                                     </div>
-                                    <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
+                                    {{-- <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
                                         aria-lablledby="done-btn" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2098,13 +2098,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="modal fade text-left" id="medicalStatusModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content ">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="modalStatusFormLabel">
-                                                        Pending
+                                                        Medical Status
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -2112,13 +2112,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    {{-- <div class="d-flex justify-content-end align-items-center">
+                                                    <div class="d-flex justify-content-end align-items-center">
                                                         <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
-                                                    </div> --}}
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-lg-3">
                                                             <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
-                                                                {{-- @if(count($patient_medical_results) > 0)
+                                                                @if(count($patient_medical_results) > 0)
                                                                     @foreach ($patient_medical_results as $medical_result)
                                                                         <div>
                                                                             <button class="btn btn-outline-primary medical_result_btn" id="{{ $medical_result->id }}">
@@ -2139,16 +2139,16 @@
                                                                     @endforeach
                                                                 @else
                                                                     <h6>No Medical Result</h6>
-                                                                @endif --}}
+                                                                @endif
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12">
+                                                        <div class="col-lg-9">
                                                             <form id="update_lab_result_pending" action="#" method="POST">
                                                                 @csrf
-                                                                {{-- <div class="form-group">
+                                                                <div class="form-group">
                                                                     <label class="form-label">Lab Status Name</label>
                                                                     <input type="text" name="lab_status_name" class="form-control" id="lab_status_name" readonly>
-                                                                </div> --}}
+                                                                </div>
                                                                 <input type="hidden" name="lab_status"
                                                                     value="1" id="lab_status">
                                                                 <input type="hidden" name="patientId"
@@ -2205,7 +2205,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
+                                    {{-- <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel18" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content modal-lg">
@@ -2315,7 +2315,7 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
@@ -3200,7 +3200,6 @@
                                 // Add the class to the clicked button
                                 clickedButton.removeClass('btn-outline-primary').addClass('btn-primary');
                             } else {
-                                console.log(response);
                                 Swal.fire('Not Found!', 'No Medical Result Found', 'error');
                             }
                         }
@@ -3214,7 +3213,41 @@
 
         $('.remove_medical_result_btn').click(function(e) {
             let id = e.target.getAttribute('data-id');
-            
+            let csrf = '{{ csrf_token() }}';
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Remove medical result",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00b5b8',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, remove it!'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/delete_patient_medical_result`,
+                        method: "DELETE",
+                        data: {
+                            _token: csrf,
+                            id: id
+                        },
+                        success: function(response) {
+                            if(response.status == 'success') {
+                                Swal.fire(
+                                    'Success!', 
+                                    response.message, 
+                                    'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        }
+                    })
+                }
+            })
         });
 
 

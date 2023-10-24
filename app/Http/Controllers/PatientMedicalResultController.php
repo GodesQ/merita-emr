@@ -23,4 +23,22 @@ class PatientMedicalResultController extends Controller
             'medical_result' => null
         ]);
     }
+
+    public function deleteMedicalResult(Request $request) {
+        $medical_result = PatientMedicalResult::where('id', $request->id)->first();
+
+        if($medical_result) {  
+            $medical_result->delete();
+
+            return response()->json([
+                'status'=> "success",
+                'message' => "Medical Result Deleted Successfully"
+            ]);
+        }
+
+        return response()->json([
+            'status'=> "failed",
+            'message' => "Medical Result Failed To Delete"
+        ]);
+    }
 }
