@@ -601,7 +601,6 @@ class AdminController extends Controller
                 'maritalstatus' => $request->maritalstatus,
                 'birthdate' => $request->birthdate,
                 'birthplace' => $request->birthplace,
-                'gender' => $request->gender,
             ]);
 
         $employeeInfo = session()->all();

@@ -746,15 +746,15 @@
 
         if(action == 'print') {
             let screenHeight = screen.height;
-            let maximumSize = [1250, 1220];
+            let maximumSize = [2000, 3200];
+            
             let secondMaxSize = 1230;
             let mainTable = document.querySelector('.main-table');
             let tableTbody = document.querySelector('.findings-table').children[0];
 
             let drag_count = 10;
-
-            while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 850 ? 1 : 0]) {
-
+            
+            while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 2000 ? 1 : 0]) {
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
                                     <td valign="top"><div>&nbsp;</div></td>
@@ -765,7 +765,6 @@
                 if(mainTable.clientHeight > maximumSize) {
                     mainTable.style.overflow = 'hidden';
                 }
-
             }
 
             let secondTable = document.querySelector('.second-table');

@@ -360,24 +360,24 @@ class AdmissionController extends Controller
                 );
             }
 
-            // if ($request->prescription != null || $request->prescription != '') {
-            //     $pdf = PDF::loadView('emails.prescription-pdf', [
-            //         'data' => $admission,
-            //         'patient' => $patient,
-            //         'doctor' => $doctor,
-            //     ])->setOptions(['defaultFont' => 'serif']);
-            // } else {
-            //     $pdf = null;
-            // }
+            if ($request->prescription != null || $request->prescription != '') {
+                $pdf = PDF::loadView('emails.prescription-pdf', [
+                    'data' => $admission,
+                    'patient' => $patient,
+                    'doctor' => $doctor,
+                ])->setOptions(['defaultFont' => 'serif']);
+            } else {
+                $pdf = null;
+            }
 
-            // Patient::where('admission_id', $admission->id)->update([
-            //     'fit_to_work_date' => date('Y-m-d'),
-            // ]);
+            Patient::where('admission_id', $admission->id)->update([
+                'fit_to_work_date' => date('Y-m-d'),
+            ]);
 
-            // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            // foreach ($recipients as $key => $recipient) {
-            //     Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
-            // }
+            ReassessmentFindings::where('admission_id', $admission->id)->delete();
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
+            }
         }
 
         if ($request->lab_status == 3) {
@@ -439,22 +439,22 @@ class AdmissionController extends Controller
                 );
             }
 
-            // if ($request->prescription != null || $request->prescription != '') {
-            //     $pdf = PDF::loadView('emails.prescription-pdf', [
-            //         'data' => $admission,
-            //         'patient' => $patient,
-            //         'doctor' => $doctor,
-            //     ])->setOptions([
-            //         'defaultFont' => 'serif',
-            //     ]);
-            // } else {
-            //     $pdf = null;
-            // }
+            if ($request->prescription != null || $request->prescription != '') {
+                $pdf = PDF::loadView('emails.prescription-pdf', [
+                    'data' => $admission,
+                    'patient' => $patient,
+                    'doctor' => $doctor,
+                ])->setOptions([
+                    'defaultFont' => 'serif',
+                ]);
+            } else {
+                $pdf = null;
+            }
 
-            // // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            // foreach ($recipients as $key => $recipient) {
-            //     Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
-            // }
+            // ReassessmentFindings::where('admission_id', $admission->id)->delete();
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
+            }
         }
 
         if ($request->lab_status == 1) {
@@ -480,17 +480,17 @@ class AdmissionController extends Controller
                 );
             }
 
-            // if ($request->prescription != null || $request->prescription != '') {
-            //     $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
-            //         'defaultFont' => 'serif',
-            //     ]);
-            // } else {
-            //     $pdf = null;
-            // }
+            if ($request->prescription != null || $request->prescription != '') {
+                $pdf = PDF::loadView('emails.prescription-pdf', ['data' => $admission, 'patient' => $patient, 'doctor' => $doctor])->setOptions([
+                    'defaultFont' => 'serif',
+                ]);
+            } else {
+                $pdf = null;
+            }
 
-            // foreach ($recipients as $key => $recipient) {
-            //     Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
-            // }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+            }
         }
 
         return response()->json([

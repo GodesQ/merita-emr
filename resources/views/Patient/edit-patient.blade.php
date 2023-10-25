@@ -43,7 +43,6 @@
         .prescription-group {
             display: none;
         }
-
         .show-med {
             display: block !important;
         }
@@ -2154,11 +2153,16 @@
                                                                 <input type="hidden" name="patientId"
                                                                     value="{{ $patient->id }}">
                                                                 <input type="hidden" name="medical_result_id" id="medical_result_id">
-                                                                <input type="hidden" id="medical_result_generate_at" name="generate_at">
                                                                 <input type="hidden" name="agency_id"
                                                                     value="{{ $patientInfo->agency_id }}">
                                                                 <input type="hidden" name="id"
                                                                     value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                                <div class="form-group">
+                                                                    <label for="">Generate at: 
+                                                                        <span style="font-size: 12px;" class="primary">This is the date when you submitted this form. </span>
+                                                                    </label>
+                                                                    <input type="date" class="form-control" name="generate_at" id="medical_result_generate_at">
+                                                                </div>
                                                                 <div class="form-group schedule_group">
                                                                     <label>Re Schedule</label>
                                                                     <input class="form-control" type="date"
@@ -2493,25 +2497,6 @@
     <script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script>
     <script src="../../../app-assets/js/scripts/custom.js"></script>
 
-
-    <script></script>
-
-    <script>
-        const medicalStatusButtons = document.querySelectorAll('.medical-status-btn');
-
-        // medicalStatusButtons.forEach(function(button) {
-        //     button.addEventListener('click', function(event) {
-        //         const thisClick = Date.now();
-        //         if (thisClick - lastClick < 500) {
-        //             console.log(false);
-        //         } else {
-        //             console.log(true);
-        //         }
-        //         lastClick = thisClick;
-        //     });
-        // });
-    </script>
-
     <script>
         let agency = document.querySelector('#agency');
         let bahia_ids = [55, 57, 58, 59, 3];
@@ -2767,147 +2752,147 @@
             })
         })
 
-        $(".medical-done").click(function() {
-            let id = "@php echo $patientCode ? $patientCode->id : null @endphp";
-            let csrf = '{{ csrf_token() }}';
-            Swal.fire({
-                title: 'Are you sure you want to change it?',
-                text: "",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, change it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(this).html(
-                        "<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>FIT TO WORK</button>"
-                    );
-                    $.ajax({
-                        url: '/update_lab_result',
-                        method: 'POST',
-                        data: {
-                            id: id,
-                            lab_status: 2,
-                            remarks: "Cleared",
-                            agency_id: '{{ $patientInfo->agency_id }}',
-                            _token: csrf
-                        },
-                        success: function(response) {
-                            if (response.status == 200) {
-                                Swal.fire('Updated!', 'Record has been updated.', 'success')
-                                    .then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload();
-                                        }
-                                    })
-                            } else {
-                                Swal.fire(
-                                    'Error Occured!',
-                                    'Internal Server Error.',
-                                    'error'
-                                ).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
-                                    }
-                                })
-                            }
-                        }
-                    }).done(function(data) {
-                        $(this).html(
-                            "<button type='button' class='btn btn-solid btn-success'>FIT TO WORK</button>"
-                        )
-                    });
-                }
-            })
-        })
+        // $(".medical-done").click(function() {
+        //     let id = "@php echo $patientCode ? $patientCode->id : null @endphp";
+        //     let csrf = '{{ csrf_token() }}';
+        //     Swal.fire({
+        //         title: 'Are you sure you want to change it?',
+        //         text: "",
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, change it!'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $(this).html(
+        //                 "<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>FIT TO WORK</button>"
+        //             );
+        //             $.ajax({
+        //                 url: '/update_lab_result',
+        //                 method: 'POST',
+        //                 data: {
+        //                     id: id,
+        //                     lab_status: 2,
+        //                     remarks: "Cleared",
+        //                     agency_id: '{{ $patientInfo->agency_id }}',
+        //                     _token: csrf
+        //                 },
+        //                 success: function(response) {
+        //                     if (response.status == 200) {
+        //                         Swal.fire('Updated!', 'Record has been updated.', 'success')
+        //                             .then((result) => {
+        //                                 if (result.isConfirmed) {
+        //                                     location.reload();
+        //                                 }
+        //                             })
+        //                     } else {
+        //                         Swal.fire(
+        //                             'Error Occured!',
+        //                             'Internal Server Error.',
+        //                             'error'
+        //                         ).then((result) => {
+        //                             if (result.isConfirmed) {
+        //                                 location.reload();
+        //                             }
+        //                         })
+        //                     }
+        //                 }
+        //             }).done(function(data) {
+        //                 $(this).html(
+        //                     "<button type='button' class='btn btn-solid btn-success'>FIT TO WORK</button>"
+        //                 )
+        //             });
+        //         }
+        //     })
+        // })
 
-        $("#update_lab_result_reassessment").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            $(".submit-reassessment").html(
-                "<button type='submit' class='submit-reassessment btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-                );
-            $.ajax({
-                url: '/update_lab_result',
-                method: "POST",
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    if (response.status == 200) {
-                        Swal.fire(
-                            'Updated!',
-                            'Record has been updated.',
-                            'success'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    } else {
-                        Swal.fire(
-                            'Error Occured!',
-                            'Internal Server Error.',
-                            'error'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    }
-                }
-            }).done(function(data) {
-                $(this).html(
-                    "<input type='submit' class='submit-reassessment btn btn-primary btn-lg' value='Submit'>"
-                    )
-            });
-        })
+        // $("#update_lab_result_reassessment").submit(function(e) {
+        //     e.preventDefault();
+        //     const fd = new FormData(this);
+        //     $(".submit-reassessment").html(
+        //         "<button type='submit' class='submit-reassessment btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
+        //         );
+        //     $.ajax({
+        //         url: '/update_lab_result',
+        //         method: "POST",
+        //         data: fd,
+        //         cache: false,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(response) {
+        //             console.log(response);
+        //             if (response.status == 200) {
+        //                 Swal.fire(
+        //                     'Updated!',
+        //                     'Record has been updated.',
+        //                     'success'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             } else {
+        //                 Swal.fire(
+        //                     'Error Occured!',
+        //                     'Internal Server Error.',
+        //                     'error'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             }
+        //         }
+        //     }).done(function(data) {
+        //         $(this).html(
+        //             "<input type='submit' class='submit-reassessment btn btn-primary btn-lg' value='Submit'>"
+        //             )
+        //     });
+        // })
 
-        $("#update_lab_result_unfit").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            $(".submit-unfit").html(
-                "<button type='submit' class='submit-unfit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-                );
-            $.ajax({
-                url: '/update_lab_result',
-                method: "POST",
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    if (response.status == 200) {
-                        Swal.fire(
-                            'Updated!',
-                            'Record has been updated.',
-                            'success'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    } else {
-                        Swal.fire(
-                            'Error Occured!',
-                            'Internal Server Error.',
-                            'error'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    }
-                }
-            }).done(function(data) {
-                $(this).html(
-                    "<input type='submit' class='submit-unfit btn btn-primary btn-lg' value='Submit'>")
-            });
-        })
+        // $("#update_lab_result_unfit").submit(function(e) {
+        //     e.preventDefault();
+        //     const fd = new FormData(this);
+        //     $(".submit-unfit").html(
+        //         "<button type='submit' class='submit-unfit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
+        //         );
+        //     $.ajax({
+        //         url: '/update_lab_result',
+        //         method: "POST",
+        //         data: fd,
+        //         cache: false,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(response) {
+        //             console.log(response);
+        //             if (response.status == 200) {
+        //                 Swal.fire(
+        //                     'Updated!',
+        //                     'Record has been updated.',
+        //                     'success'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             } else {
+        //                 Swal.fire(
+        //                     'Error Occured!',
+        //                     'Internal Server Error.',
+        //                     'error'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             }
+        //         }
+        //     }).done(function(data) {
+        //         $(this).html(
+        //             "<input type='submit' class='submit-unfit btn btn-primary btn-lg' value='Submit'>")
+        //     });
+        // })
 
         $("#update_lab_result_pending").submit(function(e) {
             e.preventDefault();
@@ -2952,48 +2937,48 @@
             });
         })
 
-        $("#update_lab_result_fit").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            $(".submit-fit").html(
-                "<button type='submit' class='submit-fit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-                );
-            $.ajax({
-                url: '/update_lab_result',
-                method: "POST",
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    if (response.status == 200) {
-                        Swal.fire(
-                            'Updated!',
-                            'Record has been updated.',
-                            'success'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    } else {
-                        Swal.fire(
-                            'Error Occured!',
-                            'Internal Server Error.',
-                            'error'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    }
-                }
-            }).done(function(data) {
-                $(this).html(
-                    "<input type='submit' class='submit-fit btn btn-primary btn-lg' value='Submit'>")
-            });
-        });
+        // $("#update_lab_result_fit").submit(function(e) {
+        //     e.preventDefault();
+        //     const fd = new FormData(this);
+        //     $(".submit-fit").html(
+        //         "<button type='submit' class='submit-fit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
+        //         );
+        //     $.ajax({
+        //         url: '/update_lab_result',
+        //         method: "POST",
+        //         data: fd,
+        //         cache: false,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(response) {
+        //             console.log(response);
+        //             if (response.status == 200) {
+        //                 Swal.fire(
+        //                     'Updated!',
+        //                     'Record has been updated.',
+        //                     'success'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             } else {
+        //                 Swal.fire(
+        //                     'Error Occured!',
+        //                     'Internal Server Error.',
+        //                     'error'
+        //                 ).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         location.reload();
+        //                     }
+        //                 })
+        //             }
+        //         }
+        //     }).done(function(data) {
+        //         $(this).html(
+        //             "<input type='submit' class='submit-fit btn btn-primary btn-lg' value='Submit'>")
+        //     });
+        // });
 
         $('.medical-status-btn').click(function(e) {
             $('.add_new_medical_result_btn').click();
