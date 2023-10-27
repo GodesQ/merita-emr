@@ -714,7 +714,6 @@
     </center>
 
     <script>
-
         let checkbox = document.querySelectorAll('.checkbox');
         for(let i = 0; i < checkbox.length; i++) {
             checkbox[i].addEventListener('click', (e) => {
