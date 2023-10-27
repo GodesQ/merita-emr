@@ -106,7 +106,7 @@ return date("M/d/Y".$time,strtotime($val));
                                                 <tr valign="bottom">
                                                     <td align='center'>
                                                         @if ($technician3)
-                                                            <img src="{{$technician3->signature}}" width="100px" style="object-fit: cover;"/>
+                                                            <img src="{{$technician3->signature}}" width="200px" style="object-fit: cover; margin-bottom: -40px;"/>
                                                         @endif
                                                     </td>
                                                 </tr>
