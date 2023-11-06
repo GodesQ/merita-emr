@@ -313,6 +313,8 @@ class AdmissionController extends Controller
         $admission->cause_of_unfit = isset($request->cause_of_unfit) ? $request->cause_of_unfit : null;
         $save = $admission->save();
 
+        $latestMedicalResult = PatientMedicalResult::where('admission_id', $admission->id)->orderBy('generate_at','desc')->first();
+
         if (isset($request->schedule)) {
             $schedule = DB::table('sched_patients')
                 ->where('id', $request->schedule_id)
@@ -340,7 +342,10 @@ class AdmissionController extends Controller
         }
 
         if ($request->lab_status == 2) {
-            PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
+
+            if($latestMedicalResult->generate_at <= $request->generate_at) {
+                PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
+            }
 
             if ($request->remarks) {
                 PatientMedicalResult::updateOrCreate(
@@ -350,7 +355,7 @@ class AdmissionController extends Controller
                     [
                         'reschedule_at' => $request->schedule ?? null,
                         'generate_at' => $request->generate_at ?? date('Y-m-d'),
-                        'status' => $request->lab_status,
+                        'status' => $latestMedicalResult->generate_at <= $request->generate_at ? $request->lab_status : $latestMedicalResult->status,
                         'remarks' => $request->remarks,
                         'prescription' => $request->prescription ?? null,
                         'doctor_prescription' => $request->doctor_prescription ?? null,
