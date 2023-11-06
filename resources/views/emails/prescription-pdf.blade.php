@@ -128,7 +128,7 @@
             </tr>
             <tr>
                 <td>
-                    <div style="height: 440px;">
+                    <div style="height: 400px;">
                         <div style="color: black; margin-left: 80px; font-size: 30px; line-height: 35px;">
                             @php echo nl2br($data->prescription) @endphp
                         </div>
