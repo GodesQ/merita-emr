@@ -18,7 +18,7 @@ class Admission extends Model
     }
 
     public function medical_results() {
-        return $this->hasMany(PatientMedicalResult::class, 'admission_id', 'id');
+        return $this->hasMany(PatientMedicalResult::class, 'admission_id', 'id')->orderBy('generate_at', 'ASC');
     }
 
     public function followup() {
