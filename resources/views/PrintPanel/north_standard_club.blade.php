@@ -72,8 +72,7 @@
                     <table width="100%" border="0" cellpacing="0" cellpadding="2">
                         <tr>
                             <td class="brdAll">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="2"
-                                    style="border: 3px solid black">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2" style="border: 3px solid black">
                                     <tr>
                                         <td>
                                             <table width="100%" border="0" cellpadding="2" cellspacing="0"

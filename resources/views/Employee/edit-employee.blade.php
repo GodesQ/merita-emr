@@ -237,6 +237,7 @@
                                         <div class="box-footer">
                                             <button name="action" value="save" type="submit" onclick=""
                                                 class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-outline-primary" id="reset_password_btn">Reset Password</button>
                                         </div>
                                     </form>
                                 </div>
@@ -277,4 +278,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
     <script type="text/javascript" src="https://www.sigplusweb.com/SigWebTablet.js"></script>
     <script src="../../../app-assets/js/scripts/custom.js"></script>
+    <script>
+        $('#reset_password_btn').click(function (e) {
+            const tokenValue = document.querySelector('input[name="_token"]').value;
+            if($('#email').val()) {
+                Swal.fire({
+                    title: 'Are you sure you want to send a reset link?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/submit_forget_form',
+                            method: 'POST',
+                            data: {
+                                _token: tokenValue,
+                                email: $('#email').val(),
+                                classification: 'admin'
+                            },
+                            success: function(response) {
+                                if(response.status) {
+                                    Swal.fire(
+                                        'Sent!',
+                                        `${response.message}`,
+                                        'success'
+                                    )
+                                }
+                            }
+                        });
+                    }
+                });  
+            } else {
+                Swal.fire({
+                    title: 'Please provide an email to continue.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                })
+            }
+        })
+    </script>
 @endpush

@@ -27,16 +27,26 @@ class ForgetPasswordController extends Controller
     public function submit_forget_form(Request $request) {
 
         $AGENCY_WORD = 'agency';
+        $ADMIN_WORD = 'admin';
+        $PATIENT_WORD = 'patient';
+
         if($request->classification == $AGENCY_WORD) {
             $request->validate([
                 "email" => "required|email|exists:mast_agency"
             ]);
-        } else {
+        }
+
+        if($request->classification == $ADMIN_WORD) {
+            $request->validate([
+                "email" => "required|email|exists:mast_employee"
+            ]);
+        }
+
+        if($request->classification == $PATIENT_WORD) {
             $request->validate([
                 "email" => "required|email|exists:mast_patient"
             ]);
         }
-
 
         $token = Str::random(64);
 
@@ -48,7 +58,15 @@ class ForgetPasswordController extends Controller
           ]);
 
         Mail::to($request->email)->send(new ForgetPassword($token, $request->classification, $request->email));
-        return back()->with('success', 'We have e-mailed your password reset link!');
+
+        if($request->ajax()) {
+            return response([
+                "status"=> true,
+                "message" => "We e-mailed the password reset link!"
+            ]);
+        } else {
+            return back()->with('success', 'We have e-mailed your password reset link!');
+        }
     }
 
     public function view_password_reset_form() {
@@ -60,15 +78,28 @@ class ForgetPasswordController extends Controller
     public function submit_reset_form(Request $request) {
 
         $AGENCY_WORD = 'agency';
+        $ADMIN_WORD = 'admin';
+        $PATIENT_WORD = 'patient';
+
         if($request->classification == $AGENCY_WORD) {
             $request->validate([
                 'email' => 'required|email|exists:mast_agency',
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
-        } else {
+        } 
+
+        if($request->classification == $PATIENT_WORD) {
             $request->validate([
                 'email' => 'required|email|exists:mast_patient',
+                'password' => 'required|min:8',
+                'password_confirmation' => 'required_with:password|same:password',
+            ]);
+        }
+
+        if($request->classification == $ADMIN_WORD) {
+            $request->validate([
+                'email' => 'required|email|exists:mast_employee',
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required_with:password|same:password',
             ]);
@@ -90,8 +121,17 @@ class ForgetPasswordController extends Controller
                 if($save_password) return redirect('/agency-login')->with('success', 'Your password has been changed!');
             }
 
+            if($request->classification == "admin") {
+                $agency = User::where('email', $request->email)->first();
+                $save_password = $agency->update(['password' => Hash::make($request->password)]);
+                DB::table('forget_passwords')->where(['email'=> $request->email])->delete();
+                if($save_password) return redirect('/employee-login')->with('success', 'Your password has been changed!');
+            }
+
+
         }else {
             return back()->with('fail', 'Invalid Token');
         }
     }
+
 }

@@ -16,6 +16,9 @@ class AgencyResetPassword extends Mailable
      *
      * @return void
      */
+    protected $email;
+    protected $id;
+    
     public function __construct($email, $id)
     {
         $this->email = $email;
