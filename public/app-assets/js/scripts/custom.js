@@ -101,9 +101,9 @@ function SigImageCallback(str) {
     submit_patient_signature(str);
 }
 window.onbeforeunload = function(evt) {
-    close();
     clearInterval(tmr);
     evt.preventDefault(); //For Firefox, needed for browser closure
+    // close();
 };
 
 onSign();
