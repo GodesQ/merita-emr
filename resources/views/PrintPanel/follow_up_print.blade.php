@@ -150,7 +150,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table width="100%" cellpadding="5" cellspacing="0" border="0" class="brdTable">
+                        <table width="100%" cellpadding="5" cellspacing="0" border="0">
                             <tbody>
                                 <tr>
                                     <table width="100%" cellspacing="0" border="1" cellpadding="2">
