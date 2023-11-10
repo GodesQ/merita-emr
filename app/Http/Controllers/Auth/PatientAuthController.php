@@ -78,13 +78,13 @@ class PatientAuthController extends Controller
          // generate patient code
          $addPatientCode = $latestPatientCode + 1;
          if ($addPatientCode > 9999) {
-             $patientCode = 'P' . date('y') . '-0' . $addPatientCode;
+             $patientcode = 'P' . date('y') . '-0' . $addPatientCode;
          } else {
-             $patientCode = 'P' . date('y') . '-00' . $addPatientCode;
+             $patientcode = 'P' . date('y') . '-00' . $addPatientCode;
          }
 
          $patient = Patient::create([
-            'patientcode' => $patientCode,
+            'patientcode' => $patientcode,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'isVerify' => false,

@@ -65,9 +65,6 @@ class AgencyDashboardController extends Controller
                                         $q->where('lab_status', 4)->whereNotNull('package_id');
                                     });
                                     break;
-                                default:
-                                    // Handle an unknown status if necessary
-                                    break;
                             }
                         })
                         ->whereHas('patientinfo', function ($q) {

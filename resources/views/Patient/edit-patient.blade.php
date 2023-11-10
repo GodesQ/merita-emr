@@ -90,10 +90,10 @@
                                             @endforeach
                                         </div>
                                         <div class="col-md-2">
-                                            @if ($patientCode)
+                                            @if ($admissionPatient)
                                                 <h3
-                                                    class="font-bold badge p-1 float-right {{ $patientCode->admit_type == 'Normal' ? 'badge-secondary' : 'badge-warning' }}">
-                                                    {{ $patientCode->admit_type }} Patient</h3>
+                                                    class="font-bold badge p-1 float-right {{ $admissionPatient->admit_type == 'Normal' ? 'badge-secondary' : 'badge-warning' }}">
+                                                    {{ $admissionPatient->admit_type }} Patient</h3>
                                             @endif
                                         </div>
                                     </div>
@@ -181,15 +181,12 @@
                                                         </div>
                                                         <div class="tab-pane main-content" id="tabIcon33" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab33">
-                                                            @include('Patient.medical_history', [
-                                                                $medicalHistory,
-                                                            ])
+                                                            @include('Patient.medical_history', [$medicalHistory])
                                                         </div>
                                                         <div class="tab-pane main-content" id="tabIcon34" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab34">
                                                             @if ($declarationForm == null)
-                                                                <h3 class="text-center font-weight-regular my-2">No Record
-                                                                    Found</h3>
+                                                                <h3 class="text-center font-weight-regular my-2">No Record Found</h3>
                                                             @else
                                                                 @include('Patient.edit-patient-form.edit-patient-dec')
                                                             @endif
@@ -199,7 +196,7 @@
                                                             id="tabIcon35" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab35">
                                                             <div class="col-12">
-                                                                @if (!$patientCode)
+                                                                @if (!$admissionPatient)
                                                                     <div
                                                                         class="container d-flex justify-content-center align-items-center flex-column">
                                                                         <h3 class="text-center font-weight-regular my-2">
@@ -468,7 +465,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_audiometry?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_audiometry?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -497,7 +494,7 @@
                                                                                                     to add a
                                                                                                     record?
                                                                                                 </h2>
-                                                                                                <a href="/add_crf?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_crf?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -524,7 +521,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_cardiovascular?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_cardiovascular?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -550,7 +547,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_dental?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_dental?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -576,7 +573,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_ecg?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_ecg?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -602,7 +599,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_ppd?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_ppd?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -628,7 +625,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_echodoppler?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_echodoppler?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -654,7 +651,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_echoplain?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_echoplain?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -680,7 +677,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_ishihara?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_ishihara?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -710,7 +707,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_physical?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_physical?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -737,7 +734,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_psycho?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_psycho?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -763,7 +760,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_psychobpi?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_psychobpi?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -789,7 +786,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_stressecho?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_stressecho?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -815,7 +812,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_stresstest?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_stresstest?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -842,7 +839,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_ultrasound?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_ultrasound?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -868,7 +865,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_visacuity?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_visacuity?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -894,7 +891,7 @@
                                                                                                 exam. Do you want to add a
                                                                                                 record?
                                                                                             </h2>
-                                                                                            <a href="/add_xray?id={{ $patientCode->id }}"
+                                                                                            <a href="/add_xray?id={{ $admissionPatient->id }}"
                                                                                                 class="btn btn-solid btn-primary te">Add</a>
                                                                                         </div>
                                                                                     </div>
@@ -912,7 +909,7 @@
                                                         <div class="tab-pane main-content" id="tabIcon36" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab36">
                                                             <div class="col-md-12">
-                                                                @if ($patientCode == null)
+                                                                @if ($admissionPatient == null)
                                                                     <div
                                                                         class="container d-flex justify-content-center align-items-center flex-column">
                                                                         <h3 class="text-center font-weight-regular my-2">
@@ -1031,7 +1028,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_bloodsero?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_bloodsero?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1054,7 +1051,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_hiv?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_hiv?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1080,7 +1077,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_drug?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_drug?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1106,7 +1103,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_fecalysis?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_fecalysis?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1132,7 +1129,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_hematology?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_hematology?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1158,7 +1155,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_hepatitis?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_hepatitis?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1184,7 +1181,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_pregnancy?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_pregnancy?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1210,7 +1207,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_urinalysis?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_urinalysis?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1236,7 +1233,7 @@
                                                                                                     exam. Do you want to add
                                                                                                     a record?
                                                                                                 </h2>
-                                                                                                <a href="/add_misc?id={{ $patientCode->id }}"
+                                                                                                <a href="/add_misc?id={{ $admissionPatient->id }}"
                                                                                                     class="btn btn-solid btn-primary te">Add</a>
                                                                                             </div>
                                                                                         </div>
@@ -1278,7 +1275,7 @@
                                             $patientInfo,
                                             $exam_groups,
                                             $patient_package,
-                                            $patientCode,
+                                            $admissionPatient,
                                         ])
                                     @endif
                                 </div>
@@ -1336,7 +1333,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($patientCode)
+                            @if ($admissionPatient)
                                 <div class="tab-pane fade" id="account-vertical-follow" role="tabpanel"
                                     aria-labelledby="account-pill-follow" aria-expanded="false">
                                     <div class="card">
@@ -1347,20 +1344,20 @@
                                             <div>
                                                 <a class="btn btn-secondary text-white"
                                                     id="account-pill-connections"data-toggle="pill"
-                                                    onclick="window.open('/default_follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=print')"
+                                                    onclick="window.open('/default_follow_up_print?id={{ $patient->id }}&admission_id={{ $admissionPatient->id }}&action=print')"
                                                     aria-expanded="false">
                                                     <i class="fa fa-print"></i>
                                                     Print Default Follow Up Form
                                                 </a>
                                                 <a class="btn btn-secondary text-white"
                                                     id="account-pill-connections"data-toggle="pill"
-                                                    onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=print')"
+                                                    onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $admissionPatient->id }}&action=print')"
                                                     aria-expanded="false">
                                                     <i class="fa fa-print"></i>
                                                     Print Follow Up Form
                                                 </a>
                                                 
-                                                <a onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $patientCode->id }}&action=download')"
+                                                <a onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $admissionPatient->id }}&action=download')"
                                                     class="btn btn-secondary text-white"><i class="fa fa-download"></i>
                                                     Download Follow Up Form</a>
                                             </div>
@@ -1374,7 +1371,7 @@
                                                             <a class="nav-link" id="{{ $key }}"
                                                                 data-toggle="tab" aria-controls="fl{{ $key }}"
                                                                 href="#fl{{ $key }}" role="tab"
-                                                                aria-selected="true">{{ date_format(new DateTime($patientCode->trans_date), 'F d, Y') }}</a>
+                                                                aria-selected="true">{{ date_format(new DateTime($admissionPatient->trans_date), 'F d, Y') }}</a>
                                                         </li>
                                                     @else
                                                         <li class="nav-item">
@@ -1504,7 +1501,7 @@
                                                         <input type="hidden" name="patient_id"
                                                             value="{{ $patient->id }}">
                                                         <input type="hidden" name="admission_id"
-                                                            value="{{ $patientCode->id }}">
+                                                            value="{{ $admissionPatient->id }}">
                                                         <div class="row p-1">
                                                             <div class="col-md-12 col-lg-8">
                                                                 <div class="nav-vertical">
@@ -1648,7 +1645,7 @@
                                     </div>
                                 </div>
                             @endif
-                            @if ($patientCode)
+                            @if ($admissionPatient)
                                 <div class="tab-pane fade" id="account-vertical-social" role="tabpanel"
                                     aria-labelledby="account-pill-social" aria-expanded="false">
                                     <div class="card">
@@ -1729,7 +1726,7 @@
                                                             alt="">
                                                         <div class="print-btn-div">
                                                             <button type="button"
-                                                                onclick="window.open('/mlc_print?id={{ $patientCode->id }}','wp','width=1000,height=800').print();"
+                                                                onclick="window.open('/mlc_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
                                                                 class="btn-print">Print MLC</button>
                                                         </div>
                                                     </div>
@@ -1740,7 +1737,7 @@
                                                             alt="">
                                                         <div class="print-btn-div">
                                                             <button type="button"
-                                                                onclick="window.open('/peme_bahia_print?id={{ $patientCode->id }}','wp','width=1000,height=800').print();"
+                                                                onclick="window.open('/peme_bahia_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
                                                                 class="btn-print">Print PEME BAHIA</button>
                                                         </div>
                                                     </div>
@@ -1751,7 +1748,7 @@
                                                             alt="">
                                                         <div class="print-btn-div">
                                                             <button type="button"
-                                                                onclick="window.open('/mer_print?id={{ $patientCode->id }}','wp','width=1000,height=800').print();"
+                                                                onclick="window.open('/mer_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
                                                                 class="btn-print">Print MER</button>
                                                         </div>
                                                     </div>
@@ -1766,7 +1763,7 @@
 
                             <div class="tab-pane fade" id="account-vertical-info" role="tabpanel"
                                 aria-labelledby="account-pill-info" aria-expanded="false">
-                                @if ($patientCode)
+                                @if ($admissionPatient)
                                     @include('Admission.edit-admission')
                                 @else
                                     @include('Admission.add-admission', [
@@ -1829,7 +1826,7 @@
                                             </div>
                                             <div class="users-view-id text-white">PATIENT ID: {{ $patient->patientcode }}
                                             </div>
-                                            <div class="text-white">ADMISSION ID: {{ $patientCode ? $patientCode->id : "N / A" }}</div>
+                                            <div class="text-white">ADMISSION ID: {{ $admissionPatient ? $admissionPatient->id : "N / A" }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1843,7 +1840,7 @@
                                             General Info
                                         </a>
                                     </li>
-                                    @if ($patientCode)
+                                    @if ($admissionPatient)
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-invoice"
                                                 data-toggle="pill" href="#account-invoice" aria-expanded="true">
@@ -1873,7 +1870,7 @@
                                             </li>
                                         @endif
                                     @endif
-                                    @if ($patientCode)
+                                    @if ($admissionPatient)
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-info"
                                                 data-toggle="pill" aria-expanded="false" href="#account-vertical-info">
@@ -1897,7 +1894,7 @@
                                             Yellow Card
                                         </a>
                                     </li>
-                                    @if ($patientCode)
+                                    @if ($admissionPatient)
                                         @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '7')
                                             <li class="nav-item">
                                                 <a class="nav-link d-flex text-white" id="account-pill-follow"
@@ -1909,7 +1906,7 @@
                                             </li>
                                         @endif
                                     @endif
-                                    @if ($patientCode)
+                                    @if ($admissionPatient)
                                         @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
                                             <li class="nav-item">
                                                 <a class="nav-link d-flex text-white" id="account-pill-social"
@@ -1923,7 +1920,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-connections"
                                                 data-toggle="pill"
-                                                onclick="window.open('/admission_print?id={{ $patientCode->id }}').print()"
+                                                onclick="window.open('/admission_print?id={{ $admissionPatient->id }}').print()"
                                                 aria-expanded="false">
                                                 <i class="fa fa-print"></i>
                                                 Print Routing Slip
@@ -1953,13 +1950,13 @@
                                         </li>
                                     @endif
                                     @if (
-                                        ($patientCode && session()->get('dept_id') == '1') ||
+                                        ($admissionPatient && session()->get('dept_id') == '1') ||
                                             session()->get('dept_id') == '3' ||
                                             session()->get('dept_id') == '8')
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-connections"
                                                 data-toggle="pill"
-                                                onclick="window.open('/lab_result?id={{ $patientCode ? $patientCode->id : 0 }}','wp','width=1000,height=800').print();"
+                                                onclick="window.open('/lab_result?id={{ $admissionPatient ? $admissionPatient->id : 0 }}','wp','width=1000,height=800').print();"
                                                 aria-expanded="false">
                                                 <i class="fa fa-print"></i>
                                                 Print Lab Result
@@ -1967,11 +1964,11 @@
                                         </li>
                                     @endif
 
-                                    @if ($patientCode)
+                                    @if ($admissionPatient)
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-connections"
                                                 data-toggle="pill"
-                                                onclick="window.open('/medical_record?id={{ $patientCode ? $patientCode->id : 0 }}&patient_id={{ $patient->id }}','wp','width=1000,height=800').print();"
+                                                onclick="window.open('/medical_record?id={{ $admissionPatient ? $admissionPatient->id : 0 }}&patient_id={{ $patient->id }}','wp','width=1000,height=800').print();"
                                                 aria-expanded="false">
                                                 <i class="fa fa-print"></i>
                                                 Print Medical History
@@ -1990,114 +1987,47 @@
                                     </li>
                                 </ul>
                             </div>
-                            @if ($patientCode)
+                            @if ($admissionPatient)
                                 <div class="col-lg-5 col-md-4 col-xl-12 my-1">
                                     <h5 class="text-white">MEDICAL STATUS:
                                         <span><b>
-                                                @if ($patientCode->lab_status == 2)
+                                                @if ($admissionPatient->lab_status == 2)
                                                     <b><u>FIT TO WORK</u></b>
-                                                @elseif ($patientCode->lab_status == 1)
+                                                @elseif ($admissionPatient->lab_status == 1)
                                                     <b><u>FINDINGS / RE ASSESSMENT</u></b>
-                                                @elseif ($patientCode->lab_status == 3)
+                                                @elseif ($admissionPatient->lab_status == 3)
                                                     <b><u>UNFIT TO WORK</u></b>
-                                                @elseif ($patientCode->lab_status == 4)
+                                                @elseif ($admissionPatient->lab_status == 4)
                                                     <b><u>UNFIT TEMPORARILY</u></b>
                                                 @endif
                                             </b></span>
                                     </h5>
                                     <div class="my-1">
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 1 ? 'active' : null }}"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 1 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="pending_medical_status_btn" data-status="pending">
                                             PENDING
                                         </button>
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 2 ? 'active' : null }}"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 2 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="fit_medical_status_btn" data-status="fit">
                                             FIT
                                         </button>
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 3 ? 'active' : null }}"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 3 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="unfit_medical_status_btn" data-status="unfit">
                                             UNFIT
                                         </button>
                                         <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 4 ? 'active' : null }}"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 4 ? 'active' : null }}"
                                             data-toggle="modal" data-target="#medicalStatusModal" id="unfit_temp_medical_status_btn" data-status="unfit_temp">
                                             UNFIT TEMP
                                         </button>
-                                        {{-- <button data-toggle="modal" data-target="#fitModal" type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-success {{ $patientCode->lab_status == 2 ? 'active' : null }}"
-                                            id="done-btn">FIT</button>
-                                        <button type="button"
-                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $patientCode->lab_status == 3 ? 'active' : null }}"
-                                            data-toggle="modal" data-target="#unfitModal">
-                                            UNFIT
-                                        </button>
-                                        <button data-toggle="modal" data-target="#unfitTempModal" type="button"
-                                            class="medical-status-btn btn btn-sm p-75 text-white m-25 btn-outline-info {{ $patientCode->lab_status == 4 ? 'active' : null }}"
-                                            id="done-btn">UNFIT TEMP</button> --}}
-                                        @if ($patientCode->lab_status)
+                                        @if ($admissionPatient->lab_status)
                                             <button class="btn btn-outline-warning medical-status-btn"
                                                 id="reset-medical-status-btn">Reset</button>
                                         @endif
                                     </div>
-                                    {{-- <div class="modal fade" id="fitModal" tabindex="-1" role="dialog"
-                                        aria-lablledby="done-btn" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content modal-lg">
-                                                <div class="modal-header">
-                                                    <div class="modal-title font-weight-bold">
-                                                        FIT
-                                                    </div>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="text-right">
-                                                        <button type="button" class="btn btn-primary"
-                                                            onclick="showMeds(this)">Show Meds</button>
-                                                    </div>
-                                                    <form action="#" method="POST" id="update_lab_result_fit">
-                                                        @csrf
-                                                        <input type="hidden" name="lab_status" value="2">
-                                                        <input type="hidden" name="patientId"
-                                                            value="{{ $patient->id }}">
-                                                        <input type="hidden" name="agency_id"
-                                                            value="{{ $patientInfo->agency_id }}">
-                                                        <input type="hidden" name="id"
-                                                            value="@php echo $patientCode ? $patientCode->id : null @endphp">
-                                                        <div class="form-group my-1">
-                                                            <input type="text" class="form-control" name=""
-                                                                value="FIT" readonly id="lab_status_name" />
-                                                        </div>
-                                                        <div class="prescription-group">
-                                                            <div class="form-group">
-                                                                <label>Prescription</label>
-                                                                <textarea class="form-control" rows="10" cols="30" name="prescription" id="prescription">{{ $patientCode ? $patientCode->prescription : null }}</textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="">Doctor Prescription</label>
-                                                                <select required name="doctor_prescription"
-                                                                    id="" class="select2">
-                                                                    @foreach ($doctors as $doctor)
-                                                                        <option value="{{ $doctor->id }}">
-                                                                            {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-footer text-center">
-                                                            <button class="submit-fit btn btn-primary">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="modal fade text-left" id="medicalStatusModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content ">
@@ -2156,7 +2086,7 @@
                                                                 <input type="hidden" name="agency_id"
                                                                     value="{{ $patientInfo->agency_id }}">
                                                                 <input type="hidden" name="id"
-                                                                    value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                                    value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
                                                                 <div class="form-group">
                                                                     <label for="">Generate at: 
                                                                         <span style="font-size: 12px;" class="primary">This is the date when you submitted this form. </span>
@@ -2209,117 +2139,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="modal fade text-left" id="unfitModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="myModalLabel18" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content modal-lg">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel18">
-                                                        UNFIT TO WORK
-                                                    </h4>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="update_lab_result_unfit" action="#" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="lab_status" value="3">
-                                                        <input type="hidden" name="patientId"
-                                                            value="{{ $patient->id }}">
-                                                        <input type="hidden" name="agency_id"
-                                                            value="{{ $patientInfo->agency_id }}">
-                                                        <input type="hidden" name="id"
-                                                            value="@php echo $patientCode ? $patientCode->id : null @endphp">
-                                                        <div class="form-group">
-                                                            <label>Unfit Date</label>
-                                                            <input class="form-control"
-                                                                value="{{ $patient->unfit_to_work_date }}"
-                                                                type="date" name="unfit_date" id="unfit_date" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Cause of Unfit:</label>
-                                                            <textarea name="cause_of_unfit" id="" cols="30" rows="10" class="form-control">@php echo $patientCode ? nl2br($patientCode->cause_of_unfit) : null; @endphp</textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="reset"
-                                                                class="btn btn-outline-secondary btn-lg"
-                                                                data-dismiss="modal" value="close">
-                                                            <button
-                                                                {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
-                                                                type='submit'
-                                                                class='submit-unfit btn btn-primary btn-lg'>Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade text-left" id="unfitTempModal" tabindex="-1"
-                                        role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content modal-lg">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel18">
-                                                        UNFIT TEMPORARILY
-                                                    </h4>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="update_lab_result_unfittemp" action="#"
-                                                        method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="lab_status" value="4">
-                                                        <input type="hidden" name="patientId"
-                                                            value="{{ $patient->id }}">
-                                                        <input type="hidden" name="agency_id"
-                                                            value="{{ $patientInfo->agency_id }}">
-                                                        <input type="hidden" name="id"
-                                                            value="@php echo $patientCode ? $patientCode->id : null @endphp">
-                                                        <div class="form-group">
-                                                            <label>Re Schedule</label>
-                                                            <input class="form-control" type="date" name="schedule"
-                                                                id="schedule" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Remarks/Recommendations:</label>
-                                                            <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $patientCode ? $patientCode->remarks : null @endphp</textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Prescription:</label>
-                                                            <textarea name="prescription" id="" cols="30" rows="10" class="form-control">@php echo $patientCode ? $patientCode->prescription : null @endphp</textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Doctor Prescription</label>
-                                                            <select required name="doctor_prescription" id=""
-                                                                class="select2">
-                                                                @foreach ($doctors as $doctor)
-                                                                    <option value="{{ $doctor->id }}">
-                                                                        {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="reset"
-                                                                class="btn btn-outline-secondary btn-lg"
-                                                                data-dismiss="modal" value="close">
-                                                            <button
-                                                                {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
-                                                                type='submit'
-                                                                class='submit-unfittemp btn btn-primary btn-lg'>Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                                         aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
@@ -2366,12 +2185,12 @@
                                                         <input type="hidden" name="agency_id"
                                                             value="{{ $patientInfo->agency_id }}">
                                                         <input type="hidden" name="id"
-                                                            value="@php echo $patientCode ? $patientCode->id : null @endphp">
+                                                            value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
                                                         <input type="hidden" name="schedule_id"
                                                             value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
                                                         <div class="form-group">
                                                             <label for="">Remarks/Recommendations:</label>
-                                                            <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $patientCode ? $patientCode->remarks : null @endphp</textarea>
+                                                            <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $admissionPatient ? $admissionPatient->remarks : null @endphp</textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="">Next Schedule Date: </label>
@@ -2392,7 +2211,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="">Prescription</label>
-                                                            <textarea name="prescription" id="" cols="30" rows="7" class="form-control">{{ $patientCode ? $patientCode->prescription : '' }}</textarea>
+                                                            <textarea name="prescription" id="" cols="30" rows="7" class="form-control">{{ $admissionPatient ? $admissionPatient->prescription : '' }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -2750,149 +2569,7 @@
                     });
                 }
             })
-        })
-
-        // $(".medical-done").click(function() {
-        //     let id = "@php echo $patientCode ? $patientCode->id : null @endphp";
-        //     let csrf = '{{ csrf_token() }}';
-        //     Swal.fire({
-        //         title: 'Are you sure you want to change it?',
-        //         text: "",
-        //         icon: 'question',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, change it!'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             $(this).html(
-        //                 "<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>FIT TO WORK</button>"
-        //             );
-        //             $.ajax({
-        //                 url: '/update_lab_result',
-        //                 method: 'POST',
-        //                 data: {
-        //                     id: id,
-        //                     lab_status: 2,
-        //                     remarks: "Cleared",
-        //                     agency_id: '{{ $patientInfo->agency_id }}',
-        //                     _token: csrf
-        //                 },
-        //                 success: function(response) {
-        //                     if (response.status == 200) {
-        //                         Swal.fire('Updated!', 'Record has been updated.', 'success')
-        //                             .then((result) => {
-        //                                 if (result.isConfirmed) {
-        //                                     location.reload();
-        //                                 }
-        //                             })
-        //                     } else {
-        //                         Swal.fire(
-        //                             'Error Occured!',
-        //                             'Internal Server Error.',
-        //                             'error'
-        //                         ).then((result) => {
-        //                             if (result.isConfirmed) {
-        //                                 location.reload();
-        //                             }
-        //                         })
-        //                     }
-        //                 }
-        //             }).done(function(data) {
-        //                 $(this).html(
-        //                     "<button type='button' class='btn btn-solid btn-success'>FIT TO WORK</button>"
-        //                 )
-        //             });
-        //         }
-        //     })
-        // })
-
-        // $("#update_lab_result_reassessment").submit(function(e) {
-        //     e.preventDefault();
-        //     const fd = new FormData(this);
-        //     $(".submit-reassessment").html(
-        //         "<button type='submit' class='submit-reassessment btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-        //         );
-        //     $.ajax({
-        //         url: '/update_lab_result',
-        //         method: "POST",
-        //         data: fd,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             console.log(response);
-        //             if (response.status == 200) {
-        //                 Swal.fire(
-        //                     'Updated!',
-        //                     'Record has been updated.',
-        //                     'success'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             } else {
-        //                 Swal.fire(
-        //                     'Error Occured!',
-        //                     'Internal Server Error.',
-        //                     'error'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             }
-        //         }
-        //     }).done(function(data) {
-        //         $(this).html(
-        //             "<input type='submit' class='submit-reassessment btn btn-primary btn-lg' value='Submit'>"
-        //             )
-        //     });
-        // })
-
-        // $("#update_lab_result_unfit").submit(function(e) {
-        //     e.preventDefault();
-        //     const fd = new FormData(this);
-        //     $(".submit-unfit").html(
-        //         "<button type='submit' class='submit-unfit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-        //         );
-        //     $.ajax({
-        //         url: '/update_lab_result',
-        //         method: "POST",
-        //         data: fd,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             console.log(response);
-        //             if (response.status == 200) {
-        //                 Swal.fire(
-        //                     'Updated!',
-        //                     'Record has been updated.',
-        //                     'success'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             } else {
-        //                 Swal.fire(
-        //                     'Error Occured!',
-        //                     'Internal Server Error.',
-        //                     'error'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             }
-        //         }
-        //     }).done(function(data) {
-        //         $(this).html(
-        //             "<input type='submit' class='submit-unfit btn btn-primary btn-lg' value='Submit'>")
-        //     });
-        // })
+        });
 
         $("#update_lab_result_pending").submit(function(e) {
             e.preventDefault();
@@ -2936,49 +2613,6 @@
                     "<input type='submit' class='submit-unfit btn btn-primary btn-lg' value='Submit'>")
             });
         })
-
-        // $("#update_lab_result_fit").submit(function(e) {
-        //     e.preventDefault();
-        //     const fd = new FormData(this);
-        //     $(".submit-fit").html(
-        //         "<button type='submit' class='submit-fit btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-        //         );
-        //     $.ajax({
-        //         url: '/update_lab_result',
-        //         method: "POST",
-        //         data: fd,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             console.log(response);
-        //             if (response.status == 200) {
-        //                 Swal.fire(
-        //                     'Updated!',
-        //                     'Record has been updated.',
-        //                     'success'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             } else {
-        //                 Swal.fire(
-        //                     'Error Occured!',
-        //                     'Internal Server Error.',
-        //                     'error'
-        //                 ).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 })
-        //             }
-        //         }
-        //     }).done(function(data) {
-        //         $(this).html(
-        //             "<input type='submit' class='submit-fit btn btn-primary btn-lg' value='Submit'>")
-        //     });
-        // });
 
         $('.medical-status-btn').click(function(e) {
             $('.add_new_medical_result_btn').click();

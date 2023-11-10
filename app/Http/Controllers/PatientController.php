@@ -648,22 +648,22 @@ class PatientController extends Controller
             // new patient code
             $addPatientCode = $lastPatientCode + 1;
             if ($addPatientCode > 9999) {
-                $patientCode = 'P' . date('y') . '-0' . $addPatientCode;
+                $patientcode = 'P' . date('y') . '-0' . $addPatientCode;
             } else {
-                $patientCode = 'P' . date('y') . '-00' . $addPatientCode;
+                $patientcode = 'P' . date('y') . '-00' . $addPatientCode;
             }
 
             if ($request->hasFile('patient_image')) {
                 $oldFileName = $request->file('patient_image')->getClientOriginalName();
                 $extension = pathinfo($oldFileName, PATHINFO_EXTENSION);
-                $newFileName = $patientCode . '.' . $extension;
+                $newFileName = $patientcode . '.' . $extension;
                 $userExistPhoto = public_path('app-assets/images/profiles/') . $newFileName;
                 $remove = @unlink($userExistPhoto);
                 $save_file = $request->file('patient_image')->move(public_path() . '/app-assets/images/profiles/', $newFileName);
             }
 
             $patient = new Patient();
-            $patient->patientcode = $patientCode;
+            $patient->patientcode = $patientcode;
             $patient->patient_image = $request->hasFile('patient_image') ? $newFileName : null;
             $patient->lastname = $request->lastname;
             $patient->firstname = $request->firstname;
@@ -677,7 +677,7 @@ class PatientController extends Controller
 
             $insert_other_patient_info = DB::table('mast_patientinfo')->insert([
                 'main_id' => $patient->id,
-                'patientcode' => $patientCode,
+                'patientcode' => $patientcode,
                 'address' => $request->address,
                 'contactno' => $request->contactno,
                 'occupation' => $request->occupation,
@@ -759,7 +759,7 @@ class PatientController extends Controller
             if (!$declarationForm) {
                 $declarationForm = null;
             }
-            $patientCode = Admission::where('id', '=', $patient->admission_id)
+            $admissionPatient = Admission::where('id', '=', $patient->admission_id)
                 ->latest('id')
                 ->first();
 
@@ -795,9 +795,9 @@ class PatientController extends Controller
 
             $additional_exams = null;
 
-            if ($patientCode) {
+            if ($admissionPatient) {
                 if (!$patient_agency) {
-                    $patient_agency = Agency::where('id', '=', $patientCode->agency_id)->first();
+                    $patient_agency = Agency::where('id', '=', $admissionPatient->agency_id)->first();
                 }
 
                 if (!$patient_package) {
@@ -822,7 +822,7 @@ class PatientController extends Controller
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
-            $patient_status = $patientCode ? $this->patientStatus($patientCode->id, $patient_exams) : $this->patientStatus(null, $patient_exams);
+            $patient_status = $admissionPatient ? $this->patientStatus($admissionPatient->id, $patient_exams) : $this->patientStatus(null, $patient_exams);
 
             $exam_audio = $patient_status['exam_audio'];
             $exam_crf = $patient_status['exam_crf'];
@@ -850,9 +850,9 @@ class PatientController extends Controller
             $examlab_urin = $patient_status['examlab_urin'];
             $examlab_misc = $patient_status['examlab_misc'];
 
-            if ($patientCode) {
+            if ($admissionPatient) {
                 $exam_ppd = DB::table('exam_ppd')
-                    ->where('admission_id', '=', $patientCode->id)
+                    ->where('admission_id', '=', $admissionPatient->id)
                     ->latest('id')
                     ->first();
             } else {
@@ -889,8 +889,8 @@ class PatientController extends Controller
 
             $patient_or = null;
 
-            if ($patientCode) {
-                $patient_or = CashierOR::where('admission_id', $patientCode->id)->first();
+            if ($admissionPatient) {
+                $patient_or = CashierOR::where('admission_id', $admissionPatient->id)->first();
             }
 
             $latest_schedule = DB::table('sched_patients')
@@ -927,21 +927,22 @@ class PatientController extends Controller
                 array_push($additional_exams, $exam_data);
             }
 
-            if ($patientCode) {
-                $followup_records = ReassessmentFindings::where('admission_id', $patientCode->id)->get();
+            if ($admissionPatient) {
+                $followup_records = ReassessmentFindings::where('admission_id', $admissionPatient->id)->get();
             } else {
                 $followup_records = [];
             }
 
-            if($patientCode) {
-                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')->where('admission_id', $patientCode->id)->orderBy('generate_at', 'ASC')->get();
+            if($admissionPatient) {
+                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')->where('admission_id', $admissionPatient->id)->orderBy('generate_at', 'ASC')->get();
             } else {
                 $patient_medical_results = [];
             }
+
             // dd($patient_medical_results);
 
-            $exam_groups = $patientCode ? (new AdmissionController())->group_by('date', $additional_exams, $patientCode->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
-            return view('Patient.edit-patient', compact('patient', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'patientCode', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
+            $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
+            return view('Patient.edit-patient', compact('patient', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
 
         } catch (\Exception $exception) {
             dd($exception);

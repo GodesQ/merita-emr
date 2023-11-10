@@ -758,7 +758,7 @@
             let drag_count = 10;
 
             
-            if(mainTable.clientHeight > 600) {
+            if(mainTable.clientHeight > 500) {
                 maximumSize = 1250;
             }
 

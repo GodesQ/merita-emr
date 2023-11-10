@@ -12,7 +12,7 @@
         </div>
         <div class="card-title">
             <h6>
-                PEME Date: {{ $patientCode->trans_date }}
+                PEME Date: {{ $admissionPatient->trans_date }}
             </h6>
         </div>
     </div>
@@ -25,7 +25,7 @@
             @endif
             <form class="form" method="POST" action="/update_admission">
                 @csrf
-                <input type="hidden" value="{{ $patientCode->id }}" name="main_id">
+                <input type="hidden" value="{{ $admissionPatient->id }}" name="main_id">
                 <div class="d-none">
                     <input type="hidden" name="package_id" value="{{ $patientInfo->medical_package }}">
                     <input type="hidden" name="agency_id" value="{{ $patientInfo->agency_id }}">
@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Peme Date</label>
                                 <input type="datetime-local" max="2050-12-31" class="form-control"
-                                    value="{{ $patientCode->trans_date }}" name="trans_date">
+                                    value="{{ $admissionPatient->trans_date }}" name="trans_date">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -65,16 +65,16 @@
                                     <option value="none" selected="" disabled="">Select
                                         Category
                                     </option>
-                                    <option value="DECK SERVICES" {{ $patientCode->category == "DECK SERVICES" ? "selected=''" : "" }}>
+                                    <option value="DECK SERVICES" {{ $admissionPatient->category == "DECK SERVICES" ? "selected=''" : "" }}>
                                         DECK SERVICES
                                     </option>
-                                    <option value="ENGINE SERVICES" {{ $patientCode->category == "ENGINE SERVICES" ? "selected=''" : "" }}>
+                                    <option value="ENGINE SERVICES" {{ $admissionPatient->category == "ENGINE SERVICES" ? "selected=''" : "" }}>
                                         ENGINE SERVICES
                                     </option>
-                                    <option value="CATERING SERVICES" {{ $patientCode->category == "CATERING SERVICES" ? "selected=''" : "" }}>
+                                    <option value="CATERING SERVICES" {{ $admissionPatient->category == "CATERING SERVICES" ? "selected=''" : "" }}>
                                         CATERING SERVICES
                                     </option>
-                                    <option value="OTHER SERVICES" {{ $patientCode->category == "OTHER SERVICES" ? "selected=''" : "" }}>
+                                    <option value="OTHER SERVICES" {{ $admissionPatient->category == "OTHER SERVICES" ? "selected=''" : "" }}>
                                         OTHER SERVICES
                                     </option>
                                 </select>
@@ -82,7 +82,7 @@
                             <div class="form-group other-specify-con">
                                 <label class="text-bold-600">Other Specify :</label>
                                 <input type="text" name="other_specify" id="other_specify"
-                                    value="{{ $patientCode->other_specify }}" class="form-control">
+                                    value="{{ $admissionPatient->other_specify }}" class="form-control">
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                                 <div class="form-group">
                                     <label class="text-bold-600" for="companyName">Position</label>
                                     <input type="text" id="companyName" class="form-control" placeholder="Position"
-                                        name="position" value="{{ $patientCode->position }}">
+                                        name="position" value="{{ $admissionPatient->position }}">
                                 </div>
                             </div>
                         </div>
@@ -104,17 +104,17 @@
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="employment1" value="Sea-Based" name="employment"
-                                           {{ $patientCode->employment == "Sea-Based" ? "checked" : "" }}>
+                                           {{ $admissionPatient->employment == "Sea-Based" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="employment1">Sea Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="employment2" name="employment" value="Land-Based"
-                                            {{ $patientCode->employment == "Land-Based" ? "checked" : ""}}>
+                                            {{ $admissionPatient->employment == "Land-Based" ? "checked" : ""}}>
                                         <label class="custom-control-label" for="employment2">Land Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="employment3" name="employment" value="Local-Based"
-                                            {{ $patientCode->employment == "Local-Based" ? "checked" : "" }}>
+                                            {{ $admissionPatient->employment == "Local-Based" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="employment3">Local Based</label>
                                     </div>
                                 </div>
@@ -128,12 +128,12 @@
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="emp_status1" name="emp_status" value="New Crew"
-                                            {{ $patientCode->emp_status == "New Crew" ? "checked" : "" }}>
+                                            {{ $admissionPatient->emp_status == "New Crew" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="emp_status1">New Crew</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="emp_status2" name="emp_status" value="Ex-Crew"
-                                            {{ $patientCode->emp_status == "Ex-Crew" ? "checked" : "" }}>
+                                            {{ $admissionPatient->emp_status == "Ex-Crew" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="emp_status2">Ex Crew</label>
                                     </div>
                                 </div>
@@ -147,12 +147,12 @@
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="admit_type1" name="admit_type" value="Normal"
-                                            {{ $patientCode->admit_type == "Normal" ? "checked" : "" }}>
+                                            {{ $admissionPatient->admit_type == "Normal" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="admit_type1">Regular Patient</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="admit_type2" name="admit_type" value="Rush"
-                                            {{ $patientCode->admit_type == "Rush" ? "checked" : "" }}>
+                                            {{ $admissionPatient->admit_type == "Rush" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="admit_type2">Rush Patient</label>
                                     </div>
                                 </div>
@@ -164,12 +164,12 @@
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" name="payment_type" id="payment_type3" value="Applicant Paid"
-                                            {{ $patientCode->payment_type == "Applicant Paid" ? "checked" : "" }}>
+                                            {{ $admissionPatient->payment_type == "Applicant Paid" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="payment_type3">Applicant Paid</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="payment_type4" name="payment_type" value="Billed"
-                                            {{ $patientCode->payment_type == "Billed" ? "checked" : "" }}>
+                                            {{ $admissionPatient->payment_type == "Billed" ? "checked" : "" }}>
                                         <label class="custom-control-label" for="payment_type4">Billed to Agency</label>
                                     </div>
                                 </div>
@@ -178,13 +178,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Last Medical in Merita</label>
-                                <input type="text" id="projectinput1" class="form-control" value="{{ $patientCode->last_medical }}" name="last_medical">
+                                <input type="text" id="projectinput1" class="form-control" value="{{ $admissionPatient->last_medical }}" name="last_medical">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Principal</label>
-                                <input type="text" id="projectinput1" class="form-control" value="{{ $patientCode->principal }}" name="principal">
+                                <input type="text" id="projectinput1" class="form-control" value="{{ $admissionPatient->principal }}" name="principal">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -193,7 +193,7 @@
                                     Referral :
                                 </label>
                                 <input type="text" class="form-control" name="referral"
-                                    value="{{ $patientCode->referral }}">
+                                    value="{{ $admissionPatient->referral }}">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -203,13 +203,13 @@
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" name="have_panama"
                                             id="have_panama3" value="1"
-                                            {{ $patientCode->have_panama ? 'checked' : null }}>
+                                            {{ $admissionPatient->have_panama ? 'checked' : null }}>
                                         <label class="custom-control-label" for="have_panama3">Yes</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="have_panama4"
                                             name="have_panama" value="0"
-                                            {{ !$patientCode->have_panama ? 'checked' : null }}>
+                                            {{ !$admissionPatient->have_panama ? 'checked' : null }}>
                                         <label class="custom-control-label" for="have_panama4">No</label>
                                     </div>
                                 </div>
@@ -222,13 +222,13 @@
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" name="have_liberian"
                                             id="have_liberian3" value="1"
-                                            {{ $patientCode->have_liberian ? 'checked' : null }}>
+                                            {{ $admissionPatient->have_liberian ? 'checked' : null }}>
                                         <label class="custom-control-label" for="have_liberian3">Yes</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
                                         <input type="radio" class="custom-control-input" id="have_liberian4"
                                             name="have_liberian" value="0"
-                                            {{ !$patientCode->have_liberian ? 'checked' : null }}>
+                                            {{ !$admissionPatient->have_liberian ? 'checked' : null }}>
                                         <label class="custom-control-label" for="have_liberian4">No</label>
                                     </div>
                                 </div>
@@ -238,14 +238,14 @@
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput2">Panama Certificate Number</label>
                                 <input class="form-control" name="panama_certno" id="panama_certno"
-                                    value="{{ $patientCode->panama_certno }}" />
+                                    value="{{ $admissionPatient->panama_certno }}" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput3">Liberian Certificate Number</label>
                                 <input class="form-control" name="liberian_certno" id="liberian_certno"
-                                    value="{{ $patientCode->liberian_certno }}" />
+                                    value="{{ $admissionPatient->liberian_certno }}" />
                             </div>
                         </div>
                     </div>

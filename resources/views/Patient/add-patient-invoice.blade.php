@@ -163,7 +163,7 @@
                                             <input type="hidden" name="payment_user" id="payment_user" />
                                             <input type="hidden" name="agency_id" value="{{$patientInfo->agency_id}}" />
                                             <input type="hidden" name="admission_id" value="{{$patient->admission_id}}" />
-                                            <input type="hidden" name="trans_date" value="{{$patientCode ? $patientCode->trans_date : null}}" />
+                                            <input type="hidden" name="trans_date" value="{{$admissionPatient ? $admissionPatient->trans_date : null}}" />
                                             <button type="submit" class="btn btn-primary mt-1 btn-block">Save</button>
                                         </div>
                                     </div>

@@ -242,7 +242,7 @@
                                                 <label for="projectinput2">Country of Destination <span
                                                         class="danger">*</span></label>
                                                 <input type="text" id="projectinput2" class="form-control"
-                                                    placeholder="Country of Destination" name="country_destination">
+                                                    placeholder="Country of Destination" name="country_destination" value="WORLDWIDE">
                                             </div>
                                         </div>
                                     </div>

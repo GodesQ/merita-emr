@@ -224,7 +224,7 @@
                                             <input type="hidden" name="admission_id"
                                                 value="{{ $patient->admission_id }}" />
                                             <input type="hidden" name="trans_date"
-                                                value="{{ $patientCode ? $patientCode->trans_date : null }}" />
+                                                value="{{ $admissionPatient ? $admissionPatient->trans_date : null }}" />
                                             <button type="submit"
                                                 class="btn btn-primary mt-1 btn-block">Save</button>
                                             <a href="cashier_or_print?id={{ $patient_or->id }}" target="_blank"
