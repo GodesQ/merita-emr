@@ -759,10 +759,10 @@
 
             
             if(mainTable.clientHeight > 600) {
-                maximumSize = 1270;
+                maximumSize = 1250;
             }
 
-            if(mainTable.clientHeight > 1270) {
+            if(mainTable.clientHeight > 1250) {
                 maximumSize = 2300;
             }
 
