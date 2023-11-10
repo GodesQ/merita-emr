@@ -153,13 +153,17 @@
                         <table width="100%" cellpadding="5" cellspacing="0" border="0" class="brdTable">
                             <tbody>
                                 <tr>
-                                    <td width="12%" style="font-weight: 800;">DATE</td>
-                                    <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
-                                    <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
+                                    <table width="100%" cellspacing="0" border="1" cellpadding="2">
+                                        <tbody>
+                                            <td width="12%" style="font-weight: 800;">DATE</td>
+                                            <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
+                                            <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
+                                        </tbody>
+                                    </table>
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <table width="100%" cellspacing="0" cellpadding="2" class="findings-table">
+                                        <table width="100%" cellspacing="0" border="1" cellpadding="2" class="findings-table">
                                             <tbody>
                                                 <tr style="display: none;">
                                                     <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
