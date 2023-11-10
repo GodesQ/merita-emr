@@ -15,6 +15,7 @@
     }
 
     table { page-break-inside:auto }
+    tr    { page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
