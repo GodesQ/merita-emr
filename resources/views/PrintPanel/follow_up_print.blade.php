@@ -159,7 +159,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <table width="100%" cellspacing="0" border="1" style="border-collapse: collapse !important;" cellpadding="2" class="findings-table">
+                                        <table width="100%" cellspacing="0" cellpadding="2" class="findings-table">
                                             <tbody>
                                                 <tr style="display: none;">
                                                     <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
