@@ -15,7 +15,7 @@
     }
 
     table { page-break-inside:auto }
-    tr    { page-break-inside:avoid; page-break-after:auto }
+    tr    { page-break-inside:auto; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
@@ -157,7 +157,6 @@
                                     <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
                                     <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
                                 </tr>
-                                
                             </tbody>
                         </table>
                     </th>
