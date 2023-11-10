@@ -15,7 +15,7 @@
     }
 
     table { page-break-inside:auto }
-    tr    { page-break-inside:auto; page-break-after:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
@@ -749,7 +749,7 @@
 
         if(action == 'print') {
             let screenHeight = screen.height;
-            let maximumSize = [2000, 3200];
+            let maximumSize = 2000;
             
             let secondMaxSize = 1230;
             let mainTable = document.querySelector('.main-table');
@@ -758,7 +758,19 @@
             let drag_count = 10;
 
             
-            while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 2000 ? 1 : 0]) {
+            if(mainTable.clientHeight > 600) {
+                maximumSize = 1270;
+            }
+
+            if(mainTable.clientHeight > 1270) {
+                maximumSize = 2300;
+            }
+
+            if(mainTable.clientHeight > 2300) {
+                maximumSize = 3500;
+            }
+
+            while(mainTable.clientHeight <= maximumSize) {
                 let tr = document.createElement('tr');
                 tr.innerHTML = `<tr>
                                     <td valign="top"><div>&nbsp;</div></td>
