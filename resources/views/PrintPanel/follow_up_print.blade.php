@@ -15,7 +15,7 @@
     }
 
     table { page-break-inside:auto }
-    tr    { page-break-inside:avoid; page-break-after:auto }
+    tr    { page-break-inside:avoid; }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
@@ -683,7 +683,11 @@
             </tbody>
         </table>
     </div> --}}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></scr
+        
+        
+        
+        ipt>
     <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
     <script>
         let url_string = location.href;
@@ -754,7 +758,6 @@
 
             let drag_count = 10;
 
-            console.log(mainTable.clientHeight);
             
             while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 2000 ? 1 : 0]) {
                 let tr = document.createElement('tr');
