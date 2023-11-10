@@ -44,7 +44,7 @@
 
 </head>
 <body>
-    <div style="min-height: 100vh; margin: 0; max-height: 200vh;">
+    <div style="min-height: 100vh; margin: 0">
         <table valign="top" width="100%" style="overflow: hidden;" cellspacing="0" cellpadding="0" border="0" id="table" class="brdNone main-table">
             <thead>
                 <tr>
@@ -759,10 +759,10 @@
 
             
             if(mainTable.clientHeight > 600) {
-                maximumSize = 1250;
+                maximumSize = 1240;
             }
 
-            if(mainTable.clientHeight > 1250) {
+            if(mainTable.clientHeight > 1240) {
                 maximumSize = 2300;
             }
 
