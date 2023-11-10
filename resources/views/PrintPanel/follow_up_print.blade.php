@@ -753,6 +753,8 @@
             let tableTbody = document.querySelector('.findings-table').children[0];
 
             let drag_count = 10;
+
+            console.log(mainTable.clientHeight);
             
             while(mainTable.clientHeight <= maximumSize[mainTable.clientHeight > 2000 ? 1 : 0]) {
                 let tr = document.createElement('tr');
