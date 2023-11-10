@@ -15,7 +15,7 @@
     }
 
     table { page-break-inside:auto }
-    tr    { page-break-after:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
@@ -157,373 +157,372 @@
                                     <td width="30%" style="font-weight: 800;">FINDINGS / DIAGNOSIS</td>
                                     <td width="28%" style="font-weight: 800;">RECOMMENDATIONS</td>
                                 </tr>
-                                
+                                <tr>
+                                    <td colspan="3">
+                                        <table width="100%" cellspacing="0" border="1" style="border-collapse: collapse !important;" cellpadding="2" class="findings-table">
+                                            <tbody>
+                                                <tr style="display: none;">
+                                                    <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
+                                                    <td>Agency: {{ $patient->agencyname }}</td>
+                                                    <td>Package: {{ $patient->admission->package->packagename }}</td>
+                                                </tr>
+                                                @forelse($records as $key_record => $record)
+                                                    @php
+                                                        $findings = explode(";", $record->findings);
+                                                        $results = array_map(function ($finding) {
+                                                            return ['Findings' => $finding];
+                                                            }, $findings);
+                                                        $recommendations = explode(";", $record->remarks);
+                                                        foreach($recommendations as $key => $recommendation) {
+                                                            if(isset($results[$key])) {
+                                                                $results[$key] += ['Recommendation' => $recommendation];
+                                                            }
+                                                        }
+                                                    @endphp
+                
+                                                    @if($loop->first)
+                                                        <tr>
+                                                            <td width="12%" valign="top">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
+                                                            <td width="30%" valign="top">
+                                                                <b>Past Med History:</b>
+                                                            </td>
+                                                            <td width="28%" valign="top"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                @if($admission->exam_physical)
+                                                                    <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
+                                                                @endif
+                                                            </td>
+                                                            <td valign="top">
+                                                                @if($admission->exam_physical)
+                                                                    <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>VITAL SIGN:</b>
+                                                            </td>
+                                                            <td valign="top">
+                                                                {{-- @if ($admission->exam_physical)
+                                                                    <b>Vital Sign</b>: {{ optional($admission->exam_physical)->vital_sign_recommendation }}
+                                                                @endif --}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                
+                                                                <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>Weight:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->weight }} kg</span>
+                                                            </td valign="top">
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>BMI:</b> <span style="margin-left: 10px;">{{ strpos(optional($admission->exam_physical)->bmi, 'Overweight') ? str_replace('Overweight', '', optional($admission->exam_physical)->bmi) : optional($admission->exam_physical)->bmi }}</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                                {{ optional($admission->exam_physical)->bmi_recommendation }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                                {{ optional($admission->exam_physical)->bp_recommendation }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>PR:</b><span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                                {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                                {{ optional($admission->exam_physical)->respiration_recommendation }}
+                                                            </td>
+                                                        </tr>
+                
+                                                        @if($admission->exam_xray)
+                                                            @if($admission->exam_xray->chest_remarks_status)
+                                                                <tr>
+                                                                    <td valign="top"></td>
+                                                                    <td valign="top">
+                                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings  }}</span>
+                                                                    </td>
+                                                                    <td valign="top">
+                                                                        @if($admission->exam_xray->chest_remarks_status == 'findings' && $admission->exam_xray->chest_recommendations)
+                                                                            <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'findings' ? $admission->exam_xray->chest_recommendations : null }}</span>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endif
+                
+                                                        @if($admission->exam_xray)
+                                                            @if($admission->exam_xray->lumbosacral_remarks_status)
+                                                                <tr>
+                                                                    <td valign="top"></td>
+                                                                    <td valign="top">
+                                                                        <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings  }}</span>
+                                                                    </td>
+                                                                    <td valign="top">
+                                                                        @if($admission->exam_xray->lumbosacral_remarks_status == 'findings' && $admission->exam_xray->lumbosacral_recommendations)
+                                                                            <b>LUMBOSACRAL Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'findings' ? $admission->exam_xray->lumbosacral_recommendations : null }}</span>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endif
+                
+                                                        @if($admission->exam_xray)
+                                                            @if($admission->exam_xray->knees_remarks_status)
+                                                                <tr>
+                                                                    <td valign="top"></td>
+                                                                    <td valign="top">
+                                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
+                                                                    </td>
+                                                                    <td valign="top">
+                                                                        @if($admission->exam_xray->knees_findings == 'findings' && $admission->exam_xray->knees_recommendations)
+                                                                            <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'findings' ? $admission->exam_xray->knees_recommendations : null }}</span>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endif
+                
+                                                        @if($admission->exam_ecg)
+                                                            <tr>
+                                                                <td valign="top"></td>
+                                                                <td valign="top">
+                                                                    <b>ECG:</b> <span style="margin-left: 10px;">{{ $admission->exam_ecg->ecg == 'Significant Findings' ? $admission->exam_ecg->findings : 'Normal'  }}</span>
+                                                                </td>
+                                                                <td valign="top">
+                                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
+                                                                        <b>ECG:</b>
+                                                                    @endif
+                                                                   {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                
+                                                        @if($admission->exam_ppd)
+                                                            <tr>
+                                                                <td valign="top"></td>
+                                                                <td valign="top">
+                                                                    <b>PPD:</b> <span style="margin-left: 10px;">{{ $admission->exam_ppd->remarks }}</span>
+                                                                </td>
+                                                                <td valign="top">
+                                                                    <b>PPD:</b>
+                                                                    <span style="margin-left: 10px;">{{ $admission->exam_ppd->recommendation }}</span>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                
+                                                    @endif
+                                                    <?php $drag_count = 1; ?>
+                                                    @foreach($results as $key => $result)
+                                                            @if(!preg_match('/PPD:/i', $result['Findings']))
+                                                                <tr style="height:40px">
+                                                                    <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
+                                                                    <td valign="top"  class="drag">
+                                                                        <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
+                                                                            @if(!preg_match('/PPD:/i', $result['Findings']))
+                                                                                @php echo nl2br($result['Findings']) @endphp
+                                                                            @endif
+                                                                        </div>
+                                                                    </td>
+                
+                                                                    <td valign="top" class="drag">
+                                                                        <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
+                                                                            @if(isset($result['Recommendation']))
+                                                                                @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
+                                                                                    @php echo nl2br($result['Recommendation']) @endphp
+                                                                                @endif
+                                                                            @endif
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                    @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td  width="12%">{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>
+                                                        <td  width="30%">
+                                                            <b>Past Med History:</b>
+                                                        </td>
+                                                        <td  width="28%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td valign="top">
+                                                            @if($admission->exam_physical)
+                                                                <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
+                                                            @endif
+                                                        </td>
+                                                        <td valign="top">
+                                                            @if($admission->exam_physical)
+                                                                <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top"></td>
+                                                        <td valign="top">
+                                                            <b>VITAL SIGN:</b>
+                                                        </td>
+                                                        <td valign="top">
+                                                            @if ($admission->exam_physical)
+                                                                {{ optional($admission->exam_physical)->vital_sign_recommendation }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>Weight:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->weight }} kg</span>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>BMI:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->bmi }}</span>
+                                                        </td>
+                                                        <td>
+                                                            {{ optional($admission->exam_physical)->bmi_recommedation }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
+                                                        </td>
+                                                        <td>
+                                                            {{ optional($admission->exam_physical)->bp_recommendation }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>PR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
+                                                        </td>
+                                                        <td>
+                                                            {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
+                                                        </td>
+                                                        <td>
+                                                            {{ optional($admission->exam_physical)->respiration_recommendation }}
+                                                        </td>
+                                                    </tr>
+                                                    @if($admission->exam_xray)
+                                                        @if($admission->exam_xray->chest_remarks_status)
+                                                            <tr>
+                                                                <td valign="top"></td>
+                                                                <td valign="top">
+                                                                    <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings }}</span>
+                                                                </td>
+                                                                <td valign="top">
+                                                                    @if($admission->exam_xray->chest_remarks_status == 'findings' && $admission->exam_xray->chest_recommendations)
+                                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'findings' ? $admission->exam_xray->chest_recommendations : null }}</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                
+                                                    @if($admission->exam_xray)
+                                                        @if($admission->exam_xray->lumbosacral_remarks_status)
+                                                            <tr>
+                                                                <td valign="top"></td>
+                                                                <td valign="top">
+                                                                    <b>Lumbosacral XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings  }}</span>
+                                                                </td>
+                                                                <td valign="top">
+                                                                    @if($admission->exam_xray->lumbosacral_remarks_status == 'findings' && $admission->exam_xray->lumbosacral_recommendations)
+                                                                        <b>Lumbosacral Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'findings' ? $admission->exam_xray->lumbosacral_recommendations : null }}</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                
+                                                    @if($admission->exam_xray)
+                                                        @if($admission->exam_xray->knees_remarks_status)
+                                                            <tr>
+                                                                <td valign="top"></td>
+                                                                <td valign="top">
+                                                                    <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings  }}</span>
+                                                                </td>
+                                                                <td valign="top">
+                                                                    @if($admission->exam_xray->knees_remarks_status == 'findings' && $admission->exam_xray->knees_recommendations)
+                                                                        <b>Knee Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_remarks_status == 'findings' ? $admission->exam_xray->knees_recommendations : null }}</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                
+                                                    @if($admission->exam_ecg)
+                                                        <tr>
+                                                            <td valign="top"></td>
+                                                            <td valign="top">
+                                                                <b>ECG:</b> <span style="margin-left: 10px;">{{ $admission->exam_ecg->ecg == 'Significant Findings' ? $admission->exam_ecg->findings : 'Normal'  }}</span>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <b>
+                                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
+                                                                        ECG:
+                                                                    @endif
+                                                                </b> {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <table width="100%" cellspacing="0" border="1" style="border-collapse: collapse !important;" cellpadding="2" class="findings-table">
-                            <tbody>
-                                <tr style="display: none;">
-                                    <td>Name: {{ $patient->lastname }}, {{ $patient->firstname }} {{ $patient->middlename }} </td>
-                                    <td>Agency: {{ $patient->agencyname }}</td>
-                                    <td>Package: {{ $patient->admission->package->packagename }}</td>
-                                </tr>
-                                @forelse($records as $key_record => $record)
-                                    @php
-                                        $findings = explode(";", $record->findings);
-                                        $results = array_map(function ($finding) {
-                                            return ['Findings' => $finding];
-                                            }, $findings);
-                                        $recommendations = explode(";", $record->remarks);
-                                        foreach($recommendations as $key => $recommendation) {
-                                            if(isset($results[$key])) {
-                                                $results[$key] += ['Recommendation' => $recommendation];
-                                            }
-                                        }
-                                    @endphp
-
-                                    @if($loop->first)
-                                        <tr>
-                                            <td width="12%" valign="top">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
-                                            <td width="30%" valign="top">
-                                                <b>Past Med History:</b>
-                                            </td>
-                                            <td width="28%" valign="top"></td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                @if($admission->exam_physical)
-                                                    <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
-                                                @endif
-                                            </td>
-                                            <td valign="top">
-                                                @if($admission->exam_physical)
-                                                    <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>VITAL SIGN:</b>
-                                            </td>
-                                            <td valign="top">
-                                                {{-- @if ($admission->exam_physical)
-                                                    <b>Vital Sign</b>: {{ optional($admission->exam_physical)->vital_sign_recommendation }}
-                                                @endif --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-
-                                                <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
-                                            </td>
-                                            <td valign="top">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>Weight:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->weight }} kg</span>
-                                            </td valign="top">
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>BMI:</b> <span style="margin-left: 10px;">{{ strpos(optional($admission->exam_physical)->bmi, 'Overweight') ? str_replace('Overweight', '', optional($admission->exam_physical)->bmi) : optional($admission->exam_physical)->bmi }}</span>
-                                            </td>
-                                            <td valign="top">
-                                                {{ optional($admission->exam_physical)->bmi_recommendation }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
-                                            </td>
-                                            <td valign="top">
-                                                {{ optional($admission->exam_physical)->bp_recommendation }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>PR:</b><span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
-                                            </td>
-                                            <td valign="top">
-                                                {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
-                                            </td>
-                                            <td valign="top">
-                                                {{ optional($admission->exam_physical)->respiration_recommendation }}
-                                            </td>
-                                        </tr>
-
-                                        @if($admission->exam_xray)
-                                            @if($admission->exam_xray->chest_remarks_status)
-                                                <tr>
-                                                    <td valign="top"></td>
-                                                    <td valign="top">
-                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings  }}</span>
-                                                    </td>
-                                                    <td valign="top">
-                                                        @if($admission->exam_xray->chest_remarks_status == 'findings' && $admission->exam_xray->chest_recommendations)
-                                                            <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'findings' ? $admission->exam_xray->chest_recommendations : null }}</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endif
-
-                                        @if($admission->exam_xray)
-                                            @if($admission->exam_xray->lumbosacral_remarks_status)
-                                                <tr>
-                                                    <td valign="top"></td>
-                                                    <td valign="top">
-                                                        <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings  }}</span>
-                                                    </td>
-                                                    <td valign="top">
-                                                        @if($admission->exam_xray->lumbosacral_remarks_status == 'findings' && $admission->exam_xray->lumbosacral_recommendations)
-                                                            <b>LUMBOSACRAL Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'findings' ? $admission->exam_xray->lumbosacral_recommendations : null }}</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endif
-
-                                        @if($admission->exam_xray)
-                                            @if($admission->exam_xray->knees_remarks_status)
-                                                <tr>
-                                                    <td valign="top"></td>
-                                                    <td valign="top">
-                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
-                                                    </td>
-                                                    <td valign="top">
-                                                        @if($admission->exam_xray->knees_findings == 'findings' && $admission->exam_xray->knees_recommendations)
-                                                            <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'findings' ? $admission->exam_xray->knees_recommendations : null }}</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endif
-
-                                        @if($admission->exam_ecg)
-                                            <tr>
-                                                <td valign="top"></td>
-                                                <td valign="top">
-                                                    <b>ECG:</b> <span style="margin-left: 10px;">{{ $admission->exam_ecg->ecg == 'Significant Findings' ? $admission->exam_ecg->findings : 'Normal'  }}</span>
-                                                </td>
-                                                <td valign="top">
-                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
-                                                        <b>ECG:</b>
-                                                    @endif
-                                                   {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
-                                                </td>
-                                            </tr>
-                                        @endif
-
-                                        @if($admission->exam_ppd)
-                                            <tr>
-                                                <td valign="top"></td>
-                                                <td valign="top">
-                                                    <b>PPD:</b> <span style="margin-left: 10px;">{{ $admission->exam_ppd->remarks }}</span>
-                                                </td>
-                                                <td valign="top">
-                                                    <b>PPD:</b>
-                                                    <span style="margin-left: 10px;">{{ $admission->exam_ppd->recommendation }}</span>
-                                                </td>
-                                            </tr>
-                                        @endif
-
-                                    @endif
-                                    <?php $drag_count = 1; ?>
-                                    @foreach($results as $key => $result)
-                                            @if(!preg_match('/PPD:/i', $result['Findings']))
-                                                <tr style="height:40px">
-                                                    <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
-                                                    <td valign="top"  class="drag">
-                                                        <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
-                                                            @if(!preg_match('/PPD:/i', $result['Findings']))
-                                                                @php echo nl2br($result['Findings']) @endphp
-                                                            @endif
-                                                        </div>
-                                                    </td>
-
-                                                    <td valign="top" class="drag">
-                                                        <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
-                                                            @if(isset($result['Recommendation']))
-                                                                @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
-                                                                    @php echo nl2br($result['Recommendation']) @endphp
-                                                                @endif
-                                                            @endif
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                    @endforeach
-                                @empty
-                                    <tr>
-                                        <td  width="12%">{{ date_format(new DateTime($admission->trans_date), "d F Y") }}</td>
-                                        <td  width="30%">
-                                            <b>Past Med History:</b>
-                                        </td>
-                                        <td  width="28%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td valign="top">
-                                            @if($admission->exam_physical)
-                                                <b>{{ $admission->exam_physical->past_peme ? $admission->exam_physical->past_peme : "." }}</b>
-                                            @endif
-                                        </td>
-                                        <td valign="top">
-                                            @if($admission->exam_physical)
-                                                <b>{{ $admission->exam_physical->past_peme_recommendation ? $admission->exam_physical->past_peme_recommendation : "." }}</b>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top"></td>
-                                        <td valign="top">
-                                            <b>VITAL SIGN:</b>
-                                        </td>
-                                        <td valign="top">
-                                            @if ($admission->exam_physical)
-                                                {{ optional($admission->exam_physical)->vital_sign_recommendation }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>Height:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->height }} cm</span>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>Weight:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->weight }} kg</span>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>BMI:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->bmi }}</span>
-                                        </td>
-                                        <td>
-                                            {{ optional($admission->exam_physical)->bmi_recommedation }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>BP:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->systollic }}/{{ optional($admission->exam_physical)->diastollic }}</span>
-                                        </td>
-                                        <td>
-                                            {{ optional($admission->exam_physical)->bp_recommendation }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>PR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->pulse }}/min</span>
-                                        </td>
-                                        <td>
-                                            {{ optional($admission->exam_physical)->pulse_rhythm_recommendation }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <b>RR:</b> <span style="margin-left: 10px;">{{ optional($admission->exam_physical)->respiration }}/min</span>
-                                        </td>
-                                        <td>
-                                            {{ optional($admission->exam_physical)->respiration_recommendation }}
-                                        </td>
-                                    </tr>
-                                    @if($admission->exam_xray)
-                                        @if($admission->exam_xray->chest_remarks_status)
-                                            <tr>
-                                                <td valign="top"></td>
-                                                <td valign="top">
-                                                    <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings }}</span>
-                                                </td>
-                                                <td valign="top">
-                                                    @if($admission->exam_xray->chest_remarks_status == 'findings' && $admission->exam_xray->chest_recommendations)
-                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'findings' ? $admission->exam_xray->chest_recommendations : null }}</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endif
-
-                                    @if($admission->exam_xray)
-                                        @if($admission->exam_xray->lumbosacral_remarks_status)
-                                            <tr>
-                                                <td valign="top"></td>
-                                                <td valign="top">
-                                                    <b>Lumbosacral XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings  }}</span>
-                                                </td>
-                                                <td valign="top">
-                                                    @if($admission->exam_xray->lumbosacral_remarks_status == 'findings' && $admission->exam_xray->lumbosacral_recommendations)
-                                                        <b>Lumbosacral Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'findings' ? $admission->exam_xray->lumbosacral_recommendations : null }}</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endif
-
-                                    @if($admission->exam_xray)
-                                        @if($admission->exam_xray->knees_remarks_status)
-                                            <tr>
-                                                <td valign="top"></td>
-                                                <td valign="top">
-                                                    <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings  }}</span>
-                                                </td>
-                                                <td valign="top">
-                                                    @if($admission->exam_xray->knees_remarks_status == 'findings' && $admission->exam_xray->knees_recommendations)
-                                                        <b>Knee Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_remarks_status == 'findings' ? $admission->exam_xray->knees_recommendations : null }}</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endif
-
-                                    @if($admission->exam_ecg)
-                                        <tr>
-                                            <td valign="top"></td>
-                                            <td valign="top">
-                                                <b>ECG:</b> <span style="margin-left: 10px;">{{ $admission->exam_ecg->ecg == 'Significant Findings' ? $admission->exam_ecg->findings : 'Normal'  }}</span>
-                                            </td>
-                                            <td valign="top">
-                                                <b>
-                                                    @if($admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation)
-                                                        ECG:
-                                                    @endif
-                                                </b> {{ $admission->exam_ecg->ecg == 'Significant Findings' && $admission->exam_ecg->recommendation ? $admission->exam_ecg->recommendation : ''  }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         FORM NO. 11 <br>
