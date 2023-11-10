@@ -100,11 +100,12 @@ function SigEmployeeImageCallback(str) {
 function SigImageCallback(str) {
     submit_patient_signature(str);
 }
-window.onbeforeunload = function(evt) {
+window.addEventListener('beforeunload', function (evt) {
     clearInterval(tmr);
-    evt.preventDefault(); //For Firefox, needed for browser closure
-    // close();
-};
+    evt.preventDefault();
+    // evt.returnValue = ''; // Some browsers might require this
+    // close(); // Perform your necessary actions here before the page unloads
+});
 
 onSign();
 
