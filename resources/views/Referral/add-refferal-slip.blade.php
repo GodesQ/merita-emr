@@ -373,7 +373,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="">Certficates</label>
+                                            <label for="">Additional Certficates</label>
                                             <div class="row">
                                                 <fieldset class="col-md-6 my-50">
                                                     <div class="custom-control custom-checkbox">

@@ -226,12 +226,7 @@
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_physical ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab9"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft9"
-                                                                                        href="#tabVerticalLeft9"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Physical Exam
+                                                                                        id="baseVerticalLeft1-tab9" data-toggle="tab" href="#tabVerticalLeft9">Physical Exam
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -242,43 +237,26 @@
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_visacuity ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab16"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft16"
-                                                                                        href="#tabVerticalLeft16"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Visual
-                                                                                        Acuity </a>
+                                                                                        id="baseVerticalLeft1-tab16" data-toggle="tab" href="#tabVerticalLeft16">Visual Acuity
+                                                                                    </a>
                                                                                 </li>
                                                                             @endif
 
                                                                             @if (session()->get('dept_id') == '9' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_dental ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab4"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft4"
-                                                                                        href="#tabVerticalLeft4"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Dental</a>
+                                                                                        id="baseVerticalLeft1-tab4" data-toggle="tab" href="#tabVerticalLeft4">Dental</a>
                                                                                 </li>
                                                                             @endif
 
                                                                             @if (session()->get('dept_id') == '5' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_psycho ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab10"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft10"
-                                                                                        href="#tabVerticalLeft10"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Psychological</a>
+                                                                                        id="baseVerticalLeft1-tab10" data-toggle="tab" href="#tabVerticalLeft10">Psychological</a>
                                                                                 </li>
                                                                             @endif
 
-                                                                            @if (session()->get('dept_id') == '15' ||
-                                                                                    session()->get('dept_id') == '1' ||
-                                                                                    session()->get('dept_id') == '6' ||
+                                                                            @if (session()->get('dept_id') == '15' || session()->get('dept_id') == '1' ||session()->get('dept_id') == '6' ||
                                                                                     session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_audio ? 'exam-done' : null }}"
@@ -286,35 +264,22 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft1"
                                                                                         href="#tabVerticalLeft1"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Audiometry</a>
+                                                                                        >Audiometry</a>
                                                                                 </li>
                                                                             @endif
 
-                                                                            @if (session()->get('dept_id') == '14' ||
-                                                                                    session()->get('dept_id') == '1' ||
-                                                                                    session()->get('dept_id') == '8' ||
+                                                                            @if (session()->get('dept_id') == '14' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8' ||
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_ishihara ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab8"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft8"
-                                                                                        href="#tabVerticalLeft8"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Ishihara</a>
+                                                                                        id="baseVerticalLeft1-tab8" data-toggle="tab" href="#tabVerticalLeft8">Ishihara</a>
                                                                                 </li>
                                                                             @endif
 
                                                                             @if (session()->get('dept_id') == '4' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_xray ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab18"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft18"
-                                                                                        href="#tabVerticalLeft18"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">X-Ray
+                                                                                        id="baseVerticalLeft1-tab18" data-toggle="tab" href="#tabVerticalLeft18">X-Ray
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -329,8 +294,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft5"
                                                                                         href="#tabVerticalLeft5"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">ECG
+                                                                                        >ECG
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -346,8 +310,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft17"
                                                                                         href="#tabVerticalLeft17"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">PPD TEST
+                                                                                        >PPD TEST
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -359,22 +322,11 @@
                                                                                     session()->get('dept_id') == '7')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_crf ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab2"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft2"
-                                                                                        href="#tabVerticalLeft2"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Cardiac
-                                                                                        Risk Factor / <br> Spirometry </a>
+                                                                                        id="baseVerticalLeft1-tab2" data-toggle="tab" href="#tabVerticalLeft2">Cardiac Risk Factor / <br> Spirometry </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_cardio ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab3"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft3"
-                                                                                        href="#tabVerticalLeft3"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Cardiovascular</a>
+                                                                                        id="baseVerticalLeft1-tab3" data-toggle="tab" href="#tabVerticalLeft3">Cardiovascular</a>
                                                                                 </li>
                                                                             @endif
 
@@ -388,23 +340,15 @@
                                                                                     session()->get('dept_id') == '7')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_echodoppler ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab6"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft6"
-                                                                                        href="#tabVerticalLeft6"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">2D
-                                                                                        Echo Doppler </a>
+                                                                                        id="baseVerticalLeft1-tab6" data-toggle="tab" aria-controls="tabVerticalLeft6" href="#tabVerticalLeft6">
+                                                                                        2D Echo Doppler 
+                                                                                    </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_echoplain ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab7 "
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft7"
-                                                                                        href="#tabVerticalLeft7"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">2D
-                                                                                        Echo Plain </a>
+                                                                                        id="baseVerticalLeft1-tab7" data-toggle="tab"  href="#tabVerticalLeft7">
+                                                                                        2D Echo Plain 
+                                                                                    </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_stressecho ? 'exam-done' : null }}"
@@ -412,8 +356,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft12"
                                                                                         href="#tabVerticalLeft12"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Stress
+                                                                                        >Stress
                                                                                         Echo </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -422,8 +365,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft13"
                                                                                         href="#tabVerticalLeft13"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Stress
+                                                                                        >Stress
                                                                                         Test </a>
                                                                                 </li>
                                                                             @endif
@@ -448,8 +390,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft14"
                                                                                         href="#tabVerticalLeft14"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Ultrasound</a>
+                                                                                        >Ultrasound</a>
                                                                                 </li>
                                                                             @endif
 
@@ -939,8 +880,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft25"
                                                                                         href="#tabVerticalLeft25"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Hematology
+                                                                                        >Hematology
                                                                                     </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -949,8 +889,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft28"
                                                                                         href="#tabVerticalLeft28"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Urinalysis</a>
+                                                                                        >Urinalysis</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_pregnancy ? 'exam-done' : null }}"
@@ -958,8 +897,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft27"
                                                                                         href="#tabVerticalLeft27"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Pregnancy</a>
+                                                                                        >Pregnancy</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_feca ? 'exam-done' : null }}"
@@ -967,8 +905,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft24"
                                                                                         href="#tabVerticalLeft24"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Fecalysis</a>
+                                                                                        >Fecalysis</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width  {{ $exam_blood_serology ? 'exam-done' : null }}"
@@ -986,8 +923,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft26"
                                                                                         href="#tabVerticalLeft26"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Serology</a>
+                                                                                        >Serology</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_hiv ? 'exam-done' : null }}"
@@ -995,8 +931,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft22"
                                                                                         href="#tabVerticalLeft22"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">HIV</a>
+                                                                                        >HIV</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_drug ? 'exam-done' : null }}"
@@ -1004,8 +939,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft23"
                                                                                         href="#tabVerticalLeft23"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Drug
+                                                                                        >Drug
                                                                                         Test</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -1014,8 +948,7 @@
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft29"
                                                                                         href="#tabVerticalLeft29"
-                                                                                        role="tab"
-                                                                                        aria-selected="false">Miscellaneous</a>
+                                                                                        >Miscellaneous</a>
                                                                                 </li>
                                                                             </ul>
                                                                             <div class="tab-content px-1">
@@ -1264,6 +1197,23 @@
                                         </div>
                                     </div>
                                 </section>
+                            </div>
+                            <div role="tabpanel" class="tab-pane false" id="account-vertical-referral" aria-labelledby="account-pill-referral" aria-expanded="false">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title" id="basic-layout-form">Edit Referral Slip</h4>
+                                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                    </div>
+                                    <div class="card-content collapse show">
+                                        <div class="card-body">
+                                            @if($referral)
+                                                @include('Referral.ReferralForms.edit-form')
+                                            @else
+                                                <div class="h4 text-center">No Referral Slip Found</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="account-invoice" role="tabpanel"
                                 aria-labelledby="account-pill-invoice" aria-expanded="false">
@@ -1847,10 +1797,17 @@
                                             General Info
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-pill-referral"
+                                            data-toggle="pill" href="#account-vertical-referral" aria-expanded="false">
+                                            <i class="feather icon-file"></i>
+                                            Referral Info
+                                        </a>
+                                    </li>
                                     @if ($admissionPatient)
                                         <li class="nav-item">
                                             <a class="nav-link d-flex text-white" id="account-pill-invoice"
-                                                data-toggle="pill" href="#account-invoice" aria-expanded="true">
+                                                data-toggle="pill" href="#account-invoice" aria-expanded="false">
                                                 <i class="fa fa-money"></i>
                                                 {{ $patient_or ? 'Edit Payment' : 'Generate Payment' }}
                                             </a>

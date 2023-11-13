@@ -66,24 +66,6 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="row p-1">
-            <div class="shadow-sm col-lg-3 bg-white p-1">
-                <span class="h6 font-weight-normal">DECK</span> <br>
-                <div class="h4 font-bold mt-50">{{$category_count['deck']}} PATIENTS</div>
-            </div>
-            <div class="shadow-sm col-lg-3 bg-white p-1">
-                <span class="h6 font-weight-normal">ENGINE</span> <br>
-                <div class="h4 font-bold mt-50">{{$category_count['engine']}} PATIENTS</div>
-            </div>
-            <div class="shadow-sm col-lg-3 bg-white p-1">
-                <span class="h6 font-weight-normal">CATERING</span> <br>
-                <div class="h4 font-bold mt-50">{{$category_count['catering']}} PATIENTS</div>
-            </div>
-            <div class="shadow-sm col-lg-3 bg-white p-1">
-                <span class="h6 font-weight-normal">OTHER</span> <br>
-                <div class="h4 font-bold mt-50">{{$category_count['other']}} PATIENTS</div>
-            </div>
-        </div> --}}
             <div class="card">
                 <div class="card-header">
                     <div class="row">

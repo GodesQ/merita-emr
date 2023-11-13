@@ -14,6 +14,8 @@ class AgencyDashboardController extends Controller
 {   
 
     public function agencyCrewList(Request $request) {
+        ini_set('max_execution_time', 240); //4 minutes
+
         try {
             $patients = Patient::with('admission', 'patientinfo')->latest('id')
                         ->when(!empty($request->get('search')), function ($query) use ($request) {
