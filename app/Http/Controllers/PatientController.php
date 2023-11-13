@@ -24,6 +24,7 @@ use App\Http\Controllers\AdmissionController;
 use App\Models\Audiometry;
 use App\Models\Refferal;
 use App\Models\PatientInfo;
+use App\Models\SchedulePatient;
 use App\Models\DeclarationForm;
 
 use App\Mail\VerificationMail;
@@ -945,11 +946,27 @@ class PatientController extends Controller
             return view('Patient.edit-patient', compact('patient', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
 
         } catch (\Exception $exception) {
-            dd($exception);
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
+    }
+
+    public function delete_patient_record(Request $request) {
+        $patient = Patient::with('admission', 'patientinfo', 'sched_patients', 'declaration_form', 'medical_history')->findOrFail($request->id);
+
+        $patient_schedules = SchedulePatient::where('patient_id', $patient->id)->delete();
+        if($patient->admission) $patient->admission->delete();
+        if($patient->patientinfo) $patient->patientinfo->delete();
+        if($patient->declaration_form) $patient->declaration_form->delete();
+        if($patient->medical_history) $patient->medical_history->delete();
+
+        $patient->delete();
+
+        return response([
+            'status' => TRUE,
+            'message' => 'Patient Record Deleted Successfully'
+        ]);
     }
 
     public function crop_signature(Request $request)

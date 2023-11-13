@@ -192,6 +192,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/get_patients', [PatientController::class, 'get_patients'])->name('patients.get');
 
     Route::get('/patient_edit', [PatientController::class, 'edit_patient'])->name('patient_edit');
+    Route::delete('/delete_patient_record', [PatientController::class, 'delete_patient_record']);
 
     Route::get('/get_patient_medical_result/{id}', [PatientMedicalResultController::class, 'getMedicalResult'])->name('get_medical_result');
     Route::delete('/delete_patient_medical_result', [PatientMedicalResultController::class, 'deleteMedicalResult'])->name('delete_patient_medical_result');

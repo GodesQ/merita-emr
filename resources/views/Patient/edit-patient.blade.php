@@ -82,12 +82,19 @@
                                         @endif
                                         <div class="col-md-10">
                                             <h3>Medical Records</h3>
-                                            @foreach ($patientRecords as $record)
-                                                <button
-                                                    onclick="location.href = 'patient_edit?id={{ $record->id }}&patientcode={{ $record->patientcode }}'"
-                                                    class="btn btn-outline-secondary mr-1 {{ $patient->created_date == $record->created_date ? 'active' : null }}">
-                                                    {{ date_format(new DateTime($record->created_date), 'F d, Y h:i A') }}</button>
-                                            @endforeach
+                                            <div class="d-flex flex-wrap">
+                                                @foreach ($patientRecords as $record)
+                                                        <div class="my-50">
+                                                            @if($patient->created_date != $record->created_date ? 'active' : null && session()->get('dept_id') == '1')
+                                                                <button type="button" class="btn btn-danger remove-patient-record-btn" id="{{ $record->id }}">Remove</button>
+                                                            @endif
+                                                            <button
+                                                                onclick="location.href = 'patient_edit?id={{ $record->id }}&patientcode={{ $record->patientcode }}'"
+                                                                class="btn btn-outline-secondary mr-1 {{ $patient->created_date == $record->created_date ? 'active' : null }}">
+                                                                {{ date_format(new DateTime($record->created_date), 'F d, Y h:i A') }}</button>
+                                                        </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             @if ($admissionPatient)
@@ -2518,6 +2525,54 @@
                 }
             }
         }
+
+        $('.remove-patient-record-btn').click(function (e) {
+            let id = $(this).attr('id');
+            let csrf = '{{ csrf_token() }}';
+            Swal.fire({
+                title: 'Are you sure you want to delete it?',
+                text: "",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/delete_patient_record',
+                        method: 'DELETE',
+                        data: {
+                            id: id,
+                            _token: csrf
+                        },
+                        success: function(response) {
+                            if (response.status) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Record has been deleted.',
+                                    'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                })
+                            } else {
+                                Swal.fire(
+                                    'Error Occured!',
+                                    'Internal Server Error.',
+                                    'error'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        });
 
         $(".delete-followup").click(function() {
             let id = $(this).attr('id');
