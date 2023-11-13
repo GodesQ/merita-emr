@@ -128,6 +128,9 @@
             buttons: [
                 'csv', 'excel', 'pdf', 'print',
             ],
+            search: {
+                "regex": true
+            },
             ajax: {
                 url: "/agency_patient_table",
                 data: function(d) {
@@ -144,38 +147,56 @@
                 {
                     data: 'lastname',
                     name: 'lastname',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'firstname',
                     name: 'firstname',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'category',
                     name: 'category',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'vessel',
                     name: 'vessel',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'medical_package',
                     name: 'medical_package',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'passportno',
                     name: 'passportno',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'ssrbno',
                     name: 'ssrbno',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'status',
                     name: 'status',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'action',
                     name: 'action',
+                    orderable: true,
+                    searchable: true
                 },
             ],
         });

@@ -14,74 +14,8 @@ class AgencyDashboardController extends Controller
 {   
 
     public function agencyCrewList(Request $request) {
-        ini_set('max_execution_time', 240); // 4 minutes
-
         try {
-            // $patients = Patient::select('id', 'patientcode', 'admission_id', 'firstname', 'lastname', 'middlename', 'email', 'position_applied')
-            //     ->with(['admission', 'patientinfo'])
-            //     ->whereExists(function ($query) {
-            //         $query->select(DB::raw(1))
-            //             ->from('mast_patientinfo')
-            //             ->whereRaw('mast_patient.id = mast_patientinfo.main_id')
-            //             ->where(function ($subQuery) {
-            //                 $subQuery->whereIn(DB::raw('upper(vessel)'), $this->getBahiaVessel(session()->get('agencyId')))
-            //                     ->orWhere('agency_id', session()->get('agencyId'));
-            //             });
-            //     })
-            //     ->when(!empty($request->get('search')), function ($query) use ($request) {
-            //         $searchData = $request->get('search');
-            //             $query->where(function ($subQuery) use ($searchData) {
-            //                 $subQuery->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $searchData . '%')
-            //                     ->whereHas('admission', function ($admissionQuery) {
-            //                         $admissionQuery->where('agency_id', 3)->orWhere('agency_id', session()->get('agencyId'));
-            //                     });
-            //             });
-            //         })
-            //     ->when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
-            //         $query->whereHas('admission', function ($q) use ($request) {
-            //             return $q->whereBetween('trans_date', [$request->start_date, $request->end_date]);
-            //         });
-            //     })
-            //     ->when(!empty($request->get('status')), function ($query) use ($request) {
-            //         $statusData = $request->get('status');
-            //         switch ($statusData) {
-            //             case 1:
-            //                 $query->where('admission_id', null)->whereHas('patientinfo', function ($q) {
-            //                     $q->whereNotNull('medical_package');
-            //                 });
-            //                 break;
-            //             case 2:
-            //                 $query->whereNotNull('admission_id')->whereHas('admission', function ($q) {
-            //                     $q->where('lab_status', null)->whereNotNull('package_id');
-            //                 });
-            //                 break;
-            //             case 3:
-            //                 $query->whereHas('admission', function ($q) {
-            //                     $q->where('lab_status', 1)->whereNotNull('package_id');
-            //                 });
-            //                 break;
-            //             case 4:
-            //                 $query->whereHas('admission', function ($q) {
-            //                     $q->where('lab_status', 2)->whereNotNull('package_id');
-            //                 });
-            //                 break;
-            //             case 5:
-            //                 $query->whereHas('admission', function ($q) {
-            //                     $q->where('lab_status', 3)->whereNotNull('package_id');
-            //                 });
-            //                 break;
-            //             case 6:
-            //                 $query->whereHas('admission', function ($q) {
-            //                     $q->where('lab_status', 4)->whereNotNull('package_id');
-            //                 });
-            //                 break;
-            //         }
-            //     })
-            //     ->latest('id')
-            //     ->get();
-            // dd($patients);
-
-            $patients = Patient::with('admission', 'patientinfo')
+            $patients = Patient::with('admission', 'patientinfo')->latest('id')
                         ->when(!empty($request->get('search')), function ($query) use ($request) {
                             $searchData = $request->get('search');
 
@@ -143,10 +77,7 @@ class AgencyDashboardController extends Controller
                             } else {
                                 $q->where('agency_id', $agencyId);
                             }
-                        })
-                        ->latest('id')
-                        ->get();
-
+                        });
             
             return DataTables::of($patients)
                     ->addIndexColumn()
