@@ -138,29 +138,33 @@
                         <div class="container-fluid border-bottom">
                             <div id="accordionWrapa1" role="tablist" aria-multiselectable="true">
                                 <div class="card accordion">
-                                    @forelse (optional($patient->admission)->medical_results as $medical_result)
-                                        <div id="heading{{ $medical_result->id }}" class="card-header d-flex justify-content-between align-items-center" style="padding: 10px 20px !important;" role="tab" data-toggle="collapse" href="#accordion{{ $medical_result->id }}" aria-expanded="false" aria-controls="accordion{{ $medical_result->id }}">
-                                            <a class="card-title lead" href="javascript:void(0)">{{ date_format( new DateTime($medical_result->generate_at), 'F d, Y') }}</a>
-                                            @if($medical_result->status == 1)
-                                                <div class="badge" style="background: #006a6c">Re Assessment</div>
-                                            @elseif ($medical_result->status == 2)
-                                                <div class="badge badge-success">Fit to Work</div>
-                                            @elseif ($medical_result->status == 3)
-                                                <div class="badge badge-primary">Unfit to Work</div>
-                                            @elseif ($medical_result->status == 4)
-                                                <div class="badge badge-primary">Unfit Temporarily</div>
-                                            @endif
-                                        </div>
-                                        <div id="accordion{{ $medical_result->id }}" role="tabpanel" data-parent="#accordionWrapa1" aria-labelledby="heading{{ $medical_result->id }}" class="collapse show">
-                                            <div class="card-content">
-                                                <div class="card-body" style="padding: 10px 20px !important;">
-                                                    <?php echo nl2br($medical_result->remarks) ?>
+                                    @if(optional($patient->admission)->medical_results)
+                                        @forelse (optional($patient->admission)->medical_results as $medical_result)
+                                            <div id="heading{{ $medical_result->id }}" class="card-header d-flex justify-content-between align-items-center" style="padding: 10px 20px !important;" role="tab" data-toggle="collapse" href="#accordion{{ $medical_result->id }}" aria-expanded="false" aria-controls="accordion{{ $medical_result->id }}">
+                                                <a class="card-title lead" href="javascript:void(0)">{{ date_format( new DateTime($medical_result->generate_at), 'F d, Y') }}</a>
+                                                @if($medical_result->status == 1)
+                                                    <div class="badge" style="background: #006a6c">Re Assessment</div>
+                                                @elseif ($medical_result->status == 2)
+                                                    <div class="badge badge-success">Fit to Work</div>
+                                                @elseif ($medical_result->status == 3)
+                                                    <div class="badge badge-primary">Unfit to Work</div>
+                                                @elseif ($medical_result->status == 4)
+                                                    <div class="badge badge-primary">Unfit Temporarily</div>
+                                                @endif
+                                            </div>
+                                            <div id="accordion{{ $medical_result->id }}" role="tabpanel" data-parent="#accordionWrapa1" aria-labelledby="heading{{ $medical_result->id }}" class="collapse show">
+                                                <div class="card-content">
+                                                    <div class="card-body" style="padding: 10px 20px !important;">
+                                                        <?php echo nl2br($medical_result->remarks) ?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @empty
-                                        <div class="text-center">No Remarks Found</div>
-                                    @endforelse
+                                        @empty
+                                            <div class="text-center">No Remarks Found</div>
+                                        @endforelse
+                                    @else
+                                        <div class="text-center">No Remarks Found</div>   
+                                    @endif
                                 </div>
                             </div>
                         </div>

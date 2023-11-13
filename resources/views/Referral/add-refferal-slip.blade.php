@@ -125,14 +125,20 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Birthplace <span class="danger">*</span></label>
+                                                <input type="text" id="birthplace" name="birthplace" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Birthdate <span class="danger">*</span></label>
                                                 <input type="date" onchange="getAge(this)" id="birthdate"
                                                     name="birthdate" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Age <span class="danger">*</span></label>
                                                 <input type="text" id="age" name="age" readonly
@@ -158,14 +164,14 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">SSRB No <span class="danger">*</span></label>
+                                                <label for="">SIRB No <span class="danger">*</span></label>
                                                 <input type="text" name="ssrb" id="ssrb"
                                                     class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">SSRB Expiry Date <span
+                                                <label for="">SIRB Expiry Date <span
                                                         class="danger">*</span></label>
                                                 <input type="date" name="ssrb_expdate" id="ssrb_expdate"
                                                     class="form-control" />
