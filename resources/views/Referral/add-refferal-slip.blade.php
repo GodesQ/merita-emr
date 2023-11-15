@@ -253,7 +253,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="projectinput4">Position Applied For <span
                                                         class="danger">*</span></label>
@@ -261,10 +261,21 @@
                                                     placeholder="Position Applied" name="position_applied">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="projectinput4">Vessel <span class="danger">*</span></label>
-                                                @php $agency_ids = [55, 57, 58]; @endphp
+                                                <label for="vessel">Vessel <span class="danger">*</span></label>
+                                                @if(count($vessels) > 0) 
+                                                    <select name="vessel" id="vessel" class="form-select">
+                                                        @foreach ($vessels as $vessel)
+                                                            <option value="{{ $vessel->vesselname }}">{{ $vessel->vesselname }}</option>
+                                                        @endforeach
+                                                        <option value="other">--- OTHER VESSEL ---</option>
+                                                    </select>
+                                                @else
+                                                    <input type="text" id="vessel" class="form-control" placeholder="Vessel" name="vessel">
+                                                @endif
+                                                <input type="text" class="form-control my-1 d-none" name="other_vessel" id="other-vessel" placeholder="Vessel">
+                                                {{-- @php $agency_ids = [55, 57, 58]; @endphp
                                                 @if (in_array(Session::get('agencyId'), $agency_ids))
                                                     <select name="vessel" class="select2">
                                                         @if (Session::get('agencyId') == 55)
@@ -290,7 +301,23 @@
                                                 @else
                                                     <input type="text" id="projectinput4" class="form-control"
                                                         placeholder="Vessel" name="vessel">
+                                                @endif --}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="principal" class="form-label">Principal <span class="text-danger danger">*</span></label>
+                                                @if(count($principals) > 0) 
+                                                    <select name="principal" id="principal" class="form-select">
+                                                        @foreach ($principals as $principal)
+                                                            <option value="{{ $principal->principal_name }}">{{ $principal->principal_name }}</option>
+                                                        @endforeach
+                                                        <option value="other">--- OTHER PRINCIPAL ---</option>
+                                                    </select>
+                                                @else
+                                                    <input type="text" id="projectinput4" class="form-control" placeholder="Principal" name="principal">
                                                 @endif
+                                                <input type="text" class="form-control my-1 d-none" name="other_principal" id="other-principal" placeholder="Principal">
                                             </div>
                                         </div>
                                     </div>
@@ -701,5 +728,23 @@
                 $(`#${id}_qty`).addClass("d-none");
             }
         }
+
+        $('#vessel').change(function (e) {
+            if(e.target.value === 'other') {
+                $('#other-vessel').removeClass('d-none');
+                $('#other-vessel').focus();
+            } else {
+                $('#other-vessel').addClass('d-none');
+            }
+        });
+
+        $('#principal').change(function (e) {
+            if(e.target.value === 'other') {
+                $('#other-principal').removeClass('d-none');
+                $('#other-principal').focus();
+            } else {
+                $('#other-principal').addClass('d-none');
+            }
+        });
     </script>
 @endpush

@@ -20,4 +20,12 @@ class Agency extends Model
     public function patientinfo() {
         return $this->belongsTo(PatientInfo::class);
     }
+
+    public function vessels() {
+        return $this->hasMany(AgencyVessel::class, 'main_id', 'id');
+    }
+
+    public function principals() {
+        return $this->hasMany(AgencyPrincipal::class, 'main_id', 'id');
+    }
 }

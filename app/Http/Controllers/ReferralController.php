@@ -19,6 +19,8 @@ use App\Models\Patient;
 use App\Models\Admission;
 use App\Models\ListPackage;
 use App\Models\Refferal;
+use App\Models\AgencyVessel;
+use App\Models\AgencyPrincipal;
 use PDF;
 
 class ReferralController extends Controller
@@ -139,16 +141,14 @@ class ReferralController extends Controller
     {
         try {
             $data = session()->all();
-            $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )->where('list_package.agency_id', $data['agencyId'])
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id','mast_agency.agencyname as agencyname')
+                        ->where('list_package.agency_id', $data['agencyId'])
             ->leftJoin('mast_agency','mast_agency.id', '=', 'list_package.agency_id')->get();
 
-            return view('Referral.add-refferal-slip', compact('packages', 'data'));
+            $vessels = AgencyVessel::where('main_id', $data['agencyId'])->get();
+            $principals = AgencyPrincipal::where('main_id', $data['agencyId'])->get();
 
+            return view('Referral.add-refferal-slip', compact('packages', 'data', 'vessels', 'principals'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -197,7 +197,8 @@ class ReferralController extends Controller
             $refferal->nationality  = $request->nationality;
             $refferal->gender = $request->gender;
             $refferal->position_applied = $request->position_applied;
-            $refferal->vessel = $request->vessel;
+            $refferal->vessel = $request->vessel == 'other' ? $request->other_vessel : $request->vessel;
+            $refferal->principal = $request->principal == 'other' ? $request->other_principal : $request->principal;
             $refferal->passport = $request->passport;
             $refferal->ssrb = $request->ssrb;
             $refferal->passport_expdate = $new_passport_expdate;

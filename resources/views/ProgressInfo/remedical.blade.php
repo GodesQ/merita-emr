@@ -246,7 +246,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="">Phone Number : <span class="danger">*</span></label>
-                                                                <input required type="tel" maxlength="11" class="form-control" name="phoneNumber" value="{{ $patient->patientinfo->contactno }}">
+                                                                <input required type="tel" maxlength="11" minlength="11" class="form-control" name="phoneNumber" value="{{ $patient->patientinfo->contactno }}">
                                                             </div>
                                                         </div>
                                                         <input type="date" max="2050-12-31" name="date" id="" hidden value="<?php echo date('Y-m-d'); ?>">

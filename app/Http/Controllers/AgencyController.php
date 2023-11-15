@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AgencyPrincipal;
+use App\Models\AgencyVessel;
 use Illuminate\Http\Request;
 use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
@@ -206,7 +208,7 @@ class AgencyController extends Controller
     {
         try {
             $id = $_GET['id'];
-            $agency = Agency::where('id', '=', $id)->first();
+            $agency = Agency::where('id', $id)->with('vessels', 'principals')->first();
             return view('Agency.edit-agency', compact('agency'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -282,6 +284,126 @@ class AgencyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function get_agency_vessel_datatable(Request $request) {
+        if($request->ajax()) {
+            $data = AgencyVessel::get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('actions', function($row) {
+                        return '<a href="#" id="' .$row->id. '" class="edit-vessel btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                                <button id="' . $row->id . '" class="delete-vessel btn btn-danger btn-sm"><i class="feather icon-trash"></i></button>';
+                    })
+                    ->rawColumns(['actions'])
+                    ->make(true);
+        }
+    }
+
+    public function store_agency_vessel(Request $request) {
+        $data = $request->all();
+        $agency_vessel = AgencyVessel::create($data);
+
+        if($agency_vessel) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Vessel Created Successfully'
+            ], 201);
+        }
+    }
+
+    public function show_agency_vessel(Request $request) {
+        $agency_vessel = AgencyVessel::find($request->id);
+
+        return response([
+            'status' => TRUE,
+            'agency_vessel' => $agency_vessel
+        ]);
+    }
+
+    public function update_agency_vessel(Request $request) {
+        $data = $request->except('_token', 'id');
+        $agency_vessel = AgencyVessel::where('id', $request->id)->update($data);
+
+        if($agency_vessel) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Vessel Updated Successfully'
+            ], 200);
+        }
+    }
+
+    public function destroy_agency_vessel(Request $request) {
+        $agency_vessel = AgencyVessel::find($request->id);
+
+        $delete = $agency_vessel->delete();
+        if($delete) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Vessel Deleted Successfully'
+            ]);
+        }
+    }
+
+    public function get_agency_principal_datatable (Request $request) {
+        if($request->ajax()) {
+            $data = AgencyPrincipal::get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('actions', function($row) {
+                        return '<a href="#" id="' .$row->id. '" class="edit-principal btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                                <button id="' . $row->id . '" class="delete-principal btn btn-danger btn-sm"><i class="feather icon-trash"></i></button>';
+                    })
+                    ->rawColumns(['actions'])
+                    ->make(true);
+        }
+    }
+
+    public function store_agency_principal(Request $request) {
+        $data = $request->all();
+        $agency_principal = AgencyPrincipal::create($data);
+
+        if($agency_principal) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Principal Created Successfully'
+            ], 201);
+        }
+    }
+
+    public function show_agency_principal(Request $request) {
+        $agency_vessel = AgencyPrincipal::find($request->id);
+
+        return response([
+            'status' => TRUE,
+            'agency_vessel' => $agency_vessel
+        ]);
+    }
+
+    public function update_agency_principal(Request $request) {
+        $data = $request->except('_token', 'id');
+        $agency_principal = AgencyPrincipal::where('id', $request->id)->update($data);
+
+        if($agency_principal) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Principal Updated Successfully'
+            ], 200);
+        }
+    }
+
+    public function destroy_agency_principal(Request $request) {
+        $agency_principal = AgencyPrincipal::find($request->id);
+
+        $delete = $agency_principal->delete();
+        if($delete) {
+            return response([
+                'status' => TRUE,
+                'message' => 'Agency Principal Deleted Successfully'
+            ]);
+        }
+    }
+
+
 
     // public function agency_patient_table(Request $request)
     // {

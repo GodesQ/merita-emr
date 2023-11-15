@@ -161,6 +161,19 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/referral', [ReferralController::class, 'view_referral']);
 
+    Route::get('agency_vessels/datatable', [AgencyController::class, 'get_agency_vessel_datatable'])->name('agency_vessels_datatable');
+    Route::post('agency_vessels/store', [AgencyController::class, 'store_agency_vessel'])->name('agency_vessels_store');
+    Route::get('agency_vessel/show/{id}', [AgencyController::class, 'show_agency_vessel'])->name('agency_vessels_show');
+    Route::post('agency_vessels/update', [AgencyController::class, 'update_agency_vessel'])->name('agency_vessels_update');
+    Route::delete('agency_vessels/destroy', [AgencyController::class, 'destroy_agency_vessel'])->name('agency_vessels_destroy');
+
+    Route::get('agency_principals/datatable', [AgencyController::class, 'get_agency_principal_datatable'])->name('agency_principals_datatable');
+    Route::post('agency_principals/store', [AgencyController::class, 'store_agency_principal'])->name('agency_principals_store');
+    Route::get('agency_principal/show/{id}', [AgencyController::class, 'show_agency_principal'])->name('agency_principals_show');
+    Route::post('agency_principals/update', [AgencyController::class, 'update_agency_principal'])->name('agency_principals_update');
+    Route::delete('agency_principals/destroy', [AgencyController::class, 'destroy_agency_principal'])->name('agency_principals_destroy');
+
+
     // ----------------------------------------- END AGENCY ACCESS --------------------------------------- //
 
     // ----------------------------------------- START ADMIN ACCESS --------------------------------------- //
@@ -185,14 +198,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::post('/submit_agency_password_form', [AgencyController::class, 'submit_agency_password_form']);
 
-    // Route::post('/reset_password_form/submit', [ForgetPasswordController::class, 'submitResetPasswordForm'])->name('reset_password_form.submit');
-
     //------------------------------- CRUD OF PATIENT IN ADMIN ACCESS ---------------------------------------- //
 
     Route::get('/get_patients', [PatientController::class, 'get_patients'])->name('patients.get');
 
     Route::get('/patient_edit', [PatientController::class, 'edit_patient'])->name('patient_edit');
-    Route::delete('/delete_patient_record', [PatientController::class, 'delete_patient_record']);
 
     Route::get('/get_patient_medical_result/{id}', [PatientMedicalResultController::class, 'getMedicalResult'])->name('get_medical_result');
     Route::delete('/delete_patient_medical_result', [PatientMedicalResultController::class, 'deleteMedicalResult'])->name('delete_patient_medical_result');

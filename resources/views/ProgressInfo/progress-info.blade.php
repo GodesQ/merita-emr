@@ -268,7 +268,7 @@
                                                                     Phone Number :
                                                                     <span class="danger">*</span>
                                                                 </label>
-                                                                <input required type="tel" maxlength="11"
+                                                                <input required type="tel" maxlength="11" minlength="11"
                                                                     class="form-control" name="phoneNumber">
                                                             </div>
                                                         </div>
