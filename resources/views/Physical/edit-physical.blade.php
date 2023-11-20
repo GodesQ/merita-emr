@@ -1785,7 +1785,7 @@
                                                     <td height="21" colspan="2"><input name="psychological"
                                                             type="radio" style="width: 20px; height: 20px;"
                                                             id="radio105" value="evaluation"
-                                                            {{ $exam->evaluation == 'normal' ? 'checked' : null }}>
+                                                            {{ $exam->psychological == 'evaluation' ? 'checked' : null }}>
                                                         For Further Evaluation</td>
                                                 </tr>
 
