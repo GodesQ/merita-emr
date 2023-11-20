@@ -564,10 +564,10 @@ class PatientController extends Controller
     public function get_patients(Request $request)
     {
         try {
-            $data = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(gender) as gender'))
+            $data = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(gender) as gender'), DB::raw('MAX(admission_id) as admission_id'))
                 ->whereNotNull('firstname')
                 ->where('yndelete', '0')
-                ->with('patientinfo', 'admission')
+                ->with('patientinfo', 'admission.package')
                 ->groupBy('patientcode');
 
             $sessions = session()->all();
@@ -596,6 +596,24 @@ class PatientController extends Controller
                             }
                         }
                     })
+                    ->addColumn('status', function ($row) {
+                        // get patient package
+                        if ($row->admission && $row->admission->package) {
+                            $patient_package = $row->admission->package;
+                        } elseif ($row->patientinfo && $row->patientinfo->package) {
+                            $patient_package = $row->patientinfo->package;
+                        } else {
+                            return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                        }
+
+                        $patient_exams = DB::table('list_packagedtl')
+                            ->select('list_packagedtl.*', 'list_exam.examname', 'list_exam.category', 'list_exam.section_id')
+                            ->where('main_id', $patient_package->id)
+                            ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                            ->get();
+
+                        return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-50 bg-info">REGISTERED</div>';
+                    })
                     ->addColumn('action', function ($row) {
                         $patient = Patient::where('id', $row['id'])->first();
                         $actionBtn =
@@ -609,7 +627,7 @@ class PatientController extends Controller
                             '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
                     })
-                    ->rawColumns(['action', 'contactno', 'agency', 'medical_package'])
+                    ->rawColumns(['action', 'contactno', 'agency', 'medical_package', 'status'])
                     ->toJson();
             }
         } catch (\Exception $exception) {

@@ -69,6 +69,7 @@
                                     <th>Firstname</th>
                                     <th width="100px">Agency</th>
                                     <th>Package</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -163,6 +164,12 @@
                     {
                         data: 'medical_package',
                         name: 'medical_package',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
                         orderable: true,
                         searchable: true
                     },

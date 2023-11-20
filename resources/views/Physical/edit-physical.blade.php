@@ -1774,7 +1774,6 @@
 
                                                 </tr>
 
-
                                                 <tr>
                                                     <td height="21">PSYCHOLOGICAL TEST</td>
                                                     <td height="21"><input name="psychological" type="radio"
@@ -1788,7 +1787,6 @@
                                                             {{ $exam->psychological == 'evaluation' ? 'checked' : null }}>
                                                         For Further Evaluation</td>
                                                 </tr>
-
 
                                                 <tr>
                                                     <td height="21">BLOOD TYPE</td>
