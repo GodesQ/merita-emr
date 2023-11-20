@@ -1683,12 +1683,12 @@
                                                     <td height="21"><input name="cbc" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio92"
                                                             value="normal"
-                                                            @if ($exam_hema) {{ $exam_hema->remarks_status == 'normal' ? 'checked' : null }} @endif>
+                                                            {{ $exam->ecg == 'normal' ? 'checked' : null }} >
                                                         Normal</td>
                                                     <td height="21" colspan="2"><input name="cbc"
                                                             type="radio" style="width: 20px; height: 20px;"
                                                             id="radio93" value="findings"
-                                                            @if ($exam_hema) {{ $exam_hema->remarks_status == 'findings' ? 'checked' : null }} @endif>
+                                                            {{ $exam->ecg == 'findings' ? 'checked' : null }}>
                                                         With Findings
                                                     </td>
                                                 </tr>
@@ -1701,12 +1701,12 @@
                                                     <td height="21"><input name="urinalysis" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio94"
                                                             value="normal"
-                                                            @if ($exam_urin) {{ $exam_urin->remarks_status == 'normal' ? 'checked' : null }} @endif>
+                                                            {{ $exam->urinalysis == 'normal' ? 'checked' : null }}>
                                                         Normal</td>
                                                     <td height="21" colspan="2"><input name="urinalysis"
                                                             type="radio" style="width: 20px; height: 20px;"
                                                             id="radio95" value="findings"
-                                                            @if ($exam_urin) {{ $exam_urin->remarks_status == 'findings' ? 'checked' : null }} @endif>
+                                                            {{ $exam->urinalysis == 'findings' ? 'checked' : null }}>
                                                         With Findings
                                                     </td>
                                                 </tr>
@@ -1716,13 +1716,13 @@
                                                     <td height="21">E.STOOL EXAM</td>
                                                     <td height="21"><input name="stool" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio96"
-                                                            value="normal"
-                                                            @if ($exam_feca) {{ $exam_feca->remarks_status == 'normal' ? 'checked' : null }} @endif>
-                                                        Normal</td>
+                                                            value="normal" {{ $exam->stool == 'normal' ? 'checked' : null }}>
+                                                            Normal
+                                                    </td>
                                                     <td height="21" colspan="2"><input name="stool"
                                                             type="radio" style="width: 20px; height: 20px;"
                                                             id="radio97" value="findings"
-                                                            @if ($exam_feca) {{ $exam_feca->remarks_status == 'findings' ? 'checked' : null }} @endif>
+                                                            {{ $exam->stool == 'findings' ? 'checked' : null }}>
                                                         With Findings
                                                     </td>
                                                 </tr>
@@ -1733,12 +1733,12 @@
                                                     <td height="21"><input name="hepa_b" type="radio"
                                                             style="width: 20px; height: 20px;" id="radio99"
                                                             value="Non Reactive"
-                                                            @if ($exam_bloodsero) {{ $exam_bloodsero->hbsag_result == 'Non Reactive' ? 'checked' : null }} @endif>
+                                                            {{ $exam->hepa_b == 'Non Reactive' ? 'checked' : null }}>
                                                         Non-Reactive </td>
                                                     <td height="21"><input name="hepa_b" colspan="2"
                                                             type="radio" id="radio98"
                                                             style="width: 20px; height: 20px;" value="Reactive"
-                                                            @if ($exam_bloodsero) {{ $exam_bloodsero->hbsag_result == 'Reactive' ? 'checked' : null }} @endif>
+                                                            {{ $exam->hepa_b == 'Reactive' ? 'checked' : null }}>
                                                         Reactive</td>
                                                 </tr>
 
@@ -1748,12 +1748,12 @@
                                                     <td height="21"><input name="hiv" type="radio"
                                                             id="radio101" style="width: 20px; height: 20px;"
                                                             value="Non Reactive"
-                                                            @if ($exam_hiv) {{ $exam_hiv->result == 'Non Reactive' ? 'checked' : null }} @endif>
+                                                            {{ $exam->hiv == 'Non Reactive' ? 'checked' : null }}>
                                                         Non-Reactive </td>
                                                     <td height="21" colspan="2"><input name="hiv"
                                                             type="radio" id="radio100"
                                                             style="width: 20px; height: 20px;" value="Reactive"
-                                                            @if ($exam_hiv) {{ $exam_hiv->result == 'Reactive' ? 'checked' : null }} @endif>
+                                                             {{ $exam->hiv == 'Reactive' ? 'checked' : null }}>
                                                         Reactive </td>
 
                                                 </tr>
@@ -1764,12 +1764,12 @@
                                                     <td height="21"><input name="rph" type="radio"
                                                             id="radio103" style="width: 20px; height: 20px;"
                                                             value="Non Reactive"
-                                                            @if ($exam_bloodsero) {{ $exam_bloodsero->vdrl_result == 'Non Reactive' ? 'checked' : null }} @endif>
+                                                            {{ $exam->rph == 'Non Reactive' ? 'checked' : null }}>
                                                         Non-Reactive </td>
                                                     <td height="21" colspan="2"><input name="rph"
                                                             type="radio" id="radio102"
                                                             style="width: 20px; height: 20px;" value="Reactive"
-                                                            @if ($exam_bloodsero) {{ $exam_bloodsero->vdrl_result == 'Reactive' ? 'checked' : null }} @endif>
+                                                            {{ $exam->rph == 'Reactive' ? 'checked' : null }}>
                                                         Reactive </td>
 
                                                 </tr>
@@ -1780,12 +1780,12 @@
                                                     <td height="21"><input name="psychological" type="radio"
                                                             id="radio104" style="width: 20px; height: 20px;"
                                                             value="normal"
-                                                            @if ($exam_psycho) {{ $exam_psycho->remarks_status == 'normal' ? 'checked' : null }} @endif>
+                                                            {{ $exam->psychological == 'normal' ? 'checked' : null }}>
                                                         Normal</td>
                                                     <td height="21" colspan="2"><input name="psychological"
                                                             type="radio" style="width: 20px; height: 20px;"
                                                             id="radio105" value="evaluation"
-                                                            @if ($exam_psycho) {{ $exam_psycho->remarks_status == 'findings' ? 'checked' : null }} @endif>
+                                                            {{ $exam->evaluation == 'normal' ? 'checked' : null }}>
                                                         For Further Evaluation</td>
                                                 </tr>
 
