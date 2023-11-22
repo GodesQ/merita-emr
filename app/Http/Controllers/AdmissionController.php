@@ -354,7 +354,7 @@ class AdmissionController extends Controller
                 [
                     'reschedule_at' => $request->schedule ?? null,
                     'generate_at' => $request->generate_at ?? date('Y-m-d'),
-                    'status' => $latestMedicalResult->generate_at <= $request->generate_at ? $request->lab_status : $latestMedicalResult->status,
+                    'status' => optional($latestMedicalResult)->generate_at <= $request->generate_at ? $request->lab_status : optional($latestMedicalResult)->status,
                     'remarks' => $request->remarks ? $request->remarks : 'Cleared',
                     'prescription' => $request->prescription ?? null,
                     'doctor_prescription' => $request->doctor_prescription ?? null,
