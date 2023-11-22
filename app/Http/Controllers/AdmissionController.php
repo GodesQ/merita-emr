@@ -347,23 +347,21 @@ class AdmissionController extends Controller
                 PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
             }
 
-            if ($request->remarks) {
-                PatientMedicalResult::updateOrCreate(
-                    // Conditions for updating or creating the record
-                    ['id' => $request->medical_result_id, ],
-                    // Attributes to update or create
-                    [
-                        'reschedule_at' => $request->schedule ?? null,
-                        'generate_at' => $request->generate_at ?? date('Y-m-d'),
-                        'status' => $latestMedicalResult->generate_at <= $request->generate_at ? $request->lab_status : $latestMedicalResult->status,
-                        'remarks' => $request->remarks,
-                        'prescription' => $request->prescription ?? null,
-                        'doctor_prescription' => $request->doctor_prescription ?? null,
-                        'admission_id' => $request->id,
-                        'patient_id' => $request->patientId
-                    ]
-                );
-            }
+            PatientMedicalResult::updateOrCreate(
+                // Conditions for updating or creating the record
+                ['id' => $request->medical_result_id, ],
+                // Attributes to update or create
+                [
+                    'reschedule_at' => $request->schedule ?? null,
+                    'generate_at' => $request->generate_at ?? date('Y-m-d'),
+                    'status' => $latestMedicalResult->generate_at <= $request->generate_at ? $request->lab_status : $latestMedicalResult->status,
+                    'remarks' => $request->remarks ? $request->remarks : 'Cleared',
+                    'prescription' => $request->prescription ?? null,
+                    'doctor_prescription' => $request->doctor_prescription ?? null,
+                    'admission_id' => $request->id,
+                    'patient_id' => $request->patientId
+                ]
+            );
 
             if ($request->prescription != null || $request->prescription != '') {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
