@@ -343,7 +343,7 @@ class AdmissionController extends Controller
 
         if ($request->lab_status == 2) {
 
-            if($latestMedicalResult->generate_at <= $request->generate_at) {
+            if(optional($latestMedicalResult)->generate_at <= $request->generate_at) {
                 PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
             }
 
