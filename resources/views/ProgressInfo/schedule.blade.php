@@ -56,7 +56,7 @@
                                                             <label for="">Schedule Date</label>
                                                             <input readonly type="text" required class="form-control"
                                                                 id="date-picker" value="" name="schedule_date"
-                                                                {{count($scheduled_patients) == 50 ? "disabled" : null}}>
+                                                                {{count($scheduled_patients) == 40 ? "disabled" : null}}>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -66,7 +66,7 @@
                                                     <i class="feather icon-x"></i> Cancel
                                                 </a>
                                                 <button type="submit" class="btn btn-primary"
-                                                    {{count($scheduled_patients) == 50 ? "disabled" : null}}>
+                                                    {{count($scheduled_patients) == 40 ? "disabled" : null}}>
                                                     <i class="fa fa-check-square-o"></i> Save
                                                 </button>
                                             </div>
@@ -90,6 +90,7 @@ $(function() {
     var dateToday = new Date();
     $("#date-picker").datepicker({
         minDate: dateToday,
+        maxDate: '+2M',
         changeMonth: true,
         changeYear: true,
         dateFormat: 'yy-mm-dd'
