@@ -6,6 +6,10 @@
             onclick='window.open("/examlab_fecalysis_print?id={{$examlab_feca->admission_id}}", "width=800,height=650").print()'
             class="btn btn-dark btn-solid"
             title="Print">Print</button>
+        <button
+            onclick='window.open("/examlab_stool_culture_print?id={{$examlab_feca->admission_id}}", "width=800,height=650").print()'
+            class="btn btn-dark btn-solid"
+            title="Print Stool Culture">Print Stool Culture</button>
     </div>
 </div>
 <table width="100%" border="0" cellpadding="2"
