@@ -404,7 +404,9 @@
                                                 </td>
                                                 <td valign="bottom">
                                                     Signature of Applicant
-                                                    <img width="180px" style="border-bottom: 1px solid black;" src="{{ base64_decode($admission->patient->patient_signature) }}" alt="">
+                                                    <span style="border-bottom: 1px solid black;">
+                                                        <img width="180px" style="transform: translateY(25px);" src="{{ base64_decode($admission->patient->patient_signature) }}" alt="">
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>
