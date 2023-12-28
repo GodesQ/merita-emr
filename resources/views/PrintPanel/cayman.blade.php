@@ -405,7 +405,7 @@
                                                 <td valign="bottom">
                                                     Signature of Applicant
                                                     <span style="border-bottom: 1px solid black; z-index: 100;">
-                                                        <img width="180px" style="transform: translateY(25px);" src="{{ base64_decode($admission->patient->patient_signature) }}" alt="">
+                                                        <img width="180px" src="{{ base64_decode($admission->patient->patient_signature) }}" alt="">
                                                     </span>
                                                 </td>
                                             </tr>
@@ -414,7 +414,7 @@
                                                     <input type="text" style="border: none; border-bottom: 1px solid black;" value="{{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), 'F d, Y') : null }}"></td>
                                                 <td valign="bottom">
                                                     Medical Examiner
-                                                    <input type="text" style="border: none; border-bottom: 1px solid black; width: 220px; z-index: 100;" value="TERESITA F. GONZALES M.D.">
+                                                    <input type="text" style="border: none; border-bottom: 1px solid black; width: 220px; z-index: 100; position: relative;" value="TERESITA F. GONZALES M.D.">
                                                 </td>
                                             </tr>
                                         </tbody>
