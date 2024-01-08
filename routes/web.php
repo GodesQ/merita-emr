@@ -755,6 +755,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     // END OF CRUD DRUG
 
     // START OF CRUD FECALYSIS
+    Route::get('/examlab_stool_culture_print', [PrintController::class, 'exam_stool_culture'])->middleware(Laboratory::class);
     Route::get('/examlab_fecalysis_print', [PrintController::class, 'exam_fecalysis'])->middleware(Laboratory::class);
     Route::get('/edit_fecalysis', [FecalysisController::class, 'edit_fecalysis'])->middleware(Laboratory::class);
 
