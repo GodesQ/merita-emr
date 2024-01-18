@@ -1197,6 +1197,7 @@
                                         </div>
                                     </div>
                                 </section>
+                                </section>
                             </div>
                             <div role="tabpanel" class="tab-pane false" id="account-vertical-referral" aria-labelledby="account-pill-referral" aria-expanded="false">
                                 <div class="card">
