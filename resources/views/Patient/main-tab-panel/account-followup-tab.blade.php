@@ -23,7 +23,7 @@
                     class="btn btn-secondary text-white"><i class="fa fa-download"></i>
                     Download Follow Up Form</a>
             </div>
-        </div>  
+        </div>
         <hr>
         <div class="card-body">
             <ul class="nav nav-tabs" role="tablist">
@@ -54,8 +54,8 @@
                     <div class="tab-pane" id="fl{{ $key }}" role="tabpanel"
                         aria-labelledby="{{ $key }}">
                         <?php
-                            $findings = explode(';', $followup_record->findings);
-                            $recommendations = explode(';', $followup_record->remarks);
+                        $findings = explode(';', $followup_record->findings);
+                        $recommendations = explode(';', $followup_record->remarks);
                         ?>
                         <div class="my-1">
                             <button type="button" class="btn btn-danger delete-followup"
@@ -68,20 +68,20 @@
                                     <div class="row">
                                         @foreach ($findings as $finding)
                                             <div class="col-md-6 my-50">
-                                                <?php echo nl2br($finding) ?>
+                                                <?php echo nl2br($finding); ?>
                                             </div>
                                         @endforeach
                                         @if ($exam_ecg)
                                             @if ($exam_ecg->ecg == 'Significant Findings')
                                                 <div class="col-md-6 my-50">
-                                                    ECG: <?php echo nl2br($exam_ecg->remarks) ?>
+                                                    ECG: <?php echo nl2br($exam_ecg->remarks); ?>
                                                 </div>
                                             @endif
                                         @endif
                                         @if ($exam_xray)
                                             @if ($exam_xray->chest_remarks_status == 'findings')
                                                 <div class="col-md-6 my-50">
-                                                    Chest Xray: <?php echo nl2br($exam_xray->chest_findings) ?>
+                                                    Chest Xray: <?php echo nl2br($exam_xray->chest_findings); ?>
                                                 </div>
                                             @endif
                                         @endif
@@ -89,7 +89,7 @@
                                         @if ($exam_xray)
                                             @if ($exam_xray->lumbosacral_remarks_status == 'findings')
                                                 <div class="col-md-6 my-50">
-                                                    Lumbosacral Xray: <?php echo nl2br($exam_xray->lumbosacral_findings) ?>
+                                                    Lumbosacral Xray: <?php echo nl2br($exam_xray->lumbosacral_findings); ?>
                                                 </div>
                                             @endif
                                         @endif
@@ -98,7 +98,7 @@
                                             @if ($exam_xray->knees_remarks_status == 'findings')
                                                 <div class="col-md-6 my-50">
                                                     Knees Xray
-                                                    <?php echo nl2br($exam_xray->knees_findings) ?>
+                                                    <?php echo nl2br($exam_xray->knees_findings); ?>
                                                 </div>
                                             @endif
                                         @endif
