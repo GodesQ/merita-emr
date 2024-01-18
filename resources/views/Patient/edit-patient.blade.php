@@ -394,8 +394,6 @@
                                                                                 </li>
                                                                             @endif
 
-
-
                                                                         </ul>
                                                                         <div class="tab-content px-1">
                                                                             <div class="tab-pane child-basic-content"
@@ -1338,7 +1336,6 @@
                                                                 aria-selected="true">{{ date_format(new DateTime($followup_record->date), 'F d, Y') }}</a>
                                                         </li>
                                                     @endif
-
                                                 @empty
                                                 @endforelse
                                                 <li class="nav-item">
@@ -1486,7 +1483,7 @@
                                                                             id="patient-findings"
                                                                             aria-labelledby="patient-findings32"
                                                                             role="tabpanel">
-                                                                            @include(
+                                                                            {{-- @include(
                                                                                 'Patient.patient_findings',
                                                                                 [
                                                                                     $exam_audio,
@@ -1514,12 +1511,12 @@
                                                                                     $examlab_pregnancy,
                                                                                     $examlab_misc,
                                                                                 ]
-                                                                            )
+                                                                            ) --}}
                                                                         </div>
                                                                         <div class="tab-pane" id="patient-recommendations"
                                                                             aria-labelledby="patient-recommendations32"
                                                                             role="tabpanel">
-                                                                            @include(
+                                                                            {{-- @include(
                                                                                 'Patient.patient_recommendations',
                                                                                 [
                                                                                     $exam_audio,
@@ -1547,17 +1544,12 @@
                                                                                     $examlab_pregnancy,
                                                                                     $examlab_misc,
                                                                                 ]
-                                                                            )
+                                                                            ) --}}
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-4">
-                                                                <!-- <div class="container-fluid">
-                                                                <a href="" class="btn btn-solid btn-secondary">May 22, 2022</a>
-                                                                <a href="" class="btn btn-solid btn-secondary">May 22, 2022</a>
-                                                                <a href="" class="btn btn-solid btn-secondary">May 22, 2022</a>
-                                                            </div> -->
                                                                 <div class="container-fluid my-1">
                                                                     <div class="form-group">
                                                                         <label for=""
@@ -1589,16 +1581,8 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="tab-pane" id="tab3" role="tabpanel"
-                                                    aria-labelledby="base-tab3">
-                                                    <p>Biscuit ice cream halvah candy canes bear claw ice cream cake
-                                                        chocolate bar donut. Toffee cotton candy liquorice. Oat cake lemon
-                                                        drops gingerbread dessert caramels. Sweet dessert jujubes powder
-                                                        sweet sesame snaps.</p>
-                                                </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             @endif

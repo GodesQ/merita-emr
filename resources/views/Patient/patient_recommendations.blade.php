@@ -31,6 +31,7 @@
                     </div>
                 @endif
             @endif
+            
             @if ($exam_visacuity)
                 @if($exam_visacuity->remarks_status == 'findings' && $exam_visacuity->recommendation)
                 <div class="my-75">
