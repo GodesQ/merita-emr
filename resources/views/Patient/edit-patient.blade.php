@@ -70,7 +70,7 @@
                             @include('Patient.main-tab-panel.account-reschedule-tab')
 
                             @if ($admissionPatient)
-                                {{-- @include('Patient.main-tab-panel.account-followup-tab') --}}
+                                @include('Patient.main-tab-panel.account-followup-tab')
                             @endif
 
                             @if ($admissionPatient)
