@@ -852,6 +852,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane main-content" id="tabIcon36" role="tabpanel"
@@ -1190,7 +1191,6 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
