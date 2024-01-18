@@ -1195,6 +1195,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </section>
                             </div>
                             <div role="tabpanel" class="tab-pane false" id="account-vertical-referral" aria-labelledby="account-pill-referral" aria-expanded="false">
@@ -1596,8 +1597,8 @@
                                                         sweet sesame snaps.</p>
                                                 </div>
                                             </div>
-
                                         </div>
+                                        
                                     </div>
                                 </div>
                             @endif
@@ -2258,10 +2259,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
     <script>
         document.querySelector('#admission-btn').addEventListener('click', () => {
