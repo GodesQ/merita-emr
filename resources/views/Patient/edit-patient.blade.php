@@ -43,7 +43,6 @@
         .prescription-group {
             display: none;
         }
-
         .show-med {
             display: block !important;
         }
@@ -85,17 +84,15 @@
                                             <h3>Medical Records</h3>
                                             <div class="d-flex flex-wrap">
                                                 @foreach ($patientRecords as $record)
-                                                    <div class="my-50">
-                                                        @if ($patient->created_date != $record->created_date ? 'active' : null && session()->get('dept_id') == '1')
-                                                            <button type="button"
-                                                                class="btn btn-danger remove-patient-record-btn"
-                                                                id="{{ $record->id }}">Remove</button>
-                                                        @endif
-                                                        <button
-                                                            onclick="location.href = 'patient_edit?id={{ $record->id }}&patientcode={{ $record->patientcode }}'"
-                                                            class="btn btn-outline-secondary mr-1 {{ $patient->created_date == $record->created_date ? 'active' : null }}">
-                                                            {{ date_format(new DateTime($record->created_date), 'F d, Y h:i A') }}</button>
-                                                    </div>
+                                                        <div class="my-50">
+                                                            @if($patient->created_date != $record->created_date ? 'active' : null && session()->get('dept_id') == '1')
+                                                                <button type="button" class="btn btn-danger remove-patient-record-btn" id="{{ $record->id }}">Remove</button>
+                                                            @endif
+                                                            <button
+                                                                onclick="location.href = 'patient_edit?id={{ $record->id }}&patientcode={{ $record->patientcode }}'"
+                                                                class="btn btn-outline-secondary mr-1 {{ $patient->created_date == $record->created_date ? 'active' : null }}">
+                                                                {{ date_format(new DateTime($record->created_date), 'F d, Y h:i A') }}</button>
+                                                        </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -191,15 +188,12 @@
                                                         </div>
                                                         <div class="tab-pane main-content" id="tabIcon33" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab33">
-                                                            @include('Patient.medical_history', [
-                                                                $medicalHistory,
-                                                            ])
+                                                            @include('Patient.medical_history', [$medicalHistory])
                                                         </div>
                                                         <div class="tab-pane main-content" id="tabIcon34" role="tabpanel"
                                                             aria-labelledby="baseIcon-tab34">
                                                             @if ($declarationForm == null)
-                                                                <h3 class="text-center font-weight-regular my-2">No Record
-                                                                    Found</h3>
+                                                                <h3 class="text-center font-weight-regular my-2">No Record Found</h3>
                                                             @else
                                                                 @include('Patient.edit-patient-form.edit-patient-dec')
                                                             @endif
@@ -232,10 +226,7 @@
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_physical ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab9"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft9">Physical
-                                                                                        Exam
+                                                                                        id="baseVerticalLeft1-tab9" data-toggle="tab" href="#tabVerticalLeft9">Physical Exam
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -246,10 +237,7 @@
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_visacuity ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab16"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft16">Visual
-                                                                                        Acuity
+                                                                                        id="baseVerticalLeft1-tab16" data-toggle="tab" href="#tabVerticalLeft16">Visual Acuity
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -257,52 +245,41 @@
                                                                             @if (session()->get('dept_id') == '9' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_dental ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab4"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft4">Dental</a>
+                                                                                        id="baseVerticalLeft1-tab4" data-toggle="tab" href="#tabVerticalLeft4">Dental</a>
                                                                                 </li>
                                                                             @endif
 
                                                                             @if (session()->get('dept_id') == '5' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_psycho ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab10"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft10">Psychological</a>
+                                                                                        id="baseVerticalLeft1-tab10" data-toggle="tab" href="#tabVerticalLeft10">Psychological</a>
                                                                                 </li>
                                                                             @endif
 
-                                                                            @if (session()->get('dept_id') == '15' ||
-                                                                                    session()->get('dept_id') == '1' ||
-                                                                                    session()->get('dept_id') == '6' ||
+                                                                            @if (session()->get('dept_id') == '15' || session()->get('dept_id') == '1' ||session()->get('dept_id') == '6' ||
                                                                                     session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_audio ? 'exam-done' : null }}"
                                                                                         id="baseVerticalLeft1-tab1"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft1"
-                                                                                        href="#tabVerticalLeft1">Audiometry</a>
+                                                                                        href="#tabVerticalLeft1"
+                                                                                        >Audiometry</a>
                                                                                 </li>
                                                                             @endif
 
-                                                                            @if (session()->get('dept_id') == '14' ||
-                                                                                    session()->get('dept_id') == '1' ||
-                                                                                    session()->get('dept_id') == '8' ||
+                                                                            @if (session()->get('dept_id') == '14' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8' ||
                                                                                     session()->get('dept_id') == '6')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_ishihara ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab8"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft8">Ishihara</a>
+                                                                                        id="baseVerticalLeft1-tab8" data-toggle="tab" href="#tabVerticalLeft8">Ishihara</a>
                                                                                 </li>
                                                                             @endif
 
                                                                             @if (session()->get('dept_id') == '4' || session()->get('dept_id') == '1' || session()->get('dept_id') == '8')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_xray ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab18"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft18">X-Ray
+                                                                                        id="baseVerticalLeft1-tab18" data-toggle="tab" href="#tabVerticalLeft18">X-Ray
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -316,7 +293,8 @@
                                                                                         id="baseVerticalLeft1-tab5"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft5"
-                                                                                        href="#tabVerticalLeft5">ECG
+                                                                                        href="#tabVerticalLeft5"
+                                                                                        >ECG
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -331,7 +309,8 @@
                                                                                         id="baseVerticalLeft1-tab17"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft17"
-                                                                                        href="#tabVerticalLeft17">PPD TEST
+                                                                                        href="#tabVerticalLeft17"
+                                                                                        >PPD TEST
                                                                                     </a>
                                                                                 </li>
                                                                             @endif
@@ -343,16 +322,11 @@
                                                                                     session()->get('dept_id') == '7')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_crf ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab2"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft2">Cardiac
-                                                                                        Risk Factor / <br> Spirometry </a>
+                                                                                        id="baseVerticalLeft1-tab2" data-toggle="tab" href="#tabVerticalLeft2">Cardiac Risk Factor / <br> Spirometry </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_cardio ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab3"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft3">Cardiovascular</a>
+                                                                                        id="baseVerticalLeft1-tab3" data-toggle="tab" href="#tabVerticalLeft3">Cardiovascular</a>
                                                                                 </li>
                                                                             @endif
 
@@ -366,19 +340,14 @@
                                                                                     session()->get('dept_id') == '7')
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_echodoppler ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab6"
-                                                                                        data-toggle="tab"
-                                                                                        aria-controls="tabVerticalLeft6"
-                                                                                        href="#tabVerticalLeft6">
-                                                                                        2D Echo Doppler
+                                                                                        id="baseVerticalLeft1-tab6" data-toggle="tab" aria-controls="tabVerticalLeft6" href="#tabVerticalLeft6">
+                                                                                        2D Echo Doppler 
                                                                                     </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-basic-tab nav-link-width {{ $exam_echoplain ? 'exam-done' : null }}"
-                                                                                        id="baseVerticalLeft1-tab7"
-                                                                                        data-toggle="tab"
-                                                                                        href="#tabVerticalLeft7">
-                                                                                        2D Echo Plain
+                                                                                        id="baseVerticalLeft1-tab7" data-toggle="tab"  href="#tabVerticalLeft7">
+                                                                                        2D Echo Plain 
                                                                                     </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -386,7 +355,8 @@
                                                                                         id="baseVerticalLeft1-tab12"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft12"
-                                                                                        href="#tabVerticalLeft12">Stress
+                                                                                        href="#tabVerticalLeft12"
+                                                                                        >Stress
                                                                                         Echo </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -394,7 +364,8 @@
                                                                                         id="baseVerticalLeft1-tab13"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft13"
-                                                                                        href="#tabVerticalLeft13">Stress
+                                                                                        href="#tabVerticalLeft13"
+                                                                                        >Stress
                                                                                         Test </a>
                                                                                 </li>
                                                                             @endif
@@ -418,7 +389,8 @@
                                                                                         id="baseVerticalLeft1-tab14"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft14"
-                                                                                        href="#tabVerticalLeft14">Ultrasound</a>
+                                                                                        href="#tabVerticalLeft14"
+                                                                                        >Ultrasound</a>
                                                                                 </li>
                                                                             @endif
 
@@ -906,7 +878,8 @@
                                                                                         id="baseVerticalLeft1-tab25"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft25"
-                                                                                        href="#tabVerticalLeft25">Hematology
+                                                                                        href="#tabVerticalLeft25"
+                                                                                        >Hematology
                                                                                     </a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -914,21 +887,24 @@
                                                                                         id="baseVerticalLeft1-tab28"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft28"
-                                                                                        href="#tabVerticalLeft28">Urinalysis</a>
+                                                                                        href="#tabVerticalLeft28"
+                                                                                        >Urinalysis</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_pregnancy ? 'exam-done' : null }}"
                                                                                         id="baseVerticalLeft1-tab27"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft27"
-                                                                                        href="#tabVerticalLeft27">Pregnancy</a>
+                                                                                        href="#tabVerticalLeft27"
+                                                                                        >Pregnancy</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_feca ? 'exam-done' : null }}"
                                                                                         id="baseVerticalLeft1-tab24"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft24"
-                                                                                        href="#tabVerticalLeft24">Fecalysis</a>
+                                                                                        href="#tabVerticalLeft24"
+                                                                                        >Fecalysis</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width  {{ $exam_blood_serology ? 'exam-done' : null }}"
@@ -945,21 +921,24 @@
                                                                                         id="baseVerticalLeft1-tab26"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft26"
-                                                                                        href="#tabVerticalLeft26">Serology</a>
+                                                                                        href="#tabVerticalLeft26"
+                                                                                        >Serology</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_hiv ? 'exam-done' : null }}"
                                                                                         id="baseVerticalLeft1-tab22"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft22"
-                                                                                        href="#tabVerticalLeft22">HIV</a>
+                                                                                        href="#tabVerticalLeft22"
+                                                                                        >HIV</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
                                                                                     <a class="nav-link child-lab-tab nav-link-width {{ $examlab_drug ? 'exam-done' : null }}"
                                                                                         id="baseVerticalLeft1-tab23"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft23"
-                                                                                        href="#tabVerticalLeft23">Drug
+                                                                                        href="#tabVerticalLeft23"
+                                                                                        >Drug
                                                                                         Test</a>
                                                                                 </li>
                                                                                 <li class="nav-item vertical-tab-border">
@@ -967,7 +946,8 @@
                                                                                         id="baseVerticalLeft1-tab29"
                                                                                         data-toggle="tab"
                                                                                         aria-controls="tabVerticalLeft29"
-                                                                                        href="#tabVerticalLeft29">Miscellaneous</a>
+                                                                                        href="#tabVerticalLeft29"
+                                                                                        >Miscellaneous</a>
                                                                                 </li>
                                                                             </ul>
                                                                             <div class="tab-content px-1">
@@ -1216,17 +1196,15 @@
                                     </div>
                                 </section>
                             </div>
-                            <div role="tabpanel" class="tab-pane false" id="account-vertical-referral"
-                                aria-labelledby="account-pill-referral" aria-expanded="false">
+                            <div role="tabpanel" class="tab-pane false" id="account-vertical-referral" aria-labelledby="account-pill-referral" aria-expanded="false">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title" id="basic-layout-form">Edit Referral Slip</h4>
-                                        <a class="heading-elements-toggle"><i
-                                                class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     </div>
                                     <div class="card-content collapse show">
                                         <div class="card-body">
-                                            @if ($referral)
+                                            @if($referral)
                                                 @include('Referral.ReferralForms.edit-form')
                                             @else
                                                 <div class="h4 text-center">No Referral Slip Found</div>
@@ -1333,7 +1311,7 @@
                                                     <i class="fa fa-print"></i>
                                                     Print Follow Up Form
                                                 </a>
-
+                                                
                                                 <a onclick="window.open('/follow_up_print?id={{ $patient->id }}&admission_id={{ $admissionPatient->id }}&action=download')"
                                                     class="btn btn-secondary text-white"><i class="fa fa-download"></i>
                                                     Download Follow Up Form</a>
@@ -1467,7 +1445,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    @empty
+                                                    </div>
+                                                @empty
                                                 @endforelse
                                                 <div class="tab-pane active" id="new_followup1" role="tabpanel"
                                                     aria-labelledby="new_followup">
@@ -1589,8 +1568,7 @@
                                                                             class="form-control">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for=""
-                                                                            class="font-weight-bold">Date</label>
+                                                                        <label for="" class="font-weight-bold">Date</label>
                                                                         <input type="date" name="date"
                                                                             id="" value="{{ date('Y-m-d') }}"
                                                                             class="form-control">
@@ -1606,667 +1584,654 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div>
-                        @endif
-                        @if ($admissionPatient)
-                            <div class="tab-pane fade" id="account-vertical-social" role="tabpanel"
-                                aria-labelledby="account-pill-social" aria-expanded="false">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="col-md-7">
-                                                <div class="card-title">
-                                                    <h3>Uploaded Files</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                @foreach ($errors->all() as $error)
-                                                    @push('scripts')
-                                                        <script>
-                                                            let toaster = toastr.error('{{ $error }}', 'Error');
-                                                        </script>
-                                                    @endpush
-                                                @endforeach
-                                                <form action="/store_patient_files" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <input type="hidden" name="patient_id"
-                                                                value="{{ $patient->id }}">
-                                                            <input type="file" class="form-control" id="upload_files"
-                                                                name="upload_files[]" multiple />
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button class="btn btn-solid btn-primary">Upload</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            @if ($patient_upload_files)
-                                                @foreach ($patient_upload_files as $patient_upload_file)
-                                                    @if (pathinfo($patient_upload_file->file_name, PATHINFO_EXTENSION) == 'pdf')
-                                                        <div class="col-md-2">
-                                                            <div class="upload-con">
-                                                                <img src="../../../app-assets/images/pdf.png"
-                                                                    alt="">
-                                                                <div class="upload-btn-div">
-                                                                    <button type="button"
-                                                                        onclick="window.open('/app-assets/files/{{ $patient_upload_file->file_name }}')"
-                                                                        class="btn-print">View</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        <div class="col-md-2">
-                                                            <div class="upload-con">
-                                                                <img src="../../../app-assets/files/{{ $patient_upload_file->file_name }}"
-                                                                    alt="">
-                                                                <div class="upload-btn-div">
-                                                                    <button type="button"
-                                                                        onclick="window.open('/app-assets/files/{{ $patient_upload_file->file_name }}')"
-                                                                        class="btn-print">View</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4><b>CERTIFICATES</b></h4>
-                                        <div class="row container my-1">
-                                            <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                                <div class="print-con">
-                                                    <img src="../../../app-assets/images/gallery/mlc.png" alt="">
-                                                    <div class="print-btn-div">
-                                                        <button type="button"
-                                                            onclick="window.open('/mlc_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
-                                                            class="btn-print">Print MLC</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                                <div class="print-con">
-                                                    <img src="../../../app-assets/images/gallery/bahia.png"
-                                                        alt="">
-                                                    <div class="print-btn-div">
-                                                        <button type="button"
-                                                            onclick="window.open('/peme_bahia_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
-                                                            class="btn-print">Print PEME BAHIA</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-xl-3 col-sm-6 ">
-                                                <div class="print-con">
-                                                    <img src="../../../app-assets/images/gallery/mer.png" alt="">
-                                                    <div class="print-btn-div">
-                                                        <button type="button"
-                                                            onclick="window.open('/mer_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
-                                                            class="btn-print">Print MER</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h4><b>MEDICAL CERTIFICATE</b></h4>
-                                        @include('PrintPanel.print-panel')
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="tab-pane fade" id="account-vertical-info" role="tabpanel"
-                            aria-labelledby="account-pill-info" aria-expanded="false">
-                            @if ($admissionPatient)
-                                @include('Admission.edit-admission')
-                            @else
-                                @include('Admission.add-admission', [$patient, $patientInfo, $list_exams])
                             @endif
-                        </div>
-                        <div class="tab-pane fade" id="account-vaccination-record" role="tabpanel"
-                            aria-labelledby="account-vaccination-record" aria-expanded="false">
-                            @include('Patient.yellow_card', [$yellow_card_records])
+                            @if ($admissionPatient)
+                                <div class="tab-pane fade" id="account-vertical-social" role="tabpanel"
+                                    aria-labelledby="account-pill-social" aria-expanded="false">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="card-title">
+                                                        <h3>Uploaded Files</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @foreach ($errors->all() as $error)
+                                                        @push('scripts')
+                                                            <script>
+                                                                let toaster = toastr.error('{{ $error }}', 'Error');
+                                                            </script>
+                                                        @endpush
+                                                    @endforeach
+                                                    <form action="/store_patient_files" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <input type="hidden" name="patient_id"
+                                                                    value="{{ $patient->id }}">
+                                                                <input type="file" class="form-control"
+                                                                    id="upload_files" name="upload_files[]" multiple />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn btn-solid btn-primary">Upload</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @if ($patient_upload_files)
+                                                    @foreach ($patient_upload_files as $patient_upload_file)
+                                                        @if (pathinfo($patient_upload_file->file_name, PATHINFO_EXTENSION) == 'pdf')
+                                                            <div class="col-md-2">
+                                                                <div class="upload-con">
+                                                                    <img src="../../../app-assets/images/pdf.png"
+                                                                        alt="">
+                                                                    <div class="upload-btn-div">
+                                                                        <button type="button"
+                                                                            onclick="window.open('/app-assets/files/{{ $patient_upload_file->file_name }}')"
+                                                                            class="btn-print">View</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="col-md-2">
+                                                                <div class="upload-con">
+                                                                    <img src="../../../app-assets/files/{{ $patient_upload_file->file_name }}"
+                                                                        alt="">
+                                                                    <div class="upload-btn-div">
+                                                                        <button type="button"
+                                                                            onclick="window.open('/app-assets/files/{{ $patient_upload_file->file_name }}')"
+                                                                            class="btn-print">View</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4><b>CERTIFICATES</b></h4>
+                                            <div class="row container my-1">
+                                                <div class="col-lg-4 col-xl-3 col-sm-6 ">
+                                                    <div class="print-con">
+                                                        <img src="../../../app-assets/images/gallery/mlc.png"
+                                                            alt="">
+                                                        <div class="print-btn-div">
+                                                            <button type="button"
+                                                                onclick="window.open('/mlc_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
+                                                                class="btn-print">Print MLC</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-xl-3 col-sm-6 ">
+                                                    <div class="print-con">
+                                                        <img src="../../../app-assets/images/gallery/bahia.png"
+                                                            alt="">
+                                                        <div class="print-btn-div">
+                                                            <button type="button"
+                                                                onclick="window.open('/peme_bahia_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
+                                                                class="btn-print">Print PEME BAHIA</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-xl-3 col-sm-6 ">
+                                                    <div class="print-con">
+                                                        <img src="../../../app-assets/images/gallery/mer.png"
+                                                            alt="">
+                                                        <div class="print-btn-div">
+                                                            <button type="button"
+                                                                onclick="window.open('/mer_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
+                                                                class="btn-print">Print MER</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4><b>MEDICAL CERTIFICATE</b></h4>
+                                            @include('PrintPanel.print-panel')
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="tab-pane fade" id="account-vertical-info" role="tabpanel"
+                                aria-labelledby="account-pill-info" aria-expanded="false">
+                                @if ($admissionPatient)
+                                    @include('Admission.edit-admission')
+                                @else
+                                    @include('Admission.add-admission', [
+                                        $patient,
+                                        $patientInfo,
+                                        $list_exams,
+                                    ])
+                                @endif
+                            </div>
+                            <div class="tab-pane fade" id="account-vaccination-record" role="tabpanel"
+                                aria-labelledby="account-vaccination-record" aria-expanded="false">
+                                @include('Patient.yellow_card', [$yellow_card_records])
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 order-lg-1 order-xl-2 order-sm-1 order-xs-1 col-lg-12 position-relative">
-                    <div class="row p-50 rounded" style="background: #091a3b">
-                        <div class="col-lg-3 col-md-4 col-xl-12">
-                            <div class="row my-1">
-                                <div
-                                    class="col-md-12 col-xl-5 col-lg-12 d-xl-flex align-items-center justify-content-center">
-                                    <button class="btn btn-solid p-0 open-camera" onclick="openCamera()">
-                                        @if (
-                                            $patient->patient_image == null ||
-                                                $patient->patient_image == '' ||
-                                                !file_exists(public_path('app-assets/images/profiles/') . $patient->patient_image))
-                                            <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                alt="Profile Picture" data-toggle="modal" data-target="#defaultSize"
-                                                class="users-avatar-shadow rounded" height="110" width="110">
-                                        @else
-                                            <img src="../../../app-assets/images/profiles/{{ $patient->patient_image . '?' . $patient->updated_date }}"
-                                                data-toggle="modal" data-target="#defaultSize" alt="Profile Picture"
-                                                class="users-avatar-shadow" height="110" width="110">
-                                        @endif
-                                    </button>
-                                </div>
-                                <div class="col-md-12 col-xl-6 col-lg-12 mx-50">
-                                    <div class="pt-25">
-                                        <div class="d-flex justify-content-start align-items-end my-25">
-                                            @if ($patient->patient_signature)
-                                                <img src="@php echo base64_decode($patient->patient_signature) @endphp"
-                                                    class="signature-taken" style="position: relative !important;" />
-                                            @elseif ($patient->signature)
-                                                <img src="data:image/jpeg;base64,{{ $patient->signature }}"
-                                                    class="signature-taken" />
+                    <div class="col-xl-3 order-lg-1 order-xl-2 order-sm-1 order-xs-1 col-lg-12 position-relative">
+                        <div class="row p-50 rounded" style="background: #091a3b">
+                            <div class="col-lg-3 col-md-4 col-xl-12">
+                                <div class="row my-1">
+                                    <div
+                                        class="col-md-12 col-xl-5 col-lg-12 d-xl-flex align-items-center justify-content-center">
+                                        <button class="btn btn-solid p-0 open-camera" onclick="openCamera()">
+                                            @if (
+                                                $patient->patient_image == null ||
+                                                    $patient->patient_image == '' ||
+                                                    !file_exists(public_path('app-assets/images/profiles/') . $patient->patient_image))
+                                                <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                    alt="Profile Picture" data-toggle="modal" data-target="#defaultSize"
+                                                    class="users-avatar-shadow rounded" height="110" width="110">
                                             @else
-                                                <div style="width: 150px;height: 40px;" class="bg-white rounded">
-                                                </div>
+                                                <img src="../../../app-assets/images/profiles/{{ $patient->patient_image . '?' . $patient->updated_date }}"
+                                                    data-toggle="modal" data-target="#defaultSize" alt="Profile Picture"
+                                                    class="users-avatar-shadow" height="110" width="110">
                                             @endif
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 col-xl-6 col-lg-12 mx-50">
+                                        <div class="pt-25">
+                                            <div class="d-flex justify-content-start align-items-end my-25">
+                                                @if ($patient->patient_signature)
+                                                    <img src="@php echo base64_decode($patient->patient_signature) @endphp"
+                                                        class="signature-taken" style="position: relative !important;" />
+                                                @elseif ($patient->signature)
+                                                    <img src="data:image/jpeg;base64,{{ $patient->signature }}"
+                                                        class="signature-taken" />
+                                                @else
+                                                    <div style="width: 150px;height: 40px;" class="bg-white rounded">
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="mb-50">
+                                                <a href="/patient_edit/crop_signature?patient_id={{ $patient->id }}"
+                                                    style="" class="btn btn-primary btn-sm">
+                                                    Edit Signature <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </div>
+                                            <div> <span class="text-white font-weight-bold">
+                                                    {{ $patient->firstname . ' ' . $patient->lastname }}
+                                                </span>
+                                            </div>
+                                            <div class="users-view-id text-white">PATIENT ID: {{ $patient->patientcode }}
+                                            </div>
+                                            <div class="text-white">ADMISSION ID: {{ $admissionPatient ? $admissionPatient->id : "N / A" }}</div>
                                         </div>
-                                        <div class="mb-50">
-                                            <a href="/patient_edit/crop_signature?patient_id={{ $patient->id }}"
-                                                style="" class="btn btn-primary btn-sm">
-                                                Edit Signature <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </div>
-                                        <div> <span class="text-white font-weight-bold">
-                                                {{ $patient->firstname . ' ' . $patient->lastname }}
-                                            </span>
-                                        </div>
-                                        <div class="users-view-id text-white">PATIENT ID: {{ $patient->patientcode }}
-                                        </div>
-                                        <div class="text-white">ADMISSION ID:
-                                            {{ $admissionPatient ? $admissionPatient->id : 'N / A' }}</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xl-12 mt-sm-2">
-                            <ul class="nav nav-pills flex-column mt-md-0 mt-1">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white active" id="account-pill-general"
-                                        data-toggle="pill" href="#account-vertical-general" aria-expanded="true">
-                                        <i class="feather icon-globe"></i>
-                                        General Info
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white" id="account-pill-referral" data-toggle="pill"
-                                        href="#account-vertical-referral" aria-expanded="false">
-                                        <i class="feather icon-file"></i>
-                                        Referral Info
-                                    </a>
-                                </li>
-                                @if ($admissionPatient)
+                            <div class="col-lg-4 col-md-4 col-xl-12 mt-sm-2">
+                                <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                                     <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-invoice"
-                                            data-toggle="pill" href="#account-invoice" aria-expanded="false">
-                                            <i class="fa fa-money"></i>
-                                            {{ $patient_or ? 'Edit Payment' : 'Generate Payment' }}
+                                        <a class="nav-link d-flex text-white active" id="account-pill-general"
+                                            data-toggle="pill" href="#account-vertical-general" aria-expanded="true">
+                                            <i class="feather icon-globe"></i>
+                                            General Info
                                         </a>
                                     </li>
-                                @endif
-                                @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '17')
-                                    @if ($latest_schedule)
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-pill-referral"
+                                            data-toggle="pill" href="#account-vertical-referral" aria-expanded="false">
+                                            <i class="feather icon-file"></i>
+                                            Referral Info
+                                        </a>
+                                    </li>
+                                    @if ($admissionPatient)
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex text-white" id="account-pill-password"
-                                                data-toggle="pill" href="#account-vertical-password"
-                                                aria-expanded="false">
-                                                <i class="feather icon-calendar"></i>
-                                                Re Schedule
+                                            <a class="nav-link d-flex text-white" id="account-pill-invoice"
+                                                data-toggle="pill" href="#account-invoice" aria-expanded="false">
+                                                <i class="fa fa-money"></i>
+                                                {{ $patient_or ? 'Edit Payment' : 'Generate Payment' }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '17')
+                                        @if ($latest_schedule)
+                                            <li class="nav-item">
+                                                <a class="nav-link d-flex text-white" id="account-pill-password"
+                                                    data-toggle="pill" href="#account-vertical-password"
+                                                    aria-expanded="false">
+                                                    <i class="feather icon-calendar"></i>
+                                                    Re Schedule
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link d-flex text-white" id="account-pill-password"
+                                                    data-toggle="pill" href="#account-vertical-password"
+                                                    aria-expanded="false">
+                                                    <i class="feather icon-calendar"></i>
+                                                    Add Schedule
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
+                                    @if ($admissionPatient)
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-info"
+                                                data-toggle="pill" aria-expanded="false" href="#account-vertical-info">
+                                                <i class="feather icon-edit"></i>
+                                                Edit Admission
                                             </a>
                                         </li>
                                     @else
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex text-white" id="account-pill-password"
-                                                data-toggle="pill" href="#account-vertical-password"
+                                            <a class="nav-link d-flex text-white" id="account-pill-info"
+                                                data-toggle="pill" aria-expanded="false" href="#account-vertical-info">
+                                                <i class="feather icon-edit"></i>
+                                                Add Admission
+                                            </a>
+                                        </li>
+                                    @endif
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-vaccination-record"
+                                            data-toggle="pill" aria-expanded="false" href="#account-vaccination-record">
+                                            <i class="feather icon-edit"></i>
+                                            Yellow Card
+                                        </a>
+                                    </li>
+                                    @if ($admissionPatient)
+                                        @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '7')
+                                            <li class="nav-item">
+                                                <a class="nav-link d-flex text-white" id="account-pill-follow"
+                                                    data-toggle="pill" href="#account-vertical-follow"
+                                                    aria-expanded="false">
+                                                    <i class="fa fa-arrow-circle-left"></i>
+                                                    Follow Up Form
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
+                                    @if ($admissionPatient)
+                                        @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
+                                            <li class="nav-item">
+                                                <a class="nav-link d-flex text-white" id="account-pill-social"
+                                                    data-toggle="pill" href="#account-vertical-social"
+                                                    aria-expanded="false">
+                                                    <i class="fa fa-print"></i>
+                                                    Print Panel
+                                                </a>
+                                            </li>
+                                        @endif
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                                data-toggle="pill"
+                                                onclick="window.open('/admission_print?id={{ $admissionPatient->id }}').print()"
                                                 aria-expanded="false">
-                                                <i class="feather icon-calendar"></i>
-                                                Add Schedule
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endif
-                                @if ($admissionPatient)
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
-                                            aria-expanded="false" href="#account-vertical-info">
-                                            <i class="feather icon-edit"></i>
-                                            Edit Admission
-                                        </a>
-                                    </li>
-                                @else
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-info" data-toggle="pill"
-                                            aria-expanded="false" href="#account-vertical-info">
-                                            <i class="feather icon-edit"></i>
-                                            Add Admission
-                                        </a>
-                                    </li>
-                                @endif
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white" id="account-vaccination-record"
-                                        data-toggle="pill" aria-expanded="false" href="#account-vaccination-record">
-                                        <i class="feather icon-edit"></i>
-                                        Yellow Card
-                                    </a>
-                                </li>
-                                @if ($admissionPatient)
-                                    @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '7')
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex text-white" id="account-pill-follow"
-                                                data-toggle="pill" href="#account-vertical-follow" aria-expanded="false">
-                                                <i class="fa fa-arrow-circle-left"></i>
-                                                Follow Up Form
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endif
-                                @if ($admissionPatient)
-                                    @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex text-white" id="account-pill-social"
-                                                data-toggle="pill" href="#account-vertical-social" aria-expanded="false">
                                                 <i class="fa fa-print"></i>
-                                                Print Panel
+                                                Print Routing Slip
                                             </a>
                                         </li>
                                     @endif
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
-                                            onclick="window.open('/admission_print?id={{ $admissionPatient->id }}').print()"
-                                            aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Routing Slip
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (session()->get('dept_id') == '1')
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
-                                            onclick="window.open('/referral_pdf?email={{ $patient->email }}').print()"
-                                            aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Referral Slip
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '17' || session()->get('dept_id') == '8')
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
-                                            onclick="window.open('/requests_print?id={{ $patientInfo->medical_package }}&patient_id={{ $patient->id }}').print()"
-                                            aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Requests
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (
-                                    ($admissionPatient && session()->get('dept_id') == '1') ||
-                                        session()->get('dept_id') == '3' ||
-                                        session()->get('dept_id') == '8')
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
-                                            onclick="window.open('/lab_result?id={{ $admissionPatient ? $admissionPatient->id : 0 }}','wp','width=1000,height=800').print();"
-                                            aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Lab Result
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if ($admissionPatient)
-                                    <li class="nav-item">
-                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                            data-toggle="pill"
-                                            onclick="window.open('/medical_record?id={{ $admissionPatient ? $admissionPatient->id : 0 }}&patient_id={{ $patient->id }}','wp','width=1000,height=800').print();"
-                                            aria-expanded="false">
-                                            <i class="fa fa-print"></i>
-                                            Print Medical History
-                                        </a>
-                                    </li>
-                                @endif
-
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex text-white" id="account-pill-connections"
-                                        data-toggle="pill"
-                                        onclick="window.open('/data_privacy_print?id={{ $patient->id }}').print()"
-                                        aria-expanded="false">
-                                        <i class="fa fa-print"></i>
-                                        Print Data Privacy Form
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        @if ($admissionPatient)
-                            <div class="col-lg-5 col-md-4 col-xl-12 my-1">
-                                <h5 class="text-white">MEDICAL STATUS:
-                                    <span><b>
-                                            @if ($admissionPatient->lab_status == 2)
-                                                <b><u>FIT TO WORK</u></b>
-                                            @elseif ($admissionPatient->lab_status == 1)
-                                                <b><u>FINDINGS / RE ASSESSMENT</u></b>
-                                            @elseif ($admissionPatient->lab_status == 3)
-                                                <b><u>UNFIT TO WORK</u></b>
-                                            @elseif ($admissionPatient->lab_status == 4)
-                                                <b><u>UNFIT TEMPORARILY</u></b>
-                                            @endif
-                                        </b></span>
-                                </h5>
-                                <div class="my-1">
-                                    <button type="button"
-                                        class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 1 ? 'active' : null }}"
-                                        data-toggle="modal" data-target="#medicalStatusModal"
-                                        id="pending_medical_status_btn" data-status="pending">
-                                        PENDING
-                                    </button>
-                                    <button type="button"
-                                        class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 2 ? 'active' : null }}"
-                                        data-toggle="modal" data-target="#medicalStatusModal"
-                                        id="fit_medical_status_btn" data-status="fit">
-                                        FIT
-                                    </button>
-                                    <button type="button"
-                                        class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 3 ? 'active' : null }}"
-                                        data-toggle="modal" data-target="#medicalStatusModal"
-                                        id="unfit_medical_status_btn" data-status="unfit">
-                                        UNFIT
-                                    </button>
-                                    <button type="button"
-                                        class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 4 ? 'active' : null }}"
-                                        data-toggle="modal" data-target="#medicalStatusModal"
-                                        id="unfit_temp_medical_status_btn" data-status="unfit_temp">
-                                        UNFIT TEMP
-                                    </button>
-                                    @if ($admissionPatient->lab_status)
-                                        <button class="btn btn-outline-warning medical-status-btn"
-                                            id="reset-medical-status-btn">Reset</button>
+                                    @if (session()->get('dept_id') == '1')
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                                data-toggle="pill"
+                                                onclick="window.open('/referral_pdf?email={{ $patient->email }}').print()"
+                                                aria-expanded="false">
+                                                <i class="fa fa-print"></i>
+                                                Print Referral Slip
+                                            </a>
+                                        </li>
                                     @endif
-                                </div>
-                                <div class="modal fade text-left" id="medicalStatusModal" role="dialog"
-                                    aria-labelledby="modalStatusFormLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content ">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="modalStatusFormLabel">
-                                                    Medical Status
-                                                </h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="d-flex justify-content-end align-items-center">
-                                                    <button class="btn btn-primary add_new_medical_result_btn">Add New
-                                                        Medical Result</button>
+                                    @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '17' || session()->get('dept_id') == '8')
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                                data-toggle="pill"
+                                                onclick="window.open('/requests_print?id={{ $patientInfo->medical_package }}&patient_id={{ $patient->id }}').print()"
+                                                aria-expanded="false">
+                                                <i class="fa fa-print"></i>
+                                                Print Requests
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (
+                                        ($admissionPatient && session()->get('dept_id') == '1') ||
+                                            session()->get('dept_id') == '3' ||
+                                            session()->get('dept_id') == '8')
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                                data-toggle="pill"
+                                                onclick="window.open('/lab_result?id={{ $admissionPatient ? $admissionPatient->id : 0 }}','wp','width=1000,height=800').print();"
+                                                aria-expanded="false">
+                                                <i class="fa fa-print"></i>
+                                                Print Lab Result
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if ($admissionPatient)
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                                data-toggle="pill"
+                                                onclick="window.open('/medical_record?id={{ $admissionPatient ? $admissionPatient->id : 0 }}&patient_id={{ $patient->id }}','wp','width=1000,height=800').print();"
+                                                aria-expanded="false">
+                                                <i class="fa fa-print"></i>
+                                                Print Medical History
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    <li class="nav-item">
+                                        <a class="nav-link d-flex text-white" id="account-pill-connections"
+                                            data-toggle="pill"
+                                            onclick="window.open('/data_privacy_print?id={{ $patient->id }}').print()"
+                                            aria-expanded="false">
+                                            <i class="fa fa-print"></i>
+                                            Print Data Privacy Form
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @if ($admissionPatient)
+                                <div class="col-lg-5 col-md-4 col-xl-12 my-1">
+                                    <h5 class="text-white">MEDICAL STATUS:
+                                        <span><b>
+                                                @if ($admissionPatient->lab_status == 2)
+                                                    <b><u>FIT TO WORK</u></b>
+                                                @elseif ($admissionPatient->lab_status == 1)
+                                                    <b><u>FINDINGS / RE ASSESSMENT</u></b>
+                                                @elseif ($admissionPatient->lab_status == 3)
+                                                    <b><u>UNFIT TO WORK</u></b>
+                                                @elseif ($admissionPatient->lab_status == 4)
+                                                    <b><u>UNFIT TEMPORARILY</u></b>
+                                                @endif
+                                            </b></span>
+                                    </h5>
+                                    <div class="my-1">
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 1 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="pending_medical_status_btn" data-status="pending">
+                                            PENDING
+                                        </button>
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 2 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="fit_medical_status_btn" data-status="fit">
+                                            FIT
+                                        </button>
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 3 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="unfit_medical_status_btn" data-status="unfit">
+                                            UNFIT
+                                        </button>
+                                        <button type="button"
+                                            class="medical-status-btn btn btn-sm p-75 m-25 text-white btn-outline-primary {{ $admissionPatient->lab_status == 4 ? 'active' : null }}"
+                                            data-toggle="modal" data-target="#medicalStatusModal" id="unfit_temp_medical_status_btn" data-status="unfit_temp">
+                                            UNFIT TEMP
+                                        </button>
+                                        @if ($admissionPatient->lab_status)
+                                            <button class="btn btn-outline-warning medical-status-btn"
+                                                id="reset-medical-status-btn">Reset</button>
+                                        @endif
+                                    </div>
+                                    <div class="modal fade text-left" id="medicalStatusModal" role="dialog" aria-labelledby="modalStatusFormLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content ">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="modalStatusFormLabel">
+                                                        Medical Status
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3">
-                                                        <div class="d-flex justify-content-center align-items-center flex-column"
-                                                            style="gap: 10px;">
-                                                            @if (count($patient_medical_results) > 0)
-                                                                @foreach ($patient_medical_results as $medical_result)
-                                                                    <div>
-                                                                        <button
-                                                                            class="btn btn-outline-primary medical_result_btn"
-                                                                            id="{{ $medical_result->id }}">
-                                                                            {{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}
-                                                                            <br>
-                                                                            @if ($medical_result->status == 2)
-                                                                                (FIT TO WORK)
-                                                                            @elseif ($medical_result->status == 1)
-                                                                                (RE ASSESSMENT)
-                                                                            @elseif ($medical_result->status == 3)
-                                                                                (UNFIT TO WORK)
-                                                                            @elseif ($medical_result->status == 4)
-                                                                                (UNFIT TEMPORARILY)
-                                                                            @endif
-                                                                        </button>
-                                                                        <button
-                                                                            class="btn btn-sm btn-danger btn-block remove_medical_result_btn"
-                                                                            data-id="{{ $medical_result->id }}">Remove</button>
-                                                                    </div>
-                                                                @endforeach
-                                                            @else
-                                                                <h6>No Medical Result</h6>
-                                                            @endif
-                                                        </div>
+                                                <div class="modal-body">
+                                                    <div class="d-flex justify-content-end align-items-center">
+                                                        <button class="btn btn-primary add_new_medical_result_btn">Add New Medical Result</button>
                                                     </div>
-                                                    <div class="col-lg-9">
-                                                        <form id="update_lab_result_pending" action="#"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label class="form-label">Lab Status Name</label>
-                                                                <input type="text" name="lab_status_name"
-                                                                    class="form-control" id="lab_status_name" readonly>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="d-flex justify-content-center align-items-center flex-column" style="gap: 10px;">
+                                                                @if(count($patient_medical_results) > 0)
+                                                                    @foreach ($patient_medical_results as $medical_result)
+                                                                        <div>
+                                                                            <button class="btn btn-outline-primary medical_result_btn" id="{{ $medical_result->id }}">
+                                                                                {{ date_format(new DateTime($medical_result->generate_at), 'M d, Y') }}
+                                                                                <br> 
+                                                                                @if ($medical_result->status == 2)
+                                                                                    (FIT TO WORK)
+                                                                                @elseif ($medical_result->status == 1)
+                                                                                    (RE ASSESSMENT)
+                                                                                @elseif ($medical_result->status == 3)
+                                                                                    (UNFIT TO WORK)
+                                                                                @elseif ($medical_result->status == 4)
+                                                                                    (UNFIT TEMPORARILY)
+                                                                                @endif
+                                                                            </button>
+                                                                            <button class="btn btn-sm btn-danger btn-block remove_medical_result_btn" data-id="{{ $medical_result->id }}">Remove</button>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <h6>No Medical Result</h6>
+                                                                @endif
                                                             </div>
-                                                            <input type="hidden" name="lab_status" value="1"
-                                                                id="lab_status">
-                                                            <input type="hidden" name="patientId"
-                                                                value="{{ $patient->id }}">
-                                                            <input type="hidden" name="medical_result_id"
-                                                                id="medical_result_id">
-                                                            <input type="hidden" name="agency_id"
-                                                                value="{{ $patientInfo->agency_id }}">
-                                                            <input type="hidden" name="id"
-                                                                value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
-                                                            <div class="form-group">
-                                                                <label for="">Generate at:
-                                                                    <span style="font-size: 12px;" class="primary">This
-                                                                        is the date when you submitted this form. </span>
-                                                                </label>
-                                                                <input type="date" class="form-control"
-                                                                    name="generate_at" id="medical_result_generate_at">
-                                                            </div>
-                                                            <div class="form-group schedule_group">
-                                                                <label>Re Schedule</label>
-                                                                <input class="form-control" type="date"
-                                                                    name="schedule" id="schedule" />
-                                                            </div>
-                                                            {{-- <div class="form-group unfit_date_group">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <form id="update_lab_result_pending" action="#" method="POST">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Lab Status Name</label>
+                                                                    <input type="text" name="lab_status_name" class="form-control" id="lab_status_name" readonly>
+                                                                </div>
+                                                                <input type="hidden" name="lab_status"
+                                                                    value="1" id="lab_status">
+                                                                <input type="hidden" name="patientId"
+                                                                    value="{{ $patient->id }}">
+                                                                <input type="hidden" name="medical_result_id" id="medical_result_id">
+                                                                <input type="hidden" name="agency_id"
+                                                                    value="{{ $patientInfo->agency_id }}">
+                                                                <input type="hidden" name="id"
+                                                                    value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
+                                                                <div class="form-group">
+                                                                    <label for="">Generate at: 
+                                                                        <span style="font-size: 12px;" class="primary">This is the date when you submitted this form. </span>
+                                                                    </label>
+                                                                    <input type="date" class="form-control" name="generate_at" id="medical_result_generate_at">
+                                                                </div>
+                                                                <div class="form-group schedule_group">
+                                                                    <label>Re Schedule</label>
+                                                                    <input class="form-control" type="date"
+                                                                        name="schedule" id="schedule" />
+                                                                </div>
+                                                                {{-- <div class="form-group unfit_date_group">
                                                                     <label>Unfit Date</label>
                                                                     <input class="form-control"
                                                                         value="{{ $patient->unfit_to_work_date }}"
                                                                         type="date" name="unfit_date" id="unfit_date" />
                                                                 </div> --}}
-                                                            <div class="form-group medical_result_remarks_group">
-                                                                <label for="medical_result_remarks"
-                                                                    id="remarks-label">Remarks:</label>
-                                                                <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control">{{ $patient->admission->remarks ?? null }}</textarea>
-                                                            </div>
-                                                            <div class="form-group medical_result_prescription_group">
-                                                                <label
-                                                                    for="medical_result_prescription">Prescription:</label>
-                                                                <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10"
-                                                                    class="form-control">{{ $patient->admission->prescription ?? null }}</textarea>
-                                                            </div>
-                                                            <div class="form-group doctor_prescription_group">
-                                                                <label for="doctor_prescription">Doctor
-                                                                    Prescription</label>
-                                                                <select required name="doctor_prescription"
-                                                                    id="doctor_prescription" class="select2">
-                                                                    @foreach ($doctors as $doctor)
-                                                                        <option value="{{ $doctor->id }}">
-                                                                            {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <input type="reset"
-                                                                    class="btn btn-outline-secondary btn-lg"
-                                                                    data-dismiss="modal" value="close">
-                                                                <button
-                                                                    {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
-                                                                    type='submit'
-                                                                    class='submit-pending btn btn-primary btn-lg'>Submit</button>
-                                                            </div>
-                                                        </form>
+                                                                <div class="form-group medical_result_remarks_group">
+                                                                    <label for="medical_result_remarks" id="remarks-label">Remarks:</label>
+                                                                    <textarea name="remarks" id="medical_result_remarks" cols="30" rows="10" class="form-control">{{ $patient->admission->remarks ?? null }}</textarea>
+                                                                </div>
+                                                                <div class="form-group medical_result_prescription_group">
+                                                                    <label for="medical_result_prescription">Prescription:</label>
+                                                                    <textarea name="prescription" id="medical_result_prescription" cols="30" rows="10" class="form-control">{{ $patient->admission->prescription ?? null }}</textarea>
+                                                                </div>
+                                                                <div class="form-group doctor_prescription_group">
+                                                                    <label for="doctor_prescription">Doctor Prescription</label>
+                                                                    <select required name="doctor_prescription"
+                                                                        id="doctor_prescription" class="select2">
+                                                                        @foreach ($doctors as $doctor)
+                                                                            <option value="{{ $doctor->id }}">
+                                                                                {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="reset"
+                                                                        class="btn btn-outline-secondary btn-lg"
+                                                                        data-dismiss="modal" value="close">
+                                                                    <button
+                                                                        {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
+                                                                        type='submit'
+                                                                        class='submit-pending btn btn-primary btn-lg'>Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel33" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <label class="modal-title text-text-bold-600"
-                                                    id="myModalLabel33">Laboratory Result</label>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel33" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <label class="modal-title text-text-bold-600" id="myModalLabel33">Laboratory Result</label>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form id="update_lab_result_reassessment" action="#"
+                                                    method="POST">
+                                                    @csrf
+                                                    @include('Patient.patient_findings', [
+                                                        $exam_audio,
+                                                        $exam_cardio,
+                                                        $exam_ecg,
+                                                        $exam_echodoppler,
+                                                        $exam_echoplain,
+                                                        $exam_ishihara,
+                                                        $exam_psycho,
+                                                        $exam_physical,
+                                                        $exam_psychobpi,
+                                                        $exam_stressecho,
+                                                        $exam_stresstest,
+                                                        $exam_ultrasound,
+                                                        $exam_dental,
+                                                        $exam_xray,
+                                                        $exam_blood_serology,
+                                                        $examlab_hiv,
+                                                        $examlab_drug,
+                                                        $examlab_feca,
+                                                        $examlab_hema,
+                                                        $examlab_hepa,
+                                                        $examlab_urin,
+                                                        $examlab_pregnancy,
+                                                        $examlab_misc,
+                                                    ])
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="lab_status" value="1">
+                                                        <input type="hidden" name="patientId"
+                                                            value="{{ $patient->id }}">
+                                                        <input type="hidden" name="agency_id"
+                                                            value="{{ $patientInfo->agency_id }}">
+                                                        <input type="hidden" name="id"
+                                                            value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
+                                                        <input type="hidden" name="schedule_id"
+                                                            value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
+                                                        <div class="form-group">
+                                                            <label for="">Remarks/Recommendations:</label>
+                                                            <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $admissionPatient ? $admissionPatient->remarks : null @endphp</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Next Schedule Date: </label>
+                                                            <input type="date" max="2050-12-31" name="schedule"
+                                                                class="form-control"
+                                                                value="{{ $latest_schedule ? $latest_schedule->date : null }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Doctor Prescription</label>
+                                                            <select required name="doctor_prescription" id=""
+                                                                class="select2">
+                                                                @foreach ($doctors as $doctor)
+                                                                    <option value="{{ $doctor->id }}">
+                                                                        {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Prescription</label>
+                                                            <textarea name="prescription" id="" cols="30" rows="7" class="form-control">{{ $admissionPatient ? $admissionPatient->prescription : '' }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="reset" class="btn btn-outline-secondary btn-lg"
+                                                            data-dismiss="modal" value="close">
+                                                        <button {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
+                                                            type='submit'
+                                                            class='submit-reassessment btn btn-primary btn-lg'>Submit</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <form id="update_lab_result_reassessment" action="#" method="POST">
-                                                @csrf
-                                                @include('Patient.patient_findings', [
-                                                    $exam_audio,
-                                                    $exam_cardio,
-                                                    $exam_ecg,
-                                                    $exam_echodoppler,
-                                                    $exam_echoplain,
-                                                    $exam_ishihara,
-                                                    $exam_psycho,
-                                                    $exam_physical,
-                                                    $exam_psychobpi,
-                                                    $exam_stressecho,
-                                                    $exam_stresstest,
-                                                    $exam_ultrasound,
-                                                    $exam_dental,
-                                                    $exam_xray,
-                                                    $exam_blood_serology,
-                                                    $examlab_hiv,
-                                                    $examlab_drug,
-                                                    $examlab_feca,
-                                                    $examlab_hema,
-                                                    $examlab_hepa,
-                                                    $examlab_urin,
-                                                    $examlab_pregnancy,
-                                                    $examlab_misc,
-                                                ])
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="lab_status" value="1">
-                                                    <input type="hidden" name="patientId"
-                                                        value="{{ $patient->id }}">
-                                                    <input type="hidden" name="agency_id"
-                                                        value="{{ $patientInfo->agency_id }}">
-                                                    <input type="hidden" name="id"
-                                                        value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
-                                                    <input type="hidden" name="schedule_id"
-                                                        value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
-                                                    <div class="form-group">
-                                                        <label for="">Remarks/Recommendations:</label>
-                                                        <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $admissionPatient ? $admissionPatient->remarks : null @endphp</textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="">Next Schedule Date: </label>
-                                                        <input type="date" max="2050-12-31" name="schedule"
-                                                            class="form-control"
-                                                            value="{{ $latest_schedule ? $latest_schedule->date : null }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="">Doctor Prescription</label>
-                                                        <select required name="doctor_prescription" id=""
-                                                            class="select2">
-                                                            @foreach ($doctors as $doctor)
-                                                                <option value="{{ $doctor->id }}">
-                                                                    {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="">Prescription</label>
-                                                        <textarea name="prescription" id="" cols="30" rows="7" class="form-control">{{ $admissionPatient ? $admissionPatient->prescription : '' }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <input type="reset" class="btn btn-outline-secondary btn-lg"
-                                                        data-dismiss="modal" value="close">
-                                                    <button {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
-                                                        type='submit'
-                                                        class='submit-reassessment btn btn-primary btn-lg'>Submit</button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                        <div class="col-lg-12 col-xl-12 my-1">
-                            <div class="container-fluid">
-                                <ul class="nav nav-tabs nav-top-border no-hover-bg" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link primary active" id="home-tab1" data-toggle="tab"
-                                            href="#home1" aria-controls="home1" role="tab"
-                                            aria-selected="true">Completed Exams</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link primary" id="profile-tab1" data-toggle="tab"
-                                            href="#profile1" aria-controls="profile1" role="tab"
-                                            aria-selected="false">On Going Exams</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content px-1 pt-1">
-                                    <div class="tab-pane active" id="home1" aria-labelledby="home-tab1"
-                                        role="tabpanel">
-                                        <div class="row">
-                                            @if ($completed_exams)
-                                                @foreach ($completed_exams as $key => $patient_exam)
-                                                    <div class="col-md-6 col-xl-12 my-50">
-                                                        <fieldset>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="customCheck" id="customCheck1" checked
-                                                                    disabled>
-                                                                <label class="custom-control-label text-white"
-                                                                    for="customCheck1">{{ $key }}</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                @endforeach
-                                            @else
-                                                <div class="white">No Exams Found</div>
-                                            @endif
+                            @endif
+                            <div class="col-lg-12 col-xl-12 my-1">
+                                <div class="container-fluid">
+                                    <ul class="nav nav-tabs nav-top-border no-hover-bg" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link primary active" id="home-tab1" data-toggle="tab"
+                                                href="#home1" aria-controls="home1" role="tab"
+                                                aria-selected="true">Completed Exams</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link primary" id="profile-tab1" data-toggle="tab"
+                                                href="#profile1" aria-controls="profile1" role="tab"
+                                                aria-selected="false">On Going Exams</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content px-1 pt-1">
+                                        <div class="tab-pane active" id="home1" aria-labelledby="home-tab1"
+                                            role="tabpanel">
+                                            <div class="row">
+                                                @if ($completed_exams)
+                                                    @foreach ($completed_exams as $key => $patient_exam)
+                                                        <div class="col-md-6 col-xl-12 my-50">
+                                                            <fieldset>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="customCheck" id="customCheck1" checked
+                                                                        disabled>
+                                                                    <label class="custom-control-label text-white"
+                                                                        for="customCheck1">{{ $key }}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="white">No Exams Found</div>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane in" id="profile1" aria-labelledby="profile-tab1"
-                                        role="tabpanel">
-                                        <div class="row">
-                                            @if ($on_going_exams)
-                                                @foreach ($on_going_exams as $key => $patient_exam)
-                                                    <div class="col-md-6 col-xl-12 my-50">
-                                                        <fieldset>
-                                                            <div class="custom-control custom-checkbox ">
-                                                                <input type="checkbox" class="custom-control-input"
-                                                                    name="customCheck" id="customCheck1" disabled>
-                                                                <label class="custom-control-label text-white"
-                                                                    style="word-break: break-all;"
-                                                                    for="customCheck1">{{ $key }}</label>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                @endforeach
-                                            @else
-                                                <div class="white">No Exams Found</div>
-                                            @endif
+                                        <div class="tab-pane in" id="profile1" aria-labelledby="profile-tab1"
+                                            role="tabpanel">
+                                            <div class="row">
+                                                @if ($on_going_exams)
+                                                    @foreach ($on_going_exams as $key => $patient_exam)
+                                                        <div class="col-md-6 col-xl-12 my-50">
+                                                            <fieldset>
+                                                                <div class="custom-control custom-checkbox ">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        name="customCheck" id="customCheck1" disabled>
+                                                                    <label class="custom-control-label text-white"
+                                                                        style="word-break: break-all;"
+                                                                        for="customCheck1">{{ $key }}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="white">No Exams Found</div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2276,7 +2241,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <script>
@@ -2498,7 +2462,7 @@
             }
         }
 
-        $('.remove-patient-record-btn').click(function(e) {
+        $('.remove-patient-record-btn').click(function (e) {
             let id = $(this).attr('id');
             let csrf = '{{ csrf_token() }}';
             Swal.fire({
@@ -2603,7 +2567,7 @@
             const fd = new FormData(this);
             $(".submit-pending").html(
                 "<button type='submit' class='submit-pending btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-            );
+                );
             $.ajax({
                 url: '/update_lab_result',
                 method: "POST",
@@ -2646,7 +2610,7 @@
 
             let data_status = e.target.getAttribute('data-status');
             switch (data_status) {
-                case 'pending':
+                case 'pending' :
                     $('#lab_status_name').val('Pending');
                     $('#lab_status').val(1);
                     $('.unfit_date_group').hide();
@@ -2654,8 +2618,8 @@
                     $('.medical_result_prescription_group').show();
                     $('.doctor_prescription_group').show();
                     break;
-
-                case 'fit':
+                
+                case 'fit' :
                     $('#lab_status_name').val('Fit');
                     $('#lab_status').val(2);
                     $('.unfit_date_group').hide();
@@ -2664,7 +2628,7 @@
                     $('.doctor_prescription_group').show();
                     break;
 
-                case 'unfit':
+                case 'unfit' :
                     $('#lab_status_name').val('Unfit');
                     $('#lab_status').val(3);
                     $('.unfit_date_group').show();
@@ -2673,7 +2637,7 @@
                     $('.doctor_prescription_group').hide();
                     break;
 
-                case 'unfit_temp':
+                case 'unfit_temp' :
                     $('#lab_status_name').val('Unfit Temporarily');
                     $('#lab_status').val(4);
                     $('.unfit_date_group').hide();
@@ -2682,7 +2646,7 @@
                     $('.doctor_prescription_group').show();
                     break;
 
-                default:
+                default :
                     break;
             }
         });
@@ -2691,7 +2655,7 @@
             e.preventDefault();
             $("#reset-medical-status-btn").html(
                 "<button type='button' class='btn btn-warning'><i class='fa fa-refresh spinner'></i> Reset</button>"
-            );
+                );
 
             $.ajax({
                 url: '/update_lab_result',
@@ -2736,7 +2700,7 @@
             const fd = new FormData(this);
             $(".submit-unfittemp").html(
                 "<button type='submit' class='submit-unfittemp btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-            );
+                );
             $.ajax({
                 url: '/update_lab_result',
                 method: "POST",
@@ -2770,7 +2734,7 @@
             }).done(function(data) {
                 $(this).html(
                     "<input type='submit' class='submit-unfittemp btn btn-primary btn-lg' value='Submit'>"
-                )
+                    )
             });
         });
 
@@ -2780,9 +2744,9 @@
             medical_result_btn.addEventListener('click', function(e) {
                 let id = e.target.getAttribute('id');
                 let clickedButton = $(e.target); // Wrap e.target in a jQuery object
-
+                
                 // clickedButton.innerHTML = clickedButton;
-                if (id) {
+                if(id) {
                     let spinner = $(" <i class='fa fa-refresh spinner'></i>");
                     clickedButton.append(spinner);
                     clickedButton.prop("disabled", true);
@@ -2794,20 +2758,16 @@
                         processData: false,
                         success: function(response) {
                             if (response.status == 'success') {
-                                $('#medical_result_remarks').val(response.medical_result
-                                    .remarks);
-                                $('#medical_result_prescription').val(response.medical_result
-                                    .prescription);
+                                $('#medical_result_remarks').val(response.medical_result.remarks);
+                                $('#medical_result_prescription').val(response.medical_result.prescription);
                                 $('#medical_result_id').val(response.medical_result.id);
-                                $('#medical_result_generate_at').val(response.medical_result
-                                    .generate_at);
+                                $('#medical_result_generate_at').val(response.medical_result.generate_at);
                                 e.target.setAttribute('id', response.medical_result.id);
                                 // Remove the classes from all buttons
-                                $('.medical_result_btn').removeClass('btn-primary').addClass(
-                                    'btn-outline-primary');
+                                $('.medical_result_btn').removeClass('btn-primary').addClass('btn-outline-primary');
 
                                 switch (response.medical_result.status) {
-                                    case '1':
+                                    case '1' :
                                         $('#lab_status_name').val('Pending');
                                         $('#lab_status').val(1);
                                         $('.unfit_date_group').hide();
@@ -2815,8 +2775,8 @@
                                         $('.medical_result_prescription_group').show();
                                         $('.doctor_prescription_group').show();
                                         break;
-
-                                    case '2':
+                                    
+                                    case '2' :
                                         $('#lab_status_name').val('Fit');
                                         $('#lab_status').val(2);
                                         $('.unfit_date_group').hide();
@@ -2825,7 +2785,7 @@
                                         $('.doctor_prescription_group').show();
                                         break;
 
-                                    case '3':
+                                    case '3' :
                                         $('#lab_status_name').val('Unfit');
                                         $('#lab_status').val(3);
                                         $('.unfit_date_group').show();
@@ -2834,7 +2794,7 @@
                                         $('.doctor_prescription_group').hide();
                                         break;
 
-                                    case '4':
+                                    case '4' :
                                         $('#lab_status_name').val('Unfit Temporarily');
                                         $('#lab_status').val(4);
                                         $('.unfit_date_group').hide();
@@ -2843,13 +2803,12 @@
                                         $('.doctor_prescription_group').show();
                                         break;
 
-                                    default:
+                                    default :
                                         break;
                                 }
 
                                 // Add the class to the clicked button
-                                clickedButton.removeClass('btn-outline-primary').addClass(
-                                    'btn-primary');
+                                clickedButton.removeClass('btn-outline-primary').addClass('btn-primary');
                             } else {
                                 Swal.fire('Not Found!', 'No Medical Result Found', 'error');
                             }
@@ -2884,10 +2843,10 @@
                             id: id
                         },
                         success: function(response) {
-                            if (response.status == 'success') {
+                            if(response.status == 'success') {
                                 Swal.fire(
-                                    'Success!',
-                                    response.message,
+                                    'Success!', 
+                                    response.message, 
                                     'success'
                                 ).then((result) => {
                                     if (result.isConfirmed) {
@@ -2904,7 +2863,7 @@
 
         // Wait for the page to load
         $(document).ready(function() {
-            $('.add_new_medical_result_btn').click(function(e) {
+            $('.add_new_medical_result_btn').click(function (e) {
                 $('#medical_result_remarks').val('');
                 $('#medical_result_prescription').val('');
                 $('#medical_result_id').val('');
