@@ -1483,7 +1483,7 @@
                                                                             id="patient-findings"
                                                                             aria-labelledby="patient-findings32"
                                                                             role="tabpanel">
-                                                                            {{-- @include(
+                                                                            @include(
                                                                                 'Patient.patient_findings',
                                                                                 [
                                                                                     $exam_audio,
@@ -1511,12 +1511,12 @@
                                                                                     $examlab_pregnancy,
                                                                                     $examlab_misc,
                                                                                 ]
-                                                                            ) --}}
+                                                                            )
                                                                         </div>
                                                                         <div class="tab-pane" id="patient-recommendations"
                                                                             aria-labelledby="patient-recommendations32"
                                                                             role="tabpanel">
-                                                                            {{-- @include(
+                                                                            @include(
                                                                                 'Patient.patient_recommendations',
                                                                                 [
                                                                                     $exam_audio,
@@ -1544,7 +1544,7 @@
                                                                                     $examlab_pregnancy,
                                                                                     $examlab_misc,
                                                                                 ]
-                                                                            ) --}}
+                                                                            )
                                                                         </div>
                                                                     </div>
                                                                 </div>
