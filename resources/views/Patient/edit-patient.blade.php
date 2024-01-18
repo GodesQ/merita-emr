@@ -1580,10 +1580,10 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                            </div> <!-- Add this closing div tag -->
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             @endif
                             @if ($admissionPatient)
                                 <div class="tab-pane fade" id="account-vertical-social" role="tabpanel"
