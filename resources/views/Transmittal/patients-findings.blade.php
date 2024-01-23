@@ -107,6 +107,12 @@
 @endif
 
 @if($patient->exam_ultrasound)
+   @if($patient->exam_ultrasound->gallbladder_exam_status == "findings")
+       <b>GALLBLADDER Ultrasound :</b> {{$patient->exam_ultrasound->gallbladder_exam_findings}} <br>
+   @endif
+@endif
+
+@if($patient->exam_ultrasound)
    @if($patient->exam_ultrasound->thyroid_exam_status == "findings")
        <b>THYROID Ultrasound :</b> {{$patient->exam_ultrasound->thyroid_exam_findings}} <br>
    @endif

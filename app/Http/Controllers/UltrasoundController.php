@@ -149,6 +149,7 @@ class UltrasoundController extends Controller
             $exam->kidney = $request->kidney;
             $exam->urinary_bladder = $request->urinary_bladder;
             $exam->liver = $request->liver;
+            $exam->liver_ultrasound = $request->liver_ultrasound;
             $exam->gall_bladder = $request->gall_bladder;
             $exam->pancreas = $request->pancreas;
             $exam->thyroid = $request->thyroid;
@@ -158,6 +159,7 @@ class UltrasoundController extends Controller
             $exam->kidney_status = $request->kidney_status;
             $exam->urinary_bladder_status = $request->urinary_bladder_status;
             $exam->liver_status = $request->liver_status;
+            $exam->liver_ultrasound_status = $request->liver_ultrasound_status;
             $exam->gall_bladder_status = $request->gall_bladder_status;
             $exam->pancreas_status = $request->pancreas_status;
             $exam->thyroid_status = $request->thyroid_status;
