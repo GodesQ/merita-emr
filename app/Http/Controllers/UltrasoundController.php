@@ -25,10 +25,10 @@ class UltrasoundController extends Controller
             )->where('tran_admission.id', $id)
                 ->leftJoin(
                     'mast_patient',
-                    'mast_patient.patientcode',
-                    'tran_admission.patientcode'
+                    'mast_patient.admission_id',
+                    'tran_admission.id'
                 )->first();
-
+            
             $sonologists = User::where('position', 'LIKE', '%Sonologist%')->get();
             return view('Ultrasound.add-ultrasound', compact('admission', 'sonologists'));
 
@@ -49,6 +49,7 @@ class UltrasoundController extends Controller
             $exam->kidney = $request->kidney;
             $exam->urinary_bladder = $request->urinary_bladder;
             $exam->liver = $request->liver;
+            $exam->liver_ultrasound = $request->liver_ultrasound;
             $exam->gall_bladder = $request->gall_bladder;
             $exam->pancreas = $request->pancreas;
             $exam->thyroid = $request->thyroid;
@@ -58,6 +59,7 @@ class UltrasoundController extends Controller
             $exam->kidney_status = $request->kidney_status;
             $exam->urinary_bladder_status = $request->urinary_bladder_status;
             $exam->liver_status = $request->liver_status;
+            $exam->liver_ultrasound_status = $request->liver_ultrasound_status;
             $exam->gall_bladder_status = $request->gall_bladder_status;
             $exam->pancreas_status = $request->pancreas_status;
             $exam->thyroid_status = $request->thyroid_status;
@@ -71,6 +73,9 @@ class UltrasoundController extends Controller
             $exam->hbt_exam_status = $request->hbt_exam_status;
             $exam->hbt_exam_findings = $request->hbt_exam_findings;
             $exam->hbt_exam_recommendation = $request->hbt_exam_recommendation;
+            $exam->gallbladder_exam_status = $request->gallbladder_exam_status;
+            $exam->gallbladder_exam_findings = $request->gallbladder_exam_findings;
+            $exam->gallbladder_exam_recommendation = $request->gallbladder_exam_recommendation;
             $exam->thyroid_exam_status = $request->thyroid_exam_status;
             $exam->thyroid_exam_findings = $request->thyroid_exam_findings;
             $exam->thyroid_exam_recommendation = $request->thyroid_exam_recommendation;
@@ -166,6 +171,9 @@ class UltrasoundController extends Controller
             $exam->hbt_exam_status = $request->hbt_exam_status;
             $exam->hbt_exam_findings = $request->hbt_exam_findings;
             $exam->hbt_exam_recommendation = $request->hbt_exam_recommendation;
+            $exam->gallbladder_exam_status = $request->gallbladder_exam_status;
+            $exam->gallbladder_exam_findings = $request->gallbladder_exam_findings;
+            $exam->gallbladder_exam_recommendation = $request->gallbladder_exam_recommendation;
             $exam->thyroid_exam_status = $request->thyroid_exam_status;
             $exam->thyroid_exam_findings = $request->thyroid_exam_findings;
             $exam->thyroid_exam_recommendation = $request->thyroid_exam_recommendation;
