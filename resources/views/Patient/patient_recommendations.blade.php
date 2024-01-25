@@ -31,6 +31,7 @@
                     </div>
                 @endif
             @endif
+            
             @if ($exam_visacuity)
                 @if($exam_visacuity->remarks_status == 'findings' && $exam_visacuity->recommendation)
                 <div class="my-75">
@@ -219,6 +220,16 @@
                         <h5><b>HBT Exam: </b></h5>
                         <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?></span>
                         <input type="hidden" value="HBT Exam: <?php echo nl2br($exam_ultrasound->hbt_exam_recommendation) ?>" name="recommendation[]" />
+                    </div>
+                @endif
+            @endif
+
+            @if ($exam_ultrasound)
+                @if($exam_ultrasound->gallbladder_exam_status == 'findings' && $exam_ultrasound->gallbladder_exam_recommendation)
+                    <div class="col-md-6 my-50">
+                        <h5><b>GALLBLADDER Exam: </b></h5>
+                        <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->gallbladder_exam_recommendation) ?></span>
+                        <input type="hidden" value="GALLBLADDER Exam: <?php echo nl2br($exam_ultrasound->gallbladder_exam_recommendation) ?>" name="findings[]" />
                     </div>
                 @endif
             @endif

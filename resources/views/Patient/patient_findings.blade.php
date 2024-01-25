@@ -197,6 +197,16 @@
         @endif
 
         @if ($exam_ultrasound)
+            @if($exam_ultrasound->gallbladder_exam_status == 'findings')
+                <div class="col-md-6 my-50">
+                    <h5><b>GALLBLADDER Exam: </b></h5>
+                    <span style="font-size: 12px;"><?php echo nl2br($exam_ultrasound->gallbladder_exam_findings) ?></span>
+                    <input type="hidden" value="GALLBLADDER Exam: <?php echo nl2br($exam_ultrasound->gallbladder_exam_findings) ?>" name="findings[]" />
+                </div>
+            @endif
+        @endif
+
+        @if ($exam_ultrasound)
             @if($exam_ultrasound->thyroid_exam_status == 'findings')
                 <div class="col-md-6 my-50">
                     <h5><b>THYROID Exam: </b></h5>

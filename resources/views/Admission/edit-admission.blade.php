@@ -44,7 +44,9 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Patient Name</label>
-                                <input type="text" id="projectinput1" class="form-control" value="{{ $patient->lastname }}, {{ $patient->firstname }}" name="fullname" readonly>
+                                <input type="text" id="projectinput1" class="form-control"
+                                    value="{{ $patient->lastname }}, {{ $patient->firstname }}" name="fullname"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -65,16 +67,20 @@
                                     <option value="none" selected="" disabled="">Select
                                         Category
                                     </option>
-                                    <option value="DECK SERVICES" {{ $admissionPatient->category == "DECK SERVICES" ? "selected=''" : "" }}>
+                                    <option value="DECK SERVICES"
+                                        {{ $admissionPatient->category == 'DECK SERVICES' ? "selected=''" : '' }}>
                                         DECK SERVICES
                                     </option>
-                                    <option value="ENGINE SERVICES" {{ $admissionPatient->category == "ENGINE SERVICES" ? "selected=''" : "" }}>
+                                    <option value="ENGINE SERVICES"
+                                        {{ $admissionPatient->category == 'ENGINE SERVICES' ? "selected=''" : '' }}>
                                         ENGINE SERVICES
                                     </option>
-                                    <option value="CATERING SERVICES" {{ $admissionPatient->category == "CATERING SERVICES" ? "selected=''" : "" }}>
+                                    <option value="CATERING SERVICES"
+                                        {{ $admissionPatient->category == 'CATERING SERVICES' ? "selected=''" : '' }}>
                                         CATERING SERVICES
                                     </option>
-                                    <option value="OTHER SERVICES" {{ $admissionPatient->category == "OTHER SERVICES" ? "selected=''" : "" }}>
+                                    <option value="OTHER SERVICES"
+                                        {{ $admissionPatient->category == 'OTHER SERVICES' ? "selected=''" : '' }}>
                                         OTHER SERVICES
                                     </option>
                                 </select>
@@ -103,18 +109,21 @@
                                     Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment1" value="Sea-Based" name="employment"
-                                           {{ $admissionPatient->employment == "Sea-Based" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="employment1"
+                                            value="Sea-Based" name="employment"
+                                            {{ $admissionPatient->employment == 'Sea-Based' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="employment1">Sea Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment2" name="employment" value="Land-Based"
-                                            {{ $admissionPatient->employment == "Land-Based" ? "checked" : ""}}>
+                                        <input type="radio" class="custom-control-input" id="employment2"
+                                            name="employment" value="Land-Based"
+                                            {{ $admissionPatient->employment == 'Land-Based' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="employment2">Land Based</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="employment3" name="employment" value="Local-Based"
-                                            {{ $admissionPatient->employment == "Local-Based" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="employment3"
+                                            name="employment" value="Local-Based"
+                                            {{ $admissionPatient->employment == 'Local-Based' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="employment3">Local Based</label>
                                     </div>
                                 </div>
@@ -127,13 +136,15 @@
                                     Status</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="emp_status1" name="emp_status" value="New Crew"
-                                            {{ $admissionPatient->emp_status == "New Crew" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="emp_status1"
+                                            name="emp_status" value="New Crew"
+                                            {{ $admissionPatient->emp_status == 'New Crew' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="emp_status1">New Crew</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="emp_status2" name="emp_status" value="Ex-Crew"
-                                            {{ $admissionPatient->emp_status == "Ex-Crew" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="emp_status2"
+                                            name="emp_status" value="Ex-Crew"
+                                            {{ $admissionPatient->emp_status == 'Ex-Crew' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="emp_status2">Ex Crew</label>
                                     </div>
                                 </div>
@@ -146,13 +157,15 @@
                                 <label class="text-bold-600" for="projectinput2">Admission Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="admit_type1" name="admit_type" value="Normal"
-                                            {{ $admissionPatient->admit_type == "Normal" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="admit_type1"
+                                            name="admit_type" value="Normal"
+                                            {{ $admissionPatient->admit_type == 'Normal' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="admit_type1">Regular Patient</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="admit_type2" name="admit_type" value="Rush"
-                                            {{ $admissionPatient->admit_type == "Rush" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" id="admit_type2"
+                                            name="admit_type" value="Rush"
+                                            {{ $admissionPatient->admit_type == 'Rush' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="admit_type2">Rush Patient</label>
                                     </div>
                                 </div>
@@ -163,14 +176,17 @@
                                 <label class="text-bold-600" for="projectinput2">Payment Type</label>
                                 <div class="container-fluid ">
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" name="payment_type" id="payment_type3" value="Applicant Paid"
-                                            {{ $admissionPatient->payment_type == "Applicant Paid" ? "checked" : "" }}>
+                                        <input type="radio" class="custom-control-input" name="payment_type"
+                                            id="payment_type3" value="Applicant Paid"
+                                            {{ $admissionPatient->payment_type == 'Applicant Paid' ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="payment_type3">Applicant Paid</label>
                                     </div>
                                     <div class="d-inline-block custom-control custom-radio mr-1">
-                                        <input type="radio" class="custom-control-input" id="payment_type4" name="payment_type" value="Billed"
-                                            {{ $admissionPatient->payment_type == "Billed" ? "checked" : "" }}>
-                                        <label class="custom-control-label" for="payment_type4">Billed to Agency</label>
+                                        <input type="radio" class="custom-control-input" id="payment_type4"
+                                            name="payment_type" value="Billed"
+                                            {{ $admissionPatient->payment_type == 'Billed' ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="payment_type4">Billed to
+                                            Agency</label>
                                     </div>
                                 </div>
                             </div>
@@ -178,13 +194,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Last Medical in Merita</label>
-                                <input type="text" id="projectinput1" class="form-control" value="{{ $admissionPatient->last_medical }}" name="last_medical">
+                                <input type="text" id="projectinput1" class="form-control"
+                                    value="{{ $admissionPatient->last_medical }}" name="last_medical">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="text-bold-600" for="projectinput1">Principal</label>
-                                <input type="text" id="projectinput1" class="form-control" value="{{ $admissionPatient->principal }}" name="principal">
+                                <input type="text" id="projectinput1" class="form-control"
+                                    value="{{ $admissionPatient->principal }}" name="principal">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -322,7 +340,7 @@
                         <i class="fa fa-check-square-o"></i> Save
                     </button>
                 </div>
+            </form>
         </div>
     </div>
-    </form>
 </div>

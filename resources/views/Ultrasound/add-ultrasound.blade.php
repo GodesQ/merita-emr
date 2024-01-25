@@ -74,6 +74,7 @@
                                                 <option value="">--SELECT--</option>
                                                 <option value="KUB" selected="">KUB</option>
                                                 <option value="HBT">HBT</option>
+                                                <option value="GALLBLADDER">GALLBLADDER</option>
                                                 <option value="THYROID">THYROID</option>
                                                 <option value="BREAST">BREAST</option>
                                                 <option value="WHOLE ABDOMEN">WHOLE ABDOMEN</option>
@@ -134,6 +135,19 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <td width="20%" valign="top"><b>LIVER ULTRASOUND</b> <br>
+                                                            <div class="form-group">
+                                                                <input name="liver_ultrasound_status" type="radio" class="m-1"
+                                                                    id="liver_ultrasound_status_0" value="normal" /> Normal
+                                                                <input name="liver_ultrasound_status" type="radio" class="m-1"
+                                                                    id="liver_ultrasound_status_1" value="findings" /> With Findings
+                                                            </div>
+                                                        </td>
+                                                        <td width="80%">
+                                                            <textarea name="liver_ultrasound" id="liver_ultrasound" cols="50" rows="5" class="form-control"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    {{-- <tr>
                                                         <td valign="top"><b>GALLBLADDER</b> <br>
                                                             <div class="form-group">
                                                                 <input name="gall_bladder_status" type="radio"
@@ -147,7 +161,7 @@
                                                         <td>
                                                             <textarea name="gall_bladder" id="gall_bladder" cols="50" rows="5" class="form-control"></textarea>
                                                         </td>
-                                                    </tr>
+                                                    </tr> --}}
                                                     <tr>
                                                         <td width="20%" valign="top"><b>PANCREAS</b>
                                                             <br>
@@ -162,6 +176,25 @@
                                                         </td>
                                                         <td width="80%">
                                                             <textarea name="pancreas" id="pancreas" cols="50" rows="5" class="form-control"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div id="divGB">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td width="20%" valign="top"><b>GALLBLADDER</b> <br>
+                                                            <div class="form-group">
+                                                                <input name="gall_bladder_status" type="radio"
+                                                                    class="m-1" id="gall_bladder_status_0"
+                                                                    value="normal" /> Normal
+                                                                <input name="gall_bladder_status" type="radio"
+                                                                    class="m-1" id="gall_bladder_status_1"
+                                                                    value="findings" /> With Findings
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <textarea name="gall_bladder" id="gall_bladder" cols="50" rows="5" class="form-control"></textarea>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -306,6 +339,33 @@
                                                                     <label class="font-weight-bold">HBT
                                                                         Recommendation</label>
                                                                     <textarea placeholder="Recommendation" class="form-control" name="hbt_exam_recommendation" id=""
+                                                                        cols="30" rows="6"></textarea>
+                                                                </div>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr id="gb_group">
+                                                        <td colspan="4">
+                                                            <div class="form-group">
+                                                                <label for=""><b>GALLBLADDER Remarks Status</b></label>
+                                                                <br>
+                                                                <input name="gallbladder_exam_status" type="radio"
+                                                                    class="m-1" id="gallbladder_exam_status_0"
+                                                                    value="normal">Normal
+                                                                <input name="gallbladder_exam_status" type="radio"
+                                                                    class="m-1" id="gallbladder_exam_status_1"
+                                                                    value="findings">With Findings
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold">GALLBLADDER Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="gallbladder_exam_findings" id="" cols="30"
+                                                                    rows="6"></textarea>
+                                                            </div>
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                <div class="form-group">
+                                                                    <label class="font-weight-bold">GALLBLADDER
+                                                                        Recommendation</label>
+                                                                    <textarea placeholder="Recommendation" class="form-control" name="gallbladder_exam_recommendation" id=""
                                                                         cols="30" rows="6"></textarea>
                                                                 </div>
                                                             @endif
@@ -465,12 +525,14 @@
             uid = $('#uid').val();
             $('#divKUB').hide();
             $('#divHBT').hide();
+            $('#divGB').hide();
             $('#divTHYROID').hide();
             $('#divBREAST').hide();
             $('#divABDOMEN').hide();
             $('#divGENITALS').hide();
             $('#kub_group').hide();
             $('#hbt_group').hide();
+            $('#gb_group').hide();
             $('#thyroid_group').hide();
             $('#breast_group').hide();
             $('#whole_abdomen_group').hide();
@@ -488,16 +550,18 @@ Negative for stone, masses nor hydronephrosis.`);
             if (exam == "HBT") {
                 $('#divHBT').show();
                 $('#hbt_group').show();
-                $('#impression').val(`Normal liver, gallbladder and pancreas.`);
+                $('#impression').val(`Normal liver and pancreas.`);
                 $('#pancreas').val(`Pancreas is normal in size.`);
-                $('#gall_bladder').val(`Gallbladder is normal in size. No stones nor masses seen.`);
                 $('#liver').val(
                     `Liver is normal in size. The intrahepatic duests are not dilated. Negative for focal solid cystic mass.`
                 );
             }
 
             if (exam == "GALLBLADDER") {
-                $('#divHBT').show();
+                $('#divGB').show();
+                $('#gall_bladder').val(`Gallbladder is normal in size. No stones nor masses seen.`);
+                $('#impression').val(`Normal gallbladder.`);
+                $('#gb_group').show();
             }
 
             if (exam == "THYROID") {

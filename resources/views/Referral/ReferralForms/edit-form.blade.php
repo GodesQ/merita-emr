@@ -76,8 +76,8 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="position_applied">Position Applied For <span class="danger">*</span></label>
-                <input type="text" id="position_applied" class="form-control" value="{{ $referral->position_applied }}"
-                    placeholder="Position Applied" name="position_applied">
+                <input type="text" id="position_applied" class="form-control"
+                    value="{{ $referral->position_applied }}" placeholder="Position Applied" name="position_applied">
             </div>
         </div>
         <div class="col-md-6">
