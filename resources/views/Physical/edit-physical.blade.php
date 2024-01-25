@@ -660,7 +660,10 @@
                                                             @php echo
                                                         $exam->sick33 == "No" || $exam->sick33 == "0" ? "checked" : "" @endphp>
                                                     </td>
-                                                    <td width="154" align="center">Gynaecological Disorders</td>
+                                                    <td width="154" align="center">Gynaecological Disorders 
+                                                        <br><input name="gynaecological_disorders" type="input"
+                                                                id="gynaecological_disorders" value="{{ $exam->gynaecological_disorders }}">
+                                                    </td>
                                                     <td width="96" align="center"><label for="checkbox">YES</label>
                                                         <input name="sick21" type="radio"
                                                             style="width: 20px; height: 20px;" id="sick21"

@@ -345,13 +345,29 @@
                                                                     </span>
                                                                 </td>
                                                                 <td><b>Gynecological
-                                                                        Disorder :</b></td>
+                                                                        Disorder :</b> <br>{{ $admission->exam_physical ? $admission->exam_physical->gynaecological_disorders : null }}</td>
                                                                 <td align="center">
                                                                     <span style="font-size: 20px;">
-                                                                        ☐
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick21 == 'Yes' || $admission->exam_physical->sick21 == '1')
+                                                                                ☑
+                                                                            @else
+                                                                                ☐
+                                                                            @endif
+                                                                        @else
+                                                                            ☐
+                                                                        @endif
                                                                     </span>
                                                                     <span style="font-size: 20px;">
-                                                                        ☑
+                                                                        @if ($admission->exam_physical)
+                                                                            @if ($admission->exam_physical->sick21 == 'No' || $admission->exam_physical->sick21 == '0')
+                                                                                ☑
+                                                                            @else
+                                                                                ☐
+                                                                            @endif
+                                                                        @else
+                                                                            ☐
+                                                                        @endif
                                                                     </span>
                                                                 </td>
                                                             </tr>
