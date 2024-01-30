@@ -308,7 +308,7 @@
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
+                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings  }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->knees_findings == 'findings' && $admission->exam_xray->knees_recommendations)
