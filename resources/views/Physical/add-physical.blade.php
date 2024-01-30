@@ -790,7 +790,10 @@
                                                     "checked"
                                                     : "" @endphp>
                                                         </td>
-                                                        <td width="154" align="center">Gynaecological Disorders</td>
+                                                        <td width="154" align="center">Gynaecological Disorders 
+                                                            <br><input name="gynaecological_disorders" type="input"
+                                                                id="gynaecological_disorders" value="">
+                                                        </td>
                                                         <td width="96" align="center"><label
                                                                 for="checkbox">YES</label>
                                                             <input name="sick21" type="radio"
@@ -1297,7 +1300,10 @@
                                                                 style="width: 20px; height: 20px;" id="sick33"
                                                                 value="No" checked="">
                                                         </td>
-                                                        <td width="154" align="center">Gynaecological Disorders</td>
+                                                        <td width="154" align="center">Gynaecological Disorders
+                                                            <br><input name="gynaecological_disorders" type="input"
+                                                                id="gynaecological_disorders" value="">
+                                                        </td>
                                                         <td width="96" align="center">
                                                             <label for="checkbox">YES</label>
                                                             <input name="sick21" type="radio"
