@@ -363,9 +363,11 @@
 
                                                     <td valign="top" class="drag">
                                                         <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
+                                                            @if(isset($result['Recommendation']))
                                                                 @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
                                                                     @php echo nl2br($result['Recommendation']) @endphp
                                                                 @endif
+                                                            @endif
                                                         </div>
                                                     </td>
                                                 </tr>
