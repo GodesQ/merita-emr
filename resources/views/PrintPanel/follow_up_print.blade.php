@@ -348,7 +348,7 @@
                                         @endif
 
                                     @endif
-                                    <?php $drag_count = 1; dd($results); ?>
+                                    <?php $drag_count = 1;  ?>
                                     @foreach($results as $key => $result)
                                             @if(!preg_match('/PPD:/i', $result['Findings']))
                                                 <tr style="height:40px">
