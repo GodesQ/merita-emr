@@ -184,6 +184,9 @@
                                                 $results[$key] += ['Recommendation' => $recommendation];
                                             }
                                         }
+                                        if(session()->get('employeeId') == 103) {
+                                            dd($findings, $recommendations);
+                                        }
                                     @endphp
 
                                     @if($loop->first)
