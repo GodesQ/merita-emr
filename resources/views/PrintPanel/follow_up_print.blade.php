@@ -185,7 +185,7 @@
                                             }
                                         }
                                         if(session()->get('employeeId') == 103) {
-                                            dd($findings, $recommendations);
+                                            dd($findings, $recommendations, $results);
                                         }
                                     @endphp
 
