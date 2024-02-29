@@ -184,6 +184,9 @@
                                                 $results[$key] += ['Recommendation' => $recommendation];
                                             }
                                         }
+                                        if(session()->get('employeeId') == 103) {
+                                            // dd($findings, $recommendations, $results);
+                                        }
                                     @endphp
 
                                     @if($loop->first)
@@ -308,7 +311,7 @@
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->remarks  }}</span>
+                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings  }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->knees_findings == 'findings' && $admission->exam_xray->knees_recommendations)
@@ -348,30 +351,28 @@
                                         @endif
 
                                     @endif
-                                    <?php $drag_count = 1; ?>
+                                    <?php $drag_count = 1;  ?>
                                     @foreach($results as $key => $result)
-                                            @if(!preg_match('/PPD:/i', $result['Findings']))
-                                                <tr style="height:40px">
-                                                    <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
-                                                    <td valign="top"  class="drag">
-                                                        <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
-                                                            @if(!preg_match('/PPD:/i', $result['Findings']))
-                                                                @php echo nl2br($result['Findings']) @endphp
-                                                            @endif
-                                                        </div>
-                                                    </td>
+                                        <tr style="height:40px">
+                                            <td valign="top">{{ $key_record > 0 && $loop->first ? date_format(new DateTime($record->date), "d F Y") : null }}</td>
+                                            <td valign="top"  class="drag">
+                                                <div class="drag" draggable="true" id="cell-findings-{{ $key }}">
+                                                    @if(!preg_match('/PPD:/i', $result['Findings']))
+                                                        @php echo nl2br($result['Findings']) @endphp
+                                                    @endif
+                                                </div>
+                                            </td>
 
-                                                    <td valign="top" class="drag">
-                                                        <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
-                                                            @if(isset($result['Recommendation']))
-                                                                @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
-                                                                    @php echo nl2br($result['Recommendation']) @endphp
-                                                                @endif
-                                                            @endif
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                            <td valign="top" class="drag">
+                                                <div class="drag" draggable="true" id="cell-recommendation-{{ $key }}">
+                                                    @if(isset($result['Recommendation']))
+                                                        @if(!preg_match('/X Ray:/i', $result['Recommendation']) && !preg_match('/Vital Sign:/i', $result['Recommendation']) && !preg_match('/PPD:/i', $result['Recommendation']))
+                                                            @php echo nl2br($result['Recommendation']) @endphp
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 @empty
                                     <tr>
