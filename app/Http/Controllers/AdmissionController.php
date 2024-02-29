@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\PatientMedicalResult;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\EmployeeLog;
 use Illuminate\Support\Facades\DB;
@@ -378,9 +379,13 @@ class AdmissionController extends Controller
             ]);
 
             ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
+
+            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+                foreach ($recipients as $key => $recipient) {
+                    Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
+                }
             }
+            
         }
 
         if ($request->lab_status == 3) {
@@ -414,8 +419,10 @@ class AdmissionController extends Controller
 
             ReassessmentFindings::where('admission_id', $admission->id)->delete();
 
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
+            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+                foreach ($recipients as $key => $recipient) {
+                    Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
+                }
             }
         }
 
@@ -455,8 +462,10 @@ class AdmissionController extends Controller
             }
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
+            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+                foreach ($recipients as $key => $recipient) {
+                    Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
+                }
             }
         }
 
@@ -491,8 +500,10 @@ class AdmissionController extends Controller
                 $pdf = null;
             }
 
-            foreach ($recipients as $key => $recipient) {
-                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+                foreach ($recipients as $key => $recipient) {
+                    Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
+                }
             }
         }
 
