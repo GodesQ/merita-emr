@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PatientMedicalResult;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -251,13 +252,9 @@ class PatientController extends Controller
     public function save_progress_info(Request $request)
     {
         try {
-            $srb_expdate = \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d');
-            $passport_expdate = \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d');
-            $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
-
-            if($request->main_id == 14850) {
-                // dd($request->all());
-            }
+            $srb_expdate = Carbon::parse($request->srb_expdate ?? date('Y-m-d'))->format('Y-m-d');
+            $passport_expdate = Carbon::parse($request->passport_expdate ?? date('Y-m-d'))->format('Y-m-d');
+            $birthdate = Carbon::parse($request->birthdate ?? date('Y-m-d'))->format('Y-m-d');
 
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
