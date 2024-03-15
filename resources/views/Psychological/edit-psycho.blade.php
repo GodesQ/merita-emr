@@ -1168,7 +1168,7 @@
                                                     <option value=""
                                                         @php echo $exam->conclusion == "" ? "selected=''" : "" @endphp>
                                                         --SELECT--</option>
-                                                    <option value="NON REQUIRED" {{ $exam->conclusion == "NON REQUIRED"  ? "selected" : "" }}>
+                                                    <option value="NON REQUIRED" {{ $exam->conclusion == "NON REQUIRED"  ? "selected" : "" }}>NON REQUIRED</option>
                                                     <option value="RECOMMENDED"
                                                         @php echo $exam->conclusion == "RECOMMENDED"
                                                     ? "selected=''" : "" @endphp>
