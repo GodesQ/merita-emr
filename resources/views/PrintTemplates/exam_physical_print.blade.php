@@ -804,7 +804,7 @@
                                             Reactive
                                         </td>
                                         <td>
-                                            <input name="rph" type="checkbox" id="rph" value="nonreactive"
+                                            <input name="rph" type="checkbox" id="rph" value="nonreactive" disabled
                                             @if($examlab_hepa) 
                                                 {{ in_array($examlab_hepa->vdrl_result, ['Non Reactive', 'non reactive']) ? "checked" : ""}}
                                             @endif />
