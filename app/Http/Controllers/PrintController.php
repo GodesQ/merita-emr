@@ -661,7 +661,7 @@ class PrintController extends Controller
     {
 
         $id = $_GET['id'];
-        $admission = Admission::with('patient', 'agency')->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = VisualAcuity::where('admission_id', '=', $id)
             ->latest('id')
