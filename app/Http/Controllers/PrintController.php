@@ -439,12 +439,14 @@ class PrintController extends Controller
         $examlab_hepa = DB::table('examlab_hepa')->where('admission_id', $id)->first();
         $exam_ecg = DB::table('exam_ecg')->where('admission_id', $id)->first();
         $exam_psycho = DB::table('exam_psycho')->where('admission_id', $id)->first();
+        $exam_visacuity = VisualAcuity::where('admission_id', $id)->first();
+
         $technician1 = User::where('id', $exam->technician_id)->first();
         $medical_director = User::where('position', "LIKE", '%Medical Director%')->first();
 
         return view(
             'PrintTemplates.exam_physical_print',
-            compact('exam', 'admission', 'technician1', 'patientInfo', 'exam_ishihara', 'exam_xray', 'examlab_feca', 'examlab_hepa', 'examlab_hiv', 'exam_ecg', 'exam_psycho', 'medical_director')
+            compact('exam', 'admission', 'technician1', 'patientInfo', 'exam_visacuity', 'exam_ishihara', 'exam_xray', 'examlab_feca', 'examlab_hepa', 'examlab_hiv', 'exam_ecg', 'exam_psycho', 'medical_director')
         );
     }
 
