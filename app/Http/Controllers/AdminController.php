@@ -519,6 +519,7 @@ class AdminController extends Controller
 
         $details = [
             'email' => $employee->email,
+            'username' => $employee->username,
             'password' => $request->password,
         ];
 
