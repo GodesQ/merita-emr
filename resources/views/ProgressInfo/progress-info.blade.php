@@ -133,18 +133,11 @@
                                                                     <span class="danger">*</span>
                                                                     <span class="primary h6">(DD/MM/YYYY)</span>
                                                                 </label>
-                                                                <div class="input-group">
-                                                                    <input onchange="getAge(this)"  name="birthdate" type='text' class="form-control pickadate-selectors" placeholder="DD/MM/YYYY" />
-                                                                    <div class="input-group-append">
-                                                                        <span class="input-group-text">
-                                                                            <span class="fa fa-calendar-o"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                {{-- <input required type="date" max="2050-12-31"
+                                                                {{-- <input onchange="getAge(this)"  name="birthdate" type='date' class="form-control" placeholder="DD/MM/YYYY" /> --}}
+                                                                <input required type="date" max="2050-12-31"
                                                                     onchange="getAge(this)" class="form-control"
                                                                     name="birthdate"
-                                                                    value="{{ optional($referral)->birthdate }}"> --}}
+                                                                    value="{{ optional($referral)->birthdate }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -358,16 +351,16 @@
                                                                     Passport Expiration Date :
                                                                     <span class="primary h6">(DD/MM/YYYY)</span>
                                                                 </label>
-                                                                <div class="input-group">
+                                                                {{-- <div class="input-group">
                                                                     <input name="passport_expdate" value="{{ optional($referral)->passport_expdate }}" type='text' class="form-control pickadate-selectors" placeholder="DD/MM/YYYY" />
                                                                     <div class="input-group-append">
                                                                         <span class="input-group-text">
                                                                             <span class="fa fa-calendar-o"></span>
                                                                         </span>
                                                                     </div>
-                                                                </div>
-                                                                {{-- <input type="date" max="2050-12-31" class="form-control" pattern="\d{2}/\d{2}/\d{4}"
-                                                                    name="passport_expdate" value="{{ optional($referral)->passport_expdate }}"> --}}
+                                                                </div> --}}
+                                                                <input type="date" max="2050-12-31" class="form-control" pattern="\d{2}/\d{2}/\d{4}"
+                                                                    name="passport_expdate" value="{{ optional($referral)->passport_expdate }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
@@ -387,7 +380,7 @@
                                                                     SSRB Expiration Date :
                                                                     <span class="primary h6">(DD/MM/YYYY)</span>
                                                                 </label>
-                                                                <div class="input-group">
+                                                                {{-- <div class="input-group">
                                                                     <input name="srb_expdate" type='text' class="form-control pickadate-selectors" placeholder="DD/MM/YYYY"
                                                                     value="{{ optional($referral)->ssrb_expdate }}" />
                                                                     <div class="input-group-append">
@@ -395,10 +388,10 @@
                                                                             <span class="fa fa-calendar-o"></span>
                                                                         </span>
                                                                     </div>
-                                                                </div>
-                                                                {{-- <input type="date" max="2050-12-31"
+                                                                </div> --}}
+                                                                <input type="date" max="2050-12-31"
                                                                     class="form-control" name="srb_expdate" pattern="\d{2}/\d{2}/\d{4}"
-                                                                    value="{{ optional($referral)->ssrb_expdate }}"> --}}
+                                                                    value="{{ optional($referral)->ssrb_expdate }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -2446,24 +2439,13 @@
         }
 
         function getAge(e) {
-            console.log(e.value);
-
-            // Split the date string into day, month, and year components
-            var dateComponents = e.value.split("/");
-            var day = parseInt(dateComponents[0]);
-            var month = parseInt(dateComponents[1]) - 1; // January is month 0, so we need to subtract 1
-            var year = parseInt(dateComponents[2]);
-
-            // Create the birthDate variable using the extracted components
-            var birthDate = new Date(year, month, day);
-
             var today = new Date();
+            var birthDate = new Date(e.value);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
-
             const ageInput = document.querySelector("#age");
             ageInput.value = age;
         }

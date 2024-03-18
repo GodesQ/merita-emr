@@ -254,7 +254,7 @@ class PatientController extends Controller
         try {
             // $srb_expdate = $request->srb_expdate ? \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d') : date('Y-m-d');
             // $passport_expdate = $request->passport_expdate ? \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d') : date('Y-m-d');
-            // $birthdate = $request->birthdate ? \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d') : date('Y-m-d');
+            // $birthdate = $request->birthdate ? \DateTime:    :createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d') : date('Y-m-d');
 
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
@@ -291,10 +291,10 @@ class PatientController extends Controller
                 'medical_package' => $request->medicalPackage,
                 'vessel' => strtoupper($patient_vessel),
                 'passportno' => strtoupper($request->passportNo),
-                // 'passport_expdate' => $passport_expdate,
+                'passport_expdate' => $request->passport_expdate,
                 'srbno' => strtoupper($request->ssrb),
-                // 'srb_expdate' => $srb_expdate,
-                // 'birthdate' => $birthdate,
+                'srb_expdate' => $request->srb_expdate,
+                'birthdate' => $request->birthdate,
                 'birthplace' => $request->birthplace,
             ]);
 
