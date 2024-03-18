@@ -120,10 +120,13 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 3px;">
-                                                    <h3>Email: {{ $details['email'] }} <br>Password:
-                                                        {{ $details['password'] }}</h3>
-                                                    <h3>Username: {{ $details['username'] }} <br>Password:
-                                                            {{ $details['password'] }}</h3>
+                                                    <h3>
+                                                        Email: {{ $details['email'] }} 
+                                                        <br>
+                                                        Username: {{ $details['username'] }} 
+                                                        <br>
+                                                        Password: {{ $details['password'] }}
+                                                    </h3>
                                                     <span
                                                         style="font-size: 13px; color: #909090; margin-bottom: 30px; display: block;">Note:
                                                         You are required to change your password on your first
