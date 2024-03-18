@@ -16,7 +16,6 @@ class EmployeePassword extends Mailable
      *
      * @return void
      */
-    public $details;
 
     public function __construct($details)
     {
@@ -31,9 +30,6 @@ class EmployeePassword extends Mailable
     public function build()
     {
         $details = $this->details;
-        return $this->subject('Merita EMR: Login Credentials')->view(
-            'emails.employee-password',
-            compact('details')
-        );
+        return $this->subject('Merita EMR: Login Credentials')->view('emails.employee-password', compact('details'));
     }
 }

@@ -120,7 +120,7 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 3px;">
-                                                    <h3>Username: {{ $details['email'] }} <br>Password:
+                                                    <h3>Email: {{ $details['email'] }} <br>Password:
                                                         {{ $details['password'] }}</h3>
                                                     <span
                                                         style="font-size: 13px; color: #909090; margin-bottom: 30px; display: block;">Note:
