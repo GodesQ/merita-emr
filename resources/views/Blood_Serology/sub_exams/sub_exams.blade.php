@@ -1,11 +1,11 @@
 <tr>
     <td>HBA1C</td>
     <td>
-        <input oninput="getBloodRemarks(this, 'HBA1C', '4.0', '6.4', '@isset($exam) {{ optional($exam)->hba1c }} @endisset')"
+        <input oninput="getBloodRemarks(this, 'HBA1C', '4.0', '6.5', '@isset($exam) {{ optional($exam)->hba1c }} @endisset')"
             name="hba1c" type="text" class="form-control" id="hba1c"
             value="@isset($exam) {{ optional($exam)->hba1c }} @endisset" />
     </td>
-    <td class="">4.0-6.4%</td>
+    <td class="">4.0-6.5%</td>
     {{-- <td><input name="hba1c_findings" type="text" class="form-control"
             style="width:350px" id="hba1c_findings"
             value="@isset($exam) {{ optional($exam)->hba1c_findings }} @endisset"></td> --}}
@@ -98,7 +98,7 @@
     <td>TRIGLYCERIDES</td>
     <td>
         <input
-            oninput="getBloodRemarks(this, 'TRIGLYCERIDES', '35', '130', '@isset($exam) {{ optional($exam)->triglycerides }} @endisset')"
+            oninput="getBloodRemarks(this, 'TRIGLYCERIDES', '35', '160', '@isset($exam) {{ optional($exam)->triglycerides }} @endisset')"
             name="triglycerides" type="text" class="form-control" id="triglycerides"
             value="@isset($exam) {{ optional($exam)->triglycerides }} @endisset" />
     </td>

@@ -111,16 +111,16 @@
                                                     @if(optional($exam_blood)->hba1c)
                                                     <tr>
                                                         <td>HBA1C</td>
-                                                        <td class="{{optional($exam_blood)->hba1c < 4.0 || optional($exam_blood)->hba1c > 6.4  ? 'red-text': null}}">
+                                                        <td class="{{optional($exam_blood)->hba1c < 4.0 || optional($exam_blood)->hba1c > 6.5  ? 'red-text': null}}">
                                                             {{optional($exam_blood)->hba1c}}
                                                             @if(optional($exam_blood)->hba1c < 4.0)
                                                                 L
                                                             @endif
-                                                            @if(optional($exam_blood)->hba1c >  6.4)
+                                                            @if(optional($exam_blood)->hba1c >  6.5)
                                                                 H
                                                             @endif
                                                         </td>
-                                                        <td>4.0-6.4%</td>
+                                                        <td>4.0-6.5%</td>
                                                     </tr>
                                                     @endif
                                                     @if(optional($exam_blood)->ppbg)
