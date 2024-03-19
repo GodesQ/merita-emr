@@ -17,13 +17,12 @@ class Patient
     public function handle(Request $request, Closure $next)
     {
         $data = session()->all();
-        if ($data['dept_id'] == 1 || $data['dept_id'] == 17 || $data['dept_id'] == 8 || $data['dept_id'] == 5) {
+        if ($data['dept_id'] == 1 || $data['dept_id'] == 17 || $data['dept_id'] == 8 || $data['dept_id'] == 5 || $data['dept_id'] == 2) {
             return $next($request);
         }
         return redirect('/dashboard')->with(
             'fail',
             'You cannot access this section'
         );
-        return $next($request);
     }
 }
