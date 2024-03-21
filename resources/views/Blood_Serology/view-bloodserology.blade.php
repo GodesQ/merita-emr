@@ -1,6 +1,7 @@
 <div class="row my-1">
     <div class="col-6">
         <a href="edit_bloodsero?id={{ $exam_blood_serology->admission_id }}" class="btn btn-solid btn-primary">Edit</a>
+        <a href="/delete_bloodsero/{{ $exam_blood_serology->id }}" class="btn btn-solid btn-warning">Reset</a>
         <button
             onclick='window.open("/examlab_bloodsero_print?id={{ $exam_blood_serology->admission_id }}&type=blood", "width=800,height=650").print()'
             class="btn btn-dark btn-solid" title="Print">Print Blood Chemistry Only</button>

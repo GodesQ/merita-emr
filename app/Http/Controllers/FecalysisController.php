@@ -176,6 +176,6 @@ class FecalysisController extends Controller
 
         $delete_fecalysis = $fecalysis->delete();
 
-        return back()->withSuccess('Fecalysis Deleted Successfully');
+        return back()->with('status', 'Fecalysis Reset.');
     }
 }

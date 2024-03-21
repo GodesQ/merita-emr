@@ -186,4 +186,12 @@ class DrugController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function delete_drug(Request $request, $id) {
+        $exam = DrugTest::where('id', $request->id)->first();
+        
+        $exam->delete();
+
+        return back()->with('status', 'Drug Test Reset.');
+    }
 }

@@ -143,7 +143,7 @@ class HematologyController extends Controller
         $hematology = Hematology::where('id', $id)->firstOrFail();
         $delete_hema = $hematology->delete();
 
-        return back()->withSuccess('Hematology Deleted Successfully');
+        return back()->with('status', 'Hematology Reset.');
     }
 }
 

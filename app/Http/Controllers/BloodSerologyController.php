@@ -100,4 +100,12 @@ class BloodSerologyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function delete_bloodsero(Request $request, $id) {
+        $exam_bloodsero = BloodSerology::where('id', $id)->first();
+        
+        $exam_bloodsero->delete();
+
+        return back()->with('status', 'Blood Serology Reset.');
+    }
 }

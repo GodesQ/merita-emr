@@ -276,8 +276,7 @@
                                                 <input name="cocaine" type="radio"
                                                     onchange="addRemarks('Cocaine', this)" class="m-75" id="cocaine_1"
                                                     value=""
-                                                    @php
-echo $exam->cocaine == "" ? "checked" : "" @endphp>
+                                                    <?php echo $exam->cocaine == "" ? "checked" : "" ?>>
                                                 Reset
                                             </td>
                                             <td align="right"><b>Propoxyphene</b></td>
@@ -356,8 +355,7 @@ echo $exam->cocaine == "" ? "checked" : "" @endphp>
                                                 <input name="alcohol" type="radio"
                                                     onchange="addRemarks('Alcohol', this)" class="m-75" id="alcohol_1"
                                                     value=""
-                                                    @php
-echo $exam->alcohol == "" ? "checked" : "" @endphp>
+                                                    <?php echo $exam->alcohol == "" ? "checked" : "" ?>>
                                                 Reset
                                             </td>
                                             <td width="18%" colspan="-2" align="right"><b> Metaqualone</b></td>

@@ -2,6 +2,7 @@
     <div class="col-6">
         <a href="edit_drug?id={{$examlab_drug->admission_id}}"
             class="btn btn-solid btn-primary">Edit</a>
+        <a href="/delete_drug/{{ $examlab_drug->id }}" class="btn btn-solid btn-warning">Reset</a>
         <button
             onclick='window.open("/examlab_drug_print?id={{$examlab_drug->admission_id}}", "width=800,height=650").print()'
             class="btn btn-dark btn-solid"
