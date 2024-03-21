@@ -170,4 +170,12 @@ class FecalysisController extends Controller
         }
 
     }
+
+    public function delete_fecalysis(Request $request, $id) {
+        $fecalysis = Fecalysis::where('id', $id)->first();
+
+        $delete_fecalysis = $fecalysis->delete();
+
+        return back()->withSuccess('Fecalysis Deleted Successfully');
+    }
 }

@@ -764,6 +764,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_fecalysis', [FecalysisController::class, 'add_fecalysis']);
 
     Route::post('/store_fecalysis', [FecalysisController::class, 'store_fecalysis'])->middleware(Laboratory::class);
+    Route::get('/delete_fecalysis/{id}', [FecalysisController::class, 'delete_fecalysis'])->middleware(Laboratory::class);
     // END OF CRUD FECALYSIS
 
     // START OF CRUD HEMATOLOGY
@@ -776,6 +777,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_hematology', [HematologyController::class, 'add_hematology'])->middleware(Laboratory::class);
 
     Route::post('/store_hematology', [HematologyController::class, 'store_hematology'])->middleware(Laboratory::class);
+    Route::get('/delete_hematology/{id}', [HematologyController::class, 'delete_hematology'])->middleware(Laboratory::class);
     // END OF CRUD HEMATOLOGY
 
     // START OF CRUD HEPATITIS

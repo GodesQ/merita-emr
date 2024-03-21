@@ -138,7 +138,16 @@ class HematologyController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function delete_hematology(Request $request, $id) {
+        $hematology = Hematology::where('id', $id)->firstOrFail();
+        $delete_hema = $hematology->delete();
+
+        return back()->withSuccess('Hematology Deleted Successfully');
+    }
 }
+
+
 
 // ALTER TABLE `examlab_hema` ADD 
 // `hemoglobin_recommendation` LONGTEXT NULL DEFAULT NULL AFTER `others_result`, ADD `hematocrit_recommendation` LONGTEXT NULL DEFAULT NULL AFTER `hemoglobin_recommendation`, 
