@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EmployeePassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -494,7 +495,7 @@ class AdminController extends Controller
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
             'email' => $request->email,
-            'username' => $request->middlename,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
             'title' => $request->title,
             'position' => $request->position,
@@ -515,6 +516,14 @@ class AdminController extends Controller
             'birthdate' => $request->birthdate,
             'birthplace' => $request->birthplace,
         ]);
+
+        $details = [
+            'email' => $employee->email,
+            'username' => $employee->username,
+            'password' => $request->password,
+        ];
+
+        Mail::to($request->email)->send(new EmployeePassword($details));
 
         $employeeInfo = session()->all();
         $log = new EmployeeLog();

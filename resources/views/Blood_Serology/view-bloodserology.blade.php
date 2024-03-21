@@ -25,10 +25,10 @@
         </tr>
         <tr>
             <td>HBA1C</td>
-            <td class="{{ $exam_blood_serology->hba1c < '4.0' ? 'text-danger' : null }}">
+            <td class="{{ $exam_blood_serology->hba1c < '4.0' || $exam_blood_serology->hba1c > 6.5 ? 'text-danger' : null }}">
                 {{ $exam_blood_serology->hba1c }}
             </td>
-            <td class="">4.0-6.4%</td>
+            <td class="">4.0-6.5%</td>
         </tr>
         <tr>
             <td>FBS</td>

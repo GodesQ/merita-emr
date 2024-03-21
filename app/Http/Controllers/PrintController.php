@@ -439,12 +439,14 @@ class PrintController extends Controller
         $examlab_hepa = DB::table('examlab_hepa')->where('admission_id', $id)->first();
         $exam_ecg = DB::table('exam_ecg')->where('admission_id', $id)->first();
         $exam_psycho = DB::table('exam_psycho')->where('admission_id', $id)->first();
+        $exam_visacuity = VisualAcuity::where('admission_id', $id)->first();
+
         $technician1 = User::where('id', $exam->technician_id)->first();
         $medical_director = User::where('position', "LIKE", '%Medical Director%')->first();
 
         return view(
             'PrintTemplates.exam_physical_print',
-            compact('exam', 'admission', 'technician1', 'patientInfo', 'exam_ishihara', 'exam_xray', 'examlab_feca', 'examlab_hepa', 'examlab_hiv', 'exam_ecg', 'exam_psycho', 'medical_director')
+            compact('exam', 'admission', 'technician1', 'patientInfo', 'exam_visacuity', 'exam_ishihara', 'exam_xray', 'examlab_feca', 'examlab_hepa', 'examlab_hiv', 'exam_ecg', 'exam_psycho', 'medical_director')
         );
     }
 
@@ -661,32 +663,7 @@ class PrintController extends Controller
     {
 
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.patientcode',
-                '=',
-                'tran_admission.patientcode'
-            )
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = VisualAcuity::where('admission_id', '=', $id)
             ->latest('id')

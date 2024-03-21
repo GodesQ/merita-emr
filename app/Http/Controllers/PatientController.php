@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PatientMedicalResult;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -251,13 +252,9 @@ class PatientController extends Controller
     public function save_progress_info(Request $request)
     {
         try {
-            $srb_expdate = \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d');
-            $passport_expdate = \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d');
-            $birthdate = \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d');
-
-            if($request->main_id == 14850) {
-                // dd($request->all());
-            }
+            // $srb_expdate = $request->srb_expdate ? \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d') : date('Y-m-d');
+            // $passport_expdate = $request->passport_expdate ? \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d') : date('Y-m-d');
+            // $birthdate = $request->birthdate ? \DateTime:    :createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d') : date('Y-m-d');
 
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
@@ -294,10 +291,10 @@ class PatientController extends Controller
                 'medical_package' => $request->medicalPackage,
                 'vessel' => strtoupper($patient_vessel),
                 'passportno' => strtoupper($request->passportNo),
-                'passport_expdate' => $passport_expdate,
+                'passport_expdate' => $request->passport_expdate,
                 'srbno' => strtoupper($request->ssrb),
-                'srb_expdate' => $srb_expdate,
-                'birthdate' => $birthdate,
+                'srb_expdate' => $request->srb_expdate,
+                'birthdate' => $request->birthdate,
                 'birthplace' => $request->birthplace,
             ]);
 

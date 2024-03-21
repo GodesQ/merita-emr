@@ -88,18 +88,13 @@
                                             <td align="left"><b>Color</b></td>
                                             <td width="76%">
                                                 <select name="color" class="form-control move">
-                                                    <option {{ $exam->color == '' ? 'selected' : null }}>Select Color
-                                                    </option>
-                                                    <option {{ $exam->color == 'Brown' ? 'selected' : null }}
-                                                        value="Brown">Brown</option>
-                                                    <option {{ $exam->color == 'For Light Brown' ? 'selected' : null }}
-                                                        value="For Light Brown">For Light Brown</option>
-                                                    <option {{ $exam->color == 'Yellow' ? 'selected' : null }}
-                                                        value="Yellow">Yellow</option>
-                                                    <option {{ $exam->color == 'Green' ? 'selected' : null }}
-                                                        value="Green">Green</option>
-                                                    <option {{ $exam->color == 'Red' ? 'selected' : null }} value="Red">
-                                                        Red</option>
+                                                    <option value="">Select Color</option>
+                                                    <option {{ $exam->color =='Brown' ? 'selected' : null }} value="Brown">Brown</option>
+                                                    <option {{ $exam->color =='Light Brown' ? 'selected' : null }} value="Light Brown">Light Brown</option>
+                                                    <option {{ $exam->color =='Dark Brown' ? 'selected' : null }} value="Dark Brown">Dark Brown</option>
+                                                    <option {{ $exam->color =='Yellow' ? 'selected' : null }} value="Yellow">Yellow</option>
+                                                    <option {{ $exam->color =='Green' ? 'selected' : null }} value="Green">Green</option>
+                                                    <option {{ $exam->color =='Red' ? 'selected' : null }} value="Red">Red</option>
                                                 </select>
                                             </td>
                                         </tr>

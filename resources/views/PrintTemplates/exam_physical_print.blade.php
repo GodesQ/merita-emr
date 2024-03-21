@@ -418,7 +418,7 @@
                                 {{$exam->pulse}}
                             </td>
                             <td width="18%">&nbsp;<b>Respiratory Rate:</b>
-                                {{$exam->respiratory_rate}}
+                                {{$exam->respiration}}
                             </td>
                         </tr>
                     </table>
@@ -441,11 +441,11 @@
                                                 <tr>
                                                     <td width="20%">OD</td>
                                                     <td width="30%">
-                                                        {{$exam->ufar_vision1}}
+                                                        {{$exam_visacuity->ufvod}}
                                                     </td>
                                                     <td width="20%">OS</td>
                                                     <td width="30%">
-                                                        {{$exam->ufar_vision2}}
+                                                        {{$exam_visacuity->ufvos}}
                                                     </td>
                                                 </tr>
                                             </table>
@@ -455,11 +455,11 @@
                                                 <tr>
                                                     <td width="20%">OD</td>
                                                     <td width="30%">
-                                                        {{$exam->unear_vision1}}
+                                                        {{$exam_visacuity->unvodj}}
                                                     </td>
                                                     <td width="20%">OS</td>
                                                     <td width="30%">
-                                                        {{$exam->unear_vision2}}
+                                                        {{$exam_visacuity->unvosj}}
                                                     </td>
                                                 </tr>
                                             </table>
@@ -472,11 +472,11 @@
                                                 <tr>
                                                     <td width="20%">OD</td>
                                                     <td width="30%">
-                                                        {{$exam->cfar_vision1}}
+                                                        {{$exam_visacuity->cfvod}}
                                                     </td>
                                                     <td width="20%">OS</td>
                                                     <td width="30%">
-                                                        {{$exam->cfar_vision2}}
+                                                        {{$exam_visacuity->cfvos}}
                                                     </td>
                                                 </tr>
                                             </table>
@@ -486,11 +486,11 @@
                                                 <tr>
                                                     <td width="20%">OD</td>
                                                     <td width="30%">
-                                                        {{$exam->cnear_vision1}}
+                                                        {{$exam_visacuity->cnvodj}}
                                                     </td>
                                                     <td width="20%">OS</td>
                                                     <td width="30%">
-                                                        {{$exam->cnear_vision2}}
+                                                        {{$exam_visacuity->cnvosj}}
                                                     </td>
                                                 </tr>
                                             </table>
@@ -570,21 +570,21 @@
                         <tr>
                             <td>Skin</td>
                             <td align="center"><b>
-                                    {{$exam->a1 ? "Yes" : ""}}
+                                    {{$exam->a1 ? "Yes" : "No"}}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a1_findings}}</font>
                                 </b></td>
                             <td>Neck,Lymph Node,Thyroid</td>
                             <td align="center"><b>
-                                    {{$exam->b1 ? "Yes" : ""}}
+                                    {{$exam->b1 ? "Yes" : "No"}}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b1_findings}}</font>
                                 </b></td>
                             <td>Anus-Rectum</td>
                             <td align="center"><b>
-                                    {{$exam->b1 ? "Yes" : ""}}
+                                    {{$exam->c1 ? "Yes" : "No"}}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c1_findings}}</font>
@@ -593,21 +593,21 @@
                         <tr>
                             <td>Head,Neck,Scalp</td>
                             <td align="center"><b>
-                                    {{$exam->a2}}
+                                    {{$exam->a2 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a2_findings}}</font>
                                 </b></td>
                             <td>Breast,Axilla,Chest</td>
                             <td align="center"><b>
-                                    {{$exam->b2}}
+                                    {{$exam->b2 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b2_findings}}</font>
                                 </b></td>
                             <td>Genito-Urinary Sys</td>
                             <td align="center"><b>
-                                    {{$exam->c2}}
+                                    {{$exam->c2 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c2_findings}}</font>
@@ -616,21 +616,21 @@
                         <tr>
                             <td>Eyes,external</td>
                             <td align="center"><b>
-                                    {{$exam->a3}}
+                                    {{$exam->a3 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a3_findings}}</font>
                                 </b></td>
                             <td>Lungs</td>
                             <td align="center"><b>
-                                    {{$exam->b3}}
+                                    {{$exam->b3 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b3_findings}}</font>
                                 </b></td>
                             <td>Inguinals,Genitals</td>
                             <td align="center"><b>
-                                    {{$exam->c3}}
+                                    {{$exam->c3 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c3_findings}}</font>
@@ -639,21 +639,21 @@
                         <tr>
                             <td>Pupils</td>
                             <td align="center"><b>
-                                    {{$exam->a4}}
+                                    {{$exam->a4 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a4_findings}}</font>
                                 </b></td>
                             <td>Heart</td>
                             <td align="center"><b>
-                                    {{$exam->b4}}
+                                    {{$exam->b4 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b4_findings}}</font>
                                 </b></td>
                             <td>Extremities</td>
                             <td align="center"><b>
-                                    {{$exam->c4}}
+                                    {{$exam->c4 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c4_findings}}</font>
@@ -662,21 +662,21 @@
                         <tr>
                             <td>Ears</td>
                             <td align="center"><b>
-                                    {{$exam->a5}}
+                                    {{$exam->a5 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a5_findings}}</font>
                                 </b></td>
                             <td>Abdomen</td>
                             <td align="center"><b>
-                                    {{$exam->b5}}
+                                    {{$exam->b5 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b5_findings}}</font>
                                 </b></td>
                             <td>Reflexes</td>
                             <td align="center"><b>
-                                    {{$exam->c5}}
+                                    {{$exam->c5 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c5_findings}}</font>
@@ -685,21 +685,21 @@
                         <tr>
                             <td>Nose,Sinuses</td>
                             <td align="center"><b>
-                                    {{$exam->a6}}
+                                    {{$exam->a6 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a6_findings}}</font>
                                 </b></td>
                             <td>Back</td>
                             <td align="center"><b>
-                                    {{$exam->b6}}
+                                    {{$exam->b6 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->b6_findings}}</font>
                                 </b></td>
                             <td>Dental(Teeth/Gums)</td>
                             <td align="center"><b>
-                                    {{$exam->c6}}
+                                    {{$exam->c6 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->c6_findings}}</font>
@@ -708,7 +708,7 @@
                         <tr>
                             <td>Mouth,Throat</td>
                             <td align="center"><b>
-                                    {{$exam->a7}}
+                                    {{$exam->a7 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
                                     <font size="1">{{$exam->a7_findings}}</font>
@@ -758,14 +758,14 @@
                                         <td>
                                             <input name="hbsag" type="checkbox" id="hbsag" value="reactive" disabled
                                                 @if ($examlab_hepa)
-                                                    {{preg_match('/reactive/i', $examlab_hepa->hbsag_result) ? "checked" : ""}}
+                                                    {{ in_array($examlab_hepa->hbsag_result, ['Reactive', 'reactive']) ? "checked" : ""}}
                                                 @endif />
                                             Reactive
                                         </td>
                                         <td>
                                             <input name="hbsag" type="checkbox" id="hbsag" value="nonreactive" disabled
                                                 @if ($examlab_hepa)
-                                                    {{preg_match('/Non Reactive/i', $examlab_hepa->hbsag_result) ? "checked" : ""}}
+                                                    {{ in_array($examlab_hepa->hbsag_result, ['Non Reactive', 'non reactive']) ? "checked" : ""}}
                                                 @endif />
                                             Non-Reactive
                                         </td>
@@ -775,14 +775,14 @@
                                         <td>
                                             <input name="hiv" type="checkbox" id="hiv" value="reactive" disabled
                                                 @if ($examlab_hiv)
-                                                    {{preg_match('/reactive/i', $examlab_hiv->result) ? "checked" : ""}}
+                                                    {{ in_array($examlab_hiv->result, ['Reactive', 'reactive']) ? "checked" : ""}}
                                                 @endif  />
                                             Reactive
                                         </td>
                                         <td>
                                             <input name="hiv" type="checkbox" id="hiv" value="nonreactive" disabled
                                                 @if ($examlab_hiv)
-                                                    {{preg_match('/Non Reactive/i', $examlab_hiv->result) ? "checked" : ""}}
+                                                    {{ in_array($examlab_hiv->result, ['Non Reactive', 'non reactive']) ? "checked" : ""}}
                                                 @endif />
                                             Non-Reactive
                                         </td>
@@ -797,12 +797,17 @@
                                         <td><b>H.RPR :</b></td>
                                         <td>
                                             <input name="rph" type="checkbox" id="rph" value="reactive"
-                                                disabled />
+                                                disabled 
+                                                @if($examlab_hepa) 
+                                                    {{ in_array($examlab_hepa->vdrl_result, ['Reactive', 'reactive']) ? "checked" : ""}}
+                                                @endif/>
                                             Reactive
                                         </td>
                                         <td>
-                                            <input name="rph" type="checkbox" id="rph" value="nonreactive"
-                                                 disabled />
+                                            <input name="rph" type="checkbox" id="rph" value="nonreactive" disabled
+                                            @if($examlab_hepa) 
+                                                {{ in_array($examlab_hepa->vdrl_result, ['Non Reactive', 'non reactive']) ? "checked" : ""}}
+                                            @endif />
                                             Non-Reactive
                                         </td>
                                     </tr>
