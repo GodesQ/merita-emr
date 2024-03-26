@@ -732,6 +732,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/edit_bloodsero', [BloodSerologyController::class, 'edit_bloodsero'])->middleware(Laboratory::class);
 
     Route::post('/update_bloodsero', [BloodSerologyController::class, 'update_bloodsero'])->middleware(Laboratory::class);
+    Route::get('/delete_bloodsero/{id}', [BloodSerologyController::class, 'delete_bloodsero'])->middleware(Laboratory::class);
     // END OF CRUD BLOOD SEROLOGY
 
     // START OF CRUD HIV
@@ -744,6 +745,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_hiv', [HIVController::class, 'add_hiv']);
 
     Route::post('/store_hiv', [HIVController::class, 'store_hiv']);
+    Route::get('/delete_hiv/{id}', [HIVController::class, 'delete_hiv'])->middleware(Laboratory::class);
+
     // END OF CRUD HIV
 
     // START OF CRUD DRUG
@@ -752,6 +755,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/update_drug', [DrugController::class, 'update_drug'])->middleware(Laboratory::class);
     Route::get('/add_drug', [DrugController::class, 'add_drug'])->middleware(Laboratory::class);
     Route::post('/store_drug', [DrugController::class, 'store_drug'])->middleware(Laboratory::class);
+    Route::get('/delete_drug/{id}', [DrugController::class, 'delete_drug'])->middleware(Laboratory::class);
     // END OF CRUD DRUG
 
     // START OF CRUD FECALYSIS
@@ -764,6 +768,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_fecalysis', [FecalysisController::class, 'add_fecalysis']);
 
     Route::post('/store_fecalysis', [FecalysisController::class, 'store_fecalysis'])->middleware(Laboratory::class);
+    Route::get('/delete_fecalysis/{id}', [FecalysisController::class, 'delete_fecalysis'])->middleware(Laboratory::class);
     // END OF CRUD FECALYSIS
 
     // START OF CRUD HEMATOLOGY
@@ -776,6 +781,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_hematology', [HematologyController::class, 'add_hematology'])->middleware(Laboratory::class);
 
     Route::post('/store_hematology', [HematologyController::class, 'store_hematology'])->middleware(Laboratory::class);
+    Route::get('/delete_hematology/{id}', [HematologyController::class, 'delete_hematology'])->middleware(Laboratory::class);
     // END OF CRUD HEMATOLOGY
 
     // START OF CRUD HEPATITIS
@@ -809,6 +815,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/add_urinalysis', [UrinalysisController::class, 'add_urinalysis'])->middleware(Laboratory::class);
 
     Route::post('/store_urinalysis', [UrinalysisController::class, 'store_urinalysis'])->middleware(Laboratory::class);
+    Route::get('/delete_urinalysis/{id}', [UrinalysisController::class, 'delete_urinalysis'])->middleware(Laboratory::class);
     // END OF CRUD URINALYSIS
 
     // START OF CRUD MISC

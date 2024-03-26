@@ -174,4 +174,12 @@ class HIVController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function delete_hiv(Request $request, $id) {
+        $exam_hiv = HIV::where('id', $request->id)->first();
+        
+        $exam_hiv->delete();
+
+        return back()->with('status', 'HIV Reset.');
+    }
 }

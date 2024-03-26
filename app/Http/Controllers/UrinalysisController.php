@@ -188,4 +188,12 @@ class UrinalysisController extends Controller
             return view('errors.error', compact('message', 'file'));
         }
     }
+
+    public function delete_urinalysis(Request $request, $id) {
+        $exam = Urinalysis::where('id', $request->id)->first();
+        
+        $exam->delete();
+
+        return back()->with('status', 'Urinalysis Reset.');
+    }
 }
