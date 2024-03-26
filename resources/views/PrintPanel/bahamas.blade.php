@@ -1270,9 +1270,9 @@
                                                         Witnessed by: (Signature):
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; position: relative;">
-                                                        @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+                                                        {{-- @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58) --}}
                                                             <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="120" height="60" style="object-fit: cover; object-position: center;" />
-                                                        @endif
+                                                        {{-- @endif --}}
                                                     </td>
                                                     <td width="1%"></td>
                                                     <td  width="25%" valign="bottom">
