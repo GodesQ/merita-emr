@@ -1212,7 +1212,7 @@
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; padding: 0 1.5rem;">
                                                         {{-- @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58) --}}
-                                                            <img src="../../../app-assets/images/signatures/rex_bahamas_signature.png" width="76" height="60" style="object-fit: cover; object-position: top;" />
+                                                            <img src="../../../app-assets/images/signatures/rex_signature.png" width="76" height="60" style="object-fit: cover; object-position: top;" />
                                                         {{-- @endif --}}
                                                     </td>
                                                     <td  width="1%"></td>
@@ -1227,8 +1227,11 @@
                                 <tr>
                                     <td colspan="4" height="80">I hereby authorize the release of all my previous
                                         medical records from any health professionals,
-                                        health institutions and public authorities to Dr. <span
-                                            style="margin-left: 0.5rem; border-bottom: 1px solid black; padding: 0 1.5rem;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>(the
+                                        health institutions and public authorities to Dr. 
+                                        <span
+                                            style="margin-left: 0.5rem; border-bottom: 1px solid black; padding: 0 1.5rem;">
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="120" height="60" style="object-fit: cover; object-position: center;" />
+                                        </span>(the
                                         approved medical practitioner carrying out the medical examinations).</td>
                                 </tr>
                                 <tr>
@@ -1263,7 +1266,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="2" height="40" style="margin-bottom: 21rem;">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="2" height="40" style="margin-bottom: 18rem;">
                                             <tbody>
                                                 <tr>
                                                     <td width="25%" style="font-size: 13px;" valign="bottom">
