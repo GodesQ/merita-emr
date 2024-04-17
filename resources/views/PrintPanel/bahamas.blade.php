@@ -1212,7 +1212,7 @@
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; padding: 0 1.5rem;">
                                                         {{-- @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58) --}}
-                                                            <img src="../../../app-assets/images/signatures/rex-signature.png" width="76" height="60" style="object-fit: cover; object-position: top;" />
+                                                            <img src="../../../app-assets/images/signatures/rex-signature.png" width="80" height="60" style="object-fit: cover; object-position: top;" />
                                                         {{-- @endif --}}
                                                     </td>
                                                     <td  width="1%"></td>
@@ -1229,8 +1229,8 @@
                                         medical records from any health professionals,
                                         health institutions and public authorities to Dr. 
                                         <span
-                                            style="margin-left: 0.5rem; border-bottom: 1px solid black; padding: 0 0.1rem;">
-                                            <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="90" height="60" style="object-fit: cover; object-position: center;" />
+                                            style="margin-left: 0.5rem; border-bottom: 1px solid black;">
+                                            <img src="../../../app-assets/images/signatures/md_gonzales_bahamas_sig.png" width="120" height="60" style="object-fit: cover; object-position: center; transform: translateY(14px);" />
                                         </span>(the
                                         approved medical practitioner carrying out the medical examinations).</td>
                                 </tr>
