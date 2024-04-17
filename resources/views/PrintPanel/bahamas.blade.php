@@ -2521,7 +2521,7 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <table width="100%" cellspacing="0" cellpadding="5" class="brdTop" style="margin: 26rem 0 3rem 0;">
+                        <table width="100%" cellspacing="0" cellpadding="5" class="brdTop" style="margin: 25rem 0 3rem 0;">
                             <tbody>
                                 <tr>
                                     <td>
@@ -3213,7 +3213,7 @@
                                                 </tr>
                                                 <tr colspan="10">
                                                     <td>
-                                                        <table width="100%" cellspacing="0" cellpadding="5" class="brdTop" style="margin: 6rem 0 2rem 0;">
+                                                        <table width="100%" cellspacing="0" cellpadding="5" class="brdTop" style="margin: 4rem 0 2rem 0;">
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
