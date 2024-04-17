@@ -1211,9 +1211,9 @@
                                                         Witnessed by: (Signature):
                                                     </td>
                                                     <td  width="15%" style="border-bottom: 1px solid black; padding: 0 1.5rem;">
-                                                        @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58)
+                                                        {{-- @if($admission->agency_id == 3 || $admission->agency_id == 55 || $admission->agency_id == 57 || $admission->agency_id == 58) --}}
                                                             <img src="../../../app-assets/images/signatures/rex_bahamas_signature.png" width="76" height="60" style="object-fit: cover; object-position: top;" />
-                                                        @endif
+                                                        {{-- @endif --}}
                                                     </td>
                                                     <td  width="1%"></td>
                                                     <td  width="25%" valign="bottom">Name: (Typed or printed)</td>
