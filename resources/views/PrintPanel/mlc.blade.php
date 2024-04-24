@@ -182,7 +182,7 @@
                                             SPECIFY: {{$admission->position}}
                                         </td>
                                         <td valign="top">COMPANY:<br>
-                                            <span class="fontMed">
+                                            <span class="fontMed" style="text-transform: uppercase;">
                                                 @if (preg_match("/Bahia/i", $admission->agency->agencyname))
                                                     {{'Bahia Shipping Services, Inc.'}}
                                                 @else
