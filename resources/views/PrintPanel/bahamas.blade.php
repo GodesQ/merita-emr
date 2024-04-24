@@ -2469,7 +2469,7 @@
                                 <tr>
                                     <td height="50" colspan="5">
                                         Place of examination: <span
-                                            style="margin-left: 0.5rem; border-bottom: 1px solid black;">MERITA DIAGNOSTIC CLINIC</span>
+                                            style="margin-left: 0.5rem; border-bottom: 1px solid black;">MERITA DIAGNOSTIC CLINIC INC.</span>
                                     </td>
                                 </tr>
                                 <tr>
