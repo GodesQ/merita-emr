@@ -274,8 +274,6 @@
                                             </td>
                                         </tr>
 
-                                        
-
                                         @if($admission->exam_xray)
                                             @if($admission->exam_xray->chest_remarks_status)
                                                 <tr>
@@ -289,7 +287,11 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @elseif($admission->exam_xray->lumbosacral_remarks_status)
+                                            @endif
+                                        @endif
+
+                                        @if($admission->exam_xray)
+                                            @if($admission->exam_xray->lumbosacral_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
@@ -301,7 +303,11 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @elseif($admission->exam_xray->knees_remarks_status)
+                                            @endif
+                                        @endif
+
+                                        @if($admission->exam_xray)
+                                            @if($admission->exam_xray->knees_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
@@ -314,30 +320,7 @@
                                                     </td>
                                                 </tr>
                                             @endif
-                                            @else
-                                                <tr>
-                                                    <td valign="top"></td>
-                                                    <td valign="top">
-                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->findings }}</span>
-                                                    </td>
-                                                    <td valign="top">
-                                                        @if($admission->exam_xray->impression)
-                                                            <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->impression }}</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endif
                                         @endif
-
-                                        {{-- @if($admission->exam_xray)
-                                            @if($admission->exam_xray->lumbosacral_remarks_status)
-                                                
-                                            @endif
-                                        @endif
-
-                                        @if($admission->exam_xray)
-                                            
-                                        @endif --}}
 
                                         @if($admission->exam_ecg)
                                             <tr>
