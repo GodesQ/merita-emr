@@ -537,7 +537,7 @@ class PatientController extends Controller
     {
         try {
             $data = session()->all();
-            $patientAdmission = Admission::where('id', $data['admissionId'])->first();
+            $patientAdmission = Admission::where('id', $data['admissionId'])->with('medical_results')->first();
             return view('ProgressInfo.laboratory_result', compact('data', 'patientAdmission'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
