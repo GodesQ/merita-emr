@@ -1181,7 +1181,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><span class="lblForm">FORM NO. 3<br>REV. 01 / 31-01-2022</span></td>
+                    <td><span class="lblForm">FORM NO. 3<br>REV. 03 / 31-01-2022</span></td>
                 </tr>
             </tbody>
         </table>
