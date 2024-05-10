@@ -287,9 +287,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @else
-
-                                            @if($admission->exam_xray->lumbosacral_remarks_status)
+                                            @elseif($admission->exam_xray->lumbosacral_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
@@ -301,9 +299,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @else
-
-                                            @if($admission->exam_xray->knees_remarks_status)
+                                            @elseif($admission->exam_xray->knees_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
@@ -316,8 +312,6 @@
                                                     </td>
                                                 </tr>
                                             @else
-
-                                            @if(!$admission->exam_xray->knees_remarks_status && !$admission->exam_xray->lumbosacral_remarks_status && !$admission->exam_xray->chest_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
