@@ -279,7 +279,7 @@
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings  }}</span>
+                                                        <b>Chest Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->chest_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->chest_findings }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->chest_remarks_status == 'findings' && $admission->exam_xray->chest_recommendations)
@@ -287,11 +287,12 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @elseif($admission->exam_xray->lumbosacral_remarks_status)
+                                            @endif
+                                            @if($admission->exam_xray->lumbosacral_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings  }}</span>
+                                                        <b>LUMBOSACRAL XRAY:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->lumbosacral_remarks_status == 'normal' ? 'Normal' : $admission->exam_xray->lumbosacral_findings }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->lumbosacral_remarks_status == 'findings' && $admission->exam_xray->lumbosacral_recommendations)
@@ -299,11 +300,12 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @elseif($admission->exam_xray->knees_remarks_status)
+                                            @endif
+                                            @if($admission->exam_xray->knees_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings  }}</span>
+                                                        <b>Knee:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->knees_findings == 'normal' ? 'Normal' : $admission->exam_xray->knees_findings }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->knees_findings == 'findings' && $admission->exam_xray->knees_recommendations)
@@ -311,11 +313,12 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                            @else
+                                            @endif
+                                            @if(!$admission->exam_xray->chest_remarks_status && !$admission->exam_xray->lumbosacral_remarks_status && !$admission->exam_xray->knees_remarks_status)
                                                 <tr>
                                                     <td valign="top"></td>
                                                     <td valign="top">
-                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->findings  }}</span>
+                                                        <b>Xray:</b> <span style="margin-left: 10px;">{{ $admission->exam_xray->findings }}</span>
                                                     </td>
                                                     <td valign="top">
                                                         @if($admission->exam_xray->impression)
