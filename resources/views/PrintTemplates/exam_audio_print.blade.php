@@ -423,9 +423,9 @@ function markSlash($val)
                                                         <td align="center">
                                                             @if ($technician1)
                                                                 @if($technician1->signature)
-                                                                    <img src="{{$technician1->signature}}" width="150" height="50" style="object-fit: cover;" />
+                                                                    <img src="{{$technician1->signature}}" width="120" height="50" style="object-fit: cover;" />
                                                                 @else
-                                                                    <div style="width: 150px;height: 20px;"></div>
+                                                                    <div style="width: 120px;height: 20px;"></div>
                                                                 @endif
                                                             @endif
                                                         </td>
