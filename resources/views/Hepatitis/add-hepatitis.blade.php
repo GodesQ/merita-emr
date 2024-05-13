@@ -211,8 +211,14 @@
                                                 <input name="tpha_result" type="radio" class="m-50" id="tpha_result_2" value="">Reset
                                             @endif
                                         </td>
-                                        <td class="brdLeft"></td>
-                                        <td class="brdLeft"></td>
+                                        <td width="20%" class="brdLeft">
+                                            <input name="tpha_value" type="text" class="form-control"
+                                                id="tpha_value" value="">
+                                        </td>
+                                        <td width="20%" class="brdLeft">
+                                            <input name="tpha_cutoff" type="text" class="form-control"
+                                                id="tpha_cutoff" value="">
+                                        </td>
                                         <td><input name="tpha_findings" type="text" class="form-control" style="width:280px"
                                             id="tpha_findings" value=""></td>
                                         <td><input name="tpha_recommendation" type="text" class="form-control" style="width:280px"
