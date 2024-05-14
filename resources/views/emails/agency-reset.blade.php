@@ -120,15 +120,9 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 3px;" bgcolor="#244681">
-                                                    <form action="{{url('')}}/change_agency_password">
-                                                        @csrf
-                                                        <input type="hidden" value="{{$id}}"
-                                                            name="agency_id">
-                                                        <input type="hidden" value="{{$email}}"
-                                                            name="email">
-                                                        <button type="submit" style="padding: 0.6rem 1rem 0.6rem 1rem; background: #244681; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; font-family: 'Google Sans', Helvetica, Arial, sans-serif; font-size: 16px;">
-                                                            CLICK HERE TO RESET PASSWORD</button>
-                                                    </form>
+                                                    <a href="{{url('')}}/change_agency_password?agency_id={{$id}}&email={{$email}}" style="padding: 0.6rem 1rem 0.6rem 1rem; background: #244681; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; font-family: 'Google Sans', Helvetica, Arial, sans-serif; font-size: 16px;">
+                                                        CLICK HERE TO RESET PASSWORD
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </table>
