@@ -195,7 +195,7 @@ class ReferralController extends Controller
             if(session()->get('email') == 'james@godesq.com') {
                 $to_emails = [$request->email_employee];
             } else {
-                $to_emails = [$request->email_employee, env(' '), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+                $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
             }
 
             $refferal_data = DB::table('refferal')
