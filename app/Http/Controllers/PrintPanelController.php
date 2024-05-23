@@ -275,32 +275,32 @@ class PrintPanelController extends Controller
          $patients = [];
 
          foreach($today_patients as $key => $patient) {
-             $additional_exams =  DB::table('tran_admissiondtl')
-                                ->select(
-                                    'tran_admissiondtl.*',
-                                    'list_exam.examname as examname',
-                                    'list_exam.category as category',
-                                    'list_exam.section_id',
-                                    'list_section.sectionname'
-                                )
-                                ->where('main_id', $patient->admission_id)
-                                ->leftJoin(
-                                    'list_exam',
-                                    'list_exam.id',
-                                    'tran_admissiondtl.exam_id'
-                                )
-                                ->leftJoin(
-                                    'list_section',
-                                    'list_section.id',
-                                    'list_exam.section_id'
-                                )
-                                ->get();
+            //  $additional_exams =  DB::table('tran_admissiondtl')
+            //                     ->select(
+            //                         'tran_admissiondtl.*',
+            //                         'list_exam.examname as examname',
+            //                         'list_exam.category as category',
+            //                         'list_exam.section_id',
+            //                         'list_section.sectionname'
+            //                     )
+            //                     ->where('main_id', $patient->admission_id)
+            //                     ->leftJoin(
+            //                         'list_exam',
+            //                         'list_exam.id',
+            //                         'tran_admissiondtl.exam_id'
+            //                     )
+            //                     ->leftJoin(
+            //                         'list_section',
+            //                         'list_section.id',
+            //                         'list_exam.section_id'
+            //                     )
+            //                     ->get();
 
-                $additional_tests = [];
+            //     $additional_tests = [];
 
-                foreach($additional_exams as $exam) {
-                    array_push($additional_tests, $exam->examname);
-                }
+            //     foreach($additional_exams as $exam) {
+            //         array_push($additional_tests, $exam->examname);
+            //     }
 
             $patient_data = [
                 "patient_lastname" => $patient->patient ? $patient->patient->lastname : null,
@@ -323,7 +323,7 @@ class PrintPanelController extends Controller
                 "patientcode" => $patient->patientcode,
                 "payment_type" => $patient->payment_type,
                 "admission_id" => $patient->id,
-                "additional_tests" => $additional_tests
+                "additional_tests" => [],
             ];
             array_push($patients, $patient_data);
          }
