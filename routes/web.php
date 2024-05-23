@@ -213,6 +213,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::post('/patient_edit/crop_signature', [PatientController::class, 'save_crop_signature'])->name('patient.crop.save');
 
+    Route::post('/agency/patient-update', [PatientController::class, 'updatePatientByAgency']);
+
     Route::group(['middleware' => ['Patient']], function () {
         Route::get('/add_patient', [PatientController::class, 'add_patient'])->name('patients.add');
 

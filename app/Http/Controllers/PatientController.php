@@ -1032,6 +1032,32 @@ class PatientController extends Controller
         ]);
     }
 
+    public function updatePatientByAgency(Request $request) {
+        
+        $patient = Patient::where('id', $request->id)->first();
+        
+        $patient->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'middlename' => $request->middlename,
+            'position_applied' => $request->position_applied,
+        ]);
+
+        $patient->patientinfo()->update([
+            'address' => $request->address,
+            'contactno' => $request->contactno,
+            'maritalstatus' => $request->maritalstatus,
+            'nationality' => $request->nationality,
+            'birthdate' => $request->birthdate,
+            'country_destination' => $request->country_destination,
+            'vessel' => $request->vessel,
+            'passportno' => $request->passportno,
+            'srbno' => $request->srbno,
+        ]);
+
+        return back()->withSuccess('Crew Information Successfully Updated.');
+    }
+
     public function update_patient_signature(Request $request) {
         if ($request->old_signature == $request->signature) {
             $signature = $request->old_signature;
