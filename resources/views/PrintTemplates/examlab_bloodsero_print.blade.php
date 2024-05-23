@@ -602,8 +602,8 @@
                                                                 Negative
                                                             @endif
                                                         </td>
-                                                        <td align="center" valign="top"> - </td>
-                                                        <td align="center" valign="top"> - </td>
+                                                        <td align="center" valign="top"> {{ $exam_sero->tpha_cutoff }} </td>
+                                                        <td align="center" valign="top"> {{ $exam_sero->tpha_value }} </td>
                                                     </tr>
                                                     @endif
                                                     @if(optional($exam_sero)->antihbs_result)

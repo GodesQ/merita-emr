@@ -91,7 +91,7 @@
                                                     <td align="center" class="brdLeftBtm"><b>NORMAL VALUES</b></td>
                                                 </tr>
 
-                                                @if($exam->hemoglobin != " ")
+                                                @if($exam->hemoglobin != "")
                                                 <tr>
                                                     <td align="left" valign="top" class="brdBtm">
                                                         <p>Hemoglobin</p>
@@ -161,7 +161,7 @@
                                                 </tr>
                                                 @endif
 
-                                                @if ($exam->neuthrophils != " ")
+                                                @if ($exam->neuthrophils != "")
                                                 <tr>
                                                     <td align="left" valign="top" class="brdBtm">
                                                         <p>&nbsp;&nbsp;&nbsp;&nbsp;Neutrophil<br>

@@ -222,8 +222,14 @@
                                                 value="" @php echo $exam->tpha_result == '' ? "checked" : ""
                                             @endphp>Reset
                                         </td>
-                                        <td width="20%" class="brdLeft"></td>
-                                        <td width="20%" class="brdLeft"></td>
+                                        <td width="20%" class="brdLeft">
+                                            <input name="tpha_value" type="text" class="form-control"
+                                                id="tpha_value" value="{{ $exam->tpha_value }}">
+                                        </td>
+                                        <td width="20%" class="brdLeft">
+                                            <input name="tpha_cutoff" type="text" class="form-control"
+                                                id="tpha_cutoff" value="{{ $exam->tpha_cutoff }}">
+                                        </td>
                                         <td><input name="tpha_findings" type="text" class="form-control" style="width:280px"
                                             id="tpha_findings" value="{{ $exam->tpha_findings }}"></td>
                                         <td><input name="tpha_recommendation" type="text" class="form-control" style="width:280px"

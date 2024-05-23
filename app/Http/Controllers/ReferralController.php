@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Referral\StoreRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
@@ -156,12 +158,9 @@ class ReferralController extends Controller
         }
     }
 
-    public function store_refferal(Request $request)
+    public function store_refferal(StoreRequest $request)
     {
         try {
-            $request->validate([
-                'email_employee' => 'required|email',
-            ]);
 
             $existing_referral = Refferal::where('email_employee', $request->email_employee)->latest('id')->first();
 
@@ -171,6 +170,8 @@ class ReferralController extends Controller
                 }
             }
 
+            $data = $request->validated();
+
             $birthdate = strtotime($request->birthdate);
             $new_birthdate = date('Y-m-d', $birthdate);
             $ssrb_expdate = strtotime($request->ssrb_expdate);
@@ -179,56 +180,23 @@ class ReferralController extends Controller
             $new_passport_expdate = date('Y-m-d', $passport_expdate);
 
             $signature = base64_encode($request->signature);
-            $refferal = new Refferal();
-            $refferal->agency_id = $request->agency_id;
-            $refferal->package_id = $request->package_id;
-            $refferal->employer = $request->employer;
-            $refferal->agency_address = $request->agency_address;
-            $refferal->country_destination = $request->country_destination;
-            $refferal->lastname = $request->lastname;
-            $refferal->firstname = $request->firstname;
-            $refferal->middlename = $request->middlename;
-            $refferal->address = $request->address;
-            $refferal->contactno = $request->contactno;
-            $refferal->birthplace = $request->birthplace;
-            $refferal->birthdate = $new_birthdate;
-            $refferal->age = $request->age;
-            $refferal->civil_status = $request->civil_status;
-            $refferal->nationality  = $request->nationality;
-            $refferal->gender = $request->gender;
-            $refferal->position_applied = $request->position_applied;
-            $refferal->vessel = $request->vessel == 'other' ? $request->other_vessel : $request->vessel;
-            $refferal->principal = $request->principal == 'other' ? $request->other_principal : $request->principal;
-            $refferal->passport = $request->passport;
-            $refferal->ssrb = $request->ssrb;
-            $refferal->passport_expdate = $new_passport_expdate;
-            $refferal->ssrb_expdate = $new_ssrb_expdate;
-            $refferal->payment_type = $request->payment_type;
-            $refferal->admission_type = $request->admission_type;
-            $refferal->custom_request = $request->custom_request;
-            $refferal->requestor = $request->requestor;
-            $refferal->certificate = implode(", ",$request->certificate);
-            $refferal->skuld_qty = $request->skuld_qty;
-            $refferal->woe_qty = $request->woe_qty;
-            $refferal->cayman_qty = $request->cayman_qty;
-            $refferal->liberian_qty = $request->liberian_qty;
-            $refferal->croatian_qty = $request->croatian_qty;
-            $refferal->danish_qty = $request->danish_qty;
-            $refferal->diamlemos_qty = $request->diamlemos_qty;
-            $refferal->marshall_qty = $request->marshall_qty;
-            $refferal->malta_qty = $request->malta_qty;
-            $refferal->dominican_qty = $request->dominican_qty;
-            $refferal->bahamas_qty = $request->bahamas_qty;
-            $refferal->bermuda_qty = $request->bermuda_qty;
-            $refferal->mlc_qty = $request->mlc_qty;
-            $refferal->mer_qty = $request->mer_qty;
-            $refferal->bahia_qty = $request->bahia_qty;
-            $refferal->signature = $signature;
-            $refferal->email_employee = $request->email_employee;
-            $refferal->created_date = date('Y-m-d');
-            $save = $refferal->save();
 
-            $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+            $refferal = Refferal::create(array_merge($data, [
+                'signature' => $signature,
+                'birthdate' => $new_birthdate,
+                'passport_expdate' => $new_passport_expdate,
+                'ssrb_expdate' => $new_ssrb_expdate,
+                'created_date' => Carbon::now(),
+                'certificate' => implode(", ",$request->certificate),
+                'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
+                'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
+            ]));
+            
+            if(session()->get('email') == 'james@godesq.com') {
+                $to_emails = [$request->email_employee];
+            } else {
+                $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+            }
 
             $refferal_data = DB::table('refferal')
                 ->select(
@@ -244,7 +212,7 @@ class ReferralController extends Controller
             $data = $refferal_data;
 
 
-            if ($save) {
+            if ($refferal) {
                 $pdf = PDF::loadView('emails.refferal-pdf', [
                     'data' => $data,
                 ])->setOptions([
@@ -261,11 +229,6 @@ class ReferralController extends Controller
 
             }
         } catch (\Exception $exception) {
-
-            $request->validate([
-                'email_employee' => 'required|email|unique:refferal'
-            ]);
-
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));

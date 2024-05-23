@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="container">
-            <button type="button" class="btn btn-outline-success block btn-lg d-none" id="open-instruction"
+            {{-- <button type="button" class="btn btn-outline-success block btn-lg d-none" id="open-instruction"
                 data-toggle="modal" data-target="#large">Announcement</button>
             <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
                 style="display: none;" aria-hidden="true">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="col-md-12 my-1">
                     <div class="card">
@@ -83,98 +83,107 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="projectinput3">Lastname <span class="danger">*</span></label>
-                                                <input type="text" id="projectinput3" class="form-control lastname"
+                                                <label for="lastname">Lastname <span class="danger">*</span></label>
+                                                <input type="text" id="lastname" class="form-control lastname"
                                                     placeholder="Lastname" name="lastname">
+                                                <span class="text-danger danger" error-name="lastname"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="projectinput4">Firstname <span class="danger">*</span></label>
-                                                <input type="text" id="projectinput4" class="form-control"
+                                                <label for="firstname">Firstname <span class="danger">*</span></label>
+                                                <input type="text" id="firstname" class="form-control"
                                                     placeholder="Firstname" name="firstname">
+                                                <span class="text-danger danger" error-name="firstname"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="projectinput4">Middlename</label>
-                                                <input type="text" id="projectinput4" class="form-control"
+                                                <label for="middlename">Middlename</label>
+                                                <input type="text" id="middlename" class="form-control"
                                                     placeholder="Middlename" name="middlename">
+                                                <span class="text-danger danger" error-name="middlename"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Address of Employee <span
+                                                <label for="address">Address of Employee <span
                                                         class="danger">*</span></label>
-                                                <input type="text" name="address" id="address"
-                                                    class="form-control" />
+                                                <input type="text" name="address" id="address" class="form-control" />
+                                                <span class="text-danger danger" error-name="address"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput2">Email of Employee <span
+                                                <label for="email_employee">Email of Employee <span
                                                         class="danger">*</span></label>
-                                                <input type="email" id="projectinput2" class="form-control"
+                                                <input type="email" id="email_employee" class="form-control"
                                                     placeholder="Email of Employee" name="email_employee">
-                                                @error('email_employee')
-                                                    {{ $message }}
-                                                @enderror
+                                                <span class="text-danger danger" error-name="email_employee"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Birthplace <span class="danger">*</span></label>
-                                                <input type="text" id="birthplace" name="birthplace" class="form-control" />
+                                                <label for="birthplace">Birthplace <span class="danger">*</span></label>
+                                                <input type="text" id="birthplace" name="birthplace"
+                                                    class="form-control" />
+                                                <span class="text-danger danger" error-name="birthplace"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Birthdate <span class="danger">*</span></label>
+                                                <label for="birthdate">Birthdate <span class="danger">*</span></label>
                                                 <input type="date" onchange="getAge(this)" id="birthdate"
                                                     name="birthdate" class="form-control" />
+                                                <span class="text-danger danger" error-name="birthdate"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Age <span class="danger">*</span></label>
+                                                <label for="age">Age <span class="danger">*</span></label>
                                                 <input type="text" id="age" name="age" readonly
                                                     class="form-control" />
+                                                <span class="text-danger danger" error-name="age"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">Passport No. <span class="danger">*</span></label>
+                                                <label for="passport">Passport No. <span class="danger">*</span></label>
                                                 <input type="text" name="passport" id="passport"
                                                     class="form-control" />
+                                                <span class="text-danger danger" error-name="passport"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">Passport Expiry Date <span
+                                                <label for="passport_expdate">Passport Expiry Date <span
                                                         class="danger">*</span></label>
                                                 <input type="date" name="passport_expdate" id="passport_expdate"
                                                     class="form-control" />
+                                                <span class="text-danger danger" error-name="passport_expdate"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">SIRB No <span class="danger">*</span></label>
+                                                <label for="ssrb">SIRB No <span class="danger">*</span></label>
                                                 <input type="text" name="ssrb" id="ssrb"
                                                     class="form-control" />
+                                                <span class="text-danger danger" error-name="ssrb"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="">SIRB Expiry Date <span
+                                                <label for="ssrb_expdate">SIRB Expiry Date <span
                                                         class="danger">*</span></label>
                                                 <input type="date" name="ssrb_expdate" id="ssrb_expdate"
                                                     class="form-control" />
+                                                <span class="text-danger danger" error-name="ssrb_expdate"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +191,9 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nationality">Nationality</label>
-                                                <input type="text" name="nationality" id="nationality" class="form-control">
+                                                <input type="text" name="nationality" id="nationality"
+                                                    class="form-control">
+                                                <span class="text-danger danger" error-name="nationality"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -195,6 +206,7 @@
                                                     <option value="Divorced">Divorced</option>
                                                     <option value="Separated">Separated</option>
                                                 </select>
+                                                <span class="text-danger danger" error-name="civil_status"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -204,10 +216,12 @@
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                 </select>
+                                                <span class="text-danger danger" error-name="gender"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 class="form-section"><i class="feather icon-user"></i> Crew Agency Information</h4>
+                                    <h4 class="form-section"><i class="feather icon-user"></i> Crew Agency Information
+                                    </h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -216,6 +230,7 @@
                                                 <input type="text" id="employer" class="form-control"
                                                     placeholder="Name of Employer" name="employer" readonly
                                                     value="{{ session()->get('agencyName') }}">
+                                                <span class="text-danger danger" error-name="employer"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -225,15 +240,16 @@
                                                 <input type="text" id="agency_address" class="form-control"
                                                     placeholder="Address of Agency" name="agency_address" readonly
                                                     value="{{ session()->get('address') }}">
+                                                <span class="text-danger danger" error-name="agency_address"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput4">Medical Package <span
+                                                <label for="package_id">Medical Package <span
                                                         class="danger">*</span></label>
-                                                <select required name="package_id" id="" class="select2">
+                                                <select required name="package_id" id="package_id" class="select2">
                                                     <option value=" ">-- SELECT PACKAGE --</option>
                                                     @foreach ($packages as $package)
                                                         <option value="{{ $package->id }}">{{ $package->packagename }}
@@ -241,83 +257,67 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <span class="text-danger danger" error-name="package_id"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput2">Country of Destination <span
+                                                <label for="country_destination">Country of Destination <span
                                                         class="danger">*</span></label>
-                                                <input type="text" id="projectinput2" class="form-control"
-                                                    placeholder="Country of Destination" name="country_destination" value="WORLDWIDE">
+                                                <input type="text" id="country_destination" class="form-control"
+                                                    placeholder="Country of Destination" name="country_destination"
+                                                    value="WORLDWIDE">
+                                                <span class="text-danger danger" error-name="country_destination"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="projectinput4">Position Applied For <span
+                                                <label for="position_applied">Position Applied For <span
                                                         class="danger">*</span></label>
-                                                <input type="text" id="projectinput4" class="form-control"
+                                                <input type="text" id="position_applied" class="form-control"
                                                     placeholder="Position Applied" name="position_applied">
+                                                <span class="text-danger danger" error-name="position_applied"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="vessel">Vessel <span class="danger">*</span></label>
-                                                @if(count($vessels) > 0) 
+                                                @if (count($vessels) > 0)
                                                     <select name="vessel" id="vessel" class="form-select">
                                                         @foreach ($vessels as $vessel)
-                                                            <option value="{{ $vessel->vesselname }}">{{ $vessel->vesselname }}</option>
+                                                            <option value="{{ $vessel->vesselname }}">
+                                                                {{ $vessel->vesselname }}</option>
                                                         @endforeach
                                                         <option value="other">--- OTHER VESSEL ---</option>
                                                     </select>
                                                 @else
-                                                    <input type="text" id="vessel" class="form-control" placeholder="Vessel" name="vessel">
-                                                @endif
-                                                <input type="text" class="form-control my-1 d-none" name="other_vessel" id="other-vessel" placeholder="Vessel">
-                                                {{-- @php $agency_ids = [55, 57, 58]; @endphp
-                                                @if (in_array(Session::get('agencyId'), $agency_ids))
-                                                    <select name="vessel" class="select2">
-                                                        @if (Session::get('agencyId') == 55)
-                                                            <option value="BOLETTE">BOLETTE</option>
-                                                            <option value="MS BOLETTE">MS BOLETTE</option>
-                                                            <option value="BRAEMAR">BRAEMAR</option>
-                                                            <option value="MS BRAEMAR">MS BRAEMAR</option>
-                                                        @endif
-
-                                                        @if (Session::get('agencyId') == 57)
-                                                            <option value="BALMORAL">BALMORAL</option>
-                                                            <option value="MS BALMORAL">MS BALMORAL</option>
-                                                            <option value="BOREALIS">BOREALIS</option>
-                                                            <option value="MS BOREALIS">MS BOREALIS</option>
-                                                        @endif
-
-                                                        @if (Session::get('agencyId') == 58)
-                                                            <option value="BLUETERN">BLUETERN</option>
-                                                            <option value="BOLDTERN">BOLDTERN</option>
-                                                            <option value="BRAVETERN">BRAVETERN</option>
-                                                        @endif
-                                                    </select>
-                                                @else
-                                                    <input type="text" id="projectinput4" class="form-control"
+                                                    <input type="text" id="vessel" class="form-control"
                                                         placeholder="Vessel" name="vessel">
-                                                @endif --}}
+                                                @endif
+                                                <input type="text" class="form-control my-1 d-none"
+                                                    name="other_vessel" id="other-vessel" placeholder="Vessel">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="principal" class="form-label">Principal <span class="text-danger danger">*</span></label>
-                                                @if(count($principals) > 0) 
+                                                <label for="principal" class="form-label">Principal <span
+                                                        class="text-danger danger">*</span></label>
+                                                @if (count($principals) > 0)
                                                     <select name="principal" id="principal" class="form-select">
                                                         @foreach ($principals as $principal)
-                                                            <option value="{{ $principal->principal_name }}">{{ $principal->principal_name }}</option>
+                                                            <option value="{{ $principal->principal_name }}">
+                                                                {{ $principal->principal_name }}</option>
                                                         @endforeach
                                                         <option value="other">--- OTHER PRINCIPAL ---</option>
                                                     </select>
                                                 @else
-                                                    <input type="text" id="projectinput4" class="form-control" placeholder="Principal" name="principal">
+                                                    <input type="text" id="projectinput4" class="form-control"
+                                                        placeholder="Principal" name="principal">
                                                 @endif
-                                                <input type="text" class="form-control my-1 d-none" name="other_principal" id="other-principal" placeholder="Principal">
+                                                <input type="text" class="form-control my-1 d-none"
+                                                    name="other_principal" id="other-principal" placeholder="Principal">
                                             </div>
                                         </div>
                                     </div>
@@ -341,6 +341,7 @@
                                                             Patient</label>
                                                     </div>
                                                 </div>
+                                                <span class="text-danger danger" error-name="admission_type"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -363,6 +364,7 @@
                                                             Agency</label>
                                                     </div>
                                                 </div>
+                                                <span class="text-danger danger" error-name="payment_type"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -371,30 +373,35 @@
                                             <div class="form-group">
                                                 <label for="">Custom Request</label>
                                                 <textarea name="custom_request" class="form-control" cols="30" rows="7"></textarea>
+                                                <span class="text-danger danger" error-name="custom_request"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-group my-1">
-                                                    <label for="projectinput4">Name of Requestor <span
+                                                    <label for="requestor">Name of Requestor <span
                                                             class="danger">*</span></label><br>
-                                                    <input type="text" class="form-control" name="requestor">
+                                                    <input type="text" class="form-control" name="requestor"
+                                                        id="requestor">
+                                                    <span class="text-danger danger" error-name="requestor"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="projectinput4">Date</label>
-                                                <input type="text" id="projectinput4" class="form-control"
+                                                <label for="created_date">Date</label>
+                                                <input type="text" id="created_date" class="form-control"
                                                     placeholder="Agency / Company" name="created_date"
-                                                    value="@php echo date("Y-m-d") @endphp" readonly />
+                                                    value="{{ date('Y-m-d') }}" readonly />
                                             </div>
                                             <div class="form-group d-none">
-                                                <label for="projectinput4">Agency</label>
-                                                <input required type="text" id="projectinput4" class="form-control"
+                                                <label for="agencyname">Agency</label>
+                                                <input required type="text" id="agencyname" class="form-control"
                                                     placeholder="Agency / Company"
-                                                    value="@php echo session()->get('agencyName') @endphp" readonly>
+                                                    value="{{ session()->get('agencyName') }}" readonly>
                                                 <input type="hidden" id="projectinput4" class="form-control"
                                                     placeholder="Agency / Company" name="agency_id"
-                                                    value="@php echo session()->get('agencyId') @endphp" readonly>
+                                                    value="{{ session()->get('agencyId') }}" readonly>
+                                                <span class="text-danger danger" error-name="agency_id"></span>
+
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +416,8 @@
                                                         <label class="custom-control-label" for="skuld">SKULD</label>
                                                     </div>
                                                     <div class="input-group mt-50 d-none" id="skuld_qty">
-                                                        <input type="number" min="1" max="5" class="form-control" placeholder="Skuld Quantity"
+                                                        <input type="number" min="1" max="5"
+                                                            class="form-control" placeholder="Skuld Quantity"
                                                             name="skuld_qty">
                                                     </div>
                                                 </fieldset>
@@ -588,6 +596,18 @@
                                                             name="bahia_qty">
                                                     </div>
                                                 </fieldset>
+                                                <fieldset class="col-md-6 my-50">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            name="certificate[]" value="PANAMA" id="panama">
+                                                        <label class="custom-control-label" for="panama">PANAMA</label>
+                                                    </div>
+                                                    <div class="input-group mt-50 d-none" id="panama_qty">
+                                                        <input type="number" min="1" max="5"
+                                                            class="form-control" placeholder="PANAMA Quantity"
+                                                            name="panama_qty">
+                                                    </div>
+                                                </fieldset>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -628,8 +648,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 
     <script>
-        document.querySelector("#open-instruction").click();
-
         const canvas = document.querySelector(".signature");
         const signaturePad = new SignaturePad(canvas, {
             penColour: '#fff',
@@ -686,11 +704,15 @@
                             }
                         },
                         error: function(response) {
-                            console.log(response);
+                            let errors = response.responseJSON.errors;
+                            for (const key in errors) {
+                                const element = document.querySelector(`span[error-name="${key}"]`);
+                                if (element) element.innerText = errors[key];
+                            }
                             $(".main-loader").css("display", "none");
                             // $("#error").removeClass("d-none");
                             // $("#error").addClass("d-block");
-                            toastr.error(response.responseJSON.errors.email_employee, 'Fail');
+                            toastr.error("Invalid Fields.", 'Fail');
                         }
                     }).done(function(data) {
                         $(".main-loader").css("display", "none");
@@ -729,8 +751,8 @@
             }
         }
 
-        $('#vessel').change(function (e) {
-            if(e.target.value === 'other') {
+        $('#vessel').change(function(e) {
+            if (e.target.value === 'other') {
                 $('#other-vessel').removeClass('d-none');
                 $('#other-vessel').focus();
             } else {
@@ -738,8 +760,8 @@
             }
         });
 
-        $('#principal').change(function (e) {
-            if(e.target.value === 'other') {
+        $('#principal').change(function(e) {
+            if (e.target.value === 'other') {
                 $('#other-principal').removeClass('d-none');
                 $('#other-principal').focus();
             } else {
