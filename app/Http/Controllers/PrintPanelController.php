@@ -308,7 +308,7 @@ class PrintPanelController extends Controller
                 "patient_middlename" => $patient->patient ? $patient->patient->middlename : null,
                 "trans_date" => $patient->trans_date,
                 "patient_email" => $patient->patient ? $patient->patient->email : null,
-                "birthdate" => $patient->patient ? $patient->patient->patientinfo->birthdate : null,
+                "birthdate" => $patient->patient ? ($patient->patient->patientinfo->birthdate ?? null) : null,
                 "patient_gender" => $patient->patient ? $patient->patient->gender : null,
                 "patient_age" => $patient->patient ? $patient->patient->age : null,
                 "principal" => $patient->principal,
