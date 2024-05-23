@@ -1,2 +1,7 @@
 .env
 merita-app.sql
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
