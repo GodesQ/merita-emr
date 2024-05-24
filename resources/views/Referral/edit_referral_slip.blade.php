@@ -92,7 +92,7 @@ $("#store_refferal").submit(function(e) {
                             'success'
                         ).then((result) => {
                             if (result.isConfirmed) {
-                                location.href = '/refferal_slips';
+                                location.href = '/referral_slips';
                             }
                         })
                     } else {

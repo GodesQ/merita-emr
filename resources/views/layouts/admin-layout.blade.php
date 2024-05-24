@@ -9,16 +9,16 @@
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description"
-        content="MERITA EMR is a website application from MERITA DIAGNOSTIC CLINIC"
-    <meta name="author" content="MERITA">
+    <meta name="description" content="MERITA EMR is a website application from MERITA DIAGNOSTIC CLINIC" <meta
+        name="author" content="MERITA">
     <title>Merita EMR - Electronic Medical Record System</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/logo/MeritaApp.png">
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
@@ -28,11 +28,11 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/calendars/timegrid.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/calendars/fullcalendar.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/file-uploaders/dropzone.css">
-        <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/switchery.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/forms/toggle/switchery.min.css">
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.css') }}">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-invoice.css">
-    <link rel="stylesheet" href="{{asset('app-assets/css/all.css')}}">
+    <link rel="stylesheet" href="{{ asset('app-assets/css/all.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Custom CSS-->
@@ -44,22 +44,24 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns fixed-navbar pace-done menu-collapsed" data-open="click" data-menu="vertical-menu"
-    data-col="2-columns">
+<body class="vertical-layout vertical-menu 2-columns fixed-navbar pace-done menu-collapsed" data-open="click"
+    data-menu="vertical-menu" data-col="2-columns">
 
     <!-- BEGIN: Header-->
-    <nav
-        class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-light" style="background-color: #16702a">
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-light"
+        style="background-color: #16702a">
         <div class="navbar-wrapper">
             <div class="navbar-header">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mobile-menu d-md-none mr-auto"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                 class="feather icon-menu font-large-1"></i></a></li>
-                    <li class="nav-item"><a class="navbar-brand" href="/dashboard" style="display: flex; justify-content: center;"><img
+                    <li class="nav-item"><a class="navbar-brand" href="/dashboard"
+                            style="display: flex; justify-content: center;"><img
                                 class="brand-logo logo-sm img-responsive" alt="stack admin"
                                 src="../../../app-assets/images/logo/MeritaApp.png">
-                            <h2 class="brand-text align-middle" style="color: #156f29; font-weight: bold;">Merita <span style="color: #29477d;">EMR</span></h2>
+                            <h2 class="brand-text align-middle" style="color: #156f29; font-weight: bold;">Merita <span
+                                    style="color: #29477d;">EMR</span></h2>
                         </a></li>
                     <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
                             data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
@@ -88,16 +90,19 @@
                     <ul class="nav navbar-nav float-right">
 
                         <li class="dropdown dropdown-user nav-item">
-                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#"
+                                data-toggle="dropdown">
                                 <div class="avatar avatar-online">@yield('employee_image')<i></i></div><span
                                     class="user-name">@yield('name')</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="/employee_documentation"><i class="feather icon-info"></i>Documentation</a>
-                                <a class="dropdown-item" href="/user_profile?id={{session()->get('employeeId')}}"><i class="feather icon-user"></i>Edit Profile</a>
+                                <a class="dropdown-item" href="/employee_documentation"><i
+                                        class="feather icon-info"></i>Documentation</a>
+                                <a class="dropdown-item" href="/user_profile?id={{ session()->get('employeeId') }}"><i
+                                        class="feather icon-user"></i>Edit Profile</a>
                                 <a class="dropdown-item" href="/support"><i class="feather icon-info"></i>Support</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="/employee_logout"><i
-                                        class="feather icon-power"></i> Logout</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item"
+                                    href="/employee_logout"><i class="feather icon-power"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -116,95 +121,96 @@
                 <li class=" navigation-header"><span>Main Navigation</span><i class=" feather icon-minus"
                         data-toggle="tooltip" data-placement="right" data-original-title="MAIN NAVIGATION"></i>
                 </li>
-                <li class="nav-item @php echo Request::path() == 'dashboard' ? 'active' : ''; @endphp"><a
-                        href="/dashboard"><i class="feather icon-home"></i><span class="menu-title"
-                            data-i18n="Templates">Dashboard</span></a></li>
-                <li class=" nav-item  @php echo Request::path() == 'patients' ? 'active' : ''; @endphp"><a
-                        href="/patients"><i class="feather icon-user-plus"></i><span class="menu-title"
-                            data-i18n="Templates">Patients</span></a></li>
+                <li class="nav-item {{ Request::path() == 'dashboard' ? 'active' : '' }}"><a href="/dashboard"><i
+                            class="feather icon-home"></i><span class="menu-title"
+                            data-i18n="Dashboard">Dashboard</span></a></li>
+                <li class=" nav-item {{ Request::path() == 'patients' ? 'active' : '' }}"><a href="/patients"><i
+                            class="feather icon-user-plus"></i><span class="menu-title"
+                            data-i18n="Patients">Patients</span></a></li>
                 @if (session()->get('dept_id') == '1')
-                <li class=" nav-item @php echo Request::path() == 'employees' ? 'active' : ''; @endphp"><a
-                        href="/employees"><i class="feather icon-users"></i><span class="menu-title"
-                            data-i18n="Templates">Employees</span></a></li>
+                    <li class=" nav-item {{ Request::path() == 'employees' ? 'active' : '' }}"><a href="/employees"><i
+                                class="feather icon-users"></i><span class="menu-title"
+                                data-i18n="Employees">Employees</span></a></li>
                 @endif
                 @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '18' || session()->get('dept_id') == '8')
-                <li class=" nav-item @php echo Request::path() == 'agencies' ? 'active' : ''; @endphp"><a
-                        href="/agencies"><i class="feather icon-globe"></i><span class="menu-title"
-                            data-i18n="Templates">Agency</span></a></li>
+                    <li class=" nav-item {{ Request::path() == 'agencies' ? 'active' : '' }}"><a href="/agencies"><i
+                                class="feather icon-globe"></i><span class="menu-title"
+                                data-i18n="Agency">Agency</span></a></li>
                 @endif
-                <li class="nav-item has-sub"><a href="#"><i class="feather icon-folder"></i><span class="menu-title"
-                            data-i18n="Icons">Master Files</span></a>
+
+                <li class=" nav-item {{ Request::path() == 'referral-slips' ? 'active' : '' }}"><a href="/referral-slips"><i
+                    class="feather icon-file"></i><span class="menu-title"
+                    data-i18n="Referral Slips">Referral Slips</span></a></li>
+
+                <li class="nav-item has-sub"><a href="#"><i class="feather icon-folder"></i><span
+                            class="menu-title" data-i18n="Master Files">Master Files</span></a>
                     <ul class="menu-content">
-                        @if(session()->get('dept_id') == 1 || session()->get('dept_id') == 2)
-                            <li class="@php echo Request::path() == 'list_exam' ? 'active' : ''; @endphp"><a
-                                    class="menu-item" href="/list_exam" data-i18n="Exams">Exams</a>
+                        @if (session()->get('dept_id') == 1 || session()->get('dept_id') == 2)
+                            <li class="{{ Request::path() == 'list_exam' ? 'active' : '' }}"><a class="menu-item"
+                                    href="/list_exam" data-i18n="Exams">Exams</a>
                             </li>
                         @endif
                         @if (session()->get('dept_id') == '1')
-                        <!--<li class="@php echo Request::path() == 'actgmast_coa' ? 'active' : ''; @endphp"><a-->
-                        <!--        class="menu-item" href="/actgmast_coa" data-i18n="Feather">Chart of Accounts</a>-->
-                        <!--</li>-->
-                        <li class="@php echo Request::path() == 'list_section' ? 'active' : ''; @endphp"><a
-                                class="menu-item" href="/list_section" data-i18n="Sections">Floors</a>
-                        </li>
-                        <li class="@php echo Request::path() == 'list_request' ? 'active' : ''; @endphp"><a
-                                class="menu-item" href="/list_request" data-i18n="Package">Requests</a>
-                        </li>
-                        <li class="@php echo Request::path() == 'list_department' ? 'active' : ''; @endphp"><a
-                                class="menu-item" href="/list_department" data-i18n="Package">Departments</a>
-                        </li>
+                            <li class="{{ Request::path() == 'list_section' ? 'active' : '' }}"><a class="menu-item"
+                                    href="/list_section" data-i18n="Floors">Floors</a>
+                            </li>
+                            <li class="{{ Request::path() == 'list_request' ? 'active' : '' }}"><a class="menu-item"
+                                    href="/list_request" data-i18n="Requests">Requests</a>
+                            </li>
+                            <li class="{{ Request::path() == 'list_department' ? 'active' : '' }}"><a
+                                    class="menu-item" href="/list_department" data-i18n="Departments">Departments</a>
+                            </li>
                         @endif
                         @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '18' || session()->get('dept_id') == 2)
-                            <li class="@php echo Request::path() == 'list_package' ? 'active' : ''; @endphp"><a
-                                    class="menu-item" href="/list_package" data-i18n="Package">Packages</a>
+                            <li class="{{ Request::path() == 'list_package' ? 'active' : '' }}"><a class="menu-item"
+                                    href="/list_package" data-i18n="Packages">Packages</a>
                             </li>
                         @endif
                     </ul>
                 </li>
-                @if (session()->get('dept_id') == '2' || session()->get('dept_id') == '1' || session()->get('dept_id')
-                == '17')
-                <li class=" nav-item"><a href="#"><i class="feather icon-edit"></i><span class="menu-title"
-                            data-i18n="Templates">Transactions</span></a>
-                    <ul class="menu-content">
-                        <li class="@php echo Request::path() == 'admissions' ? 'active' : ''; @endphp">
-                            <a class="menu-item " href="/admissions" data-i18n="Analytics">Admission</a>
-                        </li>
-                        <li class="@php echo Request::path() == 'cashier_or' ? 'active' : ''; @endphp">
-                            <a class="menu-item" href="/cashier_or" data-i18n="Fitness">Cashier-OR</a>
-                        </li>
-                        <!-- @if (session()->get('dept_id') == '1')
-                        <li class="@php echo Request::path() == 'admission_statistics' ? 'active' : ''; @endphp"><a
-                                class="menu-item" href="/admission_statistics" data-i18n="Fitness">Statistics</a>
-                        </li>
-                        @endif -->
-                    </ul>
-                </li>
+                @if (session()->get('dept_id') == '2' || session()->get('dept_id') == '1' || session()->get('dept_id') == '17')
+                    <li class=" nav-item"><a href="#"><i class="feather icon-edit"></i><span
+                                class="menu-title" data-i18n="Transactions">Transactions</span></a>
+                        <ul class="menu-content">
+                            <li class="{{ Request::path() == 'admissions' ? 'active' : '' }}">
+                                <a class="menu-item " href="/admissions" data-i18n="Admission">Admission</a>
+                            </li>
+                            <li class="{{ Request::path() == 'cashier_or' ? 'active' : '' }}">
+                                <a class="menu-item" href="/cashier_or" data-i18n="Cashier-OR">Cashier-OR</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
-                <li class=" nav-item"><a href="#"><i class="feather icon-bar-chart-2"></i><span class="menu-title" data-i18n="Layouts">Report</span></a>
+                <li class=" nav-item"><a href="#"><i class="feather icon-bar-chart-2"></i><span
+                            class="menu-title" data-i18n="Layouts">Report</span></a>
                     <ul class="menu-content">
-                        @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                            <li><a class="menu-item" href="/transmittal" data-i18n="CRM">Transmittal</a></li>
+                        @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
+                            <li><a class="menu-item" href="/transmittal" data-i18n="Transmittal">Transmittal</a></li>
                         @endif
-                        @if(session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                            <li><a class="menu-item" href="/followup_transmittal" data-i18n="CRM">Follow Up Transmittal</a></li>
+                        @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
+                            <li><a class="menu-item" href="/followup_transmittal" data-i18n="Follow Up Transmittal">Follow Up Transmittal</a></li>
                         @endif
                         <li><a class="menu-item" href="/soa" data-i18n="SOA Report">SOA Report</a></li>
-                        <li><a class="menu-item" href="/packages_report" data-i18n="Packages Report">Packages Report</a></li>
+                        <li><a class="menu-item" href="/packages_report" data-i18n="Packages Report">Packages
+                                Report</a></li>
                         <li><a class="menu-item" href="/panama" data-i18n="Panama Billing">Panama Billing</a></li>
-                        <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian Billing</a></li>
-                        <li><a class="menu-item" href="daily_patient_form" data-i18n="Fitness">Daily Patients</a></li>
+                        <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian
+                                Billing</a></li>
+                        <li><a class="menu-item" href="daily_patient_form" data-i18n="Fitness">Daily Patients</a>
+                        </li>
                     </ul>
                 </li>
                 @if (session()->get('dept_id') == '1')
-                <li class=" nav-item"><a href="#"><i class="feather icon-activity"></i><span class="menu-title"
-                            data-i18n="Layouts">Utilities</span></a>
-                    <ul class="menu-content">
-                        <li><a class="menu-item" href="/logs" data-i18n="Fitness">Employee Logs</a>
-                        </li>
-                        <li><a class="menu-item" href="/scheduled_patients" data-i18n="Fitness">Scheduled Patients</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class=" nav-item"><a href="#"><i class="feather icon-activity"></i><span
+                                class="menu-title" data-i18n="Layouts">Utilities</span></a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="/logs" data-i18n="Employee Logs">Employee Logs</a>
+                            </li>
+                            <li><a class="menu-item" href="/scheduled_patients" data-i18n="Scheduled Patients">Scheduled
+                                    Patients</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -219,7 +225,8 @@
     <footer class="footer footer-static footer-light navbar-shadow">
         <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2 container center-layout">
             <span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2022
-                <a class="text-bold-800 grey darken-2" href="https://meritaclinic.ph" target="_blank">Merita Diagnostics Clinic, Inc </a>
+                <a class="text-bold-800 grey darken-2" href="https://meritaclinic.ph" target="_blank">Merita
+                    Diagnostics Clinic, Inc </a>
             </span>
             <span class="float-md-right d-none d-lg-block">Designed & Developed by:
                 <a href="https://godesq.com/" target="_blank">GodesQ Digital Marketing Services</a>
@@ -273,7 +280,6 @@
     <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
 
     <script>
-
         const radioButtons = document.querySelectorAll('input[type="radio"]');
         let lastClick = 0;
         radioButtons.forEach(function(button) {
@@ -288,36 +294,34 @@
             });
         });
 
-    $("#search-input").change(function() {
-        let searchValue = $("#search-input").val();
-        let csrf = '{{ csrf_token() }}';
-        $.ajax({
-            url: '{{route("patient.search")}}',
-            method: 'get',
-            data: {
-                query: searchValue,
-                _token: csrf
-            },
-            success: function(response) {
-                response[0].forEach(element => {
-                    $('.search-list').append(
-                        `<div class="col-md-12 p-1">${element.firstname} ${element.lastname}</div>`
-                    );
-                });
-            }
+        $("#search-input").change(function() {
+            let searchValue = $("#search-input").val();
+            let csrf = '{{ csrf_token() }}';
+            $.ajax({
+                url: '{{ route('patient.search') }}',
+                method: 'get',
+                data: {
+                    query: searchValue,
+                    _token: csrf
+                },
+                success: function(response) {
+                    response[0].forEach(element => {
+                        $('.search-list').append(
+                            `<div class="col-md-12 p-1">${element.firstname} ${element.lastname}</div>`
+                        );
+                    });
+                }
+            });
         });
-    });
-    // window.addEventListener('resize', function(event){
-    //     if(window.innerWidth <= 1024) {
-    //         $('body').classList.remove("menu-expanded");
-    //         $('body').classList.add("menu-collapsed");
-    //     } else {
-    //         $('body').classList.add("menu-expanded");
-    //         $('body').classList.remove("menu-collapsed");
-    //     }
-    // });
-
-
+        // window.addEventListener('resize', function(event){
+        //     if(window.innerWidth <= 1024) {
+        //         $('body').classList.remove("menu-expanded");
+        //         $('body').classList.add("menu-collapsed");
+        //     } else {
+        //         $('body').classList.add("menu-expanded");
+        //         $('body').classList.remove("menu-collapsed");
+        //     }
+        // });
     </script>
 
 

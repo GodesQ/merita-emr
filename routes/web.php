@@ -141,7 +141,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::post('/get_agencies', [AgencyController::class, 'select_agencies'])->name('agencies.select');
 
-    Route::get('/refferal_slips', [ReferralController::class, 'referrals']);
+    // For admin
+    Route::get('/referral-slips', [ReferralController::class, 'index']);
+
+    // For agency
+    Route::get('/referral_slips', [ReferralController::class, 'referrals']);
 
     Route::get('/referral_slips_list', [ReferralController::class, 'referral_list']);
 

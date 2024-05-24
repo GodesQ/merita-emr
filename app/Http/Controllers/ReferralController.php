@@ -27,24 +27,21 @@ use PDF;
 
 class ReferralController extends Controller
 {
-    public function referrals() {
+    public function referrals()
+    {
         $data = session()->all();
         return view('Referral.referral', compact('data'));
     }
 
-    public function referral_list(Request $request) {
-        abort_if(!$request->ajax(), 404);
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $referrals = Refferal::with('patient', 'package', 'agency');
 
-        $referrals = Refferal::select('*')->with('patient', 'package', 'agency');
-
-        if(session()->get('classification') == 'agency') {
-            $referrals->where('agency_id', session()->get('agencyId'));
-        }
-
-        return DataTables::of($referrals)
+            return DataTables::of($referrals)
                 ->addIndexColumn()
                 ->addColumn('packagename', function ($row) {
-                    return $row->package->packagename;
+                    return $row->package->packagename ?? null;
                 })
                 ->addColumn('lastname', function ($row) {
                     return optional($row)->lastname;
@@ -62,30 +59,88 @@ class ReferralController extends Controller
                     return $row->ssrb;
                 })
                 ->addColumn('is_hold', function ($row) {
-                    if($row->is_hold) {
+                    if ($row->is_hold) {
                         return '<div class="badge badge-danger">Hold</div>';
                     } else {
                         return '<div class="badge badge-success">Activated</div>';
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    if($row->is_hold == 0) {
+                    if ($row->is_hold == 0) {
                         $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                                    <button class="btn btn-danger btn-sm hold-btn" id="'. $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
-                                    <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                            return $actionBtn;
-                   } else {
-                        $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' .  $row->id . '"><i class="fa fa-eye"></i></a>
-                            <button class="btn btn-success btn-sm activate-btn" id="'. $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
-                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' .  $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                            return $actionBtn;
-                   }
+                                    <button class="btn btn-danger btn-sm hold-btn" id="' . $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
+                                    <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+                        return $actionBtn;
+                    } else {
+                        $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
+                            <button class="btn btn-success btn-sm activate-btn" id="' . $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
+                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+                        return $actionBtn;
+                    }
                 })
                 ->rawColumns(['packagename', 'action', 'is_hold'])
                 ->toJson();
+        }
+
+        return view('Referral.referrals');
     }
 
-    public function hold_employee(Request $request) {
+    public function referral_list(Request $request)
+    {
+        abort_if(!$request->ajax(), 404);
+
+        $referrals = Refferal::select('*')->with('patient', 'package', 'agency');
+
+        if (session()->get('classification') == 'agency') {
+            $referrals->where('agency_id', session()->get('agencyId'));
+        }
+
+        return DataTables::of($referrals)
+            ->addIndexColumn()
+            ->addColumn('packagename', function ($row) {
+                return $row->package->packagename;
+            })
+            ->addColumn('lastname', function ($row) {
+                return optional($row)->lastname;
+            })
+            ->addColumn('firstname', function ($row) {
+                return optional($row)->firstname;
+            })
+            ->addColumn('position_applied', function ($row) {
+                return $row->position_applied;
+            })
+            ->addColumn('vessel', function ($row) {
+                return $row->vessel;
+            })
+            ->addColumn('ssrb', function ($row) {
+                return $row->ssrb;
+            })
+            ->addColumn('is_hold', function ($row) {
+                if ($row->is_hold) {
+                    return '<div class="badge badge-danger">Hold</div>';
+                } else {
+                    return '<div class="badge badge-success">Activated</div>';
+                }
+            })
+            ->addColumn('action', function ($row) {
+                if ($row->is_hold == 0) {
+                    $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm hold-btn" id="' . $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
+                                    <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
+                            <button class="btn btn-success btn-sm activate-btn" id="' . $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
+                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
+                    return $actionBtn;
+                }
+            })
+            ->rawColumns(['packagename', 'action', 'is_hold'])
+            ->toJson();
+    }
+
+    public function hold_employee(Request $request)
+    {
         try {
             $id = $request->id;
             $referral = Refferal::where('id', $id)->first();
@@ -94,7 +149,7 @@ class ReferralController extends Controller
             $referral->is_hold = 1;
             $save = $referral->save();
 
-            if($save) {
+            if ($save) {
                 foreach ($to_emails as $to_email) {
                     Mail::to($to_email)->send(new Hold($referral));
                 }
@@ -113,14 +168,15 @@ class ReferralController extends Controller
         }
     }
 
-    public function activate_employee(Request $request) {
+    public function activate_employee(Request $request)
+    {
         try {
             $id = $request->id;
             $referral = Refferal::where('id', $id)->first();
             $to_emails = [$referral->email_employee, env('APP_EMAIL')];
             $referral->is_hold = 0;
             $save = $referral->save();
-            if($save) {
+            if ($save) {
                 foreach ($to_emails as $to_email) {
                     Mail::to($to_email)->send(new Activate($referral));
                 }
@@ -143,9 +199,9 @@ class ReferralController extends Controller
     {
         try {
             $data = session()->all();
-            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id','mast_agency.agencyname as agencyname')
-                        ->where('list_package.agency_id', $data['agencyId'])
-            ->leftJoin('mast_agency','mast_agency.id', '=', 'list_package.agency_id')->get();
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+                ->where('list_package.agency_id', $data['agencyId'])
+                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')->get();
 
             $vessels = AgencyVessel::where('main_id', $data['agencyId'])->get();
             $principals = AgencyPrincipal::where('main_id', $data['agencyId'])->get();
@@ -164,8 +220,8 @@ class ReferralController extends Controller
 
             $existing_referral = Refferal::where('email_employee', $request->email_employee)->latest('id')->first();
 
-            if($existing_referral) {
-                if($existing_referral->created_date == date('Y-m-d')) {
+            if ($existing_referral) {
+                if ($existing_referral->created_date == date('Y-m-d')) {
                     return back()->with('fail', "You can't create new referral on the same date.");
                 }
             }
@@ -187,12 +243,12 @@ class ReferralController extends Controller
                 'passport_expdate' => $new_passport_expdate,
                 'ssrb_expdate' => $new_ssrb_expdate,
                 'created_date' => Carbon::now(),
-                'certificate' => implode(", ",$request->certificate),
+                'certificate' => implode(", ", $request->certificate),
                 'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
                 'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
             ]));
-            
-            if(session()->get('email') == 'james@godesq.com') {
+
+            if (session()->get('email') == 'james@godesq.com') {
                 $to_emails = [$request->email_employee];
             } else {
                 $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
@@ -216,11 +272,11 @@ class ReferralController extends Controller
                 $pdf = PDF::loadView('emails.refferal-pdf', [
                     'data' => $data,
                 ])->setOptions([
-                    'defaultFont' => 'sans-serif',
-                ]);
+                            'defaultFont' => 'sans-serif',
+                        ]);
 
                 foreach ($to_emails as $to_email) {
-                  Mail::to($to_email)->send(new ReferralSlip($data, $pdf));
+                    Mail::to($to_email)->send(new ReferralSlip($data, $pdf));
                 }
 
                 return response()->json([
@@ -235,17 +291,18 @@ class ReferralController extends Controller
         }
     }
 
-    public function edit_referral(Request $request) {
+    public function edit_referral(Request $request)
+    {
         $id = $request->id;
 
         $data = session()->all();
 
         $packages = ListPackage::select(
-                'list_package.id',
-                'list_package.packagename',
-                'list_package.agency_id',
-                'mast_agency.agencyname as agencyname'
-            )->where('list_package.agency_id', $data['agencyId'])
+            'list_package.id',
+            'list_package.packagename',
+            'list_package.agency_id',
+            'mast_agency.agencyname as agencyname'
+        )->where('list_package.agency_id', $data['agencyId'])
             ->leftJoin(
                 'mast_agency',
                 'mast_agency.id',
