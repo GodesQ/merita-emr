@@ -1,6 +1,6 @@
 <form class="form" id="update_agency" action="#" method="POST">
     @csrf
-    <input type="hidden" name="id" value="{{ $agency->id }}">
+    <input type="hidden" name="id" id="agency_id" value="{{ $agency->id }}">
     <div class="form-body">
         <h4 class="form-section"><i class="feather icon-user"></i>Agency</h4>
         <div class="row">
@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input type="email" class="form-control" name="email" value="{{ $agency->email }}">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $agency->email }}">
                 </div>
             </div>
         </div>
@@ -113,21 +113,28 @@
         </div>
     </div>
     <div class="form-actions">
-        <div class="row">
-            <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
                 <div class="card-body">
-                    <button type='button' class='btn btn-sm p-75 m-50 btn-success reset-password'
-                        id='reset-btn'>RESET PASSWORD</button>
+                    <div class="btn-group">
+                        <button type='button' class='btn btn-sm p-75 btn-success reset-password'
+                            id='reset-btn'>RESET PASSWORD</button>
+                        <button type='button' class='btn btn-sm p-75 btn-primary default-password'
+                            id='default-password-btn'>SEND DEFAULT PASSWORD</button>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-md-2">
+            <div>
                 <div class='card-body'>
-                    <a href="/agencies" type="reset" class="btn btn-warning mr-1">
-                        <i class="feather icon-x"></i> Cancel
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check-square-o"></i> Save
-                    </button>
+                    <div class="btn-group">
+                        <a href="/agencies" type="reset" class="btn btn-warning">
+                            <i class="feather icon-x"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

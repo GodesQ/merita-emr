@@ -16,6 +16,7 @@ use App\Mail\Hold;
 use App\Mail\AgencyResetPassword;
 use App\Mail\Activate;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\EmployeeLog;
 use App\Models\Patient;
@@ -179,15 +180,15 @@ class AgencyController extends Controller
             $log->save();
 
             if ($save) {
-                // $bodyMessage = '';
+                $bodyMessage = '';
 
-                // $details = [
-                //     'title' => 'Verification Email From Merita',
-                //     'body' => $bodyMessage,
-                //     'email' => $request->email,
-                //     'password' => $password,
-                // ];
-                // Mail::to($request->email)->send(new AgencyPassword($details));
+                $details = [
+                    'title' => 'Verification Email From Merita',
+                    'body' => $bodyMessage,
+                    'email' => $request->email,
+                    'password' => $password,
+                ];
+                Mail::to($request->email)->send(new AgencyPassword($details));
                 return redirect('/agencies')->with('status', 'Agency Added Successfully');
             } else {
                 return redirect('/login')->with('fail', 'Something went wrong. Try Again later.');
@@ -258,6 +259,7 @@ class AgencyController extends Controller
             $employeeInfo = session()->all();
             $id = $request->id;
             $data = Agency::where('id', $id)->first();
+
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description = 'Delete Agency ' . $data->agencycode;
@@ -283,6 +285,29 @@ class AgencyController extends Controller
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
         }
+    }
+
+    public function submit_agency_default_password(Request $request) {
+        $agency = Agency::where('id', $request->id)->first();
+        
+        $new_password = Str::random(8);
+
+        $agency->update([
+            'password' => Hash::make($new_password),
+        ]);
+
+        $details = [
+            'email' => $agency->email,
+            'password' => $new_password,
+        ];
+
+        Mail::to($agency->email)->send(new AgencyPassword($details));
+
+        return response()->json([
+            'status' => true,
+            'message' => 'The default password successfully sent.'
+        ]);
+        
     }
 
     public function get_agency_vessel_datatable(Request $request) {

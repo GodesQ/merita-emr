@@ -68,9 +68,8 @@
     <script>
         // Reset Password Button
         $(".reset-password").click(function() {
-            console.log(true)
-            let id = '{{ $agency->id }}';
-            let email = '{{ $agency->email }}';
+            let id = $('#agency_id').val();
+            let email = $('#email').val();
             let csrf = '{{ csrf_token() }}';
             Swal.fire({
                 title: 'Are you sure you want to reset password?',
@@ -105,6 +104,40 @@
                 }
             })
         });
+
+        $('#default-password-btn').click((e) => {
+            let id = $('#agency_id').val();
+            let email = $('#email').val();
+            let csrf = '{{ csrf_token() }}';
+            Swal.fire({
+                title: 'Are you sure want to send default password?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reset it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).html("<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>DEFAULT PASSWORD</button>");
+                    $.ajax({
+                        url: '/agency/default-password',
+                        method: 'POST',
+                        data: {
+                            id: id,
+                            email: email,
+                            _token: csrf,
+                        },
+                        success: function (response) {
+                            if(response.status) {
+                                Swal.fire('Updated!', 'The default password was successfully sent.', 'success').then((result) => { 
+                                    if (result.isConfirmed)  location.reload() 
+                                });
+                            }
+                        }
+                    })
+                }
+            })
+        })
 
         // Updating Agency
         $("#update_agency").submit(function(e) {
