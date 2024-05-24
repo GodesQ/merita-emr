@@ -1872,7 +1872,7 @@
                                     <td>Abdomen</td>
                                     <td>
                                         @if($exam_physical)
-                                            {{$exam_physical->b5_findings ? $exam_physical->b5_findings : " "}}
+                                            {{$exam_physical->b6_findings ? $exam_physical->b6_findings : " "}}
                                         @else
                                             <br>
                                             <br>
