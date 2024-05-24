@@ -1085,10 +1085,24 @@ class PatientController extends Controller
             if ($request->patient_image == $request->old_image) {
                 $name = $request->old_image;
             } else {
+                // Delete the old image if it exists
                 $userOldPhoto = public_path('app-assets/images/profiles/') . $request->old_image;
-                $remove = @unlink($userOldPhoto);
-                $name = $request->patientcode . '.' . explode('/', explode(':', substr($request->patient_image, 0, strpos($request->patient_image, ';')))[1])[1];
-                Image::make($request->patient_image)->save(public_path('app-assets/images/profiles/') . $name);
+                if (file_exists($userOldPhoto)) {
+                    @unlink($userOldPhoto);
+                }
+
+                // Generate a new name for the new image
+                $extension = explode('/', explode(':', substr($request->patient_image, 0, strpos($request->patient_image, ';')))[1])[1];
+                $name = $request->patientcode . '.' . $extension;
+
+                // Decode the base64 image
+                $image = str_replace('data:image/'.$extension.';base64,', '', $request->patient_image);
+                $image = str_replace(' ', '+', $image);
+                $imageData = base64_decode($image);
+
+                // Save the new image to the defined path
+                $filePath = public_path('app-assets/images/profiles/') . $name;
+                file_put_contents($filePath, $imageData);
             }
 
             // if ($request->old_signature == $request->signature) {
