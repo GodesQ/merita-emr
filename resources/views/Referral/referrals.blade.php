@@ -25,7 +25,7 @@
                             <h2 class="text-bold-600">Referrals List</h2>
                         </div>
                         <div class="col-6 text-end">
-                            {{-- <a href="/add_patient" class="btn btn-solid btn-primary">Add Referral</a> --}}
+                            <a href="/referrals/create" class="btn btn-solid btn-primary">Add Referral</a>
                         </div>
                     </div>
                 </div>

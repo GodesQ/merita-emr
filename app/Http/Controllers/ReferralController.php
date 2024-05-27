@@ -85,6 +85,30 @@ class ReferralController extends Controller
         return view('Referral.referrals');
     }
 
+    public function create(Request $request) {
+        return view('Referral.create');
+    }
+
+    public function store(Request $request) {
+
+    }
+
+    public function show(Request $request, $id) {
+    
+    }
+
+    public function edit(Request $request, $id) {
+    
+    }
+
+    public function update(Request $request, $id) {
+
+    }
+
+    public function destroy(Request $request, $id) {   
+    
+    }
+
     public function referral_list(Request $request)
     {
         abort_if(!$request->ajax(), 404);
