@@ -305,6 +305,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         ->name('agencies.get')
         ->middleware([Agency::class]);
 
+
     Route::get('/add_agency', [AgencyController::class, 'add_agency'])
         ->name('agency.add')
         ->middleware([Agency::class]);
@@ -312,6 +313,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/store_agency', [AgencyController::class, 'store_agency'])
         ->name('agency.store')
         ->middleware([Agency::class]);
+
+    Route::get('agencies/{agency_id}/details', [AgencyController::class, 'agency_details']);
 
     Route::get('/edit_agency', [AgencyController::class, 'edit_agency'])
         ->name('agency.edit')

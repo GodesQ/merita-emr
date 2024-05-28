@@ -10,11 +10,17 @@ class Agency extends Model
     use HasFactory;
     protected $table = 'mast_agency';
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['password', 'ad_password'];
+    protected $hidden = ['password'];
+
 
         public function admission()
     {
         return $this->hasOne(Admission::class, 'agency_id', 'id');
+    }
+
+    public function packages() {
+        return $this->hasMany(ListPackage::class, 'agency_id');
     }
 
     public function patientinfo() {

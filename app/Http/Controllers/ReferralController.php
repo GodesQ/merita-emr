@@ -86,7 +86,8 @@ class ReferralController extends Controller
     }
 
     public function create(Request $request) {
-        return view('Referral.create');
+        $agencies = Agency::get();
+        return view('Referral.create', compact('agencies'));
     }
 
     public function store(Request $request) {

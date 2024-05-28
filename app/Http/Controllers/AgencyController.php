@@ -205,6 +205,15 @@ class AgencyController extends Controller
         }
     }
 
+    public function agency_details(Request $request, $agency_id) {
+        $agency = Agency::where('id', $agency_id)->with('packages', 'vessels', 'principals')->first();
+
+        return response([
+            'status' => TRUE,
+            'agency' => $agency
+        ]);
+    }
+
     public function edit_agency()
     {
         try {
