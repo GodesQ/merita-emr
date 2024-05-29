@@ -320,13 +320,11 @@ class ReferralController extends Controller
                 'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
             ]));
 
-            // if (session()->get('email') == 'james@godesq.com') {
-            //     $to_emails = [$request->email_employee];
-            // } else {
-            //     $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
-            // }
-
-            $to_emails = [$request->email_employee];
+            if (session()->get('email') == 'james@godesq.com') {
+                $to_emails = [$request->email_employee];
+            } else {
+                $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+            }
 
             $refferal_data = DB::table('refferal')
                 ->select(
