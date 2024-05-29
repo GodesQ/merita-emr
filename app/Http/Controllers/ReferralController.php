@@ -315,16 +315,18 @@ class ReferralController extends Controller
                 'passport_expdate' => $new_passport_expdate,
                 'ssrb_expdate' => $new_ssrb_expdate,
                 'created_date' => Carbon::now(),
-                'certificate' => implode(", ", $request->certificate),
+                'certificate' => is_array($request->certificate) ? implode(", ", $request->certificate) : null,
                 'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
                 'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
             ]));
 
-            if (session()->get('email') == 'james@godesq.com') {
-                $to_emails = [$request->email_employee];
-            } else {
-                $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
-            }
+            // if (session()->get('email') == 'james@godesq.com') {
+            //     $to_emails = [$request->email_employee];
+            // } else {
+            //     $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+            // }
+
+            $to_emails = [$request->email_employee];
 
             $refferal_data = DB::table('refferal')
                 ->select(

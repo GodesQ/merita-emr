@@ -35,7 +35,7 @@ class ReferralSlip extends Mailable
     {
         return $this->from(env('MAIL_FROM_ADDRESS'))
             ->subject('Referral Slip')
-            ->view('emails.referral-slip', ['data' => $this->data])
+            ->view('emails.refferal-slip', ['data' => $this->data])
             ->attachData($this->pdf->output(), 'refferal_slip.pdf');
     }
 }
