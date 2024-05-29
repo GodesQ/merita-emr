@@ -1,4 +1,4 @@
-<form class="form" method="POST" id="referrals/store">
+<form class="form" method="POST" action="/referrals/store">
     @csrf
     <h4 class="form-section"><i class="feather icon-user"></i> Crew General
         Information</h4>
@@ -504,8 +504,7 @@
 </form>
 
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <script>
         const canvas = document.querySelector(".signature");
         const signaturePad = new SignaturePad(canvas, {
@@ -516,7 +515,13 @@
         document.querySelector('.clear-signature').addEventListener('click', () => {
             signaturePad.clear();
         });
-        
+
+        signaturePad.addEventListener("endStroke", () => {
+            let signatureData = signaturePad.toDataURL();
+            let signatureInput = document.querySelector('.signature-data');
+            signatureInput.value = signatureData;
+        });
+
         $('#agency_id').change(function(e) {
             let agency_id = e.target.value;
             $.ajax({
@@ -537,5 +542,35 @@
                 }
             })
         })
+
+        function getAge(e) {
+            var today = new Date();
+            var birthDate = new Date(e.value);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            const ageInput = document.querySelector("#age");
+            ageInput.value = age;
+        }
+
+        // show quantity if certificate has check
+        let certificateButtons = document.querySelectorAll("input[name='certificate[]']");
+
+        for (let index = 0; index < certificateButtons.length; index++) {
+            const element = certificateButtons[index];
+            element.addEventListener("change", (e) => {
+                showQuantity(element.id);
+            })
+        }
+
+        function showQuantity(id) {
+            if (document.querySelector(`#${id}`).checked) {
+                $(`#${id}_qty`).removeClass("d-none");
+            } else {
+                $(`#${id}_qty`).addClass("d-none");
+            }
+        }
     </script>
 @endpush

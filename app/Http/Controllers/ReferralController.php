@@ -85,29 +85,76 @@ class ReferralController extends Controller
         return view('Referral.referrals');
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $agencies = Agency::get();
         return view('Referral.create', compact('agencies'));
     }
 
-    public function store(Request $request) {
+    public function store(StoreRequest $request)
+    {
+        $existing_referral = Refferal::where('email_employee', $request->email_employee)->latest('id')->first();
+
+        if ($existing_referral) {
+            if ($existing_referral->created_date == date('Y-m-d')) {
+                return back()->with('fail', "You can't create new referral on the same date.");
+            }
+        }
+
+        $data = $request->validated();
+        $signature = base64_encode($request->signature);
+
+        $referral = Refferal::create(array_merge($data, [
+            'signature' => $signature,
+            'created_date' => date('Y-m-d'),
+            'certificate' => implode(", ", $request->certificate),
+            'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
+            'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
+        ]));
+
+        
+        $referral->load('package', 'agency');
+
+        if (session()->get('email') == 'james@godesq.com' || $request->employer == 'James Agency') {
+            $to_emails = [$request->email_employee];
+        } else {
+            $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
+        }
+
+
+        if ($referral) {
+            $pdf = PDF::loadView('emails.referral-pdf', ['referral' => $referral->toArray()])->setOptions([
+                        'defaultFont' => 'sans-serif',
+                    ]);
+
+            foreach ($to_emails as $to_email) {
+                Mail::to($to_email)->send(new ReferralSlip($referral->toArray(), $pdf));
+            }
+
+            return response()->json([
+                'status' => 200,
+            ]);
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
 
     }
 
-    public function show(Request $request, $id) {
-    
-    }
-
-    public function edit(Request $request, $id) {
-    
-    }
-
-    public function update(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
 
     }
 
-    public function destroy(Request $request, $id) {   
-    
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy(Request $request, $id)
+    {
+
     }
 
     public function referral_list(Request $request)
