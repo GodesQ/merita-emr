@@ -315,7 +315,7 @@ class ReferralController extends Controller
                 'passport_expdate' => $new_passport_expdate,
                 'ssrb_expdate' => $new_ssrb_expdate,
                 'created_date' => Carbon::now(),
-                'certificate' => implode(", ", $request->certificate),
+                'certificate' => is_array($request->certificate) ? implode(", ", $request->certificate) : null,
                 'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
                 'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
             ]));

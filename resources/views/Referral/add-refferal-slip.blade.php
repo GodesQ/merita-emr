@@ -643,9 +643,8 @@
 @endsection
 
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../../app-assets/js/scripts/signature_pad-master/js/signature_pad.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 
     <script>
         const canvas = document.querySelector(".signature");
@@ -658,11 +657,11 @@
             signaturePad.clear();
         });
 
-        document.querySelector('.lastname').onchange = function() {
+        signaturePad.addEventListener("endStroke", () => {
             let signatureData = signaturePad.toDataURL();
             let signatureInput = document.querySelector('.signature-data');
             signatureInput.value = signatureData;
-        }
+        });
 
         $("#store_refferal").submit(function(e) {
             e.preventDefault();
