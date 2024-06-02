@@ -42,6 +42,7 @@ class ECGController extends Controller
         try {
             $id = $request->id;
             $exam = ECG::findOrFail($id);
+            $exam->trans_date = $request->trans_date;
             $exam->otoscopy = $request->otoscopy;
             $exam->heart = $request->heart;
             $exam->lung = $request->lung;
