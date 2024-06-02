@@ -130,11 +130,11 @@ function convertNumber($num = false, $currency = 'Pesos')
                             <table width="100%" cellpadding="2" cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        <td width="20%" rowspan="3" align="center">
+                                        <td width="15%" rowspan="3" align="center">
                                             <img src="../../../app-assets/images/logo/logo.jpg" width="100"
                                                 height="100" alt="">
                                         </td>
-                                        <td width="80%" rowspan="3" align="center" valign="middle">
+                                        <td width="65%" rowspan="3" align="center" valign="middle">
                                             <span style="color: #2c763f; font-size: 30px; font-family: serif;">MERITA
                                                 DIAGNOSTIC CLINIC INC.</span><br style="margin-bottom: 20px">
                                             <span style="color: #2c763f">5th &amp; 6th Flr Jettac Bldg., 920 Quirino
@@ -144,6 +144,10 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
                                                 Accredited: DOH * POEA * MARINA * TESDA * Oil &amp; Gas UK<br>Skuld
                                                 P&amp;I * West of England P&amp;I
+                                        </td>
+                                        <td>
+                                            <img style="object-fit: cover;" src="../../../app-assets/images/logo/gcl-logo.png" width="100%"
+                                                height="100" alt="">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -155,20 +159,21 @@ function convertNumber($num = false, $currency = 'Pesos')
                             <table width="100%" cellspacing="0" cellpadding="2" style="margin: 2rem 0 0 0;">
                                 <tbody>
                                     <tr>
-                                        <td width="80%" style="font-size: 10px; text-decoration: underline;">
+                                        <td width="75%" style="font-size: 10px; text-decoration: underline;">
                                             {{ $agency->agencyname }}
                                         </td>
-                                        <td width="80%">Date:
-                                            <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span>
+                                        <td width="20%" style="text-align: right;">BILLING INVOICE No: <span style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="20%"
+                                        <td width="25%"
                                             style="font-size: 10px; text-decoration: underline;text-transform: uppercase;">
                                             {{ date_format(new DateTime($date_from), 'd') }} -
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
-                                        <td width="20%">INVOICE: <span style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
+                                        
+                                        <td width="80%" style="text-align: right;">Date:
+                                            <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -184,11 +189,11 @@ function convertNumber($num = false, $currency = 'Pesos')
                                 <table width="100%" cellpadding="2" cellspacing="0" class="brdBtm soa-table"
                                     border="0" style="margin-top: 1rem;">
                                     <tbody>
-                                        <tr>
+                                        {{-- <tr>
                                             <td colspan="10" align="center" style="font-size: 15px; font-weight: 500; border: none !important;">
                                                 STATEMENT OF ACCOUNT
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td align="left" class="brdAll" width="10%">DATE</td>
                                             <td align="left" class="brdTop brdBtm" width="2%">&nbsp;</td>
