@@ -130,12 +130,12 @@ function convertNumber($num = false, $currency = 'Pesos')
                             <table width="100%" cellpadding="2" cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        <td width="15%" rowspan="3" align="center">
+                                        <td width="20%" rowspan="3" align="center">
                                             <img src="../../../app-assets/images/logo/logo.jpg" width="100"
                                                 height="100" alt="">
                                         </td>
-                                        <td width="65%" rowspan="3" align="center" valign="middle">
-                                            <span style="color: #2c763f; font-size: 30px; font-family: serif;">MERITA
+                                        <td width="80%" rowspan="3" align="center" valign="middle">
+                                            <span style="color: #2c763f; font-size: 35px; font-family: serif;">MERITA
                                                 DIAGNOSTIC CLINIC INC.</span><br style="margin-bottom: 20px">
                                             <span style="color: #2c763f">5th &amp; 6th Flr Jettac Bldg., 920 Quirino
                                                 Ave.
@@ -145,10 +145,10 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 Accredited: DOH * POEA * MARINA * TESDA * Oil &amp; Gas UK<br>Skuld
                                                 P&amp;I * West of England P&amp;I
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <img style="object-fit: cover;" src="../../../app-assets/images/logo/gcl-logo.png" width="100%"
                                                 height="100" alt="">
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 </tbody>
                             </table>
@@ -159,10 +159,13 @@ function convertNumber($num = false, $currency = 'Pesos')
                             <table width="100%" cellspacing="0" cellpadding="2" style="margin: 2rem 0 0 0;">
                                 <tbody>
                                     <tr>
-                                        <td width="75%" style="font-size: 10px; text-decoration: underline;">
+                                        <td width="70%" style="font-size: 10px; text-decoration: underline;">
                                             {{ $agency->agencyname }}
                                         </td>
-                                        <td width="20%" style="text-align: right;">BILLING INVOICE No: <span style="border: none; border-bottom: 1px solid black;"><?php echo date('Ym') ?>{{ sprintf("%04d", $invoice_number) }}<?php $invoice_number++ ?></span>
+                                        <td width="30%"
+                                            style="text-align: right; font-weight: bold; font-size: 13px;">BILLING
+                                            INVOICE No: <span
+                                                style="border: none; border-bottom: 1px solid black; font-weight: normal;">{{ $invoice_number_first }}{{ sprintf('%04d', $invoice_number) }}<?php $invoice_number++; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -171,7 +174,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             {{ date_format(new DateTime($date_from), 'd') }} -
                                             {{ date_format(new DateTime($date_to), 'd') }}
                                             {{ date_format(new DateTime($date_to), 'F Y') }}</td>
-                                        
+
                                         <td width="80%" style="text-align: right;">Date:
                                             <span>{{ date_format(new DateTime($soa_date), 'd M Y') }}</span>
                                         </td>
@@ -214,12 +217,14 @@ function convertNumber($num = false, $currency = 'Pesos')
                                             @if (in_array('vessel', $additional_columns))
                                                 <td align="left" class="brdAll">Vessel</td>
                                             @endif
-                                            <td width="{{ $agency->id == 15 ? '20%' : '28%' }}" align="left" class="brdAll">EXAMINATIONS</td>
-                                            <td align="left" class="brdAll" width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
+                                            <td width="{{ $agency->id == 15 ? '20%' : '28%' }}" align="left"
+                                                class="brdAll">EXAMINATIONS</td>
+                                            <td align="left" class="brdAll"
+                                                width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
                                         </tr>
                                         <?php
-                                            $total = 0;
-                                            $patient_count = 1;
+                                        $total = 0;
+                                        $patient_count = 1;
                                         ?>
                                         <?php
                                         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -239,7 +244,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         {{ date_format(new DateTime($patient->trans_date), 'd-M-Y') }}
                                                     </td>
                                                     <td align="left" valign="top" class="brdRight">
-                                                        @php echo $patient_count;
+                                                        @phpecho $patient_count;
                                                             $patient_count++;
                                                         @endphp
                                                     </td>
@@ -473,8 +478,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                     <tr>
                                         <td>
                                             Prepared by / Checked by: <span
-                                                style="border-bottom: 1px solid black;"><input
-0                                                    style="border: none; border-bottom: 1px solid black;"
+                                                style="border-bottom: 1px solid black;"><input 0
+                                                    style="border: none; border-bottom: 1px solid black;"
                                                     value="{{ $prepared_by }}" /> </span>
                                         </td>
                                         <td>
@@ -492,7 +497,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                         <td style="position: absolute; bottom: 20px; left: 45%;">Page
                                             <?php echo $page;
                                             $page++; ?> of <?php echo count($collected_patients); ?></td>
-                                        <td>Date & Time: <input style="border: none; border-bottom: 1px solid black;" value="" /></td>
+                                        <td>Date & Time: <input style="border: none; border-bottom: 1px solid black;"
+                                                value="" /></td>
                                     </tr>
                                 </tbody>
                             </table>
