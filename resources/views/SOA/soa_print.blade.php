@@ -223,8 +223,8 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                 width="{{ $agency->id == 15 ? '20%' : '10%' }}">AMOUNT</td>
                                         </tr>
                                         <?php
-                                        $total = 0;
-                                        $patient_count = 1;
+                                            $total = 0;
+                                            $patient_count = 1;
                                         ?>
                                         <?php
                                         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -244,7 +244,7 @@ function convertNumber($num = false, $currency = 'Pesos')
                                                         {{ date_format(new DateTime($patient->trans_date), 'd-M-Y') }}
                                                     </td>
                                                     <td align="left" valign="top" class="brdRight">
-                                                        @phpecho $patient_count;
+                                                        @php echo $patient_count;
                                                             $patient_count++;
                                                         @endphp
                                                     </td>
