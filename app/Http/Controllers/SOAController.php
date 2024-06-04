@@ -105,14 +105,15 @@ class SOAController extends Controller
             }
         }
 
-        $invoice_number = $request->invoice_number;
+        $invoice_number_first = $request->invoice_number_first;
+        $invoice_number = $request->invoice_number_second;
         $soa_date = $request->soa_date ? date_format(date_create_from_format('Y-m-d', $request->soa_date), 'F d, Y') : date('F d, Y');
         $terms_date = $request->terms_date ? date_format(date_create_from_format('Y-m-d', $request->terms_date), 'F d, Y') : date('F d, Y');
 
         if ($request->template == 'Template 2') {
-            return view('SOA.hartmann_soa', compact('collected_patients', 'agency', 'currency', 'exchange_rate', 'invoice_number', 'soa_date', 'prepared_by', 'approved_by', 'terms_date', 'include_examination'));
+            return view('SOA.hartmann_soa', compact('collected_patients', 'agency', 'currency', 'exchange_rate', 'invoice_number_first', 'invoice_number', 'soa_date', 'prepared_by', 'approved_by', 'terms_date', 'include_examination'));
         }
-        return view('SOA.soa_print', compact('collected_patients', 'agency', 'currency', 'exchange_rate', 'invoice_number', 'soa_date', 'prepared_by', 'approved_by', 'terms_date', 'bahia_vessel', 'additional_columns', 'date_from', 'date_to', 'include_examination', 'tax'));
+        return view('SOA.soa_print', compact('collected_patients', 'agency', 'currency', 'exchange_rate', 'invoice_number_first', 'invoice_number', 'soa_date', 'prepared_by', 'approved_by', 'terms_date', 'bahia_vessel', 'additional_columns', 'date_from', 'date_to', 'include_examination', 'tax'));
     }
 
     public function panama(Request $request)

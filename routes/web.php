@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SchedulePatientController;
 use App\Http\Middleware\Agency;
 use App\Http\Middleware\Laboratory;
 use App\Http\Middleware\Ophthalmology;
@@ -89,7 +90,7 @@ Route::view('/new_skuld', 'PrintPanel.new-skuld');
 Route::group(['middleware' => ['AuthCheck']], function () {
     // Route::get('/migrate-patients', [AdminController::class, 'migrate_patients']);
 
-    Route::get('migrate_patient_remarks', [AdmissionController::class, 'migrate_patient_remarks']); 
+    Route::get('migrate_patient_remarks', [AdmissionController::class, 'migrate_patient_remarks']);
 
     Route::get('/followup_results', [AdminController::class, 'followup_results']);
     // ----------------------------------------- START PATIENT ACCESS --------------------------------------- //
@@ -122,6 +123,17 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/store_remedical', [PatientController::class, 'store_remedical']);
 
     // ----------------------------------------- END PATIENT ACCESS --------------------------------------- //
+
+
+    // ----------------------------------------- START SCHEDULE PATIENT ACCESS --------------------------------------- //
+    Route::get('schedule-appointments', [SchedulePatientController::class, 'index']);
+    Route::get('schedule-appointments/create', [SchedulePatientController::class, 'create']);
+    Route::post('schedule-appointments/store', [SchedulePatientController::class, 'store']);
+    Route::get('schedule-appointments/edit/{id}', [SchedulePatientController::class, 'edit']);
+    Route::put('schedule-appointments/update/{id}', [SchedulePatientController::class, 'update']);
+
+    // ----------------------------------------- END SCHEDULE PATIENT ACCESS --------------------------------------- //
+
 
     // ----------------------------------------- START AGENCY ACCESS --------------------------------------- //
 

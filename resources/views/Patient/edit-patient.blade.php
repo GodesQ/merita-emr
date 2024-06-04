@@ -302,7 +302,7 @@
                                                                         class="btn btn-outline-secondary btn-lg"
                                                                         data-dismiss="modal" value="close">
                                                                     <button
-                                                                        {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
+                                                                        {{ session()->get('dept_id') == 1 || session()->get('dept_id') == 8 ? null : 'disabled' }}
                                                                         type='submit'
                                                                         class='submit-pending btn btn-primary btn-lg'>Submit</button>
                                                                 </div>

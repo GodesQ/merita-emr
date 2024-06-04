@@ -111,13 +111,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">Invoice Number</label>
-                                                        <input type="text" class="form-control" readonly value="{{ date('Ym') }}">
+                                                        <input type="text" name="invoice_number_first" class="form-control" value="{{ date('Ym') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="" style="font-size: 12px;">(Input your Last Invoice Number here)</label>
-                                                        <input type="text" name="invoice_number" class="form-control" value="" placeholder="e.g. 0001">
+                                                        <input type="text" name="invoice_number_second" class="form-control" value="" placeholder="e.g. 0001">
                                                     </div>
                                                 </div>
                                             </div>
