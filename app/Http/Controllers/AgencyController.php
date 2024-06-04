@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\AgencyPrincipal;
 use App\Models\AgencyVessel;
+use App\Models\SchedulePatient;
 use Illuminate\Http\Request;
 use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
@@ -66,7 +67,9 @@ class AgencyController extends Controller
             $id = $request->id;
             $patient = Patient::where('id', $id)->with('patientinfo', 'admission.medical_results')->firstOrFail();
 
-            return view('Agency.agency-emp', compact('patient', 'data'));
+            $patient_schedule = SchedulePatient::where('patient_id', $patient->id)->latest('date')->first();
+
+            return view('Agency.agency-emp', compact('patient', 'data', 'patient_schedule'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
