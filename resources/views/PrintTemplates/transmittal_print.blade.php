@@ -174,6 +174,8 @@
                                                 $pe_status = 'Fit to Work';
                                             } else if($patient->exam_physical->fit == 'Unfit') {
                                                 $pe_status = 'Unfit to Work';
+                                            } else if($patient->exam_physical->fit == 'Unfit_temp') {
+                                                $pe_status = 'Unfit Temporarily';
                                             } else {
                                                 $pe_status = 'Pending';
                                             }
