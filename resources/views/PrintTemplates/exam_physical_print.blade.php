@@ -649,7 +649,7 @@
                                     {{$exam->b4 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
-                                    <font size="1">{{$exam->b4_findings}}</font>
+                                    <font size="1">{{$exam->b5_findings}}</font>
                                 </b></td>
                             <td>Extremities</td>
                             <td align="center"><b>
@@ -695,7 +695,7 @@
                                     {{$exam->b6 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
-                                    <font size="1">{{$exam->b5_findings}}</font>
+                                    <font size="1">{{$exam->b7_findings}}</font>
                                 </b></td>
                             <td>Dental(Teeth/Gums)</td>
                             <td align="center"><b>
