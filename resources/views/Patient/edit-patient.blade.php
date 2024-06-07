@@ -235,7 +235,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-9">
-                                                            <form id="update_lab_result_pending" action="#"
+                                                            <form id="lab_result_form" action="#"
                                                                 method="POST">
                                                                 @csrf
                                                                 <div class="form-group">
@@ -310,92 +310,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
-                                        aria-labelledby="myModalLabel33" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <label class="modal-title text-text-bold-600"
-                                                        id="myModalLabel33">Laboratory Result</label>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form id="update_lab_result_reassessment" action="#" method="POST">
-                                                    @csrf
-                                                    @include('Patient.patient_findings', [
-                                                        $exam_audio,
-                                                        $exam_cardio,
-                                                        $exam_ecg,
-                                                        $exam_echodoppler,
-                                                        $exam_echoplain,
-                                                        $exam_ishihara,
-                                                        $exam_psycho,
-                                                        $exam_physical,
-                                                        $exam_psychobpi,
-                                                        $exam_stressecho,
-                                                        $exam_stresstest,
-                                                        $exam_ultrasound,
-                                                        $exam_dental,
-                                                        $exam_xray,
-                                                        $exam_blood_serology,
-                                                        $examlab_hiv,
-                                                        $examlab_drug,
-                                                        $examlab_feca,
-                                                        $examlab_hema,
-                                                        $examlab_hepa,
-                                                        $examlab_urin,
-                                                        $examlab_pregnancy,
-                                                        $examlab_misc,
-                                                    ])
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="lab_status" value="1">
-                                                        <input type="hidden" name="patientId"
-                                                            value="{{ $patient->id }}">
-                                                        <input type="hidden" name="agency_id"
-                                                            value="{{ $patientInfo->agency_id }}">
-                                                        <input type="hidden" name="id"
-                                                            value="@php echo $admissionPatient ? $admissionPatient->id : null @endphp">
-                                                        <input type="hidden" name="schedule_id"
-                                                            value="@php echo $latest_schedule ? $latest_schedule->id : null @endphp">
-                                                        <div class="form-group">
-                                                            <label for="">Remarks/Recommendations:</label>
-                                                            <textarea name="remarks" id="" cols="30" rows="10" class="form-control">@php echo $admissionPatient ? $admissionPatient->remarks : null @endphp</textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Next Schedule Date: </label>
-                                                            <input type="date" max="2050-12-31" name="schedule"
-                                                                class="form-control"
-                                                                value="{{ $latest_schedule ? $latest_schedule->date : null }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Doctor Prescription</label>
-                                                            <select required name="doctor_prescription" id=""
-                                                                class="select2">
-                                                                @foreach ($doctors as $doctor)
-                                                                    <option value="{{ $doctor->id }}">
-                                                                        {{ $doctor->firstname . ' ' . $doctor->lastname . ' ' . "($doctor->position)" }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="">Prescription</label>
-                                                            <textarea name="prescription" id="" cols="30" rows="7" class="form-control">{{ $admissionPatient ? $admissionPatient->prescription : '' }}</textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="reset" class="btn btn-outline-secondary btn-lg"
-                                                            data-dismiss="modal" value="close">
-                                                        <button {{ session()->get('dept_id') == 1 ? null : 'disabled' }}
-                                                            type='submit'
-                                                            class='submit-reassessment btn btn-primary btn-lg'>Submit</button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -703,7 +617,7 @@
             })
         });
 
-        $("#update_lab_result_pending").submit(function(e) {
+        $("#lab_result_form").submit(function(e) {
             e.preventDefault();
             const fd = new FormData(this);
             $(".submit-pending").html(
@@ -835,49 +749,6 @@
                     "<input type='submit' class='submit-fit btn btn-primary btn-lg' value='Submit'>")
             });
         })
-
-        $("#update_lab_result_unfittemp").submit(function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            $(".submit-unfittemp").html(
-                "<button type='submit' class='submit-unfittemp btn btn-primary btn-lg'><i class='fa fa-refresh spinner'></i> Submit</button>"
-            );
-            $.ajax({
-                url: '/update_lab_result',
-                method: "POST",
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    if (response.status == 200) {
-                        Swal.fire(
-                            'Updated!',
-                            'Record has been updated.',
-                            'success'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    } else {
-                        Swal.fire(
-                            'Error Occured!',
-                            'Internal Server Error.',
-                            'error'
-                        ).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    }
-                }
-            }).done(function(data) {
-                $(this).html(
-                    "<input type='submit' class='submit-unfittemp btn btn-primary btn-lg' value='Submit'>"
-                )
-            });
-        });
 
         let medical_result_btns = document.querySelectorAll('.medical_result_btn');
 

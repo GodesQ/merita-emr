@@ -14,53 +14,6 @@
             </div>
         </div>
         <div class="container">
-            {{-- <button type="button" class="btn btn-outline-success block btn-lg d-none" id="open-instruction"
-                data-toggle="modal" data-target="#large">Announcement</button>
-            <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
-                style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Announcement</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container border p-1 my-1">
-                                Dear {{ session()->get('agencyName') }},
-                                <br><br>
-                                We're excited to announce that our system now includes new input fields in the form, making
-                                it easier than ever to collect the information you need. These new fields have been added
-                                based on your feedback, and we hope they'll improve your experience with our system.
-                                <br><br>
-                                These are the new input fields that we're added in referral form.
-                                <br>
-                                <ul>
-                                    <li style="list-style: square !important;">Passport</li>
-                                    <li style="list-style: square !important;">Passport Expiry Date</li>
-                                    <li style="list-style: square !important;">SSRB</li>
-                                    <li style="list-style: square !important;">SSRB Expiry Date</li>
-                                    <li style="list-style: square !important;">Address of Employee/Crew</li>
-                                    <li style="list-style: square !important;">Birthdate</li>
-                                    <li style="list-style: square !important;">Age</li>
-                                </ul>
-                                <br><br>
-                                If you have any questions or feedback about these new input fields, please don't hesitate to
-                                reach out to our support team. We're always here to help.
-                                <br><br>
-                                Best regards,
-                                <br><br>
-                                Merita Diagnostic Clinic
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary"
-                                data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="row">
                 <div class="col-md-12 my-1">
                     <div class="card">
@@ -199,7 +152,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="civil_status">Civil Status</label>
-                                                <select name="civil_status" id="civil_status" class="form-control">
+                                                <select name="civil_status" id="civil_status" class="form-select">
                                                     <option value="Single">Single</option>
                                                     <option value="Married">Married</option>
                                                     <option value="Widowed">Widowed</option>
@@ -212,7 +165,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
-                                                <select name="gender" id="gender" class="form-control">
+                                                <select name="gender" id="gender" class="form-select">
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                 </select>
@@ -323,7 +276,28 @@
                                     </div>
                                     <h4 class="form-section"><i class="feather icon-user"></i> Additional Information</h4>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="text-bold-600" for="employment_type">Employment Type</label>
+                                                <div class="container-fluid ">
+                                                    <div class="d-inline-block custom-control custom-radio mr-1">
+                                                        <input type="radio" class="custom-control-input"
+                                                            id="employment_type1" name="employment_type"
+                                                            value="New Crew">
+                                                        <label class="custom-control-label" for="employment_type1">New
+                                                            Crew</label>
+                                                    </div>
+                                                    <div class="d-inline-block custom-control custom-radio mr-1">
+                                                        <input type="radio" class="custom-control-input"
+                                                            id="employment_type2" name="employment_type" value="Old Crew"
+                                                            checked>
+                                                        <label class="custom-control-label" for="employment_type2">Old
+                                                            Crew</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="text-bold-600" for="projectinput2">Admission Type</label>
                                                 <div class="container-fluid ">
@@ -344,7 +318,7 @@
                                                 <span class="text-danger danger" error-name="admission_type"></span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="text-bold-600" for="projectinput2">Payment Type <span
                                                         class="danger">*</span></label>
@@ -643,8 +617,8 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 
     <script>
         const canvas = document.querySelector(".signature");
@@ -709,8 +683,6 @@
                                 if (element) element.innerText = errors[key];
                             }
                             $(".main-loader").css("display", "none");
-                            // $("#error").removeClass("d-none");
-                            // $("#error").addClass("d-block");
                             toastr.error("Invalid Fields.", 'Fail');
                         }
                     }).done(function(data) {

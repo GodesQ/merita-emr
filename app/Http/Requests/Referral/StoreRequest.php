@@ -47,6 +47,7 @@ class StoreRequest extends FormRequest
             'passport_expdate' => 'required|date',
             'ssrb_expdate' => 'required|date',
             'payment_type' => 'required|string|max:50',
+            'employment_type' => 'required|string|max:50',
             'admission_type' => 'required|string|max:50',
             'custom_request' => 'nullable|string|max:255',
             'requestor' => 'required|string|max:255',
