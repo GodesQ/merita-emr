@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\Facades\DataTables;
@@ -101,6 +102,12 @@ class AgencyDashboardController extends Controller
                     })
                     ->addColumn('category', function ($row) {
                         return $row->admission ? $row->admission->category : optional($row->patientinfo)->category;
+                    })
+                    ->editColumn('created_date', function ($row) {
+                        if($row->created_date) {
+                            return Carbon::parse($row->created_date)->format('F d, Y');
+                        }
+                        return 'No Registered Date Found';
                     })
                     ->addColumn('status', function ($row) {
                         $patientInfo = $row->patientinfo;

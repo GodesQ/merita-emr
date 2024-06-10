@@ -52,9 +52,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <ul class="search-list">
-                                    
-                                </ul>
+                                <ul class="search-list"></ul>
                             </div>
                         </div>
                     </div>
@@ -660,6 +658,26 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+    <script>
+        $("#passport_expdate").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            minDate: 'today',
+        });
+
+        $("#ssrb_expdate").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            minDate: 'today',
+        });
+
+        $("#birthdate").flatpickr({
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            maxDate: 'today',
+        });
+    </script>
 
     <script>
         const canvas = document.querySelector(".signature");

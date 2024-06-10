@@ -87,6 +87,7 @@
                                     <th>Package</th>
                                     <th>Passport No.</th>
                                     <th>SSRB No.</th>
+                                    <th>Registered Date</th>
                                     <th>Status</th>
                                     <th>View</th>
                                 </tr>
@@ -108,7 +109,7 @@
             deferRender: true,
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'excel', 'pdf', 'print',
+                'csv',
             ],
             search: {
                 "regex": true
@@ -165,6 +166,12 @@
                 {
                     data: 'ssrbno',
                     name: 'ssrbno',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'created_date',
+                    name: 'created_date',
                     orderable: true,
                     searchable: true
                 },

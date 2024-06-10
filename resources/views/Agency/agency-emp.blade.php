@@ -335,22 +335,32 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="base-tab2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        Edit Schedule
-                                    </div>
-                                    <form action="/schedule-appointments/update/{{ $patient_schedule->id }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <label for="date">Date</label>
-                                        <input type="text" id="schedule_date" name="date" class="form-control" value="{{ $patient_schedule->date }}">
-                                        <div class="mt-2">
-                                            <button class="btn btn-primary btn-block">Save Schedule</button>
+                            @if($patient_schedule)
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            Edit Schedule
                                         </div>
-                                    </form>
+                                        <form action="/schedule-appointments/update/{{ $patient_schedule->id }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <label for="date">Date</label>
+                                            <input type="text" id="schedule_date" name="date" class="form-control" value="{{ $patient_schedule->date }}">
+                                            <div class="mt-2">
+                                                <button class="btn btn-primary btn-block">Save Schedule</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <h3>No Schedule Found</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
