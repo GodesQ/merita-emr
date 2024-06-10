@@ -236,7 +236,7 @@
             let searchValue = $(".search-input .input").val();
             let csrf = '{{ csrf_token() }}';
             $.ajax({
-                url: '/search',
+                url: '/patients/search',
                 method: 'get',
                 data: {
                     query: searchValue,
@@ -244,17 +244,6 @@
                 },
                 success: function(response) {
                     if (e.keyCode !== 38 && e.keyCode !== 40 && e.keyCode !== 13) {
-                        // if (e.keyCode == 27) {
-                        //     // $(".app-content").removeClass("show-overlay")
-                        //     $(".search-input input").val("")
-                        //     $(".search-input input").blur()
-                        //     $(".search-input").removeClass("open")
-                        //     if ($(".search-list").hasClass("show")) {
-                        //         $(this).removeClass("show")
-                        //         $(".search-input").removeClass("show")
-                        //     }
-                        // }
-
                         let value = "e.target.value";
 
                         // If input value is blank
@@ -281,22 +270,6 @@
                                                             </div>
                                                         </a>
                                                     </li>`;
-
-                                    // $startList +=
-                                    //     '<li class="auto-suggestion d-flex align-items-center justify-content-between cursor-pointer ' +
-                                    //     $activeItemClass +
-                                    //     '">' +
-                                    //     '<a class="d-flex align-items-center justify-content-between w-100" href=' +
-                                    //     element.id +
-                                    //     ">" +
-                                    //     '<div class="d-flex justify-content-start">' +
-                                    //     '<span class="mr-75 ' +
-                                    //     element.lastname +
-                                    //     '"></span>' +
-                                    //     "<span>" +
-                                    //     element.firstname + " "
-                                    //     "</span>" +
-                                    //     "</div>"
                                     a++
                                 });
 

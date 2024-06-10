@@ -200,13 +200,15 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // ----------------------------------------- START ADMIN ACCESS --------------------------------------- //
 
-    Route::get('/search', [PatientController::class, 'search'])->name('patient.search');
+    Route::get('/patients/search', [PatientController::class, 'search'])->name('patient.search');
 
     Route::get('/dashboard', [AdminController::class, 'view_dashboard']);
 
     Route::get('/employee_documentation', [DocumentationController::class, 'employee_documentation']);
 
     Route::get('/patients', [PatientController::class, 'view_patients'])->name('patients.index');
+
+    Route::get('/patients/show/{id}', [PatientController::class, 'show'])->name('patients.index');
 
     Route::get('/today_patients', [AdminController::class, 'today_patients']);
 

@@ -5,7 +5,31 @@
 @endsection
 
 @section('content')
+    <style>
+        .search-list {
+            width: 97%;
+            background-color: white;
+            position: absolute;
+            margin-top: 0.5rem;
+            padding-left: 0;
+            z-index: 100 !important;
+            display: none;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+        }
+        .search-list li {
+            cursor: pointer;
+            width: 100%;
+            padding: .5rem 1rem;
+            background: white;
+            border-bottom: 1px solid lightgray;
+            z-index: 100 !important;
+        }
 
+        .search-list li:hover {
+            background: whitesmoke;
+        }
+    </style>
     <div class="app-content content">
         <div class="main-loader">
             <div class="loader">
@@ -16,6 +40,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 my-1">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body position-relative">
+                                <h5 class="mb-2">Search Crew</h5>
+                                <fieldset>
+                                    <div class="input-group">
+                                        <input type="text" id="search-bar" class="form-control" placeholder="Search your crew here..." aria-describedby="button-addon2">
+                                        <div class="input-group-append" id="button-addon2">
+                                            <button class="btn btn-primary" id="search-btn" type="button">Search</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <ul class="search-list">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="alert alert-danger alert-dismissible mb-2 d-none" id="error" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -153,11 +195,11 @@
                                             <div class="form-group">
                                                 <label for="civil_status">Civil Status</label>
                                                 <select name="civil_status" id="civil_status" class="form-select">
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Widowed">Widowed</option>
-                                                    <option value="Divorced">Divorced</option>
-                                                    <option value="Separated">Separated</option>
+                                                    <option value="SINGLE">Single</option>
+                                                    <option value="MARRIED">Married</option>
+                                                    <option value="WIDOWED">Widowed</option>
+                                                    <option value="DIVORCED">Divorced</option>
+                                                    <option value="SEPARATED">Separated</option>
                                                 </select>
                                                 <span class="text-danger danger" error-name="civil_status"></span>
                                             </div>
@@ -371,8 +413,7 @@
                                                 <input required type="text" id="agencyname" class="form-control"
                                                     placeholder="Agency / Company"
                                                     value="{{ session()->get('agencyName') }}" readonly>
-                                                <input type="hidden" id="projectinput4" class="form-control"
-                                                    placeholder="Agency / Company" name="agency_id"
+                                                <input type="hidden" id="agency_id" class="form-control" name="agency_id"
                                                     value="{{ session()->get('agencyId') }}" readonly>
                                                 <span class="text-danger danger" error-name="agency_id"></span>
 
@@ -739,5 +780,68 @@
                 $('#other-principal').addClass('d-none');
             }
         });
+
+
+        $('#search-btn').click(function(e) {
+            let query = $('#search-bar').val();
+            
+            if(query.length < 3) return $('.search-list').css('display', 'none');
+
+            $('.search-list').css('display', 'block');
+            
+            let agency_id = $('#agency_id').val();
+
+            $.ajax({
+                method: 'GET',
+                url: `/patients/search?agency_id=${agency_id}&query=${query}`,
+                success: function (data) {
+                    $list = '';
+
+                    if(data[0].length > 0) {
+                        data[0].forEach(patient => {
+                            $list += `<li data-id="${patient.id}">${patient.firstname} ${patient.lastname}</li>`
+                        });
+                    } else {
+                        data[0].forEach(patient => {
+                            $list += `<li>No Crew Found.</li>`
+                        });
+                    }
+                    
+
+                    $('ul.search-list').html($list);
+
+                    // Add the onclick event to the newly created li elements
+                    $('ul.search-list li').on('click', function() {
+                        const patientId = $(this).data('id');
+                        getPatientInfo(patientId);
+                    });
+                }
+            })
+        })
+
+        function getPatientInfo(patientId) {
+            $('.search-list').css('display', 'none');
+
+            $.ajax({
+                url: `/patients/show/${patientId}`,
+                method: 'GET',
+                success: function (data) {
+                    $('#firstname').val(data.patient.firstname);
+                    $('#lastname').val(data.patient.lastname);
+                    $('#middlename').val(data.patient.middlename);
+                    $('#address').val(data.patient.patientinfo.address);
+                    $('#email_employee').val(data.patient.email);
+                    $('#birthplace').val(data.patient.patientinfo.birthplace);
+                    $('#birthdate').val(data.patient.patientinfo.birthdate);
+                    $('#age').val(data.patient.age);
+                    $('#passport').val(data.patient.patientinfo.passportno);
+                    $('#ssrb').val(data.patient.patientinfo.srbno);
+                    $('#nationality').val(data.patient.patientinfo.nationality);
+                    $('#civil_status').val(data.patient.patientinfo.maritalstatus);
+                    $('#gender').val(data.patient.gender);
+
+                }
+            })
+        }
     </script>
 @endpush
