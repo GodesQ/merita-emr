@@ -27,7 +27,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div class="card-title">
-                    <h2>Refferal Slip</h2>
+                    <h2>Referral Slip</h2>
                 </div>
                 <div>
                     <!--<button class="btn btn-primary">Edit <i class="fa fa-pencil"></i></button>-->
