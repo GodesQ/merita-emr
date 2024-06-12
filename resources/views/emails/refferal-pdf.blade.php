@@ -55,7 +55,6 @@
     }
     </style>
 </head>
-@foreach ($data as $row)
 <table width="100%" celspacing="0" cellpadding="5" align="center">
     <tbody>
         <tr>
@@ -76,19 +75,19 @@
                         <tr>
                             <td width="40%" style="font-size: 12px;">Name of Employer/Agency:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$row->agencyname}}</div>
+                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$data->agencyname}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Vessel:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$row->vessel}}</div>
+                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$data->vessel}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Country of Destination:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$row->country_destination}}</div>
+                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$data->country_destination}}</div>
                             </td>
                         </tr>
                     </tbody>
@@ -105,19 +104,19 @@
         <tr>
             <td width="33%">
                 <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
-                    {{$row->lastname}}
+                    {{$data->lastname}}
                 </div>
                 <span style="font-size: 12px;" >Last Name</span>
             </td>
             <td width="33%">
                 <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
-                    {{$row->firstname}}
+                    {{$data->firstname}}
                 </div>
                 <span style="font-size: 12px;" >First Name</span>
             </td>
             <td width="33%">
                 <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
-                    {{$row->middlename}}
+                    {{$data->middlename}}
                 </div>
                 <span style="font-size: 12px;">Middle Name</span>
             </td>
@@ -132,7 +131,7 @@
                     <tbody>
                         <tr>
                             <td width="100%">
-                                <div style="border-bottom: 1px solid #476434; margin-bottom: 1rem;">{{$row->address}}
+                                <div style="border-bottom: 1px solid #476434; margin-bottom: 1rem;">{{$data->address}}
                                 </div>
                                 <div style="text-align: center; font-size: 12px; margin-top: -10px;">Permanent Address
                                     (Street,
@@ -146,13 +145,13 @@
                         <tr>
                             <td width="50%">
                                 <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
-                                    {{$row->age}}
+                                    {{$data->age}}
                                 </div>
                                 <span style="font-size: 12px;" >Age</span>
                             </td>
                             <td width="50%">
                                 <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
-                                    {{$row->position_applied}}
+                                    {{$data->position_applied}}
                                 </div>
                                 <span style="font-size: 12px;">Position Applied</span>
                             </td>
@@ -163,10 +162,10 @@
             <td width="29%">
                 <table width="100%" cellspacing="0" cellpadding="2">
                     <tbody>
-                                <tr><td width="38%">Birthday:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">{{$row->birthdate ? date_format(new DateTime($row->birthdate), 'F d, Y') : '' }}</td></tr>
-                                <tr><td width="38%">Passport:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$row->passport ? $row->passport : '' }}</td></tr>
-                                <tr><td width="38%">SSRB:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$row->ssrb ? $row->ssrb : '' }}</td></tr>
-                                <tr><td width="38%">Cellphone #:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$row->contactno ? $row->contactno : '' }}</td></tr>
+                                <tr><td width="38%">Birthday:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">{{$data->birthdate ? date_format(new DateTime($data->birthdate), 'F d, Y') : '' }}</td></tr>
+                                <tr><td width="38%">Passport:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$data->passport ? $data->passport : '' }}</td></tr>
+                                <tr><td width="38%">SSRB:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$data->ssrb ? $data->ssrb : '' }}</td></tr>
+                                <tr><td width="38%">Cellphone #:</td><td width="62%" style="font-weight: 400; border-bottom: 1px solid black; ">{{$data->contactno ? $data->contactno : '' }}</td></tr>
                     </tbody>
                 </table>
             </td>
@@ -227,7 +226,6 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
         </tr>
         <tr>
             <td width="50%" style="text-align: center; border-bottom: 1px solid #476434">
-                {{$row->created_date}}
             </td>
             <td width="50%" style="text-align: center; border-bottom: 1px solid #476434">
                 <img width="150px" height="45px" style="object-fit:cover;"
@@ -248,10 +246,10 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             <td colspan="3">5. Please conduct the following medication exam:</td>
         </tr>
         <tr>
-            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434">{{$row->packagename}}</td>
+            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434">{{$data->packagename}}</td>
         </tr>
         <tr>
-            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434">{{$row->custom_request}}</td>
+            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434">{{$data->custom_request}}</td>
         </tr>
     </tbody>
 </table>
@@ -261,7 +259,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             <td width="30%" style="text-align: center;"><b>Type of Payment: </b></td>
             <td style="text-align: center;">Applicant Paid
                 <span>
-                    @if ($row->payment_type == "Applicant Paid")
+                    @if ($data->payment_type == "Applicant Paid")
                     <input type="checkbox" name="" id="" checked disabled style="vertical-align: middle;">
                     @else
                     <input type="checkbox" name="" id="" disabled style="vertical-align: middle;">
@@ -270,7 +268,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             </td>
             <td style="text-align: center;">Billed Agency
                 <span>
-                    @if ($row->payment_type == "Billed")
+                    @if ($data->payment_type == "Billed")
                     <input type="checkbox" name="" id="" checked disabled style="vertical-align: middle;">
                     @else
                     <input type="checkbox" name="" id="" disabled style="vertical-align: middle;">
@@ -284,7 +282,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
 <tbody>
     <tr>
         <td width="30%">&nbsp;</td>
-        <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;"> <img src="@php echo base64_decode($row->signature)@endphp" alt=""  width="150px" height="45px" style="object-fit:cover;"></td>
+        <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;"> <img src="@php echo base64_decode($data->signature)@endphp" alt=""  width="150px" height="45px" style="object-fit:cover;"></td>
         <td width="30%">&nbsp;</td>
     </tr>
     <tr>
@@ -310,6 +308,5 @@ $map = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
     </tbody>
 </table>
 
-@endforeach
 
 </html>

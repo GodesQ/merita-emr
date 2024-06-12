@@ -109,10 +109,9 @@ class ReferralController extends Controller
             'created_date' => date('Y-m-d'),
             'certificate' => implode(", ", $request->certificate),
             'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
-            'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal
+            'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal,
         ]));
 
-        
         $referral->load('package', 'agency');
 
         if (session()->get('email') == 'james@godesq.com' || $request->employer == 'James Agency') {
@@ -121,11 +120,12 @@ class ReferralController extends Controller
             $to_emails = [$request->email_employee, env('APP_EMAIL'), 'mdcinc2019@gmail.com', 'meritadiagnosticclinic@yahoo.com', session()->get('email'), env('RECEPTION_EMAIL')];
         }
 
-
         if ($referral) {
-            $pdf = PDF::loadView('emails.referral-pdf', ['referral' => $referral->toArray()])->setOptions([
-                        'defaultFont' => 'sans-serif',
-                    ]);
+            $pdf = PDF::loadView('emails.referral-pdf', [
+                'data' => $referral->toArray(),
+            ])->setOptions([
+                'defaultFont' => 'sans-serif',
+            ]);
 
             foreach ($to_emails as $to_email) {
                 Mail::to($to_email)->send(new ReferralSlip($referral->toArray(), $pdf));

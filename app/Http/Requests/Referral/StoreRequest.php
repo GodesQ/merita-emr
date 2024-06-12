@@ -71,6 +71,7 @@ class StoreRequest extends FormRequest
             'panama_qty' => 'nullable|integer',
             'signature' => 'required|string',
             'email_employee' => 'required|email|max:255',
+            'schedule_date' => 'required|date',
         ];
     }
 }

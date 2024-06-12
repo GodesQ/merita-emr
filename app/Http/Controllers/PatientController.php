@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PatientMedicalResult;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -317,6 +318,16 @@ class PatientController extends Controller
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
             ]);
 
+            $referral_form = Refferal::where('email', $mast_patient->email)->latest()->first();
+
+            if($referral_form && $referral_form->schedule_date) {
+                SchedulePatient::create([
+                    'patient_id' => $mast_patient->id,
+                    'patientcode' => $mast_patient->patientcode,
+                    'date' => $referral_form->schedule_date
+                ]);
+            }
+
             if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
                 return back()->with('status', 'Failed to Submit Data. Please check all of your information and try again.');
             }
@@ -376,7 +387,7 @@ class PatientController extends Controller
                 }
             }
 
-            return redirect('/schedule_appointment')->with('success', 'Register Successfully');
+            return redirect('/patient_info')->with('success', 'Register Successfully');
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -401,9 +412,7 @@ class PatientController extends Controller
                 ->with('patientinfo')
                 ->first();
 
-            if (!$patient->patientinfo) {
-                return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
-            }
+            if (!$patient->patientinfo) return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('data', 'schedules', 'latest_schedule', 'scheduled_patients'));
         } catch (\Exception $exception) {
@@ -421,14 +430,27 @@ class PatientController extends Controller
 
             $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
 
+            // This request was from edit patient panel in admin dashboard
             if ($action) {
-                $schedule = DB::table('sched_patients')->insert(['patient_id' => $request->patient_id, 'patientcode' => $request->patientcode, 'date' => $request->schedule_date]);
+                SchedulePatient::create([
+                    'patient_id' => $request->patient_id,
+                    'patientcode' => $request->patientcode,
+                    'date' => $request->schedule_date,
+                ]);
+
                 return redirect($path)->with('status', 'Add schedule of patient.');
             }
-            $save = DB::insert('insert into sched_patients(patient_id, patientcode, date) values(?, ?, ?)', [$data['patientId'], $data['patientCode'], $request->schedule_date]);
-            if ($save)
-                return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
-        } catch (\Exception $exception) {
+
+            // Request from schedule appointment of patient dashboard
+            SchedulePatient::create([
+                'patient_id' => session()->get('patientId'),
+                'patientcode' => session()->get('patientCode'),
+                'date' => $request->schedule_date,
+            ]);
+
+            return redirect('/patient_info')->with('success', 'Schedule Appointment Successfully');
+
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));

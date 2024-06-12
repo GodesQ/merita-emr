@@ -62,7 +62,6 @@
 </head>
 
 <body>
-    @foreach ($referral as $referral    )
         <table width="100%" cellspacing="0" cellpadding="5" align="center">
             <tbody>
                 <tr>
@@ -90,7 +89,7 @@
                                     <td width="40%" style="font-size: 12px;">Name of Employer/Agency:</td>
                                     <td width="60%">
                                         <div style="border-bottom: 1px solid #476434; font-size: 12px;">
-                                            {{ $referral['agency']['agencyname'] ?? '' }}
+                                            {{ $data['agency']['agencyname'] ?? '' }}
                                         </div>
                                     </td>
                                 </tr>
@@ -98,7 +97,7 @@
                                     <td width="40%" style="font-size: 12px;">Vessel:</td>
                                     <td width="60%">
                                         <div style="border-bottom: 1px solid #476434; font-size: 12px;">
-                                            {{ $referral['vessel'] ?? '' }}
+                                            {{ $data['vessel'] ?? '' }}
                                         </div>
                                     </td>
                                 </tr>
@@ -106,7 +105,7 @@
                                     <td width="40%" style="font-size: 12px;">Country of Destination:</td>
                                     <td width="60%">
                                         <div style="border-bottom: 1px solid #476434; font-size: 12px;">
-                                            {{ $referral['country_destination'] ?? '' }}
+                                            {{ $data['country_destination'] ?? '' }}
                                         </div>
                                     </td>
                                 </tr>
@@ -124,19 +123,19 @@
                 <tr>
                     <td width="33%">
                         <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
-                            {{ $referral['lastname'] ?? '' }}
+                            {{ $data['lastname'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">Last Name</span>
                     </td>
                     <td width="33%">
                         <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
-                            {{ $referral['firstname'] ?? '' }}
+                            {{ $data['firstname'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">First Name</span>
                     </td>
                     <td width="33%">
                         <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
-                            {{ $referral['middlename'] ?? '' }}
+                            {{ $data['middlename'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">Middle Name</span>
                     </td>
@@ -152,7 +151,7 @@
                                 <tr>
                                     <td width="100%">
                                         <div style="border-bottom: 1px solid #476434; margin-bottom: 1rem;">
-                                            {{ $referral['address'] ?? '' }}
+                                            {{ $data['address'] ?? '' }}
                                         </div>
                                         <div style="text-align: center; font-size: 12px; margin-top: -10px;">
                                             Permanent Address (Street, Municipality)
@@ -167,14 +166,14 @@
                                     <td width="50%">
                                         <div
                                             style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
-                                            {{ $referral['age'] ?? '' }}
+                                            {{ $data['age'] ?? '' }}
                                         </div>
                                         <span style="font-size: 12px;">Age</span>
                                     </td>
                                     <td width="50%">
                                         <div
                                             style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
-                                            {{ $referral['position_applied'] ?? '' }}
+                                            {{ $data['position_applied'] ?? '' }}
                                         </div>
                                         <span style="font-size: 12px;">Position Applied</span>
                                     </td>
@@ -188,25 +187,25 @@
                                 <tr>
                                     <td width="38%">Birthday:</td>
                                     <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
-                                        {{ isset($referral['birthdate']) ? date_format(new DateTime($referral['birthdate']), 'F d, Y') : '' }}
+                                        {{ isset($data['birthdate']) ? date_format(new DateTime($data['birthdate']), 'F d, Y') : '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="38%">Passport:</td>
                                     <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
-                                        {{ $referral['passport'] ?? '' }}
+                                        {{ $data['passport'] ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="38%">SSRB:</td>
                                     <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
-                                        {{ $referral['ssrb'] ?? '' }}
+                                        {{ $data['ssrb'] ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="38%">Cellphone #:</td>
                                     <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
-                                        {{ $referral['contactno'] ?? '' }}
+                                        {{ $data['contactno'] ?? '' }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -218,8 +217,8 @@
         @php
             $path = 'https://meritaclinic.ph/wp-content/uploads/2022/03/Merita-Logo.png';
             $type = pathinfo($path, PATHINFO_EXTENSION);
-            $referral = file_get_contents($path);
-            $logo = 'data:image/' . $type . ';base64,' . base64_encode($referral);
+            $file = file_get_contents($path);
+            $logo = 'data:image/' . $type . ';base64,' . base64_encode($file);
         @endphp
         <table width="100%" cellspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #476434;">
             <tbody>
@@ -266,11 +265,11 @@
                 </tr>
                 <tr>
                     <td width="50%" style="text-align: center; border-bottom: 1px solid #476434;">
-                        {{ $referral['created_date'] ?? '' }}
+                        {{ $data['created_date'] ?? '' }}
                     </td>
                     <td width="50%" style="text-align: center; border-bottom: 1px solid #476434;">
                         <img width="150px" height="45px" style="object-fit:cover;"
-                            src="{{ $referral['signature'] ?? '' }}" alt="">
+                            src="{{ $data['signature'] ?? '' }}" alt="">
                     </td>
                 </tr>
                 <tr>
@@ -287,13 +286,13 @@
                 <tr>
                     <td width="20%">5.1 Medical Package/Test:</td>
                     <td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">
-                        {{ $referral['package']['packagename'] ?? '' }}
+                        {{ $data['package']['packagename'] ?? '' }}
                     </td>
                 </tr>
                 <tr>
                     <td width="20%">5.2 Additional Request:</td>
                     <td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">
-                        {{ $referral['custom_request'] ?? '' }}
+                        {{ $data['custom_request'] ?? '' }}
                     </td>
                 </tr>
             </tbody>
@@ -305,13 +304,13 @@
                     <td style="text-align: center;">Applicant Paid
                         <span>
                             <input type="checkbox"
-                                {{ $referral['payment_type'] == 'Applicant Paid' ? 'checked' : '' }} disabled
+                                {{ ($data['payment_type'] ?? '') == 'Applicant Paid' ? 'checked' : '' }} disabled
                                 style="vertical-align: middle;">
                         </span>
                     </td>
                     <td style="text-align: center;">Billed Agency
                         <span>
-                            <input type="checkbox" {{ $referral['payment_type'] == 'Billed' ? 'checked' : '' }}
+                            <input type="checkbox" {{ ($data['payment_type'] ?? '') == 'Billed' ? 'checked' : '' }}
                                 disabled style="vertical-align: middle;">
                         </span>
                     </td>
@@ -323,7 +322,7 @@
                 <tr>
                     <td width="30%">&nbsp;</td>
                     <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;">
-                        <img src="{{ $referral['signature'] ?? '' }}" alt="" width="150px" height="45px"
+                        <img src="{{ $data['signature'] ?? '' }}" alt="" width="150px" height="45px"
                             style="object-fit:cover;">
                     </td>
                     <td width="30%">&nbsp;</td>
@@ -339,8 +338,8 @@
         @php
             $path2 = 'https://meritaclinic.ph/wp-content/uploads/2022/06/merita-map.png';
             $type2 = pathinfo($path2, PATHINFO_EXTENSION);
-            $referral2 = file_get_contents($path2);
-            $map = 'data:image/' . $type2 . ';base64,' . base64_encode($referral2);
+            $data2 = file_get_contents($path2);
+            $map = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
         @endphp
         <table width="100%" cellspacing="5" cellpadding="2">
             <tbody>
@@ -355,7 +354,6 @@
                 </tr>
             </tbody>
         </table>
-    @endforeach
 </body>
 
 </html>

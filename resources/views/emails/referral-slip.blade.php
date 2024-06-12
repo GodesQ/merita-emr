@@ -112,6 +112,14 @@
                                 Please see the details provided below for your reference upon registration.</p>
                         </td>
                     </tr>
+                    @if($data['schedule_date'])
+                        <tr>
+                            <td bgcolor="#ffffff" align="center"
+                                style="padding: 20px 20px 0px 20px; color: #666666; font-family: 'Google Sans', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 25px;">
+                                <p style="margin: 0;">Heads up! You have a clinic appointment scheduled for <span style="font-weight: bold;">{{ Carbon::parse($data['schedule_date'])->format('F d, Y') }}</span></p>
+                            </td>
+                        </tr>
+                    @endif
                     <tr>
                         <td bgcolor="#ffffff" align="center">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
