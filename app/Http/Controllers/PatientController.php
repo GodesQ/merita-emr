@@ -1286,7 +1286,7 @@ class PatientController extends Controller
                 ]);
             }
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1334,7 +1334,7 @@ class PatientController extends Controller
     public function search(Request $request)
     {
         try {
-            $query = $_GET['query'];
+            $query = $request->query('query');
             // $patients = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'))
             //     ->when($request->query('agency_id'), function ($query) use ($request) {
             //         $query->whereHas('patientinfo', function($query) use ($request) {
@@ -1369,7 +1369,7 @@ class PatientController extends Controller
 
             return response()->json([$patients]);
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1400,7 +1400,7 @@ class PatientController extends Controller
                     return back()->with('status', 'Upload Successfully');
                 }
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
