@@ -1363,8 +1363,8 @@ class PatientController extends Controller
                         $query->where('agency_id', $request->query('agency_id'));
                     });
                 })
-                ->with('patientinfo')
                 ->groupBy('patientcode')
+                ->latest('id')
                 ->get();
 
             return response()->json([$patients]);
