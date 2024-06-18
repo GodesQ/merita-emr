@@ -11,6 +11,37 @@ class PatientInfo extends Model
 
     protected $table = 'mast_patientinfo';
     public $timestamps = false;
+    protected $fillable = [
+        'main_id',
+        'patientcode',
+        'address',
+        'contactno',
+        'telno',
+        'celno',
+        'occupation',
+        'occupation_other',
+        'category',
+        'position',
+        'nationality',
+        'religion',
+        'religion_other',
+        'maritalstatus',
+        'agency_id',
+        'principal',
+        'referral',
+        'agency_address',
+        'country_destination',
+        'medical_package',
+        'payment_type',
+        'admission_type',
+        'vessel',
+        'passportno',
+        'passport_expdate',
+        'srbno',
+        'srb_expdate',
+        'birthdate',
+        'birthplace',
+    ];
     protected $guarded = [];
 
     public function patient()

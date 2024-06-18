@@ -23,7 +23,6 @@ use App\Models\EmployeeLog;
 use App\Models\Patient;
 use App\Models\Admission;
 use App\Models\ListPackage;
-use App\Models\Refferal;
 use PDF;
 
 class AgencyController extends Controller

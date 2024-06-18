@@ -31,6 +31,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    @stack('stylesheet')
     <!-- END: Custom CSS-->
 </head>
 <!-- END: Head-->

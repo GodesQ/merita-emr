@@ -212,7 +212,7 @@ class PatientController extends Controller
             } else {
                 return redirect('/patient_info')->with('success', 'Register Successfully');
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -262,15 +262,17 @@ class PatientController extends Controller
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
-            $mast_patient->firstname = strtoupper($request->firstName);
-            $mast_patient->lastname = strtoupper($request->lastName);
-            $mast_patient->middlename = strtoupper($request->middleName);
-            $mast_patient->suffix = strtoupper($request->suffix);
-            $mast_patient->gender = $request->gender;
-            $mast_patient->age = $request->age;
-            $mast_patient->position_applied = strtoupper($request->positionApplied);
-            $mast_patient->created_date = date('Y-m-d h:i:s');
-            $mast_patient_save = $mast_patient->save();
+
+            $mast_patient_save = $mast_patient->update([
+                'firstname' => strtoupper($request->firstName),
+                'lastname' => strtoupper($request->lastName),
+                'middlename' => strtoupper($request->middleName),
+                'suffix' => strtoupper($request->suffix),
+                'gender' => $request->gender,
+                'age' => $request->age,
+                'position_applied' => strtoupper($request->positionApplied),
+                'created_date' => date('Y-m-d h:i:s'),
+            ]);
 
             $save_patient_info = PatientInfo::create([
                 'main_id' => $request->main_id,
@@ -303,7 +305,7 @@ class PatientController extends Controller
 
             $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $request->main_id);
 
-            $save_declaration_form = DB::table('declaration_form')->insert([
+            $save_declaration_form = DeclarationForm::create([
                 'main_id' => $request->main_id,
                 'travelled_abroad_recently' => $request->travelled_abroad_recently,
                 'area_visited' => $request->area_visited,
@@ -316,10 +318,11 @@ class PatientController extends Controller
                 'cough' => $request->cough,
                 'shortness_of_breath' => $request->shortness_of_breath,
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
-            ]);
+            ]);            
 
-            $referral_form = Refferal::where('email', $mast_patient->email)->latest()->first();
+            $referral_form = Refferal::where('email_employee', $mast_patient->email)->latest()->first();
 
+            // Store referral form scheduled date
             if($referral_form && $referral_form->schedule_date) {
                 SchedulePatient::create([
                     'patient_id' => $mast_patient->id,
@@ -388,7 +391,7 @@ class PatientController extends Controller
             }
 
             return redirect('/patient_info')->with('success', 'Register Successfully');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -401,11 +404,12 @@ class PatientController extends Controller
             $data = session()->all();
             $today_date = date('Y-m-d');
 
-            $schedules = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->get();
+            $schedules = SchedulePatient::where('patientcode', $data['patientCode'])->get();
 
-            $scheduled_patients = DB::table('sched_patients')->where('date', $today_date)->get();
+            $scheduled_patients = SchedulePatient::where('date', $today_date)->get();
 
-            $latest_schedule = DB::table('sched_patients')->where('patientcode', $data['patientCode'])->latest('date')
+            $latest_schedule = SchedulePatient::where('patientcode', $data['patientCode'])
+                ->latest('date')
                 ->first();
 
             $patient = Patient::where('id', session()->get('patientId'))
@@ -415,7 +419,8 @@ class PatientController extends Controller
             if (!$patient->patientinfo) return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('data', 'schedules', 'latest_schedule', 'scheduled_patients'));
-        } catch (\Exception $exception) {
+
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));

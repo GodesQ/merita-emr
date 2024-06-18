@@ -88,7 +88,7 @@ $("#store_refferal").submit(function(e) {
                     if (response.status == 200) {
                         Swal.fire(
                             'Added!',
-                            'Refferal Slip Added Successfully!',
+                            'Referral Slip Added Successfully!',
                             'success'
                         ).then((result) => {
                             if (result.isConfirmed) {

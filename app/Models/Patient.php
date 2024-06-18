@@ -11,7 +11,40 @@ class Patient extends Model
 
     protected $table = 'mast_patient';
     public $timestamps = false;
-    public $guarded = [];
+    protected $fillable = [
+        'patientcode',
+        'patient_image',
+        'patient_signature',
+        'lastname',
+        'firstname',
+        'middlename',
+        'suffix',
+        'email',
+        'gender',
+        'age',
+        'position_applied',
+        'license_no',
+        'license_date',
+        'username',
+        'password',
+        'signature',
+        'default_signature',
+        'registered_patientcode',
+        'ynactive',
+        'yndelete',
+        'isVerify',
+        'admission_id',
+        'created_date',
+        'medical_done_date',
+        're_assessment_date',
+        'fit_to_work_date',
+        'unfit_to_work_date',
+        'created_by',
+        'updated_date',
+        'updated_by',
+    ];
+
+    public $guarded = ['password'];
 
     public function admission()
     {

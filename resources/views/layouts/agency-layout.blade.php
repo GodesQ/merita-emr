@@ -117,7 +117,7 @@
                     @endif
                     @if(!in_array(Session::get('agencyId'), [59, 58, 57, 55, 68]))
                         <a class="btn btn-solid white" style="background-color: #156f29;" href="/referral_slips"><i class=" feather icon-file-text"></i>
-                            <span data-i18n="Refferal Slips">Referral Slips</span>
+                            <span data-i18n="Referral Slips">Referral Slips</span>
                         </a>
                     @endif
                 </div>

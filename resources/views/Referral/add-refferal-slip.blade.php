@@ -130,7 +130,7 @@
                         dataType: 'json',
                         success: function(response) {
                             if (response.status == 200) {
-                                Swal.fire('Added!', 'Refferal Slip Added Successfully!', 'success')
+                                Swal.fire('Added!', 'Referral Slip Added Successfully!', 'success')
                                     .then((result) => {
                                         // Redirect to list of referral slips
                                         if (result.isConfirmed) location.href =
