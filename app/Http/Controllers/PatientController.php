@@ -320,7 +320,7 @@ class PatientController extends Controller
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
             ]);            
 
-            $referral_form = Refferal::where('email_employee', $mast_patient->email)->latest()->first();
+            $referral_form = Refferal::where('email_employee', $mast_patient->email)->latest('id')->first();
 
             // Store referral form scheduled date
             if($referral_form && $referral_form->schedule_date) {
