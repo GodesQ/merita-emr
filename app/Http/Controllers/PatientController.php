@@ -622,8 +622,6 @@ class PatientController extends Controller
                         if (!$row->patientinfo->agency_id) return 'NO AGENCY';
                         $agency = $row->patientinfo->agency;
                         return $agency ? $agency->agencyname : 'NO AGENCY';
-                            }
-                        }
                     })
                     ->addColumn('medical_package', function ($row) {
                         if (!$row->patientinfo->medical_package) {
@@ -631,7 +629,6 @@ class PatientController extends Controller
                         } else {
                             $package = $row->patientinfo->package;
                             return $package ? $package->packagename : 'NO PACKAGE';
-                        }
                         }
                     })
                     ->addColumn('status', function ($row) {
@@ -667,8 +664,6 @@ class PatientController extends Controller
                             $q->whereHas('agency', function ($query) use ($searchValue) {
                                 $query->whereRaw("agencyname LIKE ?", ["%{$searchValue}%"]);
                             });
-                            // $q->whereRaw("CONCAT(firstname, ' ', lastname) LIKE ?", ["%{$searchValue}%"])
-                            //     ->orWhereRaw("CONCAT(lastname, ' ', firstname) LIKE ?", ["%{$searchValue}%"]);
                         });
                     })
                     ->rawColumns(['action', 'contactno', 'agency', 'medical_package', 'status'])
