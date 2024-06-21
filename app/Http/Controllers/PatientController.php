@@ -604,10 +604,11 @@ class PatientController extends Controller
     public function get_patients(Request $request)
     {
         try {
-            $data = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(gender) as gender'), DB::raw('MAX(admission_id) as admission_id'))
+            $data = Patient::select('patientcode', DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'), DB::raw('MAX(admission_id) as admission_id'))
                 ->whereNotNull('firstname')
+                ->whereHas('patientinfo')
                 ->where('yndelete', '0')
-                ->with('patientinfo', 'admission.package')
+                ->with('patientinfo.agency', 'patientinfo.package', 'admission.package')
                 ->groupBy('patientcode');
 
             $sessions = session()->all();
@@ -618,25 +619,19 @@ class PatientController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
-                        $patientInfo = $row->patientinfo;
-                        if ($patientInfo) {
-                            if (!$patientInfo->agency_id) {
-                                return 'NO AGENCY';
-                            } else {
-                                $agency = $patientInfo->agency;
-                                return $agency ? $agency->agencyname : 'NO AGENCY';
+                        if (!$row->patientinfo->agency_id) return 'NO AGENCY';
+                        $agency = $row->patientinfo->agency;
+                        return $agency ? $agency->agencyname : 'NO AGENCY';
                             }
                         }
                     })
                     ->addColumn('medical_package', function ($row) {
-                        $patientInfo = $row->patientinfo;
-                        if ($patientInfo) {
-                            if (!$patientInfo->medical_package) {
-                                return 'NO PACKAGE';
-                            } else {
-                                $package = $patientInfo->package;
-                                return $package ? $package->packagename : 'NO PACKAGE';
-                            }
+                        if (!$row->patientinfo->medical_package) {
+                            return 'NO PACKAGE';
+                        } else {
+                            $package = $row->patientinfo->package;
+                            return $package ? $package->packagename : 'NO PACKAGE';
+                        }
                         }
                     })
                     ->addColumn('status', function ($row) {
@@ -660,14 +655,11 @@ class PatientController extends Controller
                     ->addColumn('action', function ($row) {
                         $patient = Patient::where('id', $row['id'])->first();
                         $actionBtn =
-                            '<a href="/patient_edit?id=' .
-                            $row['id'] .
-                            '&patientcode=' .
-                            $row['patientcode'] .
-                            '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-                                <a href="#" id="' .
-                            $row['id'] .
-                            '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                            '<a href="/patient_edit?id=' . $row['id'] . '&patientcode=' . $row['patientcode'] . '" class="edit btn btn-primary btn-sm">
+                                <i class="feather icon-edit"></i>
+                            </a>
+                            <a href="#" id="' . $row['id'] . '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                            
                         return $actionBtn;
                     })
                     ->filterColumn('agency', function ($query, $searchValue) {
