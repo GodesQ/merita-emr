@@ -612,6 +612,9 @@ class PatientController extends Controller
 
             $sessions = session()->all();
             if ($request->ajax()) {
+                
+                $searchValue = $request->search['value'];
+
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
@@ -666,6 +669,15 @@ class PatientController extends Controller
                             $row['id'] .
                             '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
+                    })
+                    ->filterColumn('agency', function ($query, $searchValue) {
+                        $query->whereHas('patientinfo', function ($q) use ($searchValue) {
+                            $q->whereHas('agency', function ($query) use ($searchValue) {
+                                $query->whereRaw("agencyname LIKE ?", ["%{$searchValue}%"]);
+                            });
+                            // $q->whereRaw("CONCAT(firstname, ' ', lastname) LIKE ?", ["%{$searchValue}%"])
+                            //     ->orWhereRaw("CONCAT(lastname, ' ', firstname) LIKE ?", ["%{$searchValue}%"]);
+                        });
                     })
                     ->rawColumns(['action', 'contactno', 'agency', 'medical_package', 'status'])
                     ->toJson();
