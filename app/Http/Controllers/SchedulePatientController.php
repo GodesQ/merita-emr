@@ -11,17 +11,14 @@ class SchedulePatientController extends Controller
 
     }
 
-    public function create(Request $request) { 
-    
+    public function upsert(Request $request) {
+        
     }
 
-    public function store(Request $request) {
-    
+    public function requestSchedule(Request $request) {
+        
     }
 
-    public function edit(Request $request, $id) {
-    
-    }
 
     public function update(Request $request, $id) {
         $schedule = SchedulePatient::where('id', $id)->first();

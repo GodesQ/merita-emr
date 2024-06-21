@@ -16,6 +16,7 @@ class Activate extends Mailable
      *
      * @return void
      */
+    public $data;
     public function __construct($refferal)
     {
         //

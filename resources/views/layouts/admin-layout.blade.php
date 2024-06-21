@@ -23,12 +23,15 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/vendors/css/calendars/fullcalendar.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ URL::asset('app-assets/vendors/css/calendars/fullcalendar.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/vendors/css/calendars/daygrid.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/vendors/css/calendars/timegrid.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/css/plugins/calendars/fullcalendar.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/css/plugins/file-uploaders/dropzone.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ URL::asset('app-assets/css/plugins/file-uploaders/dropzone.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ URL::asset('app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/css/pages/app-invoice.css') }}">
@@ -98,7 +101,8 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="/employee_documentation"><i
                                         class="feather icon-info"></i>Documentation</a>
-                                <a class="dropdown-item" href="/user_profile?id={{ session()->get('employeeId') }}"><i
+                                <a class="dropdown-item"
+                                    href="/user_profile?id={{ session()->get('employeeId') }}"><i
                                         class="feather icon-user"></i>Edit Profile</a>
                                 <a class="dropdown-item" href="/support"><i class="feather icon-info"></i>Support</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
@@ -128,8 +132,8 @@
                             class="feather icon-user-plus"></i><span class="menu-title"
                             data-i18n="Patients">Patients</span></a></li>
                 @if (session()->get('dept_id') == '1')
-                    <li class=" nav-item {{ Request::path() == 'employees' ? 'active' : '' }}"><a href="/employees"><i
-                                class="feather icon-users"></i><span class="menu-title"
+                    <li class=" nav-item {{ Request::path() == 'employees' ? 'active' : '' }}"><a
+                            href="/employees"><i class="feather icon-users"></i><span class="menu-title"
                                 data-i18n="Employees">Employees</span></a></li>
                 @endif
                 @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '18' || session()->get('dept_id') == '8')
@@ -138,9 +142,13 @@
                                 data-i18n="Agency">Agency</span></a></li>
                 @endif
 
-                <li class=" nav-item {{ Request::path() == 'referral-slips' ? 'active' : '' }}"><a href="/referral-slips"><i
-                    class="feather icon-file"></i><span class="menu-title"
-                    data-i18n="Referral Slips">Referral Slips</span></a></li>
+                <li class=" nav-item {{ Request::path() == 'referral-slips' ? 'active' : '' }}"><a
+                        href="/referral-slips"><i class="feather icon-file"></i><span class="menu-title"
+                            data-i18n="Referral Slips">Referral Slips</span></a></li>
+
+                <li class=" nav-item {{ Request::path() == 'request-sched-appointments' ? 'active' : '' }}"><a
+                        href="/request-sched-appointments"><i class="feather icon-calendar"></i><span class="menu-title"
+                            data-i18n="Referral Slips">Request Schedules</span></a></li>
 
                 <li class="nav-item has-sub"><a href="#"><i class="feather icon-folder"></i><span
                             class="menu-title" data-i18n="Master Files">Master Files</span></a>
@@ -188,7 +196,8 @@
                             <li><a class="menu-item" href="/transmittal" data-i18n="Transmittal">Transmittal</a></li>
                         @endif
                         @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '8' || session()->get('dept_id') == '17')
-                            <li><a class="menu-item" href="/followup_transmittal" data-i18n="Follow Up Transmittal">Follow Up Transmittal</a></li>
+                            <li><a class="menu-item" href="/followup_transmittal"
+                                    data-i18n="Follow Up Transmittal">Follow Up Transmittal</a></li>
                         @endif
                         <li><a class="menu-item" href="/soa" data-i18n="SOA Report">SOA Report</a></li>
                         <li><a class="menu-item" href="/packages_report" data-i18n="Packages Report">Packages
@@ -206,7 +215,8 @@
                         <ul class="menu-content">
                             <li><a class="menu-item" href="/logs" data-i18n="Employee Logs">Employee Logs</a>
                             </li>
-                            <li><a class="menu-item" href="/scheduled_patients" data-i18n="Scheduled Patients">Scheduled
+                            <li><a class="menu-item" href="/scheduled_patients"
+                                    data-i18n="Scheduled Patients">Scheduled
                                     Patients</a>
                             </li>
                         </ul>

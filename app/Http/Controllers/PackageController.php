@@ -34,7 +34,7 @@ class PackageController extends Controller
                         '=',
                         $row['agency_id']
                     )->first();
-                    $agencyName;
+                    $agencyName = null;
                     if (!$agency) {
                         $agencyName = null;
                     } else {
@@ -53,25 +53,25 @@ class PackageController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('price', function ($row) {
-                    if($row->dollar_price) {
+                    if ($row->dollar_price) {
                         return '$ ' . $row->dollar_price;
-                    }else {
+                    } else {
                         return '&#8369; ' . $row->peso_price;
                     }
                 })
-                 ->filter(function ($instance) use ($request) {
-                     
-                        if (!empty($request->get('search'))) {
-                            $instance->where(function($w) use($request){
-                              $search = $request->get('search');
-                              $w->orWhere('list_package.packagename', 'LIKE', "%$search%")
-                              ->orWhere('list_package.id', 'LIKE', "%$search%")
-                              ->orWhere('list_package.peso_price', 'LIKE', "%$search%")
-                              ->orWhere('list_package.dollar_price', 'LIKE', "%$search%")
-                              ->orWhere('mast_agency.agencyname', 'LIKE', "%$search%");
-                          });
-                      }
-                        
+                ->filter(function ($instance) use ($request) {
+
+                    if (!empty($request->get('search'))) {
+                        $instance->where(function ($w) use ($request) {
+                            $search = $request->get('search');
+                            $w->orWhere('list_package.packagename', 'LIKE', "%$search%")
+                                ->orWhere('list_package.id', 'LIKE', "%$search%")
+                                ->orWhere('list_package.peso_price', 'LIKE', "%$search%")
+                                ->orWhere('list_package.dollar_price', 'LIKE', "%$search%")
+                                ->orWhere('mast_agency.agencyname', 'LIKE', "%$search%");
+                        });
+                    }
+
                 })
                 ->rawColumns(['action', 'agency', 'price'])
                 ->toJson();
@@ -91,13 +91,13 @@ class PackageController extends Controller
     }
 
     public function store_package(Request $request)
-    {   
+    {
         $request->validate([
             'package_name' => 'required',
             'peso_price' => 'nullable|numeric|min:100',
             'dollar_price' => 'nullable|numeric|min:100',
         ]);
-        
+
         $package = new ListPackage();
         $package->packagename = $request->package_name;
         $package->peso_price = $request->peso_price;
@@ -168,7 +168,7 @@ class PackageController extends Controller
             )
             ->get();
 
-            $selected_requests= DB::table('list_package_request')
+        $selected_requests = DB::table('list_package_request')
             ->select('list_package_request.*', 'requests.title', 'requests.id as request_id')
             ->where('list_package_request.main_id', '=', $id)
             ->leftJoin(
@@ -178,7 +178,7 @@ class PackageController extends Controller
                 'list_package_request.request_id'
             )
             ->get();
-        
+
 
         return view(
             'Package.edit-package',
@@ -187,23 +187,23 @@ class PackageController extends Controller
     }
 
     public function update_package(Request $request)
-    {   
+    {
         $package_exam_delete = DB::table('list_packagedtl')
             ->where('main_id', $request->id)
             ->delete();
-        
+
         foreach ($request->exams as $exam) {
             $save_package_exam = DB::insert(
                 'insert into list_packagedtl(main_id,exam_id) values(?, ?)',
                 [$request->id, $exam]
             );
-        } 
-        
-        if(isset($request->requests)) {
+        }
+
+        if (isset($request->requests)) {
             $package_request = DB::table('list_package_request')
-            ->where('main_id', $request->id)
-            ->delete();
-            
+                ->where('main_id', $request->id)
+                ->delete();
+
             foreach ($request->requests as $req) {
                 $save_package_requests = DB::insert(
                     'insert into list_package_request(main_id, request_id, created_date) values(?, ?, ?)',
@@ -211,7 +211,7 @@ class PackageController extends Controller
                 );
             }
         }
-        
+
         $package = ListPackage::where('id', $request->id)->first();
         $package->packagename = $request->package_name;
         $package->peso_price = $request->peso_price;
@@ -231,7 +231,7 @@ class PackageController extends Controller
         return response()->json([
             'status' => 200,
         ]);
-        
+
     }
 
     public function delete_list_package(Request $request)
@@ -249,7 +249,8 @@ class PackageController extends Controller
             ->where('main_id', $id)
             ->delete();
     }
-    
-    public function get_exams(Request $request) {
+
+    public function get_exams(Request $request)
+    {
     }
 }

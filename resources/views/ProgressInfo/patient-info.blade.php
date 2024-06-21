@@ -27,7 +27,6 @@
         @push('scripts')
             <script>
                 document.querySelector("#open-instruction").click();
-                toastr.success('{{ Session::get('success') }}', 'Success');
             </script>
         @endpush
     @endif

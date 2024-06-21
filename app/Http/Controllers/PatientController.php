@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PatientMedicalResult;
+use App\Models\RequestSchedAppointment;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class PatientController extends Controller
 
             return view('ProgressInfo.progress-info', compact('agencies', 'referral'));
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -90,7 +91,7 @@ class PatientController extends Controller
             $patientInfo = Patient::where('created_date', $created_date)->first();
             $request->session()->put('patientId', $patientInfo->id);
             return back();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -118,7 +119,7 @@ class PatientController extends Controller
                 ->get();
 
             return view('ProgressInfo.remedical', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'data', 'agencies', 'packages'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -245,7 +246,7 @@ class PatientController extends Controller
                 ->get();
 
             return view('ProgressInfo.edit-progress-info', compact('patientInfo', 'medicalHistory', 'declarationForm', 'patient', 'data', 'agencies', 'packages'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -401,14 +402,13 @@ class PatientController extends Controller
     public function schedule_appointment()
     {
         try {
-            $data = session()->all();
             $today_date = date('Y-m-d');
 
-            $schedules = SchedulePatient::where('patientcode', $data['patientCode'])->get();
+            $schedules = SchedulePatient::where('patientcode', session()->get('patientCode'))->get();
 
             $scheduled_patients = SchedulePatient::where('date', $today_date)->get();
 
-            $latest_schedule = SchedulePatient::where('patientcode', $data['patientCode'])
+            $latest_schedule = SchedulePatient::where('patientcode', session()->get('patientCode'))
                 ->latest('date')
                 ->first();
 
@@ -416,9 +416,11 @@ class PatientController extends Controller
                 ->with('patientinfo')
                 ->first();
 
+            $request_schedule = RequestSchedAppointment::where('patient_id', session()->get('patientId'))->first();
+
             if (!$patient->patientinfo) return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
 
-            return view('ProgressInfo.schedule', compact('data', 'schedules', 'latest_schedule', 'scheduled_patients'));
+            return view('ProgressInfo.schedule', compact('schedules', 'latest_schedule', 'scheduled_patients', 'request_schedule'));
 
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -477,7 +479,7 @@ class PatientController extends Controller
                 return redirect('/patient_info')->with('fail', "Don't have any schedule");
             }
             return view('ProgressInfo.edit-schedule', compact('data', 'schedules', 'latest_schedule'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -498,7 +500,7 @@ class PatientController extends Controller
             }
             // if patient is updating re-schedule
             return redirect('/patient_info')->with('status_schedule', 'Edit Schedule Successfully');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -556,7 +558,7 @@ class PatientController extends Controller
             } else {
                 return redirect('/patient_info')->with('status', 'Warning: Test Message');
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -569,7 +571,7 @@ class PatientController extends Controller
             $data = session()->all();
             $patientAdmission = Admission::where('id', $data['admissionId'])->with('medical_results')->first();
             return view('ProgressInfo.laboratory_result', compact('data', 'patientAdmission'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -582,7 +584,7 @@ class PatientController extends Controller
         $data = session()->all();
         try {
             return view('Patient.patients', compact('data'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -669,7 +671,7 @@ class PatientController extends Controller
                     ->rawColumns(['action', 'contactno', 'agency', 'medical_package', 'status'])
                     ->toJson();
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -682,7 +684,7 @@ class PatientController extends Controller
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
             $data = session()->all();
             return view('Patient.add-patient', compact('agencies', 'data'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -754,7 +756,7 @@ class PatientController extends Controller
             ]);
 
             return redirect('/patients')->with('status', 'Patient Added Successfully');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $request->validate([
                 'patient_image.*' => 'mimes:jpg,png,jpeg',
                 'agency' => 'required',
@@ -781,7 +783,7 @@ class PatientController extends Controller
             $res = Patient::where('id', $id)->first();
             $res->yndelete = true;
             $res->save();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1003,7 +1005,7 @@ class PatientController extends Controller
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
             return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1208,7 +1210,7 @@ class PatientController extends Controller
                 ]);
             }
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1263,7 +1265,7 @@ class PatientController extends Controller
             return response()->json([
                 'status' => 200,
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1328,7 +1330,7 @@ class PatientController extends Controller
                 'status' => 200
             ]);
 
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
@@ -1339,21 +1341,6 @@ class PatientController extends Controller
     {
         try {
             $query = $request->query('query');
-            // $patients = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'))
-            //     ->when($request->query('agency_id'), function ($query) use ($request) {
-            //         $query->whereHas('patientinfo', function($query) use ($request) {
-            //             return $query->where('agency_id', $request->query('agency_id'));
-            //         });
-            //     })
-            //     ->where('firstname', 'LIKE', '%' . $query . '%')
-            //     ->orWhere('lastname', 'LIKE', '%' . $query . '%')
-            //     ->orWhere('patientcode', 'LIKE', '%' . $query . '%')
-            //     ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $query . '%')
-            //     ->orWhere(DB::raw("concat(lastname, ' ', firstname)"), 'LIKE', '%' . $query . '%')
-            //     ->groupBy('patientcode')
-            //     ->latest('id')
-            //     ->get();
-
             $patients = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'))
                 ->where(function ($query) use ($request) {
                     $query->where('firstname', 'LIKE', '%' . $request->input('query') . '%')
@@ -1475,7 +1462,7 @@ class PatientController extends Controller
             $save = $medical_history->save();
 
             return $save;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $message = $exception->getMessage();
             dd($message);
             $file = $exception->getFile();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RequestSchedAppointmentController;
 use App\Http\Controllers\SchedulePatientController;
 use App\Http\Middleware\Agency;
 use App\Http\Middleware\Laboratory;
@@ -127,12 +128,14 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // ----------------------------------------- START SCHEDULE PATIENT ACCESS --------------------------------------- //
     Route::get('schedule-appointments', [SchedulePatientController::class, 'index']);
-    Route::get('schedule-appointments/create', [SchedulePatientController::class, 'create']);
-    Route::post('schedule-appointments/store', [SchedulePatientController::class, 'store']);
-    Route::get('schedule-appointments/edit/{id}', [SchedulePatientController::class, 'edit']);
+    Route::post('schedule-appointments/upsert/{patient_id}', [SchedulePatientController::class, 'upsert']);
     Route::put('schedule-appointments/update/{id}', [SchedulePatientController::class, 'update']);
-
     // ----------------------------------------- END SCHEDULE PATIENT ACCESS --------------------------------------- //
+
+    Route::get('request-sched-appointments', [RequestSchedAppointmentController::class,'index']);
+    Route::post('request-sched-appointments/upsert', [RequestSchedAppointmentController::class, 'upsert']);
+    Route::post('request-sched-appointments/approve', [RequestSchedAppointmentController::class,'approve']);
+    Route::post('request-sched-appointments/decline', [RequestSchedAppointmentController::class, 'decline']);
 
 
     // ----------------------------------------- START AGENCY ACCESS --------------------------------------- //

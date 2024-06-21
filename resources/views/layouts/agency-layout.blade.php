@@ -120,6 +120,9 @@
                             <span data-i18n="Referral Slips">Referral Slips</span>
                         </a>
                     @endif
+                    <a class="btn btn-solid white" style="background-color: #156f29;" href="/request-sched-appointments"><i class=" feather icon-calendar"></i>
+                        <span data-i18n="Request Schedules">Request Schedules</span>
+                    </a>
                 </div>
             </div>
         </div>

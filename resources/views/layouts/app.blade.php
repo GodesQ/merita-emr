@@ -24,13 +24,15 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/daterange/daterangepicker.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
-    <link rel="stylesheet" href="{{ asset('app-assets/css/all.css') }}" <!-- END: Page CSS-->
+    <link rel="stylesheet" href="{{ asset('app-assets/css/all.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
     @stack('stylesheet')
     <!-- END: Custom CSS-->
 </head>
@@ -185,53 +187,60 @@
     <!-- END: Footer-->
 
     <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/vendors.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
-    <script src="../../../app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/jquery.knob.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
-    <script src="../../../app-assets/js/scripts/extensions/knob.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/raphael-min.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/morris.min.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js"></script>
-    <script src="../../../app-assets/data/jvector/visitor-data.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/chart.min.js"></script>
-    <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/unslider-min.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/pickers/pickadate/picker.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/pickers/pickadate/picker.date.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/pickers/pickadate/picker.time.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/pickers/pickadate/legacy.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/pickers/daterange/daterangepicker.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/ui/jquery.sticky.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/extensions/jquery.knob.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/extensions/jquery.steps.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/extensions/knob.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/raphael-min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/morris.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/data/jvector/visitor-data.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/charts/chart.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/extensions/unslider-min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: custom JS-->
-    <script src="../../../assets/js/scripts.js"></script>
+    <script src="{{ URL::asset('assets/js/scripts.js') }}"></script>
     <!-- END: custom JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="{{ URL::asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/core/app.js') }}"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
-    <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
-    <script src="../../../app-assets/js/scripts/forms/wizard-steps.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js"></script>
-    <script src="../../../app-assets/js/scripts/forms/select/form-select2.js"></script>
-    <script src="../../../app-assets/js/scripts/modal/components-modal.js"></script>
-    <script src="../../../app-assets/js/scripts/pickers/dateTime/bootstrap-datetime.js"></script>
-    <script src="../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/ui/breadcrumbs-with-stats.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/forms/wizard-steps.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    <script src="{{ URL::asset('app-assets/js/scripts/modal/components-modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    @if(Session::get('error'))
+        <script>
+            toastr.error("{{ Session::get('error') }}", 'Failed');
+        </script>
+    @endif
+
+    @if(Session::get('success'))
+        <script>
+            toastr.success("{{ Session::get('success') }}", 'Success');
+        </script>
+    @endif
 
     <!-- END: Page JS-->
     @stack('scripts')
