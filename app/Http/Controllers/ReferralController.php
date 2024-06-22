@@ -36,10 +36,17 @@ class ReferralController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $referrals = Refferal::with('patient', 'package', 'agency');
+            $referrals = Refferal::query();
+
+            if(session()->get('classification') == 'agency') {
+                $referrals = $referrals->where('agency_id', session()->get('agencyId'));
+            }
 
             return DataTables::of($referrals)
                 ->addIndexColumn()
+                ->addColumn('agencyname', function ($row) {
+                    return $row->agency->agencyname ?? null;
+                })
                 ->addColumn('packagename', function ($row) {
                     return $row->package->packagename ?? null;
                 })
@@ -82,7 +89,11 @@ class ReferralController extends Controller
                 ->toJson();
         }
 
-        return view('Referral.referrals');
+        if(session()->get('classification') == 'agency') {
+            return view('Referral.agency-index');
+        }
+
+        return view('Referral.index');
     }
 
     public function create(Request $request)
