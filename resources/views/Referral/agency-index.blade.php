@@ -15,14 +15,6 @@
         .table td {
             padding: 0.5rem;
         }
-
-        .search-loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 10px;
-        }
     </style>
     <div class="app-content content">
         <div class="container my-4">

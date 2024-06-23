@@ -40396,3 +40396,12 @@ li {
 .skin-line .colors li.yellow {
     background: #ffc414
 }
+
+// Custom
+.search-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}

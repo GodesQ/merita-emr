@@ -19,10 +19,14 @@ class PatientService
         try {
             $referral = Refferal::where('id', $request->query('referral_id'))->first();
 
+            if(!$referral) throw new Exception("Referral Not Found.");
+
             $users = Patient::query();
 
             $users = $users->where('email', $referral->email_employee)
                 ->whereNull('referral_id')
+                ->where('firstname', 'LIKE', "%" . $referral->firstname . "%")
+                ->where('lastname', 'LIKE', "%" . $referral->lastname . "%")
                 ->whereHas('patientinfo', function ($q) use ($referral) {
                     $q->orWhere('srbno', $referral->ssrb)
                         ->orWhere('passportno', $referral->passport);

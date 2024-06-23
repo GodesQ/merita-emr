@@ -158,7 +158,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // For admin
     Route::get('/referral-slips', [ReferralController::class, 'index']);
-    Route::put('/referral-slips/update-with-patient', [ReferralController::class, 'updateFromPatient']);
+    Route::get('/referral-slips/search', [ReferralController::class, 'search']);
     Route::get('/referrals/create', [ReferralController::class, 'create']);
     Route::post('/referrals/store', [ReferralController::class, 'store']);
     Route::get('/referrals/show/{id}', [ReferralController::class, 'show']);
@@ -166,6 +166,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/referrals/update/{id}', [ReferralController::class, 'update']);
     Route::get('/referrals/destroy/{id}', [ReferralController::class, 'destroy']);
     Route::put('/referral-slips/update-with-patient', [ReferralController::class, 'updateFromPatient']);
+    Route::post('/referral-slips/generate-with-patient', [ReferralController::class, 'generateFromPatient']);
 
     // For agency
     Route::get('/referral_slips', [ReferralController::class, 'referrals']);

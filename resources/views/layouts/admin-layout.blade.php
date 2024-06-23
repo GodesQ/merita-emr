@@ -33,9 +33,9 @@
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/vendors/css/vendors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('app-assets/css/pages/app-invoice.css') }}">
-    <link rel="stylesheet" href="{{ asset('app-assets/css/all.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('app-assets/css/all.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Custom CSS-->

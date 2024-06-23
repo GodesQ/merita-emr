@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Referral\StoreRequest;
 use App\Services\LoggerService;
+use App\Services\ReferralService;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
@@ -80,7 +82,7 @@ class ReferralController extends Controller
 
                     if (!$row->patient_id) {
                         $buttons[] = '<button class="btn btn-primary btn-sm hold-btn" id="sync-btn" data-id="' . $row->id . '" title="Sync Referral" data-toggle="modal" data-target="#sync-modal">
-                                        <i class="feather icon-rotate-cw"></i>
+                                        <img src="'. asset('app-assets/images/icons/data-transfer.png') .'" style="width: 14px; height: 14px;" />
                                     </button>';
                     }
 
@@ -91,6 +93,15 @@ class ReferralController extends Controller
                     }
 
                     return implode(' ', $buttons);
+                })
+                ->filter(function ($query) use ($request) {
+                    $searchValue = $request->search['value'];
+                    if ($searchValue) {
+                        $query->where('firstname', 'LIKE', "%" . $searchValue . "%")
+                            ->orWhere('lastname', 'LIKE', "%" . $searchValue . "%")
+                            ->orWhere(DB::raw("concat(firstname, ' ', lastname)"), 'LIKE', '%' . $searchValue . '%')
+                            ->orWhere(DB::raw("concat(lastname, ' ', firstname)"), 'LIKE', '%' . $searchValue . '%');
+                    }
                 })
                 ->rawColumns(['packagename', 'action', 'is_hold'])
                 ->toJson();
@@ -175,8 +186,59 @@ class ReferralController extends Controller
 
     }
 
+    public function generateFromPatient(Request $request)
+    {
+        try {
+            $patient = Patient::where('id', $request->id)->with('patientinfo')->first();
+
+            if (!$patient && !$patient->patientinfo)
+                throw new Exception('Patient not found');
+
+            $referral = Refferal::create([
+                'agency_id' => $patient->patientinfo->agency_id,
+                'package_id' => $patient->patientinfo->medical_package,
+                'patient_id' => $patient->id,
+                'employer' => $patient->patientinfo->agency->agencyname ?? null,
+                'country_destination' => $patient->patientinfo->country_destination,
+                'lastname' => $patient->lastname,
+                'firstname' => $patient->firstname,
+                'middlename' => $patient->middlename,
+                'address' => $patient->patientinfo->address,
+                'contactno' => $patient->patientinfo->contactno,
+                'birthplace' => $patient->patientinfo->birthplace,
+                'birthdate' => $patient->patientinfo->birthdate,
+                'age' => $patient->age,
+                'civil_status' => $patient->patientinfo->maritalstatus,
+                'nationality' => $patient->patientinfo->nationality,
+                'gender' => $patient->gender,
+                'position_applied' => $patient->position_applied,
+                'payment_type' => $patient->patientinfo->payment_type,
+                'admission_type' => $patient->patientinfo->admission_type,
+                'vessel' => $patient->patientinfo->vessel,
+                'passport' => $patient->patientinfo->passportno,
+                'ssrb' => $patient->patientinfo->srbno,
+                'passport_expdate' => $patient->patientinfo->passport_expdate,
+                'ssrb_expdate' => $patient->patientinfo->srb_expdate,
+            ]);
+
+            LoggerService::log('generate', Refferal::class, ['changes' => $referral->toArray()]);
+
+            return response([
+                'status' => TRUE,
+                'message' => 'Referral generated successfully.'
+            ]);
+
+        } catch (Exception $e) {
+            return response([
+                'status' => FALSE,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
     public function updateFromPatient(Request $request)
-    {   
+    {
         $referral = Refferal::where('id', $request->referral_id)->first();
         $patient = Patient::where('id', $request->user_id)->first();
 
@@ -214,6 +276,12 @@ class ReferralController extends Controller
             'status' => TRUE,
             'message' => 'Referral synced successfully.'
         ]);
+    }
+
+    public function search(Request $request) {
+        if($request->query('search-patient')) {
+            return ReferralService::searchReferralByPatient($request);
+        }
     }
 
     public function hold_employee(Request $request)

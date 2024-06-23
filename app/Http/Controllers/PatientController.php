@@ -276,7 +276,7 @@ class PatientController extends Controller
                 'created_date' => date('Y-m-d h:i:s'),
             ]);
 
-            $save_patient_info = PatientInfo::create([
+            $patientinfo = PatientInfo::create([
                 'main_id' => $request->main_id,
                 'patientcode' => $request->patientcode,
                 'address' => strtoupper($request->address),
@@ -320,12 +320,27 @@ class PatientController extends Controller
                 'cough' => $request->cough,
                 'shortness_of_breath' => $request->shortness_of_breath,
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
-            ]);            
+            ]);
 
-            $referral_form = Refferal::where('email_employee', $mast_patient->email)->latest('id')->first();
+            $referral_form = Refferal::where('email_employee', $mast_patient->email)
+                ->where('firstname', 'LIKE', '%' . $mast_patient->firstname . '%')
+                ->where('lastname', 'LIKE', '%' . $mast_patient->lastname . '%')
+                ->where('ssrb', 'LIKE', '%' . $patientinfo->srbno . '%')
+                ->where('passportno', 'LIKE', '%' . $patientinfo->passportno . '%')
+                ->where('position_applied', 'LIKE', '%' . $mast_patient->position_applied . '%')
+                ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, created_date, ?))', [$mast_patient->created_date])
+                ->first();
 
             // Store referral form scheduled date
-            if($referral_form && $referral_form->schedule_date) {
+            if ($referral_form && $referral_form->schedule_date) {
+                $mast_patient->update([
+                    'referral_id' => $referral_form->id
+                ]);
+
+                $referral_form->update([
+                    'patient_id' => $mast_patient->id,
+                ]);
+
                 SchedulePatient::create([
                     'patient_id' => $mast_patient->id,
                     'patientcode' => $mast_patient->patientcode,
@@ -333,7 +348,7 @@ class PatientController extends Controller
                 ]);
             }
 
-            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form) {
+            if (!$mast_patient_save && !$patientinfo && !$save_medical_history && !$save_declaration_form) {
                 return back()->with('status', 'Failed to Submit Data. Please check all of your information and try again.');
             }
 
@@ -419,7 +434,8 @@ class PatientController extends Controller
 
             $request_schedule = RequestSchedAppointment::where('patient_id', session()->get('patientId'))->first();
 
-            if (!$patient->patientinfo) return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
+            if (!$patient->patientinfo)
+                return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('schedules', 'latest_schedule', 'scheduled_patients', 'request_schedule'));
 
@@ -592,8 +608,9 @@ class PatientController extends Controller
         }
     }
 
-    public function show(Request $request, $id) {
-        if($request->ajax()) {
+    public function show(Request $request, $id)
+    {
+        if ($request->ajax()) {
             $patient = Patient::where('id', $id)->with('patientinfo')->first();
 
             return response()->json([
@@ -616,13 +633,14 @@ class PatientController extends Controller
 
             $sessions = session()->all();
             if ($request->ajax()) {
-                
+
                 $searchValue = $request->search['value'];
 
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
-                        if (!$row->patientinfo->agency_id) return 'NO AGENCY';
+                        if (!$row->patientinfo->agency_id)
+                            return 'NO AGENCY';
                         $agency = $row->patientinfo->agency;
                         return $agency ? $agency->agencyname : 'NO AGENCY';
                     })
@@ -659,7 +677,7 @@ class PatientController extends Controller
                                 <i class="feather icon-edit"></i>
                             </a>
                             <a href="#" id="' . $row['id'] . '" class="delete-patient btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
-                            
+
                         return $actionBtn;
                     })
                     ->filterColumn('agency', function ($query, $searchValue) {
@@ -1000,7 +1018,7 @@ class PatientController extends Controller
                 $patient_medical_results = [];
             }
 
-            $referral = Refferal::where('email_employee', $patient->email)->with('agency')->first();
+            $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
 
 
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
@@ -1342,7 +1360,7 @@ class PatientController extends Controller
     {
         try {
 
-            if($request->query('search-referral')) {
+            if ($request->query('search-referral')) {
                 return PatientService::searchPatientByReferral($request);
             }
 
