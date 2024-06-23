@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Referral\StoreRequest;
+use App\Services\LoggerService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Agency;
@@ -206,6 +207,8 @@ class ReferralController extends Controller
         $patient->update([
             'referral_id' => $referral->id,
         ]);
+
+        LoggerService::log('sync', Refferal::class, ['changes' => $referral->getChanges()]);
 
         return response([
             'status' => TRUE,
