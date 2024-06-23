@@ -38,7 +38,7 @@ class ReferralController extends Controller
         if ($request->ajax()) {
             $referrals = Refferal::query();
 
-            if(session()->get('classification') == 'agency') {
+            if (session()->get('classification') == 'agency') {
                 $referrals = $referrals->where('agency_id', session()->get('agencyId'));
             }
 
@@ -59,12 +59,6 @@ class ReferralController extends Controller
                 ->addColumn('position_applied', function ($row) {
                     return $row->position_applied;
                 })
-                ->addColumn('vessel', function ($row) {
-                    return $row->vessel;
-                })
-                ->addColumn('ssrb', function ($row) {
-                    return $row->ssrb;
-                })
                 ->addColumn('is_hold', function ($row) {
                     if ($row->is_hold) {
                         return '<div class="badge badge-danger">Hold</div>';
@@ -73,23 +67,35 @@ class ReferralController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    if ($row->is_hold == 0) {
-                        $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                                    <button class="btn btn-danger btn-sm hold-btn" id="' . $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
-                                    <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                        return $actionBtn;
-                    } else {
-                        $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                            <button class="btn btn-success btn-sm activate-btn" id="' . $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
-                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                        return $actionBtn;
+                    $buttons = [
+                        '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '">
+                            <i class="fa fa-eye"></i>
+                        </a>',
+                        '<a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank">
+                            <i class="fa fa-print"></i>
+                        </a>'
+                    ];
+
+
+                    if (!$row->patient_id) {
+                        $buttons[] = '<button class="btn btn-primary btn-sm hold-btn" id="sync-btn" data-id="' . $row->id . '" title="Sync Referral" data-toggle="modal" data-target="#sync-modal">
+                                        <i class="feather icon-rotate-cw"></i>
+                                    </button>';
                     }
+
+                    if ($row->is_hold == 0) {
+                        $buttons[] = '<button class="btn btn-danger btn-sm hold-btn" id="' . $row->id . '" title="Hold Employee"><i class="fa fa-user-times"></i></button>';
+                    } else {
+                        $buttons[] = '<button class="btn btn-success btn-sm activate-btn" id="' . $row->id . '" title="Activate Employee"><i class="fa fa-user-plus"></i></button>';
+                    }
+
+                    return implode(' ', $buttons);
                 })
                 ->rawColumns(['packagename', 'action', 'is_hold'])
                 ->toJson();
         }
 
-        if(session()->get('classification') == 'agency') {
+        if (session()->get('classification') == 'agency') {
             return view('Referral.agency-index');
         }
 
@@ -135,8 +141,8 @@ class ReferralController extends Controller
             $pdf = PDF::loadView('emails.referral-pdf', [
                 'data' => $referral->toArray(),
             ])->setOptions([
-                'defaultFont' => 'sans-serif',
-            ]);
+                        'defaultFont' => 'sans-serif',
+                    ]);
 
             foreach ($to_emails as $to_email) {
                 Mail::to($to_email)->send(new ReferralSlip($referral->toArray(), $pdf));
@@ -168,58 +174,43 @@ class ReferralController extends Controller
 
     }
 
-    public function referral_list(Request $request)
-    {
-        abort_if(!$request->ajax(), 404);
+    public function updateFromPatient(Request $request)
+    {   
+        $referral = Refferal::where('id', $request->referral_id)->first();
+        $patient = Patient::where('id', $request->user_id)->first();
 
-        $referrals = Refferal::select('*')->with('patient', 'package', 'agency');
+        $referral->update([
+            'patient_id' => $patient->id,
+            'country_destination' => $patient->patientinfo->country_destination,
+            'lastname' => $patient->lastname,
+            'firstname' => $patient->firstname,
+            'middlename' => $patient->middlename,
+            'address' => $patient->patientinfo->address,
+            'contactno' => $patient->patientinfo->contactno,
+            'birthplace' => $patient->patientinfo->birthplace,
+            'birthdate' => $patient->patientinfo->birthdate,
+            'age' => $patient->age,
+            'civil_status' => $patient->patientinfo->maritalstatus,
+            'nationality' => $patient->patientinfo->nationality,
+            'gender' => $patient->gender,
+            'position_applied' => $patient->position_applied,
+            'payment_type' => $patient->patientinfo->payment_type,
+            'admission_type' => $patient->patientinfo->admission_type,
+            'vessel' => $patient->patientinfo->vessel,
+            'passport' => $patient->patientinfo->passportno,
+            'ssrb' => $patient->patientinfo->srbno,
+            'passport_expdate' => $patient->patientinfo->passport_expdate,
+            'ssrb_expdate' => $patient->patientinfo->srb_expdate,
+        ]);
 
-        if (session()->get('classification') == 'agency') {
-            $referrals->where('agency_id', session()->get('agencyId'));
-        }
+        $patient->update([
+            'referral_id' => $referral->id,
+        ]);
 
-        return DataTables::of($referrals)
-            ->addIndexColumn()
-            ->addColumn('packagename', function ($row) {
-                return $row->package->packagename;
-            })
-            ->addColumn('lastname', function ($row) {
-                return optional($row)->lastname;
-            })
-            ->addColumn('firstname', function ($row) {
-                return optional($row)->firstname;
-            })
-            ->addColumn('position_applied', function ($row) {
-                return $row->position_applied;
-            })
-            ->addColumn('vessel', function ($row) {
-                return $row->vessel;
-            })
-            ->addColumn('ssrb', function ($row) {
-                return $row->ssrb;
-            })
-            ->addColumn('is_hold', function ($row) {
-                if ($row->is_hold) {
-                    return '<div class="badge badge-danger">Hold</div>';
-                } else {
-                    return '<div class="badge badge-success">Activated</div>';
-                }
-            })
-            ->addColumn('action', function ($row) {
-                if ($row->is_hold == 0) {
-                    $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                                    <button class="btn btn-danger btn-sm hold-btn" id="' . $row->id . '" title="Hold Employee" "><i class="fa fa-user-times"></i></button>
-                                    <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                    return $actionBtn;
-                } else {
-                    $actionBtn = '<a class="btn btn-secondary btn-sm" href="/referral?id=' . $row->id . '"><i class="fa fa-eye"></i></a>
-                            <button class="btn btn-success btn-sm activate-btn" id="' . $row->id . ' title="Activate Employee""><i class="fa fa-user-plus "></i></button>
-                            <a class="btn btn-secondary btn-sm" href="/referral_pdf?email=' . $row->email_employee . '" target="_blank"><i class="fa fa-print"></i></a>';
-                    return $actionBtn;
-                }
-            })
-            ->rawColumns(['packagename', 'action', 'is_hold'])
-            ->toJson();
+        return response([
+            'status' => TRUE,
+            'message' => 'Referral synced successfully.'
+        ]);
     }
 
     public function hold_employee(Request $request)

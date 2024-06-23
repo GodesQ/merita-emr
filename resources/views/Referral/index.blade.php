@@ -30,16 +30,15 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-responsive table-hover data-table">
+                    <table class="table table-bordered table-hover data-table">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Agency</th>
                                 <th>Package</th>
                                 <th>Lastname</th>
                                 <th>Firstname</th>
                                 <th>Position Applied</th>
-                                <th>Vessel</th>
-                                <th>SSRB</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -60,12 +59,16 @@
             serverSide: true,
             ajax: '/referral-slips',
             columns: [{
-                    data: 'packagename',
-                    name: 'packagename'
+                    data: 'id',
+                    name: 'id',
                 },
                 {
                     data: 'agencyname',
                     name: 'agencyname'
+                },
+                {
+                    data: 'packagename',
+                    name: 'packagename'
                 },
                 {
                     data: 'lastname',
@@ -80,14 +83,6 @@
                     name: 'position_applied'
                 },
                 {
-                    data: 'vessel',
-                    name: 'vessel'
-                },
-                {
-                    data: 'ssrb',
-                    name: 'ssrb'
-                },
-                {
                     data: 'is_hold',
                     name: 'is_hold'
                 },
@@ -95,6 +90,9 @@
                     data: 'action',
                     name: 'action'
                 },
+            ],
+            order: [
+                [0, 'desc'] // Sort by the first column (index 0) in descending order
             ]
         })
     </script>

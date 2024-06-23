@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PatientMedicalResult;
 use App\Models\RequestSchedAppointment;
+use App\Services\PatientService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -1340,6 +1341,11 @@ class PatientController extends Controller
     public function search(Request $request)
     {
         try {
+
+            if($request->query('search-referral')) {
+                return PatientService::searchPatientByReferral($request);
+            }
+
             $query = $request->query('query');
             $patients = Patient::select('patientcode', DB::raw('MAX(created_date) as created_date'), DB::raw('MAX(id) as id'), DB::raw('MAX(email) as email'), DB::raw('MAX(lastname) as lastname'), DB::raw('MAX(firstname) as firstname'))
                 ->where(function ($query) use ($request) {
