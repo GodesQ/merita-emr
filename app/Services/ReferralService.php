@@ -35,7 +35,7 @@ class ReferralService
                 ->orWhere('ssrb', $patient->patientinfo->srbno)
                 ->orWhere('passport', $patient->patientinfo->passportno);
 
-            $referrals = $referrals->get();
+            $referrals = $referrals->latest('created_date')->get();
 
             return response([
                 'status' => TRUE,

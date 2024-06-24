@@ -158,25 +158,25 @@
                     {
                         data: 'agency',
                         name: 'agency',
-                        orderable: true,
+                        orderable: false,
                         searchable: true
                     },
                     {
                         data: 'medical_package',
                         name: 'medical_package',
-                        orderable: true,
+                        orderable: false,
                         searchable: true
                     },
                     {
                         data: 'status',
                         name: 'status',
-                        orderable: true,
+                        orderable: false,
                         searchable: true
                     },
                     {
                         data: 'action',
                         name: 'action',
-                        orderable: true,
+                        orderable: false,
                         searchable: true
                     },
                 ]

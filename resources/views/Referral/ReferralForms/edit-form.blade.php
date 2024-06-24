@@ -151,7 +151,7 @@
             <div class="form-group">
                 <label for="projectinput4">Date</label>
                 <input type="text" id="projectinput4" class="form-control" placeholder="Agency / Company"
-                    name="updated_date" value="@php echo date(" Y-m-d") @endphp" readonly>
+                    name="updated_date" value="{{ $referral->created_date }}" readonly>
             </div>
             <div class="form-group d-none">
                 <label for="projectinput4">Agency</label>
