@@ -46,7 +46,7 @@ class PatientInfo extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(Patient::class, 'main_id');
     }
 
     public function agency() {

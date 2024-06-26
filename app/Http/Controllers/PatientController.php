@@ -263,9 +263,20 @@ class PatientController extends Controller
 
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
+            $same_patientcode = null;
+
+            $same_patient_record = PatientInfo::where('passportno', 'LIKE', $request->passportNo)
+                                            ->where('srbno', 'LIKE', $request->ssrb)
+                                            ->whereHas('patient')
+                                            ->with('patient')
+                                            ->first();
+            
+            $same_patientcode = $same_patient_record->patient->patientcode ?? null;
+
             $mast_patient = Patient::where('id', '=', $request->main_id)->first();
 
             $mast_patient_save = $mast_patient->update([
+                'patientcode' => $same_patientcode ?? $mast_patient->patientcode,
                 'firstname' => strtoupper($request->firstName),
                 'lastname' => strtoupper($request->lastName),
                 'middlename' => strtoupper($request->middleName),
@@ -822,7 +833,7 @@ class PatientController extends Controller
             $id = $request->id;
             $patientcode = $request->patientcode;
 
-            $patient = Patient::where('id', '=', $id)->with('patientinfo')->first();
+            $patient = Patient::where('id', '=', $id)->whereHas('patientinfo')->with('patientinfo')->firstOrFail();
 
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
             $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
@@ -895,7 +906,12 @@ class PatientController extends Controller
                 }
             }
 
-            $patientRecords = Patient::where('patientcode', '=', $patientcode)->get();
+            $patientRecords = Patient::where('firstname', 'LIKE', "%" . $patient->firstname ."%")
+            ->where("lastname", 'LIKE', "%" . $patient->lastname ."%")
+            ->whereHas('patientinfo', function ($query) use ($patient) {
+                $query->where('srbno','LIKE', $patient->patientinfo->srbno)
+                    ->where('passportno', 'LIKE', $patient->patientinfo->passportno);
+            })->get();
 
             $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
@@ -1013,14 +1029,15 @@ class PatientController extends Controller
             }
 
             if ($admissionPatient) {
-                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')->where('admission_id', $admissionPatient->id)->orderBy('generate_at', 'ASC')->get();
+                $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')
+                    ->where('admission_id', $admissionPatient->id)
+                    ->orderBy('generate_at', 'ASC')
+                    ->get();
             } else {
                 $patient_medical_results = [];
             }
 
             $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
-
-
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
             return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
 
