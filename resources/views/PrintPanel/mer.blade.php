@@ -1951,7 +1951,7 @@
                                             <tr>
                                                 <td>B. ECG : <br>
                                                     <div
-                                                        style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                                        style="width: 100%; display: flex; align-items: center; justify-content: start;">
                                                         <span style="margin-right: 0.2rem;">Specify: </span>
                                                         <span style="font-size: 10px;">
                                                             {{ $admission->exam_physical ? $admission->exam_physical->ecg_findings : null }}</span>

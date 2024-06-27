@@ -17,7 +17,7 @@ class DentalController extends Controller
     public function edit_dental(Request $request)
     {   
         try {
-            $id = $_GET['id'];
+            $id = $request->id;
             $exam = Dental::select(
                 'exam_dental.*',
                 'tran_admission.patientcode as patientcode'
@@ -52,93 +52,23 @@ class DentalController extends Controller
             // dd($request->all());
             $id = $request->id;
             $exam = Dental::where('id', $id)->latest('id')->first();
-            $exam->hygiene = $request->hygiene;
-            $exam->gingiva = $request->gingiva;
-            $exam->color = $request->color;
-            $exam->tongue = $request->tongue;
-            $exam->high_blood = $request->high_blood;
-            $exam->diabetis = $request->diabetis;
-            $exam->tuberculosis = $request->tuberculosis;
-            $exam->hepatitis = $request->hepatitis;
-            $exam->goiter = $request->goiter;
-            $exam->allergy = $request->allergy;
-            $exam->food = $request->food;
-            $exam->drugs = $request->drugs;
-            $exam->anesthesia = $request->anesthesia;
-            $exam->fainting = $request->fainting;
-            $exam->others = $request->others;
-            $exam->tooth18 = $request->tooth18;
-            $exam->tooth17 = $request->tooth17;
-            $exam->tooth16 = $request->tooth16;
-            $exam->tooth15 = $request->tooth15;
-            $exam->tooth14 = $request->tooth14;
-            $exam->tooth13 = $request->tooth13;
-            $exam->tooth12 = $request->tooth12;
-            $exam->tooth11 = $request->tooth11;
-            $exam->tooth21 = $request->tooth21;
-            $exam->tooth22 = $request->tooth22;
-            $exam->tooth23 = $request->tooth23;
-            $exam->tooth24 = $request->tooth24;
-            $exam->tooth25 = $request->tooth25;
-            $exam->tooth26 = $request->tooth26;
-            $exam->tooth27 = $request->tooth27;
-            $exam->tooth28 = $request->tooth28;
-            $exam->tooth48 = $request->tooth48;
-            $exam->tooth47 = $request->tooth47;
-            $exam->tooth46 = $request->tooth46;
-            $exam->tooth45 = $request->tooth45;
-            $exam->tooth44 = $request->tooth44;
-            $exam->tooth43 = $request->tooth43;
-            $exam->tooth42 = $request->tooth42;
-            $exam->tooth41 = $request->tooth41;
-            $exam->tooth31 = $request->tooth31;
-            $exam->tooth32 = $request->tooth32;
-            $exam->tooth33 = $request->tooth33;
-            $exam->tooth34 = $request->tooth34;
-            $exam->tooth35 = $request->tooth35;
-            $exam->tooth36 = $request->tooth36;
-            $exam->tooth37 = $request->tooth37;
-            $exam->tooth38 = $request->tooth38;
-            $exam->decidous1 = $request->decidous1;
-            $exam->decidous2 = $request->decidous2;
-            $exam->dentition1 = $request->dentition1;
-            $exam->dentition2 = $request->dentition2;
-            $exam->dentition18 = $request->dentition18;
-            $exam->dentition17 = $request->dentition17;
-            $exam->dentition16 = $request->dentition16;
-            $exam->dentition15 = $request->dentition15;
-            $exam->dentition14 = $request->dentition14;
-            $exam->dentition13 = $request->dentition13;
-            $exam->dentition12 = $request->dentition12;
-            $exam->dentition11 = $request->dentition11;
-            $exam->dentition21 = $request->dentition21;
-            $exam->dentition22 = $request->dentition22;
-            $exam->dentition23 = $request->dentition23;
-            $exam->dentition24 = $request->dentition24;
-            $exam->dentition25 = $request->dentition25;
-            $exam->dentition26 = $request->dentition26;
-            $exam->dentition27 = $request->dentition27;
-            $exam->dentition28 = $request->dentition28;
-            $exam->dentition48 = $request->dentition48;
-            $exam->dentition47 = $request->dentition47;
-            $exam->dentition46 = $request->dentition46;
-            $exam->dentition45 = $request->dentition45;
-            $exam->dentition44 = $request->dentition44;
-            $exam->dentition43 = $request->dentition43;
-            $exam->dentition42 = $request->dentition42;
-            $exam->dentition41 = $request->dentition41;
-            $exam->dentition31 = $request->dentition31;
-            $exam->dentition32 = $request->dentition32;
-            $exam->dentition33 = $request->dentition33;
-            $exam->dentition34 = $request->dentition34;
-            $exam->dentition35 = $request->dentition35;
-            $exam->dentition36 = $request->dentition36;
-            $exam->dentition37 = $request->dentition37;
-            $exam->dentition38 = $request->dentition38;
-            $exam->remarks_status = $request->remarks_status;
-            $exam->remarks = $request->remarks;
-            $exam->recommendation = $request->recommendation;
-            $exam->technician_id = $request->technician_id;
+
+            $exam->fill($request->only([
+                'hygiene', 'gingiva', 'color', 'tongue', 'high_blood', 'diabetis', 'tuberculosis', 'hepatitis', 
+                'goiter', 'allergy', 'food', 'drugs', 'anesthesia', 'fainting', 'others', 'tooth18', 'tooth17', 
+                'tooth16', 'tooth15', 'tooth14', 'tooth13', 'tooth12', 'tooth11', 'tooth21', 'tooth22', 
+                'tooth23', 'tooth24', 'tooth25', 'tooth26', 'tooth27', 'tooth28', 'tooth48', 'tooth47', 
+                'tooth46', 'tooth45', 'tooth44', 'tooth43', 'tooth42', 'tooth41', 'tooth31', 'tooth32', 
+                'tooth33', 'tooth34', 'tooth35', 'tooth36', 'tooth37', 'tooth38', 'decidous1', 'decidous2', 
+                'dentition1', 'dentition2', 'dentition18', 'dentition17', 'dentition16', 'dentition15', 
+                'dentition14', 'dentition13', 'dentition12', 'dentition11', 'dentition21', 'dentition22', 
+                'dentition23', 'dentition24', 'dentition25', 'dentition26', 'dentition27', 'dentition28', 
+                'dentition48', 'dentition47', 'dentition46', 'dentition45', 'dentition44', 'dentition43', 
+                'dentition42', 'dentition41', 'dentition31', 'dentition32', 'dentition33', 'dentition34', 
+                'dentition35', 'dentition36', 'dentition37', 'dentition38', 'remarks_status', 'remarks', 
+                'recommendation', 'technician_id'
+            ]));
+            
             $save = $exam->save();
 
             DB::table('exam_dental_services')->where('main_id', $exam->id)->delete();
