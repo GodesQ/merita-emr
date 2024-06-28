@@ -129,16 +129,17 @@
                         processData: false,
                         dataType: 'json',
                         success: function(response) {
+                            console.log(response);
                             if (response.status == 200) {
                                 Swal.fire('Added!', 'Referral Slip Added Successfully!', 'success')
                                     .then((result) => {
                                         // Redirect to list of referral slips
-                                        if (result.isConfirmed) location.href =
-                                            '/referral_slips';
+                                        if (result.isConfirmed) location.href = '/referral-slips';
                                     })
                             }
                         },
                         error: function(response) {
+                            console.log(response);
                             if (response.status == 422) {
                                 let errors = response?.responseJSON?.errors;
                                 for (const key in errors) {
