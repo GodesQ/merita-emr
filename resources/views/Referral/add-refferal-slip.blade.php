@@ -125,8 +125,6 @@
                         method: 'POST',
                         data: fd,
                         cache: false,
-                        contentType: false,
-                        processData: false,
                         dataType: 'json',
                         success: function(response) {
                             console.log(response);
