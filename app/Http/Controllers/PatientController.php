@@ -906,12 +906,14 @@ class PatientController extends Controller
                 }
             }
 
-            $patientRecords = Patient::where('firstname', 'LIKE', "%" . $patient->firstname ."%")
-            ->where("lastname", 'LIKE', "%" . $patient->lastname ."%")
-            ->whereHas('patientinfo', function ($query) use ($patient) {
-                $query->where('srbno','LIKE', $patient->patientinfo->srbno)
-                    ->where('passportno', 'LIKE', $patient->patientinfo->passportno);
-            })->get();
+            // $patientRecords = Patient::where('firstname', 'LIKE', "%" . $patient->firstname ."%")
+            // ->where("lastname", 'LIKE', "%" . $patient->lastname ."%")
+            // ->whereHas('patientinfo', function ($query) use ($patient) {
+            //     $query->where('srbno','LIKE', $patient->patientinfo->srbno)
+            //         ->where('passportno', 'LIKE', $patient->patientinfo->passportno);
+            // })->get();
+
+            $patientRecords = Patient::where('patientcode', $patient->patientcode)->get();
 
             $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')

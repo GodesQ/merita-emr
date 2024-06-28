@@ -268,8 +268,7 @@
                         {{ $data['created_date'] ?? '' }}
                     </td>
                     <td width="50%" style="text-align: center; border-bottom: 1px solid #476434;">
-                        <img width="150px" height="45px" style="object-fit:cover;"
-                            src="{{ $data['signature'] ?? '' }}" alt="">
+                        <img width="150px" height="45px" style="object-fit:cover;" src="{{ base64_decode($data['signature']) ?? '' }}" alt="">
                     </td>
                 </tr>
                 <tr>
