@@ -321,7 +321,7 @@
                 <tr>
                     <td width="30%">&nbsp;</td>
                     <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;">
-                        <img src="{{ $data['signature'] ?? '' }}" alt="" width="150px" height="45px"
+                        <img src="{{ base64_decode($data['signature']) ?? '' }}" alt="" width="150px" height="45px"
                             style="object-fit:cover;">
                     </td>
                     <td width="30%">&nbsp;</td>
