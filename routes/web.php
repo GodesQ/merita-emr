@@ -159,12 +159,12 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     // For admin
     Route::get('/referral-slips', [ReferralController::class, 'index']);
     Route::get('/referral-slips/search', [ReferralController::class, 'search']);
-    Route::get('/referrals/create', [ReferralController::class, 'create']);
-    Route::post('/referrals/store', [ReferralController::class, 'store']);
-    Route::get('/referrals/show/{id}', [ReferralController::class, 'show']);
-    Route::get('/referrals/edit/{id}', [ReferralController::class, 'edit']);
-    Route::get('/referrals/update/{id}', [ReferralController::class, 'update']);
-    Route::get('/referrals/destroy/{id}', [ReferralController::class, 'destroy']);
+    Route::get('/referral-slips/create', [ReferralController::class, 'create']);
+    Route::post('/referral-slips/store', [ReferralController::class, 'store']);
+    Route::get('/referral-slips/show/{id}', [ReferralController::class, 'show']);
+    Route::get('/referral-slips/edit/{id}', [ReferralController::class, 'edit']);
+    Route::get('/referral-slips/update/{id}', [ReferralController::class, 'update']);
+    Route::get('/referral-slips/destroy/{id}', [ReferralController::class, 'destroy']);
     Route::put('/referral-slips/update-with-patient', [ReferralController::class, 'updateFromPatient']);
     Route::post('/referral-slips/generate-with-patient', [ReferralController::class, 'generateFromPatient']);
 

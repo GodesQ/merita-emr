@@ -109,35 +109,37 @@ class ReferralController extends Controller
         }
 
         if (session()->get('classification') == 'agency') {
-            return view('Referral.agency-index');
+            return view('Referral.agency.index');
         }
 
-        return view('Referral.index');
+        return view('Referral.admin.index');
     }
 
     public function create(Request $request)
-    {
-        $agencies = Agency::get();
-        return view('Referral.create', compact('agencies'));
+    {   
+        $agencies = Agency::when(session()->get('classification') == 'agency', function($q) {
+            $q->where('id', session()->get('agencyId'));
+        })->get();
+
+            // $vessels = AgencyVessel::where('main_id', $data['agencyId'])->get();
+            // $principals = AgencyPrincipal::where('main_id', $data['agencyId'])->get();
+
+        if(session()->get('classification') == 'agency') {
+            return view('Referral.agency.create', compact('agencies'));
+        }
+
+        return view('Referral.admin.create', compact('agencies'));
     }
 
     public function store(StoreRequest $request)
     {
-        $existing_referral = Refferal::where('email_employee', $request->email_employee)->latest('id')->first();
-
-        if ($existing_referral) {
-            if ($existing_referral->created_date == date('Y-m-d')) {
-                return back()->with('fail', "You can't create new referral on the same date.");
-            }
-        }
-
         $data = $request->validated();
         $signature = base64_encode($request->signature);
 
         $referral = Refferal::create(array_merge($data, [
             'signature' => $signature,
             'created_date' => date('Y-m-d'),
-            'certificate' => implode(", ", $request->certificate),
+            'certificate' => is_array($request->certificate) ? implode(", ", $request->certificate) : null,
             'vessel' => $request->vessel == 'other' ? $request->other_vessel : $request->vessel,
             'principal' => $request->principal == 'other' ? $request->other_principal : $request->principal,
         ]));
@@ -358,21 +360,7 @@ class ReferralController extends Controller
 
     public function add_refferal_slip()
     {
-        try {
-            $data = session()->all();
-            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
-                ->where('list_package.agency_id', $data['agencyId'])
-                ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')->get();
-
-            $vessels = AgencyVessel::where('main_id', $data['agencyId'])->get();
-            $principals = AgencyPrincipal::where('main_id', $data['agencyId'])->get();
-
-            return view('Referral.add-refferal-slip', compact('packages', 'data', 'vessels', 'principals'));
-        } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
-        }
+        return redirect('/referral-slips/create');
     }
 
     public function store_refferal(StoreRequest $request)
