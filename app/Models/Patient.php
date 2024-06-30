@@ -33,6 +33,7 @@ class Patient extends Model
         'ynactive',
         'yndelete',
         'isVerify',
+        'referral_id',
         'admission_id',
         'created_date',
         'medical_done_date',
