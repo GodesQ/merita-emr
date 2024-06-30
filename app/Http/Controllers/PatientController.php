@@ -38,7 +38,7 @@ class PatientController extends Controller
 
             $patient_email = session()->has('email') ? session()->get('email') : null;
 
-            $referral = Refferal::where('email_employee', $patient_email)->first();
+            $referral = Refferal::where('email_employee', $patient_email)->latest('id')->first();
 
             if ($patientInfo) return redirect('/patient_info');
 
