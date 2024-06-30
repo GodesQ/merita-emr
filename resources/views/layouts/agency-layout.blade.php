@@ -111,7 +111,7 @@
                         <span data-i18n="Add Slip">Home</span>
                     </a>
                     @if(!in_array(Session::get('agencyId'), [59, 58, 57, 55, 68]))
-                        <a class="btn btn-solid white" style="background-color: #156f29;" href="/add_refferal_slip"><i class=" feather icon-file"></i>
+                        <a class="btn btn-solid white" style="background-color: #156f29;" href="/referral-slips/create"><i class=" feather icon-file"></i>
                             <span data-i18n="Add Slip">Add Referral Slip</span>
                         </a>
                     @endif

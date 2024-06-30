@@ -1,90 +1,82 @@
-@extends('layouts.agency-layout')
+<style>
+    .card {
+        border-radius: 10px;
+    }
 
-@section('content')
-    <style>
-        .card {
-            border-radius: 10px;
-        }
+    .card-header {
+        background-color: #244681;
+        color: white;
+    }
 
-        .card-header {
-            background-color: #244681;
-            color: white;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.5rem;
-        }
-    </style>
-    <div class="app-content content">
-        <div class="container my-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h2 class="text-bold-600">Referrals List</h2>
-                        </div>
-                        <div class="col-6 text-end">
-                            <a href="/referrals/create" class="btn btn-solid btn-primary">Add Referral</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Agency</th>
-                                <th>Package</th>
-                                <th>Lastname</th>
-                                <th>Firstname</th>
-                                <th>Position Applied</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+    .table th,
+    .table td {
+        padding: 0.5rem;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-bold-600">Referrals List</h2>
             </div>
-        </div>
-
-        <!-- Sync Modal -->
-        <div class="modal fade text-left" id="sync-modal" tabindex="-1" role="dialog" aria-labelledby="sync-modal-label"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="sync-modal-label">Sync Referral</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="row p-2 justify-content-center align-items-center" id="referral-record">
-
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="row p-2 justify-content-center" id="synced-records">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="search-loading">
-                            <img src="{{ URL::asset('app-assets/images/icons/loading.gif') }}" alt="">
-                            <h3>Searching for same record...</h3>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+            <div class="col-6 text-end">
+                <a href="/referral-slips/create" class="btn btn-solid btn-primary">Add Referral</a>
             </div>
         </div>
     </div>
-@endsection
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-hover data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Agency</th>
+                    <th>Package</th>
+                    <th>Lastname</th>
+                    <th>Firstname</th>
+                    <th>Position Applied</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<!-- Sync Modal -->
+<div class="modal fade text-left" id="sync-modal" tabindex="-1" role="dialog" aria-labelledby="sync-modal-label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="sync-modal-label">Sync Referral</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="row p-2 justify-content-center align-items-center" id="referral-record">
+
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="row p-2 justify-content-center" id="synced-records">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="search-loading">
+                    <img src="{{ URL::asset('app-assets/images/icons/loading.gif') }}" alt="">
+                    <h3>Searching for same record...</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script>
@@ -156,7 +148,7 @@
             let referralRecord = document.querySelector('#referral-record');
             let output = `<div class="col-lg-12 border p-2 rounded">
                                     <h3 class="text-center fw-bold">Referral Record</h3>
-                                    <h6 class="my-1"><span class="fw-bold">Name: </span> ${referral.firstname} ${referral.middlename} ${referral.lastname}</h6>
+                                    <h6 class="my-1"><span class="fw-bold">Name: </span> ${referral.firstname} ${referral.middlename ?? ''} ${referral.lastname}</h6>
                                     <h6 class="my-1"><span class="fw-bold">Email: </span> ${referral.email_employee}</h6>
                                     <h6 class="my-1"><span class="fw-bold">SIRB: </span> ${referral.ssrb}</h6>
                                     <h6 class="my-1"><span class="fw-bold">Passport: </span> ${referral.passport}</h6>
@@ -175,7 +167,7 @@
                     let registered_date = new Date(user.created_date);
                     registered_date = dateToWords(registered_date);
                     output += `<div class="col-lg-12 border p-2 rounded">
-                                        <h6 class="my-1"><span class="fw-bold">Name: </span> ${user.firstname} ${user.middlename} ${user.lastname}</h6>
+                                        <h6 class="my-1"><span class="fw-bold">Name: </span> ${user.firstname} ${user.middlename ?? ''} ${user.lastname}</h6>
                                         <h6 class="my-1"><span class="fw-bold">Email: </span> ${user.email}</h6>
                                         <h6 class="my-1"><span class="fw-bold">SIRB: </span> ${user.patientinfo?.srbno}</h6>
                                         <h6 class="my-1"><span class="fw-bold">Passport: </span> ${user.patientinfo?.passportno}</h6>

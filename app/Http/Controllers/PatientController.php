@@ -8,16 +8,12 @@ use App\Services\PatientService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Patient;
 use App\Models\MedicalHistory;
 use App\Models\ListPackage;
 use App\Models\ListExam;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use App\Models\EmployeeLog;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Agency;
@@ -25,13 +21,10 @@ use App\Models\Admission;
 use App\Models\CashierOR;
 use App\Models\ReassessmentFindings;
 use App\Http\Controllers\AdmissionController;
-use App\Models\Audiometry;
 use App\Models\Refferal;
 use App\Models\PatientInfo;
 use App\Models\SchedulePatient;
 use App\Models\DeclarationForm;
-
-use App\Mail\VerificationMail;
 use App\Mail\RegisteredUser;
 
 class PatientController extends Controller
@@ -45,11 +38,9 @@ class PatientController extends Controller
 
             $patient_email = session()->has('email') ? session()->get('email') : null;
 
-            $referral = Refferal::where('email_employee', $patient_email)->first();
+            $referral = Refferal::where('email_employee', $patient_email)->latest('id')->first();
 
-            // if the user completed the registration, it will redirect into dashboard.
-            if ($patientInfo)
-                return redirect('/patient_info');
+            if ($patientInfo) return redirect('/patient_info');
 
             return view('ProgressInfo.progress-info', compact('agencies', 'referral'));
 
@@ -69,7 +60,7 @@ class PatientController extends Controller
 
         // if the user is not fully registered, it will redirect to step by step registration.
         if (!$patient->patientinfo)
-            return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing in the dashboard.');
+            return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
         $patientRecords = Patient::where('patientcode', session()->get('patientCode'))->get();
 
@@ -152,7 +143,7 @@ class PatientController extends Controller
 
             $patient_vessel = $request->agencyName == 3 || $request->agencyName == 57 || $request->agencyName == 58 || $request->agencyName == 55 ? $request->bahia_vessel : $request->vessel;
 
-            $save_patient_info = PatientInfo::create([
+            $patientinfo = PatientInfo::create([
                 'main_id' => $mast_patient->id,
                 'patientcode' => $request->patientcode,
                 'address' => strtoupper($request->address),
@@ -200,7 +191,32 @@ class PatientController extends Controller
                 'persistent_pain_in_chest' => $request->persistent_pain_in_the_chest
             ]);
 
-            if (!$mast_patient_save && !$save_patient_info && !$save_medical_history && !$save_declaration_form)
+            $referral_form = Refferal::whereNull('patient_id')
+                ->where('firstname', 'LIKE', '%' . $mast_patient->firstname . '%')
+                ->where('lastname', 'LIKE', '%' . $mast_patient->lastname . '%')
+                ->where('ssrb', 'LIKE', $patientinfo->srbno)
+                ->where('passport', 'LIKE', $patientinfo->passportno)
+                ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, created_date, ?))', [$mast_patient->created_date])
+                ->first();
+
+            // Store referral form scheduled date
+            if ($referral_form && $referral_form->schedule_date) {
+                $mast_patient->update([
+                    'referral_id' => $referral_form->id
+                ]);
+
+                $referral_form->update([
+                    'patient_id' => $mast_patient->id,
+                ]);
+
+                SchedulePatient::create([
+                    'patient_id' => $mast_patient->id,
+                    'patientcode' => $mast_patient->patientcode,
+                    'date' => $referral_form->schedule_date
+                ]);
+            }
+
+            if (!$mast_patient_save && !$patientinfo && !$save_medical_history && !$save_declaration_form)
                 return back()->with('status', 'Failed to Submit Data');
 
             $request->session()->put('patientId', $mast_patient->id);
@@ -257,26 +273,25 @@ class PatientController extends Controller
     public function save_progress_info(Request $request)
     {
         try {
-            // $srb_expdate = $request->srb_expdate ? \DateTime::createFromFormat('d/m/Y', $request->srb_expdate)->format('Y-m-d') : date('Y-m-d');
-            // $passport_expdate = $request->passport_expdate ? \DateTime::createFromFormat('d/m/Y', $request->passport_expdate)->format('Y-m-d') : date('Y-m-d');
-            // $birthdate = $request->birthdate ? \DateTime::createFromFormat('d/m/Y', $request->birthdate)->format('Y-m-d') : date('Y-m-d');
-
             $patient_vessel = $request->agency_id == 3 ? $request->bahia_vessel : $request->vessel;
 
-            $same_patientcode = null;
+            $existing_patientcode = null;
 
             $same_patient_record = PatientInfo::where('passportno', 'LIKE', $request->passportNo)
                                             ->where('srbno', 'LIKE', $request->ssrb)
-                                            ->whereHas('patient')
+                                            ->whereHas('patient', function ($query) use ($request) {
+                                                $query->where('firstname', 'LIKE', "%" . $request->firstName . "%")
+                                                    ->where('lastname', 'LIKE', "%" . $request->lastName . "%");
+                                            })
                                             ->with('patient')
                                             ->first();
             
-            $same_patientcode = $same_patient_record->patient->patientcode ?? null;
+            $existing_patientcode = $same_patient_record->patient->patientcode ?? null;
 
-            $mast_patient = Patient::where('id', '=', $request->main_id)->first();
+            $mast_patient = Patient::where('id', $request->main_id)->first();
 
             $mast_patient_save = $mast_patient->update([
-                'patientcode' => $same_patientcode ?? $mast_patient->patientcode,
+                'patientcode' => $existing_patientcode ?? $mast_patient->patientcode,
                 'firstname' => strtoupper($request->firstName),
                 'lastname' => strtoupper($request->lastName),
                 'middlename' => strtoupper($request->middleName),
@@ -333,12 +348,11 @@ class PatientController extends Controller
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
             ]);
 
-            $referral_form = Refferal::where('email_employee', $mast_patient->email)
+            $referral_form = Refferal::whereNull('patient_id')
                 ->where('firstname', 'LIKE', '%' . $mast_patient->firstname . '%')
                 ->where('lastname', 'LIKE', '%' . $mast_patient->lastname . '%')
-                ->where('ssrb', 'LIKE', '%' . $patientinfo->srbno . '%')
-                ->where('passportno', 'LIKE', '%' . $patientinfo->passportno . '%')
-                ->where('position_applied', 'LIKE', '%' . $mast_patient->position_applied . '%')
+                ->where('ssrb', 'LIKE', $patientinfo->srbno)
+                ->where('passport', 'LIKE', $patientinfo->passportno)
                 ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, created_date, ?))', [$mast_patient->created_date])
                 ->first();
 

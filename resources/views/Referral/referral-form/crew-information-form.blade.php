@@ -58,8 +58,8 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="text-uppercase" for="email_employee">Email of Employee: <span class="danger">*</span></label>
-                <input type="email" id="email_employee" class="form-control" placeholder="Email of Employee"
+                <label class="text-uppercase" for="email_employee">Email of Crew: <span class="danger">*</span></label>
+                <input type="email" id="email_employee" class="form-control" placeholder="Email of Crew"
                     name="email_employee">
                 <span class="text-danger danger" error-name="email_employee"></span>
             </div>
