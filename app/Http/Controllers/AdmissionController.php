@@ -334,7 +334,7 @@ class AdmissionController extends Controller
 
         $doctor = User::where('id', $request->doctor_prescription)->first();
 
-
+        # For Reset Status 
         if($request->lab_status == 0) {
             PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
             foreach ($recipients as $key => $recipient) {
@@ -342,6 +342,7 @@ class AdmissionController extends Controller
             }
         }
 
+        # For Fit to Work Status
         if ($request->lab_status == 2) {
 
             if(optional($latestMedicalResult)->generate_at <= $request->generate_at) {
@@ -388,6 +389,7 @@ class AdmissionController extends Controller
             
         }
 
+        # For Unfit to Work Status
         if ($request->lab_status == 3) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => 'Unfit',
@@ -426,6 +428,7 @@ class AdmissionController extends Controller
             }
         }
 
+        # For Unfit Temporarily Status
         if ($request->lab_status == 4) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => 'Unfit_temp',
@@ -464,11 +467,12 @@ class AdmissionController extends Controller
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
             if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
                 foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission, $pdf));
+                    Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission));
                 }
             }
         }
 
+        # For Re-Assessment Status
         if ($request->lab_status == 1) {
             PhysicalExam::where('admission_id', $request->id)->update([
                 'fit' => 'Pending',

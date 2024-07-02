@@ -16,6 +16,11 @@ class UnfitToWork extends Mailable
      *
      * @return void
      */
+    public $patient;
+    public $agency;
+    public $admission;
+    public $cause_of_unfit;
+    
     public function __construct($patient, $agency, $admission, $cause_of_unfit)
     {
         //
