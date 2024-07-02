@@ -16,6 +16,12 @@ class ReAssessment extends Mailable
      *
      * @return void
      */
+
+    public $data;
+    public $schedule;
+    public $patient;
+    public $pdf;
+    
     public function __construct($admission, $patient, $schedule, $pdf)
     {
         //
