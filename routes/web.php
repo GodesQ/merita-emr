@@ -132,10 +132,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::put('schedule-appointments/update/{id}', [SchedulePatientController::class, 'update']);
     // ----------------------------------------- END SCHEDULE PATIENT ACCESS --------------------------------------- //
 
-    Route::get('request-sched-appointments', [RequestSchedAppointmentController::class,'index']);
-    Route::post('request-sched-appointments/upsert', [RequestSchedAppointmentController::class, 'upsert']);
-    Route::post('request-sched-appointments/approve', [RequestSchedAppointmentController::class,'approve']);
-    Route::post('request-sched-appointments/decline', [RequestSchedAppointmentController::class, 'decline']);
+    // Route::get('request-sched-appointments', [RequestSchedAppointmentController::class,'index']);
+    // Route::post('request-sched-appointments/upsert', [RequestSchedAppointmentController::class, 'upsert']);
+    // Route::post('request-sched-appointments/approve', [RequestSchedAppointmentController::class,'approve']);
+    // Route::post('request-sched-appointments/decline', [RequestSchedAppointmentController::class, 'decline']);
 
 
     // ----------------------------------------- START AGENCY ACCESS --------------------------------------- //
