@@ -265,7 +265,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::post('/store_patient_files', [PatientController::class, 'store_patient_files'])->name('store_patient_files');
 
-        Route::delete('/patient_delete', [PatientController::class, 'delete_patient'])->name('patientsDelete');
+        Route::delete('/delete_patient_record', [PatientController::class, 'delete_patient_record'])->name('patientsDelete');
     });
 
     // ------------------------------- END OF CRUD PATIENT IN ADMIN ACCESS ---------------------------------------- //
