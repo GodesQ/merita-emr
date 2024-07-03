@@ -142,13 +142,13 @@
                                 data-i18n="Agency">Agency</span></a></li>
                 @endif
 
-                <li class=" nav-item {{ Request::path() == 'referral-slips' ? 'active' : '' }}"><a
+                {{-- <li class=" nav-item {{ Request::path() == 'referral-slips' ? 'active' : '' }}"><a
                         href="/referral-slips"><i class="feather icon-file"></i><span class="menu-title"
                             data-i18n="Referral Slips">Referral Slips</span></a></li>
 
                 <li class=" nav-item {{ Request::path() == 'request-sched-appointments' ? 'active' : '' }}"><a
                         href="/request-sched-appointments"><i class="feather icon-calendar"></i><span class="menu-title"
-                            data-i18n="Referral Slips">Request Schedules</span></a></li>
+                            data-i18n="Referral Slips">Request Schedules</span></a></li> --}}
 
                 <li class="nav-item has-sub"><a href="#"><i class="feather icon-folder"></i><span
                             class="menu-title" data-i18n="Master Files">Master Files</span></a>
