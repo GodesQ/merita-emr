@@ -460,7 +460,7 @@ class PatientController extends Controller
             $request_schedule = RequestSchedAppointment::where('patient_id', session()->get('patientId'))->first();
 
             if (!$patient->patientinfo)
-                return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before continuing to the dashboard.');
+                return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('schedules', 'latest_schedule', 'scheduled_patients', 'request_schedule'));
 
