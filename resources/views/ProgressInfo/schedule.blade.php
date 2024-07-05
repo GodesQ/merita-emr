@@ -70,7 +70,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="">Schedule Date</label>
-                                                            <input type="hidden" name="patient_id" value="{{$latest_schedule->patient_id}}">
+                                                            <input type="hidden" name="patient_id" value="{{ session()->get('patientId') }}">
                                                             <input type="text" id="date-picker" class="form-control" value="" name="schedule_date">
                                                         </div>
                                                     </div>
