@@ -46,18 +46,18 @@
                                     <td style="color: #156f29;">
                                         NAME :
                                     </td>
-                                    <td style="border-bottom: 1px solid black;">{{$admission->lastname}}, {{$admission->firstname}} {{$admission->middlename}}</td>
+                                    <td style="border-bottom: 1px solid black;">{{$admission->patient->lastname}}, {{$admission->patient->firstname}} {{$admission->patient->middlename}}</td>
                                     <td style="color: #156f29;">
                                        AGE :
                                     </td>
                                     <td width='11%' style="border-bottom: 1px solid black;">
-                                        {{$admission->age}}
+                                        {{$admission->patient->age}}
                                     </td>
                                     <td width='7%' style="color: #156f29;">
                                        SEX :
                                     </td>
                                     <td width='15%' style="border-bottom: 1px solid black;">
-                                        {{$admission->gender}}
+                                        {{$admission->patient->gender}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,11 +65,11 @@
                                         REQUESTED BY :
                                     </td>
                                     <td style="border-bottom: 1px solid black;">
-                                        {{$admission->agencyname}}
+                                        {{$admission->agency->agencyname}}
                                     </td>
                                     <td style="color: #156f29;">CIVIL STATUS :</td>
                                     <td colspan='3' style="border-bottom: 1px solid black;">
-                                        {{$patientinfo->maritalstatus}}
+                                        {{$admission->patient->patientinfo->maritalstatus}}
                                     </td>
                                 </tr>
                             </tbody>
