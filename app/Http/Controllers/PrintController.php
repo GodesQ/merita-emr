@@ -1237,65 +1237,61 @@ class PrintController extends Controller
                         return $q->where('agency_id', $agency_id);
                     }
                 })
-                ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                    if ($agency_id == 3) {
-                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            // dd($bahia_vessel);
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                ->when($bahia_vessel, function ($q) use ($bahia_vessel, $agency_id) {
+                    $q->where(function ($q) use ($bahia_vessel, $agency_id) {
+                        if ($agency_id == 3) {
+                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                                // dd($bahia_vessel);
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                            }
+    
+                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                            }
+    
+                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                            }
+    
+                        } else if ($agency_id == 55) {
+                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                            }
+                        } else if ($agency_id == 57) {
+                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                            }
+                        } else if ($agency_id == 58) {
+                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                            }
                         }
-
-                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                        }
-
-                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                        }
-
-                    }
-
-                    if ($agency_id == 55) {
-                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                        }
-                    }
-
-                    if ($agency_id == 57) {
-                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                        }
-                    }
-
-                    if ($agency_id == 58) {
-                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
-                        }
-                    }
+                    });
                 })
                 ->where(function ($q) use ($hartmann_principal, $agency_id) {
-                    if ($agency_id == 9) {
+                    if ($agency_id == 9 && $hartmann_principal != "all") {
                         return $q->where(DB::raw('upper(principal)'), strtoupper($hartmann_principal));
                     }
                 })

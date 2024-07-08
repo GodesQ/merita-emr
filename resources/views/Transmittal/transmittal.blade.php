@@ -106,7 +106,7 @@
                                             <div class="form-group bahia-group">
                                                 <label for="">Bahia Vessels <span class="primary" style="font-size: 12px; font-style:italic;">(This is for Bahia Agency Only)</span></label>
                                                 <select name="bahia_vessel" id="bahia-select-vessels" class="select2">
-                                                    <option value="">Select Vessel</option>
+                                                    <option value="">All</option>
                                                 </select>
                                             </div>
                                             <div class="form-group hartmann-group">
@@ -155,6 +155,7 @@
         function getHartmannPrincipals(e) {
             $('.hartmann-select-principals option').remove();
             if(e.value == 9) {
+                $('<option value="all">All</option>').appendTo('.hartmann-select-principals');
                 hartmann_principals.forEach(principal => {
                     $(`<option value='${principal}'>${principal}</option>`).appendTo(
                     '.hartmann-select-principals');
@@ -167,6 +168,8 @@
 
         function getBahiaVessels(e) {
             $('#bahia-select-vessels option').remove();
+
+            $('<option value="">All</option>').appendTo('#bahia-select-vessels');
 
             if(e.value == 55) {
                 vessel_three.forEach(vessel => {
