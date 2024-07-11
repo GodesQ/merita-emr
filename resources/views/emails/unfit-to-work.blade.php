@@ -152,18 +152,16 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @if($cause_of_unfit)
-                                                <tr>
-                                                    <td>
-                                                        <div style="margin-bottom: 1rem;">
-                                                            <div><b>Cause of Unfit</b></div>
-                                                            <div>
-                                                                {{$cause_of_unfit}}
-                                                            </div>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;"><b><u>Remarks / Recommendation</u></b></div>
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;">
+                                                            @php echo nl2br($admission->remarks)@endphp
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>

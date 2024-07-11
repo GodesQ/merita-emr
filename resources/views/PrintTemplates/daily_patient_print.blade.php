@@ -80,7 +80,7 @@
                                             <td>{{implode(", ",$today_patient['additional_tests'])}}</td>
                                             <td>{{$today_patient['vessel']}}</td>
                                             <td>{{$today_patient['last_medical']}}</td>
-                                            <td>{{$today_patient['birthdate']}}</td>
+                                            <td>{{ date_format(new DateTime($today_patient['birthdate']), "M d, Y") }}</td>
                                             <td>{{$today_patient['payment_type']}}</td>
                                             <td>{{$today_patient['requestor']}}</td>
                                         </tr>

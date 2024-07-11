@@ -603,7 +603,7 @@
                                     {{$exam->b2 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
-                                    <font size="1">{{$exam->b2_findings}}</font>
+                                    <font size="1">{{$exam->b3_findings}}</font>
                                 </b></td>
                             <td>Genito-Urinary Sys</td>
                             <td align="center"><b>
@@ -626,7 +626,7 @@
                                     {{$exam->b3 ? "Yes" : "No" }}
                                 </b></td>
                             <td align="center"><b>
-                                    <font size="1">{{$exam->b3_findings}}</font>
+                                    <font size="1">{{$exam->b4_findings}}</font>
                                 </b></td>
                             <td>Inguinals,Genitals</td>
                             <td align="center"><b>

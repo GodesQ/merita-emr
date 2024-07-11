@@ -46,38 +46,14 @@ class PrintController extends Controller
     {
         $id = $_GET['id'];
 
-        $exam = Audiometry::where('admission_id', '=', $id)
+        $exam = Audiometry::where('admission_id', $id)
             ->latest('id')
             ->first();
 
         $technician1 = User::where('id', $exam->technician_id)->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-        )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         return view(
             'PrintTemplates.exam_audio_print',
@@ -105,32 +81,7 @@ class PrintController extends Controller
         $technician1 = User::where('id', $exam->technician_id)->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
 
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         return view(
             'PrintTemplates.exam_crf_print',
@@ -141,74 +92,23 @@ class PrintController extends Controller
     public function exam_cardiovascular(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = CardioVascular::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
 
         $technician1 = User::where('id', $exam->technician_id)->first();
-        return view(
-            'PrintTemplates.exam_cardiovascular_print',
-            compact('exam', 'admission', 'technician1')
-        );
+
+        return view('PrintTemplates.exam_cardiovascular_print', compact('exam', 'admission', 'technician1'));
     }
 
     public function exam_dental(Request $request)
     {
         $id = $_GET['id'];
-
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = Dental::where('admission_id', '=', $id)
             ->latest('id')
@@ -230,32 +130,8 @@ class PrintController extends Controller
             ->first();
         $technician1 = User::where('id', $exam->technician_id)->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         return view(
             'PrintTemplates.exam_ecg_print',
@@ -266,32 +142,8 @@ class PrintController extends Controller
     public function exam_echodoppler(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
+
         $exam = EchoDoppler::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -305,32 +157,7 @@ class PrintController extends Controller
     public function exam_echoplain(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = EchoPlain::where('admission_id', '=', $id)
             ->latest('id')
@@ -347,32 +174,7 @@ class PrintController extends Controller
     {
         $id = $_GET['id'];
 
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = Ishihara::where('admission_id', '=', $id)->first();
         $technician1 = User::where('id', $exam->technician_id)->first();
@@ -383,7 +185,8 @@ class PrintController extends Controller
         );
     }
 
-    public function exam_physical() {
+    public function exam_physical()
+    {
         $id = $_GET['id'];
 
         $admission = Admission::select(
@@ -401,7 +204,7 @@ class PrintController extends Controller
             'mast_patient.position_applied as position_applied',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -454,32 +257,8 @@ class PrintController extends Controller
     {
         $id = $_GET['id'];
 
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
+
         $exam = Psychological::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -495,32 +274,7 @@ class PrintController extends Controller
     public function exam_psychobpi(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = PsychoBPI::where('admission_id', '=', $id)
             ->latest('id')
@@ -538,32 +292,8 @@ class PrintController extends Controller
     public function exam_stress_echo(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
+
         $exam = StressEcho::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -579,32 +309,8 @@ class PrintController extends Controller
     public function exam_stresstest(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
+
         $exam = StressTest::select('exam_stresstest.*')
             ->where('admission_id', '=', $id)
             ->latest('id')
@@ -620,32 +326,7 @@ class PrintController extends Controller
     public function exam_ultrasound(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = UltraSound::where('admission_id', '=', $id)
             ->latest('id')
@@ -681,32 +362,8 @@ class PrintController extends Controller
     public function exam_xray(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
+
         $exam = XRay::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
@@ -723,106 +380,49 @@ class PrintController extends Controller
     public function exam_ppd(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = PPD::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
 
-        $patientinfo =  DB::table('mast_patientinfo')->where('main_id', $admission->patient_id)->first();
-        // dd($patientinfo);
-
         $technician1 = User::where('id', $exam->technician_id)->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
 
-        return view(
-            'PrintTemplates.exam_ppd_print',
-            compact('exam', 'admission', 'technician1', 'technician2', 'patientinfo')
-        );
+        return view('PrintTemplates.exam_ppd_print', compact('exam', 'admission', 'technician1', 'technician2'));
     }
 
     public function exam_bloodsero(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-            )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.admission_id',
-                '=',
-                'tran_admission.id'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
-
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam_blood = BloodSerology::where('admission_id', '=', $id)
             ->latest('id')
             ->first();
 
         $exam_sero = Hepatitis::where('admission_id', '=', $id)
-        ->latest('id')
-        ->first();
+            ->latest('id')
+            ->first();
 
         $type = $request->type;
 
-        if($type == 'blood') {
+        if ($type == 'blood') {
             $technician1 = User::where('id', $exam_blood->technician_id)->first();
             $technician2 = User::where('id', $exam_blood->technician2_id)->first();
         }
 
-        if($type == 'serology') {
+        if ($type == 'serology') {
             $technician1 = User::where('id', $exam_sero->technician_id)->first();
             $technician2 = User::where('id', $exam_sero->technician2_id)->first();
         }
 
-        if($type == 'both' && $exam_blood) {
+        if ($type == 'both' && $exam_blood) {
             $technician1 = User::where('id', $exam_blood->technician_id)->first();
             $technician2 = User::where('id', $exam_blood->technician2_id)->first();
         }
 
-        if($type == 'both' && $exam_sero) {
+        if ($type == 'both' && $exam_sero) {
             $technician1 = User::where('id', $exam_sero->technician_id)->first();
             $technician2 = User::where('id', $exam_sero->technician2_id)->first();
         }
@@ -838,7 +438,7 @@ class PrintController extends Controller
         $id = $_GET['id'];
         $admission = Admission::select(
             'tran_admission.*'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->with('patient', 'agency')
             ->latest('id')
@@ -879,7 +479,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -923,7 +523,8 @@ class PrintController extends Controller
         );
     }
 
-    public function exam_stool_culture(Request $request) {
+    public function exam_stool_culture(Request $request)
+    {
         $id = $_GET['id'];
         $admission = Admission::select(
             'tran_admission.*',
@@ -937,7 +538,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -991,7 +592,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1045,7 +646,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1099,7 +700,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1153,7 +754,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1207,7 +808,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1261,7 +862,7 @@ class PrintController extends Controller
             'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
-            )
+        )
             ->where('tran_admission.id', '=', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1317,7 +918,7 @@ class PrintController extends Controller
             'mast_patient.signature',
             'mast_patient.updated_date',
             'mast_patient.patient_image'
-            )
+        )
             ->where('tran_admission.id', $id)
             ->leftJoin(
                 'mast_patient',
@@ -1373,46 +974,46 @@ class PrintController extends Controller
         // // dd($exam_names);
 
         $patient_exams = DB::table('list_packagedtl')
-                ->select(
-                    'list_packagedtl.*',
-                    'list_exam.examname as examname',
-                    'list_exam.category as category',
-                    'list_exam.section_id',
-                    'list_section.sectionname'
-                )
-                ->where('main_id', $patientInfo->medical_package)
-                ->leftJoin(
-                    'list_exam',
-                    'list_exam.id',
-                    'list_packagedtl.exam_id'
-                )
-                ->leftJoin(
-                    'list_section',
-                    'list_section.id',
-                    'list_exam.section_id'
-                )
-                ->get();
+            ->select(
+                'list_packagedtl.*',
+                'list_exam.examname as examname',
+                'list_exam.category as category',
+                'list_exam.section_id',
+                'list_section.sectionname'
+            )
+            ->where('main_id', $patientInfo->medical_package)
+            ->leftJoin(
+                'list_exam',
+                'list_exam.id',
+                'list_packagedtl.exam_id'
+            )
+            ->leftJoin(
+                'list_section',
+                'list_section.id',
+                'list_exam.section_id'
+            )
+            ->get();
 
         $additional_exams = DB::table('tran_admissiondtl')
-                ->select(
-                    'tran_admissiondtl.*',
-                    'list_exam.examname as examname',
-                    'list_exam.category as category',
-                    'list_exam.section_id',
-                    'list_section.sectionname'
-                )
-                ->where('main_id', $admission->id)
-                ->leftJoin(
-                    'list_exam',
-                    'list_exam.id',
-                    'tran_admissiondtl.exam_id'
-                )
-                ->leftJoin(
-                    'list_section',
-                    'list_section.id',
-                    'list_exam.section_id'
-                )
-                ->get();
+            ->select(
+                'tran_admissiondtl.*',
+                'list_exam.examname as examname',
+                'list_exam.category as category',
+                'list_exam.section_id',
+                'list_section.sectionname'
+            )
+            ->where('main_id', $admission->id)
+            ->leftJoin(
+                'list_exam',
+                'list_exam.id',
+                'tran_admissiondtl.exam_id'
+            )
+            ->leftJoin(
+                'list_section',
+                'list_section.id',
+                'list_exam.section_id'
+            )
+            ->get();
 
         $add_exams = [];
         $exams = [];
@@ -1435,7 +1036,8 @@ class PrintController extends Controller
         );
     }
 
-    public function referral_pdf() {
+    public function referral_pdf()
+    {
         $email = $_GET['email'];
 
         $referral = Refferal::where('email_employee', $email)->latest('id')->with('package', 'agency')->first();
@@ -1464,7 +1066,8 @@ class PrintController extends Controller
         return view("PrintTemplates.referral_pdf_print", compact('referral'));
     }
 
-    public function transmittal_print(Request $request) {
+    public function transmittal_print(Request $request)
+    {
 
         $from_date = $request->input('date_from');
         $to_date = $request->input('date_to');
@@ -1473,7 +1076,7 @@ class PrintController extends Controller
         $bahia_vessel = $request->input('bahia_vessel');
         $hartmann_principal = $request->input('hartmann_principal');
 
-        if($agency_id == "") {
+        if ($agency_id == "") {
             $patients = $this->patientStatus($patientstatus, $from_date, $to_date);
         } else {
             $patients = $this->patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal);
@@ -1488,32 +1091,33 @@ class PrintController extends Controller
         return view('PrintTemplates.transmittal_print', compact('patients', 'from_date', 'to_date', 'patientstatus', 'agency', 'additional_columns'));
     }
 
-    public function requests_print() {
+    public function requests_print()
+    {
         $id = $_GET['id'];
         $patient_id = $_GET['patient_id'];
         $package_requests = DB::table('list_package_request')
-        ->select('list_package_request.request_id', 'requests.title')
-        ->where('list_package_request.main_id', $id)
-        ->leftJoin('requests', 'requests.id', 'list_package_request.request_id')
-        ->get();
+            ->select('list_package_request.request_id', 'requests.title')
+            ->where('list_package_request.main_id', $id)
+            ->leftJoin('requests', 'requests.id', 'list_package_request.request_id')
+            ->get();
 
         $patient = Patient::where('id', $patient_id)->first();
 
         $patientInfo = DB::table('mast_patientinfo')
-        ->select('mast_patientinfo.*', 'mast_agency.agencyname')
-        ->where('mast_patientinfo.main_id', $patient_id)
-        ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
-        ->first();
+            ->select('mast_patientinfo.*', 'mast_agency.agencyname')
+            ->where('mast_patientinfo.main_id', $patient_id)
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->first();
 
 
         $requests = [];
 
         foreach ($package_requests as $key => $package_request) {
             $request_exam = DB::table('requests_exam')
-            ->select('requests_exam.exam_id', 'list_exam.examname')
-            ->where('requests_exam.main_id', $package_request->request_id)
-            ->leftJoin('list_exam', 'list_exam.id', 'requests_exam.exam_id')
-            ->get();
+                ->select('requests_exam.exam_id', 'list_exam.examname')
+                ->where('requests_exam.main_id', $package_request->request_id)
+                ->leftJoin('list_exam', 'list_exam.id', 'requests_exam.exam_id')
+                ->get();
 
             $request = [
                 "title" => $package_request->title,
@@ -1530,54 +1134,22 @@ class PrintController extends Controller
         $id = $_GET['id'];
 
         $patient = Patient::select('mast_patient.*', 'mast_patientinfo.birthdate', 'mast_patientinfo.nationality')
-        ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-        ->where('mast_patient.id', $id)
-        ->first();
+            ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
+            ->where('mast_patient.id', $id)
+            ->first();
 
-        $records =  DB::table('yellow_card')->where('patient_id', $id)->orderBy('count')->get();
+        $records = DB::table('yellow_card')->where('patient_id', $id)->orderBy('count')->get();
         // dd($records);
         return view("PrintTemplates.yellow_card_print", compact('patient', 'records'));
     }
 
-    public function patientStatus($patientstatus, $from_date, $to_date) {
-            if($patientstatus == "") {
-                $patients = Admission::whereDate('trans_date', '>=', $from_date)
-            ->whereDate('trans_date', '<=', $to_date)
-                ->with('exam_audio',
-                        'exam_ecg',
-                        'exam_physical',
-                        'exam_visacuity',
-                        'exam_bloodsero',
-                        'patient',
-                        'exam_crf',
-                        'exam_cardio',
-                        'exam_dental',
-                        'exam_drug',
-                        'exam_echodoppler',
-                        'exam_echoplain',
-                        'exam_feca',
-                        'exam_hema',
-                        'exam_hepa',
-                        'exam_hiv',
-                        'exam_ishihara',
-                        'exam_misc',
-                        'exam_pregnancy',
-                        'exam_psychobpi',
-                        'exam_psycho',
-                        'exam_stressecho',
-                        'exam_stresstest',
-                        'exam_ultrasound',
-                        'exam_xray',
-                        'package',
-                        'agency',
-                        'followup',
-                        'followups'
-                        )->get();
-
-            } else {
-               $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                    ->whereDate('trans_date', '<=', $to_date)
-                    ->with('exam_audio',
+    public function patientStatus($patientstatus, $from_date, $to_date)
+    {
+        if ($patientstatus == "") {
+            $patients = Admission::whereDate('trans_date', '>=', $from_date)
+                ->whereDate('trans_date', '<=', $to_date)
+                ->with(
+                    'exam_audio',
                     'exam_ecg',
                     'exam_physical',
                     'exam_visacuity',
@@ -1606,196 +1178,125 @@ class PrintController extends Controller
                     'agency',
                     'followup',
                     'followups'
-                    )->whereHas('exam_physical', function ($query) use ($patientstatus) {
-                        $query->where('fit', $patientstatus);
-                    })->get();
-            }
+                )->get();
+
+        } else {
+            $patients = Admission::whereDate('trans_date', '>=', $from_date)
+                ->whereDate('trans_date', '<=', $to_date)
+                ->with(
+                    'exam_audio',
+                    'exam_ecg',
+                    'exam_physical',
+                    'exam_visacuity',
+                    'exam_bloodsero',
+                    'patient',
+                    'exam_crf',
+                    'exam_cardio',
+                    'exam_dental',
+                    'exam_drug',
+                    'exam_echodoppler',
+                    'exam_echoplain',
+                    'exam_feca',
+                    'exam_hema',
+                    'exam_hepa',
+                    'exam_hiv',
+                    'exam_ishihara',
+                    'exam_misc',
+                    'exam_pregnancy',
+                    'exam_psychobpi',
+                    'exam_psycho',
+                    'exam_stressecho',
+                    'exam_stresstest',
+                    'exam_ultrasound',
+                    'exam_xray',
+                    'package',
+                    'agency',
+                    'followup',
+                    'followups'
+                )->whereHas('exam_physical', function ($query) use ($patientstatus) {
+                    $query->where('fit', $patientstatus);
+                })->get();
+        }
 
 
-            return $patients;
+        return $patients;
     }
 
-    public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal) {
-        if($patientstatus == "") {
-                $patients = Admission::whereDate('trans_date', '>=', $from_date)
+    public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal)
+    {
+        if ($patientstatus == "") {
+            $patients = Admission::whereDate('trans_date', '>=', $from_date)
                 ->whereDate('trans_date', '<=', $to_date)
                 ->where(function ($q) use ($agency_id) {
                     $bahia_ids = ['55', '57', '58', '59'];
-                    if($agency_id == 3) {
+                    if ($agency_id == 3) {
                         return $q->where('agency_id', $agency_id);
-                    } else if(in_array($agency_id, $bahia_ids)){
+                    } else if (in_array($agency_id, $bahia_ids)) {
                         return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
                     } else {
                         return $q->where('agency_id', $agency_id);
                     }
                 })
-                ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                    if($agency_id == 3) {
-                        if($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            // dd($bahia_vessel);
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLD TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUE TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVE TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
+                ->when($bahia_vessel, function ($q) use ($bahia_vessel, $agency_id) {
+                    $q->where(function ($q) use ($bahia_vessel, $agency_id) {
+                        if ($agency_id == 3) {
+                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                                // dd($bahia_vessel);
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                            }
+    
+                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                            }
+    
+                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                            }
+    
+                        } else if ($agency_id == 55) {
+                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                            }
+                        } else if ($agency_id == 57) {
+                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                            }
+                        } else if ($agency_id == 58) {
+                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                            }
                         }
-
-                        if($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAEMAR'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOLETTE'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
-                        }
-
-                        if($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOREALIS'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BALMORAL'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
-                        }
-
-                    }
-
-                    if($agency_id == 55) {
-                        if($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAEMAR'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOLETTE'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
-                        }
-                    }
-
-                    if($agency_id == 57) {
-                        if($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOREALIS'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BALMORAL'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
-                        }
-                    }
-
-                    if($agency_id == 58) {
-                        if($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLD TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUE TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVE TERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
-                            ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                        }
-                    }
+                    });
                 })
                 ->where(function ($q) use ($hartmann_principal, $agency_id) {
-                    if($agency_id == 9) {
-                        return $q->where(DB::raw('upper(principal)'),  strtoupper($hartmann_principal));
+                    if ($agency_id == 9 && $hartmann_principal != "all") {
+                        return $q->where(DB::raw('upper(principal)'), strtoupper($hartmann_principal));
                     }
                 })
-                ->with('exam_audio',
-                        'exam_ecg',
-                        'exam_physical',
-                        'exam_visacuity',
-                        'exam_bloodsero',
-                        'patient',
-                        'exam_crf',
-                        'exam_cardio',
-                        'exam_dental',
-                        'exam_drug',
-                        'exam_echodoppler',
-                        'exam_echoplain',
-                        'exam_feca',
-                        'exam_hema',
-                        'exam_hepa',
-                        'exam_hiv',
-                        'exam_ishihara',
-                        'exam_misc',
-                        'exam_pregnancy',
-                        'exam_psychobpi',
-                        'exam_psycho',
-                        'exam_stressecho',
-                        'exam_stresstest',
-                        'exam_ultrasound',
-                        'exam_xray',
-                        'package',
-                        'agency',
-                        'followup'
-                        )
-                        ->get();
-                    // dd($patients);
-        } else {
-                $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                    ->whereDate('trans_date', '<=', $to_date)
-                    ->whereHas('exam_physical', function ($query) use ($patientstatus) {
-                        $query->where('fit','=', $patientstatus);
-                    })
-                    ->where(function ($q) use ($agency_id) {
-                        $bahia_ids = ['55', '57', '58', '59'];
-                        if($agency_id == 3) {
-                            return $q->where('agency_id', $agency_id);
-                        } else if(in_array($agency_id, $bahia_ids)){
-                            return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
-                        } else {
-                            return $q->where('agency_id', $agency_id);
-                        }
-                    })
-                    ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                        if($agency_id == 3) {
-                            if($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                                // dd($bahia_vessel);
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                            }
-
-                            if($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
-                            }
-
-                            if($bahia_vessel == 'BALMORAL/BOREALIS') {
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
-                            }
-
-                        }
-
-                        if($agency_id == 55) {
-                            if($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BRAEMAR'));
-                            }
-                        }
-
-                        if($agency_id == 57) {
-                            if($bahia_vessel == 'BALMORAL/BOREALIS') {
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('MS BOREALIS'));
-                            }
-                        }
-
-                        if($agency_id == 58) {
-                            if($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                                return $q->where(DB::raw('upper(vesselname)'),  strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'),  strtoupper('BRAVETERN'));
-                            }
-                        }
-                    })
-                    ->with('exam_audio',
+                ->with(
+                    'exam_audio',
                     'exam_ecg',
                     'exam_physical',
                     'exam_visacuity',
@@ -1823,49 +1324,156 @@ class PrintController extends Controller
                     'package',
                     'agency',
                     'followup'
-                    )
-                     ->get();
+                )
+                ->get();
+            // dd($patients);
+        } else {
+            $patients = Admission::whereDate('trans_date', '>=', $from_date)
+                ->whereDate('trans_date', '<=', $to_date)
+                ->whereHas('exam_physical', function ($query) use ($patientstatus) {
+                    $query->where('fit', '=', $patientstatus);
+                })
+                ->where(function ($q) use ($agency_id) {
+                    $bahia_ids = ['55', '57', '58', '59'];
+                    if ($agency_id == 3) {
+                        return $q->where('agency_id', $agency_id);
+                    } else if (in_array($agency_id, $bahia_ids)) {
+                        return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
+                    } else {
+                        return $q->where('agency_id', $agency_id);
+                    }
+                })
+                ->where(function ($q) use ($bahia_vessel, $agency_id) {
+                    if ($agency_id == 3) {
+                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                            // dd($bahia_vessel);
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                        }
+
+                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                        }
+
+                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                        }
+
+                    }
+
+                    if ($agency_id == 55) {
+                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
+                        }
+                    }
+
+                    if ($agency_id == 57) {
+                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
+                        }
+                    }
+
+                    if ($agency_id == 58) {
+                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
+                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
+                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
+                        }
+                    }
+                })
+                ->with(
+                    'exam_audio',
+                    'exam_ecg',
+                    'exam_physical',
+                    'exam_visacuity',
+                    'exam_bloodsero',
+                    'patient',
+                    'exam_crf',
+                    'exam_cardio',
+                    'exam_dental',
+                    'exam_drug',
+                    'exam_echodoppler',
+                    'exam_echoplain',
+                    'exam_feca',
+                    'exam_hema',
+                    'exam_hepa',
+                    'exam_hiv',
+                    'exam_ishihara',
+                    'exam_misc',
+                    'exam_pregnancy',
+                    'exam_psychobpi',
+                    'exam_psycho',
+                    'exam_stressecho',
+                    'exam_stresstest',
+                    'exam_ultrasound',
+                    'exam_xray',
+                    'package',
+                    'agency',
+                    'followup'
+                )
+                ->get();
         }
         return $patients;
     }
 
-    public function data_privacy_print() {
+    public function data_privacy_print()
+    {
         $id = $_GET['id'];
         $patient = Patient::where('id', $id)->first();
 
         return view('PrintTemplates.data_privacy_form', compact('patient'));
     }
 
-    public function cashier_or_print(Request $request) {
+    public function cashier_or_print(Request $request)
+    {
         $data = session()->all();
         $id = $request->id;
         $account = CashierOR::select('actgtran_or.*', 'mast_agency.agencyname')
-        ->where('actgtran_or.id', $id)
-        ->leftJoin('mast_agency', 'mast_agency.id', 'actgtran_or.agency_id')
-        ->with('admission')
-        ->first();
+            ->where('actgtran_or.id', $id)
+            ->leftJoin('mast_agency', 'mast_agency.id', 'actgtran_or.agency_id')
+            ->with('admission')
+            ->first();
 
         $print_by = User::where('id', $data['employeeId'])->first();
         $admission = Admission::where('id', $account->admission_id)->first();
         $patient_package = ListPackage::where('id', $admission->package_id)->first();
         $items = [];
 
-        if($account->paying_type == "exams") {
+        if ($account->paying_type == "exams") {
 
-            if($account->payment_user == 'agency') {
+            if ($account->payment_user == 'agency') {
                 $admission_exams = DB::table('tran_admissiondtl')
-                ->select('tran_admissiondtl.*', 'list_exam.examname', 'list_exam.price')
-                ->where('main_id', $account->admission_id)
-                ->where('tran_admissiondtl.charge', 'package')
-                ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
-                ->get();
+                    ->select('tran_admissiondtl.*', 'list_exam.examname', 'list_exam.price')
+                    ->where('main_id', $account->admission_id)
+                    ->where('tran_admissiondtl.charge', 'package')
+                    ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
+                    ->get();
             } else {
                 $admission_exams = DB::table('tran_admissiondtl')
-                ->select('tran_admissiondtl.*', 'list_exam.examname', 'list_exam.price')
-                ->where('main_id', $account->admission_id)
-                ->where('tran_admissiondtl.charge', 'applicant_paid')
-                ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
-                ->get();
+                    ->select('tran_admissiondtl.*', 'list_exam.examname', 'list_exam.price')
+                    ->where('main_id', $account->admission_id)
+                    ->where('tran_admissiondtl.charge', 'applicant_paid')
+                    ->leftJoin('list_exam', 'list_exam.id', 'tran_admissiondtl.exam_id')
+                    ->get();
             }
 
             foreach ($admission_exams as $key => $exam) {
@@ -1877,7 +1485,7 @@ class PrintController extends Controller
                 ];
                 array_push($items, $item_data);
             }
-        } else if($account->paying_type == 'package') {
+        } else if ($account->paying_type == 'package') {
             $item_data = [
                 'itemname' => $patient_package->packagename,
                 'date' => $admission->trans_date,
@@ -1892,7 +1500,7 @@ class PrintController extends Controller
                 'price' => $account->amount_due,
                 'description' => $account->paying_type
             ];
-             array_push($items, $item_data);
+            array_push($items, $item_data);
         }
 
         return view('PrintTemplates.cashier_or_print', compact('account', 'print_by', 'items'));

@@ -30,32 +30,35 @@
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{ $admission->patient->lastname . ' ' . $admission->patient->suffix . ', ' . $admission->patient->firstname . ' ' . $admission->patient->middlename }}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
+                                        <span style="font-size:15px">{{ $admission->patient->age }}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
+                                        <span style="font-size:15px">{{ $admission->patient->gender }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
-                                                {{'Bahia Shipping Services, Inc.'}}
+                                            @if (preg_match('/Bahia/i', $admission->agency->agencyname))
+                                                {{ 'Bahia Shipping Services, Inc.' }}
                                             @else
-                                                {{$admission->agencyname}}
-                                            @endif</span>
+                                                {{ $admission->agency->agencyname }}
+                                            @endif
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
+                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME
+                                            DATE:</b><br>
+                                        <span
+                                            style="font-size:15px">{{ date_format(new DateTime($admission->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
+                                            NO:</b><br><span style="font-size:15px">{{ $admission->patient->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -79,14 +82,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td width="13" height="100" valign="top"><br></td>
-                                                    <td width="651" valign="top">{{$exam->result}}</td>
+                                                    <td width="651" valign="top">{{ $exam->result }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" valign="top"><b>REMARKS:</b></td>
                                                 </tr>
                                                 <tr>
                                                     <td height="100" valign="top"><br></td>
-                                                    <td valign="top">{{$exam->remarks}}</td>
+                                                    <td valign="top">{{ $exam->remarks }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -98,15 +101,19 @@
                                             <tbody>
                                                 <tr>
                                                     <td height="120" align="right" valign="bottom">
-                                                        <table width="270" border="0" cellspacing="2" cellpadding="2">
+                                                        <table width="270" border="0" cellspacing="2"
+                                                            cellpadding="2">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
                                                                         @if ($technician1)
-                                                                            @if($technician1->signature)
-                                                                                <img src="{{$technician1->signature}}" width="150" height="50" style="object-fit: cover;" />
+                                                                            @if ($technician1->signature)
+                                                                                <img src="{{ $technician1->signature }}"
+                                                                                    width="150" height="50"
+                                                                                    style="object-fit: cover;" />
                                                                             @else
-                                                                                <div style="width: 150px;height: 20px;"></div>
+                                                                                <div style="width: 150px;height: 20px;">
+                                                                                </div>
                                                                             @endif
                                                                         @endif
                                                                     </td>
@@ -114,7 +121,7 @@
                                                                 <tr valign="bottom">
                                                                     <td align="center" class="brdTop">
                                                                         @if ($technician1)
-                                                                        {{$technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title}}
+                                                                            {{ $technician1->firstname . ' ' . $technician1->middlename . ' ' . $technician1->lastname . ', ' . $technician1->title }}
                                                                         @endif
                                                                         <br>
                                                                         Optometrist

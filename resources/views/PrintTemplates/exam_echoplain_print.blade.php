@@ -45,52 +45,6 @@
                         </table>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td>
-                        <table width="760" border="0" cellpadding="2" cellspacing="0" class="brdAll">
-                            <tbody>
-                                <tr>
-                                    <td width="80" rowspan="3" align="center"></td>
-                                    <td width="356" rowspan="3" align="center" valign="middle">
-                                        <span class="lblCompName">MERITA DIAGNOSTIC CLINIC INC.</span><br
-                                            style="margin-bottom: 20px">
-                                        <span class="lblCompDtl"><b>5th &amp; 6th Flr Jettac Bldg., 920 Quirino Ave.
-                                                Cor. San Antonio St. Malate, Manila<b><br>
-                                                    Tel No.: (02) 5310-032 / 5310-0825 / 0917-8576942 / 0908-8908850<br>
-                                                    Email: meritaclinic@gmail.com / meritadiagnosticclinic@yahoo.com<br>
-                                                    Accredited: DOH * POEA * MARINA * TESDA * Oil &amp; Gas UK<br>Skuld
-                                                    P&amp;I * West of England P&amp;I</b></b></span><b><b>
-                                            </b></b>
-                                    </td>
-                                    <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
-                                        <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
-                                    </td>
-                                    <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
-                                    </td>
-                                    <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
-                                        <b>REQUESTED BY:</b><br>
-                                        <span style="font-size:15px">{{$admission->agencyname}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
-                                    </td>
-                                    <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr> -->
                 <tr>
                     <td height="30" align="center" class="lblReport">TWO DIMENSIONAL ECHOCARDIOGRAPHY</td>
                 </tr>

@@ -137,7 +137,7 @@ function markSlash($val)
                             <tbody>
                                 <tr>
                                     <td width="80" rowspan="5" align="center"><img
-                                            src="../../../app-assets/images/logo/logo.jpg" width="80" height="80"
+                                            src="{{ URL::asset('app-assets/images/logo/logo.jpg') }}" width="80" height="80"
                                             alt=""></td>
                                     <td width="356" rowspan="3" align="center" valign="middle">
                                         <span class="lblCompName">MERITA DIAGNOSTIC CLINIC INC.</span><br
@@ -152,23 +152,23 @@ function markSlash($val)
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{$admission->patient->lastname . " " . $admission->patient->suffix . ', ' . $admission->patient->firstname . " " . $admission->patient->middlename}}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
+                                        <span style="font-size:15px">{{$admission->patient->age}}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
+                                        <span style="font-size:15px">{{$admission->patient->gender}}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
+                                            @if (preg_match("/Bahia/i", $admission->agency->agencyname)) 
                                                 {{'Bahia Shipping Services, Inc.'}}
                                             @else
-                                                {{$admission->agencyname}}
+                                                {{$admission->agency->agencyname}}
                                             @endif
                                         </span>
                                     </td>
@@ -178,7 +178,7 @@ function markSlash($val)
                                         <span style="font-size:15px">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
+                                            NO:</b><br><span style="font-size:15px">{{$admission->patient->patientcode}}</span>
                                     </td>
                                 </tr>
                             </tbody>

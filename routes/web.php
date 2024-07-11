@@ -132,10 +132,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::put('schedule-appointments/update/{id}', [SchedulePatientController::class, 'update']);
     // ----------------------------------------- END SCHEDULE PATIENT ACCESS --------------------------------------- //
 
-    Route::get('request-sched-appointments', [RequestSchedAppointmentController::class,'index']);
-    Route::post('request-sched-appointments/upsert', [RequestSchedAppointmentController::class, 'upsert']);
-    Route::post('request-sched-appointments/approve', [RequestSchedAppointmentController::class,'approve']);
-    Route::post('request-sched-appointments/decline', [RequestSchedAppointmentController::class, 'decline']);
+    // Route::get('request-sched-appointments', [RequestSchedAppointmentController::class,'index']);
+    // Route::post('request-sched-appointments/upsert', [RequestSchedAppointmentController::class, 'upsert']);
+    // Route::post('request-sched-appointments/approve', [RequestSchedAppointmentController::class,'approve']);
+    // Route::post('request-sched-appointments/decline', [RequestSchedAppointmentController::class, 'decline']);
 
 
     // ----------------------------------------- START AGENCY ACCESS --------------------------------------- //
@@ -265,7 +265,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::post('/store_patient_files', [PatientController::class, 'store_patient_files'])->name('store_patient_files');
 
-        Route::delete('/patient_delete', [PatientController::class, 'delete_patient'])->name('patientsDelete');
+        Route::delete('/delete_patient_record', [PatientController::class, 'delete_patient_record'])->name('patientsDelete');
     });
 
     // ------------------------------- END OF CRUD PATIENT IN ADMIN ACCESS ---------------------------------------- //

@@ -35,7 +35,7 @@
                                         <span style="font-size:15px">{{$admission->age}}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">Male</span>
+                                        <span style="font-size:15px">{{ $admission->gender }}</span>
                                     </td>
                                 </tr>
                                 <tr>
