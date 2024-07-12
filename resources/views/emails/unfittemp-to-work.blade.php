@@ -142,16 +142,16 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <!--<tr>-->
-                                            <!--    <td>-->
-                                            <!--        <div style="margin-bottom: 1rem;">-->
-                                            <!--            <div><b>Remarks/Recommendation</b></div>-->
-                                            <!--            <div>-->
-                                            <!--                @php echo nl2br($admission->remarks) @endphp-->
-                                            <!--            </div>-->
-                                            <!--        </div>-->
-                                            <!--    </td>-->
-                                            <!--</tr>-->
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;"><b><u>Remarks / Recommendation</u></b></div>
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;">
+                                                            @php echo nl2br($admission->remarks)@endphp
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
