@@ -23,7 +23,6 @@ class UnfitToWork extends Mailable
     
     public function __construct($patient, $agency, $admission, $cause_of_unfit)
     {
-        //
         $this->patient = $patient;
         $this->agency = $agency;
         $this->admission = $admission;

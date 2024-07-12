@@ -11,6 +11,11 @@ class FitToWork extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $patient;
+    public $agency;
+    public $admission;
+    public $pdf;
+
     /**
      * Create a new message instance.
      *
@@ -22,7 +27,6 @@ class FitToWork extends Mailable
         $this->agency = $agency;
         $this->admission = $admission;
         $this->pdf = $pdf;
-
     }
 
     /**
