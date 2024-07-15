@@ -850,19 +850,13 @@ class PatientController extends Controller
             $patient = Patient::where('id', '=', $id)->whereHas('patientinfo')->with('patientinfo')->firstOrFail();
 
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
-            $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
+            $patientInfo = PatientInfo::where('main_id', $id)->first();
+            // $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
 
             $medicalHistory = MedicalHistory::where('main_id', '=', $id)->first();
 
-            if (!$medicalHistory) {
-                $medicalHistory = null;
-            }
-            $declarationForm = DB::table('declaration_form')
-                ->where('main_id', $id)
-                ->first();
-            if (!$declarationForm) {
-                $declarationForm = null;
-            }
+            $declarationForm = DeclarationForm::where('main_id', $id)->first();
+
             $admissionPatient = Admission::where('id', '=', $patient->admission_id)
                 ->latest('id')
                 ->first();
