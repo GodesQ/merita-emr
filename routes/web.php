@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RequestSchedAppointmentController;
 use App\Http\Controllers\SchedulePatientController;
+use App\Http\Controllers\TransmittalController;
 use App\Http\Middleware\Agency;
 use App\Http\Middleware\Laboratory;
 use App\Http\Middleware\Ophthalmology;
@@ -515,8 +516,6 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/peme_bahia_print', [PrintPanelController::class, 'peme_bahia_print']);
 
-    Route::get('/transmittal_print', [PrintController::class, 'transmittal_print']);
-
     Route::get('/requests_print', [PrintController::class, 'requests_print']);
 
     Route::get('/cashier_or_print', [PrintController::class, 'cashier_or_print'])->name('cashier_or.print');
@@ -867,7 +866,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::post('/store_misc', [MiscellaneousController::class, 'store_misc'])->middleware(Laboratory::class);
     // END OF CRUD MISC
 
-    Route::get('/transmittal', [PrintPanelController::class, 'transmittal']);
+    Route::get('/transmittal', [TransmittalController::class, 'index']);
+    Route::get('/transmittal_print', [TransmittalController::class, 'print']);
 
     Route::get('/followup_transmittal', [PrintPanelController::class, 'followup_transmittal']);
 
