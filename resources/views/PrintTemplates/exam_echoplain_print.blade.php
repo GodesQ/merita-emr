@@ -58,11 +58,11 @@
                             <tbody>
                                 <tr>
                                     <td>Name: </td>
-                                    <td>{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</td>
+                                    <td>{{$admission->patient->lastname . " " . $admission->patient->suffix . ', ' . $admission->patient->firstname . " " . $admission->patient->middlename}}</td>
                                     <td>Age</td>
-                                    <td>{{$admission->age}}</td>
+                                    <td>{{$admission->patient->age}}</td>
                                     <td>Sex</td>
-                                    <td>{{$admission->gender}}</td>
+                                    <td>{{$admission->patient->gender}}</td>
                                     <td>Date</td>
                                     <td colspan="3">{{date_format(new DateTime($admission->trans_date), "d F Y")}}</td>
                                 </tr>
