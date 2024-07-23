@@ -93,10 +93,10 @@ class PatientController extends Controller
     public function remedical(Request $request)
     {
         try {
-            $patientcode = $request->patientcode;
+            $patient_id = session()->get('patientId');
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
             $data = session()->all();
-            $patient = Patient::where('patientcode', $patientcode)->first();
+            $patient = Patient::where('patientcode', $patient_id)->latest('id')->first();
             $patientInfo = DB::table('mast_patientinfo')
                 ->where('main_id', $data['patientId'])
                 ->first();
