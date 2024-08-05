@@ -40,7 +40,7 @@ class PackageReportController extends Controller
                     ->with('agency', 'package', 'exam_physical', 'patient')
                     ->whereHas('package', function($query) use ($request) {
                         $query->where('packagename', $request->package);
-                    })->latest('trans_date')->get();
+                    })->get();
 
         return view('PrintPanel.packages_report_print', compact('patients', 'month'));
     }
