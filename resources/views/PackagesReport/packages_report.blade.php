@@ -18,11 +18,6 @@
                                         Default Report
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" role="tab" aria-selected="false">
-                                        Skuld Report
-                                    </a>
-                                </li>
                             </ul>
                             <div class="tab-content px-1 pt-1">
                                 <div class="tab-pane active" id="tab1" role="tabpanel" aria-labelledby="base-tab1">
