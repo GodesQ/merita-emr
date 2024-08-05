@@ -47,9 +47,10 @@ class PackageController extends Controller
                         '<a href="edit_package?id=' .
                         $row['id'] .
                         '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-<a href="#" id="' .
-                        $row['id'] .
-                        '" class="delete-package btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
+                        ';
+                        // <a href="#" id="' .
+                        // $row['id'] .
+                        // '" class="delete-package btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
                     return $actionBtn;
                 })
                 ->addColumn('price', function ($row) {
@@ -252,5 +253,14 @@ class PackageController extends Controller
 
     public function get_exams(Request $request)
     {
+    }
+
+    public function get_agency_packages(Request $request, $agency_id) {
+        $packages = ListPackage::select('id', 'agency_id', 'packagename')->where('agency_id', $agency_id)->get();
+        
+        return response([
+            'status' => TRUE,
+            'packages' => $packages,
+        ]);
     }
 }

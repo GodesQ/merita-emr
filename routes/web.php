@@ -1,8 +1,5 @@
 <?php
-
-use App\Http\Controllers\RequestSchedAppointmentController;
-use App\Http\Controllers\SchedulePatientController;
-use App\Http\Controllers\TransmittalController;
+use App\Http\Controllers\DefaultPackageController;
 use App\Http\Middleware\Agency;
 use App\Http\Middleware\Laboratory;
 use App\Http\Middleware\Ophthalmology;
@@ -60,6 +57,10 @@ use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AgencyDashboardController;
 use App\Http\Controllers\PatientMedicalResultController;
+use App\Http\Controllers\PackageReportController;
+use App\Http\Controllers\RequestSchedAppointmentController;
+use App\Http\Controllers\SchedulePatientController;
+use App\Http\Controllers\TransmittalController;
 
 
 Route::get('/', [PatientAuthController::class, 'login']);
@@ -365,6 +366,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
         Route::post('/update_package', [PackageController::class, 'update_package'])->name('package.update');
 
         Route::delete('/list_package_delete', [PackageController::class, 'delete_list_package'])->name('package.delete');
+
+        Route::get('/packages/agency/{agency_id}', [PackageController::class, 'get_agency_packages'])->name('packages.agency.get');
     });
 
     Route::get('/list_exam', [ExamController::class, 'view_list_exam'])->name('exam.index');
@@ -881,8 +884,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/daily_patient_form', [PrintPanelController::class, 'daily_patient_form']);
 
-    Route::get('/packages_report', [PrintPanelController::class, 'packages_report']);
-    Route::get('/packages_report_print', [PrintPanelController::class, 'packages_report_print']);
+    Route::get('/packages_report', [PackageReportController::class, 'index']);
+    Route::get('/packages_report_print', [PackageReportController::class, 'print']);
 
     Route::get('/soa', [SOAController::class, 'index']);
     Route::get('/soa_print', [SOAController::class, 'soa_print']);
@@ -905,4 +908,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/logout', [PatientAuthController::class, 'logout']);
     Route::get('/employee_logout', [AdminAuthController::class, 'logout']);
     Route::get('/agency_logout', [UserController::class, 'agency_logout']);
+
+    Route::get('/default-packages', [DefaultPackageController::class, 'index'])->name('default_packages.index');
+    Route::get('/default-packages/create', [DefaultPackageController::class, 'create'])->name('default_packages.create');
+    Route::post('/default-packages/store', [DefaultPackageController::class, 'store'])->name('default_packages.store');
+    Route::get('/default-packages/edit/{id}', [DefaultPackageController::class, 'edit'])->name('default_packages.edit');
+    Route::put('/default-packages/update/{id}', [DefaultPackageController::class, 'update'])->name('default_packages.update');
 });
