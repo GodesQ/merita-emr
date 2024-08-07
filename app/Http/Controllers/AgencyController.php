@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\AgencyPrincipal;
 use App\Models\AgencyVessel;
+use App\Models\DefaultPackage;
+use App\Models\ListPackageExam;
 use App\Models\SchedulePatient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
@@ -133,7 +136,8 @@ class AgencyController extends Controller
     public function add_agency()
     {
         try {
-            return view('Agency.add-agency');
+            $default_packages = DefaultPackage::get();
+            return view('Agency.add-agency', compact('default_packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -173,6 +177,31 @@ class AgencyController extends Controller
             $agency->commission = $request->commission;
             $agency->created_date = $request->registered_at;
             $save = $agency->save();
+            
+            if ($request->has('default_packages') && is_array($request->default_packages)) {
+                $defaultPackages = DefaultPackage::whereIn('id', $request->default_packages)
+                    ->with('exams')
+                    ->get();
+            
+                foreach ($defaultPackages as $defaultPackage) {
+                    $mainPackage = ListPackage::create([
+                        'packagename' => $defaultPackage->package_name,
+                        'peso_price' => $defaultPackage->peso_price,
+                        'dollar_price' => $defaultPackage->dollar_price,
+                        'agency_id' => $agency->id,
+                        'created_date' => Carbon::now(),
+                    ]);
+            
+                    $exams = $defaultPackage->exams->map(function ($exam) use ($mainPackage) {
+                        return [
+                            'main_id' => $mainPackage->id,
+                            'exam_id' => $exam->exam_id,
+                        ];
+                    });
+            
+                    ListPackageExam::insert($exams->toArray());
+                }
+            }
 
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
@@ -223,7 +252,9 @@ class AgencyController extends Controller
         try {
             $id = $_GET['id'];
             $agency = Agency::where('id', $id)->with('vessels', 'principals')->first();
-            return view('Agency.edit-agency', compact('agency'));
+            $default_packages = DefaultPackage::get();
+            
+            return view('Agency.edit-agency', compact('agency', 'default_packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -305,13 +336,15 @@ class AgencyController extends Controller
         
         $new_password = Str::random(8);
 
+        $password = $new_password;
+
         $agency->update([
-            'password' => Hash::make($new_password),
+            'password' => Hash::make($password),
         ]);
 
         $details = [
             'email' => $agency->email,
-            'password' => $new_password,
+            'password' => $password,
         ];
 
         Mail::to($agency->email)->send(new AgencyPassword($details));
