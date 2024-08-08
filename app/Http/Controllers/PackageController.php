@@ -23,31 +23,21 @@ class PackageController extends Controller
 
     public function get_list_package(Request $request)
     {
-        $sessions = session()->all();
         if ($request->ajax()) {
-            $data = ListPackage::select('list_package.*', 'mast_agency.agencyname')->leftJoin('mast_agency', 'mast_agency.id', 'list_package.agency_id');
+            $data = ListPackage::select('list_package.*', 'mast_agency.agencyname')
+                    ->where('is_active', 1)
+                    ->leftJoin('mast_agency', 'mast_agency.id', 'list_package.agency_id');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('agency', function ($row) {
-                    $agency = Agency::where(
-                        'id',
-                        '=',
-                        $row['agency_id']
-                    )->first();
-                    $agencyName = null;
-                    if (!$agency) {
-                        $agencyName = null;
-                    } else {
-                        $agencyName = $agency->agencyname;
-                    }
+                    $agencyName = $row->agency->agencyname ?? '';
                     return $agencyName;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn =
-                        '<a href="edit_package?id=' .
-                        $row['id'] .
-                        '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-                        ';
+                        '<a href="edit_package?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm">
+                            <i class="feather icon-edit"></i>
+                        </a>';
                         // <a href="#" id="' .
                         // $row['id'] .
                         // '" class="delete-package btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
@@ -148,6 +138,7 @@ class PackageController extends Controller
             'list_package.dollar_price',
             'list_package.agency_id',
             'list_package.remarks',
+            'list_package.is_active',
             'mast_agency.agencyname as agencyname'
         )
             ->where('list_package.id', '=', $id)
@@ -219,6 +210,7 @@ class PackageController extends Controller
         $package->dollar_price = $request->dollar_price;
         $package->remarks = $request->remarks;
         $package->agency_id = $request->agency;
+        $package->is_active = $request->has('is_active');
         $save = $package->save();
         $package_id = $package->id;
 
