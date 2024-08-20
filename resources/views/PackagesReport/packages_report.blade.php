@@ -38,7 +38,7 @@
                                                             required>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="col-lg-6">
+                                                <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="agency-field" class="form-label">Agency</label>
                                                         <select name="agency_id" id="agency-field" class="select2">
@@ -48,15 +48,12 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="package-field" class="form-label">Package</label>
                                                         <select name="package" id="package-field" class="select2 form-select">
                                                             <option value="">--- SELECT PACKAGES ---</option>
-                                                            @foreach ($packages as $package)
-                                                                <option value="{{ $package->packagename }}">{{ $package->packagename }}</option>
-                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
