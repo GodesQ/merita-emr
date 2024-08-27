@@ -511,6 +511,17 @@
                             placeholder="PANAMA Quantity" name="panama_qty">
                     </div>
                 </fieldset>
+                <fieldset class="col-md-6 my-50">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="certificate[]" value="VANUATU"
+                            id="vanuatu">
+                        <label class="custom-control-label text-uppercase" for="vanuatu">VANUATU</label>
+                    </div>
+                    <div class="input-group mt-50 d-none" id="vanuatu_qty">
+                        <input type="number" min="1" max="5" class="form-control"
+                            placeholder="VANUATU Quantity" name="vanuatu_qty">
+                    </div>
+                </fieldset>
             </div>
         </div>
     </div>
