@@ -1189,4 +1189,32 @@ class PrintController extends Controller
         return view('PrintTemplates.cashier_or_print', compact('account', 'print_by', 'items'));
     }
 
+    public function daily_summary_report(Request $request) {
+        $agencies = Agency::orderBy('agencyname', 'desc')->get();
+        return view('DailySummaryReport.daily-summary-report', compact('agencies'));
+    }
+
+    public function daily_summary_report_print(Request $request) {
+        $from_date = $request->input('date_from');
+        $to_date = $request->input('date_to');
+        $agency_id = $request->input('agency_id');
+
+        $agency = Agency::where('id', $agency_id)->first();
+
+        $admissions = Admission::whereBetween('trans_date', [$from_date, $to_date])
+                            ->whereHas('patient')
+                            ->where(function ($q) use ($agency_id) {
+                                $bahia_ids = ['55', '57', '58', '59'];
+                                if ($agency_id == 3) {
+                                    return $q->where('agency_id', $agency_id);
+                                } else if (in_array($agency_id, $bahia_ids)) {
+                                    return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
+                                } else {
+                                    return $q->where('agency_id', $agency_id);
+                                }
+                            })->get();
+
+        return view('PrintTemplates.daily_summary_report', compact('agency', 'admissions'));
+    }
+
 }
