@@ -884,6 +884,9 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/daily_patient_form', [PrintPanelController::class, 'daily_patient_form']);
 
+    Route::get('/daily-summary-report', [PrintController::class, 'daily_summary_report']);
+    Route::get('/daily-summary-report-print', [PrintController::class, 'daily_summary_report_print']);
+
     Route::get('/packages_report', [PackageReportController::class, 'index']);
     Route::get('/packages_report_print', [PackageReportController::class, 'print']);
 
