@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdditionalExam;
 use App\Models\PatientMedicalResult;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -297,6 +298,15 @@ class AdmissionController extends Controller
         $log->date = date('Y-m-d');
         $log->save();
         $res = Admission::find($id)->delete();
+    }
+
+    public function delete_additional_exams(Request $request) {
+        $additional_exam = AdditionalExam::where('id', $request->id)->first();
+        
+        // Delete additional exam
+        $additional_exam->delete();
+
+        return response()->json(['status'=> 'success', 'message' => 'Additional Exam Deleted Successfully.']);
     }
 
     public function reset_lab_result(Request $request) {

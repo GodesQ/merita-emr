@@ -1023,6 +1023,7 @@ class PatientController extends Controller
 
             foreach ($admission_exams as $key => $exam) {
                 $exam_data = [
+                    'id' => $exam->id,
                     'exam_id' => $exam->exam_id,
                     'examname' => $exam->examname,
                     'charge' => $exam->charge,
@@ -1049,8 +1050,8 @@ class PatientController extends Controller
 
             $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
+            
             return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
-
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
