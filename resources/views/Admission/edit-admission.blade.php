@@ -290,11 +290,11 @@
                                                 <div class="col-md-3 font-weight-bold text-center">Action</div>
                                             </div>
                                             @foreach ($exam_groups as $key => $exam_group)
-                                                <div class="row border p-75">
+                                                <div class="row border p-75 main-exam-row">
                                                     <h4 class="font-weight-bold">
                                                         {{ date_format(new DateTime($key), 'F d, Y') }}</h4>
                                                     @foreach ($exam_group as $key => $exam)
-                                                        <div class="col-md-12 border p-1">
+                                                        <div class="col-md-12 border p-1 exam-row" id="{{ $exam['id'] }}">
                                                             <div class="row">
                                                                 <div class="col-md-3 text-center">
                                                                     {{ $exam['examname'] }}</div>
@@ -302,6 +302,9 @@
                                                                     {{ $exam['charge'] == 'package' ? 'Billed To Agency' : 'Applicant Paid' }}
                                                                 </div>
                                                                 <div class="col-md-3 text-center">{{ $exam['date'] }}
+                                                                </div>
+                                                                <div class="col-md-3 text-center">
+                                                                    <button data-exam-id="{{ $exam['id'] }}" type="button" class="btn btn-danger exam-delete-btn"><i class="fa fa-trash"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -344,3 +347,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        $('.exam-delete-btn').click(e => {
+            let additional_exam_id = e.target.getAttribute('data-exam-id');
+            console.log(additional_exam_id, e.target);
+            $.ajax({
+                method: "DELETE",
+                url: `/admission/additional-exams/delete/${additional_exam_id}`,
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if (data.status === "success") {
+                        const examRow = document.getElementById(additional_exam_id);
+
+                        if (examRow) {
+                            // Find the parent main-exam-row
+                            const mainExamRow = examRow.closest('.main-exam-row');
+
+                            // Check if the main-exam-row has only one exam-row
+                            if (mainExamRow.querySelectorAll('.exam-row').length === 1) {
+                                // If only one exam-row, remove the entire main-exam-row
+                                mainExamRow.remove();
+                            } else {
+                                // Otherwise, remove only the specific exam-row
+                                examRow.remove();
+                            }
+                        }
+                    }
+                }
+            })
+        })
+    });
+</script>

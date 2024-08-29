@@ -308,6 +308,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::delete('/admission_delete', [AdmissionController::class, 'delete_admission'])
         ->name('admission.delete')
         ->middleware([Transaction::class]);
+    
+    Route::delete('/admission/additional-exams/delete/{id}', [AdmissionController::class, 'delete_additional_exams']);
 
     Route::post('/update_lab_result', [AdmissionController::class, 'update_lab_result'])->name('update_lab_result')->middleware([Transaction::class]);
     Route::post('/reset_lab_result', [AdmissionController::class, 'reset_lab_result'])->name('reset_lab_result')->middleware([Transaction::class]);

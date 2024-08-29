@@ -51,8 +51,7 @@ class TransmittalController extends Controller
 
     public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal)
     {
-        $patients = Admission::whereDate('trans_date', '>=', $from_date)
-            ->whereDate('trans_date', '<=', $to_date)
+        $patients = Admission::whereBetween('trans_date', [$from_date, $to_date])
             ->where(function ($q) use ($agency_id) {
                 $bahia_ids = ['55', '57', '58', '59'];
                 if ($agency_id == 3) {
