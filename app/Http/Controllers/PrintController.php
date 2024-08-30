@@ -1042,27 +1042,6 @@ class PrintController extends Controller
 
         $referral = Refferal::where('email_employee', $email)->latest('id')->with('package', 'agency')->first();
 
-        // if($referral) {
-        //     $referral = Patient::select(
-        //         'mast_patient.*',
-        //         'mast_patientinfo.address',
-        //         'mast_patientinfo.birthdate',
-        //         'mast_patientinfo.passportno',
-        //         'mast_patientinfo.srbno',
-        //         'mast_patientinfo.contactno',
-        //         'mast_patientinfo.vessel',
-        //         'mast_patientinfo.payment_type',
-        //         'mast_patientinfo.country_destination',
-        //         'tran_admission.trans_date',
-        //         'list_package.packagename',
-        //         'mast_agency.agencyname'
-        //     )->where('mast_patient.email', $email)
-        //     ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-        //     ->leftJoin('tran_admission', 'tran_admission.id', 'mast_patient.admission_id')
-        //     ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
-        //     ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')->latest('mast_patient.id')->first();
-        // }
-
         return view("PrintTemplates.referral_pdf_print", compact('referral'));
     }
 
