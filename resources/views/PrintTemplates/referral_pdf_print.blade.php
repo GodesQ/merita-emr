@@ -9,11 +9,11 @@
     tr,
     td {
         font-family: sans-serif;
-        font-size: 12.5px;
+        font-size: 12px;
     }
 
     .fontBoldLrg {
-        font: bold 15px sans-serif;
+        font: bold 16px sans-serif;
     }
 
     .fontMed {
@@ -48,7 +48,7 @@
         border: 1px solid black;
     }
     span, p, td, b {
-        color: #476434;
+        color: #486b20;
     }
     @page {
         size: A4;
@@ -77,25 +77,25 @@
                         <tr>
                             <td width="40%" style="font-size: 12px;">Name of Employer/Agency:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$referral ? optional($referral->agency)->agencyname : null}}</div>
+                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$referral ? optional($referral->agency)->agencyname : null}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Vessel:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$referral ? $referral->vessel : null}}</div>
+                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$referral ? $referral->vessel : null}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Country of Destination:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #476434; font-size: 12px;">{{$referral ? $referral->country_destination : null}}</div>
+                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$referral ? $referral->country_destination : null}}</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </td>
-            <td style="text-align: center; border: 1px solid #476434; width: 100px; height: 110px;">
+            <td style="text-align: center; border: 1px solid #486b20; width: 100px; height: 110px;">
                     <span>
                         @if($referral)
                             @if($referral->patient_image)
@@ -111,19 +111,19 @@
     <tbody>
         <tr>
             <td width="33%">
-                <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$referral ? $referral->lastname : null}}
                 </div>
                 <span style="font-size: 12px;" >Last Name</span>
             </td>
             <td width="33%">
-                <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$referral ? $referral->firstname : null}}
                 </div>
                 <span style="font-size: 12px;" >First Name</span>
             </td>
             <td width="33%">
-                <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$referral ? $referral->middlename: null}}
                 </div>
                 <span style="font-size: 12px;">Middle Name</span>
@@ -139,7 +139,7 @@
                     <tbody>
                         <tr>
                             <td width="100%">
-                                <div style="border-bottom: 1px solid #476434; margin-bottom: 1rem;">{{$referral ? $referral->address : null}}
+                                <div style="border-bottom: 1px solid #486b20; margin-bottom: 1rem;">{{$referral ? $referral->address : null}}
                                 </div>
                                 <div style="text-align: center; font-size: 12px; margin-top: -10px;">Permanent Address
                                     (Street,
@@ -152,13 +152,13 @@
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
+                                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
                                     {{$referral ? $referral->age : null}}
                                 </div>
                                 <span style="font-size: 12px;" >Age</span>
                             </td>
                             <td width="50%">
-                                <div style="border-bottom: 1px solid #476434;  margin-bottom: 0.3rem; font-size: 12px;">
+                                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
                                     {{$referral ? $referral->position_applied : null}}
                                 </div>
                                 <span style="font-size: 12px;">Position Applied</span>
@@ -171,15 +171,15 @@
                 <table width="100%" cellspacing="0" cellpadding="2">
                     <tbody>
                                 <tr>
-                                    <td width="40%">Birthday:</td><td style="font-weight: 400; border-bottom: 1px solid #476434;">
+                                    <td width="40%">Birthday:</td><td style="font-weight: 400; border-bottom: 1px solid #486b20;">
                                         @if($referral)
                                             {{$referral->birthdate ? date_format(new DateTime($referral->birthdate), 'F d, Y') : null}}
                                         @endif
                                     </td>
                                 </tr>
-                                <tr><td width="40%">Passport:</td><td style="font-weight: 400; border-bottom: 1px solid #476434;">{{$referral ? $referral->passportno : null}}</td></tr>
-                                <tr><td width="40%">SSRB:</td><td  style="font-weight: 400; border-bottom: 1px solid #476434; ">{{$referral ? $referral->srbno : null}}</td></tr>
-                                <tr><td width="40%">Cellphone #:</td><td  style="font-weight: 400; border-bottom: 1px solid #476434; ">{{$referral ? $referral->contactno : null}}</td></tr>
+                                <tr><td width="40%">Passport:</td><td style="font-weight: 400; border-bottom: 1px solid #486b20;">{{$referral ? $referral->passportno : null}}</td></tr>
+                                <tr><td width="40%">SSRB:</td><td  style="font-weight: 400; border-bottom: 1px solid #486b20; ">{{$referral ? $referral->srbno : null}}</td></tr>
+                                <tr><td width="40%">Cellphone #:</td><td  style="font-weight: 400; border-bottom: 1px solid #486b20; ">{{$referral ? $referral->contactno : null}}</td></tr>
                     </tbody>
                 </table>
             </td>
@@ -192,7 +192,7 @@ $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
 @endphp
-<table width="100%" celspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #476434;" >
+<table width="100%" celspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #486b20;" >
     <tbody>
         <tr width="90%" style="border: 1px solid black; text-align: center;">
              
@@ -239,10 +239,10 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     requirement.</b></td>
         </tr>
         <tr height="30px;">
-            <td width="50%" style="text-align: center; border-bottom: 1px solid #476434">
+            <td width="50%" style="text-align: center; border-bottom: 1px solid #486b20">
                 {{$referral ? date_format(new DateTime($referral->trans_date), "F d, Y") : null}}
             </td>
-            <td width="50%" style="text-align: center; border-bottom: 1px solid #476434">
+            <td width="50%" style="text-align: center; border-bottom: 1px solid #486b20">
                 
             </td>
         </tr>
@@ -250,7 +250,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             <td style="text-align: center; font-size: 11px; font-family: sans-serif;">
             Date of PEME
             </td>                      
-            <td style="text-align: center; font-size: 11px; font-family: sans-serif;">Signature</td>
+            <td style="text-align: center; font-size: 11px; font-family: sans-serif;">Signature of Applicant</td>
         </tr>
     </tbody>
 </table>
@@ -260,10 +260,10 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             <td colspan="3">5. Please conduct the following medication exam:</td>
         </tr>
         <tr>
-            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">{{$referral ? optional($referral->package)->packagename : null}}</td>
+            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #486b20;">{{$referral ? optional($referral->package)->packagename : null}}</td>
         </tr>
         <tr>
-            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">{{$referral ? $referral->custom_request : null}}</td>
+            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #486b20;">{{$referral ? $referral->custom_request : null}}</td>
         </tr>
     </tbody>
 </table>
@@ -300,7 +300,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
 <tbody>
     <tr height="30px">
         <td width="30%">&nbsp;</td>
-        <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;"> 
+        <td width="40%" style="text-align: center; border-bottom: 1px solid #486b20;"> 
             @if($referral)
                 @if($referral->signature)
                     <img width="150px" height="45px" style="object-fit:cover;" src="@php echo base64_decode($referral->signature)@endphp" alt="">
