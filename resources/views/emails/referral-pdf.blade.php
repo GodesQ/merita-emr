@@ -52,7 +52,7 @@
         p,
         td,
         b {
-            color: #476434;
+            color: #178613;
         }
 
         @page {
@@ -88,7 +88,7 @@
                                 <tr>
                                     <td width="40%" style="font-size: 12px;">Name of Employer/Agency:</td>
                                     <td width="60%">
-                                        <div style="border-bottom: 1px solid #476434; font-size: 12px;">
+                                        <div style="border-bottom: 1px solid #178613; font-size: 12px;">
                                             {{ $data['agency']['agencyname'] ?? '' }}
                                         </div>
                                     </td>
@@ -96,7 +96,7 @@
                                 <tr>
                                     <td width="40%" style="font-size: 12px;">Vessel:</td>
                                     <td width="60%">
-                                        <div style="border-bottom: 1px solid #476434; font-size: 12px;">
+                                        <div style="border-bottom: 1px solid #178613; font-size: 12px;">
                                             {{ $data['vessel'] ?? '' }}
                                         </div>
                                     </td>
@@ -104,7 +104,7 @@
                                 <tr>
                                     <td width="40%" style="font-size: 12px;">Country of Destination:</td>
                                     <td width="60%">
-                                        <div style="border-bottom: 1px solid #476434; font-size: 12px;">
+                                        <div style="border-bottom: 1px solid #178613; font-size: 12px;">
                                             {{ $data['country_destination'] ?? '' }}
                                         </div>
                                     </td>
@@ -112,7 +112,7 @@
                             </tbody>
                         </table>
                     </td>
-                    <td style="text-align: center; border: 1px solid #476434; width: 100px; height: 100px;">
+                    <td style="text-align: center; border: 1px solid #178613; width: 100px; height: 100px;">
                         <span>IMAGE HERE</span>
                     </td>
                 </tr>
@@ -122,19 +122,19 @@
             <tbody>
                 <tr>
                     <td width="33%">
-                        <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
+                        <div style="border-bottom: 1px solid #178613; margin-bottom: 0.3rem; font-size: 12px;">
                             {{ $data['lastname'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">Last Name</span>
                     </td>
                     <td width="33%">
-                        <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
+                        <div style="border-bottom: 1px solid #178613; margin-bottom: 0.3rem; font-size: 12px;">
                             {{ $data['firstname'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">First Name</span>
                     </td>
                     <td width="33%">
-                        <div style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
+                        <div style="border-bottom: 1px solid #178613; margin-bottom: 0.3rem; font-size: 12px;">
                             {{ $data['middlename'] ?? '' }}
                         </div>
                         <span style="font-size: 12px;">Middle Name</span>
@@ -150,7 +150,7 @@
                             <tbody>
                                 <tr>
                                     <td width="100%">
-                                        <div style="border-bottom: 1px solid #476434; margin-bottom: 1rem;">
+                                        <div style="border-bottom: 1px solid #178613; margin-bottom: 1rem;">
                                             {{ $data['address'] ?? '' }}
                                         </div>
                                         <div style="text-align: center; font-size: 12px; margin-top: -10px;">
@@ -165,14 +165,14 @@
                                 <tr>
                                     <td width="50%">
                                         <div
-                                            style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
+                                            style="border-bottom: 1px solid #178613; margin-bottom: 0.3rem; font-size: 12px;">
                                             {{ $data['age'] ?? '' }}
                                         </div>
                                         <span style="font-size: 12px;">Age</span>
                                     </td>
                                     <td width="50%">
                                         <div
-                                            style="border-bottom: 1px solid #476434; margin-bottom: 0.3rem; font-size: 12px;">
+                                            style="border-bottom: 1px solid #178613; margin-bottom: 0.3rem; font-size: 12px;">
                                             {{ $data['position_applied'] ?? '' }}
                                         </div>
                                         <span style="font-size: 12px;">Position Applied</span>
@@ -185,26 +185,26 @@
                         <table width="100%" cellspacing="0" cellpadding="2">
                             <tbody>
                                 <tr>
-                                    <td width="38%">Birthday:</td>
-                                    <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
+                                    <td width="40%">Birthday:</td>
+                                    <td width="60%" style="font-weight: 400; border-bottom: 1px solid black;">
                                         {{ isset($data['birthdate']) ? date_format(new DateTime($data['birthdate']), 'F d, Y') : '' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="38%">Passport:</td>
-                                    <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
+                                    <td width="40%">Passport:</td>
+                                    <td width="60%" style="font-weight: 400; border-bottom: 1px solid black;">
                                         {{ $data['passport'] ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="38%">SSRB:</td>
-                                    <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
+                                    <td width="40%">SSRB:</td>
+                                    <td width="60%" style="font-weight: 400; border-bottom: 1px solid black;">
                                         {{ $data['ssrb'] ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="38%">Cellphone #:</td>
-                                    <td width="62%" style="font-weight: 400; border-bottom: 1px solid black;">
+                                    <td width="40%">Cellphone #:</td>
+                                    <td width="60%" style="font-weight: 400; border-bottom: 1px solid black;">
                                         {{ $data['contactno'] ?? '' }}
                                     </td>
                                 </tr>
@@ -220,7 +220,7 @@
             $file = file_get_contents($path);
             $logo = 'data:image/' . $type . ';base64,' . base64_encode($file);
         @endphp
-        <table width="100%" cellspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #476434;">
+        <table width="100%" cellspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #178613;">
             <tbody>
                 <tr style="border: 1px solid black; text-align: center;">
                     <td width="25%" style="text-align: right;">
@@ -264,16 +264,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="50%" style="text-align: center; border-bottom: 1px solid #476434;">
+                    <td width="50%" style="text-align: center; border-bottom: 1px solid #178613;">
                         {{ $data['created_date'] ?? '' }}
                     </td>
-                    <td width="50%" style="text-align: center; border-bottom: 1px solid #476434;">
-                        <img width="150px" height="45px" style="object-fit:cover;" src="{{ base64_decode($data['signature']) ?? '' }}" alt="">
+                    <td width="50%" style="text-align: center; border-bottom: 1px solid #178613;">
+                        
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: center; font-size: 11px; font-family: sans-serif;">Date of PEME</td>
-                    <td style="text-align: center; font-size: 11px; font-family: sans-serif;">Signature</td>
+                    <td style="text-align: center; font-size: 11px; font-family: sans-serif;">Signature of Applicant</td>
                 </tr>
             </tbody>
         </table>
@@ -283,14 +283,14 @@
                     <td colspan="3">5. Please conduct the following medical exam:</td>
                 </tr>
                 <tr>
-                    <td width="20%">5.1 Medical Package/Test:</td>
-                    <td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">
+                    <td width="25%">5.1 Medical Package/Test:</td>
+                    <td width="75%" style="text-align: left; border-bottom: 1px solid #178613;">
                         {{ $data['package']['packagename'] ?? '' }}
                     </td>
                 </tr>
                 <tr>
-                    <td width="20%">5.2 Additional Request:</td>
-                    <td width="80%" style="text-align: left; border-bottom: 1px solid #476434;">
+                    <td width="25%">5.2 Additional Request:</td>
+                    <td width="75%" style="text-align: left; border-bottom: 1px solid #178613;">
                         {{ $data['custom_request'] ?? '' }}
                     </td>
                 </tr>
@@ -320,7 +320,7 @@
             <tbody>
                 <tr>
                     <td width="30%">&nbsp;</td>
-                    <td width="40%" style="text-align: center; border-bottom: 1px solid #476434;">
+                    <td width="40%" style="text-align: center; border-bottom: 1px solid #178613;">
                         <img src="{{ base64_decode($data['signature']) ?? '' }}" alt="" width="150px" height="45px"
                             style="object-fit:cover;">
                     </td>

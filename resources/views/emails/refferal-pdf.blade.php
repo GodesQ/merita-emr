@@ -48,7 +48,7 @@
         border: 1px solid black;
     }
     span, p, td, b {
-        color: #486b20;
+        color: #178613;
     }
     @page {
         size: A4;
@@ -75,25 +75,25 @@
                         <tr>
                             <td width="40%" style="font-size: 12px;">Name of Employer/Agency:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$data->agencyname}}</div>
+                                <div style="border-bottom: 1px solid #178613; font-size: 12px;">{{$data->agencyname}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Vessel:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$data->vessel}}</div>
+                                <div style="border-bottom: 1px solid #178613; font-size: 12px;">{{$data->vessel}}</div>
                             </td>
                         </tr>
                         <tr>
                             <td width="40%" style="font-size: 12px;">Country of Destination:</td>
                             <td width="60%">
-                                <div style="border-bottom: 1px solid #486b20; font-size: 12px;">{{$data->country_destination}}</div>
+                                <div style="border-bottom: 1px solid #178613; font-size: 12px;">{{$data->country_destination}}</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </td>
-            <td style="text-align: center; border: 1px solid #486b20; width: 100px; height: 100px;">
+            <td style="text-align: center; border: 1px solid #178613; width: 100px; height: 100px;">
                     <span>IMAGE HERE</span>
             </td>
         </tr>
@@ -103,19 +103,19 @@
     <tbody>
         <tr>
             <td width="33%">
-                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #178613;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$data->lastname}}
                 </div>
                 <span style="font-size: 12px;" >Last Name</span>
             </td>
             <td width="33%">
-                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #178613;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$data->firstname}}
                 </div>
                 <span style="font-size: 12px;" >First Name</span>
             </td>
             <td width="33%">
-                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
+                <div style="border-bottom: 1px solid #178613;  margin-bottom: 0.3rem; font-size: 12px;">
                     {{$data->middlename}}
                 </div>
                 <span style="font-size: 12px;">Middle Name</span>
@@ -131,7 +131,7 @@
                     <tbody>
                         <tr>
                             <td width="100%">
-                                <div style="border-bottom: 1px solid #486b20; margin-bottom: 1rem;">{{$data->address}}
+                                <div style="border-bottom: 1px solid #178613; margin-bottom: 1rem;">{{$data->address}}
                                 </div>
                                 <div style="text-align: center; font-size: 12px; margin-top: -10px;">Permanent Address
                                     (Street,
@@ -144,13 +144,13 @@
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
+                                <div style="border-bottom: 1px solid #178613;  margin-bottom: 0.3rem; font-size: 12px;">
                                     {{$data->age}}
                                 </div>
                                 <span style="font-size: 12px;" >Age</span>
                             </td>
                             <td width="50%">
-                                <div style="border-bottom: 1px solid #486b20;  margin-bottom: 0.3rem; font-size: 12px;">
+                                <div style="border-bottom: 1px solid #178613;  margin-bottom: 0.3rem; font-size: 12px;">
                                     {{$data->position_applied}}
                                 </div>
                                 <span style="font-size: 12px;">Position Applied</span>
@@ -178,7 +178,7 @@ $type = pathinfo($path, PATHINFO_EXTENSION);
 $data = file_get_contents($path);
 $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
 @endphp
-<table width="100%" celspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #486b20;" >
+<table width="100%" celspacing="0" cellpadding="5" style="text-align: center; border: 1px solid #178613;" >
     <tbody>
         <tr width="90%" style="border: 1px solid black; text-align: center;">
              
@@ -225,9 +225,9 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     requirement.</b></td>
         </tr>
         <tr>
-            <td width="50%" style="text-align: center; border-bottom: 1px solid #486b20">
+            <td width="50%" style="text-align: center; border-bottom: 1px solid #178613">
             </td>
-            <td width="50%" style="text-align: center; border-bottom: 1px solid #486b20">
+            <td width="50%" style="text-align: center; border-bottom: 1px solid #178613">
                 <img width="150px" height="45px" style="object-fit:cover;"
                 src="" alt="">
             </td>
@@ -246,10 +246,10 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
             <td colspan="3">5. Please conduct the following medication exam:</td>
         </tr>
         <tr>
-            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #486b20">{{$data->packagename}}</td>
+            <td width="20%">5.1 Medical Package/Test:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #178613">{{$data->packagename}}</td>
         </tr>
         <tr>
-            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #486b20">{{$data->custom_request}}</td>
+            <td width="20%">5.2 Additional Request:</td><td width="80%" style="text-align: left; border-bottom: 1px solid #178613">{{$data->custom_request}}</td>
         </tr>
     </tbody>
 </table>
@@ -282,7 +282,7 @@ $logo = 'data:image/' . $type . ';base64,' . base64_encode($data);
 <tbody>
     <tr>
         <td width="30%">&nbsp;</td>
-        <td width="40%" style="text-align: center; border-bottom: 1px solid #486b20;"> <img src="@php echo base64_decode($data->signature)@endphp" alt=""  width="150px" height="45px" style="object-fit:cover;"></td>
+        <td width="40%" style="text-align: center; border-bottom: 1px solid #178613;"> <img src="@php echo base64_decode($data->signature)@endphp" alt=""  width="150px" height="45px" style="object-fit:cover;"></td>
         <td width="30%">&nbsp;</td>
     </tr>
     <tr>
