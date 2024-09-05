@@ -923,7 +923,8 @@ class PatientController extends Controller
 
             $patientRecords = Patient::where('patientcode', $patient->patientcode)->get();
 
-            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname', 'list_package.is_active')
+                ->where('list_package.is_active', 1)
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
