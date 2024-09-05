@@ -76,7 +76,7 @@
                                                                 <td width="35%">
                                                                     Date of birth in format "day-month-year"
                                                                     <div class="fontBoldLrg">
-                                                                        {{ $admission->patient->patientinfo->birthdate }}
+                                                                        {{ $admission->patient->patientinfo->birthdate ? date_format(new DateTime($admission->patient->patientinfo->birthdate), 'M d, Y') : null }}
                                                                     </div>
                                                                 </td>
                                                                 <td width="10%">
