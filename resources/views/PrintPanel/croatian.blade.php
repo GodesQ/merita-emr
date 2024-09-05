@@ -234,7 +234,7 @@
                                                                     <td width="25%">Day of birth (yy/mm/dd):</td>
                                                                     <td width="23%"
                                                                         style="border-bottom: 1px solid black;">
-                                                                        {{$admission->patient->patientinfo->birthdate}}</td>
+                                                                        {{$admission->patient->patientinfo->birthdate ? date_format(new DateTime($admission->patient->patientinfo->birthdate), 'M d, Y') : null }}</td>
                                                                     <td></td>
                                                                     <td width="25%">Place / Country of birth</td>
                                                                     <td width="25%"

@@ -70,7 +70,7 @@
                                 <td>{{ date_format(new DateTime($patient->trans_date), 'F d, Y')}}</td>
                                 <td>{{ optional($patient->exam_physical)->progressive_notes }}</td>
                                 <td>{{ optional($patient->patient)->lastname . ', ' . optional($patient->patient)->firstname }}</td>
-                                <td>{{ date_format(new DateTime(optional(optional($patient->patient)->patientinfo)->birthdate), 'm-d-Y')}}</td>
+                                <td>{{ date_format(new DateTime(optional(optional($patient->patient)->patientinfo)->birthdate), 'd-M-Y')}}</td>
                                 <td width="5%">{{ optional(optional($patient->patient)->patientinfo)->passportno }}</td>
                                 <td>{{ optional($patient->agency)->agencyname }}</td>
                                 <td width="15%">{{ $patient->principal }}</td>
