@@ -236,7 +236,7 @@
                                                     <span class="lbl">DATE OF BIRTH</span>
                                                 </td>
                                                 <td colspan="3" style="border-bottom: solid 1.7px black">
-                                                    <span class="valSmall">{{$patientInfo->birthdate ? date_format(new DateTime($patientinfo->birthdate), 'M d, Y') : null }}</span>
+                                                    <span class="valSmall">{{ $patientInfo->birthdate }}</span>
                                                 </td>
                                             </tr>
                                             <tr>
