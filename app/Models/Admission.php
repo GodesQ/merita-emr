@@ -309,31 +309,31 @@ class Admission extends Model
 
             if ($this && !$status) {
                 if($this->lab_status == 2) {
-                    $status = '<div class="badge mx-1 p-50 bg-success">FIT TO WORK</div>';
+                    $status = '<div class="badge mx-1 fs-12 bg-success">FIT TO WORK</div>';
                 } else if($this->lab_status == 1) {
-                    $status = '<div class="badge mx-1 p-50 bg-primary bg-darken-3">NEED REASSESSMENT</div>';
+                    $status = '<div class="badge mx-1 fs-12 bg-primary bg-darken-3">NEED REASSESSMENT</div>';
                 } else if($this->lab_status == 3) {
-                    $status = '<div class="badge mx-1 p-50 bg-primary bg-darken-5">UNFIT TO WORK</div>';
+                    $status = '<div class="badge mx-1 fs-12 bg-primary bg-darken-5">UNFIT TO WORK</div>';
                 } else if($this->lab_status == 4) {
-                    $status = '<div class="badge mx-1 p-50 bg-info bg-darken-2">UNFIT TEMPORARILY</div>';
+                    $status = '<div class="badge mx-1 fs-12 bg-info bg-darken-2">UNFIT TEMPORARILY</div>';
                 }
             }
 
             if(count($exams) == count($completed_exams) && !$status) {
-                $status = '<div class="badge mx-1 p-50 bg-darken-2" style="background: #e4a917 !important;">MEDICAL DONE</div>';
+                $status = '<div class="badge mx-1 fs-12 bg-darken-2" style="background: #e4a917 !important;">MEDICAL DONE</div>';
             }
 
             if (in_array('completed', $exams) && !$status) {
-                $status = '<div class="badge mx-1 p-50 bg-secondary">TAKING EXAM</div>';
+                $status = '<div class="badge mx-1 fs-12 bg-secondary">TAKING EXAM</div>';
             }
 
             if ($this->id && !$status) {
-                $status = '<div class="badge mx-1 p-50 bg-warning">ADMITTED</div>';
+                $status = '<div class="badge mx-1 fs-12 bg-warning">ADMITTED</div>';
             }
 
         } else {
             if(!$status) {
-                $status = '<div class="badge mx-1 p-50 bg-danger">NO EXAMS</div>';
+                $status = '<div class="badge mx-1 fs-12 bg-danger">NO EXAMS</div>';
             }
         }
         return $status;
