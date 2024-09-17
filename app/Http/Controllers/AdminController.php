@@ -32,55 +32,6 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    public function migrate_patients(Request $request) {
-
-        // $patients = Admission::whereIn('package_id', [123, 125, 127, 129])->with('patient')->get();
-
-        // foreach ($patients as $key => $patient) {
-        //     $patient->update([
-        //         'package_id' => 3
-        //     ]);
-        // }
-
-        // echo 'Success';
-
-        // $patients = DB::table('mast_patient')
-        //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
-        //     ->groupBy('name')
-        //     ->havingRaw('COUNT(*) > 1')
-        //     ->get();
-
-        // foreach ($patients as $patient) {
-        //     // Find the first registered record based on the created_date in each group
-        //     $firstRecord = DB::table('mast_patient')
-        //         ->where('firstname', $patient->firstname)
-        //         ->where('middlename', $patient->middlename)
-        //         ->where('lastname', $patient->lastname)
-        //         ->orderBy('created_date', 'ASC')
-        //         ->first();
-
-        //     // Update the patientcode value for all other records in the group
-        //     DB::table('mast_patient')
-        //         ->where('firstname', $patient->firstname)
-        //         ->where('middlename', $patient->middlename)
-        //         ->where('lastname', $patient->lastname)
-        //         ->where('id', '<>', $firstRecord->id)
-        //         ->update(['registered_patientcode' => DB::raw('patientcode'), 'patientcode' => $firstRecord->patientcode]);
-        // }
-
-        // echo 'success';
-
-        // $patients = Patient::where('patientcode', 'P19-000010')->update([
-        //     'patientcode' => DB::raw('registered_patientcode')
-        // ]);
-
-        // DB::table('mast_patient')
-        //     ->where('firstname', null)
-        //     ->where('middlename', null)
-        //     ->where('lastname', null)
-        //     ->delete();
-    }
-
     public function today_patients(Request $request)
     {
         $data = session()->all();
@@ -120,11 +71,14 @@ class AdminController extends Controller
                         return null;
                     }
                 })
+                ->addColumn('status', function ($row) {
+                    return $row->patient->admission->getStatusExams($row->patient->patientinfo->package->list_package_exams);
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'patient_image', 'patientname'])
+                ->rawColumns(['action', 'patient_image', 'patientname', 'status'])
                 ->toJson();
         }
     }
@@ -181,7 +135,7 @@ class AdminController extends Controller
     {
         isset($_GET['request_date']) ? session()->put('request_date', $_GET['request_date']) : null;
         $data = session()->all();
-        $today = $data['request_date'];
+        $today = $data['request_date'] ?? date('Y-m-d');
 
         // return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
 
@@ -201,7 +155,13 @@ class AdminController extends Controller
                 return $q->where('lab_status', 1);
             })->count();
 
-            return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending'));
+            $schedule_patients = SchedulePatient::select('patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
+            ->where('date', '=', $today)
+            ->with('patient')
+            ->groupBy('patientcode')
+            ->get();
+
+            return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending', 'schedule_patients'));
         } else {
 
             $patients = Patient::limit(5)

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ListPackage extends Model
 {
@@ -29,5 +30,9 @@ class ListPackage extends Model
     public function patientsinfo()
     {
         return $this->hasMany(PatientInfo::class, 'medical_package');
+    }
+
+    public function list_package_exams() : HasMany {
+        return $this->hasMany(ListPackageExam::class, 'main_id');
     }
 }
