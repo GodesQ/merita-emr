@@ -72,7 +72,7 @@ class AdminController extends Controller
                     }
                 })
                 ->addColumn('status', function ($row) {
-                    return $row->patient->admission->getStatusExams($row->patient->patientinfo->package->list_package_exams);
+                    return $row->patient->admission ? $row->patient->admission->getStatusExams($row->patient->patientinfo->package->list_package_exams) : null;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
