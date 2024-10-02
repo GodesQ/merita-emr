@@ -93,10 +93,10 @@ class PatientController extends Controller
     public function remedical(Request $request)
     {
         try {
-            $patientcode = $request->patientcode;
+            $patient_id = session()->get('patientId');
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
             $data = session()->all();
-            $patient = Patient::where('patientcode', $patientcode)->first();
+            $patient = Patient::where('id', $patient_id)->latest('id')->first();
             $patientInfo = DB::table('mast_patientinfo')
                 ->where('main_id', $data['patientId'])
                 ->first();
@@ -850,19 +850,13 @@ class PatientController extends Controller
             $patient = Patient::where('id', '=', $id)->whereHas('patientinfo')->with('patientinfo')->firstOrFail();
 
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
-            $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
+            $patientInfo = PatientInfo::where('main_id', $id)->first();
+            // $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
 
             $medicalHistory = MedicalHistory::where('main_id', '=', $id)->first();
 
-            if (!$medicalHistory) {
-                $medicalHistory = null;
-            }
-            $declarationForm = DB::table('declaration_form')
-                ->where('main_id', $id)
-                ->first();
-            if (!$declarationForm) {
-                $declarationForm = null;
-            }
+            $declarationForm = DeclarationForm::where('main_id', $id)->first();
+
             $admissionPatient = Admission::where('id', '=', $patient->admission_id)
                 ->latest('id')
                 ->first();
@@ -929,7 +923,8 @@ class PatientController extends Controller
 
             $patientRecords = Patient::where('patientcode', $patient->patientcode)->get();
 
-            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname')
+            $packages = ListPackage::select('list_package.id', 'list_package.packagename', 'list_package.agency_id', 'mast_agency.agencyname as agencyname', 'list_package.is_active')
+                ->where('list_package.is_active', 1)
                 ->leftJoin('mast_agency', 'mast_agency.id', '=', 'list_package.agency_id')
                 ->get();
 
@@ -1029,6 +1024,7 @@ class PatientController extends Controller
 
             foreach ($admission_exams as $key => $exam) {
                 $exam_data = [
+                    'id' => $exam->id,
                     'exam_id' => $exam->exam_id,
                     'examname' => $exam->examname,
                     'charge' => $exam->charge,
@@ -1055,8 +1051,8 @@ class PatientController extends Controller
 
             $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
+            
             return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
-
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();

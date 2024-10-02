@@ -124,26 +124,11 @@
                                 <td align="left">{{$count++}}</td>
                                 <td align="left">{{$patient->patientcode}}</td>
                                 <td align="left">
-                                    {{-- @if($patient->followups)
-                                        @if(count($patient->followups) > 1)
-                                            <?php $latest_followup = $patient->followups()->latest();
-                                            ?>
-                                            {{ date_format(new DateTime($latest_followup->date), "d F Y") }}
-                                        @else
-                                            {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
-                                        @endif
-                                    @endif --}}
-                                    @if($patient->followups)
-                                        @if(count($patient->followups) > 1)
-                                            {{ date_format(new DateTime($patient->followup->date), "d F Y") }}
-                                        @else
-                                            {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
-                                        @endif
-                                    @endif
+                                    {{ date_format(new DateTime($patient->trans_date), "d F Y") }}
                                 </td>
                                 <td align="left">{{$patient->patient ? $patient->patient->lastname . " " . $patient->patient->suffix : null}}</td>
                                 <td align="left">{{$patient->patient ? $patient->patient->firstname : null}}</td>
-                                <td align="left">{{$patient->patient ? $patient->patient->middlename : null}}</td>
+                                <td align="left">{{$patient->patient ? $patient->patient->middlename : null}}</td>                                      
                                 <td align="left">{{$patient->patient ? $patient->patient->age : null}}</td>
                                 <td align="left">{{$patient->position}}</td>
                                 <td align="left" valign="top">
@@ -153,19 +138,6 @@
                                     {{ count($results) > 0 ? $results[0]['Recommendation'] : null }}
                                 </td>
                                 <td align="left" valign="top">
-                                    <?php
-                                        if($patient->lab_status  == '3') {
-                                            $status = 'Unfit';
-                                        } else if($patient->lab_status  == '2') {
-                                            $status = 'Fit';
-                                        } else if($patient->lab_status  == '4') {
-                                            $status = 'Unfit Temporarily';
-                                        } else if($patient->lab_status  == '1') {
-                                            $status = 'Pending';
-                                        } else {
-                                            $status = '';
-                                        }
-                                    ?>
                                     <?php $pe_status = null; ?>
                                     @if($patient->exam_physical)
                                         <?php
@@ -278,7 +250,7 @@
                                         @endif
 
                                         @if(in_array("emp_status", $additional_columns))
-                                            <td align="left">{{$patient->emp_status}}</td>
+                                            <td align="left"></td>
                                         @endif
 
                                         @if(in_array("medical_package", $additional_columns))
@@ -320,7 +292,7 @@
                                     @endif
 
                                     @if(in_array("emp_status", $additional_columns))
-                                        <td align="left">{{$patient->emp_status}}</td>
+                                        <td align="left"></td>
                                     @endif
 
                                     @if(in_array("medical_package", $additional_columns))
@@ -360,7 +332,7 @@
                                     @endif
 
                                     @if(in_array("emp_status", $additional_columns))
-                                        <td align="left">{{$patient->emp_status}}</td>
+                                        <td align="left"></td>
                                     @endif
 
                                     @if(in_array("medical_package", $additional_columns))
@@ -400,7 +372,7 @@
                                     @endif
 
                                     @if(in_array("emp_status", $additional_columns))
-                                        <td align="left">{{$patient->emp_status}}</td>
+                                        <td align="left"></td>
                                     @endif
 
                                     @if(in_array("medical_package", $additional_columns))
@@ -441,7 +413,7 @@
                                 @endif
 
                                 @if(in_array("emp_status", $additional_columns))
-                                    <td align="left">{{$patient->emp_status}}</td>
+                                    <td align="left"></td>
                                 @endif
 
                                 @if(in_array("medical_package", $additional_columns))
@@ -481,7 +453,7 @@
                                 @endif
 
                                 @if(in_array("emp_status", $additional_columns))
-                                    <td align="left">{{$patient->emp_status}}</td>
+                                    <td align="left"></td>
                                 @endif
 
                                 @if(in_array("medical_package", $additional_columns))
@@ -521,7 +493,7 @@
                                 @endif
 
                                 @if(in_array("emp_status", $additional_columns))
-                                    <td align="left">{{$patient->emp_status}}</td>
+                                    <td align="left"></td>
                                 @endif
 
                                 @if(in_array("medical_package", $additional_columns))

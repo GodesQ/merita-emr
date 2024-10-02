@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdditionalExam;
 use App\Models\PatientMedicalResult;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -299,6 +300,15 @@ class AdmissionController extends Controller
         $res = Admission::find($id)->delete();
     }
 
+    public function delete_additional_exams(Request $request) {
+        $additional_exam = AdditionalExam::where('id', $request->id)->first();
+        
+        // Delete additional exam
+        $additional_exam->delete();
+
+        return response()->json(['status'=> 'success', 'message' => 'Additional Exam Deleted Successfully.']);
+    }
+
     public function reset_lab_result(Request $request) {
         $admission = Admission::where('id', $request->id)->first();
     }
@@ -312,7 +322,7 @@ class AdmissionController extends Controller
         $admission->prescription = isset($request->prescription) ? $request->prescription : null;
         $admission->prescription_date = $request->lab_status == 1 ? date('Y-m-d') : null;
         $admission->cause_of_unfit = isset($request->cause_of_unfit) ? $request->cause_of_unfit : null;
-        $save = $admission->save();
+        $admission->save();
 
         $latestMedicalResult = PatientMedicalResult::where('admission_id', $admission->id)->orderBy('generate_at','desc')->first();
 
@@ -351,7 +361,7 @@ class AdmissionController extends Controller
 
             PatientMedicalResult::updateOrCreate(
                 // Conditions for updating or creating the record
-                ['id' => $request->medical_result_id, ],
+                ['id' => $request->medical_result_id],
                 // Attributes to update or create
                 [
                     'reschedule_at' => $request->schedule ?? null,
@@ -365,14 +375,14 @@ class AdmissionController extends Controller
                 ]
             );
 
+            $pdf = null;
+
             if ($request->prescription != null || $request->prescription != '') {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
                     'data' => $admission,
                     'patient' => $patient,
                     'doctor' => $doctor,
                 ])->setOptions(['defaultFont' => 'serif']);
-            } else {
-                $pdf = null;
             }
 
             Patient::where('admission_id', $admission->id)->update([
@@ -386,7 +396,6 @@ class AdmissionController extends Controller
                     Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
                 }
             }
-            
         }
 
         # For Unfit to Work Status

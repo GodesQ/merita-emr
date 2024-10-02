@@ -1042,53 +1042,7 @@ class PrintController extends Controller
 
         $referral = Refferal::where('email_employee', $email)->latest('id')->with('package', 'agency')->first();
 
-        // if($referral) {
-        //     $referral = Patient::select(
-        //         'mast_patient.*',
-        //         'mast_patientinfo.address',
-        //         'mast_patientinfo.birthdate',
-        //         'mast_patientinfo.passportno',
-        //         'mast_patientinfo.srbno',
-        //         'mast_patientinfo.contactno',
-        //         'mast_patientinfo.vessel',
-        //         'mast_patientinfo.payment_type',
-        //         'mast_patientinfo.country_destination',
-        //         'tran_admission.trans_date',
-        //         'list_package.packagename',
-        //         'mast_agency.agencyname'
-        //     )->where('mast_patient.email', $email)
-        //     ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-        //     ->leftJoin('tran_admission', 'tran_admission.id', 'mast_patient.admission_id')
-        //     ->leftJoin('list_package', 'list_package.id', 'mast_patientinfo.medical_package')
-        //     ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')->latest('mast_patient.id')->first();
-        // }
-
         return view("PrintTemplates.referral_pdf_print", compact('referral'));
-    }
-
-    public function transmittal_print(Request $request)
-    {
-
-        $from_date = $request->input('date_from');
-        $to_date = $request->input('date_to');
-        $agency_id = $request->input('agency_id');
-        $patientstatus = $request->input('patientstatus');
-        $bahia_vessel = $request->input('bahia_vessel');
-        $hartmann_principal = $request->input('hartmann_principal');
-
-        if ($agency_id == "") {
-            $patients = $this->patientStatus($patientstatus, $from_date, $to_date);
-        } else {
-            $patients = $this->patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal);
-        }
-
-        $additional_columns = $request->additional_columns ? $request->additional_columns : [];
-
-        $agency = Agency::where('id', $agency_id)->first();
-
-        // dd($patients[0]);
-
-        return view('PrintTemplates.transmittal_print', compact('patients', 'from_date', 'to_date', 'patientstatus', 'agency', 'additional_columns'));
     }
 
     public function requests_print()
@@ -1141,298 +1095,6 @@ class PrintController extends Controller
         $records = DB::table('yellow_card')->where('patient_id', $id)->orderBy('count')->get();
         // dd($records);
         return view("PrintTemplates.yellow_card_print", compact('patient', 'records'));
-    }
-
-    public function patientStatus($patientstatus, $from_date, $to_date)
-    {
-        if ($patientstatus == "") {
-            $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                ->whereDate('trans_date', '<=', $to_date)
-                ->with(
-                    'exam_audio',
-                    'exam_ecg',
-                    'exam_physical',
-                    'exam_visacuity',
-                    'exam_bloodsero',
-                    'patient',
-                    'exam_crf',
-                    'exam_cardio',
-                    'exam_dental',
-                    'exam_drug',
-                    'exam_echodoppler',
-                    'exam_echoplain',
-                    'exam_feca',
-                    'exam_hema',
-                    'exam_hepa',
-                    'exam_hiv',
-                    'exam_ishihara',
-                    'exam_misc',
-                    'exam_pregnancy',
-                    'exam_psychobpi',
-                    'exam_psycho',
-                    'exam_stressecho',
-                    'exam_stresstest',
-                    'exam_ultrasound',
-                    'exam_xray',
-                    'package',
-                    'agency',
-                    'followup',
-                    'followups'
-                )->get();
-
-        } else {
-            $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                ->whereDate('trans_date', '<=', $to_date)
-                ->with(
-                    'exam_audio',
-                    'exam_ecg',
-                    'exam_physical',
-                    'exam_visacuity',
-                    'exam_bloodsero',
-                    'patient',
-                    'exam_crf',
-                    'exam_cardio',
-                    'exam_dental',
-                    'exam_drug',
-                    'exam_echodoppler',
-                    'exam_echoplain',
-                    'exam_feca',
-                    'exam_hema',
-                    'exam_hepa',
-                    'exam_hiv',
-                    'exam_ishihara',
-                    'exam_misc',
-                    'exam_pregnancy',
-                    'exam_psychobpi',
-                    'exam_psycho',
-                    'exam_stressecho',
-                    'exam_stresstest',
-                    'exam_ultrasound',
-                    'exam_xray',
-                    'package',
-                    'agency',
-                    'followup',
-                    'followups'
-                )->whereHas('exam_physical', function ($query) use ($patientstatus) {
-                    $query->where('fit', $patientstatus);
-                })->get();
-        }
-
-
-        return $patients;
-    }
-
-    public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal)
-    {
-        if ($patientstatus == "") {
-            $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                ->whereDate('trans_date', '<=', $to_date)
-                ->where(function ($q) use ($agency_id) {
-                    $bahia_ids = ['55', '57', '58', '59'];
-                    if ($agency_id == 3) {
-                        return $q->where('agency_id', $agency_id);
-                    } else if (in_array($agency_id, $bahia_ids)) {
-                        return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
-                    } else {
-                        return $q->where('agency_id', $agency_id);
-                    }
-                })
-                ->when($bahia_vessel, function ($q) use ($bahia_vessel, $agency_id) {
-                    $q->where(function ($q) use ($bahia_vessel, $agency_id) {
-                        if ($agency_id == 3) {
-                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                                // dd($bahia_vessel);
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
-                            }
-    
-                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                            }
-    
-                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                            }
-    
-                        } else if ($agency_id == 55) {
-                            if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                            }
-                        } else if ($agency_id == 57) {
-                            if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                            }
-                        } else if ($agency_id == 58) {
-                            if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                                return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                    ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
-                            }
-                        }
-                    });
-                })
-                ->where(function ($q) use ($hartmann_principal, $agency_id) {
-                    if ($agency_id == 9 && $hartmann_principal != "all") {
-                        return $q->where(DB::raw('upper(principal)'), strtoupper($hartmann_principal));
-                    }
-                })
-                ->with(
-                    'exam_audio',
-                    'exam_ecg',
-                    'exam_physical',
-                    'exam_visacuity',
-                    'exam_bloodsero',
-                    'patient',
-                    'exam_crf',
-                    'exam_cardio',
-                    'exam_dental',
-                    'exam_drug',
-                    'exam_echodoppler',
-                    'exam_echoplain',
-                    'exam_feca',
-                    'exam_hema',
-                    'exam_hepa',
-                    'exam_hiv',
-                    'exam_ishihara',
-                    'exam_misc',
-                    'exam_pregnancy',
-                    'exam_psychobpi',
-                    'exam_psycho',
-                    'exam_stressecho',
-                    'exam_stresstest',
-                    'exam_ultrasound',
-                    'exam_xray',
-                    'package',
-                    'agency',
-                    'followup'
-                )
-                ->get();
-            // dd($patients);
-        } else {
-            $patients = Admission::whereDate('trans_date', '>=', $from_date)
-                ->whereDate('trans_date', '<=', $to_date)
-                ->whereHas('exam_physical', function ($query) use ($patientstatus) {
-                    $query->where('fit', '=', $patientstatus);
-                })
-                ->where(function ($q) use ($agency_id) {
-                    $bahia_ids = ['55', '57', '58', '59'];
-                    if ($agency_id == 3) {
-                        return $q->where('agency_id', $agency_id);
-                    } else if (in_array($agency_id, $bahia_ids)) {
-                        return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
-                    } else {
-                        return $q->where('agency_id', $agency_id);
-                    }
-                })
-                ->where(function ($q) use ($bahia_vessel, $agency_id) {
-                    if ($agency_id == 3) {
-                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            // dd($bahia_vessel);
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
-                        }
-
-                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                        }
-
-                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                        }
-
-                    }
-
-                    if ($agency_id == 55) {
-                        if ($bahia_vessel == 'BOLETTE/BRAEMAR') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAEMAR'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOLETTE'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BRAEMAR'));
-                        }
-                    }
-
-                    if ($agency_id == 57) {
-                        if ($bahia_vessel == 'BALMORAL/BOREALIS') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOREALIS'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BALMORAL'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('MS BOREALIS'));
-                        }
-                    }
-
-                    if ($agency_id == 58) {
-                        if ($bahia_vessel == 'BLUETERN/BOLDTERN/BRAVETERN') {
-                            return $q->where(DB::raw('upper(vesselname)'), strtoupper('BOLD TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVE TERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BOLDTERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BLUETERN'))
-                                ->orWhere(DB::raw('upper(vesselname)'), strtoupper('BRAVETERN'));
-                        }
-                    }
-                })
-                ->with(
-                    'exam_audio',
-                    'exam_ecg',
-                    'exam_physical',
-                    'exam_visacuity',
-                    'exam_bloodsero',
-                    'patient',
-                    'exam_crf',
-                    'exam_cardio',
-                    'exam_dental',
-                    'exam_drug',
-                    'exam_echodoppler',
-                    'exam_echoplain',
-                    'exam_feca',
-                    'exam_hema',
-                    'exam_hepa',
-                    'exam_hiv',
-                    'exam_ishihara',
-                    'exam_misc',
-                    'exam_pregnancy',
-                    'exam_psychobpi',
-                    'exam_psycho',
-                    'exam_stressecho',
-                    'exam_stresstest',
-                    'exam_ultrasound',
-                    'exam_xray',
-                    'package',
-                    'agency',
-                    'followup'
-                )
-                ->get();
-        }
-        return $patients;
     }
 
     public function data_privacy_print()
@@ -1504,6 +1166,34 @@ class PrintController extends Controller
         }
 
         return view('PrintTemplates.cashier_or_print', compact('account', 'print_by', 'items'));
+    }
+
+    public function daily_summary_report(Request $request) {
+        $agencies = Agency::orderBy('agencyname', 'desc')->get();
+        return view('DailySummaryReport.daily-summary-report', compact('agencies'));
+    }
+
+    public function daily_summary_report_print(Request $request) {
+        $from_date = $request->input('date_from');
+        $to_date = $request->input('date_to');
+        $agency_id = $request->input('agency_id');
+
+        $agency = Agency::where('id', $agency_id)->first();
+
+        $admissions = Admission::whereBetween('trans_date', [$from_date, $to_date])
+                            ->whereHas('patient')
+                            ->where(function ($q) use ($agency_id) {
+                                $bahia_ids = ['55', '57', '58', '59'];
+                                if ($agency_id == 3) {
+                                    return $q->where('agency_id', $agency_id);
+                                } else if (in_array($agency_id, $bahia_ids)) {
+                                    return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
+                                } else {
+                                    return $q->where('agency_id', $agency_id);
+                                }
+                            })->get();
+
+        return view('PrintTemplates.daily_summary_report', compact('agency', 'admissions'));
     }
 
 }

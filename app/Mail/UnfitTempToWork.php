@@ -11,6 +11,10 @@ class UnfitTempToWork extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $patient;
+    public $agency;
+    public $admission;
+
     /**
      * Create a new message instance.
      *
@@ -18,7 +22,6 @@ class UnfitTempToWork extends Mailable
      */
     public function __construct($patient, $agency, $admission)
     {
-        //
         $this->patient = $patient;
         $this->agency = $agency;
         $this->admission = $admission;

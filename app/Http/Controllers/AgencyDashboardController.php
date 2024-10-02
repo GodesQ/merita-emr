@@ -110,7 +110,6 @@ class AgencyDashboardController extends Controller
                         return 'No Registered Date Found';
                     })
                     ->addColumn('status', function ($row) {
-                        $patientInfo = $row->patientinfo;
 
                         // get patient package
                         if ($row->admission && $row->admission->package) {
@@ -126,6 +125,7 @@ class AgencyDashboardController extends Controller
                             ->where('main_id', $patient_package->id)
                             ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
                             ->get();
+
                         return $row->admission ? $row->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
                     })
                     ->addColumn('action', function ($row) {

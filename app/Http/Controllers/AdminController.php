@@ -32,55 +32,6 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    public function migrate_patients(Request $request) {
-
-        // $patients = Admission::whereIn('package_id', [123, 125, 127, 129])->with('patient')->get();
-
-        // foreach ($patients as $key => $patient) {
-        //     $patient->update([
-        //         'package_id' => 3
-        //     ]);
-        // }
-
-        // echo 'Success';
-
-        // $patients = DB::table('mast_patient')
-        //     ->select(DB::raw('*, CONCAT_WS(" ", firstname, middlename, lastname) AS name'))
-        //     ->groupBy('name')
-        //     ->havingRaw('COUNT(*) > 1')
-        //     ->get();
-
-        // foreach ($patients as $patient) {
-        //     // Find the first registered record based on the created_date in each group
-        //     $firstRecord = DB::table('mast_patient')
-        //         ->where('firstname', $patient->firstname)
-        //         ->where('middlename', $patient->middlename)
-        //         ->where('lastname', $patient->lastname)
-        //         ->orderBy('created_date', 'ASC')
-        //         ->first();
-
-        //     // Update the patientcode value for all other records in the group
-        //     DB::table('mast_patient')
-        //         ->where('firstname', $patient->firstname)
-        //         ->where('middlename', $patient->middlename)
-        //         ->where('lastname', $patient->lastname)
-        //         ->where('id', '<>', $firstRecord->id)
-        //         ->update(['registered_patientcode' => DB::raw('patientcode'), 'patientcode' => $firstRecord->patientcode]);
-        // }
-
-        // echo 'success';
-
-        // $patients = Patient::where('patientcode', 'P19-000010')->update([
-        //     'patientcode' => DB::raw('registered_patientcode')
-        // ]);
-
-        // DB::table('mast_patient')
-        //     ->where('firstname', null)
-        //     ->where('middlename', null)
-        //     ->where('lastname', null)
-        //     ->delete();
-    }
-
     public function today_patients(Request $request)
     {
         $data = session()->all();
@@ -107,52 +58,71 @@ class AdminController extends Controller
                     return $patientname;
                 })
                 ->addColumn('package', function ($row) {
-                    if($row->patient()->exists()) {
+                    if ($row->patient()->exists()) {
                         return optional($row->patient)->patientinfo->package ? optional($row->patient)->patientinfo->package->packagename : null;
                     } else {
                         return null;
                     }
                 })
                 ->addColumn('agency', function ($row) {
-                    if($row->patient()->exists()) {
+                    if ($row->patient()->exists()) {
                         return optional($row->patient)->patientinfo->agency ? optional($row->patient)->patientinfo->agency->agencyname : null;
                     } else {
                         return null;
                     }
                 })
+                ->addColumn('status', function ($row) {
+                    // get patient package
+                    if ($row->patient->admission && $row->patient->admission->package) {
+                        $patient_package = $row->patient->admission->package;
+                    } elseif ($row->patientinfo && $row->patientinfo->package) {
+                        $patient_package = $row->patientinfo->package;
+                    } else {
+                        return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                    }
+
+                    $patient_exams = DB::table('list_packagedtl')
+                        ->select('list_packagedtl.*', 'list_exam.examname', 'list_exam.category', 'list_exam.section_id')
+                        ->where('main_id', $patient_package->id)
+                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                        ->get();
+
+                    return $row->patient->admission ? $row->patient->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'patient_image', 'patientname'])
+                ->rawColumns(['action', 'patient_image', 'patientname', 'status'])
                 ->toJson();
         }
     }
 
-    public function today_medical_packages(Request $request) {
+    public function today_medical_packages(Request $request)
+    {
         $today = session()->get('request_date');
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
 
             $patientCounts = Patient::select('mast_patientinfo.medical_package', DB::raw('count(*) as count'))
                 ->join('mast_patientinfo', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
                 ->join('sched_patients', function ($join) use ($today) {
                     $join->on('mast_patient.id', '=', 'sched_patients.patient_id')
-                         ->where('sched_patients.date', '=', $today);
+                        ->where('sched_patients.date', '=', $today);
                 })->groupBy('mast_patientinfo.medical_package')
                 ->get();
-            
+
             // dd($patientCounts);
 
             $packages = ListPackage::select('id', 'packagename', 'agency_id')
                 ->with('agency')
-                ->whereIn('id', function($query) use ($patientCounts, $today) {
+                ->whereIn('id', function ($query) use ($patientCounts, $today) {
                     $query->select('mast_patientinfo.medical_package')
                         ->from('mast_patientinfo')
                         ->join('mast_patient', 'mast_patient.id', '=', 'mast_patientinfo.main_id')
                         ->join('sched_patients', function ($join) use ($today) {
                             $join->on('mast_patient.id', '=', 'sched_patients.patient_id')
-                                 ->where('sched_patients.date', '=', $today);
+                                ->where('sched_patients.date', '=', $today);
                         })
                         ->whereIn('mast_patientinfo.medical_package', $patientCounts->pluck('medical_package')->toArray())
                         ->groupBy('mast_patientinfo.medical_package')
@@ -160,12 +130,12 @@ class AdminController extends Controller
                         ->get();
                 })
                 ->get()
-                ->map(function($row) use ($patientCounts) {
+                ->map(function ($row) use ($patientCounts) {
                     $row->total = $patientCounts->where('medical_package', $row->id)->first()->count ?? 0;
                     $row->packagename = $row->packagename . ' ' . '(' . optional($row->agency)->agencyname . ')';
                     return $row;
                 })
-                ->filter(function($row) {
+                ->filter(function ($row) {
                     return $row->total > 0;
                 });
 
@@ -181,27 +151,33 @@ class AdminController extends Controller
     {
         isset($_GET['request_date']) ? session()->put('request_date', $_GET['request_date']) : null;
         $data = session()->all();
-        $today = $data['request_date'];
+        $today = $data['request_date'] ?? date('Y-m-d');
 
         // return view('layouts.dashboard', compact('data', 'ongoing_patients', 'completed_patients', 'pending_patients', 'queue_patients', 'fit_patients'));
 
-        if(session()->get('dept_id') == 1) {
+        if (session()->get('dept_id') == 1) {
 
             $agencies = Agency::all();
 
             $total_fit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                    return $q->where('lab_status', 2);
+                return $q->where('lab_status', 2);
             })->count();
 
             $total_unfit = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                    return $q->where('lab_status', 3);
+                return $q->where('lab_status', 3);
             })->count();
 
             $total_pending = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
                 return $q->where('lab_status', 1);
             })->count();
 
-            return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending'));
+            $schedule_patients = SchedulePatient::select('patientcode', DB::raw('MAX(patient_id) as patient_id'), DB::raw('MAX(date) as date'))
+                ->where('date', '=', $today)
+                ->with('patient')
+                ->groupBy('patientcode')
+                ->get();
+
+            return view('layouts.admin-dashboard', compact('agencies', 'total_fit', 'total_unfit', 'total_pending', 'schedule_patients'));
         } else {
 
             $patients = Patient::limit(5)
@@ -232,13 +208,13 @@ class AdminController extends Controller
 
                 $patient_exams = null;
 
-                if($patient->patient) {
+                if ($patient->patient) {
                     $patient_exams = DB::table('list_packagedtl')
-                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                    ->where('main_id', $patient->patient->patientinfo->medical_package)
-                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
-                    ->get();
+                        ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
+                        ->where('main_id', $patient->patient->patientinfo->medical_package)
+                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                        ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
+                        ->get();
                 }
 
                 if (!$patient_exams) {
@@ -317,28 +293,31 @@ class AdminController extends Controller
         }
     }
 
-    public function today_fit_patients() {
+    public function today_fit_patients()
+    {
         $today = session()->get('request_date');
         $fit_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                return $q->where('lab_status', 2);
+            return $q->where('lab_status', 2);
         })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
 
         return response()->json($fit_patients);
     }
 
-    public function today_unfit_patients() {
+    public function today_unfit_patients()
+    {
         $today = session()->get('request_date');
         $unfit_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                return $q->where('lab_status', 3);
+            return $q->where('lab_status', 3);
         })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
 
         return response()->json($unfit_patients);
     }
 
-    public function today_pending_patients() {
+    public function today_pending_patients()
+    {
         $today = session()->get('request_date');
         $pending_patients = SchedulePatient::where('date', $today)->whereHas('patient.admission', function ($q) {
-                return $q->where('lab_status', 1);
+            return $q->where('lab_status', 1);
         })->with('patient.patientinfo.agency', 'patient.patientinfo.package')->get();
 
         return response()->json($pending_patients);
@@ -421,22 +400,22 @@ class AdminController extends Controller
             $data = User::select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status', function($row) {
-                    if($row->ynactive) {
+                ->addColumn('status', function ($row) {
+                    if ($row->ynactive) {
                         return $badge = '<div class="badge badge-success">Active</div>';
                     } else {
                         return $badge = '<div class="badge badge-danger">Inactive</div>';
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    if($row->ynactive) {
-                        $actionBtn ='<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                    if ($row->ynactive) {
+                        $actionBtn = '<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                         <a href="#" id="' . $row['id'] . '" class="delete-employee btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
-                        <button class="btn btn-sm btn-danger" data-id="'.$row->id.'" onclick="updateStatus(0, this)"><i class="fa fa-user-times"></i></button>';
+                        <button class="btn btn-sm btn-danger" data-id="' . $row->id . '" onclick="updateStatus(0, this)"><i class="fa fa-user-times"></i></button>';
                     } else {
-                        $actionBtn ='<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                        $actionBtn = '<a href="edit_employees?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                         <a href="#" id="' . $row['id'] . '" class="delete-employee btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>
-                        <button class="btn btn-sm btn-success" data-id="'.$row->id.'" onclick="updateStatus(1, this)"><i class="fa fa-user-plus"></i></button>';
+                        <button class="btn btn-sm btn-success" data-id="' . $row->id . '" onclick="updateStatus(1, this)"><i class="fa fa-user-plus"></i></button>';
                     }
                     return $actionBtn;
                 })
@@ -550,7 +529,8 @@ class AdminController extends Controller
         return view('Employee.edit-employee', compact('employee', 'departments', 'data'));
     }
 
-    public function update_employee_signature(Request $request) {
+    public function update_employee_signature(Request $request)
+    {
         if ($request->old_signature == $request->signature) {
             $signature = $request->old_signature;
         } else {
@@ -567,7 +547,8 @@ class AdminController extends Controller
         $user->signature = $signature;
         $save = $user->save();
 
-        if($save) return response()->json(['status' => true, 'message' => 'Signature updated successfully.'], 200);
+        if ($save)
+            return response()->json(['status' => true, 'message' => 'Signature updated successfully.'], 200);
     }
 
     public function update_employees(Request $request)
@@ -625,14 +606,16 @@ class AdminController extends Controller
         }
     }
 
-    public function update_status(Request $request) {
+    public function update_status(Request $request)
+    {
         $id = $request->id;
         $employee = User::where('id', $id)->first();
         $employee->ynactive = $request->status;
         $save = $employee->save();
 
 
-        if($save) return response()->json(['status' => true, 'message' => 'Update Successfully']);
+        if ($save)
+            return response()->json(['status' => true, 'message' => 'Update Successfully']);
     }
 
     // -------------------------------------------------------------------- START: DEPARTMENT (CRUD) -------------------------------------------------------------------- //
@@ -884,7 +867,7 @@ class AdminController extends Controller
         }
     }
 
-        // public function followup_results(Request $request) {
+    // public function followup_results(Request $request) {
     //     $reassessmentData = DB::table('reassessment')->get();
 
     //     foreach ($reassessmentData as $data) {

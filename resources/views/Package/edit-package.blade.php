@@ -114,9 +114,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Remarks</label>
                                             <textarea row="20" class="form-control" col="10" name="remarks">{{$package->remarks}}</textarea>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group pb-1">
+                                                <input type="checkbox" id="active-status-checkbox" name="is_active" class="switchery" {{ $package->is_active ? 'checked' : null }} />
+                                                <label for="switchery" class="font-medium-2 ml-1">Active Status</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

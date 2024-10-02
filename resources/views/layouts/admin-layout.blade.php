@@ -174,6 +174,11 @@
                                     href="/list_package" data-i18n="Packages">Packages</a>
                             </li>
                         @endif
+                        @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '18' || session()->get('dept_id') == 2)
+                            <li class="{{ Request::path() == 'default-packages' ? 'active' : '' }}"><a class="menu-item"
+                                    href="/default-packages" data-i18n="Default Packages">Default Packages</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 @if (session()->get('dept_id') == '2' || session()->get('dept_id') == '1' || session()->get('dept_id') == '17')
@@ -206,6 +211,8 @@
                         <li><a class="menu-item" href="/liberian_billing" data-i18n="Liberian Billing">Liberian
                                 Billing</a></li>
                         <li><a class="menu-item" href="daily_patient_form" data-i18n="Fitness">Daily Patients</a>
+                        </li>
+                        <li><a class="menu-item" href="/daily-summary-report" data-i18n="Daily Summary Report">Daily Summary Report</a>
                         </li>
                     </ul>
                 </li>

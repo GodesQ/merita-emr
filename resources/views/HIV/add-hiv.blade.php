@@ -121,7 +121,7 @@
                                             <td><b>HIV Proficiency Cert. <br>
                                                     Expiry Date</b></td>
                                             <td colspan="2"><input name="expiry_date" type="date" max="2050-12-31"
-                                                    id="expiry_date" value="2024-12-31" class="form-control"
+                                                    id="expiry_date" value="2027-12-31" class="form-control"
                                                     style="width:160px">
                                             </td>
                                         </tr>

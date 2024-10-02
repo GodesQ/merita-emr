@@ -52,6 +52,7 @@ class MiscellaneousController extends Controller
         try {
             $id = $request->id;
             $exam = Miscellaneous::findOrFail($id);
+            $exam->trans_date = $request->trans_date;
             $exam->exam = $request->exam;
             $exam->result = $request->result;
             $exam->col1 = $request->col1;

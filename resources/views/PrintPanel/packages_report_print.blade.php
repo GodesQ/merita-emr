@@ -59,6 +59,8 @@
                             <th>Principal</th>
                             <th>P/F</th>
                             <th>Vessel</th>
+                            <th>Position</th>
+                            <th>Medical Packages</th>
                             {{-- <th>Package</th> --}}
                         </tr>
                     </thead>
@@ -68,7 +70,7 @@
                                 <td>{{ date_format(new DateTime($patient->trans_date), 'F d, Y')}}</td>
                                 <td>{{ optional($patient->exam_physical)->progressive_notes }}</td>
                                 <td>{{ optional($patient->patient)->lastname . ', ' . optional($patient->patient)->firstname }}</td>
-                                <td>{{ date_format(new DateTime(optional(optional($patient->patient)->patientinfo)->birthdate), 'm-d-Y')}}</td>
+                                <td>{{ date_format(new DateTime(optional(optional($patient->patient)->patientinfo)->birthdate), 'd-M-Y')}}</td>
                                 <td width="5%">{{ optional(optional($patient->patient)->patientinfo)->passportno }}</td>
                                 <td>{{ optional($patient->agency)->agencyname }}</td>
                                 <td width="15%">{{ $patient->principal }}</td>
@@ -84,11 +86,15 @@
                                 <td>
                                     {{ optional(optional($patient->patient)->patientinfo)->vessel }}
                                 </td>
+                                <td>{{ $patient->position }}</td>
+                                <td>{{ $patient->package->packagename ?? "" }}</td>
                                 {{-- <td>{{ $patient->package->packagename }}</td> --}}
                             </tr>
                         @empty
-                            <td colspan="10" align="center">
-                                <div style="font-size: 20px; text-align: center; text-transfrom: uppercase !important;">NO RECORD FOUND FOR THE FOLLOWING QUERY: PACKAGES, DATES</div>
+                            <td colspan="11" align="center">
+                                <div style="font-size: 20px; text-align: center; text-transfrom: uppercase !important;">
+                                    NO RECORD FOUND FOR THE FOLLOWING QUERY: PACKAGES, DATES
+                                </div>
                             </td>
                         @endforelse
                         <tr>

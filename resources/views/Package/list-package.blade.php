@@ -40,7 +40,7 @@
             <hr>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table data-order='[[ 0, "desc" ]]' class="table table-bordered table-hover data-table">
+                    <table data-order='[[ 1, "asc" ]]' class="table table-bordered table-hover data-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -121,7 +121,8 @@ $(document).ready(function() {
             },
             {
                 data: 'packagename',
-                name: 'packagename'
+                name: 'packagename',
+                orderable: true,
             },
             {
                 data: 'agency',
@@ -140,7 +141,7 @@ $(document).ready(function() {
                 name: 'action',
                 orderable: true,
                 searchable: true
-            },
+            }, 
         ],
     });
 

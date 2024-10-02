@@ -134,10 +134,20 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div>
+                                                    <div style="margin-bottom: 1rem;">
                                                         <div><b>Agency</b></div>
                                                         <div>
                                                             {{$patient->agencyname}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="margin-bottom: 1rem;">
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;"><b><u>Remarks / Recommendation</u></b></div>
+                                                        <div style="font-family: 'Google Sans', Helvetica, Arial, sans-serif;">
+                                                            @php echo nl2br($admission->remarks)@endphp
                                                         </div>
                                                     </div>
                                                 </td>

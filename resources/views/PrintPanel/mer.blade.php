@@ -2168,14 +2168,20 @@
                                                 <td width="12%">&nbsp;</td>
                                                 <td width="33%" align="left"><b>FIT FOR LOOK OUT DUTY
                                                         @if ($admission->exam_physical)
-                                                            <span
-                                                                style="font-size: 20px;">{{ $admission->exam_physical->duty == 'Fit' ? '☑' : '☐' }}</span>
+                                                            @if($admission->exam_physical->duty == 'Fit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                            @endif
                                                         @endif
                                                     </b></td>
                                                 <td width="28%" align="center"><b>NOT FIT FOR LOOK OUT DUTY
                                                         @if ($admission->exam_physical)
-                                                            <span
-                                                                style="font-size: 20px;">{{ $admission->exam_physical->duty == 'Unfit' ? '☑' : '☐' }}</span>
+                                                            @if($admission->exam_physical->duty == 'Unfit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                            @endif
                                                         @endif
                                                     </b></td>
                                                 <td width="27%">&nbsp;</td>
@@ -2194,32 +2200,82 @@
                                             <tr>
                                                 <td><b>FIT</b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Fit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Fit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            @if($admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Fit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                            @endif
+                                                        @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Fit' ? '☑' : '☐' }}
-                                                    </b></td>
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Fit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
+                                                    </b>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>UNFIT</b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'DECK SERVICES' && optional($admission->exam_physical)->fit == 'Unfit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'ENGINE SERVICES' && optional($admission->exam_physical)->fit == 'Unfit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
+                                                        @if ($admission->exam_physical)
+                                                            @if($admission->category == 'CATERING SERVICES' && optional($admission->exam_physical)->fit == 'Unfit')
+                                                                <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                            @else
+                                                                <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                            @endif
+                                                        @endif
                                                     </b></td>
                                                 <td style="font-size: 20px;"><b>
-                                                        {{ $admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Unfit' ? '☑' : '☐' }}
-                                                    </b></td>
+                                                    @if ($admission->exam_physical)
+                                                        @if($admission->category == 'OTHER SERVICES' && optional($admission->exam_physical)->fit == 'Unfit')
+                                                            <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
+                                                        @else
+                                                            <img src="../../../app-assets/images/icoUncheck.gif" width="15" class="checkbox">
+                                                        @endif
+                                                    @endif
+                                                    </b>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
