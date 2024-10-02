@@ -2075,8 +2075,10 @@
                                         style="border-bottom: 1px solid black;" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
-                                                <td>ADDITIONAL TEST (Specify) e.g Blood Chemistries, Drug Test, Alcohol
-                                                    Test</td>
+                                                <td>ADDITIONAL TEST (Specify) <input name="co" type="text"
+                                                    id="co" value="e.g Blood Chemistries, Drug Test, Alcohol Test" class="brdNone"
+                                                    style="width:630px;text-align:left;border: none;">
+                                                </td>
                                             </tr>
                                             <td>
                                                 @if ($admission->exam_physical)
