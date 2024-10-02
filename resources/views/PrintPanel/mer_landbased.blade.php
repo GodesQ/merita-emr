@@ -1625,7 +1625,7 @@
                     </table>
                     <div style="display: flex; align-items: start; justify-content: space-between;">
                         <span style="font-size: 11px; text-align: left;">CONTROL NO. 20240924-0124</span>
-                        <span style="font-size: 11px;text-align: left;width: 85px;border: 1px solid black;padding: 5px;">DOH-PEMER-LB <br> REVISION 00 <br> 06/21/2013 <br> Page 2 of 2</span>
+                        <span style="font-size: 11px;text-align: left;width: 125px;border: 1px solid black;padding: 5px;">DOH-PEMER-LB <br> REVISION 00 <br> 06/21/2013 <br> Page 2 of 2</span>
                     </div>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
