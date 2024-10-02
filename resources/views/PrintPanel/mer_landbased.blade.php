@@ -2166,7 +2166,7 @@
                                             </tr>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
-                                                <td width="25%" align="left"><b>FIT
+                                                <td width="10%" align="left"><b>FIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Fit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
@@ -2175,7 +2175,7 @@
                                                             @endif
                                                         @endif
                                                     </b></td>
-                                                <td width="28%" align="start"><b>UNFIT
+                                                <td width="28%" align="left"><b>UNFIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Unfit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
