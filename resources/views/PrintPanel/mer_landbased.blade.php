@@ -2604,7 +2604,7 @@
             </tr>
         </tbody>
     </table> --}}
-    <div style="display: flex; align-items-center; justify-content: between;">
+    <div style="display: flex; align-items: center; justify-content: between;">
         <span style="font-size: 11px; text-align: left;">CONTROL NO. 20240924-0124</span>
         <span style="font-size: 11px; text-align: left;">DOH-PEMER-SB REVISION 03/10-17-2013</span>
     </div>
