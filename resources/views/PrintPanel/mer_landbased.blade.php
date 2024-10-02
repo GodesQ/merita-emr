@@ -2166,7 +2166,7 @@
                                             </tr>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
-                                                <td width="33%" align="left"><b>FIT
+                                                <td width="25%" align="left"><b>FIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Fit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
