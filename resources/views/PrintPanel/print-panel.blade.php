@@ -154,8 +154,8 @@
             <img src="../../../app-assets/images/gallery/land_based.jpg" alt="">
             <div class="print-btn-div">
                 <button type="button"
-                    onclick="window.open('/land_based_print?id={{$admissionPatient->id}}','wp','width=1000,height=800').print();"
-                    class="btn-print">Print Land Based</button>
+                    onclick="window.open('/standard_club_north_print?id={{$admissionPatient->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print North Standard Club</button>
             </div>
         </div>
     </div>
@@ -164,8 +164,18 @@
             <img src="../../../app-assets/images/gallery/land_based.jpg" alt="">
             <div class="print-btn-div">
                 <button type="button"
-                    onclick="window.open('/standard_club_north_print?id={{$admissionPatient->id}}','wp','width=1000,height=800').print();"
-                    class="btn-print">Print North Standard Club</button>
+                    onclick="window.open('/land_based_print?id={{$admissionPatient->id}}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print Land Based</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3 col-sm-6 ">
+        <div class="print-con">
+            <img src="../../../app-assets/images/gallery/mer.png" alt="">
+            <div class="print-btn-div">
+                <button type="button"
+                    onclick="window.open('/mer_landbased_print?id={{ $admissionPatient->id }}','wp','width=1000,height=800').print();"
+                    class="btn-print">Print MER LANDBASED</button>
             </div>
         </div>
     </div>
