@@ -2077,7 +2077,7 @@
                                             <tr>
                                                 <td>ADDITIONAL TEST (Specify) <input name="co" type="text"
                                                     id="co" value="e.g Blood Chemistries, Drug Test, Alcohol Test" class="brdNone"
-                                                    style="width:430px;text-align:left;border: none;">
+                                                    style="width:630px;text-align:left;border: none;">
                                                 </td>
                                             </tr>
                                             <td>
