@@ -2151,7 +2151,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="2" style="border-bottom: 1px solid;>
                                         <tbody>
                                             <tr>
                                                 <td colspan="4">V.ASSESSMENT OF FITNESS FOR LANDBASED OVERSEAS WORK. Place a
