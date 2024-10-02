@@ -2142,7 +2142,7 @@
                                                     </b>WITH SIGNIFICANT FINDINGS</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><b>REMARKS/SPECIAL NEEDS SPECIFY</b>(Specify e.g.
+                                                <td colspan="2" style="height: 85px;" valign="top"><b>REMARKS/SPECIAL NEEDS SPECIFY</b>(Specify e.g.
                                                     with medication,diet restriction etc.)<br>
                                                     @if ($admission->exam_physical)
                                                         {{ $admission->exam_physical->remarks ? $admission->exam_physical->remarks : null }}
@@ -2166,7 +2166,7 @@
                                             </tr>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
-                                                <td width="33%" align="left"><b>FIT FOR LOOK OUT DUTY
+                                                <td width="33%" align="left"><b>FIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Fit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
@@ -2175,7 +2175,7 @@
                                                             @endif
                                                         @endif
                                                     </b></td>
-                                                <td width="28%" align="center"><b>NOT FIT FOR LOOK OUT DUTY
+                                                <td width="28%" align="center"><b>UNFIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Unfit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
@@ -2188,7 +2188,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    {{-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
@@ -2278,8 +2278,8 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
-                                    <table width="100%" border="1"
+                                    </table> --}}
+                                    {{-- <table width="100%" border="1"
                                         style="border-left : none;border-right : none;" cellspacing="0"
                                         cellpadding="0">
                                         <tbody>
@@ -2338,7 +2338,7 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
                                     <table width="100%" border="1"
                                         style="border-top : none;border-left : none;border-right : none;"
                                         cellspacing="0" cellpadding="0">
