@@ -260,9 +260,9 @@
                                                         @if (preg_match('/Bahia/i', $admission->agency->agencyname))
                                                             {{ 'Bahia Shipping Services, Inc.' }}
                                                         @else
-                                                            <input name="co" type="text" id="co"
+                                                        <input name="co" type="text" id="co"
                                                         value="{{ $admission->agency->agencyname }}" class="brdNone"
-                                                        style="width:300px;text-align:left;border: none;font-size: 11px;">
+                                                        style="width:330px;text-align:left;border: none;font-size: 14px;font-weight:bold;">
                                                         @endif
                                                     </b></td>
                                             </tr>
@@ -2481,7 +2481,7 @@
                                                                         @else
                                                                             <input name="co" type="text" id="co"
                                                                             value="{{ $admission->agency->agencyname }}" class="brdNone"
-                                                                            style="width:300px;text-align:left;border: none;font-size: 11px;">
+                                                                            style="width:330px;text-align:left;border: none;font-size: 14px;font-weight:bold;">
                                                                             {{-- {{ $admission->agency->agencyname }} --}}
                                                                         @endif
                                                                     </b></td>
