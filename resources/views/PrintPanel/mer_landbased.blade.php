@@ -2465,7 +2465,7 @@
                                                         examining/authorized physician.</p>
                                                     <p>I hereby authorized the release of all my medical records to
                                                         the DOH/MARINA/POEA, the examining/authorized physician and
-                                                        my employer/manning agency </p>
+                                                        my employer </p>
                                                     <table width="100%" border="0" cellspacing="0"
                                                         cellpadding="0">
                                                         <tbody>
@@ -2604,9 +2604,9 @@
             </tr>
         </tbody>
     </table> --}}
-    <div style="display: flex; align-items: center; justify-content: between;">
+    <div style="display: flex; align-items: start; justify-content: space-between;">
         <span style="font-size: 11px; text-align: left;">CONTROL NO. 20240924-0124</span>
-        <span style="font-size: 11px; text-align: left;">DOH-PEMER-SB REVISION 03/10-17-2013</span>
+        <span style="font-size: 11px;text-align: left;width: 80px;border: 1px solid black;padding: 5px;">DOH-PEMER-LB <br> REVISION 00 <br> 06/21/2013 <br> Page 2 of 2</span>
     </div>
 
     <script>
