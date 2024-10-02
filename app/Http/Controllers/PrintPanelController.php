@@ -226,6 +226,16 @@ class PrintPanelController extends Controller
         return view('PrintPanel.mer', compact('admission', 'medical_director'));
     }
 
+    public function mer_landbased_print(Request $request) {
+        $id = $request->id;
+        $admission = Admission::where('tran_admission.id', $id)
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
+            ->first();
+
+        $medical_director = User::select('mast_employee.*', 'mast_employeeinfo.address')->where('mast_employee.position', 'Medical Director')->leftJoin('mast_employeeinfo', 'mast_employeeinfo.main_id', 'mast_employee.id')->first();
+        return view('PrintPanel.mer_landbased', compact('admission', 'medical_director'));
+    }
+
     public function mlc_print(Request $request)
     {
         $id = $request->id;

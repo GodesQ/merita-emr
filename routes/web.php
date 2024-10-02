@@ -517,6 +517,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     Route::get('/mer_print', [PrintPanelController::class, 'mer_print']);
 
+    Route::get('/mer_landbased_print', [PrintPanelController::class, 'mer_landbased_print']);
+
     Route::get('/mlc_print', [PrintPanelController::class, 'mlc_print']);
 
     Route::get('/peme_bahia_print', [PrintPanelController::class, 'peme_bahia_print']);
