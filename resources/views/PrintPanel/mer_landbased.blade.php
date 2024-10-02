@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Medical Examination Report for Seafarers</title>
+    <title>Medical Examination Report for Landbased Overseas Work</title>
     <link href="dist/css/eureka-print.css" rel="stylesheet" type="text/css">
     <link href="dist/css/eureka-print.css?v=1650448751" rel="stylesheet" type="text/css">
     <style>
@@ -2154,7 +2154,7 @@
                                     <table width="100%" border="0" cellspacing="0" cellpadding="2">
                                         <tbody>
                                             <tr>
-                                                <td colspan="4">V.ASSESSMENT OF FITNESS FOR SERVICE AT SEA. Place a
+                                                <td colspan="4">V.ASSESSMENT OF FITNESS FOR LANDBASED OVERSEAS WORK. Place a
                                                     check mark (✔) in the appropriate box<b>
                                                         ☐
                                                     </b></td>
@@ -2536,7 +2536,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" valign="top"><b>NAME AND
-                                                                        SIGNATURE OF SEAFARER</b> <br style="">
+                                                                        SIGNATURE OF APPLICANT</b> <br style="">
 
                                                                     <span style="font-size: 7px;font-color:solid"><b>THIS
                                                                             SIGNATURE SHOULD BE AFFIXED IN THE
@@ -2561,7 +2561,7 @@
             </tr>
         </tbody>
     </table>
-    <table width="100%" border="1" cellspacing="0" cellpadding="2">
+    {{-- <table width="100%" border="1" cellspacing="0" cellpadding="2">
         <tbody>
             <tr>
                 <td>
@@ -2590,7 +2590,7 @@
                                         <li>Within.......(specify) miles from a safe haven</li>
                                         <li>Near - coastal only</li>
                                         <li>Coastal waters only,up to....(specify) miles from shore</li>
-                                        <li>Non - tropical waters only</li>
+                                        <li>Non - tropical waters only</li>g
                                         <li>Not fit for service on stand-by vessels</li>
                                         <li>Fit for service only on vessels with ship's doctor</li>
                                         <li>Toilet/washing facilities in private cabin required</li>
@@ -2603,8 +2603,9 @@
                 </td>
             </tr>
         </tbody>
-    </table>
-    <div>
+    </table> --}}
+    <div style="display: flex; align-items-center; justify-content: between;">
+        <span style="font-size: 11px; text-align: left;">CONTROL NO. 20240924-0124</span>
         <span style="font-size: 11px; text-align: left;">DOH-PEMER-SB REVISION 03/10-17-2013</span>
     </div>
 
