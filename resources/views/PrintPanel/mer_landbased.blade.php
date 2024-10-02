@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Medical Examination Report for Seafarers</title>
+    <title>Medical Examination Report for Landbased Overseas Work</title>
     <link href="dist/css/eureka-print.css" rel="stylesheet" type="text/css">
     <link href="dist/css/eureka-print.css?v=1650448751" rel="stylesheet" type="text/css">
     <style>
@@ -2142,7 +2142,7 @@
                                                     </b>WITH SIGNIFICANT FINDINGS</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><b>REMARKS/SPECIAL NEEDS SPECIFY</b>(Specify e.g.
+                                                <td colspan="2" style="height: 85px;" valign="top"><b>REMARKS/SPECIAL NEEDS SPECIFY</b>(Specify e.g.
                                                     with medication,diet restriction etc.)<br>
                                                     @if ($admission->exam_physical)
                                                         {{ $admission->exam_physical->remarks ? $admission->exam_physical->remarks : null }}
@@ -2151,10 +2151,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="2" style="border-bottom: 1px solid;>
                                         <tbody>
                                             <tr>
-                                                <td colspan="4">V.ASSESSMENT OF FITNESS FOR SERVICE AT SEA. Place a
+                                                <td colspan="4">V.ASSESSMENT OF FITNESS FOR LANDBASED OVERSEAS WORK. Place a
                                                     check mark (✔) in the appropriate box<b>
                                                         ☐
                                                     </b></td>
@@ -2166,7 +2166,7 @@
                                             </tr>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
-                                                <td width="33%" align="left"><b>FIT FOR LOOK OUT DUTY
+                                                <td width="10%" align="left"><b>FIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Fit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
@@ -2175,7 +2175,7 @@
                                                             @endif
                                                         @endif
                                                     </b></td>
-                                                <td width="28%" align="center"><b>NOT FIT FOR LOOK OUT DUTY
+                                                <td width="28%" align="left"><b>UNFIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Unfit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
@@ -2188,7 +2188,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    {{-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
                                                 <td width="12%">&nbsp;</td>
@@ -2278,8 +2278,8 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
-                                    <table width="100%" border="1"
+                                    </table> --}}
+                                    {{-- <table width="100%" border="1"
                                         style="border-left : none;border-right : none;" cellspacing="0"
                                         cellpadding="0">
                                         <tbody>
@@ -2338,7 +2338,7 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
                                     <table width="100%" border="1"
                                         style="border-top : none;border-left : none;border-right : none;"
                                         cellspacing="0" cellpadding="0">
@@ -2465,7 +2465,7 @@
                                                         examining/authorized physician.</p>
                                                     <p>I hereby authorized the release of all my medical records to
                                                         the DOH/MARINA/POEA, the examining/authorized physician and
-                                                        my employer/manning agency </p>
+                                                        my employer </p>
                                                     <table width="100%" border="0" cellspacing="0"
                                                         cellpadding="0">
                                                         <tbody>
@@ -2536,7 +2536,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" valign="top"><b>NAME AND
-                                                                        SIGNATURE OF SEAFARER</b> <br style="">
+                                                                        SIGNATURE OF APPLICANT</b> <br style="">
 
                                                                     <span style="font-size: 7px;font-color:solid"><b>THIS
                                                                             SIGNATURE SHOULD BE AFFIXED IN THE
@@ -2561,7 +2561,7 @@
             </tr>
         </tbody>
     </table>
-    <table width="100%" border="1" cellspacing="0" cellpadding="2">
+    {{-- <table width="100%" border="1" cellspacing="0" cellpadding="2">
         <tbody>
             <tr>
                 <td>
@@ -2590,7 +2590,7 @@
                                         <li>Within.......(specify) miles from a safe haven</li>
                                         <li>Near - coastal only</li>
                                         <li>Coastal waters only,up to....(specify) miles from shore</li>
-                                        <li>Non - tropical waters only</li>
+                                        <li>Non - tropical waters only</li>g
                                         <li>Not fit for service on stand-by vessels</li>
                                         <li>Fit for service only on vessels with ship's doctor</li>
                                         <li>Toilet/washing facilities in private cabin required</li>
@@ -2603,9 +2603,10 @@
                 </td>
             </tr>
         </tbody>
-    </table>
-    <div>
-        <span style="font-size: 11px; text-align: left;">DOH-PEMER-SB REVISION 03/10-17-2013</span>
+    </table> --}}
+    <div style="display: flex; align-items: start; justify-content: space-between;">
+        <span style="font-size: 11px; text-align: left;">CONTROL NO. 20240924-0124</span>
+        <span style="font-size: 11px;text-align: left;width: 85px;border: 1px solid black;padding: 5px;">DOH-PEMER-LB <br> REVISION 00 <br> 06/21/2013 <br> Page 2 of 2</span>
     </div>
 
     <script>
