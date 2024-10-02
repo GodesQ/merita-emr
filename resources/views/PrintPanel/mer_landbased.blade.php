@@ -2175,7 +2175,7 @@
                                                             @endif
                                                         @endif
                                                     </b></td>
-                                                <td width="28%" align="center"><b>UNFIT
+                                                <td width="28%" align="start"><b>UNFIT
                                                         @if ($admission->exam_physical)
                                                             @if($admission->exam_physical->duty == 'Unfit')
                                                                 <img src="../../../app-assets/images/icoCheck.gif" width="15" class="checkbox">
