@@ -260,7 +260,9 @@
                                                         @if (preg_match('/Bahia/i', $admission->agency->agencyname))
                                                             {{ 'Bahia Shipping Services, Inc.' }}
                                                         @else
-                                                            {{ $admission->agency->agencyname }}
+                                                        <input name="co" type="text" id="co"
+                                                        value="{{ $admission->agency->agencyname }}" class="brdNone"
+                                                        style="width:330px;text-align:left;border: none;font-size: 14px;font-weight:bold;">
                                                         @endif
                                                     </b></td>
                                             </tr>
@@ -2477,7 +2479,10 @@
                                                                         @if (preg_match('/Bahia/i', $admission->agency->agencyname))
                                                                             {{ 'Bahia Shipping Services, Inc.' }}
                                                                         @else
-                                                                            {{ $admission->agency->agencyname }}
+                                                                            <input name="co" type="text" id="co"
+                                                                            value="{{ $admission->agency->agencyname }}" class="brdNone"
+                                                                            style="width:330px;text-align:left;border: none;font-size: 14px;font-weight:bold;">
+                                                                            {{-- {{ $admission->agency->agencyname }} --}}
                                                                         @endif
                                                                     </b></td>
                                                                 <td width="65%">)</td>
