@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admission;
 use App\Models\Agency;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,7 +40,11 @@ class TransmittalController extends Controller
 
     public function patientStatus($patientstatus, $from_date, $to_date)
     {
-        $patients = Admission::whereBetween('trans_date', [$from_date, $to_date])
+        $from_date = Carbon::parse($from_date)->format('Y-m-d');
+        $to_date = Carbon::parse($to_date)->format('Y-m-d');
+
+        $patients = Admission::whereDate('trans_date', '>=', $from_date)
+            ->whereDate('trans_date', '<=', $to_date)
             ->when($patientstatus, function ($query) use ($patientstatus) {
                 $query->whereHas('exam_physical', function ($query) use ($patientstatus) {
                     $query->where('fit', $patientstatus);
@@ -51,7 +56,11 @@ class TransmittalController extends Controller
 
     public function patientAgencyStatus($patientstatus, $from_date, $to_date, $agency_id, $bahia_vessel, $hartmann_principal)
     {
-        $patients = Admission::whereBetween('trans_date', [$from_date, $to_date])
+        $from_date = Carbon::parse($from_date)->format('Y-m-d');
+        $to_date = Carbon::parse($to_date)->format('Y-m-d');
+
+        $patients = Admission::whereDate('trans_date', '>=', $from_date)
+            ->whereDate('trans_date', '<=', $to_date)
             ->where(function ($q) use ($agency_id) {
                 $bahia_ids = ['55', '57', '58', '59'];
                 if ($agency_id == 3) {
