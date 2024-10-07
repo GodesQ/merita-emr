@@ -40,7 +40,8 @@ class PatientController extends Controller
 
             $referral = Refferal::where('email_employee', $patient_email)->latest('id')->first();
 
-            if ($patientInfo) return redirect('/patient_info');
+            if ($patientInfo)
+                return redirect('/patient_info');
 
             return view('ProgressInfo.progress-info', compact('agencies', 'referral'));
 
@@ -59,7 +60,7 @@ class PatientController extends Controller
             ->first();
 
         // if the user is not fully registered, it will redirect to step by step registration.
-        if (!$patient->patientinfo)
+        if (! $patient->patientinfo)
             return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
         $patientRecords = Patient::where('patientcode', session()->get('patientCode'))->get();
@@ -216,7 +217,7 @@ class PatientController extends Controller
                 ]);
             }
 
-            if (!$mast_patient_save && !$patientinfo && !$save_medical_history && !$save_declaration_form)
+            if (! $mast_patient_save && ! $patientinfo && ! $save_medical_history && ! $save_declaration_form)
                 return back()->with('status', 'Failed to Submit Data');
 
             $request->session()->put('patientId', $mast_patient->id);
@@ -278,14 +279,14 @@ class PatientController extends Controller
             $existing_patientcode = null;
 
             $same_patient_record = PatientInfo::where('passportno', 'LIKE', $request->passportNo)
-                                            ->where('srbno', 'LIKE', $request->ssrb)
-                                            ->whereHas('patient', function ($query) use ($request) {
-                                                $query->where('firstname', 'LIKE', "%" . $request->firstName . "%")
-                                                    ->where('lastname', 'LIKE', "%" . $request->lastName . "%");
-                                            })
-                                            ->with('patient')
-                                            ->first();
-            
+                ->where('srbno', 'LIKE', $request->ssrb)
+                ->whereHas('patient', function ($query) use ($request) {
+                    $query->where('firstname', 'LIKE', "%" . $request->firstName . "%")
+                        ->where('lastname', 'LIKE', "%" . $request->lastName . "%");
+                })
+                ->with('patient')
+                ->first();
+
             $existing_patientcode = $same_patient_record->patient->patientcode ?? null;
 
             $mast_patient = Patient::where('id', $request->main_id)->first();
@@ -373,7 +374,7 @@ class PatientController extends Controller
                 ]);
             }
 
-            if (!$mast_patient_save && !$patientinfo && !$save_medical_history && !$save_declaration_form) {
+            if (! $mast_patient_save && ! $patientinfo && ! $save_medical_history && ! $save_declaration_form) {
                 return back()->with('status', 'Failed to Submit Data. Please check all of your information and try again.');
             }
 
@@ -459,7 +460,7 @@ class PatientController extends Controller
 
             $request_schedule = RequestSchedAppointment::where('patient_id', session()->get('patientId'))->first();
 
-            if (!$patient->patientinfo)
+            if (! $patient->patientinfo)
                 return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('schedules', 'latest_schedule', 'scheduled_patients', 'request_schedule'));
@@ -517,7 +518,7 @@ class PatientController extends Controller
                 ->where('patientcode', $data['patientCode'])
                 ->latest('date')
                 ->first();
-            if (!$latest_schedule) {
+            if (! $latest_schedule) {
                 return redirect('/patient_info')->with('fail', "Don't have any schedule");
             }
             return view('ProgressInfo.edit-schedule', compact('data', 'schedules', 'latest_schedule'));
@@ -664,13 +665,13 @@ class PatientController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
-                        if (!$row->patientinfo->agency_id)
+                        if (! $row->patientinfo->agency_id)
                             return 'NO AGENCY';
                         $agency = $row->patientinfo->agency;
                         return $agency ? $agency->agencyname : 'NO AGENCY';
                     })
                     ->addColumn('medical_package', function ($row) {
-                        if (!$row->patientinfo->medical_package) {
+                        if (! $row->patientinfo->medical_package) {
                             return 'NO PACKAGE';
                         } else {
                             $package = $row->patientinfo->package;
@@ -849,6 +850,10 @@ class PatientController extends Controller
 
             $patient = Patient::where('id', '=', $id)->whereHas('patientinfo')->with('patientinfo')->firstOrFail();
 
+            $patient->update([
+                'age' => Carbon::parse($patient->patientinfo->birthdate)->age,
+            ]);
+
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
             $patientInfo = PatientInfo::where('main_id', $id)->first();
             // $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
@@ -894,11 +899,11 @@ class PatientController extends Controller
             $additional_exams = null;
 
             if ($admissionPatient) {
-                if (!$patient_agency) {
+                if (! $patient_agency) {
                     $patient_agency = Agency::where('id', '=', $admissionPatient->agency_id)->first();
                 }
 
-                if (!$patient_package) {
+                if (! $patient_package) {
                     $patient_package = ListPackage::where('id', '=', $patientInfo->medical_package)->first();
                 }
 
@@ -985,7 +990,7 @@ class PatientController extends Controller
                 if (count($completed_exams) == count($patient_exams)) {
                     $complete_patient = true;
                     $patient = Patient::where('id', $id)->first();
-                    if (!$patient->medical_done_date) {
+                    if (! $patient->medical_done_date) {
                         $medical_done_update = Patient::where('id', $id)->update([
                             'medical_done_date' => date('Y-m-d h:i:s'),
                         ]);
@@ -1051,7 +1056,7 @@ class PatientController extends Controller
 
             $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
-            
+
             return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -1093,7 +1098,7 @@ class PatientController extends Controller
     {
         $patient = Patient::where('id', $request->id)->first();
 
-        if (!$patient->default_signature) {
+        if (! $patient->default_signature) {
             $patient->default_signature = $patient->patient_signature;
         }
 
@@ -1665,127 +1670,127 @@ class PatientController extends Controller
             foreach ($patient_exams as $key => $exam) {
                 $exams[$exam->examname] = 'completed';
                 if (preg_match('/audiometry/i', $exam->examname)) {
-                    if (!$exam_audio) {
+                    if (! $exam_audio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardiac/i', $exam->examname) || preg_match('/Spirometry/i', $exam->examname)) {
-                    if (!$exam_crf) {
+                    if (! $exam_crf) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardio/i', $exam->examname)) {
-                    if (!$exam_cardio) {
+                    if (! $exam_cardio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/dental/i', $exam->examname)) {
-                    if (!$exam_dental) {
+                    if (! $exam_dental) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/ecg/i', $exam->examname)) {
-                    if (!$exam_ecg) {
+                    if (! $exam_ecg) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/doppler/i', $exam->examname)) {
-                    if (!$exam_echodoppler) {
+                    if (! $exam_echodoppler) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/plain/i', $exam->examname)) {
-                    if (!$exam_echoplain) {
+                    if (! $exam_echoplain) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/ishihara/i', $exam->examname)) {
-                    if (!$exam_ishihara) {
+                    if (! $exam_ishihara) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/Complete PE and Medical History/i', $exam->examname) || preg_match('/STOOL/i', $exam->examname)) {
-                    if (!$exam_physical) {
+                    if (! $exam_physical) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/pyschological/i', $exam->examname) || preg_match('/Psychometric/i', $exam->examname)) {
-                    if (!$exam_psycho) {
+                    if (! $exam_psycho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/STRESS ECHO/i', $exam->examname)) {
-                    if (!$exam_stressecho) {
+                    if (! $exam_stressecho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Treadmill/i', $exam->examname)) {
-                    if (!$exam_stresstest) {
+                    if (! $exam_stresstest) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Acuity/i', $exam->examname)) {
-                    if (!$exam_visacuity) {
+                    if (! $exam_visacuity) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Ultrasound/i', $exam->category)) {
-                    if (!$exam_ultrasound) {
+                    if (! $exam_ultrasound) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Xray/i', $exam->category)) {
-                    if (!$exam_xray) {
+                    if (! $exam_xray) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) || preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) || preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) || preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) || preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) || preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) || preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
-                    if (!$exam_blood_serology) {
+                    if (! $exam_blood_serology) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/HIV/i', $exam->examname)) {
-                    if (!$examlab_hiv) {
+                    if (! $examlab_hiv) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/drug/i', $exam->examname) || preg_match('/Drug/i', $exam->category)) {
-                    if (!$examlab_drug) {
+                    if (! $examlab_drug) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Fecalysis/i', $exam->examname)) {
-                    if (!$examlab_feca) {
+                    if (! $examlab_feca) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hematology/i', $exam->category) || preg_match('/CBC/i', $exam->examname)) {
-                    if (!$examlab_hema) {
+                    if (! $examlab_hema) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hepatitis Profile/i', $exam->examname)) {
-                    if (!$examlab_hepa) {
+                    if (! $examlab_hepa) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Pregnancy/i', $exam->examname)) {
-                    if (!$examlab_pregnancy) {
+                    if (! $examlab_pregnancy) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Urinalysis/i', $exam->examname)) {
-                    if (!$examlab_urin) {
+                    if (! $examlab_urin) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Miscellaneous/i', $exam->examname)) {
-                    if (!$examlab_misc) {
+                    if (! $examlab_misc) {
                         $exams[$exam->examname] = '';
                     }
                 }
