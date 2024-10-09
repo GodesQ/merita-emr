@@ -30,33 +30,35 @@
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . " " . $admission->suffix . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{ $admission->lastname . ' ' . $admission->suffix . ', ' . $admission->firstname . ' ' . $admission->middlename }}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
+                                        <span style="font-size:15px">{{ $admission->patient->age }}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
+                                        <span style="font-size:15px">{{ $admission->gender }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
                                         <span style="font-size:15px">
-                                            @if (preg_match("/Bahia/i", $admission->agencyname)) 
-                                                {{'Bahia Shipping Services, Inc.'}}
+                                            @if (preg_match('/Bahia/i', $admission->agencyname))
+                                                {{ 'Bahia Shipping Services, Inc.' }}
                                             @else
-                                                {{$admission->agencyname}}
+                                                {{ $admission->agencyname }}
                                             @endif
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($exam->trans_date), "d F Y")}}</span>
+                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME
+                                            DATE:</b><br>
+                                        <span
+                                            style="font-size:15px">{{ date_format(new DateTime($exam->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
+                                            NO:</b><br><span style="font-size:15px">{{ $admission->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -73,13 +75,14 @@
                             <tbody>
                                 <tr>
                                     <td align="center">
-                                        <table width="100%" border="0" cellpadding="3" cellspacing="2" class="brdTable">
+                                        <table width="100%" border="0" cellpadding="3" cellspacing="2"
+                                            class="brdTable">
                                             <tbody>
                                                 <tr>
                                                     <td width="39%" height="100" align="center">
                                                         <h3>
-                                                            {{$exam->specimen_type}}<br>
-                                                            RESULT * {{$exam->result}}</h3>
+                                                            {{ $exam->specimen_type }}<br>
+                                                            RESULT * {{ $exam->result }}</h3>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -92,30 +95,34 @@
                                             <tbody>
                                                 <tr>
                                                     <td height="120" align="center" valign="bottom">
-                                                        <table width="260" border="0" cellspacing="2" cellpadding="2">
+                                                        <table width="260" border="0" cellspacing="2"
+                                                            cellpadding="2">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        @if($technician1)
-                                                                            <img src="{{$technician1->signature}}" width="100px" style="object-fit: cover;"/>
+                                                                        @if ($technician1)
+                                                                            <img src="{{ $technician1->signature }}"
+                                                                                width="100px"
+                                                                                style="object-fit: cover;" />
                                                                         @endif
                                                                     </td>
                                                                 </tr>
                                                                 <tr valign="bottom">
                                                                     <td align="center" class="brdTop">
                                                                         @if ($technician1)
-                                                                        {{$technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title}}<br>
-                                                                        Medical Technologist<br>
-                                                                        Lic. No.
-                                                                        {{$technician1->license_no}}
-                                                                        @endif  
+                                                                            {{ $technician1->firstname . ' ' . $technician1->middlename . ' ' . $technician1->lastname . ', ' . $technician1->title }}<br>
+                                                                            Medical Technologist<br>
+                                                                            Lic. No.
+                                                                            {{ $technician1->license_no }}
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </td>
                                                     <td colspan="3" align="center" valign="bottom">
-                                                        <table width="260" border="0" cellspacing="2" cellpadding="2">
+                                                        <table width="260" border="0" cellspacing="2"
+                                                            cellpadding="2">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center"></td>
@@ -123,10 +130,10 @@
                                                                 <tr valign="bottom">
                                                                     <td align="center" class="brdTop">
                                                                         @if ($technician2)
-                                                                            {{$technician2->firstname . " " . $technician2->middlename . " " . $technician2->lastname . ", " . $technician2->title}}<br>
+                                                                            {{ $technician2->firstname . ' ' . $technician2->middlename . ' ' . $technician2->lastname . ', ' . $technician2->title }}<br>
                                                                             Pathologist<br>
                                                                             Lic. No.
-                                                                            {{$technician2->license_no}}        
+                                                                            {{ $technician2->license_no }}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
