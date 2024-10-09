@@ -107,7 +107,7 @@ class PrintController extends Controller
     public function exam_dental(Request $request)
     {
         $id = $_GET['id'];
-        
+
         $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $exam = Dental::where('admission_id', '=', $id)
@@ -751,7 +751,6 @@ class PrintController extends Controller
             'mast_patient.patientcode as patientcode',
             'mast_patient.gender as gender',
             'mast_patient.age as age',
-            'mast_patient.age as age',
             'mast_patient.id as patient_id',
             'mast_agency.agencyname as agencyname'
         )
@@ -1168,12 +1167,14 @@ class PrintController extends Controller
         return view('PrintTemplates.cashier_or_print', compact('account', 'print_by', 'items'));
     }
 
-    public function daily_summary_report(Request $request) {
+    public function daily_summary_report(Request $request)
+    {
         $agencies = Agency::orderBy('agencyname', 'desc')->get();
         return view('DailySummaryReport.daily-summary-report', compact('agencies'));
     }
 
-    public function daily_summary_report_print(Request $request) {
+    public function daily_summary_report_print(Request $request)
+    {
         $from_date = $request->input('date_from');
         $to_date = $request->input('date_to');
         $agency_id = $request->input('agency_id');
@@ -1181,17 +1182,17 @@ class PrintController extends Controller
         $agency = Agency::where('id', $agency_id)->first();
 
         $admissions = Admission::whereBetween('trans_date', [$from_date, $to_date])
-                            ->whereHas('patient')
-                            ->where(function ($q) use ($agency_id) {
-                                $bahia_ids = ['55', '57', '58', '59'];
-                                if ($agency_id == 3) {
-                                    return $q->where('agency_id', $agency_id);
-                                } else if (in_array($agency_id, $bahia_ids)) {
-                                    return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
-                                } else {
-                                    return $q->where('agency_id', $agency_id);
-                                }
-                            })->get();
+            ->whereHas('patient')
+            ->where(function ($q) use ($agency_id) {
+                $bahia_ids = ['55', '57', '58', '59'];
+                if ($agency_id == 3) {
+                    return $q->where('agency_id', $agency_id);
+                } else if (in_array($agency_id, $bahia_ids)) {
+                    return $q->where('agency_id', $agency_id)->orWhere('agency_id', 3);
+                } else {
+                    return $q->where('agency_id', $agency_id);
+                }
+            })->get();
 
         return view('PrintTemplates.daily_summary_report', compact('agency', 'admissions'));
     }
