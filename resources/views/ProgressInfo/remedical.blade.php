@@ -135,7 +135,7 @@
                                                                 </label>
                                                                 <input required type="date" max="2050-12-31"
                                                                     onchange="getAge(this)" class="form-control"
-                                                                    name="birthdate"
+                                                                    name="birthdate" id-="birthdate-field"
                                                                     value="{{ $patient->patientinfo->birthdate }}">
                                                             </div>
                                                         </div>
@@ -2413,6 +2413,8 @@
             const ageInput = document.querySelector("#age");
             ageInput.value = age;
         }
+
+        getAge(document.querySelector('#birthdate-field'));
 
         function isVaccinated(e) {
             if (e.value == 1) {
