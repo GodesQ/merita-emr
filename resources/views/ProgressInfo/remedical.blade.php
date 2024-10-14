@@ -135,7 +135,7 @@
                                                                 </label>
                                                                 <input required type="date" max="2050-12-31"
                                                                     onchange="getAge(this)" class="form-control"
-                                                                    name="birthdate" id-="birthdate-field"
+                                                                    name="birthdate" id="birthdate-field"
                                                                     value="{{ $patient->patientinfo->birthdate }}">
                                                             </div>
                                                         </div>
