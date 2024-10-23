@@ -52,7 +52,8 @@
                                             style="font-size:15px">{{ date_format(new DateTime($admission->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{ $admission->patient->patientcode }}</span>
+                                            NO:</b><br><span
+                                            style="font-size:15px">{{ $admission->patient->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -141,14 +142,14 @@
                                         <tr>
                                             <td height="180" align="right" valign="bottom">
                                                 <table width="270" border="0" cellspacing="2" cellpadding="2"
-                                                    class="tbl">
+                                                    class="tbl" style="position: relative;">
                                                     <tr>
                                                         <td align="center">
                                                             @if ($technician1)
                                                                 @if ($technician1->signature)
                                                                     <img src="{{ $technician1->signature }}"
                                                                         width="150" height="50"
-                                                                        style="object-fit: cover;" />
+                                                                        style="object-fit: cover; position: absolute; top: -67px; height: 74px; left: 63px;" />
                                                                 @else
                                                                     <div style="width: 150px;height: 20px;"></div>
                                                                 @endif
