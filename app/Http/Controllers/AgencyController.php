@@ -336,10 +336,11 @@ class AgencyController extends Controller
     {
         $agency = Agency::where('id', $request->id)->first();
 
-        $new_password = "o2xezKLi";
+        $new_password = "123456789";
 
 
         $agency->update([
+            'not_first' => 0,
             'password' => Hash::make($new_password),
         ]);
 
