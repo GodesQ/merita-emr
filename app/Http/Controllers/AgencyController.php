@@ -119,7 +119,7 @@ class AgencyController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn =
-                            '<a href="edit_agency?id=' . $row['id'] .'" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                            '<a href="edit_agency?id=' . $row['id'] . '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                             <a href="#" id="' . $row['id'] . '" class="delete-agency btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                         return $actionBtn;
                     })
@@ -177,12 +177,12 @@ class AgencyController extends Controller
             $agency->commission = $request->commission;
             $agency->created_date = $request->registered_at;
             $save = $agency->save();
-            
+
             if ($request->has('default_packages') && is_array($request->default_packages)) {
                 $defaultPackages = DefaultPackage::whereIn('id', $request->default_packages)
                     ->with('exams')
                     ->get();
-            
+
                 foreach ($defaultPackages as $defaultPackage) {
                     $mainPackage = ListPackage::create([
                         'packagename' => $defaultPackage->package_name,
@@ -191,14 +191,14 @@ class AgencyController extends Controller
                         'agency_id' => $agency->id,
                         'created_date' => Carbon::now(),
                     ]);
-            
+
                     $exams = $defaultPackage->exams->map(function ($exam) use ($mainPackage) {
                         return [
                             'main_id' => $mainPackage->id,
                             'exam_id' => $exam->exam_id,
                         ];
                     });
-            
+
                     ListPackageExam::insert($exams->toArray());
                 }
             }
@@ -236,10 +236,11 @@ class AgencyController extends Controller
         }
     }
 
-    public function agency_details(Request $request, $agency_id) {
+    public function agency_details(Request $request, $agency_id)
+    {
         $agency = Agency::select('id', 'agencyname', 'email', 'address')
-                    ->where('id', $agency_id)->with('packages', 'vessels', 'principals')
-                    ->first();
+            ->where('id', $agency_id)->with('packages', 'vessels', 'principals')
+            ->first();
 
         return response([
             'status' => TRUE,
@@ -253,7 +254,7 @@ class AgencyController extends Controller
             $id = $_GET['id'];
             $agency = Agency::where('id', $id)->with('vessels', 'principals')->first();
             $default_packages = DefaultPackage::get();
-            
+
             return view('Agency.edit-agency', compact('agency', 'default_packages'));
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -331,20 +332,20 @@ class AgencyController extends Controller
         }
     }
 
-    public function submit_agency_default_password(Request $request) {
+    public function submit_agency_default_password(Request $request)
+    {
         $agency = Agency::where('id', $request->id)->first();
-        
+
         $new_password = Str::random(8);
 
-        $password = $new_password;
 
         $agency->update([
-            'password' => Hash::make($password),
+            'password' => Hash::make($new_password),
         ]);
 
         $details = [
             'email' => $agency->email,
-            'password' => $password,
+            'password' => $new_password,
         ];
 
         Mail::to($agency->email)->send(new AgencyPassword($details));
@@ -353,28 +354,30 @@ class AgencyController extends Controller
             'status' => true,
             'message' => 'The default password successfully sent.'
         ]);
-        
+
     }
 
-    public function get_agency_vessel_datatable(Request $request) {
-        if($request->ajax()) {
+    public function get_agency_vessel_datatable(Request $request)
+    {
+        if ($request->ajax()) {
             $data = AgencyVessel::get();
             return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('actions', function($row) {
-                        return '<a href="#" id="' .$row->id. '" class="edit-vessel btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                ->addIndexColumn()
+                ->addColumn('actions', function ($row) {
+                    return '<a href="#" id="' . $row->id . '" class="edit-vessel btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                                 <button id="' . $row->id . '" class="delete-vessel btn btn-danger btn-sm"><i class="feather icon-trash"></i></button>';
-                    })
-                    ->rawColumns(['actions'])
-                    ->make(true);
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
         }
     }
 
-    public function store_agency_vessel(Request $request) {
+    public function store_agency_vessel(Request $request)
+    {
         $data = $request->all();
         $agency_vessel = AgencyVessel::create($data);
 
-        if($agency_vessel) {
+        if ($agency_vessel) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Vessel Created Successfully'
@@ -382,7 +385,8 @@ class AgencyController extends Controller
         }
     }
 
-    public function show_agency_vessel(Request $request) {
+    public function show_agency_vessel(Request $request)
+    {
         $agency_vessel = AgencyVessel::find($request->id);
 
         return response([
@@ -391,11 +395,12 @@ class AgencyController extends Controller
         ]);
     }
 
-    public function update_agency_vessel(Request $request) {
+    public function update_agency_vessel(Request $request)
+    {
         $data = $request->except('_token', 'id');
         $agency_vessel = AgencyVessel::where('id', $request->id)->update($data);
 
-        if($agency_vessel) {
+        if ($agency_vessel) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Vessel Updated Successfully'
@@ -403,11 +408,12 @@ class AgencyController extends Controller
         }
     }
 
-    public function destroy_agency_vessel(Request $request) {
+    public function destroy_agency_vessel(Request $request)
+    {
         $agency_vessel = AgencyVessel::find($request->id);
 
         $delete = $agency_vessel->delete();
-        if($delete) {
+        if ($delete) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Vessel Deleted Successfully'
@@ -415,25 +421,27 @@ class AgencyController extends Controller
         }
     }
 
-    public function get_agency_principal_datatable (Request $request) {
-        if($request->ajax()) {
+    public function get_agency_principal_datatable(Request $request)
+    {
+        if ($request->ajax()) {
             $data = AgencyPrincipal::get();
             return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('actions', function($row) {
-                        return '<a href="#" id="' .$row->id. '" class="edit-principal btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
+                ->addIndexColumn()
+                ->addColumn('actions', function ($row) {
+                    return '<a href="#" id="' . $row->id . '" class="edit-principal btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
                                 <button id="' . $row->id . '" class="delete-principal btn btn-danger btn-sm"><i class="feather icon-trash"></i></button>';
-                    })
-                    ->rawColumns(['actions'])
-                    ->make(true);
+                })
+                ->rawColumns(['actions'])
+                ->make(true);
         }
     }
 
-    public function store_agency_principal(Request $request) {
+    public function store_agency_principal(Request $request)
+    {
         $data = $request->all();
         $agency_principal = AgencyPrincipal::create($data);
 
-        if($agency_principal) {
+        if ($agency_principal) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Principal Created Successfully'
@@ -441,7 +449,8 @@ class AgencyController extends Controller
         }
     }
 
-    public function show_agency_principal(Request $request) {
+    public function show_agency_principal(Request $request)
+    {
         $agency_vessel = AgencyPrincipal::find($request->id);
 
         return response([
@@ -450,11 +459,12 @@ class AgencyController extends Controller
         ]);
     }
 
-    public function update_agency_principal(Request $request) {
+    public function update_agency_principal(Request $request)
+    {
         $data = $request->except('_token', 'id');
         $agency_principal = AgencyPrincipal::where('id', $request->id)->update($data);
 
-        if($agency_principal) {
+        if ($agency_principal) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Principal Updated Successfully'
@@ -462,11 +472,12 @@ class AgencyController extends Controller
         }
     }
 
-    public function destroy_agency_principal(Request $request) {
+    public function destroy_agency_principal(Request $request)
+    {
         $agency_principal = AgencyPrincipal::find($request->id);
 
         $delete = $agency_principal->delete();
-        if($delete) {
+        if ($delete) {
             return response([
                 'status' => TRUE,
                 'message' => 'Agency Principal Deleted Successfully'
