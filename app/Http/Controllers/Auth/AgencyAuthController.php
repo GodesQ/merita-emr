@@ -12,16 +12,19 @@ use App\Mail\AgencyPassword;
 
 class AgencyAuthController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return view('Auth.agency-login');
     }
 
-    public function save_login(Request $request) {
+    public function save_login(Request $request)
+    {
         $agency = Agency::where('email', '=', $request->email)->first();
 
-        if (!$agency) return back()->with('fail', 'The email you entered is incorrect. Please check and try again.');
+        if (! $agency)
+            return back()->with('fail', 'The email you entered is incorrect. Please check and try again.');
 
-        if (Hash::check($request->password, $agency->password) || Hash::check($request->password, $agency->ad_password)) {
+        if (Hash::check($request->password, $agency->password)) {
             $request->session()->put([
                 'classification' => 'agency',
                 'agencyCode' => $agency->agencycode,
@@ -33,7 +36,8 @@ class AgencyAuthController extends Controller
                 'end_date' => null,
             ]);
 
-            if ($agency->not_first == 0) return redirect('/change_password');
+            if ($agency->not_first == 0)
+                return redirect('/change_password');
             return redirect('/agency_dashboard');
         }
 
@@ -65,7 +69,8 @@ class AgencyAuthController extends Controller
             $agency->not_first = 1;
             $save = $agency->save();
 
-            if ($save) return redirect('agency_dashboard');
+            if ($save)
+                return redirect('agency_dashboard');
         } catch (\Exception $exception) {
 
             $request->validate([
@@ -79,13 +84,15 @@ class AgencyAuthController extends Controller
         }
     }
 
-    public function change_agency_password(Request $request) {
+    public function change_agency_password(Request $request)
+    {
         $email = $request->email;
         $id = $request->agency_id;
         return view('Agency.agency-reset-form', compact('email', 'id'));
     }
 
-    public function update_agency_password(Request $request) {
+    public function update_agency_password(Request $request)
+    {
         try {
 
             $request->validate([
