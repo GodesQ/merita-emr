@@ -336,7 +336,7 @@ class AgencyController extends Controller
     {
         $agency = Agency::where('id', $request->id)->first();
 
-        $new_password = "o2xezKLi";
+        $new_password = Str::random(8);
 
 
         $agency->update([
