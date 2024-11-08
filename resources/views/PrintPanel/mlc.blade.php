@@ -715,7 +715,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="140" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="120" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0"
                                                             cellpadding="0">

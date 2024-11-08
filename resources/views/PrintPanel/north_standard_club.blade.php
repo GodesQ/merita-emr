@@ -72,7 +72,8 @@
                     <table width="100%" border="0" cellpacing="0" cellpadding="2">
                         <tr>
                             <td class="brdAll">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="2" style="border: 3px solid black">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2"
+                                    style="border: 3px solid black">
                                     <tr>
                                         <td>
                                             <table width="100%" border="0" cellpadding="2" cellspacing="0"
@@ -112,7 +113,7 @@
                                             GIVEN NAME:<br>
                                             <span class="fontBoldLrg">{{ $admission->patient->firstname }}</span>
                                         </td>
-                                        <td width="230" valign="top" style="text-transform: uppercase;">
+                                        <td width="265" valign="top" style="text-transform: uppercase;">
                                             MIDDLE NAME:<br>
                                             <span class="fontBoldLrg">{{ $admission->patient->middlename }}</span>
                                         </td>
@@ -173,27 +174,35 @@
                                             POSITION APPLIED FOR:<br>
                                             <b>DECK</b>&nbsp;&nbsp;&nbsp;
                                             @if ($admission->category == 'DECK SERVICES')
-                                                <img src="../../../app-assets/images/icoCheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoCheck.gif" width="10"
+                                                    class="checkbox">
                                             @else
-                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10"
+                                                    class="checkbox">
                                             @endif&nbsp;&nbsp;&nbsp;&nbsp;
                                             <b>ENGINE</b>&nbsp;&nbsp;&nbsp;
                                             @if ($admission->category == 'ENGINE SERVICES')
-                                                <img src="../../../app-assets/images/icoCheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoCheck.gif" width="10"
+                                                    class="checkbox">
                                             @else
-                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10"
+                                                    class="checkbox">
                                             @endif&nbsp;&nbsp;&nbsp;&nbsp;
                                             <b>CATERING&nbsp;&nbsp;&nbsp;</b>
                                             @if ($admission->category == 'CATERING SERVICES')
-                                                <img src="../../../app-assets/images/icoCheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoCheck.gif" width="10"
+                                                    class="checkbox">
                                             @else
-                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10"
+                                                    class="checkbox">
                                             @endif&nbsp;&nbsp;&nbsp;
                                             <b>OTHER</b>
                                             @if ($admission->category == 'OTHER SERVICES')
-                                                <img src="../../../app-assets/images/icoCheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoCheck.gif" width="10"
+                                                    class="checkbox">
                                             @else
-                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10" class="checkbox">
+                                                <img src="../../../app-assets/images/icoUncheck.gif" width="10"
+                                                    class="checkbox">
                                             @endif&nbsp;&nbsp;&nbsp;&nbsp;
                                             SPECIFY: {{ $admission->position }}
                                         </td>
@@ -689,7 +698,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="150" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="135" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0"
                                                             cellpadding="0">
@@ -812,9 +821,9 @@
 
     <script>
         let checkbox = document.querySelectorAll('.checkbox');
-        for(let i = 0; i < checkbox.length; i++) {
+        for (let i = 0; i < checkbox.length; i++) {
             checkbox[i].addEventListener('click', (e) => {
-                if(e.target.classList.contains('check')) {
+                if (e.target.classList.contains('check')) {
                     e.target.src = '../../../app-assets/images/icoUncheck.gif';
                     e.target.classList.toggle('check');
                 } else {

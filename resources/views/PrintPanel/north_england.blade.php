@@ -72,7 +72,7 @@
                                             GIVEN NAME:<br>
                                             <span class="fontBoldLrg">{{ $admission->patient->firstname }}</span>
                                         </td>
-                                        <td width="255" valign="top" style="text-transform: uppercase;">
+                                        <td width="265" valign="top" style="text-transform: uppercase;">
                                             MIDDLE NAME:<br>
                                             <span class="fontBoldLrg">{{ $admission->patient->middlename }}</span>
                                         </td>
@@ -612,8 +612,10 @@
                                                                     DATE OF EXAMINATION:
                                                                     {{ $admission->exam_physical ? date_format(new DateTime($admission->exam_physical->date_examination), 'd F Y') : null }}<br><br>
                                                                     APPROVED BY:<br>
-                                                                    @if($admission->exam_physical && $admission->agency_id == 3)
-                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png" width="200" height="60" style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
+                                                                    @if ($admission->exam_physical && $admission->agency_id == 3)
+                                                                        <img src="../../../app-assets/images/signatures/md_gonzales_sig.png"
+                                                                            width="200" height="60"
+                                                                            style="object-fit: cover; transform: translate(-53px, 19px); margin-top: -25px;" />
                                                                     @else
                                                                         <br>
                                                                         <br>
@@ -629,7 +631,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td height="120" align="center" class="brdRight">&nbsp;</td>
+                                                    <td height="110" align="center" class="brdRight">&nbsp;</td>
                                                     <td valign="top" class="brdLeft">
                                                         <table width="100%" border="0" cellspacing="0"
                                                             cellpadding="0">
