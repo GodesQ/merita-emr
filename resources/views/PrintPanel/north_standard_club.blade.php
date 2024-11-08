@@ -119,12 +119,12 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="140" valign="top">
-                                            DATE OF BIRTH:<br>
+                                        <td width="163" valign="top">
+                                            DATE OF BIRTH: (DAY/MONTH/YEAR)<br>
                                             <span
                                                 class="fontMed">{{ date_format(new DateTime($admission->patient->patientinfo->birthdate), 'd F Y') }}</span>
                                         </td>
-                                        <td colspan="2" valign="top">
+                                        <td width="91" valign="top">
                                             AGE:<br>
                                             <span class="fontMed">{{ $admission->patient->age }}</span>
                                         </td>
