@@ -1,5 +1,17 @@
 @extends('layouts.admin-layout')
 
+@section('name')
+    {{ session()->get('employeeFirstname') . ' ' . session()->get('employeeLastname') }}
+@endsection
+
+@section('employee_image')
+    @if (session()->get('employee_image') != null || session()->get('employee_image') != '')
+        <img src="../../../app-assets/images/employees/{{ session()->get('employee_image') }}" alt="avatar">
+    @else
+        <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
+    @endif
+@endsection
+
 @section('content')
     <style>
         .table th,
@@ -236,12 +248,12 @@
                                                     <td>
                                                         <!-- @if ($queue_patient->patient_image == null || $queue_patient->patient_image == '')
     <div class="avatar avatar-md mr-1">
-                                                                                                <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                                                                    alt="Profile Picture" class="">
-                                                                                            </div>
+                                                                                                    <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                                                                        alt="Profile Picture" class="">
+                                                                                                </div>
 @else
     <img src="../../../app-assets/images/profiles/{{ $queue_patient->patient_image }}"
-                                                                                                alt="Profile Picture" class="">
+                                                                                                    alt="Profile Picture" class="">
     @endif -->
                                                         {{ $indexKey + 1 }}
                                                     </td>
