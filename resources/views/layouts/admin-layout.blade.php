@@ -175,8 +175,9 @@
                             </li>
                         @endif
                         @if (session()->get('dept_id') == '1' || session()->get('dept_id') == '18' || session()->get('dept_id') == 2)
-                            <li class="{{ Request::path() == 'default-packages' ? 'active' : '' }}"><a class="menu-item"
-                                    href="/default-packages" data-i18n="Default Packages">Default Packages</a>
+                            <li class="{{ Request::path() == 'default-packages' ? 'active' : '' }}"><a
+                                    class="menu-item" href="/default-packages" data-i18n="Default Packages">Default
+                                    Packages</a>
                             </li>
                         @endif
                     </ul>
@@ -212,7 +213,8 @@
                                 Billing</a></li>
                         <li><a class="menu-item" href="daily_patient_form" data-i18n="Fitness">Daily Patients</a>
                         </li>
-                        <li><a class="menu-item" href="/daily-summary-report" data-i18n="Daily Summary Report">Daily Summary Report</a>
+                        <li><a class="menu-item" href="/daily-summary-report" data-i18n="Daily Summary Report">Daily
+                                Summary Report</a>
                         </li>
                     </ul>
                 </li>
@@ -287,12 +289,6 @@
     <script src="{{ asset('app-assets/js/scripts/pages/app-invoice.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('app-assets/vendors/js/extensions/moment.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/daygrid.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/timegrid.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/interactions.min.js') }}"></script>
-    <script src="{{ asset('app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
-    <script src="{{ asset('app-assets/js/scripts/extensions/dropzone.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/toggle/switchery.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
 
