@@ -1541,404 +1541,279 @@ class PatientController extends Controller
         return $query->first();
     }
 
-    // public function patientStatus($admission_id, $patient_exams)
-    // {
-    //     if ($admission_id) {
-    //         $exam_audio = DB::table('exam_audio')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_crf = DB::table('exam_crf')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_cardio = DB::table('exam_cardio')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_dental = DB::table('exam_dental')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_ecg = DB::table('exam_ecg')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_echodoppler = DB::table('exam_echodoppler')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_echoplain = DB::table('exam_echoplain')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_ishihara = DB::table('exam_ishihara')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_physical = DB::table('exam_physical')
-    //             ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice')
-    //             ->where('exam_physical.admission_id', '=', $admission_id)
-    //             ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
-    //             ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
-    //             ->leftJoin('list_tier4', 'list_tier4.id', 'exam_physical.tier4_id')
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_psycho = DB::table('exam_psycho')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_psychobpi = DB::table('exam_psychobpi')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_stressecho = DB::table('exam_stressecho')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_stresstest = DB::table('exam_stresstest')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_ultrasound = DB::table('exam_ultrasound')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_visacuity = DB::table('exam_visacuity')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_xray = DB::table('exam_xray')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $exam_blood_serology = DB::table('examlab_bloodsero')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_hiv = DB::table('examlab_hiv')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_drug = DB::table('examlab_drug')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_feca = DB::table('examlab_feca')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_hema = DB::table('examlab_hema')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_hepa = DB::table('examlab_hepa')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_pregnancy = DB::table('examlab_pregnancy')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_urin = DB::table('examlab_urin')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-
-    //         $examlab_misc = DB::table('examlab_misc')
-    //             ->where('admission_id', '=', $admission_id)
-    //             ->latest('id')
-    //             ->first();
-    //     } else {
-    //         // set all exam value to null if the patient doesn't have a admission id
-    //         $exam_audio = $exam_cardio = $exam_crf = $exam_ecg = $exam_dental = $exam_echodoppler = $exam_echoplain = $exam_ishihara = $exam_physical = $exam_psycho = $exam_psychobpi = $exam_stressecho = $exam_stresstest = $exam_ultrasound = $exam_visacuity = $exam_xray = $exam_blood_serology = $examlab_hiv = $examlab_drug = $examlab_feca = $examlab_hema = $examlab_pregnancy = $examlab_hepa = $examlab_urin = $examlab_misc = null;
-    //     }
-
-    //     $exams = [];
-
-    //     if ($patient_exams) {
-    //         foreach ($patient_exams as $key => $exam) {
-    //             $exams[$exam->examname] = 'completed';
-    //             if (preg_match('/audiometry/i', $exam->examname)) {
-    //                 if (! $exam_audio) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/cardiac/i', $exam->examname) || preg_match('/Spirometry/i', $exam->examname)) {
-    //                 if (! $exam_crf) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/cardio/i', $exam->examname)) {
-    //                 if (! $exam_cardio) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/dental/i', $exam->examname)) {
-    //                 if (! $exam_dental) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/ecg/i', $exam->examname)) {
-    //                 if (! $exam_ecg) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/doppler/i', $exam->examname)) {
-    //                 if (! $exam_echodoppler) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/plain/i', $exam->examname)) {
-    //                 if (! $exam_echoplain) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-
-    //             if (preg_match('/ishihara/i', $exam->examname)) {
-    //                 if (! $exam_ishihara) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-
-    //             if (preg_match('/Complete PE and Medical History/i', $exam->examname) || preg_match('/STOOL/i', $exam->examname)) {
-    //                 if (! $exam_physical) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-
-    //             if (preg_match('/pyschological/i', $exam->examname) || preg_match('/Psychometric/i', $exam->examname)) {
-    //                 if (! $exam_psycho) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/STRESS ECHO/i', $exam->examname)) {
-    //                 if (! $exam_stressecho) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Treadmill/i', $exam->examname)) {
-    //                 if (! $exam_stresstest) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Acuity/i', $exam->examname)) {
-    //                 if (! $exam_visacuity) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Ultrasound/i', $exam->category)) {
-    //                 if (! $exam_ultrasound) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Xray/i', $exam->category)) {
-    //                 if (! $exam_xray) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-
-    //             if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) ||
-    //                 preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) ||
-    //                 preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) ||
-    //                 preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) ||
-    //                 preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) ||
-    //                 preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) ||
-    //                 preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) ||
-    //                 preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) ||
-    //                 preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) ||
-    //                 preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
-    //                 if (! $exam_blood_serology) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-
-    //             if (preg_match('/HIV/i', $exam->examname)) {
-    //                 if (! $examlab_hiv) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/drug/i', $exam->examname) || preg_match('/Drug/i', $exam->category)) {
-    //                 if (! $examlab_drug) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Fecalysis/i', $exam->examname) || preg_match('/FECT/i', $exam->examname)) {
-    //                 if (! $examlab_feca) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Hematology/i', $exam->category) || preg_match('/CBC/i', $exam->examname)) {
-    //                 if (! $examlab_hema) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Hepatitis Profile/i', $exam->examname)) {
-    //                 if (! $examlab_hepa) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Pregnancy/i', $exam->examname)) {
-    //                 if (! $examlab_pregnancy) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Urinalysis/i', $exam->examname)) {
-    //                 if (! $examlab_urin) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //             if (preg_match('/Miscellaneous/i', $exam->examname)) {
-    //                 if (! $examlab_misc) {
-    //                     $exams[$exam->examname] = '';
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         $exams = null;
-    //     }
-
-    //     // set all data to access in different uses
-    //     $data = [
-    //         'exam_audio' => $exam_audio,
-    //         'exam_dental' => $exam_dental,
-    //         'exam_echodoppler' => $exam_echodoppler,
-    //         'exam_echoplain' => $exam_echoplain,
-    //         'exam_ecg' => $exam_ecg,
-    //         'exam_stressecho' => $exam_stressecho,
-    //         'exam_stresstest' => $exam_stresstest,
-    //         'exam_ishihara' => $exam_ishihara,
-    //         'exam_visacuity' => $exam_visacuity,
-    //         'exam_psycho' => $exam_psycho,
-    //         'exam_psychobpi' => $exam_psychobpi,
-    //         'exam_ultrasound' => $exam_ultrasound,
-    //         'exam_xray' => $exam_xray,
-    //         'exam_cardio' => $exam_cardio,
-    //         'exam_crf' => $exam_crf,
-    //         'exam_physical' => $exam_physical,
-    //         'exam_blood_serology' => $exam_blood_serology,
-    //         'examlab_hiv' => $examlab_hiv,
-    //         'examlab_drug' => $examlab_drug,
-    //         'examlab_feca' => $examlab_feca,
-    //         'examlab_hema' => $examlab_hema,
-    //         'examlab_hepa' => $examlab_hepa,
-    //         'examlab_pregnancy' => $examlab_pregnancy,
-    //         'examlab_urin' => $examlab_urin,
-    //         'examlab_misc' => $examlab_misc,
-    //         'exams' => $exams,
-    //     ];
-
-    //     return $data;
-    // }
-
     public function patientStatus($admission_id, $patient_exams)
     {
-
-        // Exam tables and their respective configurations
-        $examTables = [
-            'exam_audio' => [],
-            'exam_crf' => [],
-            'exam_cardio' => [],
-            'exam_dental' => [],
-            'exam_ecg' => [],
-            'exam_echodoppler' => [],
-            'exam_echoplain' => [],
-            'exam_ishihara' => [],
-            'exam_physical' => [],
-            'exam_psycho' => [],
-            'exam_psychobpi' => [],
-            'exam_stressecho' => [],
-            'exam_stresstest' => [],
-            'exam_ultrasound' => [],
-            'exam_visacuity' => [],
-            'exam_xray' => [],
-            'examlab_bloodsero' => [],
-            'examlab_hiv' => [],
-            'examlab_drug' => [],
-            'examlab_feca' => [],
-            'examlab_hema' => [],
-            'examlab_hepa' => [],
-            'examlab_pregnancy' => [],
-            'examlab_urin' => [],
-            'examlab_misc' => [],
-        ];
-
-        $examResults = [];
         if ($admission_id) {
-            foreach ($examTables as $table => $joins) {
-                $examResults[$table] = $this->fetchLatestExam($table, $admission_id, $joins);
-            }
+            $exam_audio = DB::table('exam_audio')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_crf = DB::table('exam_crf')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_cardio = DB::table('exam_cardio')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_dental = DB::table('exam_dental')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_ecg = DB::table('exam_ecg')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_echodoppler = DB::table('exam_echodoppler')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_echoplain = DB::table('exam_echoplain')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_ishihara = DB::table('exam_ishihara')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_physical = DB::table('exam_physical')
+                ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice')
+                ->where('exam_physical.admission_id', '=', $admission_id)
+                ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
+                ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
+                ->leftJoin('list_tier4', 'list_tier4.id', 'exam_physical.tier4_id')
+                ->latest('id')
+                ->first();
+
+            $exam_psycho = DB::table('exam_psycho')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_psychobpi = DB::table('exam_psychobpi')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_stressecho = DB::table('exam_stressecho')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_stresstest = DB::table('exam_stresstest')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_ultrasound = DB::table('exam_ultrasound')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_visacuity = DB::table('exam_visacuity')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_xray = DB::table('exam_xray')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $exam_blood_serology = DB::table('examlab_bloodsero')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_hiv = DB::table('examlab_hiv')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_drug = DB::table('examlab_drug')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_feca = DB::table('examlab_feca')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_hema = DB::table('examlab_hema')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_hepa = DB::table('examlab_hepa')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_pregnancy = DB::table('examlab_pregnancy')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_urin = DB::table('examlab_urin')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
+
+            $examlab_misc = DB::table('examlab_misc')
+                ->where('admission_id', '=', $admission_id)
+                ->latest('id')
+                ->first();
         } else {
-            // Set all exam values to null if the patient doesn't have an admission ID
-            foreach (array_keys($examTables) as $table) {
-                $examResults[$table] = null;
-            }
+            // set all exam value to null if the patient doesn't have a admission id
+            $exam_audio = $exam_cardio = $exam_crf = $exam_ecg = $exam_dental = $exam_echodoppler = $exam_echoplain = $exam_ishihara = $exam_physical = $exam_psycho = $exam_psychobpi = $exam_stressecho = $exam_stresstest = $exam_ultrasound = $exam_visacuity = $exam_xray = $exam_blood_serology = $examlab_hiv = $examlab_drug = $examlab_feca = $examlab_hema = $examlab_pregnancy = $examlab_hepa = $examlab_urin = $examlab_misc = null;
         }
 
-        // Process patient exams
         $exams = [];
+
         if ($patient_exams) {
-            foreach ($patient_exams as $exam) {
-                $examName = $exam->examname;
-                $examCategory = $exam->category ?? null;
-                $exams[$examName] = 'completed';
+            foreach ($patient_exams as $key => $exam) {
+                $exams[$exam->examname] = 'completed';
+                if (preg_match('/audiometry/i', $exam->examname)) {
+                    if (! $exam_audio) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/cardiac/i', $exam->examname) || preg_match('/Spirometry/i', $exam->examname)) {
+                    if (! $exam_crf) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/cardio/i', $exam->examname)) {
+                    if (! $exam_cardio) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/dental/i', $exam->examname)) {
+                    if (! $exam_dental) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/ecg/i', $exam->examname)) {
+                    if (! $exam_ecg) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/doppler/i', $exam->examname)) {
+                    if (! $exam_echodoppler) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/plain/i', $exam->examname)) {
+                    if (! $exam_echoplain) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
 
-                // Define patterns and their corresponding tables
-                $patterns = [
-                    'audiometry' => 'exam_audio',
-                    'cardiac|Spirometry' => 'exam_crf',
-                    'cardio' => 'exam_cardio',
-                    'dental' => 'exam_dental',
-                    'ecg' => 'exam_ecg',
-                    'doppler' => 'exam_echodoppler',
-                    'plain' => 'exam_echoplain',
-                    'ishihara' => 'exam_ishihara',
-                    'Complete PE and Medical History|STOOL' => 'exam_physical',
-                    'pyschological|Psychometric' => 'exam_psycho',
-                    'STRESS ECHO' => 'exam_stressecho',
-                    'Treadmill' => 'exam_stresstest',
-                    'Acuity' => 'exam_visacuity',
-                    'Ultrasound' => 'exam_ultrasound',
-                    'Xray' => 'exam_xray',
-                    'Serology|Chemistry|Enzymes|SGPT|BLOOD|Anti HBe|Anti HAV|Anti HBc|Anti HCV|HepaB|TPHA|Electrolytes|Sodium|Potassium|Calcium|Albumin|Creatinine|Uric Acid|Anti HBs' => 'examlab_bloodsero',
-                    'HIV' => 'examlab_hiv',
-                    'drug|Drug' => 'examlab_drug',
-                    'Fecalysis|FECT' => 'examlab_feca',
-                    'Hematology|CBC' => 'examlab_hema',
-                    'Hepatitis Profile' => 'examlab_hepa',
-                    'Pregnancy' => 'examlab_pregnancy',
-                    'Urinalysis' => 'examlab_urin',
-                    'Miscellaneous' => 'examlab_misc',
-                ];
+                if (preg_match('/ishihara/i', $exam->examname)) {
+                    if (! $exam_ishihara) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
 
-                foreach ($patterns as $pattern => $table) {
-                    if (preg_match("/$pattern/i", $examName) || ($examCategory && preg_match("/$pattern/i", $examCategory))) {
-                        if (! $examResults[$table]) {
-                            $exams[$examName] = '';
-                        }
+                if (preg_match('/Complete PE and Medical History/i', $exam->examname) || preg_match('/STOOL/i', $exam->examname)) {
+                    if (! $exam_physical) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+
+                if (preg_match('/pyschological/i', $exam->examname) || preg_match('/Psychometric/i', $exam->examname)) {
+                    if (! $exam_psycho) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/STRESS ECHO/i', $exam->examname)) {
+                    if (! $exam_stressecho) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Treadmill/i', $exam->examname)) {
+                    if (! $exam_stresstest) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Acuity/i', $exam->examname)) {
+                    if (! $exam_visacuity) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Ultrasound/i', $exam->category)) {
+                    if (! $exam_ultrasound) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Xray/i', $exam->category)) {
+                    if (! $exam_xray) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+
+                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) ||
+                    preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) ||
+                    preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) ||
+                    preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) ||
+                    preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) ||
+                    preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) ||
+                    preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) ||
+                    preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) ||
+                    preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) ||
+                    preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
+                    if (! $exam_blood_serology) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+
+                if (preg_match('/HIV/i', $exam->examname)) {
+                    if (! $examlab_hiv) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/drug/i', $exam->examname) || preg_match('/Drug/i', $exam->category)) {
+                    if (! $examlab_drug) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Fecalysis/i', $exam->examname) || preg_match('/FECT/i', $exam->examname)) {
+                    if (! $examlab_feca) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Hematology/i', $exam->category) || preg_match('/CBC/i', $exam->examname)) {
+                    if (! $examlab_hema) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Hepatitis Profile/i', $exam->examname)) {
+                    if (! $examlab_hepa) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Pregnancy/i', $exam->examname)) {
+                    if (! $examlab_pregnancy) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Urinalysis/i', $exam->examname)) {
+                    if (! $examlab_urin) {
+                        $exams[$exam->examname] = '';
+                    }
+                }
+                if (preg_match('/Miscellaneous/i', $exam->examname)) {
+                    if (! $examlab_misc) {
+                        $exams[$exam->examname] = '';
                     }
                 }
             }
@@ -1946,8 +1821,133 @@ class PatientController extends Controller
             $exams = null;
         }
 
-        // Combine all results into the data array
-        return array_merge($examResults, ['exams' => $exams]);
+        // set all data to access in different uses
+        $data = [
+            'exam_audio' => $exam_audio,
+            'exam_dental' => $exam_dental,
+            'exam_echodoppler' => $exam_echodoppler,
+            'exam_echoplain' => $exam_echoplain,
+            'exam_ecg' => $exam_ecg,
+            'exam_stressecho' => $exam_stressecho,
+            'exam_stresstest' => $exam_stresstest,
+            'exam_ishihara' => $exam_ishihara,
+            'exam_visacuity' => $exam_visacuity,
+            'exam_psycho' => $exam_psycho,
+            'exam_psychobpi' => $exam_psychobpi,
+            'exam_ultrasound' => $exam_ultrasound,
+            'exam_xray' => $exam_xray,
+            'exam_cardio' => $exam_cardio,
+            'exam_crf' => $exam_crf,
+            'exam_physical' => $exam_physical,
+            'exam_blood_serology' => $exam_blood_serology,
+            'examlab_hiv' => $examlab_hiv,
+            'examlab_drug' => $examlab_drug,
+            'examlab_feca' => $examlab_feca,
+            'examlab_hema' => $examlab_hema,
+            'examlab_hepa' => $examlab_hepa,
+            'examlab_pregnancy' => $examlab_pregnancy,
+            'examlab_urin' => $examlab_urin,
+            'examlab_misc' => $examlab_misc,
+            'exams' => $exams,
+        ];
+
+        return $data;
     }
+
+    // public function patientStatus($admission_id, $patient_exams)
+    // {
+
+    //     // Exam tables and their respective configurations
+    //     $examTables = [
+    //         'exam_audio' => [],
+    //         'exam_crf' => [],
+    //         'exam_cardio' => [],
+    //         'exam_dental' => [],
+    //         'exam_ecg' => [],
+    //         'exam_echodoppler' => [],
+    //         'exam_echoplain' => [],
+    //         'exam_ishihara' => [],
+    //         'exam_physical' => [],
+    //         'exam_psycho' => [],
+    //         'exam_psychobpi' => [],
+    //         'exam_stressecho' => [],
+    //         'exam_stresstest' => [],
+    //         'exam_ultrasound' => [],
+    //         'exam_visacuity' => [],
+    //         'exam_xray' => [],
+    //         'examlab_bloodsero' => [],
+    //         'examlab_hiv' => [],
+    //         'examlab_drug' => [],
+    //         'examlab_feca' => [],
+    //         'examlab_hema' => [],
+    //         'examlab_hepa' => [],
+    //         'examlab_pregnancy' => [],
+    //         'examlab_urin' => [],
+    //         'examlab_misc' => [],
+    //     ];
+
+    //     $examResults = [];
+    //     if ($admission_id) {
+    //         foreach ($examTables as $table => $joins) {
+    //             $examResults[$table] = $this->fetchLatestExam($table, $admission_id, $joins);
+    //         }
+    //     } else {
+    //         // Set all exam values to null if the patient doesn't have an admission ID
+    //         foreach (array_keys($examTables) as $table) {
+    //             $examResults[$table] = null;
+    //         }
+    //     }
+
+    //     // Process patient exams
+    //     $exams = [];
+    //     if ($patient_exams) {
+    //         foreach ($patient_exams as $exam) {
+    //             $examName = $exam->examname;
+    //             $examCategory = $exam->category ?? null;
+    //             $exams[$examName] = 'completed';
+
+    //             // Define patterns and their corresponding tables
+    //             $patterns = [
+    //                 'audiometry' => 'exam_audio',
+    //                 'cardiac|Spirometry' => 'exam_crf',
+    //                 'cardio' => 'exam_cardio',
+    //                 'dental' => 'exam_dental',
+    //                 'ecg' => 'exam_ecg',
+    //                 'doppler' => 'exam_echodoppler',
+    //                 'plain' => 'exam_echoplain',
+    //                 'ishihara' => 'exam_ishihara',
+    //                 'Complete PE and Medical History|STOOL' => 'exam_physical',
+    //                 'pyschological|Psychometric' => 'exam_psycho',
+    //                 'STRESS ECHO' => 'exam_stressecho',
+    //                 'Treadmill' => 'exam_stresstest',
+    //                 'Acuity' => 'exam_visacuity',
+    //                 'Ultrasound' => 'exam_ultrasound',
+    //                 'Xray' => 'exam_xray',
+    //                 'Serology|Chemistry|Enzymes|SGPT|BLOOD|Anti HBe|Anti HAV|Anti HBc|Anti HCV|HepaB|TPHA|Electrolytes|Sodium|Potassium|Calcium|Albumin|Creatinine|Uric Acid|Anti HBs' => 'examlab_bloodsero',
+    //                 'HIV' => 'examlab_hiv',
+    //                 'drug|Drug' => 'examlab_drug',
+    //                 'Fecalysis|FECT' => 'examlab_feca',
+    //                 'Hematology|CBC' => 'examlab_hema',
+    //                 'Hepatitis Profile' => 'examlab_hepa',
+    //                 'Pregnancy' => 'examlab_pregnancy',
+    //                 'Urinalysis' => 'examlab_urin',
+    //                 'Miscellaneous' => 'examlab_misc',
+    //             ];
+
+    //             foreach ($patterns as $pattern => $table) {
+    //                 if (preg_match("/$pattern/i", $examName) || ($examCategory && preg_match("/$pattern/i", $examCategory))) {
+    //                     if (! $examResults[$table]) {
+    //                         $exams[$examName] = '';
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         $exams = null;
+    //     }
+
+    //     // Combine all results into the data array
+    //     return array_merge($examResults, ['exams' => $exams]);
+    // }
 
 }
