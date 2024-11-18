@@ -844,7 +844,6 @@ class PatientController extends Controller
 
             $data = session()->all();
             $employeeInfo = session()->all();
-            // dd($employeeInfo);
             $id = $request->id;
             $patientcode = $request->patientcode;
 
@@ -1748,7 +1747,16 @@ class PatientController extends Controller
                     }
                 }
 
-                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) || preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) || preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) || preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) || preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) || preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) || preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
+                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) ||
+                    preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) ||
+                    preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) ||
+                    preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) ||
+                    preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) ||
+                    preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname) ||
+                    preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) ||
+                    preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) ||
+                    preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) ||
+                    preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
                     if (! $exam_blood_serology) {
                         $exams[$exam->examname] = '';
                     }
@@ -1764,7 +1772,7 @@ class PatientController extends Controller
                         $exams[$exam->examname] = '';
                     }
                 }
-                if (preg_match('/Fecalysis/i', $exam->examname)) {
+                if (preg_match('/Fecalysis/i', $exam->examname) || preg_match('/FECT/i', $exam->examname)) {
                     if (! $examlab_feca) {
                         $exams[$exam->examname] = '';
                     }

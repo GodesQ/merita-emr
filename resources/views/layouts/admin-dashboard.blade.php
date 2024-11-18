@@ -62,42 +62,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="card">
-                            <div class="card-header border-bottom">
-                                <div class="card-title">Patients Today</div>
-                            </div>
-                            <div class="card-body table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Patient</th>
-                                            <th>Agency</th>
-                                            <th>Package</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($schedule_patients as $schedule_patient)
-                                            <tr>
-
-                                                <td style="font-size: 12px;">
-                                                    {{ ($schedule_patient->patient->firstname ?? '') . ' ' . ($schedule_patient->patient->lastname ?? '') }}
-                                                </td>
-                                                <td style="font-size: 12px;">
-                                                    {{ $schedule_patient->patient->patientinfo->agency->agencyname }}</td>
-                                                <td style="font-size: 12px;">
-                                                    {{ $schedule_patient->patient->patientinfo->package->packagename }}</td>
-                                                <td>{!! $schedule_patient->patient->admission->getStatusExams(
-                                                    $schedule_patient->patient->patientinfo->package->list_package_exams,
-                                                ) !!}</td>
-                                                <td></td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="col-xl-5 col-lg-12">
                         <div class="row">
@@ -108,7 +72,7 @@
                                         <div class="card-body">
                                             <div class="media">
                                                 <div class="media-body text-left w-100">
-                                                    <h3 class="primary">{{ str_pad($total_fit, 2, '0', STR_PAD_LEFT) }}
+                                                    <h3 class="primary">{{ str_pad($totals['fit'], 2, '0', STR_PAD_LEFT) }}
                                                     </h3>
                                                     <span>Total Fit</span>
                                                 </div>
@@ -157,7 +121,7 @@
                                         <div class="card-body">
                                             <div class="media">
                                                 <div class="media-body text-left w-100">
-                                                    <h3 class="danger">{{ str_pad($total_unfit, 2, '0', STR_PAD_LEFT) }}
+                                                    <h3 class="danger">{{ str_pad($totals['unfit'], 2, '0', STR_PAD_LEFT) }}
                                                     </h3>
                                                     <span>Total Unfit</span>
                                                 </div>
@@ -206,7 +170,8 @@
                                         <div class="card-body">
                                             <div class="media">
                                                 <div class="media-body text-left w-100">
-                                                    <h3 class="warning">{{ str_pad($total_pending, 2, '0', STR_PAD_LEFT) }}
+                                                    <h3 class="warning">
+                                                        {{ str_pad($totals['pending'], 2, '0', STR_PAD_LEFT) }}
                                                     </h3>
                                                     <span>Total Pending</span>
                                                 </div>
@@ -249,7 +214,224 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card patient-status">
+                            <div class="card-header pb-0">
+                                <h5 class="primary"><i class="icon icon-user customize-icon"></i> QUEUE</h5>
+                                <span class="sub-heading">PATIENT IS QUEUED IN
+                                    LOCATION
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table status-table">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Package</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody class="table-striped">
+                                            @foreach ($categorizedPatients['queue'] as $indexKey => $queue_patient)
+                                                <tr>
+                                                    <td>
+                                                        <!-- @if ($queue_patient->patient_image == null || $queue_patient->patient_image == '')
+    <div class="avatar avatar-md mr-1">
+                                                                                        <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                                                            alt="Profile Picture" class="">
+                                                                                    </div>
+@else
+    <img src="../../../app-assets/images/profiles/{{ $queue_patient->patient_image }}"
+                                                                                        alt="Profile Picture" class="">
+    @endif -->
+                                                        {{ $indexKey + 1 }}
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <a href="patient_edit?id={{ $queue_patient->patient_id }}&patientcode={{ $queue_patient->patientcode }}"
+                                                            class="primary">{{ $queue_patient->patient->lastname . ', ' . $queue_patient->patient->firstname }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $queue_patient->patient->patientinfo->package ? $queue_patient->patient->patientinfo->package->packagename : null }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="patient_edit?id={{ $queue_patient->patient_id }}&patientcode={{ $queue_patient->patientcode }}"
+                                                            class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i>
+                                                            Edit</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card patient-status">
+                            <div class="card-header pb-0">
+                                <h5 class="warning font-bold"><i class="icon icon-user customize-icon"></i> ADMITTED</h5>
+                                <span class="sub-heading">PATIENT IS IN THE
+                                    RECEPTION
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table status-table">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Package</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody class="table-striped">
+                                            @foreach ($categorizedPatients['pending'] as $indexKey => $pending_patient)
+                                                <tr>
+                                                    <td>
+                                                        {{ $indexKey + 1 }}
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <a href="patient_edit?id={{ $pending_patient->patient_id }}&patientcode={{ $pending_patient->patientcode }}"
+                                                            class="warning font-bold">{{ $pending_patient->patient->lastname . ', ' . $pending_patient->patient->firstname }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $pending_patient->patient->patientinfo->package ? $pending_patient->patient->patientinfo->package->packagename : null }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="patient_edit?id={{ $pending_patient->patient_id }}&patientcode={{ $pending_patient->patientcode }}"
+                                                            class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i>
+                                                            Edit</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card patient-status">
+                            <div class="card-header pb-0">
+                                <h5 class="danger"><i class="icon icon-user customize-icon"></i> ON GOING</h5>
+                                <span class="sub-heading">PATIENT IS TAKING THE
+                                    EXAMS</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table status-table">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Package</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody class="table-striped">
+                                            @foreach ($categorizedPatients['ongoing'] as $indexKey => $ongoing_patient)
+                                                <tr>
+                                                    <td>
+                                                        {{ $indexKey + 1 }}
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <a href="patient_edit?id={{ $ongoing_patient->patient_id }}&patientcode={{ $ongoing_patient->patientcode }}"
+                                                            class="danger">{{ $ongoing_patient->patient->lastname . ', ' . $ongoing_patient->patient->firstname }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $ongoing_patient->patient->patientinfo->package ? $ongoing_patient->patient->patientinfo->package->packagename : null }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="patient_edit?id={{ $ongoing_patient->patient_id }}&patientcode={{ $ongoing_patient->patientcode }}"
+                                                            class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i>
+                                                            Edit</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card patient-status">
+                            <div class="card-header pb-0">
+                                <h5 class="success">
+                                    <i class="icon icon-user customize-icon"></i> MEDICAL DONE
+                                </h5>
+                                <span class="sub-heading"> PATIENT COMPLETED THE
+                                    EXAMS</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table status-table">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Package</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody class="table-striped">
+                                            @foreach ($categorizedPatients['completed'] as $indexKey => $completed_patient)
+                                                <tr>
+                                                    <td>
+                                                        {{ $indexKey + 1 }}
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <a href="patient_edit?id={{ $completed_patient->patient_id }}&patientcode={{ $completed_patient->patientcode }}"
+                                                            class="success">{{ $completed_patient->patient->lastname . ', ' . $completed_patient->patient->firstname }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $completed_patient->patient->patientinfo->package ? $completed_patient->patient->patientinfo->package->packagename : null }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="patient_edit?id={{ $completed_patient->patient_id }}&patientcode={{ $completed_patient->patientcode }}"
+                                                            class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i>
+                                                            Edit</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card patient-status">
+                            <div class="card-header pb-0">
+                                <h5 class="success">
+                                    <i class="icon icon-user customize-icon"></i> FIT TO WORK
+                                </h5>
+                                <span class="sub-heading"> PATIENT COMPLETED THE
+                                    EXAMS</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table status-table">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Package</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody class="table-striped">
+                                            @foreach ($categorizedPatients['fit'] as $indexKey => $fit_patient)
+                                                <tr>
+                                                    <td>
+                                                        {{ $indexKey + 1 }}
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <a href="patient_edit?id={{ $fit_patient->patient_id }}&patientcode={{ $fit_patient->patientcode }}"
+                                                            class="success">{{ $fit_patient->patient->lastname . ', ' . $fit_patient->patient->firstname }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ optional($fit_patient->patient->patientinfo->package)->packagename }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="patient_edit?id={{ $fit_patient->patient_id }}&patientcode={{ $fit_patient->patientcode }}"
+                                                            class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="card">
                             <div class="card-header">
                                 <div class="card-title">Transmittal</div>
                             </div>
@@ -375,7 +557,7 @@
                                     </form>
                                 </section>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
