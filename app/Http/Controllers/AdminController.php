@@ -71,24 +71,24 @@ class AdminController extends Controller
                         return null;
                     }
                 })
-                ->addColumn('status', function ($row) {
-                    // get patient package
-                    if ($row->patient->admission && $row->patient->admission->package) {
-                        $patient_package = $row->patient->admission->package;
-                    } elseif ($row->patientinfo && $row->patientinfo->package) {
-                        $patient_package = $row->patientinfo->package;
-                    } else {
-                        return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
-                    }
+                // ->addColumn('status', function ($row) {
+                //     // get patient package
+                //     if ($row->patient->admission && $row->patient->admission->package) {
+                //         $patient_package = $row->patient->admission->package;
+                //     } elseif ($row->patientinfo && $row->patientinfo->package) {
+                //         $patient_package = $row->patientinfo->package;
+                //     } else {
+                //         return '<div class="badge mx-1 p-1 bg-info">NO EXAMS</div>';
+                //     }
 
-                    $patient_exams = DB::table('list_packagedtl')
-                        ->select('list_packagedtl.*', 'list_exam.examname', 'list_exam.category', 'list_exam.section_id')
-                        ->where('main_id', $patient_package->id)
-                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                        ->get();
+                //     $patient_exams = DB::table('list_packagedtl')
+                //         ->select('list_packagedtl.*', 'list_exam.examname', 'list_exam.category', 'list_exam.section_id')
+                //         ->where('main_id', $patient_package->id)
+                //         ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+                //         ->get();
 
-                    return $row->patient->admission ? $row->patient->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
-                })
+                //     return $row->patient->admission ? $row->patient->admission->getStatusExams($patient_exams) : '<div class="badge mx-1 p-1 bg-info">REGISTERED</div>';
+                // })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="patient_edit?id=' . $row->patient_id . '&patientcode=' . $row->patientcode . '"  class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>';
                     return $actionBtn;
@@ -332,6 +332,7 @@ class AdminController extends Controller
 
 
             $patientStatus = (new PatientController())->patientStatus($patient->patient->admission_id, $patientExams);
+            // dd($patientStatus);
             $completedExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === 'completed');
             $ongoingExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === '');
 

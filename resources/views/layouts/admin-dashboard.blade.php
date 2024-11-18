@@ -54,7 +54,7 @@
                                                 <th>Patient Name</th>
                                                 <th>Package</th>
                                                 <th>Agency</th>
-                                                <th>Status</th>
+                                                {{-- <th>Status</th> --}}
                                                 <th>Action</th>
                                             </thead>
                                         </table>
@@ -236,12 +236,12 @@
                                                     <td>
                                                         <!-- @if ($queue_patient->patient_image == null || $queue_patient->patient_image == '')
     <div class="avatar avatar-md mr-1">
-                                                                                        <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                                                            alt="Profile Picture" class="">
-                                                                                    </div>
+                                                                                                <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                                                                    alt="Profile Picture" class="">
+                                                                                            </div>
 @else
     <img src="../../../app-assets/images/profiles/{{ $queue_patient->patient_image }}"
-                                                                                        alt="Profile Picture" class="">
+                                                                                                alt="Profile Picture" class="">
     @endif -->
                                                         {{ $indexKey + 1 }}
                                                     </td>
@@ -608,10 +608,7 @@
                     orderable: true,
                     searchable: true
                 },
-                {
-                    data: 'status',
-                    name: 'status',
-                },
+
                 {
                     data: 'action',
                     name: 'action',
