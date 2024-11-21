@@ -334,29 +334,59 @@ class AgencyController extends Controller
 
     public function submit_agency_default_password(Request $request)
     {
-        $agency = Agency::where('id', $request->id)->first();
+        // Start a database transaction
+        DB::beginTransaction();
 
-        $new_password = "123456789";
+        try {
+            // Retrieve the agency
+            $agency = Agency::find($request->id);
 
+            if (! $agency) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Agency not found.'
+                ], 404);
+            }
 
-        $agency->update([
-            'not_first' => 0,
-            'password' => Hash::make($new_password),
-        ]);
+            // Generate a new secure password
+            $new_password = Str::random(8);
 
-        $details = [
-            'email' => $agency->email,
-            'password' => $new_password,
-        ];
+            // Update agency details
+            $agency->update([
+                'not_first' => 0,
+                'password' => Hash::make($new_password),
+            ]);
 
-        Mail::to($agency->email)->send(new AgencyPassword($details));
+            // Prepare email details
+            $details = [
+                'email' => $agency->email,
+                'password' => $new_password,
+            ];
 
-        return response()->json([
-            'status' => true,
-            'message' => 'The default password successfully sent.'
-        ]);
+            // Attempt to send the email
+            Mail::to($agency->email)->send(new AgencyPassword($details));
 
+            // Commit the transaction if email sent successfully
+            DB::commit();
+
+            // Return success response
+            return response()->json([
+                'status' => true,
+                'message' => 'The default password was successfully sent.'
+            ]);
+        } catch (\Exception $e) {
+            // Rollback the transaction if an error occurs
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to send the email.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+
+
 
     public function get_agency_vessel_datatable(Request $request)
     {
