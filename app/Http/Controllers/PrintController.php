@@ -505,7 +505,7 @@ class PrintController extends Controller
 
         $agency = Agency::where('id', '=', $admission->agency_id)->first();
 
-        $technician1 = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')->where('mast_employee.id', 70)->leftJoin('mast_employeeinfo', 'mast_employeeinfo.main_id', 'mast_employee.id')->first();
+        $technician1 = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')->where('mast_employee.id', $exam->technician_id)->leftJoin('mast_employeeinfo', 'mast_employeeinfo.main_id', 'mast_employee.id')->first();
         $technician2 = User::where('id', $exam->technician2_id)->first();
 
 
