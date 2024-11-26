@@ -770,33 +770,7 @@ class PrintController extends Controller
     public function exam_urinalysis(Request $request)
     {
         $id = $_GET['id'];
-        $admission = Admission::select(
-            'tran_admission.*',
-            'mast_patient.lastname as lastname',
-            'mast_patient.firstname as firstname',
-            'mast_patient.middlename as middlename',
-            'mast_patient.suffix as suffix',
-            'mast_patient.patientcode as patientcode',
-            'mast_patient.gender as gender',
-            'mast_patient.age as age',
-            'mast_patient.age as age',
-            'mast_patient.id as patient_id',
-            'mast_agency.agencyname as agencyname'
-        )
-            ->where('tran_admission.id', '=', $id)
-            ->leftJoin(
-                'mast_patient',
-                'mast_patient.patientcode',
-                '=',
-                'tran_admission.patientcode'
-            )
-            ->leftJoin(
-                'mast_agency',
-                'mast_agency.id',
-                '=',
-                'tran_admission.agency_id'
-            )
-            ->first();
+        $admission = Admission::where('id', $id)->with('patient', 'agency')->first();
 
         $gen_info = DB::table('mast_patientinfo')
             ->where('main_id', $admission->patient_id)
