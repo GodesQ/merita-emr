@@ -456,7 +456,8 @@
                                                                                     licence</td>
                                                                                 <td colspan="2"><span><img
                                                                                             src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                            width="10"></span>Passport
+                                                                                            width="10"></span>Passport:
+                                                                                    {{ $admission->patient->patientinfo->passportno ?? null }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
