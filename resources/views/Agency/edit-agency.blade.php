@@ -37,10 +37,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="agency-vessel-tab" role="tabpanel"
-                            aria-labelledby="base-agency-vessel">
+                        <div class="tab-pane" id="agency-vessel-tab" role="tabpanel" aria-labelledby="base-agency-vessel">
                             <div class="my-2 text-right">
-                                <button class="btn btn-primary text-right add-vessel">Add Vessel <i class="fa fa-plus"></i></button>
+                                <button class="btn btn-primary text-right add-vessel">Add Vessel <i
+                                        class="fa fa-plus"></i></button>
                             </div>
                             @include('Agency.agency-vessel.agency-vessel-form')
                             @include('Agency.agency-vessel.list-agency-vessel')
@@ -48,8 +48,9 @@
                         <div class="tab-pane" id="agency-principal-tab" role="tabpanel"
                             aria-labelledby="base-agency-principal">
                             <div class="my-2 text-right">
-                                <button class="btn btn-primary text-right add-principal">Add Principal <i class="fa fa-plus"></i></button>
-                            </div>                        
+                                <button class="btn btn-primary text-right add-principal">Add Principal <i
+                                        class="fa fa-plus"></i></button>
+                            </div>
                             @include('Agency.agency-principal.agency-principal-form')
                             @include('Agency.agency-principal.list-agency-principal')
                         </div>
@@ -61,9 +62,7 @@
 @endsection
 
 @push('scripts')
-    <script>
-
-    </script>
+    <script></script>
 
     <script>
         // Reset Password Button
@@ -86,20 +85,28 @@
                     $.ajax({
                         url: '/submit_agency_password_form',
                         method: 'POST',
-                        data: { id: id, email: email, _token: csrf },
+                        data: {
+                            id: id,
+                            email: email,
+                            _token: csrf
+                        },
                         success: function(response) {
                             if (response.status == 200) {
-                                Swal.fire('Updated!', 'Record has been updated.', 'success').then((result) => { 
-                                    if (result.isConfirmed)  location.reload() 
-                                });
+                                Swal.fire('Updated!', 'Record has been updated.', 'success')
+                                    .then((result) => {
+                                        if (result.isConfirmed) location.reload()
+                                    });
                             } else {
-                                Swal.fire('Error Occured!', 'Internal Server Error.', 'error').then((result) => {
-                                    if (result.isConfirmed) location.reload()
-                                });
+                                Swal.fire('Error Occured!', 'Internal Server Error.', 'error')
+                                    .then((result) => {
+                                        if (result.isConfirmed) location.reload()
+                                    });
                             }
                         }
                     }).done(function(data) {
-                        $(this).html("<button type='button' class='btn btn-sm p-75 m-50 btn-outline-success reset-password' id='reset-btn'>RESET PASSWORD</button>")
+                        $(this).html(
+                            "<button type='button' class='btn btn-sm p-75 m-50 btn-outline-success reset-password' id='reset-btn'>RESET PASSWORD</button>"
+                        )
                     });
                 }
             })
@@ -118,7 +125,9 @@
                 confirmButtonText: 'Yes, reset it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $(this).html("<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>DEFAULT PASSWORD</button>");
+                    $(this).html(
+                        "<button type='button' class='btn btn-solid btn-success'><i class='fa fa-refresh spinner'></i>DEFAULT PASSWORD</button>"
+                    );
                     $.ajax({
                         url: '/agency/default-password',
                         method: 'POST',
@@ -127,12 +136,26 @@
                             email: email,
                             _token: csrf,
                         },
-                        success: function (response) {
-                            if(response.status) {
-                                Swal.fire('Updated!', 'The default password was successfully sent.', 'success').then((result) => { 
-                                    if (result.isConfirmed)  location.reload() 
+                        success: function(response) {
+                            if (response.status) {
+                                Swal.fire('Updated!',
+                                    'The default password was successfully sent.', 'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) location.reload()
                                 });
                             }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle errors
+                            let errorMessage =
+                                'An error occurred while processing your request.';
+
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON
+                                    .message; // Extract server-side error message if available
+                            }
+
+                            Swal.fire('Error', errorMessage, 'error');
                         }
                     })
                 }
@@ -154,7 +177,8 @@
                 success: function(response) {
                     console.log(response);
                     if (response.status == 200) {
-                        Swal.fire('Update!', 'Agency Update Successfully!', 'success').then((result) => {
+                        Swal.fire('Update!', 'Agency Update Successfully!', 'success').then((
+                            result) => {
                             if (result.isConfirmed) location.reload()
                         });
                     } else {
