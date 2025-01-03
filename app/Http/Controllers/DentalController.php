@@ -15,7 +15,7 @@ class DentalController extends Controller
 {
     //
     public function edit_dental(Request $request)
-    {   
+    {
         try {
             $id = $request->id;
             $exam = Dental::select(
@@ -31,10 +31,10 @@ class DentalController extends Controller
                 ->latest('id')
                 ->first();
             // dd($exam);
-            
+
             $dental_services = DB::table('exam_dental_services')->where('main_id', $exam->id)->get();
             $dental_uploads = DB::table('exam_dental_upload')->where('main_id', $exam->id)->get();
-    
+
             $patient = Patient::where('patientcode', $exam->patientcode)->latest('id')->first();
             $admission = Admission::where('id', $exam->admission_id)->first();
             $dentists = User::where('position', 'LIKE', '%Dentist%')->get();
@@ -47,34 +47,34 @@ class DentalController extends Controller
     }
 
     public function update_dental(Request $request)
-    {   
+    {
         try {
             // dd($request->all());
             $id = $request->id;
             $exam = Dental::where('id', $id)->latest('id')->first();
 
             $exam->fill($request->only([
-                'hygiene', 'gingiva', 'color', 'tongue', 'high_blood', 'diabetis', 'tuberculosis', 'hepatitis', 
-                'goiter', 'allergy', 'food', 'drugs', 'anesthesia', 'fainting', 'others', 'tooth18', 'tooth17', 
-                'tooth16', 'tooth15', 'tooth14', 'tooth13', 'tooth12', 'tooth11', 'tooth21', 'tooth22', 
-                'tooth23', 'tooth24', 'tooth25', 'tooth26', 'tooth27', 'tooth28', 'tooth48', 'tooth47', 
-                'tooth46', 'tooth45', 'tooth44', 'tooth43', 'tooth42', 'tooth41', 'tooth31', 'tooth32', 
-                'tooth33', 'tooth34', 'tooth35', 'tooth36', 'tooth37', 'tooth38', 'decidous1', 'decidous2', 
-                'dentition1', 'dentition2', 'dentition18', 'dentition17', 'dentition16', 'dentition15', 
-                'dentition14', 'dentition13', 'dentition12', 'dentition11', 'dentition21', 'dentition22', 
-                'dentition23', 'dentition24', 'dentition25', 'dentition26', 'dentition27', 'dentition28', 
-                'dentition48', 'dentition47', 'dentition46', 'dentition45', 'dentition44', 'dentition43', 
-                'dentition42', 'dentition41', 'dentition31', 'dentition32', 'dentition33', 'dentition34', 
-                'dentition35', 'dentition36', 'dentition37', 'dentition38', 'remarks_status', 'remarks', 
+                'trans_date', 'hygiene', 'gingiva', 'color', 'tongue', 'high_blood', 'diabetis', 'tuberculosis', 'hepatitis',
+                'goiter', 'allergy', 'food', 'drugs', 'anesthesia', 'fainting', 'others', 'tooth18', 'tooth17',
+                'tooth16', 'tooth15', 'tooth14', 'tooth13', 'tooth12', 'tooth11', 'tooth21', 'tooth22',
+                'tooth23', 'tooth24', 'tooth25', 'tooth26', 'tooth27', 'tooth28', 'tooth48', 'tooth47',
+                'tooth46', 'tooth45', 'tooth44', 'tooth43', 'tooth42', 'tooth41', 'tooth31', 'tooth32',
+                'tooth33', 'tooth34', 'tooth35', 'tooth36', 'tooth37', 'tooth38', 'decidous1', 'decidous2',
+                'dentition1', 'dentition2', 'dentition18', 'dentition17', 'dentition16', 'dentition15',
+                'dentition14', 'dentition13', 'dentition12', 'dentition11', 'dentition21', 'dentition22',
+                'dentition23', 'dentition24', 'dentition25', 'dentition26', 'dentition27', 'dentition28',
+                'dentition48', 'dentition47', 'dentition46', 'dentition45', 'dentition44', 'dentition43',
+                'dentition42', 'dentition41', 'dentition31', 'dentition32', 'dentition33', 'dentition34',
+                'dentition35', 'dentition36', 'dentition37', 'dentition38', 'remarks_status', 'remarks',
                 'recommendation', 'technician_id'
             ]));
-            
+
             $save = $exam->save();
 
             DB::table('exam_dental_services')->where('main_id', $exam->id)->delete();
-            
+
             foreach ($request->dates as $key => $date) {
-                if($date && $request->services[$key] && $request->teeth[$key]) {
+                if ($date && $request->services[$key] && $request->teeth[$key]) {
                     // INSERT NEW RECORD
                     $new_record = DB::table('exam_dental_services')->insert([
                         "main_id" => $exam->id,
@@ -89,7 +89,7 @@ class DentalController extends Controller
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
             $log->description =
-                'Update Dental from Patient ' . $request->patientcode;
+                'Update Dental from Patient '.$request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 
@@ -106,7 +106,7 @@ class DentalController extends Controller
     }
 
     public function add_dental(Request $request)
-    {   
+    {
         try {
             $id = $_GET['id'];
             $admission = Admission::select(
@@ -133,7 +133,7 @@ class DentalController extends Controller
     }
 
     public function store_dental(Request $request)
-    {       
+    {
         try {
             $exam = new Dental();
             $exam->trans_date = $request->trans_date;
@@ -227,7 +227,7 @@ class DentalController extends Controller
             $save = $exam->save();
 
             foreach ($request->dates as $key => $date) {
-                if($date && $request->services[$key] && $request->teeth[$key]) {
+                if ($date && $request->services[$key] && $request->teeth[$key]) {
                     // INSERT NEW RECORD
                     $new_record = DB::table('exam_dental_services')->insert([
                         "main_id" => $exam->id,
@@ -241,14 +241,14 @@ class DentalController extends Controller
             $employeeInfo = session()->all();
             $log = new EmployeeLog();
             $log->employee_id = $employeeInfo['employeeId'];
-            $log->description = 'Add Dental from Patient ' . $request->patientcode;
+            $log->description = 'Add Dental from Patient '.$request->patientcode;
             $log->date = date('Y-m-d');
             $log->save();
 
             $path =
-                'patient_edit?id=' .
-                $request->patient_id .
-                '&patientcode=' .
+                'patient_edit?id='.
+                $request->patient_id.
+                '&patientcode='.
                 $request->patientcode;
             if ($save) {
                 return redirect($path)->with('status', 'Dental Exam added')->with('redirect', 'basic-exam;child-basic-tab;child-basic-component;baseVerticalLeft1-tab4;tabVerticalLeft4');
@@ -260,38 +260,37 @@ class DentalController extends Controller
         }
     }
 
-     public function upload_dental(Request $request)
-    {   
+    public function upload_dental(Request $request)
+    {
         try {
             $this->validate($request, [
                 'upload_files' => 'required',
                 'upload_files.*' => 'mimes:pdf,jpg,png,jpeg'
             ]);
-    
-            if($request->hasFile('upload_files')) {
-                foreach($request->file('upload_files') as $file)
-                {
-                    $name= $file->getClientOriginalName();
-                    $file->move(public_path().'/app-assets/images/dental_files', $name);  
-                 
+
+            if ($request->hasFile('upload_files')) {
+                foreach ($request->file('upload_files') as $file) {
+                    $name = $file->getClientOriginalName();
+                    $file->move(public_path().'/app-assets/images/dental_files', $name);
+
                     $save_file = DB::table('exam_dental_upload')->insert([
                         "main_id" => $request->patient_id,
                         "file" => $name,
                         "created_date" => date("Y-m-d")
                     ]);
                 }
-                
-                if($save_file) {
+
+                if ($save_file) {
                     return back()->with('status', 'Upload Successfully');
                 }
             }
         } catch (\Exception $exception) {
-            
+
             $this->validate($request, [
                 'upload_files' => 'required',
                 'upload_files.*' => 'mimes:pdf,jpg,png,jpeg'
             ]);
-            
+
             $message = $exception->getMessage();
             $file = $exception->getFile();
             return view('errors.error', compact('message', 'file'));
