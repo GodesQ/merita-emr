@@ -39,12 +39,12 @@ class AdmissionController extends Controller
                     $patient = Patient::where('patientcode', '=', $row['patientcode'])->first();
                     $patient_name = null;
                     if ($patient) {
-                        $patient_name = $patient->lastname . ', ' . $patient->firstname;
+                        $patient_name = $patient->lastname.', '.$patient->firstname;
                     }
                     return $patient_name;
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<button id=' . $row['id'] . ' class="btn btn-secondary btn-sm select-admission" title="Routing Slip"><i class="fa fa-hand-o-left"></i></button>';
+                    $actionBtn = '<button id='.$row['id'].' class="btn btn-secondary btn-sm select-admission" title="Routing Slip"><i class="fa fa-hand-o-left"></i></button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'patientname'])
@@ -71,17 +71,17 @@ class AdmissionController extends Controller
                     $patient = Patient::where('patientcode', '=', $row['patientcode'])->first();
                     $patient_name = null;
                     if ($patient) {
-                        $patient_name = $patient->lastname . ', ' . $patient->firstname;
+                        $patient_name = $patient->lastname.', '.$patient->firstname;
                     }
                     return $patient_name;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn =
-                        '<button id=' .
-                        $row['id'] .
+                        '<button id='.
+                        $row['id'].
                         ' class="btn btn-secondary btn-sm route-print" title="Routing Slip"><i class="fa fa-print"></i></button>
-                        <a href="#" id="' .
-                        $row['id'] .
+                        <a href="#" id="'.
+                        $row['id'].
                         '" class="delete-admission btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
                     return $actionBtn;
                 })
@@ -165,11 +165,11 @@ class AdmissionController extends Controller
         $tran_exams = $employeeInfo = session()->all();
         $log = new EmployeeLog();
         $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Add Admission ' . $request->patientcode;
+        $log->description = 'Add Admission '.$request->patientcode;
         $log->date = date('Y-m-d');
         $log->save();
 
-        $path = 'patient_edit?id=' . $request->patient_id . '&patientcode=' . $request->patientcode;
+        $path = 'patient_edit?id='.$request->patient_id.'&patientcode='.$request->patientcode;
 
         if ($save_admission) {
             return redirect($path)->with('status', 'New Patient Added Successfully');
@@ -278,7 +278,7 @@ class AdmissionController extends Controller
         $tran_exams = $employeeInfo = session()->all();
         $log = new EmployeeLog();
         $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Update Admission ' . $request->patientcode;
+        $log->description = 'Update Admission '.$request->patientcode;
         $log->date = date('Y-m-d');
         $log->save();
 
@@ -294,22 +294,24 @@ class AdmissionController extends Controller
         $data = Admission::where('id', $id)->first();
         $log = new EmployeeLog();
         $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Delete Admission of Patient ' . $data->patientcode;
+        $log->description = 'Delete Admission of Patient '.$data->patientcode;
         $log->date = date('Y-m-d');
         $log->save();
         $res = Admission::find($id)->delete();
     }
 
-    public function delete_additional_exams(Request $request) {
+    public function delete_additional_exams(Request $request)
+    {
         $additional_exam = AdditionalExam::where('id', $request->id)->first();
-        
+
         // Delete additional exam
         $additional_exam->delete();
 
-        return response()->json(['status'=> 'success', 'message' => 'Additional Exam Deleted Successfully.']);
+        return response()->json(['status' => 'success', 'message' => 'Additional Exam Deleted Successfully.']);
     }
 
-    public function reset_lab_result(Request $request) {
+    public function reset_lab_result(Request $request)
+    {
         $admission = Admission::where('id', $request->id)->first();
     }
 
@@ -324,7 +326,7 @@ class AdmissionController extends Controller
         $admission->cause_of_unfit = isset($request->cause_of_unfit) ? $request->cause_of_unfit : null;
         $admission->save();
 
-        $latestMedicalResult = PatientMedicalResult::where('admission_id', $admission->id)->orderBy('generate_at','desc')->first();
+        $latestMedicalResult = PatientMedicalResult::where('admission_id', $admission->id)->orderBy('generate_at', 'desc')->first();
 
         if (isset($request->schedule)) {
             $schedule = DB::table('sched_patients')
@@ -345,7 +347,7 @@ class AdmissionController extends Controller
         $doctor = User::where('id', $request->doctor_prescription)->first();
 
         # For Reset Status 
-        if($request->lab_status == 0) {
+        if ($request->lab_status == 0) {
             PhysicalExam::where('admission_id', $request->id)->update(['fit' => null]);
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new ResetLabStatus($patient, $agency, $admission));
@@ -355,7 +357,7 @@ class AdmissionController extends Controller
         # For Fit to Work Status
         if ($request->lab_status == 2) {
 
-            if(optional($latestMedicalResult)->generate_at <= $request->generate_at) {
+            if (optional($latestMedicalResult)->generate_at <= $request->generate_at) {
                 PhysicalExam::where('admission_id', $request->id)->update(['fit' => 'Fit']);
             }
 
@@ -391,11 +393,13 @@ class AdmissionController extends Controller
 
             ReassessmentFindings::where('admission_id', $admission->id)->delete();
 
-            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
-                }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
             }
+
+            // if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+
+            // }
         }
 
         # For Unfit to Work Status
@@ -407,7 +411,7 @@ class AdmissionController extends Controller
             if ($request->remarks) {
                 PatientMedicalResult::updateOrCreate(
                     // Conditions for updating or creating the record
-                    ['id' => $request->medical_result_id, ],
+                    ['id' => $request->medical_result_id,],
                     // Attributes to update or create
                     [
                         'reschedule_at' => $request->schedule ?? null,
@@ -430,11 +434,13 @@ class AdmissionController extends Controller
 
             ReassessmentFindings::where('admission_id', $admission->id)->delete();
 
-            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
-                }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new UnfitToWork($patient, $agency, $admission, $cause_of_unfit));
             }
+
+            // if (Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+
+            // }
         }
 
         # For Unfit Temporarily Status
@@ -446,7 +452,7 @@ class AdmissionController extends Controller
             if ($request->remarks) {
                 PatientMedicalResult::updateOrCreate(
                     // Conditions for updating or creating the record
-                    ['id' => $request->medical_result_id, ],
+                    ['id' => $request->medical_result_id,],
                     // Attributes to update or create
                     [
                         'reschedule_at' => $request->schedule ?? null,
@@ -467,18 +473,19 @@ class AdmissionController extends Controller
                     'patient' => $patient,
                     'doctor' => $doctor,
                 ])->setOptions([
-                    'defaultFont' => 'serif',
-                ]);
+                            'defaultFont' => 'serif',
+                        ]);
             } else {
                 $pdf = null;
             }
 
             // ReassessmentFindings::where('admission_id', $admission->id)->delete();
-            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission));
-                }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new UnfitTempToWork($patient, $agency, $admission));
             }
+            // if (Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+
+            // }
         }
 
         # For Re-Assessment Status
@@ -490,7 +497,7 @@ class AdmissionController extends Controller
             if ($request->remarks) {
                 PatientMedicalResult::updateOrCreate(
                     // Conditions for updating or creating the record
-                    ['id' => $request->medical_result_id, ],
+                    ['id' => $request->medical_result_id,],
                     // Attributes to update or create
                     [
                         'reschedule_at' => $request->schedule ?? null,
@@ -513,11 +520,13 @@ class AdmissionController extends Controller
                 $pdf = null;
             }
 
-            if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
-                foreach ($recipients as $key => $recipient) {
-                    Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
-                }
+            foreach ($recipients as $key => $recipient) {
+                Mail::to($recipient)->send(new ReAssessment($admission, $patient, $request->schedule, $pdf));
             }
+
+            // if (Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
+
+            // }
         }
 
         return response()->json([
@@ -527,7 +536,7 @@ class AdmissionController extends Controller
 
     public function create_followup(Request $request)
     {
-        if (!$request->findings) {
+        if (! $request->findings) {
             return back()->with('fail', 'No Significant Findings Found. Failed to Submit');
         }
         $findings = implode(';', $request->findings);
@@ -556,13 +565,14 @@ class AdmissionController extends Controller
         }
     }
 
-    public function migrate_patient_remarks(Request $request) {
+    public function migrate_patient_remarks(Request $request)
+    {
         $admissions = Admission::whereNotNull('remarks')->with('patient')->get();
 
         foreach ($admissions as $admission) {
-            if($admission->remarks || $admission->prescription) {
+            if ($admission->remarks || $admission->prescription) {
 
-                if($admission->lab_status == 2) {
+                if ($admission->lab_status == 2) {
                     $generate_at = $admission->patient->fit_to_work_date ?? $admission->trans_date;
                 } else {
                     $generate_at = $admission->prescription_date ?? $admission->trans_date;
@@ -582,4 +592,4 @@ class AdmissionController extends Controller
 
         return 'Success';
     }
- }
+}
