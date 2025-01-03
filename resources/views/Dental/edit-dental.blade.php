@@ -128,8 +128,8 @@
                                         </tr>
                                         <tr>
                                             <td><b>Exam Date</b></td>
-                                            <td><input name="trans_date" type="text" id="trans_date"
-                                                    value="{{ $exam->trans_date }}" class="form-control" readonly="">
+                                            <td><input name="trans_date" type="date" id="trans_date"
+                                                    value="{{ $exam->trans_date }}" class="form-control">
                                             </td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
@@ -891,7 +891,16 @@ echo $exam->color == 'Pink' ? "checked" : "" @endphp>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                        @if (
+                                                            !in_array(session()->get('position'), [
+                                                                'Cashier',
+                                                                'Releasing',
+                                                                'Human Resource / Documentation Officer',
+                                                                'Processing officer',
+                                                                'Information Clerk',
+                                                                'Nurse',
+                                                                'Asst accounant',
+                                                            ]))
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-group">
