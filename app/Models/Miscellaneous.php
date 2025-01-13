@@ -12,7 +12,8 @@ class Miscellaneous extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    public function admission() {
-        $this->belongsTo(Admission::class, 'admission_id');
+    public function admission()
+    {
+        return $this->belongsTo(Admission::class, 'admission_id');
     }
 }
