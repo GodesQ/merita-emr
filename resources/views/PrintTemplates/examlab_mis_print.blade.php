@@ -30,27 +30,29 @@
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{$admission->lastname . ', ' . $admission->firstname . " " . $admission->middlename}}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{ $admission->lastname . ', ' . $admission->firstname . ' ' . $admission->middlename }}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{$admission->age}}</span>
+                                        <span style="font-size:15px">{{ $admission->age }}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{$admission->gender}}</span>
+                                        <span style="font-size:15px">{{ $admission->gender }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
-                                        <span style="font-size:15px">{{$admission->agencyname}}</span>
+                                        <span style="font-size:15px">{{ $admission->agencyname }}</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME DATE:</b><br>
-                                        <span style="font-size:15px">{{date_format(new DateTime($exam->trans_date), "d F Y")}}</span>
+                                    <td height="26" align="left" valign="top" class="brdLeft"><b>PEME
+                                            DATE:</b><br>
+                                        <span
+                                            style="font-size:15px">{{ date_format(new DateTime($exam->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{$admission->patientcode}}</span>
+                                            NO:</b><br><span style="font-size:15px">{{ $admission->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -58,7 +60,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td height="50" align="center" class="lblReport">TEST EXAM</td>
+                    <td height="50" align="center" class="lblReport">{{ $exam->exam }}</td>
                 </tr>
                 <tr>
                     <td>
@@ -76,8 +78,8 @@
                                                     <td valign="top"><b>NORMAL VALUE</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="37%" height="100" valign="top">@php echo
-                                                        nl2br($exam->col1) @endphp</td>
+                                                    <td width="37%" height="100" valign="top">@php echo nl2br($exam->col1); @endphp
+                                                    </td>
                                                     <td width="31%" valign="top">@php echo nl2br($exam->col2) @endphp
                                                     </td>
                                                     <td width="32%" valign="top">@php echo nl2br($exam->col3) @endphp
@@ -93,22 +95,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td height="120" align="center" valign="bottom">
-                                                        <table width="260" border="0" cellspacing="2" cellpadding="2">
+                                                        <table width="260" border="0" cellspacing="2"
+                                                            cellpadding="2">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        @if($technician1)
-                                                                            <img src="{{$technician1->signature}}" width="100px" style="object-fit: cover;"/>
+                                                                        @if ($technician1)
+                                                                            <img src="{{ $technician1->signature }}"
+                                                                                width="100px"
+                                                                                style="object-fit: cover;" />
                                                                         @endif
                                                                     </td>
                                                                 </tr>
                                                                 <tr valign="bottom">
                                                                     <td align="center" class="brdTop">
                                                                         @if ($technician1)
-                                                                        {{$technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title}}<br>
-                                                                        Medical Technologist<br>
-                                                                        Lic. No.
-                                                                        {{$technician1->license_no}}
+                                                                            {{ $technician1->firstname . ' ' . $technician1->middlename . ' ' . $technician1->lastname . ', ' . $technician1->title }}<br>
+                                                                            Medical Technologist<br>
+                                                                            Lic. No.
+                                                                            {{ $technician1->license_no }}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
@@ -116,7 +121,8 @@
                                                         </table>
                                                     </td>
                                                     <td colspan="3" align="center" valign="bottom">
-                                                        <table width="260" border="0" cellspacing="2" cellpadding="2">
+                                                        <table width="260" border="0" cellspacing="2"
+                                                            cellpadding="2">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center"></td>
@@ -124,10 +130,10 @@
                                                                 <tr valign="bottom">
                                                                     <td align="center" class="brdTop">
                                                                         @if ($technician2)
-                                                                        {{$technician2->firstname . " " . $technician2->middlename . " " . $technician2->lastname . ", " . $technician2->title}}<br>
-                                                                        Pathologist<br>
-                                                                        Lic. No.
-                                                                        {{$technician2->license_no}}        
+                                                                            {{ $technician2->firstname . ' ' . $technician2->middlename . ' ' . $technician2->lastname . ', ' . $technician2->title }}<br>
+                                                                            Pathologist<br>
+                                                                            Lic. No.
+                                                                            {{ $technician2->license_no }}
                                                                         @endif
                                                                     </td>
                                                                 </tr>
