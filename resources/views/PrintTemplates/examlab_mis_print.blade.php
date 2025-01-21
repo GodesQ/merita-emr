@@ -30,19 +30,19 @@
                                     </td>
                                     <td width="218" valign="top" class="brdLeftBtm"><b>NAME:</b><br>
                                         <span
-                                            style="font-size:15px; text-transform: uppercase;">{{ $admission->lastname . ', ' . $admission->firstname . ' ' . $admission->middlename }}</span>
+                                            style="font-size:15px; text-transform: uppercase;">{{ $admission->patient->lastname . ', ' . $admission->patient->firstname . ' ' . $admission->patient->middlename }}</span>
                                     </td>
                                     <td width="39" valign="top" class="brdLeftBtm"><b>AGE:</b><br>
-                                        <span style="font-size:15px">{{ $admission->age }}</span>
+                                        <span style="font-size:15px">{{ $admission->patient->age }}</span>
                                     </td>
                                     <td width="45" valign="top" class="brdLeftBtm"><b>SEX:</b><br>
-                                        <span style="font-size:15px">{{ $admission->gender }}</span>
+                                        <span style="font-size:15px">{{ $admission->patient->gender }}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td height="27" colspan="3" align="left" valign="top" class="brdLeftBtm">
                                         <b>REQUESTED BY:</b><br>
-                                        <span style="font-size:15px">{{ $admission->agencyname }}</span>
+                                        <span style="font-size:15px">{{ $admission->agency->agencyname }}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -52,7 +52,8 @@
                                             style="font-size:15px">{{ date_format(new DateTime($exam->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
-                                            NO:</b><br><span style="font-size:15px">{{ $admission->patientcode }}</span>
+                                            NO:</b><br><span
+                                            style="font-size:15px">{{ $admission->patient->patientcode }}</span>
                                     </td>
                                 </tr>
                             </tbody>
