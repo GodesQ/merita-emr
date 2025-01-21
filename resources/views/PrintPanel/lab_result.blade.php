@@ -333,7 +333,7 @@
                     </table>
                 </td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td>
                     <table class="brdAll" cellpadding="0" cellspacing="0" width="100%">
                         <tbody>
@@ -432,7 +432,7 @@
                         </tbody>
                     </table>
                 </td>
-            </tr>
+            </tr> --}}
             <tr>
                 <td>
                     <table width="100%" cellpadding="0" cellspacing="2" class="brdAll">
