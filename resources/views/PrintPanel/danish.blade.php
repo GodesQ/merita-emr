@@ -384,7 +384,7 @@
                                                                                         style="margin-left: 1rem; width: 50%;">
                                                                                         @if ($admission->agency_id != 19)
                                                                                             @if ($admission->patient->patient_signature)
-                                                                                                <img style="width: 100%;"
+                                                                                                <img style="width: 80%;"
                                                                                                     src="@php echo base64_decode($admission->patient->patient_signature) @endphp"
                                                                                                     class="signature-taken" />
                                                                                             @elseif($admission->patient->signature)
