@@ -375,28 +375,38 @@
                                                                         <tr>
                                                                             <td colspan="4" height="70">
                                                                                 <div
-                                                                                    style="display: flex; align-items: flex-start; justify-content: space-between; padding: 1rem; height: 100%;">
-                                                                                    <div width="50%">Date <span
-                                                                                            style="margin-left: 1rem;">{{ Carbon::parse($admission->trans_date)->format('M-d-Y') }}</span>
+                                                                                    style="display: flex; align-items: flex-end; justify-content: space-between; ">
+                                                                                    <div
+                                                                                        style="margin-left: 1rem; width: 50%; text-align: center;">
+                                                                                        {{ Carbon::parse($admission->trans_date)->format('M-d-Y') }}
                                                                                     </div>
-                                                                                    <div width="50%">Signature:
-                                                                                        <div id="divImage">
-                                                                                            <div id="divImage">
-                                                                                                @if ($admission->agency_id != 19)
-                                                                                                    @if ($admission->patient->patient_signature)
-                                                                                                        <img src="@php echo base64_decode($admission->patient->patient_signature) @endphp"
-                                                                                                            class="signature-taken" />
-                                                                                                    @elseif($admission->patient->signature)
-                                                                                                        <img src="data:image/jpeg;base64,{{ $admission->patient->signature }}"
-                                                                                                            class="signature-taken" />
-                                                                                                    @else
-                                                                                                        <div
-                                                                                                            style="width: 150px;height: 40px;">
-                                                                                                        </div>
-                                                                                                    @endif
-                                                                                                @endif
-                                                                                            </div>
-                                                                                        </div>
+                                                                                    <div
+                                                                                        style="margin-left: 1rem; width: 50%;">
+                                                                                        @if ($admission->agency_id != 19)
+                                                                                            @if ($admission->patient->patient_signature)
+                                                                                                <img style="width: 100%;"
+                                                                                                    src="@php echo base64_decode($admission->patient->patient_signature) @endphp"
+                                                                                                    class="signature-taken" />
+                                                                                            @elseif($admission->patient->signature)
+                                                                                                <img src="data:image/jpeg;base64,{{ $admission->patient->signature }}"
+                                                                                                    class="signature-taken" />
+                                                                                            @else
+                                                                                                <div
+                                                                                                    style="width: 150px;height: 40px;">
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="display: flex; align-items: flex-start; justify-content: space-between; padding: 0rem 1rem 1rem 1rem;">
+                                                                                    <div
+                                                                                        style="width: 50%; border-top: 1px solid black; text-align: center;">
+                                                                                        Date
+                                                                                    </div>
+                                                                                    <div
+                                                                                        style="width: 50%; border-top: 1px solid black; text-align: center;">
+                                                                                        Signature:
                                                                                     </div>
                                                                                 </div>
                                                                             </td>
