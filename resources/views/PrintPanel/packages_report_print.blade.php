@@ -66,6 +66,7 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="brdTable">
                     <thead>
                         <tr style="text-transform: uppercase !important;">
+                            <th>No.</th>
                             <th>Date</th>
                             <th>Hologram Number</th>
                             <th>Full Name</th>
