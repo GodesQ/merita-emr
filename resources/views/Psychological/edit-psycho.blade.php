@@ -1168,7 +1168,9 @@
                                                     <option value=""
                                                         @php echo $exam->conclusion == "" ? "selected=''" : "" @endphp>
                                                         --SELECT--</option>
-                                                    <option value="NON REQUIRED" {{ $exam->conclusion == "NON REQUIRED"  ? "selected" : "" }}>NON REQUIRED</option>
+                                                    <option value="NON REQUIRED"
+                                                        {{ $exam->conclusion == 'NON REQUIRED' ? 'selected' : '' }}>NON
+                                                        REQUIRED</option>
                                                     <option value="RECOMMENDED"
                                                         @php echo $exam->conclusion == "RECOMMENDED"
                                                     ? "selected=''" : "" @endphp>
@@ -1202,7 +1204,16 @@
                                                     <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30"
                                                         rows="6">{{ $exam->remarks }}</textarea>
                                                 </div>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (
+                                                    !in_array(session()->get('position'), [
+                                                        'Cashier',
+                                                        'Releasing',
+                                                        'Human Resource / Documentation Officer',
+                                                        'null',
+                                                        'Information Clerk',
+                                                        'Nurse',
+                                                        'Asst accounant',
+                                                    ]))
                                                     <div class="form-group">
                                                         <label class="font-weight-bold">Recommendation</label>
                                                         <textarea placeholder="Recommendation" class="form-control" name="recommendation" id=""

@@ -137,10 +137,12 @@
                                                     <tr>
                                                         <td width="20%" valign="top"><b>LIVER ULTRASOUND</b> <br>
                                                             <div class="form-group">
-                                                                <input name="liver_ultrasound_status" type="radio" class="m-1"
-                                                                    id="liver_ultrasound_status_0" value="normal" /> Normal
-                                                                <input name="liver_ultrasound_status" type="radio" class="m-1"
-                                                                    id="liver_ultrasound_status_1" value="findings" /> With Findings
+                                                                <input name="liver_ultrasound_status" type="radio"
+                                                                    class="m-1" id="liver_ultrasound_status_0"
+                                                                    value="normal" /> Normal
+                                                                <input name="liver_ultrasound_status" type="radio"
+                                                                    class="m-1" id="liver_ultrasound_status_1"
+                                                                    value="findings" /> With Findings
                                                             </div>
                                                         </td>
                                                         <td width="80%">
@@ -307,7 +309,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="kub_exam_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">KUB
                                                                         Recommendation</label>
@@ -334,7 +345,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="hbt_exam_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">HBT
                                                                         Recommendation</label>
@@ -347,7 +367,8 @@
                                                     <tr id="gb_group">
                                                         <td colspan="4">
                                                             <div class="form-group">
-                                                                <label for=""><b>GALLBLADDER Remarks Status</b></label>
+                                                                <label for=""><b>GALLBLADDER Remarks
+                                                                        Status</b></label>
                                                                 <br>
                                                                 <input name="gallbladder_exam_status" type="radio"
                                                                     class="m-1" id="gallbladder_exam_status_0"
@@ -357,11 +378,21 @@
                                                                     value="findings">With Findings
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="font-weight-bold">GALLBLADDER Findings</label>
-                                                                <textarea placeholder="Findings" class="form-control" name="gallbladder_exam_findings" id="" cols="30"
-                                                                    rows="6"></textarea>
+                                                                <label class="font-weight-bold">GALLBLADDER
+                                                                    Findings</label>
+                                                                <textarea placeholder="Findings" class="form-control" name="gallbladder_exam_findings" id=""
+                                                                    cols="30" rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">GALLBLADDER
                                                                         Recommendation</label>
@@ -388,7 +419,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="thyroid_exam_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">THYROID
                                                                         Recommendation</label>
@@ -415,7 +455,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="breast_exam_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">BREAST
                                                                         Recommendation</label>
@@ -443,7 +492,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="whole_abdomen_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">WHOLE ABDOMEN
                                                                         Recommendation</label>
@@ -470,7 +528,16 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="genitals_exam_findings" id="" cols="30"
                                                                     rows="6"></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (
+                                                                !in_array(session()->get('position'), [
+                                                                    'Cashier',
+                                                                    'Releasing',
+                                                                    'Human Resource / Documentation Officer',
+                                                                    'null',
+                                                                    'Information Clerk',
+                                                                    'Nurse',
+                                                                    'Asst accounant',
+                                                                ]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">GENITALS
                                                                         Recommendation</label>

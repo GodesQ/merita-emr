@@ -413,7 +413,8 @@
                                         </tr>
                                         <tr>
                                             <td width="17%" rowspan="2" align="center" valign="bottom">
-                                                <b>VALVE</b></td>
+                                                <b>VALVE</b>
+                                            </td>
                                             <td width="15%" rowspan="2" align="center">
                                                 <p><b>MAX VELOCITY<br>
                                                         m/sec</b></p>
@@ -624,7 +625,16 @@
                                                                     <label class="font-weight-bold">Findings</label>
                                                                     <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6">{{ $exam->remarks }}</textarea>
                                                                 </div>
-                                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                @if (
+                                                                    !in_array(session()->get('position'), [
+                                                                        'Cashier',
+                                                                        'Releasing',
+                                                                        'Human Resource / Documentation Officer',
+                                                                        'null',
+                                                                        'Information Clerk',
+                                                                        'Nurse',
+                                                                        'Asst accounant',
+                                                                    ]))
                                                                     <div class="form-group">
                                                                         <label
                                                                             class="font-weight-bold">Recommendation</label>
