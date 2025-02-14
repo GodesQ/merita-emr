@@ -107,13 +107,13 @@
                                                                         {{ $admission->patient->patientinfo->address }}
                                                                     </div>
                                                                 </td>
-                                                                <td>
+                                                                <td valign="top">
                                                                     Postal code and town/city
                                                                     <div class="fontBoldLrg"></div>
                                                                 </td>
                                                                 <td>
                                                                     Country
-                                                                    <div class="fontBoldLrg"></div>
+                                                                    <div class="fontBoldLrg">PH</div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -481,7 +481,8 @@
                                                                                     licence</td>
                                                                                 <td colspan="2"><span><img
                                                                                             src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                            width="10"></span>Passport
+                                                                                            width="10"></span>Passport:
+                                                                                    {{ $admission->patient->patientinfo->passportno ?? null }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
