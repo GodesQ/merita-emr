@@ -162,7 +162,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                        @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-group">

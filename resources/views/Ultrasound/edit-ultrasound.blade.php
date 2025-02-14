@@ -96,11 +96,11 @@
                                                     {{ $exam->exam_type == "BREAST" ?  "selected" : null }}>
                                                     BREAST
                                                 </option>
-                                                <option value="WHOLE ABDOMEN" 
+                                                <option value="WHOLE ABDOMEN"
                                                     {{ $exam->exam_type == "WHOLE ABDOMEN" ? "selected" : null }}>
                                                     WHOLE ABDOMEN
                                                 </option>
-                                                <option value="GENITALS" 
+                                                <option value="GENITALS"
                                                     {{ $exam->exam_type == "GENITALS" ? "selected" : null }}>
                                                     GENITALS
                                                 </option>
@@ -176,10 +176,10 @@
                                                         <td width="20%" valign="top"><b>LIVER ULTRASOUND</b> <br>
                                                             <div class="form-group">
                                                                 <input name="liver_ultrasound_status" type="radio" class="m-1"
-                                                                    id="liver_ultrasound_status_0" value="normal" 
+                                                                    id="liver_ultrasound_status_0" value="normal"
                                                                     {{ $exam->liver_ultrasound_status == 'normal' ? 'checked' : null }} /> Normal
                                                                 <input name="liver_ultrasound_status" type="radio" class="m-1"
-                                                                    id="liver_ultrasound_status_1" value="findings" 
+                                                                    id="liver_ultrasound_status_1" value="findings"
                                                                     {{ $exam->liver_ultrasound_status == 'findings' ? 'checked' : null }} /> With Findings
                                                             </div>
                                                         </td>
@@ -369,7 +369,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="kub_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->kub_exam_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">KUB
                                                                         Recommendation</label>
@@ -398,7 +398,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="hbt_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->hbt_exam_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">HBT
                                                                         Recommendation</label>
@@ -425,7 +425,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="gallbladder_exam_findings" id="" cols="30"
                                                                     rows="6">{{ $exam->gallbladder_exam_findings }}</textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">GALLBLADDER
                                                                         Recommendation</label>
@@ -455,7 +455,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="thyroid_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->thyroid_exam_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">THYROID
                                                                         Recommendation</label>
@@ -485,7 +485,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="breast_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->breast_exam_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">BREAST
                                                                         Recommendation</label>
@@ -516,7 +516,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="whole_abdomen_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->whole_abdomen_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">WHOLE ABDOMEN
                                                                         Recommendation</label>
@@ -546,7 +546,7 @@
                                                                 <textarea placeholder="Findings" class="form-control" name="genitals_exam_findings" id="" cols="30"
                                                                     rows="6"><?php echo nl2br($exam->genitals_exam_findings); ?></textarea>
                                                             </div>
-                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                            @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                 <div class="form-group">
                                                                     <label class="font-weight-bold">GENITALS
                                                                         Recommendation</label>

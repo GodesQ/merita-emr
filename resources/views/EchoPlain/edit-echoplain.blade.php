@@ -469,7 +469,7 @@
                                                                     <textarea placeholder="Findings" class="form-control" name="findings" id="" cols="30"
                                                                         rows="6">{{ $exam->findings }}</textarea>
                                                                 </div>
-                                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                                     <div class="form-group">
                                                                         <label
                                                                             class="font-weight-bold">Recommendation</label>

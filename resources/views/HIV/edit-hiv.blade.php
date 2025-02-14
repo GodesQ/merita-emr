@@ -162,7 +162,7 @@ echo $exam->exam == "others" ? "checked" : "" @endphp>
                                                     <label class="font-weight-bold">Findings</label>
                                                     <textarea class="form-control" name="remarks" id="" cols="30" rows="6">{{ $exam->remarks }}</textarea>
                                                 </div>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                     <div class="form-group">
                                                         <label class="font-weight-bold">Recommendation</label>
                                                         <textarea class="form-control" name="recommendation" id="" cols="30" rows="6">{{ $exam->recommendation }}</textarea>
