@@ -275,8 +275,7 @@
                                                 Positive
                                                 <input name="cocaine" type="radio"
                                                     onchange="addRemarks('Cocaine', this)" class="m-75" id="cocaine_1"
-                                                    value=""
-                                                    <?php echo $exam->cocaine == "" ? "checked" : "" ?>>
+                                                    value="" <?php echo $exam->cocaine == '' ? 'checked' : ''; ?>>
                                                 Reset
                                             </td>
                                             <td align="right"><b>Propoxyphene</b></td>
@@ -354,8 +353,7 @@
                                                 Positive
                                                 <input name="alcohol" type="radio"
                                                     onchange="addRemarks('Alcohol', this)" class="m-75" id="alcohol_1"
-                                                    value=""
-                                                    <?php echo $exam->alcohol == "" ? "checked" : "" ?>>
+                                                    value="" <?php echo $exam->alcohol == '' ? 'checked' : ''; ?>>
                                                 Reset
                                             </td>
                                             <td width="18%" colspan="-2" align="right"><b> Metaqualone</b></td>
@@ -423,7 +421,15 @@
                                                     <label class="font-weight-bold">Findings</label>
                                                     <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6">{{ $exam->remarks }}</textarea>
                                                 </div>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (
+                                                    !in_array(session()->get('position'), [
+                                                        'Cashier',
+                                                        'Releasing',
+                                                        'Human Resource / Documentation Officer',
+                                                        'Information Clerk',
+                                                        'Nurse',
+                                                        'Asst accounant',
+                                                    ]))
                                                     <div class="form-group">
                                                         <label class="font-weight-bold">Recommendation</label>
                                                         <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"

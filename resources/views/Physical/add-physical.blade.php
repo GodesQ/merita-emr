@@ -790,7 +790,7 @@
                                                     "checked"
                                                     : "" @endphp>
                                                         </td>
-                                                        <td width="154" align="center">Gynaecological Disorders 
+                                                        <td width="154" align="center">Gynaecological Disorders
                                                             <br><input name="gynaecological_disorders" type="input"
                                                                 id="gynaecological_disorders" value="">
                                                         </td>
@@ -888,7 +888,7 @@
                                                             'Cashier',
                                                             'Releasing',
                                                             'Human Resource / Documentation Officer',
-                                                            'Processing officer',
+                                                            '""',
                                                             'Information Clerk',
                                                             'Nurse',
                                                             'Asst accounant',
@@ -1567,7 +1567,7 @@
                                                                     'Cashier',
                                                                     'Releasing',
                                                                     'Human Resource / Documentation Officer',
-                                                                    'Processing officer',
+                                                                    '""',
                                                                     'Information Clerk',
                                                                     'Nurse',
                                                                     'Asst accounant',
@@ -1655,10 +1655,13 @@
                                             <tbody>
                                                 <tr>
                                                     <td colspan="10" align="center">
-                                                        <table width="100%" cellspacing="0" cellpadding="0" class="table table-bordered">
+                                                        <table width="100%" cellspacing="0" cellpadding="0"
+                                                            class="table table-bordered">
                                                             <thead>
                                                                 <tr>
-                                                                    <td colspan="2"><h2>Vital Signs</h2></td>
+                                                                    <td colspan="2">
+                                                                        <h2>Vital Signs</h2>
+                                                                    </td>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -1667,70 +1670,95 @@
                                                                         <div class="row">
                                                                             <div class="col-lg-3">
                                                                                 <div class="form-group">
-                                                                                    <label class="form-label">Height</label>
-                                                                                    <input type="text" class="form-control" value="{{ $exam_cardio ? $exam_cardio->height : null }}" name="height" id="height" onkeyup="computeBMI();">
+                                                                                    <label
+                                                                                        class="form-label">Height</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        value="{{ $exam_cardio ? $exam_cardio->height : null }}"
+                                                                                        name="height" id="height"
+                                                                                        onkeyup="computeBMI();">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3">
                                                                                 <div class="form-group">
-                                                                                    <label class="form-label">Weight</label>
-                                                                                    <input type="text" class="form-control" value="{{ $exam_cardio ? $exam_cardio->weight : null }}" name="weight" id="weight" onkeyup="computeBMI();">
+                                                                                    <label
+                                                                                        class="form-label">Weight</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        value="{{ $exam_cardio ? $exam_cardio->weight : null }}"
+                                                                                        name="weight" id="weight"
+                                                                                        onkeyup="computeBMI();">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                     <label class="form-label">BMI</label>
-                                                                                    <input type="text" class="form-control" value="{{ $exam_cardio ? $exam_cardio->bmi : null }}" name="bmi" id="bmi">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        value="{{ $exam_cardio ? $exam_cardio->bmi : null }}"
+                                                                                        name="bmi" id="bmi">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-3">
                                                                                 <div class="form-group">
-                                                                                    <label class="form-label">Waist</label>
-                                                                                    <input type="text" class="form-control" value="" name="waist" id="waist">
+                                                                                    <label
+                                                                                        class="form-label">Waist</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        value="" name="waist"
+                                                                                        id="waist">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <label for="" class="form-label">Recommendation</label>
-                                                                        <textarea name="bmi_recommendation" id="bmi_recommendation" cols="30" rows="2" class="form-control"></textarea>
+                                                                        <label for=""
+                                                                            class="form-label">Recommendation</label>
+                                                                        <textarea name="bmi_recommendation" id="bmi_recommendation" cols="30" rows="2"
+                                                                            class="form-control"></textarea>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
                                                                         <div class="row">
                                                                             <div class="col-md-3">
-                                                                                <label class="form-label">Systollic</label>
+                                                                                <label
+                                                                                    class="form-label">Systollic</label>
                                                                                 <input name="systollic" type="text"
                                                                                     class="form-control" id="systollic"
-                                                                                    placeholder="Systollic" value=""
-                                                                                    size="10">
+                                                                                    placeholder="Systollic"
+                                                                                    value="" size="10">
                                                                             </div>
                                                                             <div class="col-md-3">
-                                                                                <label class="form-label">Diastollic</label>
+                                                                                <label
+                                                                                    class="form-label">Diastollic</label>
                                                                                 <input name="diastollic" type="text"
                                                                                     class="form-control" id="diastollic"
-                                                                                    placeholder="Diastollic" value=""
-                                                                                    size="10">
+                                                                                    placeholder="Diastollic"
+                                                                                    value="" size="10">
                                                                             </div>
                                                                             <div class="col-md-3">
-                                                                                <label class="form-label">Blood Pressure (sitting)</label>
+                                                                                <label class="form-label">Blood Pressure
+                                                                                    (sitting)</label>
                                                                                 <input name="bp_sitting" type="text"
                                                                                     class="form-control" id="bp_sitting"
-                                                                                    placeholder="BP Sitting" value=""
-                                                                                    size="10">
+                                                                                    placeholder="BP Sitting"
+                                                                                    value="" size="10">
                                                                             </div>
                                                                             <div class="col-md-3">
-                                                                                <label class="form-label">Blood Pressure (laying down)</label>
-                                                                                <input name="bp_laying_down" type="text"
-                                                                                    class="form-control" id="bp_laying_down"
-                                                                                    placeholder="BP Laying Down" value=""
-                                                                                    size="10">
+                                                                                <label class="form-label">Blood Pressure
+                                                                                    (laying down)</label>
+                                                                                <input name="bp_laying_down"
+                                                                                    type="text" class="form-control"
+                                                                                    id="bp_laying_down"
+                                                                                    placeholder="BP Laying Down"
+                                                                                    value="" size="10">
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <label for="" class="form-label">Recommendation</label>
+                                                                        <label for=""
+                                                                            class="form-label">Recommendation</label>
                                                                         <textarea name="bp_recommendation" id="bp_recommendation" cols="30" rows="2" class="form-control"></textarea>
                                                                     </td>
                                                                 </tr>
@@ -1738,42 +1766,51 @@
                                                                     <td>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <label class="form-label">Pulse Rate</label>
+                                                                                <label class="form-label">Pulse
+                                                                                    Rate</label>
                                                                                 <input name="pulse" type="text"
-                                                                                class="form-control" id="pulse"
-                                                                                value="" size="5">
+                                                                                    class="form-control" id="pulse"
+                                                                                    value="" size="5">
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <label class="form-label">Rhythm</label>
-                                                                                <input name="rhythm" type="text" id="rhythm" value="NORMAL" size="10" class="form-control">
+                                                                                <input name="rhythm" type="text"
+                                                                                    id="rhythm" value="NORMAL"
+                                                                                    size="10" class="form-control">
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <label for="" class="form-label">Recommendation</label>
-                                                                        <textarea name="pulse_rhythm_recommendation" id="pulse_rhythm_recommendation" cols="30" rows="2" class="form-control"></textarea>
+                                                                        <label for=""
+                                                                            class="form-label">Recommendation</label>
+                                                                        <textarea name="pulse_rhythm_recommendation" id="pulse_rhythm_recommendation" cols="30" rows="2"
+                                                                            class="form-control"></textarea>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <label class="form-label">Respiration</label>
+                                                                                <label
+                                                                                    class="form-label">Respiration</label>
                                                                                 <input name="respiration" type="text"
-                                                                                class="form-control" id="respiration"
-                                                                                value="">
+                                                                                    class="form-control"
+                                                                                    id="respiration" value="">
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label class="form-label">Expiration</label>
+                                                                                <label
+                                                                                    class="form-label">Expiration</label>
                                                                                 <input name="expiration" type="text"
-                                                                                class="form-control" id="expiration"
-                                                                                value="">
+                                                                                    class="form-control" id="expiration"
+                                                                                    value="">
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <label for="" class="form-label">Recommendation</label>
-                                                                        <textarea name="respiration_recommendation" id="respiration_recommendation" cols="30" rows="2" class="form-control"></textarea>
+                                                                        <label for=""
+                                                                            class="form-label">Recommendation</label>
+                                                                        <textarea name="respiration_recommendation" id="respiration_recommendation" cols="30" rows="2"
+                                                                            class="form-control"></textarea>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -1855,16 +1892,7 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                @if (
-                                                                    !in_array(session()->get('position'), [
-                                                                        'Cashier',
-                                                                        'Releasing',
-                                                                        'Human Resource / Documentation Officer',
-                                                                        'Processing officer',
-                                                                        'Information Clerk',
-                                                                        'Nurse',
-                                                                        'Asst accounant',
-                                                                    ]))
+                                                                @if (!in_array(session()->get('position'), ['Cashier', 'Releasing', 'Human Resource / Documentation Officer', '""', 'Information Clerk', 'Nurse', 'Asst accounant']))
                                                                     <tr>
                                                                         <td colspan="7">
                                                                             Vital Sign Recommendation: <br>
@@ -1900,7 +1928,7 @@
                                                         <td align="center">Recommendations</td>
                                                         <td width="135" align="center"><b>B</b></td>
                                                         <td width="29" align="center">YES</td>
-                                                        <td  align="center">Significant Findings </td>
+                                                        <td align="center">Significant Findings </td>
                                                         <td align="center">Recommendations</td>
                                                     </tr>
                                                     <tr>
@@ -1930,7 +1958,8 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="140" height="36" align="center">Head,Neck,Scalp
+                                                        <td width="140" height="36" align="center">
+                                                            Head,Neck,Scalp
                                                         </td>
                                                         <td width="29" align="center"><input name="a2"
                                                                 type="checkbox" id="a2" value="Yes" checked>
@@ -2580,7 +2609,8 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
-                                                                                                                FIT FOR SEA DUTY
+                                                                                                                FIT FOR SEA
+                                                                                                                DUTY
                                                                                                                 <input
                                                                                                                     type="radio"
                                                                                                                     style="width: 20px; height: 20px;"
@@ -2590,7 +2620,9 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
-                                                                                                                FIT FOR TRAINING PURPOSES
+                                                                                                                FIT FOR
+                                                                                                                TRAINING
+                                                                                                                PURPOSES
                                                                                                                 <input
                                                                                                                     type="radio"
                                                                                                                     style="width: 20px; height: 20px;"
@@ -2600,7 +2632,8 @@
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 align="center">
-                                                                                                                FIT WITH RESTRICTION
+                                                                                                                FIT WITH
+                                                                                                                RESTRICTION
                                                                                                                 <input
                                                                                                                     type="radio"
                                                                                                                     style="width: 20px; height: 20px;"
@@ -2793,13 +2826,8 @@
                                                                                                                     of
                                                                                                                     this
                                                                                                                     page).
-                                                                                                                    <textarea
-                                                                                                                    name="describe_restriction"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    style="border-color: green"
-                                                                                                                    id="describe_restriction"
-                                                                                                                    class="form-control"></textarea>
+                                                                                                                    <textarea name="describe_restriction" cols="70" rows="3" style="border-color: green"
+                                                                                                                        id="describe_restriction" class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2809,12 +2837,8 @@
                                                                                                                 <div
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Comments/Restriction/Prescription</b>
-                                                                                                                    <textarea
-                                                                                                                    name="comments_restriction"
-                                                                                                                    cols="70"
-                                                                                                                    rows="3"
-                                                                                                                    id="comments_restriction"
-                                                                                                                    class="form-control"></textarea>
+                                                                                                                    <textarea name="comments_restriction" cols="70" rows="3" id="comments_restriction"
+                                                                                                                        class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2825,12 +2849,7 @@
                                                                                                                     class="col-md-12">
                                                                                                                     <b>Hologram
                                                                                                                         Number</b>
-                                                                                                                        <textarea
-                                                                                                                        name="progressive_notes"
-                                                                                                                        cols="70"
-                                                                                                                        rows="3"
-                                                                                                                        id="progressive_notes"
-                                                                                                                        class="form-control"></textarea>
+                                                                                                                    <textarea name="progressive_notes" cols="70" rows="3" id="progressive_notes" class="form-control"></textarea>
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2904,22 +2923,14 @@
                                                                                                                 valign="middle">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="finding"
-                                                                                                                    rows="3"
-                                                                                                                    class="form-control"
-                                                                                                                    id="finding"></textarea>
+                                                                                                                    <textarea name="finding" rows="3" class="form-control" id="finding"></textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                             <td valign="middle"
                                                                                                                 colspan="2">
                                                                                                                 <span
                                                                                                                     class="col-md-8">
-                                                                                                                    <textarea
-                                                                                                                    name="recommendations"
-                                                                                                                    rows="3"
-                                                                                                                    class="form-control"
-                                                                                                                    id="recommendations"></textarea>
+                                                                                                                    <textarea name="recommendations" rows="3" class="form-control" id="recommendations"></textarea>
                                                                                                                 </span>
                                                                                                             </td>
                                                                                                         </tr>

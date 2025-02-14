@@ -1053,7 +1053,7 @@
                                                     <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30"
                                                         rows="6"></textarea>
                                                 </div>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", """", "Information Clerk", "Nurse",  "Asst accounant"]))
                                                     <div class="form-group">
                                                         <label class="font-weight-bold">Recommendation</label>
                                                         <textarea placeholder="Recommendation" class="form-control" name="recommendation" id=""

@@ -113,8 +113,7 @@
                                         <tr>
                                             <td width="92"><b>PEME Date</b></td>
                                             <td width="247"><input name="peme_date" type="text" id="peme_date"
-                                                    value="{{ $admission->trans_date }}" class="form-control"
-                                                    readonly="">
+                                                    value="{{ $admission->trans_date }}" class="form-control" readonly>
                                             </td>
                                             <td width="113"><b>Admission No.</b></td>
                                             <td width="322">
@@ -896,7 +895,6 @@ echo $exam->color == 'Pink' ? "checked" : "" @endphp>
                                                                 'Cashier',
                                                                 'Releasing',
                                                                 'Human Resource / Documentation Officer',
-                                                                'Processing officer',
                                                                 'Information Clerk',
                                                                 'Nurse',
                                                                 'Asst accounant',
