@@ -2225,15 +2225,16 @@
                                                                                                         </div>
                                                                                                         <div
                                                                                                             class="col-md-6">
-                                                                                                            <b>VALID
-                                                                                                                UNTIL:</b>
+                                                                                                            <label
+                                                                                                                class="form-label">VALID
+                                                                                                                UNTIL:</label>
                                                                                                             <br>
                                                                                                             <input
                                                                                                                 name="valid_until"
                                                                                                                 type="text"
                                                                                                                 value="{{ $exam->valid_until }}"
                                                                                                                 size="10"
-                                                                                                                class="form-control"style="width:150px">
+                                                                                                                class="form-control">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
