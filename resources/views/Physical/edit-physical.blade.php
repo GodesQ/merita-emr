@@ -2223,12 +2223,12 @@
                                                                                                                 value="{{ $exam->date_expiration }}"
                                                                                                                 class="form-control" />
                                                                                                         </div>
+                                                                                                    </div>
+                                                                                                    <div class="row mb-3">
                                                                                                         <div
                                                                                                             class="col-md-6">
-                                                                                                            <label
-                                                                                                                class="form-label">VALID
+                                                                                                            <label>VALID
                                                                                                                 UNTIL:</label>
-                                                                                                            <br>
                                                                                                             <input
                                                                                                                 name="valid_until"
                                                                                                                 type="text"
