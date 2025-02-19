@@ -375,13 +375,38 @@
                                                                         <tr>
                                                                             <td colspan="4" height="70">
                                                                                 <div
-                                                                                    style="display: flex; align-items: flex-start; justify-content: space-between; padding: 1rem; height: 100%;">
-                                                                                    <div width="50%">Date <span
-                                                                                            style="margin-left: 1rem;"></span>
+                                                                                    style="display: flex; align-items: flex-end; justify-content: space-between; ">
+                                                                                    <div
+                                                                                        style="margin-left: 1rem; width: 50%; text-align: center;">
+                                                                                        {{ Carbon::parse($admission->trans_date)->format('M-d-Y') }}
                                                                                     </div>
-                                                                                    <div width="50%">Signature:
-                                                                                        <span
-                                                                                            style="margin-left: 1rem;"></span>
+                                                                                    <div
+                                                                                        style="margin-left: 1rem; width: 50%;">
+                                                                                        @if ($admission->agency_id != 19)
+                                                                                            @if ($admission->patient->patient_signature)
+                                                                                                <img style="width: 80%;"
+                                                                                                    src="@php echo base64_decode($admission->patient->patient_signature) @endphp"
+                                                                                                    class="signature-taken" />
+                                                                                            @elseif($admission->patient->signature)
+                                                                                                <img src="data:image/jpeg;base64,{{ $admission->patient->signature }}"
+                                                                                                    class="signature-taken" />
+                                                                                            @else
+                                                                                                <div
+                                                                                                    style="width: 150px;height: 40px;">
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="display: flex; align-items: flex-start; justify-content: space-between; padding: 0rem 1rem 1rem 1rem;">
+                                                                                    <div
+                                                                                        style="width: 50%; border-top: 1px solid black; text-align: center;">
+                                                                                        Date
+                                                                                    </div>
+                                                                                    <div
+                                                                                        style="width: 50%; border-top: 1px solid black; text-align: center;">
+                                                                                        Signature:
                                                                                     </div>
                                                                                 </div>
                                                                             </td>
@@ -601,12 +626,37 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td><b>Result:</b> </td>
-                                                                                <td><img src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                        width="10"> Fit for
-                                                                                    look-out duty</td>
-                                                                                <td><img src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                        width="10"> Unfit for
-                                                                                    look-out duty</td>
+                                                                                <td>
+                                                                                    @if ($admission->exam_physical)
+                                                                                        @if ($admission->exam_physical->duty == 'Fit')
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoCheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @else
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @endif
+                                                                                    @else
+                                                                                        <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                            width="10">
+                                                                                    @endif Fit for
+                                                                                    look-out duty
+                                                                                </td>
+                                                                                <td>
+                                                                                    @if ($admission->exam_physical)
+                                                                                        @if ($admission->exam_physical->duty == 'Unfit')
+                                                                                            <img src="../../../app-assets/images/icoCheck.gif"
+                                                                                                width="10">
+                                                                                        @else
+                                                                                            <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                                                width="10">
+                                                                                        @endif
+                                                                                    @else
+                                                                                        <img src="../../../app-assets/images/icoUncheck.gif"
+                                                                                            width="10">
+                                                                                    @endif Unfit
+                                                                                    for
+                                                                                    look-out duty
+                                                                                </td>
                                                                                 <td><img src="../../../app-assets/images/icoUnCheck.gif"
                                                                                         width="10">Unfit for
                                                                                     look-out duty and engine-room duty
@@ -617,10 +667,34 @@
                                                                                     your opinion fit for
                                                                                     duty?...............................
                                                                                 </td>
-                                                                                <td><img src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                        width="10"> Yes</td>
-                                                                                <td><img src="../../../app-assets/images/icoUnCheck.gif"
-                                                                                        width="10"> No</td>
+                                                                                <td>
+                                                                                    @if ($admission->exam_physical)
+                                                                                        @if ($admission->exam_physical->duty == 'Fit')
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoCheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @else
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @endif
+                                                                                    @else
+                                                                                        <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                            width="10">
+                                                                                    @endif Yes
+                                                                                </td>
+                                                                                <td>
+                                                                                    @if ($admission->exam_physical)
+                                                                                        @if ($admission->exam_physical->duty == 'Unfit')
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoCheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @else
+                                                                                            <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                                width="10">
+                                                                                        @endif
+                                                                                    @else
+                                                                                        <img src="{{ URL::asset('app-assets/images/icoUncheck.gif') }}"
+                                                                                            width="10">
+                                                                                    @endif No
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td colspan="4">If “no”, please

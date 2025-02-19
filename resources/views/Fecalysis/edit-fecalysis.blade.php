@@ -56,7 +56,7 @@
                                         <tr>
                                             <td><b>Exam Date</b></td>
                                             <td><input name="trans_date" type="date" id="trans_date"
-                                                value="{{ $exam->trans_date }}" class="form-control"></td>
+                                                    value="{{ $exam->trans_date }}" class="form-control"></td>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                         </tr>
@@ -89,12 +89,18 @@
                                             <td width="76%">
                                                 <select name="color" class="form-control move">
                                                     <option value="">Select Color</option>
-                                                    <option {{ $exam->color =='Brown' ? 'selected' : null }} value="Brown">Brown</option>
-                                                    <option {{ $exam->color =='Light Brown' ? 'selected' : null }} value="Light Brown">Light Brown</option>
-                                                    <option {{ $exam->color =='Dark Brown' ? 'selected' : null }} value="Dark Brown">Dark Brown</option>
-                                                    <option {{ $exam->color =='Yellow' ? 'selected' : null }} value="Yellow">Yellow</option>
-                                                    <option {{ $exam->color =='Green' ? 'selected' : null }} value="Green">Green</option>
-                                                    <option {{ $exam->color =='Red' ? 'selected' : null }} value="Red">Red</option>
+                                                    <option {{ $exam->color == 'Brown' ? 'selected' : null }}
+                                                        value="Brown">Brown</option>
+                                                    <option {{ $exam->color == 'Light Brown' ? 'selected' : null }}
+                                                        value="Light Brown">Light Brown</option>
+                                                    <option {{ $exam->color == 'Dark Brown' ? 'selected' : null }}
+                                                        value="Dark Brown">Dark Brown</option>
+                                                    <option {{ $exam->color == 'Yellow' ? 'selected' : null }}
+                                                        value="Yellow">Yellow</option>
+                                                    <option {{ $exam->color == 'Green' ? 'selected' : null }}
+                                                        value="Green">Green</option>
+                                                    <option {{ $exam->color == 'Red' ? 'selected' : null }} value="Red">
+                                                        Red</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -209,7 +215,16 @@
                                                     <label class="font-weight-bold">Findings</label>
                                                     <textarea placeholder="Remarks" class="form-control" name="remarks" id="" cols="30" rows="6">{{ $exam->remarks }}</textarea>
                                                 </div>
-                                                @if (!in_array(session()->get('position'), ["Cashier", "Releasing", "Human Resource / Documentation Officer", "Processing officer", "Information Clerk", "Nurse",  "Asst accounant"]))
+                                                @if (
+                                                    !in_array(session()->get('position'), [
+                                                        'Cashier',
+                                                        'Releasing',
+                                                        'Human Resource / Documentation Officer',
+                                                        'null',
+                                                        'Information Clerk',
+                                                        'Nurse',
+                                                        'Asst accounant',
+                                                    ]))
                                                     <div class="form-group">
                                                         <label class="font-weight-bold">Recommendation</label>
                                                         <textarea placeholder="Recommendation" class="form-control" name="recommendation" id="" cols="30"

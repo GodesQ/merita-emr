@@ -812,7 +812,7 @@
                                                                     'Cashier',
                                                                     'Releasing',
                                                                     'Human Resource / Documentation Officer',
-                                                                    'Processing officer',
+                                                                    '""',
                                                                     'Information Clerk',
                                                                     'Nurse',
                                                                     'Asst accounant',

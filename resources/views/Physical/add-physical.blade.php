@@ -888,7 +888,7 @@
                                                             'Cashier',
                                                             'Releasing',
                                                             'Human Resource / Documentation Officer',
-                                                            'Processing officer',
+                                                            '""',
                                                             'Information Clerk',
                                                             'Nurse',
                                                             'Asst accounant',
@@ -1567,7 +1567,7 @@
                                                                     'Cashier',
                                                                     'Releasing',
                                                                     'Human Resource / Documentation Officer',
-                                                                    'Processing officer',
+                                                                    '""',
                                                                     'Information Clerk',
                                                                     'Nurse',
                                                                     'Asst accounant',
@@ -1892,7 +1892,16 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                @if (!in_array(session()->get('position'), ['Cashier', 'Releasing', 'Human Resource / Documentation Officer', 'Processing officer', 'Information Clerk', 'Nurse', 'Asst accounant']))
+                                                                @if (
+                                                                    !in_array(session()->get('position'), [
+                                                                        'Cashier',
+                                                                        'Releasing',
+                                                                        'Human Resource / Documentation Officer',
+                                                                        'Processing officer',
+                                                                        'Information Clerk',
+                                                                        'Nurse',
+                                                                        'Asst accounant',
+                                                                    ]))
                                                                     <tr>
                                                                         <td colspan="7">
                                                                             Vital Sign Recommendation: <br>
