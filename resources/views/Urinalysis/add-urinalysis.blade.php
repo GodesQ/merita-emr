@@ -79,6 +79,8 @@
                                                     <option value="Yellow">Yellow</option>
                                                     <option value="Light Yellow">Light Yellow</option>
                                                     <option value="Dark Yellow">Dark Yellow</option>
+                                                    <option value="Orange">Orange</option>
+                                                    <option value="Red">Red</option>
                                                 </select>
                                             </td>
                                             <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -91,6 +93,8 @@
                                                     <option value="Clear">Clear</option>
                                                     <option value="Sl. Turbid">Sl. Turbid</option>
                                                     <option value="Turbid">Turbid</option>
+                                                    <option value="Slightly Hazy">Slightly Hazy</option>
+                                                    <option value="Hazy">Hazy</option>
                                                 </select>
                                             </td>
                                             <td align="left" valign="top" class="brdAll">&nbsp;</td>

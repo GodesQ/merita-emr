@@ -103,6 +103,12 @@
                                                         @php echo $exam->color == "Dark Yellow" ?
                                                     "selected=''" : "" @endphp>
                                                         Dark Yellow</option>
+                                                    <option value="Orange"
+                                                        {{ $exam->color == 'Orange' ? 'selected' : null }}>Orange
+                                                    </option>
+                                                    <option value="Red" {{ $exam->color == 'Red' ? 'selected' : null }}>
+                                                        Red
+                                                    </option>
                                                 </select>
                                             </td>
                                             <td align="left" valign="top" class="brdAll">&nbsp;</td>
@@ -127,6 +133,14 @@
                                                         @php echo $exam->transparency == "Turbid" ?
                                                     "selected=''" : "" @endphp>
                                                         Turbid</option>
+                                                    <option value="Slightly Hazy"
+                                                        {{ $exam->transparency == 'Slightly Hazy' ? 'selected' : null }}>
+                                                        Slightly Hazy
+                                                    </option>
+                                                    <option value="Hazy"
+                                                        {{ $exam->transparency == 'Hazy' ? 'selected' : null }}>
+                                                        Hazy
+                                                    </option>
                                                 </select>
                                             </td>
                                             <td align="left" valign="top" class="brdAll">&nbsp;</td>
