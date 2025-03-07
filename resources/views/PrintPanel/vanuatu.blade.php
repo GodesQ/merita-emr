@@ -399,11 +399,29 @@
                                         <td>
                                             TESTS TO BE PERFORMED
                                         </td>
-                                        <td><input type="checkbox"> THC
-                                            <input type="checkbox"> Cocaine
-                                            <input type="checkbox"> PCP
-                                            <input type="checkbox"> Oplates
-                                            <input type="checkbox"> Amphetamines
+                                        <td>
+                                            @if ($admission->exam_drug)
+                                                <input type="checkbox"
+                                                    {{ $admission->exam_drug->tetrahydrocannabinol ? 'checked' : null }}>
+                                                THC
+                                                <input type="checkbox"
+                                                    {{ $admission->exam_drug->cocaine ? 'checked' : null }} />
+                                                Cocaine
+                                                <input type="checkbox"
+                                                    {{ $admission->exam_drug->phencyclidine ? 'checked' : null }}> PCP
+                                                <input type="checkbox"
+                                                    {{ $admission->exam_drug->morphine ? 'checked' : null }}>
+                                                Oplates
+                                                <input type="checkbox"
+                                                    {{ $admission->exam_drug->amphetamines ? 'checked' : null }}>
+                                                Amphetamines
+                                            @else
+                                                <input type="checkbox"> THC
+                                                <input type="checkbox"> Cocaine
+                                                <input type="checkbox"> PCP
+                                                <input type="checkbox"> Oplates
+                                                <input type="checkbox"> Amphetamines
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -420,52 +438,157 @@
                                                         </td>
                                                         <td>POSITIVE</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            CANNABINOIDS as Carboxy - THC</td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">COCAINE
-                                                            METABOLITES as Benzoylecgonine</td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            PHENCYCLIDINE</td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            OPIATES
-                                                        </td>
-                                                        <td class="brdRight"></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            <input type="checkbox"> codeine
-                                                        </td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            <input type="checkbox"> methamphetamine
-                                                        </td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="brdRight">
-                                                            OTHERS (please specify)
-                                                        </td>
-                                                        <td class="brdRight"><input type="checkbox"></td>
-                                                        <td><input type="checkbox"></td>
-                                                    </tr>
+                                                    @php
+                                                        $tests = [
+                                                            'CANNABINOIDS as Carboxy - THC' => optional(
+                                                                $admission->exam_drug,
+                                                            )->tetrahydrocannabinol,
+                                                            'COCAINE METABOLITES as Benzoylecgonine' => optional(
+                                                                $admission->exam_drug,
+                                                            )->cocaine,
+                                                            'PHENCYCLIDINE' => optional($admission->exam_drug)
+                                                                ->phencyclidine,
+                                                            'OPIATES' => null,
+                                                            'Codeine' => optional($admission->exam_drug)->morphine, // Placeholder for checkbox
+                                                            'Methamphetamine' => optional($admission->exam_drug)
+                                                                ->methamphetamine, // Placeholder for checkbox
+                                                            'OTHERS (please specify)' => null,
+                                                        ];
+                                                    @endphp
+
+                                                    @foreach ($tests as $test => $result)
+                                                        <tr>
+                                                            @if ($test === 'Codeine' || $test === 'Methamphetamine')
+                                                                <!-- Custom checkboxes for Codeine and Methamphetamine -->
+                                                                <td class="brdRight">
+                                                                    <input type="checkbox"
+                                                                        name="{{ strtolower($test) }}" value="1"
+                                                                        {{ optional($admission->exam_drug)->{strtolower($test)} ? 'checked' : '' }}>
+                                                                    {{ $test }}
+                                                                </td>
+                                                                <td class="brdRight">
+                                                                    <input type="checkbox"
+                                                                        {{ $result === 'Negative' ? 'checked' : '' }}>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="checkbox"
+                                                                        {{ $result === 'Positive' ? 'checked' : '' }}>
+                                                                </td>
+                                                            @else
+                                                                <!-- Regular Drug Test Entries -->
+                                                                <td class="brdRight">{{ $test }}</td>
+                                                                @if ($test != 'OPIATES')
+                                                                    <td class="brdRight">
+                                                                        <input type="checkbox"
+                                                                            {{ $result === 'Negative' ? 'checked' : '' }}>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="checkbox"
+                                                                            {{ $result === 'Positive' ? 'checked' : '' }}>
+                                                                    </td>
+                                                                @endif
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+
+                                                    {{-- @if ($admission->exam_drug)
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                CANNABINOIDS as Carboxy - THC</td>
+                                                            <td class="brdRight">
+                                                                <input type="checkbox"
+                                                                    {{ $admission->exam_drug->tetrahydrocannabinol == 'Negative' ? 'checked' : null }}>
+                                                            </td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">COCAINE
+                                                                METABOLITES as Benzoylecgonine</td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                PHENCYCLIDINE</td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                OPIATES
+                                                            </td>
+                                                            <td class="brdRight"></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                <input type="checkbox"> codeine
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                <input type="checkbox"> methamphetamine
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                OTHERS (please specify)
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                    @else
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                CANNABINOIDS as Carboxy - THC</td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">COCAINE
+                                                                METABOLITES as Benzoylecgonine</td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                PHENCYCLIDINE</td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                OPIATES
+                                                            </td>
+                                                            <td class="brdRight"></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                <input type="checkbox"> codeine
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                <input type="checkbox"> methamphetamine
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="brdRight">
+                                                                OTHERS (please specify)
+                                                            </td>
+                                                            <td class="brdRight"><input type="checkbox"></td>
+                                                            <td><input type="checkbox"></td>
+                                                        </tr>
+                                                    @endif --}}
                                                 </tbody>
                                             </table>
                                         </td>
