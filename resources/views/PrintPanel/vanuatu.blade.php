@@ -486,6 +486,9 @@
                                                                         <input type="checkbox"
                                                                             {{ $result === 'Positive' ? 'checked' : '' }}>
                                                                     </td>
+                                                                @else
+                                                                    <td class="brdRight"></td>
+                                                                    <td></td>
                                                                 @endif
                                                             @endif
                                                         </tr>
