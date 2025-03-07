@@ -49,15 +49,16 @@ class PrintPanelController extends Controller
             )
             ->first();
 
-            if(!$admission) {
-                $pathPhoto = null;
-            } else {
-                $pathPhoto = file_exists(public_path('app-assets/images/profiles/') . $admission->patient_image);
-            }
+        if (!$admission) {
+            $pathPhoto = null;
+        } else {
+            $pathPhoto = file_exists(public_path('app-assets/images/profiles/') . $admission->patient_image);
+        }
         return view('PrintPanel.print-panel', compact('admission', 'data', 'pathPhoto'));
     }
 
-    public function followup_transmittal() {
+    public function followup_transmittal()
+    {
         $agencies = Agency::all();
         return view('Transmittal.followup_transmittal', compact('agencies'));
     }
@@ -126,7 +127,7 @@ class PrintPanelController extends Controller
             ->first();
 
         $exam_physical = DB::table('exam_physical')
-        ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice', 'mast_employee.firstname  as tech1_firstname', 'mast_employee.lastname  as tech1_lastname', 'mast_employee.middlename  as tech1_middlename', 'mast_employee.title  as tech1_title', 'mast_employee.license_no')
+            ->select('exam_physical.*', 'list_tier2.choices as tier2_choice', 'list_tier3.choices as tier3_choice', 'list_tier4.choices as tier4_choice', 'mast_employee.firstname  as tech1_firstname', 'mast_employee.lastname  as tech1_lastname', 'mast_employee.middlename  as tech1_middlename', 'mast_employee.title  as tech1_title', 'mast_employee.license_no')
             ->where('exam_physical.admission_id', '=', $id)
             ->leftJoin('list_tier2', 'list_tier2.id', 'exam_physical.tier2_id')
             ->leftJoin('list_tier3', 'list_tier3.id', 'exam_physical.tier3_id')
@@ -154,8 +155,8 @@ class PrintPanelController extends Controller
     {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
-        ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
-        ->first();
+            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
+            ->first();
 
         $medical_director = User::where('position', 'Medical Director')->first();
         return view('PrintPanel.liberian', compact('admission', 'medical_director'));
@@ -226,7 +227,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.mer', compact('admission', 'medical_director'));
     }
 
-    public function mer_landbased_print(Request $request) {
+    public function mer_landbased_print(Request $request)
+    {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
             ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
@@ -246,22 +248,34 @@ class PrintPanelController extends Controller
         return view('PrintPanel.mlc', compact('admission'));
     }
 
+    public function vanuatu_print(Request $request)
+    {
+        $id = $request->id;
+        $admission = Admission::where('id', $id)
+            ->with('patient.patientinfo', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
+            ->first();
+
+        return view('PrintPanel.vanuatu', compact('admission'));
+    }
+
     public function peme_bahia_print(Request $request)
     {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
-            ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
+            ->with('patient.patientinfo', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
             ->first();
 
         return view('PrintPanel.peme-bahia', compact('admission'));
     }
 
-    public function transmittal() {
+    public function transmittal()
+    {
         $agencies = Agency::all();
         return view('Transmittal.transmittal', compact('agencies'));
     }
 
-    public function daily_patient(Request $request) {
+    public function daily_patient(Request $request)
+    {
         $from_date = $request->date_from;
         $to_date = $request->date_to;
 
@@ -277,14 +291,14 @@ class PrintPanelController extends Controller
             DB::raw('MAX(tran_admission.vesselname) as vessel'),
             DB::raw('MAX(tran_admission.last_medical) as last_medical'),
         )->whereDate('tran_admission.trans_date', '>=', $from_date)
-        ->whereDate('tran_admission.trans_date', '<=', $to_date)
-        ->with('patient', 'agency', 'package')
-         ->groupBy('patientcode')
-         ->get();
+            ->whereDate('tran_admission.trans_date', '<=', $to_date)
+            ->with('patient', 'agency', 'package')
+            ->groupBy('patientcode')
+            ->get();
 
-         $patients = [];
+        $patients = [];
 
-         foreach($today_patients as $key => $patient) {
+        foreach ($today_patients as $key => $patient) {
             $patient_data = [
                 "patient_lastname" => $patient->patient ? $patient->patient->lastname : null,
                 "patient_firstname" => $patient->patient ? $patient->patient->firstname : null,
@@ -314,7 +328,8 @@ class PrintPanelController extends Controller
         return view("PrintTemplates.daily_patient_print", compact("patients", "from_date", "to_date"));
     }
 
-    public function store_yellow_card(Request $request) {
+    public function store_yellow_card(Request $request)
+    {
         // dd($request->all());
         $path = '/yellow_card_print?id=' . $request->patient_id;
         if ($request->action == 'store') {
@@ -347,48 +362,52 @@ class PrintPanelController extends Controller
         }
     }
 
-    public function daily_patient_form() {
+    public function daily_patient_form()
+    {
         $data = session()->all();
         return view('PrintPanel.daily_patient_form', compact('data'));
     }
 
-    public function follow_up_print(Request $request) {
+    public function follow_up_print(Request $request)
+    {
         $id = $request->id;
         $admission_id = $request->admission_id;
 
         $patient = Patient::select('mast_patient.*', 'mast_agency.agencyname')
-        ->where('mast_patient.id', $id)
-        ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-        ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
-        ->first();
+            ->where('mast_patient.id', $id)
+            ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->first();
 
         $admission = Admission::where('id', $admission_id)->latest('id')->with('exam_physical', 'exam_ecg', 'exam_xray')->first();
 
         $records = ReassessmentFindings::where('admission_id', $admission_id)->get();
 
         return view('PrintPanel.follow_up_print', compact(
-                    'patient',
-                    'admission',
-                    'records'
-            ));
+            'patient',
+            'admission',
+            'records'
+        ));
     }
 
-    public function default_follow_up_print(Request $request) {
+    public function default_follow_up_print(Request $request)
+    {
         $id = $request->id;
         $admission_id = $request->admission_id;
 
         $patient = Patient::select('mast_patient.*', 'mast_agency.agencyname')
-        ->where('mast_patient.id', $id)
-        ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
-        ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
-        ->first();
+            ->where('mast_patient.id', $id)
+            ->leftJoin('mast_patientinfo', 'mast_patientinfo.main_id', 'mast_patient.id')
+            ->leftJoin('mast_agency', 'mast_agency.id', 'mast_patientinfo.agency_id')
+            ->first();
 
         $admission = Admission::where('id', $admission_id)->latest('id')->with('exam_physical', 'exam_ecg', 'exam_xray')->first();
 
         return view('PrintPanel.default_follow_up_print', compact('patient', 'admission'));
     }
 
-    public function lab_result(Request $request) {
+    public function lab_result(Request $request)
+    {
         $id = $request->id;
 
         $admission = Admission::where('id', $id)
@@ -396,25 +415,25 @@ class PrintPanelController extends Controller
             ->first();
 
         $additional_exams = DB::table('tran_admissiondtl')
-                ->select(
-                    'tran_admissiondtl.*',
-                    'list_exam.examname as examname',
-                    'list_exam.category as category',
-                    'list_exam.section_id',
-                    'list_section.sectionname'
-                )
-                ->where('main_id', $admission->id)
-                ->leftJoin(
-                    'list_exam',
-                    'list_exam.id',
-                    'tran_admissiondtl.exam_id'
-                )
-                ->leftJoin(
-                    'list_section',
-                    'list_section.id',
-                    'list_exam.section_id'
-                )
-                ->get();
+            ->select(
+                'tran_admissiondtl.*',
+                'list_exam.examname as examname',
+                'list_exam.category as category',
+                'list_exam.section_id',
+                'list_section.sectionname'
+            )
+            ->where('main_id', $admission->id)
+            ->leftJoin(
+                'list_exam',
+                'list_exam.id',
+                'tran_admissiondtl.exam_id'
+            )
+            ->leftJoin(
+                'list_section',
+                'list_section.id',
+                'list_exam.section_id'
+            )
+            ->get();
 
         $add_exams = [];
         $exams = [];
@@ -428,7 +447,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.lab_result', compact('admission', 'additional'));
     }
 
-    public function land_based_print(Request $request) {
+    public function land_based_print(Request $request)
+    {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
             ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
@@ -437,7 +457,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.land_base', compact('admission'));
     }
 
-    public function north_england_print(Request $request) {
+    public function north_england_print(Request $request)
+    {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
             ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
@@ -446,7 +467,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.north_england', compact('admission'));
     }
 
-    public function standard_club_print(Request $request) {
+    public function standard_club_print(Request $request)
+    {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
             ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
@@ -455,7 +477,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.standard_club', compact('admission'));
     }
 
-    public function standard_club_north_print(Request $request) {
+    public function standard_club_north_print(Request $request)
+    {
         $id = $request->id;
         $admission = Admission::where('tran_admission.id', $id)
             ->with('patient', 'package', 'agency', 'exam_audio', 'exam_ishihara', 'exam_physical', 'exam_visacuity', 'exam_urin')
@@ -464,7 +487,8 @@ class PrintPanelController extends Controller
         return view('PrintPanel.north_standard_club', compact('admission'));
     }
 
-    public function medical_record(Request $request) {
+    public function medical_record(Request $request)
+    {
         $patient_id = $request->patient_id;
         $id = $request->id;
 
@@ -536,13 +560,15 @@ class PrintPanelController extends Controller
         return view('PrintPanel.medical-history', compact('admission', 'patientInfo', 'exam_audio', 'exam_physical', 'exam_ishihara', 'exam_visacuity', 'medical_history'));
     }
 
-    public function packages_report(Request $request) {
+    public function packages_report(Request $request)
+    {
         $agencies = Agency::get();
         $packages = ListPackage::select('packagename', DB::raw('MAX(id) as id'))->groupBy('packagename')->get();
         return view('PackagesReport.packages_report', compact('agencies', 'packages'));
     }
 
-    public function packages_report_print(Request $request) {
+    public function packages_report_print(Request $request)
+    {
 
         $from_date = new \DateTime($request->from_date);
         $to_date = new \DateTime($request->to_date);
@@ -562,11 +588,11 @@ class PrintPanelController extends Controller
         }
 
         $patients = Admission::whereDate('trans_date', '>=', $request->from_date)
-                    ->whereDate('trans_date', '<=', $request->to_date)
-                    ->with('agency', 'package', 'exam_physical', 'patient')
-                    ->WhereHas('package', function($query) use ($request) {
-                        $query->where('packagename', $request->package);
-                    })->latest('trans_date')->get();
+            ->whereDate('trans_date', '<=', $request->to_date)
+            ->with('agency', 'package', 'exam_physical', 'patient')
+            ->WhereHas('package', function ($query) use ($request) {
+                $query->where('packagename', $request->package);
+            })->latest('trans_date')->get();
 
         return view('PrintPanel.packages_report_print', compact('patients', 'month'));
     }

@@ -308,7 +308,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::delete('/admission_delete', [AdmissionController::class, 'delete_admission'])
         ->name('admission.delete')
         ->middleware([Transaction::class]);
-    
+
     Route::delete('/admission/additional-exams/delete/{id}', [AdmissionController::class, 'delete_additional_exams']);
 
     Route::post('/update_lab_result', [AdmissionController::class, 'update_lab_result'])->name('update_lab_result')->middleware([Transaction::class]);
@@ -497,6 +497,7 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/croatian_print', [PrintPanelController::class, 'croatian_print']);
     Route::get('/danish_print', [PrintPanelController::class, 'danish_print']);
     Route::get('/bahamas_print', [PrintPanelController::class, 'bahamas_print']);
+    Route::get('/vanuatu_print', [PrintPanelController::class, 'vanuatu_print']);
     Route::get('/liberian_print', [PrintPanelController::class, 'liberian_print']);
 
     Route::get('/singapore_flag_print', [PrintPanelController::class, 'singapore_flag_print']);

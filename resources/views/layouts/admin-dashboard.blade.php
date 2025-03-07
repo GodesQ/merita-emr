@@ -248,12 +248,12 @@
                                                     <td>
                                                         <!-- @if ($queue_patient->patient_image == null || $queue_patient->patient_image == '')
     <div class="avatar avatar-md mr-1">
-                                                                                                    <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                                                                        alt="Profile Picture" class="">
-                                                                                                </div>
+                                                                                                                                    <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                                                                                                        alt="Profile Picture" class="">
+                                                                                                                                </div>
 @else
     <img src="../../../app-assets/images/profiles/{{ $queue_patient->patient_image }}"
-                                                                                                    alt="Profile Picture" class="">
+                                                                                                                                    alt="Profile Picture" class="">
     @endif -->
                                                         {{ $indexKey + 1 }}
                                                     </td>

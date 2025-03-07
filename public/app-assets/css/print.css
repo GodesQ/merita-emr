@@ -1,8 +1,6 @@
 /*--------------------------------------------------------------------*/
 
-
 /* EUREKA: CUSTOMIZED CSS FOR PRINTOUT                                */
-
 
 /*--------------------------------------------------------------------*/
 
@@ -64,11 +62,14 @@
 }
 
 .brdTop {
-    border-top: solid 1px black;
+    border-top: 1px solid black;
 }
 
 .brdBtm {
-    border-bottom: solid 1px black;
+    border-bottom: 1px solid black !important;
+}
+.brdBtmTr tr {
+    border-bottom: 1px solid black;
 }
 
 .brdLeftTopBtm {
@@ -108,7 +109,7 @@
 }
 
 .brdRight {
-    border-right: solid 1px black;
+    border-right: 1px solid black !important;
 }
 
 .brdForm {
@@ -131,11 +132,11 @@
 }
 
 .smallfont {
-    font-size: 9px
+    font-size: 9px;
 }
 
 .size10 {
-    font-size: 9px
+    font-size: 9px;
 }
 
 .brdMedCert {
