@@ -236,6 +236,7 @@
                                     <td colspan="2">
                                         General Appearance:
                                         <br>
+                                        <input type="text" style="border: none;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                 </tr>
@@ -263,11 +264,13 @@
                                     <td width="15%">
                                         Right Eye
                                         <br>
+                                        {{ $admission->exam_visacuity->ufvod ?? '' }}
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <td width="15%">
                                         Left Eye
                                         <br>
+                                        {{ $admission->exam_visacuity->ufvos ?? '' }}
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <td width="15%">
@@ -276,11 +279,13 @@
                                     <td>
                                         Right Eye
                                         <br>
+                                        {{ $admission->exam_visacuity->cfvod ?? '' }}
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <td>
                                         Left Eye
                                         <br>
+                                        {{ $admission->exam_visacuity->cfvos ?? '' }}
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                 </tr>
@@ -637,7 +642,7 @@
                                             applicant on
                                             <input type="text"
                                                 value="{{ Carbon\Carbon::parse($admission->exam_physical->date_examination)->format('Y-m-d') }}"
-                                                style="width: 350px; border: none; border-bottom: 1px solid black; font-weight: bold;">
+                                                style="width: 200px; border: none; border-bottom: 1px solid black; font-weight: bold;">
                                             and he/she is <br>
                                             <span>
                                                 @if ($admission->exam_physical)
@@ -676,19 +681,19 @@
                                         <td colspan="2">
                                             Qualifications of Physician
                                             <br>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <b>Medical Director</b>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="50%">
                                             Physician's Licensing Authority
                                             <br>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <b>055997</b>
                                         </td>
                                         <td>
                                             Expiration date of current Practioner's Certificate or License
                                             <br>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <b>April 25, 2027</b>
                                         </td>
                                     </tr>
                                 </tbody>
