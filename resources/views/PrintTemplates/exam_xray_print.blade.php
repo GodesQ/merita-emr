@@ -105,8 +105,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td height="70" valign="top">&nbsp;</td>
-                                                    <td height="70" valign="top">@phpecho nl2br($exam->findings);
-                                                                                                                                                                                                                                                                                                                        @endphp ?> ?> ?> ?> ?></td>
+                                                    <td height="70" valign="top">
+                                                        <?php echo nl2br($exam->findings); ?>
+                                                    </td>
                                                     <td height="70" valign="top">&nbsp;</td>
                                                 </tr>
                                                 <tr>
@@ -114,8 +115,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td height="70" valign="top">&nbsp;</td>
-                                                    <td height="70" valign="top">@phpecho nl2br($exam->impression);
-                                                                                                                                                                                                                                                                                                                        @endphp ?> ?> ?> ?> ?></td>
+                                                    <td height="70" valign="top">
+                                                        <?php echo nl2br($exam->impression); ?>
+                                                    </td>
                                                     <td height="70" valign="top">&nbsp;</td>
                                                 </tr>
                                                 <tr>
