@@ -331,7 +331,7 @@ class AdminController extends Controller
 
 
 
-            $patientStatus = (new PatientController())->patientStatus($patient->patient->admission_id, $patientExams);
+            $patientStatus = (new PatientController())->patientStatus($patient->patient->admission_id ?? null, $patientExams);
             // dd($patientStatus);
             $completedExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === 'completed');
             $ongoingExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === '');
