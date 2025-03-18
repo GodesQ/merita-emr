@@ -248,21 +248,21 @@
                                                     <td>
                                                         <!-- @if ($queue_patient->patient_image == null || $queue_patient->patient_image == '')
     <div class="avatar avatar-md mr-1">
-                                                                                                                                    <img src="../../../app-assets/images/profiles/profilepic.jpg"
-                                                                                                                                        alt="Profile Picture" class="">
-                                                                                                                                </div>
+                                                                                                                                            <img src="../../../app-assets/images/profiles/profilepic.jpg"
+                                                                                                                                                alt="Profile Picture" class="">
+                                                                                                                                        </div>
 @else
     <img src="../../../app-assets/images/profiles/{{ $queue_patient->patient_image }}"
-                                                                                                                                    alt="Profile Picture" class="">
+                                                                                                                                            alt="Profile Picture" class="">
     @endif -->
                                                         {{ $indexKey + 1 }}
                                                     </td>
                                                     <td style="text-transform: capitalize;">
                                                         <a href="patient_edit?id={{ $queue_patient->patient_id }}&patientcode={{ $queue_patient->patientcode }}"
-                                                            class="primary">{{ $queue_patient->patient->lastname . ', ' . $queue_patient->patient->firstname }}</a>
+                                                            class="primary">{{ ($queue_patient->patient->lastname ?? '') . ', ' . ($queue_patient->patient->firstname ?? '') }}</a>
                                                     </td>
                                                     <td>
-                                                        <span>{{ $queue_patient->patient->patientinfo->package ? $queue_patient->patient->patientinfo->package->packagename : null }}</span>
+                                                        <span>{{ $queue_patient->patient->patientinfo->package ?? '' ? $queue_patient->patient->patientinfo->package->packagename ?? '' : null }}</span>
                                                     </td>
                                                     <td>
                                                         <a href="patient_edit?id={{ $queue_patient->patient_id }}&patientcode={{ $queue_patient->patientcode }}"
