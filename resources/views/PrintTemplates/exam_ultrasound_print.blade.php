@@ -49,7 +49,7 @@
                                     <td height="26" align="left" valign="top" class="brdLeft"><b>PEME
                                             DATE:</b><br>
                                         <span
-                                            style="font-size:15px">{{ date_format(new DateTime($admission->trans_date), 'd F Y') }}</span>
+                                            style="font-size:15px">{{ date_format(new DateTime($exam->trans_date), 'd F Y') }}</span>
                                     </td>
                                     <td colspan="2" align="left" valign="top" class="brdLeft"><b>PATIENT
                                             NO:</b><br><span
