@@ -101,7 +101,7 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        @if ($technician1)
+                                                                        @if ($technician1 && $technician1->signature)
                                                                             <img src="{{ $technician1->signature }}"
                                                                                 width="100px"
                                                                                 style="object-fit: cover;" />
