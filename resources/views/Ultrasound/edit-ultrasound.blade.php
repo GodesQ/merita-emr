@@ -51,11 +51,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr>U
                                         <td><b>Exam Date</b></td>
-                                        <td><input name="trans_date" type="text" id="trans_date"
-                                                value="{{ $exam->trans_date }}" class="form-control" style="padding: .4rem;"
-                                                readonly /></td>
+                                        <td><input name="trans_date" type="date" id="trans_date"
+                                                value="{{ $exam->trans_date }}" class="form-control"
+                                                style="padding: .4rem;" /></td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                     </tr>
