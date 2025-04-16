@@ -60,7 +60,7 @@ class PatientController extends Controller
             ->first();
 
         // if the user is not fully registered, it will redirect to step by step registration.
-        if (! $patient->patientinfo)
+        if (!$patient->patientinfo)
             return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
         $patientRecords = Patient::where('patientcode', session()->get('patientCode'))->get();
@@ -125,6 +125,8 @@ class PatientController extends Controller
 
             $current_patient = Patient::where('patientcode', $request->patientcode)->latest('id')->first();
 
+            $age = $this->calculateAgeWithUpcomingBirthday(Carbon::parse($request->birthdate));
+
             $date = date('Y-m-d h:i:s');
             $mast_patient = new Patient();
             $mast_patient->patientcode = $request->patientcode;
@@ -136,7 +138,7 @@ class PatientController extends Controller
             $mast_patient->firstname = strtoupper($request->firstName);
             $mast_patient->suffix = strtoupper($request->suffix);
             $mast_patient->gender = $request->gender;
-            $mast_patient->age = $request->age;
+            $mast_patient->age = $age;
             $mast_patient->position_applied = $request->positionApplied;
             $mast_patient->isVerify = 1;
             $mast_patient->created_date = $date;
@@ -217,7 +219,7 @@ class PatientController extends Controller
                 ]);
             }
 
-            if (! $mast_patient_save && ! $patientinfo && ! $save_medical_history && ! $save_declaration_form)
+            if (!$mast_patient_save && !$patientinfo && !$save_medical_history && !$save_declaration_form)
                 return back()->with('status', 'Failed to Submit Data');
 
             $request->session()->put('patientId', $mast_patient->id);
@@ -289,18 +291,24 @@ class PatientController extends Controller
 
             $existing_patientcode = $same_patient_record->patient->patientcode ?? null;
 
+            $age = $this->calculateAgeWithUpcomingBirthday(Carbon::parse($request->birthdate));
+
             $mast_patient = Patient::where('id', $request->main_id)->first();
 
-            $mast_patient_save = $mast_patient->update([
+            if (!$mast_patient) {
+                throw new Exception('Patient record not found.');
+            }
+
+            $mast_patient->update([
                 'patientcode' => $existing_patientcode ?? $mast_patient->patientcode,
                 'firstname' => strtoupper($request->firstName),
                 'lastname' => strtoupper($request->lastName),
                 'middlename' => strtoupper($request->middleName),
                 'suffix' => strtoupper($request->suffix),
                 'gender' => $request->gender,
-                'age' => $request->age,
+                'age' => $age,
                 'position_applied' => strtoupper($request->positionApplied),
-                'created_date' => date('Y-m-d h:i:s'),
+                'created_date' => now(),
             ]);
 
             $patientinfo = PatientInfo::create([
@@ -332,9 +340,9 @@ class PatientController extends Controller
                 'birthplace' => $request->birthplace,
             ]);
 
-            $save_medical_history = $this->action_med_history($request->all(), 'store', 'patient', $request->main_id);
+            $this->action_med_history($request->all(), 'store', 'patient', $request->main_id);
 
-            $save_declaration_form = DeclarationForm::create([
+            DeclarationForm::create([
                 'main_id' => $request->main_id,
                 'travelled_abroad_recently' => $request->travelled_abroad_recently,
                 'area_visited' => $request->area_visited,
@@ -349,95 +357,25 @@ class PatientController extends Controller
                 'persistent_pain_in_chest' => $request->persistent_pain_in_chest,
             ]);
 
-            $referral_form = Refferal::whereNull('patient_id')
-                ->where('firstname', 'LIKE', '%' . $mast_patient->firstname . '%')
-                ->where('lastname', 'LIKE', '%' . $mast_patient->lastname . '%')
-                ->where('ssrb', 'LIKE', $patientinfo->srbno)
-                ->where('passport', 'LIKE', $patientinfo->passportno)
-                ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, created_date, ?))', [$mast_patient->created_date])
-                ->first();
-
             // Store referral form scheduled date
-            if ($referral_form && $referral_form->schedule_date) {
-                $mast_patient->update([
-                    'referral_id' => $referral_form->id
-                ]);
+            $this->linkReferralAndSchedule($mast_patient, $patientinfo);
 
-                $referral_form->update([
-                    'patient_id' => $mast_patient->id,
-                ]);
+            $this->storeSession($request, patient: $mast_patient);
 
-                SchedulePatient::create([
-                    'patient_id' => $mast_patient->id,
-                    'patientcode' => $mast_patient->patientcode,
-                    'date' => $referral_form->schedule_date
-                ]);
+            if (in_array($request->agency_id, [3, 53])) {
+                $this->sendBahiaMail($request, $patient_vessel);
             }
 
-            if (! $mast_patient_save && ! $patientinfo && ! $save_medical_history && ! $save_declaration_form) {
-                return back()->with('status', 'Failed to Submit Data. Please check all of your information and try again.');
-            }
-
-            if ($request->fever == 1 && $request->cough == 1 && $request->shortness_of_breath == 1 && $request->persistent_pain_in_the_chest == 1 && $request->travelled_abroad_recently == 1) {
-                $request->session()->put([
-                    'classification' => 'patient',
-                    'patientCode' => $mast_patient->patientcode,
-                    'patientId' => $mast_patient->id,
-                    'admissionId' => $mast_patient->admission_id,
-                    'patient_image' => $mast_patient->patient_image,
-                    'created_date' => $mast_patient->created_date,
-                    'firstname' => $mast_patient->firstname,
-                    'lastname' => $mast_patient->lastname,
-                ]);
-
-                return redirect('/patient_info')->with('status', "Oops! Looks like you're not ready to go in clinic. Please Stay atleast 7 days to continue in medical clinic.");
-            }
-
-            $request->session()->put([
-                'classification' => 'patient',
-                'patientCode' => $mast_patient->patientcode,
-                'patientId' => $mast_patient->id,
-                'admissionId' => $mast_patient->admission_id,
-                'patient_image' => $mast_patient->patient_image,
-                'created_date' => $mast_patient->created_date,
-                'firstname' => $mast_patient->firstname,
-                'lastname' => $mast_patient->lastname,
-            ]);
-
-            if ($request->agency_id == 3 || $request->agency_id == 53) {
-                $details = [
-                    'name' => strtoupper($request->firstName) . ' ' . strtoupper($request->lastName),
-                    'agency' => 'Bahia Shipping Services, Inc.' . ' - ' . $request->bahia_vessel
-                ];
-
-                $bollete_braemar_vessel = ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'];
-                $balmoral_vessel = ['BALMORAL', 'MS BALMORAL'];
-                $borealis_vessel = ['BOREALIS', 'MS BOREALIS'];
-                $offshore_vessel = ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'];
-
-                if (in_array($patient_vessel, $bollete_braemar_vessel)) {
-                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('bssi.bol.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
-                } else if (in_array($patient_vessel, $balmoral_vessel)) {
-                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('bssi.bl.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
-                } else if (in_array($patient_vessel, $borealis_vessel)) {
-                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('bssi.bor.hotel@bahiashipping.ph')->send(new RegisteredUser($details));
-                } else if (in_array($patient_vessel, $offshore_vessel)) {
-                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('maan.cortes@bahiashipping.ph')->send(new RegisteredUser($details));
-                } else {
-                    // Mail::to('james@godesq.com')->send(new RegisteredUser($details));
-                    Mail::to('bssi.deckeng@bahiashipping.ph')->send(new RegisteredUser($details));
-                }
+            if ($this->hasCovidSymptoms($request)) {
+                return redirect('/patient_info')->with('status', "Oops! Looks like you're not ready to go in clinic. Please stay at least 7 days before returning.");
             }
 
             return redirect('/patient_info')->with('success', 'Register Successfully');
         } catch (Exception $exception) {
-            $message = $exception->getMessage();
-            $file = $exception->getFile();
-            return view('errors.error', compact('message', 'file'));
+            return view('errors.error', [
+                'message' => $exception->getMessage(),
+                'file' => $exception->getFile(),
+            ]);
         }
     }
 
@@ -460,7 +398,7 @@ class PatientController extends Controller
 
             $request_schedule = RequestSchedAppointment::where('patient_id', session()->get('patientId'))->first();
 
-            if (! $patient->patientinfo)
+            if (!$patient->patientinfo)
                 return redirect('/progress-patient-info')->with('fail', 'Please complete the registration before proceeding to the dashboard.');
 
             return view('ProgressInfo.schedule', compact('schedules', 'latest_schedule', 'scheduled_patients', 'request_schedule'));
@@ -518,7 +456,7 @@ class PatientController extends Controller
                 ->where('patientcode', $data['patientCode'])
                 ->latest('date')
                 ->first();
-            if (! $latest_schedule) {
+            if (!$latest_schedule) {
                 return redirect('/patient_info')->with('fail', "Don't have any schedule");
             }
             return view('ProgressInfo.edit-schedule', compact('data', 'schedules', 'latest_schedule'));
@@ -553,6 +491,8 @@ class PatientController extends Controller
     public function update_patient_info(Request $request)
     {
         try {
+            $age = $this->calculateAgeWithUpcomingBirthday(Carbon::parse($request->birthdate));
+
             $data = session()->all();
             $mast_patient = Patient::where('id', $request->main_id)->first();
             $mast_patient->firstname = strtoupper($request->firstName);
@@ -560,7 +500,7 @@ class PatientController extends Controller
             $mast_patient->middlename = strtoupper($request->middleName);
             $mast_patient->suffix = strtoupper($request->suffix);
             $mast_patient->gender = $request->gender;
-            $mast_patient->age = $request->age;
+            $mast_patient->age = $age;
             $mast_patient->position_applied = strtoupper($request->positionApplied);
             $mast_patient_save = $mast_patient->save();
 
@@ -665,13 +605,13 @@ class PatientController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('agency', function ($row) {
-                        if (! $row->patientinfo->agency_id)
+                        if (!$row->patientinfo->agency_id)
                             return 'NO AGENCY';
                         $agency = $row->patientinfo->agency;
                         return $agency ? $agency->agencyname : 'NO AGENCY';
                     })
                     ->addColumn('medical_package', function ($row) {
-                        if (! $row->patientinfo->medical_package) {
+                        if (!$row->patientinfo->medical_package) {
                             return 'NO PACKAGE';
                         } else {
                             $package = $row->patientinfo->package;
@@ -767,6 +707,8 @@ class PatientController extends Controller
                 $save_file = $request->file('patient_image')->move(public_path() . '/app-assets/images/profiles/', $newFileName);
             }
 
+            $age = $this->calculateAgeWithUpcomingBirthday(Carbon::parse($request->birthdate));
+
             $patient = new Patient();
             $patient->patientcode = $patientcode;
             $patient->patient_image = $request->hasFile('patient_image') ? $newFileName : null;
@@ -774,7 +716,7 @@ class PatientController extends Controller
             $patient->firstname = $request->firstname;
             $patient->middlename = $request->middlename;
             $patient->gender = $request->gender;
-            $patient->age = $request->age;
+            $patient->age = $age;
             $patient->email = $request->email;
             $patient->position_applied = $request->position_applied;
             $patient->created_date = date('Y-m-d H:i:s');
@@ -898,11 +840,11 @@ class PatientController extends Controller
             $additional_exams = null;
 
             if ($admissionPatient) {
-                if (! $patient_agency) {
+                if (!$patient_agency) {
                     $patient_agency = Agency::where('id', '=', $admissionPatient->agency_id)->first();
                 }
 
-                if (! $patient_package) {
+                if (!$patient_package) {
                     $patient_package = ListPackage::where('id', '=', $patientInfo->medical_package)->first();
                 }
 
@@ -989,7 +931,7 @@ class PatientController extends Controller
                 if (count($completed_exams) == count($patient_exams)) {
                     $complete_patient = true;
                     $patient = Patient::where('id', $id)->first();
-                    if (! $patient->medical_done_date) {
+                    if (!$patient->medical_done_date) {
                         $medical_done_update = Patient::where('id', $id)->update([
                             'medical_done_date' => date('Y-m-d h:i:s'),
                         ]);
@@ -1097,7 +1039,7 @@ class PatientController extends Controller
     {
         $patient = Patient::where('id', $request->id)->first();
 
-        if (! $patient->default_signature) {
+        if (!$patient->default_signature) {
             $patient->default_signature = $patient->patient_signature;
         }
 
@@ -1216,6 +1158,8 @@ class PatientController extends Controller
             //     $signature = base64_encode($sign);
             // }
 
+            $age = $this->calculateAgeWithUpcomingBirthday(Carbon::parse($request->birthdate));
+
             $mast_patient = Patient::where('id', $request->main_id)->first();
             $mast_patient->patient_image = $name;
             $mast_patient->firstname = strtoupper($request->firstName);
@@ -1224,7 +1168,7 @@ class PatientController extends Controller
             $mast_patient->email = $request->email;
             $mast_patient->middlename = strtoupper($request->middleName);
             $mast_patient->gender = $request->gender;
-            $mast_patient->age = $request->age;
+            $mast_patient->age = $age;
             $mast_patient->created_date = $request->created_date;
             $mast_patient->updated_date = date('Y-m-d h:i:s');
             $mast_patient_save = $mast_patient->save();
@@ -1683,85 +1627,86 @@ class PatientController extends Controller
             foreach ($patient_exams as $key => $exam) {
                 $exams[$exam->examname] = 'completed';
                 if (preg_match('/audiometry/i', $exam->examname)) {
-                    if (! $exam_audio) {
+                    if (!$exam_audio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardiac/i', $exam->examname) || preg_match('/Spirometry/i', $exam->examname)) {
-                    if (! $exam_crf) {
+                    if (!$exam_crf) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardio/i', $exam->examname)) {
-                    if (! $exam_cardio) {
+                    if (!$exam_cardio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/dental/i', $exam->examname)) {
-                    if (! $exam_dental) {
+                    if (!$exam_dental) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/ecg/i', $exam->examname)) {
-                    if (! $exam_ecg) {
+                    if (!$exam_ecg) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/doppler/i', $exam->examname)) {
-                    if (! $exam_echodoppler) {
+                    if (!$exam_echodoppler) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/plain/i', $exam->examname)) {
-                    if (! $exam_echoplain) {
+                    if (!$exam_echoplain) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/ishihara/i', $exam->examname)) {
-                    if (! $exam_ishihara) {
+                    if (!$exam_ishihara) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/Complete PE and Medical History/i', $exam->examname) || preg_match('/STOOL/i', $exam->examname)) {
-                    if (! $exam_physical) {
+                    if (!$exam_physical) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/pyschological/i', $exam->examname) || preg_match('/Psychometric/i', $exam->examname)) {
-                    if (! $exam_psycho) {
+                    if (!$exam_psycho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/STRESS ECHO/i', $exam->examname)) {
-                    if (! $exam_stressecho) {
+                    if (!$exam_stressecho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Treadmill/i', $exam->examname)) {
-                    if (! $exam_stresstest) {
+                    if (!$exam_stresstest) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Acuity/i', $exam->examname)) {
-                    if (! $exam_visacuity) {
+                    if (!$exam_visacuity) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Ultrasound/i', $exam->category)) {
-                    if (! $exam_ultrasound) {
+                    if (!$exam_ultrasound) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Xray/i', $exam->category)) {
-                    if (! $exam_xray) {
+                    if (!$exam_xray) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
-                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) ||
+                if (
+                    preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) ||
                     preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname) ||
                     preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) ||
                     preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname) ||
@@ -1770,49 +1715,50 @@ class PatientController extends Controller
                     preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) ||
                     preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname) ||
                     preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) ||
-                    preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
-                    if (! $exam_blood_serology) {
+                    preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)
+                ) {
+                    if (!$exam_blood_serology) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/HIV/i', $exam->examname)) {
-                    if (! $examlab_hiv) {
+                    if (!$examlab_hiv) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/drug/i', $exam->examname) || preg_match('/Drug/i', $exam->category)) {
-                    if (! $examlab_drug) {
+                    if (!$examlab_drug) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Fecalysis/i', $exam->examname) || preg_match('/FECT/i', $exam->examname)) {
-                    if (! $examlab_feca) {
+                    if (!$examlab_feca) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hematology/i', $exam->category) || preg_match('/CBC/i', $exam->examname)) {
-                    if (! $examlab_hema) {
+                    if (!$examlab_hema) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hepatitis Profile/i', $exam->examname)) {
-                    if (! $examlab_hepa) {
+                    if (!$examlab_hepa) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Pregnancy/i', $exam->examname)) {
-                    if (! $examlab_pregnancy) {
+                    if (!$examlab_pregnancy) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Urinalysis/i', $exam->examname)) {
-                    if (! $examlab_urin) {
+                    if (!$examlab_urin) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Miscellaneous/i', $exam->examname)) {
-                    if (! $examlab_misc) {
+                    if (!$examlab_misc) {
                         $exams[$exam->examname] = '';
                     }
                 }
@@ -1854,100 +1800,83 @@ class PatientController extends Controller
         return $data;
     }
 
-    // public function patientStatus($admission_id, $patient_exams)
-    // {
+    private function linkReferralAndSchedule($mast_patient, $patientinfo)
+    {
+        $referral = Refferal::whereNull('patient_id')
+            ->where('firstname', 'LIKE', "%{$mast_patient->firstname}%")
+            ->where('lastname', 'LIKE', "%{$mast_patient->lastname}%")
+            ->where('ssrb', 'LIKE', $patientinfo->srbno)
+            ->where('passport', 'LIKE', $patientinfo->passportno)
+            ->orderByRaw('ABS(TIMESTAMPDIFF(SECOND, created_date, ?))', [$mast_patient->created_date])
+            ->first();
 
-    //     // Exam tables and their respective configurations
-    //     $examTables = [
-    //         'exam_audio' => [],
-    //         'exam_crf' => [],
-    //         'exam_cardio' => [],
-    //         'exam_dental' => [],
-    //         'exam_ecg' => [],
-    //         'exam_echodoppler' => [],
-    //         'exam_echoplain' => [],
-    //         'exam_ishihara' => [],
-    //         'exam_physical' => [],
-    //         'exam_psycho' => [],
-    //         'exam_psychobpi' => [],
-    //         'exam_stressecho' => [],
-    //         'exam_stresstest' => [],
-    //         'exam_ultrasound' => [],
-    //         'exam_visacuity' => [],
-    //         'exam_xray' => [],
-    //         'examlab_bloodsero' => [],
-    //         'examlab_hiv' => [],
-    //         'examlab_drug' => [],
-    //         'examlab_feca' => [],
-    //         'examlab_hema' => [],
-    //         'examlab_hepa' => [],
-    //         'examlab_pregnancy' => [],
-    //         'examlab_urin' => [],
-    //         'examlab_misc' => [],
-    //     ];
+        if ($referral && $referral->schedule_date) {
+            $mast_patient->update(['referral_id' => $referral->id]);
+            $referral->update(['patient_id' => $mast_patient->id]);
 
-    //     $examResults = [];
-    //     if ($admission_id) {
-    //         foreach ($examTables as $table => $joins) {
-    //             $examResults[$table] = $this->fetchLatestExam($table, $admission_id, $joins);
-    //         }
-    //     } else {
-    //         // Set all exam values to null if the patient doesn't have an admission ID
-    //         foreach (array_keys($examTables) as $table) {
-    //             $examResults[$table] = null;
-    //         }
-    //     }
+            SchedulePatient::create([
+                'patient_id' => $mast_patient->id,
+                'patientcode' => $mast_patient->patientcode,
+                'date' => $referral->schedule_date,
+            ]);
+        }
+    }
 
-    //     // Process patient exams
-    //     $exams = [];
-    //     if ($patient_exams) {
-    //         foreach ($patient_exams as $exam) {
-    //             $examName = $exam->examname;
-    //             $examCategory = $exam->category ?? null;
-    //             $exams[$examName] = 'completed';
+    private function hasCovidSymptoms($request)
+    {
+        return $request->fever && $request->cough && $request->shortness_of_breath && $request->persistent_pain_in_the_chest && $request->travelled_abroad_recently;
+    }
 
-    //             // Define patterns and their corresponding tables
-    //             $patterns = [
-    //                 'audiometry' => 'exam_audio',
-    //                 'cardiac|Spirometry' => 'exam_crf',
-    //                 'cardio' => 'exam_cardio',
-    //                 'dental' => 'exam_dental',
-    //                 'ecg' => 'exam_ecg',
-    //                 'doppler' => 'exam_echodoppler',
-    //                 'plain' => 'exam_echoplain',
-    //                 'ishihara' => 'exam_ishihara',
-    //                 'Complete PE and Medical History|STOOL' => 'exam_physical',
-    //                 'pyschological|Psychometric' => 'exam_psycho',
-    //                 'STRESS ECHO' => 'exam_stressecho',
-    //                 'Treadmill' => 'exam_stresstest',
-    //                 'Acuity' => 'exam_visacuity',
-    //                 'Ultrasound' => 'exam_ultrasound',
-    //                 'Xray' => 'exam_xray',
-    //                 'Serology|Chemistry|Enzymes|SGPT|BLOOD|Anti HBe|Anti HAV|Anti HBc|Anti HCV|HepaB|TPHA|Electrolytes|Sodium|Potassium|Calcium|Albumin|Creatinine|Uric Acid|Anti HBs' => 'examlab_bloodsero',
-    //                 'HIV' => 'examlab_hiv',
-    //                 'drug|Drug' => 'examlab_drug',
-    //                 'Fecalysis|FECT' => 'examlab_feca',
-    //                 'Hematology|CBC' => 'examlab_hema',
-    //                 'Hepatitis Profile' => 'examlab_hepa',
-    //                 'Pregnancy' => 'examlab_pregnancy',
-    //                 'Urinalysis' => 'examlab_urin',
-    //                 'Miscellaneous' => 'examlab_misc',
-    //             ];
+    private function calculateAgeWithUpcomingBirthday($birthdate)
+    {
+        $now = Carbon::now();
+        $age = $birthdate->age;
 
-    //             foreach ($patterns as $pattern => $table) {
-    //                 if (preg_match("/$pattern/i", $examName) || ($examCategory && preg_match("/$pattern/i", $examCategory))) {
-    //                     if (! $examResults[$table]) {
-    //                         $exams[$examName] = '';
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         $exams = null;
-    //     }
+        $nextBirthday = $birthdate->copy()->year($now->year);
+        if ($nextBirthday->isPast())
+            $nextBirthday->addYear();
 
-    //     // Combine all results into the data array
-    //     return array_merge($examResults, ['exams' => $exams]);
-    // }
+        return $now->diffInMonths($nextBirthday) <= 6 ? $age + 1 : $age;
+    }
+
+    private function storeSession($request, $patient)
+    {
+        $request->session()->put([
+            'classification' => 'patient',
+            'patientCode' => $patient->patientcode,
+            'patientId' => $patient->id,
+            'admissionId' => $patient->admission_id,
+            'patient_image' => $patient->patient_image,
+            'created_date' => $patient->created_date,
+            'firstname' => $patient->firstname,
+            'lastname' => $patient->lastname,
+        ]);
+    }
+
+    private function sendBahiaMail($request, $vessel)
+    {
+        $details = [
+            'name' => strtoupper($request->firstName) . ' ' . strtoupper($request->lastName),
+            'agency' => 'Bahia Shipping Services, Inc. - ' . $request->bahia_vessel,
+        ];
+
+        $vessel_email_map = [
+            'bssi.bol.hotel@bahiashipping.ph' => ['MS BOLETTE', 'BOLETTE', 'MS BRAEMAR', 'BRAEMAR'],
+            'bssi.bl.hotel@bahiashipping.ph' => ['BALMORAL', 'MS BALMORAL'],
+            'bssi.bor.hotel@bahiashipping.ph' => ['BOREALIS', 'MS BOREALIS'],
+            'maan.cortes@bahiashipping.ph' => ['BLUE TERN', 'BLUETERN', 'BOLDTERN', 'BOLD TERN', 'BRAVETERN', 'BRAVE TERN'],
+        ];
+
+        $recipient = 'bssi.deckeng@bahiashipping.ph';
+
+        foreach ($vessel_email_map as $email => $vessels) {
+            if (in_array(strtoupper($vessel), $vessels)) {
+                $recipient = $email;
+                break;
+            }
+        }
+
+        Mail::to($recipient)->send(new RegisteredUser($details));
+    }
 
 }
