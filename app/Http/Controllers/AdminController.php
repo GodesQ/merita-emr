@@ -328,26 +328,19 @@ class AdminController extends Controller
                 ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
                 ->get();
 
-
-
-
             $patientStatus = (new PatientController())->patientStatus($patient->patient->admission_id ?? null, $patientExams);
             // dd($patientStatus);
-            $completedExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === 'completed');
-            $ongoingExams = array_filter($patientStatus['exams'] ?? [], fn ($status) => $status === '');
+            $completedExams = array_filter($patientStatus['exams'] ?? [], fn($status) => $status === 'completed');
+            $ongoingExams = array_filter($patientStatus['exams'] ?? [], fn($status) => $status === '');
 
-            // if ($key == 2) {
-            //     dd($patientStatus);
-            // }
-
-            if (! $admission) {
+            if (!$admission) {
                 $categorizedPatients['queue'][] = $patient;
             } elseif ($admission->lab_status == 2) {
                 $categorizedPatients['fit'][] = $patient;
-            } elseif (empty(array_filter(array_pop($patientStatus), fn ($status) => $status != null))) {
+            } elseif (empty(array_filter(array_pop($patientStatus), fn($status) => $status != null))) {
                 $categorizedPatients['pending'][] = $patient;
             } else {
-                if (! empty($ongoingExams)) {
+                if (!empty($ongoingExams)) {
                     $categorizedPatients['ongoing'][] = $patient;
                 }
                 if (count($completedExams) === count($patientExams)) {
@@ -359,9 +352,9 @@ class AdminController extends Controller
         // Calculate department-specific data
         if (session()->get('dept_id') == 1) {
             $totals = [
-                'fit' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn ($q) => $q->where('lab_status', 2))->count(),
-                'unfit' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn ($q) => $q->where('lab_status', 3))->count(),
-                'pending' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn ($q) => $q->where('lab_status', 1))->count(),
+                'fit' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn($q) => $q->where('lab_status', 2))->count(),
+                'unfit' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn($q) => $q->where('lab_status', 3))->count(),
+                'pending' => SchedulePatient::where('date', $requestDate)->whereHas('patient.admission', fn($q) => $q->where('lab_status', 1))->count(),
             ];
 
 
@@ -700,99 +693,6 @@ class AdminController extends Controller
             return response()->json(['status' => true, 'message' => 'Update Successfully']);
     }
 
-    // -------------------------------------------------------------------- START: DEPARTMENT (CRUD) -------------------------------------------------------------------- //
-
-    public function view_departments()
-    {
-        $data = session()->all();
-        return view('Department.list-department', compact('data'));
-    }
-
-    public function department_tables(Request $request)
-    {
-        $data = Department::select('*');
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $actionBtn =
-                    '<a href="/edit_department?id=' .
-                    $row['id'] .
-                    '" class="edit btn btn-primary btn-sm"><i class="feather icon-edit"></i></a>
-<a href="#" id="' .
-                    $row['id'] .
-                    '" class="delete-department btn btn-danger btn-sm"><i class="feather icon-trash"></i></a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }
-
-    public function delete_department(Request $request)
-    {
-        $employeeInfo = session()->all();
-        $id = $request->id;
-        $data = Department::where('id', '=', $id)->first();
-        $log = new EmployeeLog();
-        $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Delete Department ' . $data->dept;
-        $log->date = date('Y-m-d');
-        $save = $log->save();
-        $res = Department::find($id)->delete();
-    }
-
-    public function add_department()
-    {
-        $data = session()->all();
-        return view('Department.add-department', compact('data'));
-    }
-
-    public function store_department(Request $request)
-    {
-        $department = new Department();
-        $department->dept = $request->dept;
-        $save = $department->save();
-
-        $employeeInfo = session()->all();
-        $log = new EmployeeLog();
-        $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Add Department ' . $request->dept;
-        $log->date = date('Y-m-d');
-        $log->save();
-
-        if ($save) {
-            return redirect('/list_department');
-        }
-    }
-
-    public function edit_department()
-    {
-        $data = session()->all();
-        $id = $_GET['id'];
-        $department = Department::where('id', $id)->first();
-        $employees = User::where('dept_id', $id)->get();
-        return view('Department.edit-department', compact('department', 'data', 'employees'));
-    }
-    public function update_department(Request $request)
-    {
-        $id = $request->id;
-        $department = Department::where('id', $id)->first();
-        $department->dept = $request->dept;
-        $save = $department->save();
-
-        $employeeInfo = session()->all();
-        $log = new EmployeeLog();
-        $log->employee_id = $employeeInfo['employeeId'];
-        $log->description = 'Update Department ' . $request->dept;
-        $log->date = date('Y-m-d');
-        $log->save();
-
-        if ($save) {
-            return redirect('/list_department');
-        }
-    }
-
-    // -------------------------------------------------------------------- END: DEPARTMENT (CRUD) -------------------------------------------------------------------- //
-
     public function view_cashier_or(Request $request)
     {
         return view('CashierOR.cashier-or');
@@ -900,53 +800,6 @@ class AdminController extends Controller
         $admission_list .= '</datalist>';
 
         echo $admission_list;
-    }
-
-    public function support()
-    {
-        $data = session()->all();
-        return view('Support.support', compact('data'));
-    }
-
-    public function store_support(Request $request)
-    {
-        $this->validate($request, [
-            'ss_issue' => 'required',
-            'ss_issue.*' => 'mimes:pdf,jpg,png,jpeg',
-        ]);
-        if ($request->hasFile('ss_issue')) {
-            $file_name = $request->file('ss_issue')->getClientOriginalName();
-            $save_ss = $request->file('ss_issue')->move(public_path() . '/app-assets/images/support/', $file_name);
-            if ($save_ss) {
-                $save = DB::table('support')->insert([
-                    'role' => $request->role,
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'subject' => $request->subject,
-                    'issue' => $request->issue,
-                    'ss_issue' => $file_name,
-                ]);
-
-                $data = [
-                    'role' => $request->role,
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'subject' => $request->subject,
-                    'issue' => $request->issue,
-                    'ss_issue' => $file_name,
-                ];
-
-                Mail::to(env('DEVELOPER_EMAIL'))->send(new Support($data));
-
-                if ($request->role == 'employee') {
-                    return redirect('/dashboard')->with('success_support', 'Successfully Sent');
-                } elseif ($request->role == 'patient') {
-                    return redirect('/patient_info')->with('success_support', 'Successfully Sent');
-                } else {
-                    return redirect('/agency_dashboard')->with('success_support', 'Successfully Sent');
-                }
-            }
-        }
     }
 
     // public function followup_results(Request $request) {
