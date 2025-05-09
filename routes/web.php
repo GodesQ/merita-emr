@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\DefaultPackageController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SupportController;
 use App\Http\Middleware\Agency;
 use App\Http\Middleware\Laboratory;
 use App\Http\Middleware\Ophthalmology;
@@ -446,19 +448,19 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
         Route::delete('/list_section_delete', [SectionController::class, 'delete_list_section'])->name('section.delete');
 
-        Route::get('/list_department', [AdminController::class, 'view_departments'])->name('department.index');
+        Route::get('/list_department', [DepartmentController::class, 'index'])->name('department.index');
 
-        Route::get('/department_tables', [AdminController::class, 'department_tables'])->name('department_tables');
+        Route::get('/department_tables', [DepartmentController::class, 'datatable'])->name('department_tables');
 
-        Route::get('/add_department', [AdminController::class, 'add_department'])->name('department.add');
+        Route::get('/add_department', [DepartmentController::class, 'create'])->name('department.add');
 
-        Route::post('/store_department', [AdminController::class, 'store_department'])->name('department.add');
+        Route::post('/store_department', [DepartmentController::class, 'store'])->name('department.add');
 
-        Route::get('/edit_department', [AdminController::class, 'edit_department'])->name('department.edit');
+        Route::get('/edit_department', [DepartmentController::class, 'edit'])->name('department.edit');
 
-        Route::post('/update_department', [AdminController::class, 'update_department'])->name('department.update');
+        Route::post('/update_department', [DepartmentController::class, 'update'])->name('department.update');
 
-        Route::delete('/delete_department', [AdminController::class, 'delete_department'])->name('department.delete');
+        Route::delete('/delete_department', [DepartmentController::class, 'destroy'])->name('department.delete');
 
         Route::get('/list_request', [RequestController::class, 'view_requests'])->name('request.index');
 
@@ -904,8 +906,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('/liberian_billing', [SOAController::class, 'liberian_billing']);
     Route::get('/liberian_billing_print', [SOAController::class, 'liberian_billing_print']);
 
-    Route::get('/support', [AdminController::class, 'support']);
-    Route::post('/store_support', [AdminController::class, 'store_support']);
+    Route::get('/support', [SupportController::class, 'view_support_page']);
+    Route::post('/store_support', [SupportController::class, 'store_support_request']);
 
     Route::get('/user_profile', [UserController::class, 'user_profile']);
     Route::post('/update_profile', [UserController::class, 'update_profile']);
