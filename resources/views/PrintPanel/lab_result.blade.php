@@ -657,7 +657,7 @@
                                 <td colspan="6" style="text-transform: uppercase; font-weight: 600;">STOOL CULTURE
                                     & SENSITIVITY TEST: <span>
                                         <input style="width: 500px; border: none;  font-family: constantia;"
-                                            value="No significant pathogens isolated" />
+                                            value="" />
                                     </span></td>
                             </tr>
                         </tbody>
