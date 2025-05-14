@@ -35,10 +35,10 @@ class FecalysisController extends Controller
 
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
-            ->where('mast_employee.position', 'LIKE', '%Pathologist%')
-            ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
-            ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
-            ->get();
+                ->where('mast_employee.position', 'LIKE', '%Pathologist%')
+                ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
+                ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
+                ->get();
 
             return view('Fecalysis.edit-fecalysis', compact('exam', 'patient', 'admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
@@ -62,6 +62,7 @@ class FecalysisController extends Controller
             $exam->mucus = $request->mucus;
             $exam->ova = $request->ova;
             $exam->bacteria = $request->bacteria;
+            $exam->has_stool_culture = $request->has('has_stool_culture');
             $exam->stool_culture = $request->stool_culture;
             $exam->stool_status = $request->stool_status;
             $exam->remarks = $request->remarks;
@@ -110,10 +111,10 @@ class FecalysisController extends Controller
 
             $medical_techs = User::where('position', '=', 'Medical Technologist')->get();
             $pathologists = User::select('mast_employee.*', 'mast_employeeinfo.otherposition')
-            ->where('mast_employee.position', 'LIKE', '%Pathologist%')
-            ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
-            ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
-            ->get();
+                ->where('mast_employee.position', 'LIKE', '%Pathologist%')
+                ->orWhere('mast_employeeinfo.otherposition', 'LIKE', '%Pathologist%')
+                ->leftJoin('mast_employeeinfo', 'mast_employee.id', 'mast_employeeinfo.main_id')
+                ->get();
 
             return view('Fecalysis.add-fecalysis', compact('admission', 'medical_techs', 'pathologists'));
         } catch (\Exception $exception) {
@@ -137,6 +138,7 @@ class FecalysisController extends Controller
             $exam->mucus = $request->mucus;
             $exam->ova = $request->ova;
             $exam->bacteria = $request->bacteria;
+            $exam->has_stool_culture = $request->has('has_stool_culture');
             $exam->stool_culture = $request->stool_culture;
             $exam->stool_status = $request->stool_status;
             $exam->remarks = $request->remarks;
@@ -171,7 +173,8 @@ class FecalysisController extends Controller
 
     }
 
-    public function delete_fecalysis(Request $request, $id) {
+    public function delete_fecalysis(Request $request, $id)
+    {
         $fecalysis = Fecalysis::where('id', $id)->first();
 
         $delete_fecalysis = $fecalysis->delete();

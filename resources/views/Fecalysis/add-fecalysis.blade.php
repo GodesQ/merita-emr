@@ -152,7 +152,16 @@
                                                     id="ova" value="No intestinal parasite seen."></td>
                                         </tr>
                                         <tr>
-                                            <td align="left"><b>Stool Culture</b></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <div>
+                                                    <input name="has_stool_culture" type="checkbox" id="checkbox"
+                                                        value="1">Has Stool Culture & Sensitivity Test
+                                                </div>
+                                                <b>Stool Culture</b>
+                                            </td>
                                             <td valign="center">
                                                 <input name="stool_status" type="radio" class="m-1 move"
                                                     id="stool_status_0" value="normal">Normal

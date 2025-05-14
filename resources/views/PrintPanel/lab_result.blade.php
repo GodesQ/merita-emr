@@ -649,21 +649,24 @@
                     </table>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <table width="100%" cellpadding="2" cellspacing="5" class="brdAll">
-                        <tbody>
-                            <tr>
-                                <td colspan="6" style="text-transform: uppercase; font-weight: 600;">STOOL CULTURE
-                                    & SENSITIVITY TEST: <span>
-                                        <input style="width: 500px; border: none;  font-family: constantia;"
-                                            value="" />
-                                    </span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
+            @if ($admission->exam_feca && $admission->exam_feca->has_stool_culture)
+                <tr>
+                    <td>
+                        <table width="100%" cellpadding="2" cellspacing="5" class="brdAll">
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" style="text-transform: uppercase; font-weight: 600;">STOOL
+                                        CULTURE
+                                        & SENSITIVITY TEST: <span>
+                                            <input style="width: 500px; border: none;  font-family: constantia;"
+                                                value="{{ $admission->exam_feca->stool_culture == 'normal' ? 'No specific pathogen isolated.' : $admission->exam_feca->stool_culture }}" />
+                                        </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td>
                     <table width="100%" cellpadding="2" cellspacing="5" class="brdAll">

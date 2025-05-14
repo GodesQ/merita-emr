@@ -178,7 +178,23 @@
                                                     id="ova" value="{{ $exam->ova }}"></td>
                                         </tr>
                                         <tr>
-                                            <td align="left"><b>Stool Culture</b></td>
+                                            <td colspan="2" valign="middle" align="left"
+                                                style="padding-bottom: 0 !important; vertical-align: middle !important;">
+                                                <div class="mb-2">
+                                                    <input name="has_stool_culture" id="has_stool_culture"
+                                                        type="checkbox" id="checkbox" value="1">
+                                                    <label for="has_stool_culture" class="font-weight-bold"
+                                                        style="color: black !important;">Has
+                                                        Stool
+                                                        Culture & Sensitivity
+                                                        Test</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <b>Stool Culture</b>
+                                            </td>
                                             <td valign="center">
                                                 <input name="stool_status" type="radio" class="m-1 move"
                                                     id="stool_status_0" value="normal"
