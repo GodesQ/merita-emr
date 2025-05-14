@@ -197,14 +197,17 @@
                                                 <b>Stool Culture</b>
                                             </td>
                                             <td valign="center">
-                                                <input name="stool_status" type="radio" class="m-1 move"
-                                                    id="stool_status_0" value="normal"
+                                                <input name="stool_status" type="radio"
+                                                    class="m-1 move stool-status-radio" id="stool_status_0"
+                                                    value="normal"
                                                     {{ $exam->stool_status == 'normal' ? 'checked' : null }}>Normal
-                                                <input name="stool_status" type="radio" class="m-1 move"
-                                                    id="stool_status_1" value="findings"
+                                                <input name="stool_status" type="radio"
+                                                    class="m-1 move stool-status-radio" id="stool_status_1"
+                                                    value="findings"
                                                     {{ $exam->stool_status == 'findings' ? 'checked' : null }}>Findings
-                                                <input name="stool_status" type="radio" class="m-1 move"
-                                                    id="stool_status_2" value=""
+                                                <input name="stool_status" type="radio"
+                                                    class="m-1 move stool-status-radio" id="stool_status_2"
+                                                    value="N/A"
                                                     {{ $exam->stool_status == '' ? 'checked' : null }}>Reset
                                             </td>
                                             <td align="left" valign="center">
@@ -335,5 +338,29 @@
                     focusableInputElements[nextIndex].focus();
                 }
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get all radio buttons with name 'stool_status'
+                const radioButtons = document.querySelectorAll('input[name="stool_status"]');
+                const stoolCultureInput = document.getElementById('stool_culture');
+
+                // Function to update stool_culture based on radio button selection
+                function updateStoolCulture() {
+                    if (document.getElementById('stool_status_0').checked) {
+                        stoolCultureInput.value = 'No specific pathogen isolated';
+                    } else {
+                        // Clear the input if 'Normal' is not selected
+                        stoolCultureInput.value = '';
+                    }
+                }
+
+                // Add event listeners to all radio buttons
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', updateStoolCulture);
+                });
+
+                // Run on page load to handle initial state
+                updateStoolCulture();
+            });
         </script>
     @endsection

@@ -299,5 +299,29 @@
                 focusableInputElements[nextIndex].focus();
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all radio buttons with name 'stool_status'
+            const radioButtons = document.querySelectorAll('input[name="stool_status"]');
+            const stoolCultureInput = document.getElementById('stool_culture');
+
+            // Function to update stool_culture based on radio button selection
+            function updateStoolCulture() {
+                if (document.getElementById('stool_status_0').checked) {
+                    stoolCultureInput.value = 'No specific pathogen isolated';
+                } else {
+                    // Clear the input if 'Normal' is not selected
+                    stoolCultureInput.value = '';
+                }
+            }
+
+            // Add event listeners to all radio buttons
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', updateStoolCulture);
+            });
+
+            // Run on page load to handle initial state
+            updateStoolCulture();
+        });
     </script>
 @endsection
