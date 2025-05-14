@@ -658,8 +658,10 @@
                                     <td colspan="6" style="text-transform: uppercase; font-weight: 600;">STOOL
                                         CULTURE
                                         & SENSITIVITY TEST: <span>
-                                            <input style="width: 500px; border: none;  font-family: constantia;"
-                                                value="{{ $admission->exam_feca->stool_culture == 'normal' ? 'No specific pathogen isolated.' : $admission->exam_feca->stool_culture }}" />
+                                            @if ($admission->exam_feca->stool_culture)
+                                                <input style="width: 500px; border: none;  font-family: constantia;"
+                                                    value="{{ $admission->exam_feca->stool_culture == 'normal' ? 'No specific pathogen isolated.' : $admission->exam_feca->stool_culture }}" />
+                                            @endif
                                         </span></td>
                                 </tr>
                             </tbody>
