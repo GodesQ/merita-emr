@@ -184,6 +184,7 @@
                                                     <input name="has_stool_culture" id="has_stool_culture"
                                                         type="checkbox" id="checkbox" value="1">
                                                     <label for="has_stool_culture" class="font-weight-bold"
+                                                        {{ $exam->has_stool_culture ? 'checked' : null }}
                                                         style="color: black !important;">Has
                                                         Stool
                                                         Culture & Sensitivity
