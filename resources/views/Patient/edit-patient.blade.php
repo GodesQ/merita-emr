@@ -1,12 +1,12 @@
 @extends('layouts.admin-layout')
 
 @section('name')
-    {{ $data['employeeFirstname'] . ' ' . $data['employeeLastname'] }}
+    {{ session()->get('employeeFirstname') . ' ' . session()->get('employeeLastname') }}
 @endsection
 
 @section('employee_image')
-    @if ($data['employee_image'] != null || $data['employee_image'] != '')
-        <img src="../../../app-assets/images/employees/{{ $data['employee_image'] }}" alt="avatar">
+    @if (session()->get('employee_image'))
+        <img src="../../../app-assets/images/employees/{{ session()->get('employee_image') }}" alt="avatar">
     @else
         <img src="../../../app-assets/images/profiles/profilepic.jpg" alt="default avatar">
     @endif
@@ -235,8 +235,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-9">
-                                                            <form id="lab_result_form" action="#"
-                                                                method="POST">
+                                                            <form id="lab_result_form" action="#" method="POST">
                                                                 @csrf
                                                                 <div class="form-group">
                                                                     <label class="form-label">Lab Status Name</label>

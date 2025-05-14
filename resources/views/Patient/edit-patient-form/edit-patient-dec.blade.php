@@ -13,7 +13,7 @@
                         <div class="custom-control custom-radio">
                             <input required type="radio" class="custom-control-input required"
                                 name="travelled_abroad_recently" id="travelled_abroad_recently1" value="1"
-                                {{ $declarationForm->travelled_abroad_recently == '1' ? 'checked' : null }}
+                                {{ $patient->declaration_form->travelled_abroad_recently == '1' ? 'checked' : null }}
                                 onchange="isTravelAbroadRecently(this)">
                             <label class="custom-control-label" for="travelled_abroad_recently1">YES</label>
                         </div>
@@ -22,7 +22,7 @@
                         <div class="custom-control custom-radio">
                             <input required type="radio" value="0" class="custom-control-input required"
                                 name="travelled_abroad_recently" id="travelled_abroad_recently2"
-                                {{ $declarationForm->travelled_abroad_recently == '0' ? 'checked' : null }}
+                                {{ $patient->declaration_form->travelled_abroad_recently == '0' ? 'checked' : null }}
                                 onchange="isTravelAbroadRecently(this)">
                             <label class="custom-control-label" for="travelled_abroad_recently2">No</label>
                         </div>
@@ -36,7 +36,7 @@
                     </label>
                     <fieldset>
                         <input name="area_visited" type="text" id="" placeholder="Country, State, City"
-                            class="form-control" value="{{ $declarationForm->area_visited }}" />
+                            class="form-control" value="{{ $patient->declaration_form->area_visited }}" />
                     </fieldset>
                 </div>
             </div>
@@ -49,12 +49,14 @@
                         <div class="col-md-6">
                             <label class="font-weight-bold" for="">Arrival</label>
                             <input name="travel_arrival_date" id="" placeholder="" class="form-control"
-                                type="date" max="2050-12-31" value="{{ $declarationForm->travel_arrival }}" />
+                                type="date" max="2050-12-31"
+                                value="{{ $patient->declaration_form->travel_arrival }}" />
                         </div>
                         <div class="col-md-6">
                             <label class="font-weight-bold" for="">Return</label>
                             <input name="travel_return_date" id="" placeholder="" class="form-control"
-                                type="date" max="2050-12-31" value="{{ $declarationForm->travel_return }}" s />
+                                type="date" max="2050-12-31" value="{{ $patient->declaration_form->travel_return }}"
+                                s />
                         </div>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
                             <input required type="radio" value="1" class="custom-control-input required"
                                 name="contact_with_people_being_infected_suspected_or_diagnosed_with_covid"
                                 id="contact_with_people_being_infected_suspected_or_diagnosed_with_covid1"
-                                {{ $declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov == '1' ? 'checked' : null }}
+                                {{ $patient->declaration_form->contact_with_people_being_infected_suspected_diagnose_with_cov == '1' ? 'checked' : null }}
                                 onchange="hasContactWithPeopleInfected(this)">
                             <label class="custom-control-label"
                                 for="contact_with_people_being_infected_suspected_or_diagnosed_with_covid1">YES</label>
@@ -84,7 +86,7 @@
                         <div class="custom-control custom-radio">
                             <input required type="radio" value="0" class="custom-control-input required"
                                 name="contact_with_people_being_infected_suspected_or_diagnosed_with_covid"
-                                {{ $declarationForm->contact_with_people_being_infected_suspected_diagnose_with_cov == '0' ? 'checked' : null }}
+                                {{ $patient->declaration_form->contact_with_people_being_infected_suspected_diagnose_with_cov == '0' ? 'checked' : null }}
                                 id="contact_with_people_being_infected_suspected_or_diagnosed_with_covid2"
                                 onchange="hasContactWithPeopleInfected(this)">
                             <label class=" custom-control-label"
@@ -104,14 +106,15 @@
                             <label class="font-weight-bold" for="">Relationship</label>
                             <input name="relationship_with_last_people" id="" placeholder=""
                                 class="form-control" type="text"
-                                value="{{ $declarationForm->relationship_with_last_people }}" />
+                                value="{{ $patient->declaration_form->relationship_with_last_people }}" />
                         </div>
                         <div class="col-md-6">
                             <label class="font-weight-bold" for="">Last
                                 contact
                                 date</label>
                             <input name="last_contact_date" id="" placeholder="" class="form-control"
-                                type="date" max="2050-12-31" value="{{ $declarationForm->last_contact_date }}" />
+                                type="date" max="2050-12-31"
+                                value="{{ $patient->declaration_form->last_contact_date }}" />
                         </div>
                     </div>
                 </div>
@@ -135,7 +138,7 @@
                                                 class="custom-control-input required" name="fever" id="fever1"
                                                 @php
 echo
-                                                $declarationForm->fever
+                                                $patient->declaration_form->fever
                                             == 1
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="fever1">YES</label>
@@ -149,7 +152,7 @@ echo
                                                 class="custom-control-input required" name="fever" id="fever2"
                                                 @php
 echo
-                                                $declarationForm->fever
+                                                $patient->declaration_form->fever
                                             == 0
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="fever2">NO</label>
@@ -166,7 +169,7 @@ echo
                                                 class="custom-control-input required" name="cough" id="cough1"
                                                 @php
 echo
-                                                $declarationForm->cough
+                                                $patient->declaration_form->cough
                                             == 1
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="cough1">YES</label>
@@ -180,7 +183,7 @@ echo
                                                 class="custom-control-input required" name="cough" id="cough2"
                                                 @php
 echo
-                                                $declarationForm->cough
+                                                $patient->declaration_form->cough
                                             == 0
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="cough2">NO</label>
@@ -197,7 +200,7 @@ echo
                                                 class="custom-control-input required" name="shortness_of_breath"
                                                 id="shortness_of_breath1"
                                                 @php echo
-                                                $declarationForm->shortness_of_breath
+                                                $patient->declaration_form->shortness_of_breath
                                             == 1
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="shortness_of_breath1">YES</label>
@@ -211,7 +214,7 @@ echo
                                                 class="custom-control-input required" name="shortness_of_breath"
                                                 id="shortness_of_breath2"
                                                 @php echo
-                                                $declarationForm->shortness_of_breath
+                                                $patient->declaration_form->shortness_of_breath
                                             == 0
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label" for="shortness_of_breath2">NO</label>
@@ -229,7 +232,7 @@ echo
                                                 class="custom-control-input required"
                                                 name="persistent_pain_in_the_chest" id="persistent_pain_in_the_chest1"
                                                 @php echo
-                                                $declarationForm->persistent_pain_in_chest
+                                                $patient->declaration_form->persistent_pain_in_chest
                                             == 1
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label"
@@ -244,7 +247,7 @@ echo
                                                 class="custom-control-input required"
                                                 name="persistent_pain_in_the_chest" id="persistent_pain_in_the_chest2"
                                                 @php echo
-                                                $declarationForm->persistent_pain_in_chest
+                                                $patient->declaration_form->persistent_pain_in_chest
                                             == 0
                                             ? "checked" : "" @endphp>
                                             <label class="custom-control-label"

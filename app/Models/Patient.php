@@ -47,6 +47,23 @@ class Patient extends Model
 
     public $guarded = ['password'];
 
+    public function scopeByPatientCode($query, $patientcode)
+    {
+        return $query->where('patientcode', $patientcode);
+    }
+
+    public function scopeLatestFirst($query)
+    {
+        return $query->latest('id');
+    }
+
+    public static function getPatientRecords(string $patientcode, bool $latestOnly = false)
+    {
+        $query = self::byPatientCode($patientcode)->latestFirst();
+
+        return $latestOnly ? $query->first() : $query->get();
+    }
+
     public function admission()
     {
         return $this->hasOne(Admission::class, 'id', 'admission_id');
@@ -57,15 +74,18 @@ class Patient extends Model
         return $this->hasOne(PatientInfo::class, 'main_id');
     }
 
-    public function sched_patients() {
+    public function sched_patients()
+    {
         return $this->hasOne(SchedulePatient::class, 'patient_id');
     }
 
-    public function declaration_form() {
+    public function declaration_form()
+    {
         return $this->hasOne(DeclarationForm::class, 'main_id');
     }
 
-    public function medical_history() {
+    public function medical_history()
+    {
         return $this->hasOne(MedicalHistory::class, 'main_id');
     }
 }

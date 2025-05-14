@@ -120,11 +120,11 @@
                             </div>
                             <div class="tab-pane main-content" id="tabIcon33" role="tabpanel"
                                 aria-labelledby="baseIcon-tab33">
-                                @include('Patient.medical_history', [$medicalHistory])
+                                @include('Patient.medical_history')
                             </div>
                             <div class="tab-pane main-content" id="tabIcon34" role="tabpanel"
                                 aria-labelledby="baseIcon-tab34">
-                                @if ($declarationForm == null)
+                                @if ($patient->declaration_form == null)
                                     <h3 class="text-center font-weight-regular my-2">No Record Found</h3>
                                 @else
                                     @include('Patient.edit-patient-form.edit-patient-dec')

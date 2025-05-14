@@ -784,88 +784,39 @@ class PatientController extends Controller
                 session()->put('payment_type', $_GET['payment_type']);
             }
 
-            $data = session()->all();
-            $employeeInfo = session()->all();
             $id = $request->id;
             $patientcode = $request->patientcode;
 
-            $patient = Patient::where('id', '=', $id)->whereHas('patientinfo')->with('patientinfo')->firstOrFail();
+            $patient = Patient::where('id', $id)
+                ->whereHas('patientinfo')
+                ->with('patientinfo', 'medical_history', 'declaration_form', 'admission')
+                ->firstOrFail();
 
             $patient->update([
                 'age' => Carbon::parse($patient->patientinfo->birthdate)->age,
             ]);
 
             $agencies = Agency::whereNotIn('id', [58, 55, 57, 59, 68])->get();
-            $patientInfo = PatientInfo::where('main_id', $id)->first();
-            // $patientInfo = DB::table('mast_patientinfo')->where('mast_patientinfo.main_id', $id)->first();
+            $list_exams = ListExam::all();
 
-            $medicalHistory = MedicalHistory::where('main_id', '=', $id)->first();
-
-            $declarationForm = DeclarationForm::where('main_id', $id)->first();
+            $patientInfo = $patient->patientinfo ?? null;
 
             $admissionPatient = Admission::where('id', '=', $patient->admission_id)
                 ->latest('id')
                 ->first();
 
-            $patientRecords = Patient::where('patientcode', '=', $patientcode)
-                ->latest('id')
-                ->get();
+            $patientRecords = Patient::getPatientRecords($patientcode);
 
-            $latestRecord = Patient::where('patientcode', '=', $patientcode)
-                ->latest('id')
-                ->first();
-
-            $patient_agency = Agency::where('id', '=', $patientInfo->agency_id)->first();
-
-            $patient_package = ListPackage::where('id', $patientInfo->medical_package)->first();
-
-            $list_exams = ListExam::all();
 
             $yellow_card_records = DB::table('yellow_card')
                 ->where('patient_id', $id)
                 ->orderBy('count')
                 ->get();
 
-            if ($patient_package) {
-                $patient_exams = DB::table('list_packagedtl')
-                    ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                    ->where('main_id', $patient_package->id)
-                    ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                    ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
-                    ->get();
-            } else {
-                $patient_exams = null;
-            }
-
-            $additional_exams = null;
-
-            if ($admissionPatient) {
-                if (!$patient_agency) {
-                    $patient_agency = Agency::where('id', '=', $admissionPatient->agency_id)->first();
-                }
-
-                if (!$patient_package) {
-                    $patient_package = ListPackage::where('id', '=', $patientInfo->medical_package)->first();
-                }
-
-                if ($patient_package) {
-                    $patient_exams = DB::table('list_packagedtl')
-                        ->select('list_packagedtl.*', 'list_exam.examname as examname', 'list_exam.category as category', 'list_exam.section_id', 'list_section.sectionname')
-                        ->where('main_id', $patient_package->id)
-                        ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
-                        ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
-                        ->get();
-                } else {
-                    $patient_exams = null;
-                }
-            }
-
-            // $patientRecords = Patient::where('firstname', 'LIKE', "%" . $patient->firstname ."%")
-            // ->where("lastname", 'LIKE', "%" . $patient->lastname ."%")
-            // ->whereHas('patientinfo', function ($query) use ($patient) {
-            //     $query->where('srbno','LIKE', $patient->patientinfo->srbno)
-            //         ->where('passportno', 'LIKE', $patient->patientinfo->passportno);
-            // })->get();
+            $patient_exams = null;
+            $patient_agency = $patient->patientinfo->agency ?? $patient->admission?->agency;
+            $patient_package = $patient->patientinfo->package ?? $patient->admission?->package;
+            $patient_exams = $patient_package ? $this->getPackageExams($patient_package->id) : null;
 
             $patientRecords = Patient::where('patientcode', $patient->patientcode)->get();
 
@@ -902,13 +853,12 @@ class PatientController extends Controller
             $examlab_urin = $patient_status['examlab_urin'];
             $examlab_misc = $patient_status['examlab_misc'];
 
+            $exam_ppd = null;
             if ($admissionPatient) {
                 $exam_ppd = DB::table('exam_ppd')
                     ->where('admission_id', '=', $admissionPatient->id)
                     ->latest('id')
                     ->first();
-            } else {
-                $exam_ppd = null;
             }
 
             $exams = $patient_status['exams'];
@@ -950,8 +900,6 @@ class PatientController extends Controller
                 ->latest('date')
                 ->first();
 
-
-
             $patient_upload_files = DB::table('mast_patient_files')
                 ->where('main_id', $patient->id)
                 ->get();
@@ -980,25 +928,23 @@ class PatientController extends Controller
                 array_push($additional_exams, $exam_data);
             }
 
+            $followup_records = [];
             if ($admissionPatient) {
                 $followup_records = ReassessmentFindings::where('admission_id', $admissionPatient->id)->get();
-            } else {
-                $followup_records = [];
             }
 
+            $patient_medical_results = [];
             if ($admissionPatient) {
                 $patient_medical_results = PatientMedicalResult::select('id', 'generate_at', 'status')
                     ->where('admission_id', $admissionPatient->id)
                     ->orderBy('generate_at', 'ASC')
                     ->get();
-            } else {
-                $patient_medical_results = [];
             }
 
             $referral = Refferal::where('patient_id', $patient->id)->with('agency')->first();
             $exam_groups = $admissionPatient ? (new AdmissionController())->group_by('date', $additional_exams, $admissionPatient->trans_date) : (new AdmissionController())->group_by('date', $additional_exams, null);
 
-            return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'medicalHistory', 'declarationForm', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'employeeInfo', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'data', 'latest_schedule', 'patientRecords', 'latestRecord', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
+            return view('Patient.edit-patient', compact('patient', 'referral', 'patientInfo', 'agencies', 'patient_medical_results', 'admissionPatient', 'patient_agency', 'patient_package', 'packages', 'exam_audio', 'exam_crf', 'exam_cardio', 'exam_dental', 'exam_ecg', 'exam_echodoppler', 'exam_echoplain', 'exam_ishihara', 'exam_physical', 'exam_psycho', 'exam_psychobpi', 'exam_stressecho', 'exam_stresstest', 'patient_or', 'exam_ultrasound', 'exam_visacuity', 'exam_xray', 'exam_ppd', 'exam_blood_serology', 'examlab_hiv', 'examlab_drug', 'examlab_feca', 'examlab_hema', 'examlab_hepa', 'examlab_pregnancy', 'examlab_urin', 'examlab_misc', 'patientRecords', 'patient_exams', 'completed_exams', 'on_going_exams', 'latest_schedule', 'patientRecords', 'list_exams', 'additional_exams', 'complete_patient', 'doctors', 'patient_upload_files', 'yellow_card_records', 'exam_groups', 'followup_records'));
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $file = $exception->getFile();
@@ -1851,6 +1797,25 @@ class PatientController extends Controller
             'firstname' => $patient->firstname,
             'lastname' => $patient->lastname,
         ]);
+    }
+
+    /**
+     * Get package exams with related exam and section data
+     */
+    protected function getPackageExams(int $packageId)
+    {
+        return DB::table('list_packagedtl')
+            ->select([
+                'list_packagedtl.*',
+                'list_exam.examname',
+                'list_exam.category',
+                'list_exam.section_id',
+                'list_section.sectionname'
+            ])
+            ->where('main_id', $packageId)
+            ->leftJoin('list_exam', 'list_exam.id', 'list_packagedtl.exam_id')
+            ->leftJoin('list_section', 'list_section.id', 'list_exam.section_id')
+            ->get();
     }
 
     private function sendBahiaMail($request, $vessel)

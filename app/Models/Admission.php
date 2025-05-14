@@ -39,12 +39,12 @@ class Admission extends Model
 
     public function package()
     {
-        return $this->hasOne(ListPackage::class, 'id', 'package_id');
+        return $this->belongsTo(ListPackage::class, 'package_id');
     }
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class)->latest('id');
+        return $this->belongsTo(Agency::class, 'agency_id')->latest('id');
     }
 
     public function exam_audio()
@@ -197,131 +197,133 @@ class Admission extends Model
             foreach ($patient_exams as $key => $exam) {
                 $exams[$exam->examname] = 'completed';
                 if (preg_match('/audiometry/i', $exam->examname)) {
-                    if (! $this->exam_audio) {
+                    if (!$this->exam_audio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardiac/i', $exam->examname) || preg_match('/Spirometry/i', $exam->examname)) {
-                    if (! $this->exam_crf) {
+                    if (!$this->exam_crf) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/cardio/i', $exam->examname)) {
-                    if (! $this->exam_cardio) {
+                    if (!$this->exam_cardio) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/dental/i', $exam->examname)) {
-                    if (! $this->exam_dental) {
+                    if (!$this->exam_dental) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/ecg/i', $exam->examname)) {
-                    if (! $this->exam_ecg) {
+                    if (!$this->exam_ecg) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/doppler/i', $exam->examname)) {
-                    if (! $this->exam_echodoppler) {
+                    if (!$this->exam_echodoppler) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/plain/i', $exam->examname)) {
-                    if (! $this->exam_echoplain) {
+                    if (!$this->exam_echoplain) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/ishihara/i', $exam->examname)) {
-                    if (! $this->exam_ishihara) {
+                    if (!$this->exam_ishihara) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/Complete PE and Medical History/i', $exam->examname) || preg_match('/STOOL/i', $exam->examname)) {
-                    if (! $this->exam_physical) {
+                    if (!$this->exam_physical) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/pyschological/i', $exam->examname) || preg_match('/Psychometric/i', $exam->examname)) {
-                    if (! $this->exam_psycho) {
+                    if (!$this->exam_psycho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/STRESS ECHO/i', $exam->examname)) {
-                    if (! $this->exam_stressecho) {
+                    if (!$this->exam_stressecho) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Treadmill/i', $exam->examname)) {
-                    if (! $this->exam_stresstest) {
+                    if (!$this->exam_stresstest) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Acuity/i', $exam->examname)) {
-                    if (! $this->exam_visacuity) {
+                    if (!$this->exam_visacuity) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Ultrasound/i', $exam->category)) {
-                    if (! $this->exam_ultrasound) {
+                    if (!$this->exam_ultrasound) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Xray/i', $exam->category)) {
-                    if (! $this->exam_xray) {
+                    if (!$this->exam_xray) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
-                if (preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname)
+                if (
+                    preg_match('/Serology/i', $exam->category) || preg_match('/Chemistry/i', $exam->category) || preg_match('/Enzymes/i', $exam->category) || preg_match('/SGPT/i', $exam->examname)
                     || preg_match('/BLOOD/i', $exam->examname) || preg_match('/Anti HBe/i', $exam->examname) || preg_match('/Anti HAV/i', $exam->examname) || preg_match('/Anti HBc/i', $exam->examname)
                     || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/Anti HCV/i', $exam->examname) || preg_match('/HepaB/i', $exam->examname) || preg_match('/TPHA/i', $exam->examname)
                     || preg_match('/Electrolytes/i', $exam->category) || preg_match('/Sodium/i', $exam->examname) || preg_match('/Potassium/i', $exam->examname) || preg_match('/Calcium/i', $exam->examname)
-                    || preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) || preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)) {
-                    if (! $this->exam_blood_serology) {
+                    || preg_match('/Albumin/i', $exam->examname) || preg_match('/Creatinine/i', $exam->examname) || preg_match('/Uric Acid/i', $exam->examname) || preg_match('/Anti HBs/i', $exam->examname)
+                ) {
+                    if (!$this->exam_blood_serology) {
                         $exams[$exam->examname] = '';
                     }
                 }
 
                 if (preg_match('/HIV/i', $exam->examname)) {
-                    if (! $this->exam_hiv) {
+                    if (!$this->exam_hiv) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/drug/i', $exam->examname) || preg_match('/Drug/i', $exam->category)) {
-                    if (! $this->exam_drug) {
+                    if (!$this->exam_drug) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Fecalysis/i', $exam->examname) || preg_match('/FECT/i', $exam->examname)) {
-                    if (! $this->exam_feca) {
+                    if (!$this->exam_feca) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hematology/i', $exam->category) || preg_match('/CBC/i', $exam->examname)) {
-                    if (! $this->exam_hema) {
+                    if (!$this->exam_hema) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Hepatitis Profile/i', $exam->examname)) {
-                    if (! $this->exam_hepa) {
+                    if (!$this->exam_hepa) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Pregnancy/i', $exam->examname)) {
-                    if (! $this->exam_pregnancy) {
+                    if (!$this->exam_pregnancy) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Urinalysis/i', $exam->examname)) {
-                    if (! $this->exam_urin) {
+                    if (!$this->exam_urin) {
                         $exams[$exam->examname] = '';
                     }
                 }
                 if (preg_match('/Miscellaneous/i', $exam->examname)) {
-                    if (! $this->exam_misc) {
+                    if (!$this->exam_misc) {
                         $exams[$exam->examname] = '';
                     }
                 }
@@ -341,7 +343,7 @@ class Admission extends Model
                 return $exam == '';
             });
 
-            if ($this && ! $status) {
+            if ($this && !$status) {
                 if ($this->lab_status == 2) {
                     $status = '<div class="badge mx-1 fs-12 bg-success">FIT TO WORK</div>';
                 } else if ($this->lab_status == 1) {
@@ -353,20 +355,20 @@ class Admission extends Model
                 }
             }
 
-            if (count($exams) == count($completed_exams) && ! $status) {
+            if (count($exams) == count($completed_exams) && !$status) {
                 $status = '<div class="badge mx-1 fs-12 bg-darken-2" style="background: #e4a917 !important;">MEDICAL DONE</div>';
             }
 
-            if (in_array('completed', $exams) && ! $status) {
+            if (in_array('completed', $exams) && !$status) {
                 $status = '<div class="badge mx-1 fs-12 bg-secondary">TAKING EXAM</div>';
             }
 
-            if ($this->id && ! $status) {
+            if ($this->id && !$status) {
                 $status = '<div class="badge mx-1 fs-12 bg-warning">ADMITTED</div>';
             }
 
         } else {
-            if (! $status) {
+            if (!$status) {
                 $status = '<div class="badge mx-1 fs-12 bg-danger">NO EXAMS</div>';
             }
         }
