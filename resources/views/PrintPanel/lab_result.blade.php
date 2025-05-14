@@ -660,7 +660,7 @@
                                         & SENSITIVITY TEST: <span>
                                             @if ($admission->exam_feca->stool_status)
                                                 <input style="width: 500px; border: none;  font-family: constantia;"
-                                                    value="{{ $admission->exam_feca->stool_culture == 'normal' ? 'No specific pathogen isolated.' : $admission->exam_feca->stool_culture }}" />
+                                                    value="{{ $admission->exam_feca->stool_status == 'normal' ? 'No specific pathogen isolated.' : $admission->exam_feca->stool_culture }}" />
                                             @endif
                                         </span></td>
                                 </tr>
