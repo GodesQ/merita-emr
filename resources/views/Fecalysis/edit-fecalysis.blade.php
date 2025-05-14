@@ -182,9 +182,9 @@
                                                 style="padding-bottom: 0 !important; vertical-align: middle !important;">
                                                 <div class="mb-2">
                                                     <input name="has_stool_culture" id="has_stool_culture"
-                                                        type="checkbox" id="checkbox" value="1">
+                                                        type="checkbox" id="checkbox" value="1"
+                                                        {{ $exam->has_stool_culture ? 'checked' : null }}>
                                                     <label for="has_stool_culture" class="font-weight-bold"
-                                                        {{ $exam->has_stool_culture ? 'checked' : null }}
                                                         style="color: black !important;">Has
                                                         Stool
                                                         Culture & Sensitivity
