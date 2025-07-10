@@ -723,7 +723,7 @@
                                                                                     S-803E-2000
                                                                                     FILIPINO
                                                                                     TERESITA F. GONZALES, M.D.
-                                                                                    LIC. NO. 055997
+                                                                                    LIC. NO. 0055997
                                                                                     MERITA DIAGNOSTIC CLINIC INC. 5th
                                                                                     Floor Jettac
                                                                                     Bldg 920 Pres. Quirino Ave.cor. San
