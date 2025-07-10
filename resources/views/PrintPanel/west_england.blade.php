@@ -624,7 +624,7 @@
                                             PHYSICIAN’S CERTIFYING
                                             AUTHORITY: PROFESSIONAL
                                             REGULATION COMMISSION <br><br>
-                                            PHYSICIAN’S LICENSE NUMBER: </td>
+                                            PHYSICIAN’S LICENSE NUMBER: 0055997</td>
                                         </tr>
                                       </tbody>
                                     </table>
