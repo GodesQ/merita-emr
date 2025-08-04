@@ -378,7 +378,6 @@ class AdmissionController extends Controller
             );
 
             $pdf = null;
-
             if ($request->prescription != null || $request->prescription != '') {
                 $pdf = PDF::loadView('emails.prescription-pdf', [
                     'data' => $admission,
@@ -388,7 +387,7 @@ class AdmissionController extends Controller
             }
 
             Patient::where('admission_id', $admission->id)->update([
-                'fit_to_work_date' => date('Y-m-d'),
+                'fit_to_work_date' => $request->generate_at ?? date('Y-m-d'),
             ]);
 
             ReassessmentFindings::where('admission_id', $admission->id)->delete();
@@ -396,10 +395,6 @@ class AdmissionController extends Controller
             foreach ($recipients as $key => $recipient) {
                 Mail::to($recipient)->send(new FitToWork($patient, $agency, $admission, $pdf));
             }
-
-            // if(Carbon::parse($admission->trans_date)->format('Y') >= date('Y')) {
-
-            // }
         }
 
         # For Unfit to Work Status

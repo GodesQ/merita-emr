@@ -863,7 +863,8 @@
                         method: "DELETE",
                         data: {
                             _token: csrf,
-                            id: id
+                            id: id,
+                            admission_id: '{{ $patient->admission_id }}',
                         },
                         success: function(response) {
                             if (response.status == 'success') {
