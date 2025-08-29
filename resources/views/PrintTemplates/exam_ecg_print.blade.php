@@ -166,7 +166,7 @@
                                         @if ($technician2)
                                           {{ $technician2->firstname . ' ' . $technician2->middlename[0] . '.' . ' ' . $technician2->lastname . ', ' . $technician2->title }}<br>
                                           <b>Physician</b> <br>
-                                          Lic. No.:
+                                          Lic. No.
                                           {{ $technician2->license_no }}
                                         @endif
                                       </td>
