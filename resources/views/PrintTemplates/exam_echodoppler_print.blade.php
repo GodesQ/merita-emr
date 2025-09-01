@@ -272,11 +272,11 @@
                           <td width="8%">LVMI</td>
                           <td align="center">
                             @if($exam->lvmi)
-                <input name="lvmi" type="text" id="lvmi"
-                  value="{{$exam->lvmi}} {{$exam->lvmi < '49' ? 'L' : null}}"
-                  class="brdNone {{$exam->lvmi < '49' ? 'text-red' : null}}"
-                  style="width:50px;text-align:center;">
-              @endif
+                              <input name="lvmi" type="text" id="lvmi"
+                                value="{{$exam->lvmi}} {{$exam->lvmi < '49' ? 'L' : null}}"
+                                class="brdNone {{$exam->lvmi < '49' ? 'text-red' : null}}"
+                                style="width:50px;text-align:center;">
+                            @endif
                           </td>
                           <td colspan="2" align="center">(49-115)</td>
                         </tr>
@@ -529,17 +529,27 @@
                     <table width="760" border="0" cellpadding="2" cellspacing="0" style="margin-top: 1.3rem;">
                       <tbody>
                         <tr>
+                          <td valign="bottom">
+                            <span class="lblForm">FORM NO. 38<br>REV. 01 / 02-12-2019</span>
+                          </td>
                           <td height="100" align="right" valign="bottom">
                             <table width="270" border="0" cellspacing="2" cellpadding="2">
                               <tbody>
-                                <tr>
-                                  <td align="center">
-                                  </td>
-                                </tr>
                                 <tr valign="bottom">
-                                  <td align="center" class="brdTop">
-                                    {{$technician1 ? $technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title : '&nbsp;'}}<br>
-                                    Cardiologist
+
+                                  <td align="center">
+                                    @if ($technician1)
+                                      @if ($technician1->signature)
+                                        <img src="{{ $technician1->signature }}" width="70" style="object-fit: cover;" />
+                                      @else
+                                        <div style="width: 70px;height: 20px;">
+                                        </div>
+                                      @endif
+                                    @endif
+                                    <div style="border-top: 1px solid black;">
+                                      {{$technician1 ? $technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title : ""}}
+                                      Cardiologist
+                                    </div>
                                   </td>
                                 </tr>
                               </tbody>
@@ -555,7 +565,7 @@
           </td>
         </tr>
         <tr>
-          <td height="60"><span class="lblForm">FORM NO. 38<br>REV. 01 / 02-12-2019</span></td>
+          <td height="60"></td>
         </tr>
       </tbody>
     </table>

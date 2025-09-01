@@ -467,7 +467,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="13%" valign="top"><b>Conclusion:</b></td>
-                                                            <td width="87%" valign="top" style="font-size: 16px !important;">@php echo nl2br($exam->conclusion) @endphp</td>
+                                                            <td width="87%" valign="top" style="font-size: 16px !important;"><?php echo nl2br($exam->conclusion) ?></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -480,7 +480,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="13%" valign="top"><b>Remarks:</b></td>
-                                                            <td width="87%" valign="top" style="font-size: 16px !important;">@php echo nl2br($exam->remarks) @endphp</td>
+                                                            <td width="87%" valign="top" style="font-size: 16px !important;"><?php nl2br($exam->remarks) ?></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -503,10 +503,20 @@
                                             <tbody>
                                                 <tr valign="bottom">
                                                     <td width="70%"><span class="lblForm" style="font-weight: 800;">FORM NO. 38<br>REV. 01 / 02-12-2019</span></td>
-                                                    <td align="center" class="brdTop">
+                                                    <td align="center">
+                                                      @if ($technician1)
+                                                        @if ($technician1->signature)
+                                                          <img src="{{ $technician1->signature }}" width="70"
+                                                            style="object-fit: cover;" />
+                                                        @else
+                                                          <div style="width: 70px;height: 20px;">
+                                                          </div>
+                                                        @endif
+                                                      @endif
+                                                      <div style="border-top: 1px solid black;">
                                                         {{$technician1 ? $technician1->firstname . " " . $technician1->middlename . " " . $technician1->lastname . ", " . $technician1->title : ""}}
-                                                        <br>
-                                                        Cardiologist
+                                                      Cardiologist
+                                                      </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
